@@ -8,7 +8,7 @@ using namespace cv;
 
 class Matching {
 public:
-	static int templateMatching(string filename, string templatename) {
+	static int templateMatching(string filename, string templatename, double threshold) {
 		const char* image_window = "Source Image";
 		int match_method = 5;
 		Mat result;
@@ -17,7 +17,7 @@ public:
 		Mat templ = cv::imread(templatename);
 		if (img.empty() || templ.empty())
 		{
-			cout << "Error reading file(s)!" << endl;
+			cout << "Error reading file(s) in templateMatching Funkion!" << endl;
 			return 0;
 		}
 		namedWindow(image_window, WINDOW_AUTOSIZE);
@@ -35,7 +35,7 @@ public:
 
 			matchLoc = minLoc;
 			matchLoc = maxLoc;
-			if (maxVal >= 0.74)
+			if (maxVal >= threshold)
 			{
 				cv::rectangle(img_display, matchLoc, Point(matchLoc.x + templ.cols, matchLoc.y + templ.rows), CV_RGB(0, 255, 0), 1);;
 				floodFill(result, matchLoc, 0); //mark drawn blob
@@ -43,11 +43,6 @@ public:
 			else
 				break;
 		}
-
-		//Nato60 = 0.74
-		//BT = 0.74
-		//BP = 0.74
-
 		cv::imshow(image_window, img_display);
 
 		waitKey(0);

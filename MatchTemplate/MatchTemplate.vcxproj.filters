@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ItemImages">
+      <UniqueIdentifier>{9cb5b8cc-baf9-4abb-809f-0fbff9087b16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ItemImages\AmmunitionImages">
+      <UniqueIdentifier>{d6958344-52d4-4d8a-9aa6-7bc6fd4ace45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -23,5 +29,10 @@
     <ClInclude Include="TemplateMatching.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Images\BT.png">
+      <Filter>ItemImages\AmmunitionImages</Filter>
+    </Image>
   </ItemGroup>
 </Project>

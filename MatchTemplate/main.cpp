@@ -14,7 +14,7 @@ void main() {
 	//All = 0.78
 	threshold = 0.80;
 	filename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/stashscreen1.png";
-	templatename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/BP3.png";
+	templatename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/BP.png";
 
 	if (filename.empty() || templatename.empty()) 
 		cout << "Error reading file(s) in main Funkion!" << endl;	

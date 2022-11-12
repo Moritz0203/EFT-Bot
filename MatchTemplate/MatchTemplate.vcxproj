@@ -132,13 +132,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="DistributorForMatching .cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TemplateMatching.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Images\BT.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,7 +18,7 @@ public:
 		if (img.empty() || templ.empty())
 		{
 			cout << "Error reading file(s) in templateMatching Funkion!" << endl;
-			return 0;
+			return false;
 		}
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 
@@ -32,12 +32,11 @@ public:
 		while (true)
 		{
 			minMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, Mat());
-
-			matchLoc = minLoc;
-			matchLoc = maxLoc;
 			if (maxVal >= threshold)
 			{
-				cv::rectangle(img_display, matchLoc, Point(matchLoc.x + templ.cols, matchLoc.y + templ.rows), CV_RGB(0, 255, 0), 1);;
+				matchLoc = maxLoc;
+				cv::rectangle(img_display, matchLoc, Point(matchLoc.x + templ.cols, matchLoc.y + templ.rows), CV_RGB(0, 255, 0), 2);
+				cv::line(img_display, matchLoc, Point(10 , 10), CV_RGB(0, 255, 0), 1);
 				floodFill(result, matchLoc, 0); //mark drawn blob
 			}
 			else
@@ -45,8 +44,9 @@ public:
 		}
 		cv::imshow(image_window, img_display);
 
+		cout << matchLoc.y << " " << matchLoc.x << " "  << templ.cols << " " << templ.rows << " " << endl;
 		waitKey(0);
-		return matchLoc, templ.cols, templ.rows;
+		return matchLoc.y, matchLoc.x, templ.cols, templ.rows;
 	}
 };
 

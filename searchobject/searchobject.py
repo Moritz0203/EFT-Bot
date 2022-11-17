@@ -21,4 +21,4 @@ def find_match(big_image, small_image, threshold=0.7):
     return [out_list, w, h]
 
 
-print(find_match("stashscreen1.png", "small_image.png"))
+print(find_match("NEW2.png", "BP.png"))

@@ -1,6 +1,18 @@
 #include <iostream>
 #include "TemplateMatching.h"
 using namespace std;
+void AmmunitionMatching();
+void MagazineMatching();
+
+
+
+
+void main() {
+	AmmunitionMatching();// HP fixen 
+	MagazineMatching();
+}
+
+
 
 std::array<std::string, 12> Ammunition{
 	//NATO 7.62
@@ -20,7 +32,7 @@ std::array<std::string, 12> Ammunition{
 		"itemImages/AmmunitionImages/7.62RUS/US.png",//US
 };
 
-std::array<std::string, 12> NameOfItem{
+std::array<std::string, 12> NameOfItemAmmunition{
 	//NATO 7.62
 		"M80",
 		"M62",
@@ -48,28 +60,100 @@ std::array<double, 12> AmmunitionThreshold{
 		0.88,//UltraNosi
 	//RUS 7.62
 		0.88,//BP
-		0.90,//HP
+		0.88,//HP
 		//0.84,//MAIAP
 		0.88,//PS
 		0.90,//T45M1
 		0.90,//US
 };
 
-void main() {
+void AmmunitionMatching() {
 	string  filename, templatename;
 	double	threshold;
 	int size = sizeof(Ammunition) / sizeof(string);
-	cout << size << endl;
-	
+
+	vector<int> ReturnDataAM;
+
 	for (int i = 0; i < size; i++) {
 		threshold = AmmunitionThreshold[i];
-		filename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/NEW1.png";
+		filename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/NEW2.png";
 		templatename = Ammunition[i];
 
 		if (filename.empty() || templatename.empty())
 			cout << "Error reading file(s) in main Funkion!" << endl;
 		else
-			Matching::templateMatching(filename, templatename, threshold, 50, NameOfItem[i]);
+			Matching::templateMatching(filename, templatename, threshold, 50, 58,  NameOfItemAmmunition[i], ReturnDataAM);
 	}
+
+	/*for (int i = 0; i < ReturnDataAM.size(); i++) {
+		cout << ReturnDataAM[i] << endl;
+	}*/
 }
 
+
+
+std::array<std::string, 8> Magazine{
+	//MP
+		"itemImages/MagazineImgas/4.6HK/MP7.png",
+	//NATO
+		"itemImages/MagazineImgas/5.56NATO/MAG5-60.png",
+		"itemImages/MagazineImgas/5.56NATO/PMAG-D60.png",
+		"itemImages/MagazineImgas/7.62NARO/PMAG.png",
+		"itemImages/MagazineImgas/7.62NARO/SLR.png",
+	//RUS
+		"itemImages/MagazineImgas/7.62RRUS/SVD.png",
+		"itemImages/MagazineImgas/7.62RUS/AK30.png",
+		"itemImages/MagazineImgas/7.62RUS/GEN-M3.png",
+
+};
+
+std::array<std::string, 8> NameOfItemMagazine{
+	//MP
+		"MP7",
+	//NATO
+		"MAG5-60",
+		"PMAG-D60",
+		"PMAG",
+		"SLR",
+	//RUS
+		"SVD",
+		"AK30",
+		"GEN-M3",
+}; 
+
+std::array<double, 8> MagazineThreshold{
+	//MP
+		0.85,//MP7
+	//NATO
+		0.83,//MAG5-60
+		0.83,//PMAG-D60
+		0.83,//PMAG
+		0.85,//SLR
+	//RUS
+		0.87,//SVD
+		0.87,//AK30
+		0.87,//GEN-M3
+};
+
+void MagazineMatching() {
+	string  filename, templatename;
+	double	threshold;
+	int size = sizeof(Magazine) / sizeof(string);
+
+	vector<int> ReturnDataMA;
+
+	for (int i = 0; i < size; i++) {
+		threshold = MagazineThreshold[i];
+		filename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/NEW3.png";
+		templatename = Magazine[i];
+
+		if (filename.empty() || templatename.empty())
+			cout << "Error reading file(s) in main Funkion!" << endl;
+		else
+			Matching::templateMatching(filename, templatename, threshold, 95, 58, NameOfItemMagazine[i], ReturnDataMA);
+	}
+
+	/*for (int i = 0; i < ReturnDataMA.size(); i++) {
+		cout << ReturnDataMA[i] << endl;
+	}*/
+}

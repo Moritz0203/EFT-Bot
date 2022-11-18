@@ -10,7 +10,7 @@ using namespace cv;
 class Matching {
 public:
 	static inline int templateMatching(string filename, string templatename, double threshold, int height, int width,
-									   bool MabyHasInsurance, string NameOfItem, vector<int> &ReturnData) 
+									   bool MabyHasInsurance, bool NoRoiNeed, string NameOfItem, vector<int> &ReturnData) 
 	{
 		const char* image_window = "Source Image";
 		const char* Test = "Item Image";
@@ -25,7 +25,7 @@ public:
 			return false;
 		}
 		namedWindow(image_window, WINDOW_AUTOSIZE);
-		/*namedWindow(Test, WINDOW_AUTOSIZE);*/
+		namedWindow(Test, WINDOW_AUTOSIZE);
 
 
 		Mat img_display;
@@ -35,17 +35,23 @@ public:
 		if (MabyHasInsurance == true) {
 			StartY = 2; StartX = 2;
 		}	
-		else
-			width = templ.cols - 1;
-		
+		else if(NoRoiNeed == true) {
+			width = templ.cols - 0;
+			height = templ.rows - 0; 
+		}
+		else {
+			width = templ.cols - 0;
+		}
+			
 		Rect Rec(StartY, StartX, width, height);
 		Mat Roi = templ(Rec);
-		/*imshow(Test, Roi);*/
+		imshow(Test, Roi);
 
 		matchTemplate(img, Roi, result, match_method);
 		double minVal; double maxVal; Point minLoc; Point maxLoc;
 		Point matchLoc;
 
+		int count = 0;
 		cout << NameOfItem << endl;
 		while (true)
 		{
@@ -61,6 +67,7 @@ public:
 					cout << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
 					ReturnData.push_back(matchLoc.y);
 					ReturnData.push_back(matchLoc.x);
+					count++;
 				}
 				else {
 					cout << "No Match found";
@@ -70,9 +77,10 @@ public:
 			else
 				break;
 		}
+		cout << count << endl;
 		cv::imshow(image_window, img_display);
 
-		waitKey(500);
+		waitKey(0);
 		return templ.cols, templ.rows;
 	}
 };

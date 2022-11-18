@@ -132,7 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DistributorForMatching .cpp" />
+    <ClCompile Include="DistributorForMatching.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TemplateMatching.h" />

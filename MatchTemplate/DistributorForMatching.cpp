@@ -3,13 +3,15 @@
 using namespace std;
 void AmmunitionMatching();
 void MagazineMatching();
+void BarterMatching();
 
 
 
 
 void main() {
-	AmmunitionMatching();// HP fixen 
+	AmmunitionMatching();
 	MagazineMatching();
+	BarterMatching();
 }
 
 
@@ -82,7 +84,7 @@ void AmmunitionMatching() {
 		if (filename.empty() || templatename.empty())
 			cout << "Error reading file(s) in main Funkion!" << endl;
 		else
-			Matching::templateMatching(filename, templatename, threshold, 50, 58, false, NameOfItemAmmunition[i], ReturnDataAM);
+			Matching::templateMatching(filename, templatename, threshold, 50, 58, false, false, NameOfItemAmmunition[i], ReturnDataAM);
 	}
 
 	/*for (int i = 0; i < ReturnDataAM.size(); i++) {
@@ -150,7 +152,71 @@ void MagazineMatching() {
 		if (filename.empty() || templatename.empty())
 			cout << "Error reading file(s) in main Funkion!" << endl;
 		else
-			Matching::templateMatching(filename, templatename, threshold, 95, 58, true, NameOfItemMagazine[i], ReturnDataMA);
+			Matching::templateMatching(filename, templatename, threshold, 95, 58, true, false, NameOfItemMagazine[i], ReturnDataMA);
+	}
+
+	/*for (int i = 0; i < ReturnDataMA.size(); i++) {
+		cout << ReturnDataMA[i] << endl;
+	}*/
+}
+
+
+
+std::array<std::string, 7> Barter{
+	//OneSlot
+		"itemImages/BarterImages/OneSlot/Bolts.png",
+		"itemImages/BarterImages/OneSlot/Bulb.png",
+		"itemImages/BarterImages/OneSlot/Defibrillator.png",
+		"itemImages/BarterImages/OneSlot/LEDX.png",
+		"itemImages/BarterImages/OneSlot/SDiary.png",
+	//TwoSlot
+		"itemImages/BarterImages/TwoSlot/Diary.png",
+	//SixSlot
+		"itemImages/BarterImages/SixSlot/Lion.png"
+};
+
+std::array<std::string, 7> NameOfItemBarter{
+	//OneSlot
+		"Bolts",
+		"Bulb",
+		"Defibrillator",
+		"LEDX",
+		"SDiary",
+	//TwoSlot
+		"Diary",
+	//SixSlot
+		"Lion",
+};
+
+std::array<double, 7> BarterThreshold{
+	//OneSlot
+		0.88,//Bolts
+		0.92,//Bulb
+		0.95,//Defibrillator
+		0.90,//LEDX
+		0.88,//SDiary
+	//TwoSlot
+		0.88,//Diary
+	//SixSlot
+		0.96,//Lion
+};
+
+void BarterMatching() {
+	string  filename, templatename;
+	double	threshold;
+	int size = sizeof(Barter) / sizeof(string);
+
+	vector<int> ReturnDataBA;
+
+	for (int i = 0; i < size; i++) {
+		threshold = BarterThreshold[i];
+		filename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/NEW4.png";
+		templatename = Barter[i];
+
+		if (filename.empty() || templatename.empty())
+			cout << "Error reading file(s) in main Funkion!" << endl;
+		else
+			Matching::templateMatching(filename, templatename, threshold, 95, 58, false, true, NameOfItemBarter[i], ReturnDataBA);
 	}
 
 	/*for (int i = 0; i < ReturnDataMA.size(); i++) {

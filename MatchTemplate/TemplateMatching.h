@@ -9,7 +9,7 @@ using namespace cv;
 
 class Matching {
 public:
-	static int templateMatching(string filename, string templatename, double threshold, int height, int width, string NameOfItem, vector<int> &ReturnData) {
+	static int templateMatching(string filename, string templatename, double threshold, int height, int width, bool MabyHasInsurance,  string NameOfItem, vector<int> &ReturnData) {
 		const char* image_window = "Source Image";
 		const char* Test = "Item Image";
 		int match_method = 5;
@@ -29,8 +29,14 @@ public:
 		Mat img_display;
 		img.copyTo(img_display);
 
+		int StartY = 0, StartX = 0;
+		if (MabyHasInsurance == true) {
+			StartY = 2; StartX = 2;
+		}	
+		else
+			width = templ.cols - 1;
 		
-		Rect Rec(2, 2, width, height);
+		Rect Rec(StartY, StartX, width, height);
 		Mat Roi = templ(Rec);
 		/*imshow(Test, Roi);*/
 
@@ -39,7 +45,6 @@ public:
 		Point matchLoc;
 
 		cout << NameOfItem << endl;
-		
 		while (true)
 		{
 			minMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, Mat());
@@ -65,7 +70,7 @@ public:
 		}
 		cv::imshow(image_window, img_display);
 
-		waitKey(600);
+		waitKey(500);
 		return templ.cols, templ.rows;
 	}
 };

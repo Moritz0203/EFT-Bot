@@ -60,9 +60,9 @@ std::array<double, 12> AmmunitionThreshold{
 		0.88,//UltraNosi
 	//RUS 7.62
 		0.88,//BP
-		0.88,//HP
+		0.90,//HP
 		//0.84,//MAIAP
-		0.88,//PS
+		0.90,//PS
 		0.90,//T45M1
 		0.90,//US
 };
@@ -82,7 +82,7 @@ void AmmunitionMatching() {
 		if (filename.empty() || templatename.empty())
 			cout << "Error reading file(s) in main Funkion!" << endl;
 		else
-			Matching::templateMatching(filename, templatename, threshold, 50, 58,  NameOfItemAmmunition[i], ReturnDataAM);
+			Matching::templateMatching(filename, templatename, threshold, 50, 58, false, NameOfItemAmmunition[i], ReturnDataAM);
 	}
 
 	/*for (int i = 0; i < ReturnDataAM.size(); i++) {
@@ -150,7 +150,7 @@ void MagazineMatching() {
 		if (filename.empty() || templatename.empty())
 			cout << "Error reading file(s) in main Funkion!" << endl;
 		else
-			Matching::templateMatching(filename, templatename, threshold, 95, 58, NameOfItemMagazine[i], ReturnDataMA);
+			Matching::templateMatching(filename, templatename, threshold, 95, 58, true, NameOfItemMagazine[i], ReturnDataMA);
 	}
 
 	/*for (int i = 0; i < ReturnDataMA.size(); i++) {

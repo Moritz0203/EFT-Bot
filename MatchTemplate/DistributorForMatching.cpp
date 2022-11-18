@@ -84,7 +84,7 @@ void AmmunitionMatching() {
 		if (filename.empty() || templatename.empty())
 			cout << "Error reading file(s) in main Funkion!" << endl;
 		else
-			Matching::templateMatching(filename, templatename, threshold, 50, 58, false, false, NameOfItemAmmunition[i], ReturnDataAM);
+			Matching::templateMatching(filename, templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM);
 	}
 
 	/*for (int i = 0; i < ReturnDataAM.size(); i++) {
@@ -152,7 +152,7 @@ void MagazineMatching() {
 		if (filename.empty() || templatename.empty())
 			cout << "Error reading file(s) in main Funkion!" << endl;
 		else
-			Matching::templateMatching(filename, templatename, threshold, 95, 58, true, false, NameOfItemMagazine[i], ReturnDataMA);
+			Matching::templateMatching(filename, templatename, threshold, true, false, NameOfItemMagazine[i], ReturnDataMA);
 	}
 
 	/*for (int i = 0; i < ReturnDataMA.size(); i++) {
@@ -190,11 +190,11 @@ std::array<std::string, 7> NameOfItemBarter{
 
 std::array<double, 7> BarterThreshold{
 	//OneSlot
-		0.88,//Bolts
+		0.86,//Bolts
 		0.92,//Bulb
 		0.95,//Defibrillator
-		0.90,//LEDX
-		0.88,//SDiary
+		0.88,//LEDX
+		0.86,//SDiary
 	//TwoSlot
 		0.88,//Diary
 	//SixSlot
@@ -216,7 +216,7 @@ void BarterMatching() {
 		if (filename.empty() || templatename.empty())
 			cout << "Error reading file(s) in main Funkion!" << endl;
 		else
-			Matching::templateMatching(filename, templatename, threshold, 95, 58, false, true, NameOfItemBarter[i], ReturnDataBA);
+			Matching::templateMatching(filename, templatename, threshold, false, true, NameOfItemBarter[i], ReturnDataBA);
 	}
 
 	/*for (int i = 0; i < ReturnDataMA.size(); i++) {

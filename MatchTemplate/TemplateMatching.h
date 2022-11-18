@@ -9,9 +9,10 @@ using namespace cv;
 
 class Matching {
 public:
-	static inline int templateMatching(string filename, string templatename, double threshold, int height, int width,
-									   bool MabyHasInsurance, bool NoRoiNeed, string NameOfItem, vector<int> &ReturnData) 
+	static inline int templateMatching(string filename, string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, 
+									   string NameOfItem, vector<int> &ReturnData) 
 	{
+		int height = {}, width = {};
 		const char* image_window = "Source Image";
 		const char* Test = "Item Image";
 		int match_method = 5;
@@ -34,13 +35,16 @@ public:
 		int StartY = 0, StartX = 0;
 		if (MabyHasInsurance == true) {
 			StartY = 2; StartX = 2;
+			width = templ.cols - 4;
+			height = templ.rows - 35;
 		}	
-		else if(NoRoiNeed == true) {
+		else if(RoiNeed == true) {
 			width = templ.cols - 0;
-			height = templ.rows - 0; 
+			height = templ.rows - 12; 
 		}
 		else {
 			width = templ.cols - 0;
+			height = templ.rows - 0;
 		}
 			
 		Rect Rec(StartY, StartX, width, height);
@@ -80,7 +84,7 @@ public:
 		cout << count << endl;
 		cv::imshow(image_window, img_display);
 
-		waitKey(0);
+		waitKey(500);
 		return templ.cols, templ.rows;
 	}
 };

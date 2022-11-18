@@ -9,7 +9,9 @@ using namespace cv;
 
 class Matching {
 public:
-	static int templateMatching(string filename, string templatename, double threshold, int height, int width, bool MabyHasInsurance,  string NameOfItem, vector<int> &ReturnData) {
+	static inline int templateMatching(string filename, string templatename, double threshold, int height, int width,
+									   bool MabyHasInsurance, string NameOfItem, vector<int> &ReturnData) 
+	{
 		const char* image_window = "Source Image";
 		const char* Test = "Item Image";
 		int match_method = 5;

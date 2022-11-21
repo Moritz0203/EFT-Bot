@@ -26,7 +26,7 @@ public:
 			return false;
 		}
 		namedWindow(image_window, WINDOW_AUTOSIZE);
-		namedWindow(Test, WINDOW_AUTOSIZE);
+		/*namedWindow(Test, WINDOW_AUTOSIZE);*/
 
 
 		Mat img_display;
@@ -49,7 +49,7 @@ public:
 			
 		Rect Rec(StartY, StartX, width, height);
 		Mat Roi = templ(Rec);
-		imshow(Test, Roi);
+		/*imshow(Test, Roi);*/
 
 		matchTemplate(img, Roi, result, match_method);
 		double minVal; double maxVal; Point minLoc; Point maxLoc;

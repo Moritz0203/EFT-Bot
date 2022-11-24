@@ -3,14 +3,16 @@
 #include "opencv2/imgproc.hpp"
 #include <iostream>
 #include <vector>
+#include <conio.h>
+#include <windows.h>
 using namespace std;
 using namespace cv;
 
 
-class Matching {
+class TemplateMatching {
 public:
 	static inline int templateMatching(string filename, string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, 
-									   string NameOfItem, vector<int> &ReturnData) 
+									   string NameOfItem, vector<POINT> &ReturnData) 
 	{
 		int height = {}, width = {};
 		const char* image_window = "Source Image";
@@ -56,6 +58,7 @@ public:
 		Point matchLoc;
 
 		int count = 0;
+		POINT PointReturn;
 		cout << NameOfItem << endl;
 		while (true)
 		{
@@ -69,14 +72,13 @@ public:
 				floodFill(result, matchLoc, 0); //mark drawn blob
 				if (matchLoc.y && matchLoc.x != 0) {
 					cout << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
-					ReturnData.push_back(matchLoc.y);
-					ReturnData.push_back(matchLoc.x);
+					PointReturn.y = matchLoc.y;
+					PointReturn.x = matchLoc.x;
+					ReturnData.push_back(PointReturn);
 					count++;
 				}
-				else {
-					cout << "No Match found";
+				else 
 					return false;
-				}
 			}
 			else
 				break;

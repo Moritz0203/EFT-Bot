@@ -132,10 +132,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MatchingMove.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DistributorForMatching.h" />
+    <ClInclude Include="getMat.h" />
+    <ClInclude Include="Includes.h" />
     <ClInclude Include="InputMT.h" />
     <ClInclude Include="TemplateMatching.h" />
   </ItemGroup>

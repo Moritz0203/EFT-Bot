@@ -11,7 +11,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MatchingMove.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -23,6 +23,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputMT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="getMat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

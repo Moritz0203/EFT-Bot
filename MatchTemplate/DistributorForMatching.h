@@ -57,7 +57,7 @@ namespace Matching {
 			0.90,//US
 	};
 
-	vector<POINT> AmmunitionMatching() {
+	vector<POINT> AmmunitionMatching(Mat Screen) {
 		string  filename, templatename;
 		double	threshold;
 		int size = sizeof(Ammunition) / sizeof(string);
@@ -72,7 +72,7 @@ namespace Matching {
 			if (filename.empty() || templatename.empty())
 				cout << "Error reading file(s) in main Funkion!" << endl;
 			else
-				TemplateMatching::templateMatching(filename, templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM);
+				TemplateMatching::templateMatching(filename, templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM, Screen);
 		}
 
 		/*for (int i = 0; i < ReturnDataAM.size(); i++) {
@@ -128,6 +128,7 @@ namespace Matching {
 	};
 
 	vector<POINT> MagazineMatching() {
+		Mat Screen;
 		string  filename, templatename;
 		double	threshold;
 		int size = sizeof(Magazine) / sizeof(string);
@@ -142,7 +143,7 @@ namespace Matching {
 			if (filename.empty() || templatename.empty())
 				cout << "Error reading file(s) in main Funkion!" << endl;
 			else
-				TemplateMatching::templateMatching(filename, templatename, threshold, true, false, NameOfItemMagazine[i], ReturnDataMA);
+				TemplateMatching::templateMatching(filename, templatename, threshold, true, false, NameOfItemMagazine[i], ReturnDataMA, Screen);
 		}
 
 		/*for (int i = 0; i < ReturnDataMA.size(); i++) {
@@ -194,6 +195,7 @@ namespace Matching {
 	};
 
 	vector<POINT> BarterMatching() {
+		Mat Screen;
 		string  filename, templatename;
 		double	threshold;
 		int size = sizeof(Barter) / sizeof(string);
@@ -208,7 +210,7 @@ namespace Matching {
 			if (filename.empty() || templatename.empty())
 				cout << "Error reading file(s) in main Funkion!" << endl;
 			else
-				TemplateMatching::templateMatching(filename, templatename, threshold, false, true, NameOfItemBarter[i], ReturnDataBA);
+				TemplateMatching::templateMatching(filename, templatename, threshold, false, true, NameOfItemBarter[i], ReturnDataBA, Screen);
 		}
 
 		/*for (int i = 0; i < ReturnDataMA.size(); i++) {

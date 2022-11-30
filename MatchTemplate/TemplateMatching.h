@@ -1,10 +1,4 @@
-#include "opencv2/imgcodecs.hpp"
-#include "opencv2/highgui.hpp"
-#include "opencv2/imgproc.hpp"
-#include <iostream>
-#include <vector>
-#include <conio.h>
-#include <windows.h>
+#include "Includes.h"
 using namespace std;
 using namespace cv;
 
@@ -12,15 +6,21 @@ using namespace cv;
 class TemplateMatching {
 public:
 	static inline int templateMatching(string filename, string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, 
-									   string NameOfItem, vector<POINT> &ReturnData) 
+									   string NameOfItem, vector<POINT> &ReturnData, Mat Screen) 
 	{
 		int height = {}, width = {};
 		const char* image_window = "Source Image";
 		const char* Test = "Item Image";
 		int match_method = 5;
 		Mat result;
+		Mat img;
 
-		Mat img = cv::imread(filename);
+		img = cv::imread(filename);
+
+		/*if (!Screen.empty()) {
+			img = Screen;
+		}*/
+	
 		Mat templ = cv::imread(templatename);
 		if (img.empty() || templ.empty())
 		{
@@ -86,7 +86,7 @@ public:
 		cout << count << endl;
 		cv::imshow(image_window, img_display);
 
-		waitKey(500);
+		waitKey(0);
 		return templ.cols, templ.rows;
 	}
 };

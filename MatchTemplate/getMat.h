@@ -11,7 +11,7 @@ using namespace cv;
 
 HWND FindeWindow() {
 	HWND hWND;
-	LPCWSTR windowTitle = L"BsgLauncher";
+	LPCWSTR windowTitle = L"EscapeFromTarkov";
 	hWND = FindWindow(NULL, windowTitle);
 	while (!hWND)
 	{
@@ -134,7 +134,7 @@ cv::Mat getMat(HWND hWND) {
 	BYTE* bmp_pixels = new BYTE[(width * 3 + bmp_padding) * height];
 	GetDIBits(hdc, hbmp, 0, height, bmp_pixels, &bmp_info, DIB_RGB_COLORS);
 
-	string Name = "TempIMG.bmp";
+	string Name = "TempIMG.png";
 	wstring temp = wstring(Name.begin(), Name.end());
 	LPCWSTR wideString = temp.c_str();
 
@@ -162,7 +162,7 @@ cv::Mat getMat(HWND hWND) {
 	//Close the handle for the file that was created
 	CloseHandle(bmp_file_handle);
 
-	Mat mat = cv::imread("TempIMG.bmp");
+	Mat mat = cv::imread("TempIMG.png");
 	return  mat;
 
 	DeleteDC(hdc);

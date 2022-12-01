@@ -13,6 +13,13 @@ namespace Mouse {
 		}
 		return true;
 	}
+	bool MoverPOINT(POINT Points) {
+		SetCursorPos(Points.x, Points.y);
+		
+		cout << "MouseMov" << endl;
+
+		return true;
+	}
 }
 
 namespace Keyboard {

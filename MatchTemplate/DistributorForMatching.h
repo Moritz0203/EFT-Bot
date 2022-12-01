@@ -72,7 +72,7 @@ namespace Matching {
 			if (filename.empty() || templatename.empty())
 				cout << "Error reading file(s) in main Funkion!" << endl;
 			else
-				TemplateMatching::templateMatching(filename, templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM, Screen);
+				TemplateMatching::templateMatchingItems(filename, templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM, Screen);
 		}
 
 		/*for (int i = 0; i < ReturnDataAM.size(); i++) {
@@ -143,7 +143,7 @@ namespace Matching {
 			if (filename.empty() || templatename.empty())
 				cout << "Error reading file(s) in main Funkion!" << endl;
 			else
-				TemplateMatching::templateMatching(filename, templatename, threshold, true, false, NameOfItemMagazine[i], ReturnDataMA, Screen);
+				TemplateMatching::templateMatchingItems(filename, templatename, threshold, true, false, NameOfItemMagazine[i], ReturnDataMA, Screen);
 		}
 
 		/*for (int i = 0; i < ReturnDataMA.size(); i++) {
@@ -210,7 +210,7 @@ namespace Matching {
 			if (filename.empty() || templatename.empty())
 				cout << "Error reading file(s) in main Funkion!" << endl;
 			else
-				TemplateMatching::templateMatching(filename, templatename, threshold, false, true, NameOfItemBarter[i], ReturnDataBA, Screen);
+				TemplateMatching::templateMatchingItems(filename, templatename, threshold, false, true, NameOfItemBarter[i], ReturnDataBA, Screen);
 		}
 
 		/*for (int i = 0; i < ReturnDataMA.size(); i++) {

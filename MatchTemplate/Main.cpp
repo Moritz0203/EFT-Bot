@@ -1,43 +1,52 @@
 #include "Includes.h"
 #include "DistributorForMatching.h"
-#include "InputMT.h"
 #include "getMat.h"
 //external controllers for applications / ECFA
-void startFunktion(vector<POINT> Returner);
+void startFunktion(vector<POINT> &Returner, Mat MatScreen);
 
 
 int main() {
 
 	vector<POINT> Returner;
 	
+	
+	HWND hWND = FindeWindow();
+	SetForegroundWindow(hWND);
+	Mat MatScreen = getMat(hWND);
+	
+
 	string Start;
 	cin >> Start;
 
-
 	if (Start == "start") {
-		startFunktion(Returner);
+		startFunktion(Returner, MatScreen);
 	}
 	else if (Start == "test") {
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
+		Mat templ = imread("ObjectImages/Banner.png");
 	
-		HWND hWND = FindeWindow();
-		SetForegroundWindow(hWND);
-		Mat img = getMat(hWND);
-		Mat img_display;
+		
+		
+		
+		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.98);
+		
+		cout << point.y << " " << point.x << endl;
+
+		
+		/*Mat img_display;
 		img.copyTo(img_display);
 		imshow(image_window, img);
-		waitKey(0);
+		waitKey(0);*/
 	}
 
-	/*for (int i = 0; i < Returner.size(); i++) {
-			cout << Returner[i].y << " " << Returner[i].x << endl;
-	}*/
+	//for (int i = 0; i < Returner.size(); i++) {
+	//		cout << Returner[i].y << " " << Returner[i].x << endl;
+	//}
 
-	/*Mouse::Mover(Returner);*/
+	
 }
 
-void startFunktion(vector<POINT> Returner) {
-	Mat Screen;
-	Returner = Matching::AmmunitionMatching(Screen);
+void startFunktion(vector<POINT> &Returner, Mat MatScreen) {
+	Returner = Matching::AmmunitionMatching(MatScreen);
 }

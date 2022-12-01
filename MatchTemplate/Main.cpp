@@ -24,12 +24,9 @@ int main() {
 	else if (Start == "test") {
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
-		Mat templ = imread("ObjectImages/Banner.png");
+		Mat templ = imread("ObjectImages/scrollbar.png");
 	
-		
-		
-		
-		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.98);
+		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.70);
 		
 		cout << point.y << " " << point.x << endl;
 
@@ -43,8 +40,6 @@ int main() {
 	//for (int i = 0; i < Returner.size(); i++) {
 	//		cout << Returner[i].y << " " << Returner[i].x << endl;
 	//}
-
-	
 }
 
 void startFunktion(vector<POINT> &Returner, Mat MatScreen) {

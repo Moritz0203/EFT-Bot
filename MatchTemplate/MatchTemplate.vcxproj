@@ -139,6 +139,7 @@
     <ClInclude Include="getMat.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="InputMT.h" />
+    <ClInclude Include="StartUp.h" />
     <ClInclude Include="TemplateMatching.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

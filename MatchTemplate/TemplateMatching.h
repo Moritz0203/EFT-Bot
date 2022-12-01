@@ -100,22 +100,17 @@ public:
 		Mat result;
 		POINT PointReturn = {};
 
-		
-		
 		/*if (MatScreen.empty() || templ.empty())
 		{
 			cout << "Error reading file(s) in templateMatching Funkion!" << endl;
-			
 		}*/
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		/*namedWindow(Test, WINDOW_AUTOSIZE);*/
 		
-
 		Mat img_display;
 		MatScreen.copyTo(img_display);
 
 		//imshow(Test, templ);
-
 
 		matchTemplate(MatScreen, templ, result, match_method);
 		double minVal; double maxVal; Point minLoc; Point maxLoc;
@@ -143,7 +138,6 @@ public:
 		cv::imshow(image_window, img_display);
 
 		waitKey(0);
-
 
 		return PointReturn;
 	}

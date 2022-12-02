@@ -15,19 +15,19 @@ int main() {
 	vector<POINT> Returner;
 	
 	
-	HWND hWND = FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(100);
-	Mat MatScreen = getMat(hWND);
+	//HWND hWND = FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(100);
+	//Mat MatScreen = getMat(hWND);
 	
 
 	string Start;
 	cin >> Start;
 
-	if (Start == "start") {
+	/*if (Start == "start") {
 		startFunktion(Returner, MatScreen);
-	}
-	else if (Start == "test") {
+	}*/
+	if (Start == "test") {
 		
 		
 		

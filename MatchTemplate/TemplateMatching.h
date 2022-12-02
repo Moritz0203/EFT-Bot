@@ -141,7 +141,7 @@ public:
 		}
 		cv::imshow(image_window, img_display);
 
-		waitKey(0);
+		waitKey(50);
 
 		return PointReturn;
 	}

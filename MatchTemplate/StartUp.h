@@ -14,34 +14,33 @@ namespace StartUp {
 	bool CheckForFails();
 	
 	void Entrance() {
-		while (CheckForFails() == false)
-		{
-			POINT point = {};
-			point.y = 729;
-			point.x = 961;
-			Mouse::MoverPOINT(point); //729 961
-			cout << "ok" << endl;
-		}
+		
+		CheckForFails();
+		
+		
 		
 	}
 
 
 	bool CheckForFails() {
+		Mat MatScreen;
+		Mat templ;
+		POINT pointMouse = {};
+		pointMouse.y = 729;
+		pointMouse.x = 961;
+
 		HWND hWND = FindeWindow();
-		if (!hWND) {
-			SetForegroundWindow(hWND);
-			Mat MatScreen = getMat(hWND);
-			if (!MatScreen.empty()) {
-				Mat templ = imread("ObjectImages/Banner.png");
-				if (!templ.empty()) {
-					POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.98);
-					if (point.y || point.x != 0)
-						return true;
-				}
-					
-			}
-		}
-		return false;
+		SetForegroundWindow(hWND);
+		Sleep(5);//Delete later
+		MatScreen = getMat(hWND);
+
+		templ = imread("ObjectImages/Banner.png");
+
+		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.98);
+		if (point.y || point.x != 0)
+			Mouse::MoverPOINT(pointMouse); //729 961
+		else
+			return true;
 	}
 }
 

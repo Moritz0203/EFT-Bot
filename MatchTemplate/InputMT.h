@@ -1,7 +1,7 @@
 #include <iostream>
-#include <windows.h>
+#include <vector>
 #include <conio.h>
-using namespace std;
+#include <windows.h>
 
 namespace Mouse {
 	bool Mover(vector<POINT> &Points) {
@@ -13,9 +13,11 @@ namespace Mouse {
 		}
 		return true;
 	}
+
 	bool MoverPOINT(POINT Points) {
 		SetCursorPos(Points.x, Points.y);
-		
+		mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 		cout << "MouseMov" << endl;
 
 		return true;

@@ -28,9 +28,6 @@
     <ClInclude Include="getMat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Includes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StartUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>

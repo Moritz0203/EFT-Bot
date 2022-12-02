@@ -1,5 +1,8 @@
-#include <iostream>
 #include "TemplateMatching.h"
+#include <iostream>
+#include <vector>
+#include <conio.h>
+#include <windows.h>
 using namespace std;
 
 namespace Matching {

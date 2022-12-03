@@ -50,7 +50,6 @@ namespace StartUp {
 		MatScreen = getMat(hWND);
 
 		templ = imread("ObjectImages/Banner.png");
-
 		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.98);
 		if (point.y || point.x != 0)
 			Mouse::MoverPOINTandPress(pointMouse); //729 961
@@ -59,7 +58,6 @@ namespace StartUp {
 	void CheckScrollbarPositions() {
 		Mat MatScreen;
 		Mat templ;
-		
 		
 		HWND hWND = FindeWindow();
 		SetForegroundWindow(hWND);
@@ -75,7 +73,6 @@ namespace StartUp {
 			int keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key 
 			Keyboard::KeyboardInput(keyforInput);
 		}
-		
 	}
 	
 	array<Mat, 11> TakeScreenshots() {
@@ -92,11 +89,9 @@ namespace StartUp {
 		Mouse::MoverPOINTandPress(point);
 		
 		int size = sizeof(ReturnMatScreen) / sizeof(Mat);
-		for (int i = 0; i < size; i++)
-		{
+		for (int i = 0; i < size; i++) {
 			Sleep(250);
 			ReturnMatScreen[i] = getMat(hWND);
-			Sleep(250);
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key 
 			Keyboard::KeyboardInput(keyforInput);
 		}

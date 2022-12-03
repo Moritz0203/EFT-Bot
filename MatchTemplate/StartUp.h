@@ -11,18 +11,33 @@ using namespace cv;
 
 
 namespace StartUp {
-	bool CheckForFails();
+	void CheckForFails();
+	void CheckScrollbarPositions();
+	array<Mat, 11> TakeScreenshots();
 	
 	void Entrance() {
 		
+		array<Mat, 11> ReturntMatScreen;
+
 		CheckForFails();
+
+		CheckScrollbarPositions();
 		
-		
+
+		const char* image_window = "Source Image";
+		namedWindow(image_window, WINDOW_AUTOSIZE);
+
+		ReturntMatScreen = TakeScreenshots();
+		int size = sizeof(ReturntMatScreen) / sizeof(Mat);
+		for (int i = 0; i < size; i++) {
+			imshow(image_window, ReturntMatScreen[i]);
+			waitKey(0);
+		}
 		
 	}
 
 
-	bool CheckForFails() {
+	void CheckForFails() {
 		Mat MatScreen;
 		Mat templ;
 		POINT pointMouse = {};
@@ -38,9 +53,55 @@ namespace StartUp {
 
 		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.98);
 		if (point.y || point.x != 0)
-			Mouse::MoverPOINT(pointMouse); //729 961
-		else
-			return true;
+			Mouse::MoverPOINTandPress(pointMouse); //729 961
+	}
+
+	void CheckScrollbarPositions() {
+		Mat MatScreen;
+		Mat templ;
+		
+		
+		HWND hWND = FindeWindow();
+		SetForegroundWindow(hWND);
+		Sleep(5);//Delete later
+		MatScreen = getMat(hWND);
+
+		templ = imread("ObjectImages/scrollbar.png");
+		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.70);
+		if (point.y > 79) {// Later with screen resolution
+			point.y  = (templ.rows / 2) + point.y;
+			point.x = (templ.cols / 2) + point.x;
+			Mouse::MoverPOINTandPress(point);
+			int keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key 
+			Keyboard::KeyboardInput(keyforInput);
+		}
+		
+	}
+	
+	array<Mat, 11> TakeScreenshots() {
+		Mat MatScreen;
+		array<Mat, 11> ReturnMatScreen;
+
+		HWND hWND = FindeWindow();
+		SetForegroundWindow(hWND);
+		Sleep(5);//Delete later
+		
+		POINT point;
+		point.y = 171;
+		point.x = 1903;
+		Mouse::MoverPOINTandPress(point);
+		
+		int size = sizeof(ReturnMatScreen) / sizeof(Mat);
+		for (int i = 0; i < size; i++)
+		{
+			Sleep(250);
+			ReturnMatScreen[i] = getMat(hWND);
+			Sleep(250);
+			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key 
+			Keyboard::KeyboardInput(keyforInput);
+		}
+
+		return ReturnMatScreen;
 	}
 }
 

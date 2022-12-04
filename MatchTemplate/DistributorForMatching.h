@@ -86,7 +86,6 @@ namespace Matching {
 	}
 
 
-
 	std::array<std::string, 8> Magazine{
 		//MP
 			"itemImages/MagazineImgas/4.6HK/MP7.png",

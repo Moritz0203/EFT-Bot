@@ -28,6 +28,7 @@ namespace StartUp {
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 
 		ReturntMatScreen = TakeScreenshots();
+
 		int size = sizeof(ReturntMatScreen) / sizeof(Mat);
 		for (int i = 0; i < size; i++) {
 			imshow(image_window, ReturntMatScreen[i]);
@@ -36,6 +37,7 @@ namespace StartUp {
 		
 	}
 
+	
 
 	void CheckForFails() {
 		Mat MatScreen;
@@ -70,7 +72,7 @@ namespace StartUp {
 			point.y  = (templ.rows / 2) + point.y;
 			point.x = (templ.cols / 2) + point.x;
 			Mouse::MoverPOINTandPress(point);
-			int keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key 
+			int keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key
 			Keyboard::KeyboardInput(keyforInput);
 		}
 	}
@@ -83,7 +85,7 @@ namespace StartUp {
 		SetForegroundWindow(hWND);
 		Sleep(5);//Delete later
 		
-		POINT point;
+		POINT point {};
 		point.y = 171;
 		point.x = 1903;
 		Mouse::MoverPOINTandPress(point);
@@ -92,7 +94,7 @@ namespace StartUp {
 		for (int i = 0; i < size; i++) {
 			Sleep(250);
 			ReturnMatScreen[i] = getMat(hWND);
-			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key 
+			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 			Keyboard::KeyboardInput(keyforInput);
 		}
 

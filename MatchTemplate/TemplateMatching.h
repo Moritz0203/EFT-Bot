@@ -8,8 +8,7 @@
 using namespace std;
 using namespace cv;
 
-class TemplateMatching {
-public:
+struct TemplateMatching {
 	static inline int templateMatchingItems(string filename, string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, 
 									   string NameOfItem, vector<POINT> &ReturnData, Mat MatScreen)
 	{
@@ -95,7 +94,6 @@ public:
 		return templ.cols, templ.rows;
 	}
 
-
 	static POINT templateMatchingObjects(Mat MatScreen, Mat templ, double threshold) {
 		int height = {}, width = {};
 		const char* image_window = "Source Image";
@@ -141,7 +139,7 @@ public:
 		}
 		cv::imshow(image_window, img_display);
 
-		waitKey(20);
+		waitKey(0);
 
 		return PointReturn;
 	}

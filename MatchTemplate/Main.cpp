@@ -37,8 +37,13 @@ int main() {
 		/*int width = templ.cols / 2;
 		int height = templ.rows / 2;*/
 		
-		TemplateMatching::templateMatchingItems("", "ObjectImages/Intel.png", 0.82, false, false, "Intel", Returner, MatScreen); // erst (807 1582 124 62) zweit (464 1582 124 62) drit (122 1582 124 62)   diverst(343) divzweit(342)
+		TemplateMatching::templateMatchingItems("", "ObjectImages/Weapon.png", 0.90, false, false, "Intel", Returner, MatScreen);   // 807  464  122    div1  343  div2  342     1Solt
 
+																																	// 814  471  128    div1  343  div2  343     1Slot
+																																	
+																																	// 500  157         div1  343                2Solt
+
+																																	// 535  192         div1  343                3Slot
 		/*cout << point.y + height << " " << point.x + width << endl;*/
 
 		/*point.y = height + point.y;

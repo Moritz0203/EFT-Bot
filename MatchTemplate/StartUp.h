@@ -132,14 +132,17 @@ namespace StartUp {
 				int iTemp = i;
 				iTemp++;
 				for (int i3 = 0; i3 > DataTemp[iTemp].size(); i3++) {//Um das nächste teil im Main vector zu druchlaufen 
+					bool FoundDuplicate;
 					for (int i4 = 0; i4 > 6; i4++) {//Um Point temp von 340 bis 345 zu druch lauf und mit dem aktuellen point im nächsten Main vector so vergleichen 
 						pointTemp.y + 340 + i4;
-						if (pointTemp.y != DataTemp[iTemp][i3].y && pointTemp.x != DataTemp[iTemp][i3].x) {// Checken ob pointTemp gleich dem aktuellen Point im nächsten Main vector nicht entspreicht wenn ja dann soll der aktuelle punkt 
-							DataSave[i].push_back(DataTemp[iTemp][i3]);									   // in denn entgültigen vector of vector gepusht werden wenn er aber gleich ist soll er nicht gespeichert werden und es wird der nachste punkt 
+						if (pointTemp.y == DataTemp[iTemp][i3].y && pointTemp.x == DataTemp[iTemp][i3].x) {  // Checken ob pointTemp gleich dem aktuellen Point im nächsten Main vector nicht entspreicht wenn ja dann soll der aktuelle punkt 
+							FoundDuplicate = true;															// in denn entgültigen vector of vector gepusht werden wenn er aber gleich ist soll er nicht gespeichert werden und es wird der nachste punkt 
 						}																				   // in dem nächsten Main vector probiert so lange bist jeder punkt mit jedem punkt verglichen wurde
 						else
 							continue;
 					}
+					if (FoundDuplicate != true)
+						DataSave[iTemp].push_back(DataTemp[iTemp][i3]);
 				}
 			}
 		}

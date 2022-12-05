@@ -98,8 +98,8 @@ namespace StartUp {
 		return ReturnMatScreen;
 	}
 
-	vector<vector<POINT>> DataTemp;
-	vector<vector<POINT>> DataSave;
+	vector<vector<POINT>> PointVectorTemp;
+	vector<vector<POINT>> PointVectorCleanUp;
 
 	void Magic() {
 		array<Mat, 11> ReturntMatScreen;
@@ -110,7 +110,7 @@ namespace StartUp {
 		for ( int i = 0; i > size; i++) {
 			ReturnPoints = Matching::AmmunitionMatching(ReturntMatScreen[i]);
 			if (!ReturnPoints.empty()) {
-				DataTemp.push_back(ReturnPoints);
+				PointVectorTemp.push_back(ReturnPoints);
 			}
 		}
 
@@ -121,28 +121,28 @@ namespace StartUp {
 
 
 	void cleanUpVector() {
-		if (!DataTemp.size() >= 1)
+		if (!PointVectorTemp.size() >= 1)
 			return;
 
-		DataSave[1] = DataTemp[1];
-		for (int i = 0; i > DataTemp.size(); i++) {//Um denn Main vector zu durchlaufen
-			for (int i2 = 0; i2 > DataTemp[i].size(); i2++) {//Um in dem Main vector die einzelnen zu druchlaufen 
-				POINT pointTemp = DataTemp[i][i2];
+		PointVectorCleanUp[1] = PointVectorTemp[1];
+		for (int i = 0; i > PointVectorTemp.size(); i++) {//Um denn Main vector zu durchlaufen
+			for (int i2 = 0; i2 > PointVectorTemp[i].size(); i2++) {//Um in dem Main vector die einzelnen zu druchlaufen 
+				POINT pointTemp = PointVectorTemp[i][i2];
 				
 				int iTemp = i;
 				iTemp++;
-				for (int i3 = 0; i3 > DataTemp[iTemp].size(); i3++) {//Um das nächste teil im Main vector zu druchlaufen 
+				for (int i3 = 0; i3 > PointVectorTemp[iTemp].size(); i3++) {//Um das nächste teil im Main vector zu druchlaufen 
 					bool FoundDuplicate;
 					for (int i4 = 0; i4 > 6; i4++) {//Um Point temp von 340 bis 345 zu druch lauf und mit dem aktuellen point im nächsten Main vector so vergleichen 
 						pointTemp.y + 340 + i4;
-						if (pointTemp.y == DataTemp[iTemp][i3].y && pointTemp.x == DataTemp[iTemp][i3].x) {  // Checken ob pointTemp gleich dem aktuellen Point im nächsten Main vector nicht entspreicht wenn ja dann soll der aktuelle punkt 
+						if (pointTemp.y == PointVectorTemp[iTemp][i3].y && pointTemp.x == PointVectorTemp[iTemp][i3].x) {  // Checken ob pointTemp gleich dem aktuellen Point im nächsten Main vector nicht entspreicht wenn ja dann soll der aktuelle punkt 
 							FoundDuplicate = true;															// in denn entgültigen vector of vector gepusht werden wenn er aber gleich ist soll er nicht gespeichert werden und es wird der nachste punkt 
 						}																				   // in dem nächsten Main vector probiert so lange bist jeder punkt mit jedem punkt verglichen wurde
 						else
 							continue;
 					}
 					if (FoundDuplicate != true)
-						DataSave[iTemp].push_back(DataTemp[iTemp][i3]);
+						PointVectorCleanUp[iTemp].push_back(PointVectorTemp[iTemp][i3]);
 				}
 			}
 		}

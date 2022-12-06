@@ -90,7 +90,7 @@ struct TemplateMatching {
 		cout << count << endl;
 		cv::imshow(image_window, img_display);
 
-		waitKey(0);
+		waitKey(1);
 		return templ.cols, templ.rows;
 	}
 
@@ -139,7 +139,7 @@ struct TemplateMatching {
 		}
 		cv::imshow(image_window, img_display);
 
-		waitKey(0);
+		waitKey(200);
 
 		return PointReturn;
 	}

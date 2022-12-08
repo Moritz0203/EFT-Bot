@@ -184,11 +184,11 @@ void startFunktion(vector<POINT> &Returner, Mat MatScreen) {
 
 
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 5; i++) {
 			ReturnPoints = Matching::AmmunitionMatching(ReturntMatScreen[i]);
 			if ( !ReturnPoints.empty()) {
 				PointVectorTemp.push_back(ReturnPoints);
-				cout << " her \n";
+				cout << " -----------------------------------------------------------------------------------\n";
 			}
 		}
 		
@@ -221,17 +221,15 @@ void startFunktion(vector<POINT> &Returner, Mat MatScreen) {
 		PointVectorCleanUp.push_back(temp);
 		temp.clear();
 
-		for (int i = 1; i < PointVectorTemp.size(); i++) {//Um denn Main vector zu durchlaufen
+		int iTemp = 1;
+		for (int i = 1; i < PointVectorTemp.size(); i++ ) {//Um denn Main vector zu durchlaufen
+			iTemp++;
+
+			if (iTemp == PointVectorTemp.size())
+				break;
+			
 			for (int i2 = 0; i2 < PointVectorTemp[i].size(); i2++) {//Um in dem Main vector die einzelnen zu druchlaufen 
 				
-				/*cout << "in Funktion 1\n";
-				cout << pointTempGround.y << " " << pointTempGround.x << " " << "TeTempGroundmp" << endl;
-				cout << PointVectorTemp[i][i2].y << " " << PointVectorTemp[i][i2].x << endl;
-				cout << endl;*/
-
-				int iTemp = 1;
-				iTemp++;
-
 				for (int i3 = 0; i3 < PointVectorTemp[iTemp].size(); i3++) {//Um das nächste teil im Main vector zu druchlaufen 
 					bool FoundDuplicate = false;
 					
@@ -242,32 +240,26 @@ void startFunktion(vector<POINT> &Returner, Mat MatScreen) {
 
 					if (pointLookForLast.y == PointVectorTemp[iTemp][i3].y && pointLookForLast.x == PointVectorTemp[iTemp][i3].x)
 						break;
-					
-
-					cout << "in Funktion 2\n";
-					cout << pointLookForLast.y << " " << pointLookForLast.x << " " << "TempGround" << endl;
-					cout << PointVectorTemp[iTemp][i3].y << " " << PointVectorTemp[iTemp][i3].x << " " << PointVectorTemp[iTemp].size() << endl;
-					cout << endl;
 
 					for (int i4 = 0; i4 < 6; i4++) {//Um Point temp von 340 bis 345 zu druch lauf und mit dem aktuellen point im nächsten Main vector so vergleichen 
 						POINT pointTemp = pointTempGround;
 						pointTemp.y = pointTemp.y + i4;
 
-						cout << "in Funktion 3\n";
-						cout << pointLookForLast.y << " " << pointLookForLast.x << " " << "TempGround" << endl;
-						cout << pointTemp.y << " " << pointTemp.x << " " << "Temp" << endl;
-						cout << endl;
-
 						if (PointVectorTemp[i][i2].y == pointTemp.y && PointVectorTemp[i][i2].x == pointTemp.x) {	// Checken ob pointTemp gleich dem aktuellen Point im nächsten Main vector nicht entspreicht wenn ja dann soll der aktuelle punkt 
-							FoundDuplicate = true;	 
-							cout << "in Funktion 4\n";	
-							cout << endl;                                                                             // in denn entgültigen vector of vector gepusht werden wenn er aber gleich ist soll er nicht gespeichert werden und es wird der nachste punkt 
+							FoundDuplicate = true;	   
+							break;																					// in denn entgültigen vector of vector gepusht werden wenn er aber gleich ist soll er nicht gespeichert werden und es wird der nachste punkt 
 						} 	                                                                                               // in dem nächsten Main vector probiert so lange bist jeder punkt mit jedem punkt verglichen wurde
 					}
-					if (FoundDuplicate == false)
+				
+					if (FoundDuplicate == true) {
 						temp.push_back(PointVectorTemp[i][i2]);
+					}	
 				}
-				PointVectorCleanUp.push_back(temp);
+				
+				if (!temp.empty()) {
+					PointVectorCleanUp.push_back(temp);
+					temp.clear();
+				}	
 			}
 		}
 	}

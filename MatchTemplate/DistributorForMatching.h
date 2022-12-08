@@ -45,7 +45,7 @@ namespace Matching {
 	std::array<double, 12> AmmunitionThreshold{
 		//NATO 7.62
 			0.90,//M80
-			0.89,//M62
+			0.88,//M62
 			0.90,//M61
 			0.90,//M993
 			0.84,//BCPFMJ

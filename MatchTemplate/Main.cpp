@@ -210,8 +210,6 @@ void startFunktion(vector<POINT> &Returner, Mat MatScreen) {
 	}
 
 
-
-
 	void cleanUpVector() {
 		vector<POINT> temp;
 		if (!PointVectorTemp.size() >= 1)
@@ -222,15 +220,15 @@ void startFunktion(vector<POINT> &Returner, Mat MatScreen) {
 		temp.clear();
 
 		int iTemp = 1;
-		for (int i = 1; i < PointVectorTemp.size(); i++ ) {//Um denn Main vector zu durchlaufen
+		for (int i = 1; i < PointVectorTemp.size(); i++ ) {// Loop the vector
 			iTemp++;
 
 			if (iTemp == PointVectorTemp.size())
 				break;
 			
-			for (int i2 = 0; i2 < PointVectorTemp[i].size(); i2++) {//Um in dem Main vector die einzelnen zu druchlaufen 
+			for (int i2 = 0; i2 < PointVectorTemp[i].size(); i2++) {//Loop through the vector of vector 
 				
-				for (int i3 = 0; i3 < PointVectorTemp[iTemp].size(); i3++) {//Um das nächste teil im Main vector zu druchlaufen 
+				for (int i3 = 0; i3 < PointVectorTemp[iTemp].size(); i3++) {//Loop through the next vector of vector  
 					bool FoundDuplicate = false;
 					
 					POINT pointLookForLast = PointVectorTemp[i][i2];
@@ -241,17 +239,17 @@ void startFunktion(vector<POINT> &Returner, Mat MatScreen) {
 					if (pointLookForLast.y == PointVectorTemp[iTemp][i3].y && pointLookForLast.x == PointVectorTemp[iTemp][i3].x)
 						break;
 
-					for (int i4 = 0; i4 < 6; i4++) {//Um Point temp von 340 bis 345 zu druch lauf und mit dem aktuellen point im nächsten Main vector so vergleichen 
+					for (int i4 = 0; i4 < 6; i4++) {//To run pointTemp from 340 to 345 and compare with the current point in the next vector  
 						POINT pointTemp = pointTempGround;
 						pointTemp.y = pointTemp.y + i4;
 
-						if (PointVectorTemp[i][i2].y == pointTemp.y && PointVectorTemp[i][i2].x == pointTemp.x) {	// Checken ob pointTemp gleich dem aktuellen Point im nächsten Main vector nicht entspreicht wenn ja dann soll der aktuelle punkt 
+						if (PointVectorTemp[i][i2].y == pointTemp.y && PointVectorTemp[i][i2].x == pointTemp.x) {//Check if pointTemp is equal to the current point in the next vector
 							FoundDuplicate = true;	   
-							break;																					// in denn entgültigen vector of vector gepusht werden wenn er aber gleich ist soll er nicht gespeichert werden und es wird der nachste punkt 
-						} 	                                                                                               // in dem nächsten Main vector probiert so lange bist jeder punkt mit jedem punkt verglichen wurde
+							break;																					
+						} 	                                                                                          
 					}
 				
-					if (FoundDuplicate == true) {
+					if (FoundDuplicate == true) {//If a duplicate was found the point that was compared is pushed to temp
 						temp.push_back(PointVectorTemp[i][i2]);
 					}	
 				}

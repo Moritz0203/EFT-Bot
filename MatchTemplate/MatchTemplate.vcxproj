@@ -135,6 +135,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CaseMatching.h" />
     <ClInclude Include="DistributorForMatching.h" />
     <ClInclude Include="getMat.h" />
     <ClInclude Include="InputMT.h" />

@@ -25,7 +25,7 @@ namespace Mouse {
 }
 
 namespace Keyboard {
-	bool KeyboardInput(int keyforInput) {
+	bool KeyboardInput(float keyforInput) {
 		INPUT ip;
 		// Set up a generic keyboard event.
 		ip.type = INPUT_KEYBOARD;

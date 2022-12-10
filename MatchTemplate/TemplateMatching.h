@@ -62,7 +62,7 @@ struct TemplateMatching {
 		Point matchLoc;
 
 		int count = 0;
-		POINT PointReturn;
+		POINT PointReturn{};
 		cout << NameOfItem << endl;
 		while (true)
 		{

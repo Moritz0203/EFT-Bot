@@ -1,6 +1,6 @@
-#include "opencv2/imgcodecs.hpp"
-#include "opencv2/highgui.hpp"
-#include "opencv2/imgproc.hpp"
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -142,5 +142,32 @@ struct TemplateMatching {
 		waitKey(200);
 
 		return PointReturn;
+		
+	}
+	
+	enum Color {RED, ORANGSH, GREEN, BLUE, PURPLE, PINK, GRAY};
+
+								   // BLUE GREEN RED
+	cv::Scalar redLow =      cv::Scalar(0, 0, 100);
+	cv::Scalar redHigh =     cv::Scalar(10, 10, 110);
+	cv::Scalar orangshLow =  cv::Scalar(5, 55, 100);
+	cv::Scalar orangshHigh = cv::Scalar(15, 65, 110);
+	cv::Scalar greenLow =	 cv::Scalar(10, 100, 70);
+	cv::Scalar greenHigh =	 cv::Scalar(20, 110, 80);
+	cv::Scalar blueLow =	 cv::Scalar(80, 100, 0);
+	cv::Scalar blueHigh =	 cv::Scalar(90, 110, 10);
+	cv::Scalar purpleLow =	 cv::Scalar(100, 0, 40);
+	cv::Scalar purpleHigh =  cv::Scalar(110, 10, 50);
+	cv::Scalar pinkLow =     cv::Scalar(50, 0, 100);
+	cv::Scalar pinkHigh =	 cv::Scalar(60, 10, 110);
+	cv::Scalar grayLow =     cv::Scalar(100, 100, 100);
+	cv::Scalar grayHigh =    cv::Scalar(110, 110, 110);
+
+
+	static Color ColorMatching(Rect Rec, Mat MatScreen) {
+		Mat Roi = MatScreen(Rec);
+		
+		Color color;
+
 	}
 };

@@ -190,7 +190,6 @@ namespace StartUp {
 						temp.push_back(PointVectorTemp[i][i2]);
 					}
 				}
-
 			}
 			if (!temp.empty()) {
 				PointVectorCleanUp.push_back(temp);
@@ -200,7 +199,6 @@ namespace StartUp {
 				PointVectorCleanUp.push_back(temp);
 				temp.clear();
 			}
-				
 		}
 	}
 }

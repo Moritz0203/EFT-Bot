@@ -88,6 +88,7 @@ class CaseMatching
 			}
 		}
 		
+		pointCase.emplace_back(pointCasetemp);
 		
 		/*point.y = (templ.rows / 2) + point.y;
 		point.x = (templ.cols / 2) + point.x;

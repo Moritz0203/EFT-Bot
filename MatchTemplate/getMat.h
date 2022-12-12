@@ -138,12 +138,12 @@ cv::Mat getMat(HWND hWND) {
 	wstring temp = wstring(Name.begin(), Name.end());
 	LPCWSTR wideString = temp.c_str();
 
-	BITMAPFILEHEADER bmfHeader;
+	BITMAPFILEHEADER bmfHeader{};
 	HANDLE bmp_file_handle = CreateFile(wideString, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	
 
 	// Add the size of the headers to the size of the bitmap to get the total file size
-	DWORD dwSizeofDIB = (width * 3 + bmp_padding) * height + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+	DWORD dwSizeofDIB = (static_cast<unsigned long long>(width) * 3 + bmp_padding) * height + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
 
 	//Offset to where the actual bitmap bits start.
 	bmfHeader.bfOffBits = (DWORD)sizeof(BITMAPFILEHEADER) + (DWORD)sizeof(BITMAPINFOHEADER);

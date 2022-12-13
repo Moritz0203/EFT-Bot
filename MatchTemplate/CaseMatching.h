@@ -11,6 +11,8 @@ using namespace cv;
 
 class CaseMatching
 {
+	void OpenCaseAndTakeScreen(vector<POINT> tempPoints, Mat templ, std::string NameOfCase, int page);
+
 	vector<vector<POINT>> PointVectorTemp;
 	vector<vector<POINT>> PointVectorCleanUp;
 	void THICC() {
@@ -36,26 +38,27 @@ class CaseMatching
 
 		StartUp::cleanUpVector(PointVectorTemp, PointVectorCleanUp);
 		StartUp::CheckScrollbarPositions();
-
+		int page = 0;
 		for (int i = 0; i < PointVectorCleanUp.size(); i++) {
 			if (!PointVectorCleanUp[i].size() == 0) {
-				OpenCaseAndTakeScreen(PointVectorCleanUp[i], templ, NameOfCase);
+				OpenCaseAndTakeScreen(PointVectorCleanUp[i], templ, NameOfCase, page);
 			}
 			else {
 				float keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 				Keyboard::KeyboardInput(keyforInput);
 			}
+			page++;
 		}
 
 		
 	}
 	
-	vector<vector<PointCase>> pointCase;
+	vector<vector<PointCaseInStash>> pointCase;
 
-	void OpenCaseAndTakeScreen(vector<POINT> tempPoints, Mat templ, std::string NameOfCase) {
+	void OpenCaseAndTakeScreen(vector<POINT> tempPoints, Mat templ, std::string NameOfCase, int page) {
 		Color color;
 		Mat MatScreen;
-		vector<PointCase> pointCasetemp;
+		vector<PointCaseInStash> pointCasetemp;
 
 
 		HWND hWND = FindeWindow();
@@ -63,33 +66,34 @@ class CaseMatching
 		Sleep(5);//Delete later
 		MatScreen = getMat(hWND);
 
-
 		for (int i = 0; i < tempPoints.size(); i++) {
 			Rect Rec(tempPoints[i].x, tempPoints[i].y, templ.cols, templ.rows);
 			color = TemplateMatching::ColorMatching(Rec, MatScreen);
 			switch (color)
 			{
 				case Color::RED:
-					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::RED, templ.rows, templ.cols);
+					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::RED, templ.rows, templ.cols, page);
 				case Color::ORANGSH:
-					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::ORANGSH, templ.rows, templ.cols);
+					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::ORANGSH, templ.rows, templ.cols, page);
 				case Color::GREEN:
-					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::GREEN, templ.rows, templ.cols);
+					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::GREEN, templ.rows, templ.cols, page);
 				case Color::BLUE:
-					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::BLUE, templ.rows, templ.cols);
+					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::BLUE, templ.rows, templ.cols, page);
 				case Color::PURPLE:
-					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::PURPLE, templ.rows, templ.cols);
+					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::PURPLE, templ.rows, templ.cols, page);
 				case Color::PINK:
-					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::PINK, templ.rows, templ.cols);
+					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::PINK, templ.rows, templ.cols, page);
 				case Color::GRAY:
-					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::GRAY, templ.rows, templ.cols);
+					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::GRAY, templ.rows, templ.cols, page);
 				case Color::NOCOLOR:
-					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::NOCOLOR, templ.rows, templ.cols);
+					pointCasetemp.emplace_back(tempPoints[i], NameOfCase, Color::NOCOLOR, templ.rows, templ.cols, page);
 			}
 		}
 		
 		pointCase.emplace_back(pointCasetemp);
 		
+
+
 		/*point.y = (templ.rows / 2) + point.y;
 		point.x = (templ.cols / 2) + point.x;
 		Mouse::MoverPOINTandPress(point);*/

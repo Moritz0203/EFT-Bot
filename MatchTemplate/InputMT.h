@@ -14,19 +14,38 @@ namespace Mouse {
 		return true;
 	}
 
-	bool MoverPOINTandPress(POINT Points) {
+	void MoverPOINTandPress(POINT Points) {
 		SetCursorPos(Points.x, Points.y);
 		mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 		cout << "MouseMovPress" << endl;
 
-		return true;
+		return;
+	}
+	void MoverPOINTandPressTwoTimes(POINT Points) {
+		SetCursorPos(Points.x, Points.y);
+		mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+		mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+		cout << "MouseMovPressTwoTimes" << endl;
+
+		return;
+	}
+	void MouseMoveAtoB(POINT PointA, POINT PointB) {
+		SetCursorPos(PointA.x, PointA.y);
+		mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+		SetCursorPos(PointB.x, PointB.y);
+		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+		cout << "MouseMoveAtoB" << endl;
+
+		return;
 	}
 }
 
 namespace Keyboard {
 	bool KeyboardInput(float keyforInput) {
-		INPUT ip;
+		INPUT ip{};
 		// Set up a generic keyboard event.
 		ip.type = INPUT_KEYBOARD;
 		ip.ki.wScan = 0; // hardware scan code for key

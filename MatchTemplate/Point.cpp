@@ -18,7 +18,7 @@ PointCaseInCase::PointCaseInCase()
 {
 }
 
-PointCaseInCase::PointCaseInCase(POINT pointInCase, POINT pointFromParentCase, std::string nameOfCase, Color color, int heightTempl, int widthTempl, int page)
+PointCaseInCase::PointCaseInCase(POINT pointInCase, POINT pointFromParentCase, std::string nameOfCase, Color color, int heightTempl, int widthTempl, int pageOfParentCase)
 {
 	this->pointInCase = pointInCase;
 	this->pointFromParentCase = pointFromParentCase;
@@ -26,6 +26,6 @@ PointCaseInCase::PointCaseInCase(POINT pointInCase, POINT pointFromParentCase, s
 	this->color = color;
 	this->heightTempl = heightTempl;
 	this->widthTempl = widthTempl;
-	this->page = page;
+	this->pageOfParentCase = pageOfParentCase;
 }
 

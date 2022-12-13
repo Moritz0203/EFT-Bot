@@ -23,10 +23,10 @@ class PointCaseInCase
 public:
 	Color color = {};
 	POINT pointInCase = {}, pointFromParentCase = {};
-	int heightTempl = {}, widthTempl = {}, page = {};
+	int heightTempl = {}, widthTempl = {}, pageOfParentCase = {};
 	std::string nameOfCase = {};
 
 	PointCaseInCase();
-	PointCaseInCase(POINT pointInCase, POINT pointFromParentCase, std::string nameOfCase, Color color, int heightTempl, int widthTempl, int page);
+	PointCaseInCase(POINT pointInCase, POINT pointFromParentCase, std::string nameOfCase, Color color, int heightTempl, int widthTempl, int pageOfParentCase);
 };
 

@@ -69,19 +69,10 @@ namespace Matching {
 
 		for (int i = 0; i < size; i++) {
 			threshold = AmmunitionThreshold[i];
-			filename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/NEW2.png";
 			templatename = Ammunition[i];
 
-			if (filename.empty() || templatename.empty())
-				cout << "Error reading file(s) in main Funkion!" << endl;
-			else
-				TemplateMatching::templateMatchingItems(filename, templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM, Screen);
+			TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM, Screen);
 		}
-
-		/*for (int i = 0; i < ReturnDataAM.size(); i++) {
-			cout << ReturnDataAM[i] << endl;
-		}*/
-
 		return ReturnDataAM;
 	}
 
@@ -139,19 +130,10 @@ namespace Matching {
 
 		for (int i = 0; i < size; i++) {
 			threshold = MagazineThreshold[i];
-			filename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/NEW3.png";
 			templatename = Magazine[i];
 
-			if (filename.empty() || templatename.empty())
-				cout << "Error reading file(s) in main Funkion!" << endl;
-			else
-				TemplateMatching::templateMatchingItems(filename, templatename, threshold, true, false, NameOfItemMagazine[i], ReturnDataMA, Screen);
+			TemplateMatching::templateMatchingItems(templatename, threshold, true, false, NameOfItemMagazine[i], ReturnDataMA, Screen);
 		}
-
-		/*for (int i = 0; i < ReturnDataMA.size(); i++) {
-			cout << ReturnDataMA[i] << endl;
-		}*/
-
 		return ReturnDataMA;
 	}
 
@@ -206,19 +188,10 @@ namespace Matching {
 
 		for (int i = 0; i < size; i++) {
 			threshold = BarterThreshold[i];
-			filename = "C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/NEW4.png";
 			templatename = Barter[i];
 
-			if (filename.empty() || templatename.empty())
-				cout << "Error reading file(s) in main Funkion!" << endl;
-			else
-				TemplateMatching::templateMatchingItems(filename, templatename, threshold, false, true, NameOfItemBarter[i], ReturnDataBA, Screen);
+			TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemBarter[i], ReturnDataBA, Screen);
 		}
-
-		/*for (int i = 0; i < ReturnDataMA.size(); i++) {
-			cout << ReturnDataMA[i] << endl;
-		}*/
-
 		return ReturnDataBA;
 	}
 }

@@ -25,7 +25,7 @@ class CaseMatching
 		String NameOfCase = "THICCcase";
 
 		for (int i = 0; i < 7; i++) {// 5 must later be size 
-			TemplateMatching::templateMatchingItems("", "ObjectImages/THICCcase.png", 0.90, false, false, "THICCcase", ReturnPoints, ReturntMatScreen[i]);
+			TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.90, false, false, "THICCcase", ReturnPoints, ReturntMatScreen[i]);
 			if (!ReturnPoints.empty()) {
 				PointVectorTemp.push_back(ReturnPoints);
 				ReturnPoints.clear();
@@ -109,7 +109,63 @@ class CaseMatching
 
 			float keyforInput = 0x1B;// virtual-key code for the "ESC button" key
 			Keyboard::KeyboardInput(keyforInput);
+
+			
 		}
+
+		MatchingCase(MatScreenVector, tempPoints);
+	}
+
+
+	std::array<std::string, 6> Cases{
+		"itemImages/CaseImages/AmmoCase.png",
+		"itemImages/CaseImages/GrenadCase.png",
+		"itemImages/CaseImages/HolodilnickCase.png",
+		"itemImages/CaseImages/MagCase.png",
+		"itemImages/CaseImages/MedCase.png",
+		"itemImages/CaseImages/MoneyCase.png",
+	};
+
+	std::array<std::string, 6> NameOfItemCases{
+		"AmmoCase",
+		"GrenadCase",
+		"HolodilnickCase",
+		"MagCase",
+		"MedCase",
+		"MoneyCase",
+	};
+
+	std::array<double, 6> CasesThreshold{
+		0.90,//AmmoCase
+		0.90,//GrenadCase
+		0.90,//HolodilnickCase
+		0.90,//MagCase
+		0.90,//MedCase
+		0.90,//MoneyCase
+	};
+
+	
+
+	void MatchingCase(vector<Mat> MatScreenVector, vector<POINT> tempPoints) {
+		string  filename, templatename;
+		double	threshold;
+		int size = sizeof(Cases) / sizeof(string);
+		vector<PointCaseInCase> pointCaseInCase;
+
+		vector<POINT> ReturnDataCase;
+		for (int i = 0; i < MatScreenVector.size(); i++) {
+			for (int i2 = 0; i2 < size; i2++) {
+				threshold = CasesThreshold[i2];
+				templatename = Cases[i2];
+
+				TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemCases[i], ReturnDataCase, MatScreenVector[i]);
+
+				for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
+					pointCaseInCase.emplace_back(ReturnDataCase[i3], tempPoints[i], NameOfItemCases[i], )
+				}
+			}
+		}
+		
 	}
 
 	void MoveTopBarTHICCcase() {

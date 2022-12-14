@@ -37,7 +37,7 @@ int main() {
 		/*int width = templ.cols / 2;
 		int height = templ.rows / 2;*/
 		
-		TemplateMatching::templateMatchingItems("", "ObjectImages/THICCcase.png", 0.90, false, false, "Intel", Returner, MatScreen);   // 807  464  122    div1  343  div2  342     1Solt
+		TemplateMatching::templateMatchingItems( "ObjectImages/THICCcase.png", 0.90, false, false, "Intel", Returner, MatScreen);   // 807  464  122    div1  343  div2  342     1Solt
 
 																																	// 814  471  128    div1  343  div2  343     1Slot
 																																	

@@ -11,7 +11,7 @@ using namespace cv;
 
 class TemplateMatching {
 public:
-	static inline int templateMatchingItems(string filename, string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed,
+	static inline int templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed,
 		string NameOfItem, vector<POINT>& ReturnData, Mat MatScreen)
 	{
 		int height = {}, width = {};
@@ -21,12 +21,8 @@ public:
 		Mat result;
 		Mat img;
 
-		img = cv::imread(filename);
 
-		if (!MatScreen.empty()) {
-			img = MatScreen;
-		}
-
+		img = MatScreen;
 		Mat templ = cv::imread(templatename);
 		if (img.empty() || templ.empty())
 		{

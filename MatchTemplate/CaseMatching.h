@@ -130,7 +130,32 @@ class CaseMatching
 	};
 
 	void OtherCases() {
+		string  filename, templatename;
+		double	threshold;
+		int size = sizeof(CasesInCase) / sizeof(string);
+		vector<PointCaseInCase> pointCaseInCasetemp;
+		Mat templ;
+		Color color{};
 
+		vector<POINT> ReturnDataCase;
+		for (int i = 0; i < MatScreenVector.size(); i++) {
+			for (int i2 = 0; i2 < size; i2++) {
+				threshold = CasesInCaseThreshold[i2];
+				templatename = CasesInCase[i2];
+				templ = imread(CasesInCase[i2]);
+
+				TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemCasesInCase[i], ReturnDataCase, MatScreenVector[i]);
+
+				for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
+					Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, templ.cols, templ.rows);
+
+					color = TemplateMatching::ColorMatching(Rec, MatScreenVector[i]);
+					pointCaseInCasetemp.emplace_back(ReturnDataCase[i3], tempPoints[i], NameOfItemCasesInCase[i], color, templ.rows, templ.cols, page);
+				}
+			}
+			pointCaseInCase.emplace_back(pointCaseInCasetemp);
+			pointCaseInCasetemp.clear();
+		}
 	}
 
 

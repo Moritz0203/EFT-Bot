@@ -57,6 +57,7 @@ class CaseMatching
 		PointVectorCleanUp.clear();
 	}
 
+
 	void ItemsCase() {
 		Mat templ;
 		array<Mat, 11> ReturntMatScreen;
@@ -96,71 +97,89 @@ class CaseMatching
 		PointVectorCleanUp.clear();
 	}
 	
-	std::array<std::string, 8> Cases{
-		"itemImages/CaseImages/AmmoCase.png",
-		"itemImages/CaseImages/GrenadCase.png",
-		"itemImages/CaseImages/HolodilnickCase.png",
-		"itemImages/CaseImages/MagCase.png",
-		"itemImages/CaseImages/MedCase.png",
-		"itemImages/CaseImages/MoneyCase.png",
-		"itemImages/CaseImages/JunkCase.png",
-		"itemImages/CaseImages/WeaponsCase.png",
-	};
-
-	std::array<std::string, 8> NameOfItemCases{
-		"AmmoCase",
-		"GrenadCase",
-		"HolodilnickCase",
-		"MagCase",
-		"MedCase",
-		"MoneyCase",
-		"JunkCase",
-		"WeaponsCase",
-	};
-
-	std::array<double, 8> CasesThreshold{
-		0.90,//AmmoCase
-		0.90,//GrenadCase
-		0.90,//HolodilnickCase
-		0.90,//MagCase
-		0.90,//MedCase
-		0.90,//MoneyCase
-		0.90,//JunkCase
-		0.90,//WeaponsCase
-	};
-
-	void OtherCases() {
-		string  filename, templatename;
-		double	threshold;
-		int size = sizeof(CasesInCase) / sizeof(string);
-		vector<PointCaseInCase> pointCaseInCasetemp;
-		Mat templ;
-		Color color{};
-
-		vector<POINT> ReturnDataCase;
-		for (int i = 0; i < MatScreenVector.size(); i++) {
-			for (int i2 = 0; i2 < size; i2++) {
-				threshold = CasesInCaseThreshold[i2];
-				templatename = CasesInCase[i2];
-				templ = imread(CasesInCase[i2]);
-
-				TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemCasesInCase[i], ReturnDataCase, MatScreenVector[i]);
-
-				for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
-					Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, templ.cols, templ.rows);
-
-					color = TemplateMatching::ColorMatching(Rec, MatScreenVector[i]);
-					pointCaseInCasetemp.emplace_back(ReturnDataCase[i3], tempPoints[i], NameOfItemCasesInCase[i], color, templ.rows, templ.cols, page);
-				}
-			}
-			pointCaseInCase.emplace_back(pointCaseInCasetemp);
-			pointCaseInCasetemp.clear();
-		}
-	}
-
 
 	vector<vector<PointCaseInStash>> pointCaseInStash;
 	vector<vector<PointCaseInCase>> pointCaseInCase;
+
+	class OtherCasesClass {
+		vector<vector<PointCaseInStash>> PointCaseInStasTemp;
+		vector<vector<PointCaseInStash>> PointCaseInStasCleanUp;
+
+		std::array<std::string, 8> Cases{
+			"itemImages/CaseImages/AmmoCase.png",
+			"itemImages/CaseImages/GrenadCase.png",
+			"itemImages/CaseImages/HolodilnickCase.png",
+			"itemImages/CaseImages/MagCase.png",
+			"itemImages/CaseImages/MedCase.png",
+			"itemImages/CaseImages/MoneyCase.png",
+			"itemImages/CaseImages/JunkCase.png",
+			"itemImages/CaseImages/WeaponsCase.png",
+		};
+
+		std::array<std::string, 8> NameOfItemCases{
+			"AmmoCase",
+			"GrenadCase",
+			"HolodilnickCase",
+			"MagCase",
+			"MedCase",
+			"MoneyCase",
+			"JunkCase",
+			"WeaponsCase",
+		};
+
+		std::array<double, 8> CasesThreshold{
+			0.90,//AmmoCase
+			0.90,//GrenadCase
+			0.90,//HolodilnickCase
+			0.90,//MagCase
+			0.90,//MedCase
+			0.90,//MoneyCase
+			0.90,//JunkCase
+			0.90,//WeaponsCase
+		};
+
+		void OtherCases() {
+			PointCaseInStash pointCasetempStash;
+			vector<PointCaseInStash> pointCasetempStashVector;
+			array<Mat, 11> ReturntMatScreen;
+			ReturntMatScreen = StartUp::TakeScreenshots();
+			Color color{};
+			Mat templ;
+
+			vector<POINT> ReturnDataCase;
+			int size = sizeof(Cases) / sizeof(string);
+			for (int i = 0; i < 7; i++) {// 5 must later be size 
+				for (int i2 = 0; i2 < size; i2++) {
+					TemplateMatching::templateMatchingItems(Cases[i2], CasesThreshold[i2], false, false, NameOfItemCases[i2], ReturnDataCase, ReturntMatScreen[i]);
+					templ = imread(Cases[i2]);
+
+					if (!ReturnDataCase.empty()) {
+						for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
+							Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, templ.cols, templ.rows);
+							color = TemplateMatching::ColorMatching(Rec, ReturntMatScreen[i]);
+
+							pointCasetempStash.point = ReturnDataCase[i3];
+							pointCasetempStash.nameOfCase = NameOfItemCases[i2];
+							pointCasetempStash.color = color;
+							pointCasetempStash.heightTempl = templ.rows;
+							pointCasetempStash.widthTempl = templ.cols;
+							pointCasetempStash.page = i;
+
+							pointCasetempStashVector.emplace_back(pointCasetempStash);
+						}
+						ReturnDataCase.clear();
+					}
+				}
+				PointCaseInStasTemp.emplace_back(pointCasetempStashVector);
+				pointCasetempStashVector.clear();
+				cout << "-----------------------------------------------------------------------------------\n";
+			}
+
+			StartUp::cleanUpVectorOnParameters(PointCaseInStasTemp, PointCaseInStasCleanUp);
+		}
+	};
+	
+
 
 	void OpenCaseAndTakeScreen(vector<POINT> tempPoints, Mat templ, std::string NameOfCase, int page) {
 		Color color;

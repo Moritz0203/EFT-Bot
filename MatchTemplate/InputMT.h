@@ -61,6 +61,6 @@ namespace Keyboard {
 		ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
 		SendInput(1, &ip, sizeof(INPUT));
 
-		cout << "keyboard presst" << endl;
+		cout << "keyboard presst" << " " << keyforInput << endl;
 	}
 }

@@ -31,8 +31,8 @@ namespace CaseMatching
 		templ = imread("ObjectImages/THICCcase.png");
 		String NameOfCase = "THICCcase";
 
-		for (int i = 0; i < 9; i++) {// 5 must later be size 
-			TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.92, false, false, NameOfCase, ReturnPoints, ReturntMatScreen[i]);
+		for (int i = 0; i < 2; i++) {// 5 must later be size 
+			TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.91, false, false, NameOfCase, ReturnPoints, ReturntMatScreen[i]);
 			if (!ReturnPoints.empty()) {
 				PointVectorTemp.push_back(ReturnPoints);
 				ReturnPoints.clear();
@@ -60,11 +60,16 @@ namespace CaseMatching
 		int page = 0;
 		for (int i = 0; i < PointVectorCleanUp.size(); i++) {
 			if (!PointVectorCleanUp[i].size() == 0) {
+				int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+				Keyboard::KeyboardInput(keyforInput);
+				Sleep(500);
 				OpenCaseAndTakeScreen(PointVectorCleanUp[i], templ, NameOfCase, page);
+				break;
 			}
 			else {
 				int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 				Keyboard::KeyboardInput(keyforInput);
+				Sleep(500);
 			}
 			page++;
 		}
@@ -209,12 +214,22 @@ namespace CaseMatching
 		Sleep(5);//Delete later
 		MatScreen = getMat(hWND);
 
+		const char* image_window = "Source Image";
+		namedWindow(image_window, WINDOW_AUTOSIZE);
 		for (int i = 0; i < tempPoints.size(); i++) {
 			Rect Rec(tempPoints[i].x, tempPoints[i].y, templ.cols, templ.rows);
 			color = TemplateMatching::ColorMatching(Rec, MatScreen);
 			pointCasetempStash.emplace_back(tempPoints[i], NameOfCase, color, templ.rows, templ.cols, page);
+
+
+			Mat Roi = MatScreen(Rec);
+			imshow(image_window, Roi);
+			waitKey(0);
 		}
 		
+
+		
+
 		pointCaseInStash.emplace_back(pointCasetempStash);
 		pointCasetempStash.clear();
 

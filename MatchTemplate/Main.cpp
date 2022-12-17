@@ -27,10 +27,36 @@ int main() {
 		StartUp::Entrance();
 	}
 	if (Start == "test") {
+		Mat templ;
+		Color color;
 		
-		CaseMatching::THICCcase();
+		vector<POINT> ReturnPoints;
+		templ = imread("ObjectImages/THICCcase.png");
+		const char* image_window = "Source Image";
+		namedWindow(image_window, WINDOW_AUTOSIZE);
+
+		TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.91, false, false, "thicc", ReturnPoints, MatScreen);
+		
+		cout << "------" << endl;
+		
+		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, templ.cols, templ.rows);
+
+		Mat Roi = MatScreen(Rec);
+		imshow(image_window, Roi);
+		waitKey(0);
+
+		color = TemplateMatching::ColorMatching(Rec, MatScreen);
+		
+		
+		cout << color << " " << "color" << endl;
 
 
+
+
+
+		/*CaseMatching::THICCcase();*/
+	}
+	else if (Start == "2test") {
 	}
 
 	/*for (int i = 0; i < Returner.size(); i++) {

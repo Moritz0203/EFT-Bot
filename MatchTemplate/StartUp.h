@@ -86,7 +86,7 @@ namespace StartUp {
 
 		int size = sizeof(ReturnMatScreen) / sizeof(Mat);
 		for (int i = 0; i < size; i++) {
-			Sleep(300);
+			Sleep(500);
 			ReturnMatScreen[i] = getMat(hWND);
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 			Keyboard::KeyboardInput(keyforInput);
@@ -109,7 +109,7 @@ namespace StartUp {
 		int size = sizeof(ReturntMatScreen) / sizeof(Mat);
 		for (int i = 0; i < size; i++) {
 			imshow(image_window, ReturntMatScreen[i]);
-			waitKey(200);
+			waitKey(0);
 		}
 
 

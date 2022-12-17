@@ -149,8 +149,9 @@ public:
 public:
 	static Color ColorMatching(Rect Rec, Mat MatScreen) {
 		array<cv::Scalar, 7> ScalarLow{
-			cv::Scalar(0, 0, 100), /*redLow*/
+
 			cv::Scalar(5, 55, 100), /*orangshLow*/
+			cv::Scalar(0, 0, 100), /*redLow*/
 			cv::Scalar(10, 100, 70), /*greenLow*/
 			cv::Scalar(80, 100, 0), /*blueLow*/
 			cv::Scalar(100, 0, 40), /*purpleLow*/
@@ -159,8 +160,9 @@ public:
 		};
 
 		array<cv::Scalar, 7> ScalarHigh{
-			cv::Scalar(10, 10, 110), /*redHigh*/
+			
 			cv::Scalar(15, 65, 110), /*orangshHigh*/
+			cv::Scalar(10, 10, 110), /*redHigh*/
 			cv::Scalar(20, 110, 80), /*greenHigh*/
 			cv::Scalar(90, 110, 10), /*blueHigh*/
 			cv::Scalar(110, 10, 50), /*purpleHigh*/
@@ -173,9 +175,10 @@ public:
 				switch (i)
 				{
 				case 0:
-					return Color::RED;
-				case 1:
 					return Color::ORANGSH;
+					
+				case 1:
+					return Color::RED;
 				case 2:
 					return Color::GREEN;
 				case 3:

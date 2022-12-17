@@ -2,6 +2,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+#include "getMat.h"
 #include "InputMT.h"
 #include "DistributorForMatching.h"
 using namespace std;
@@ -60,9 +61,14 @@ namespace StartUp {
 			point.y = (templ.rows / 2) + point.y;
 			point.x = (templ.cols / 2) + point.x;
 			Mouse::MoverPOINTandPress(point);
-			float keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key
+			int keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key
 			Keyboard::KeyboardInput(keyforInput);
 		}
+
+		POINT pointBarClick{};
+		pointBarClick.y = 171;
+		pointBarClick.x = 1903;
+		Mouse::MoverPOINTandPress(pointBarClick);
 	}
 
 	array<Mat, 11> TakeScreenshots() {
@@ -80,9 +86,9 @@ namespace StartUp {
 
 		int size = sizeof(ReturnMatScreen) / sizeof(Mat);
 		for (int i = 0; i < size; i++) {
-			Sleep(250);
+			Sleep(300);
 			ReturnMatScreen[i] = getMat(hWND);
-			float keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 			Keyboard::KeyboardInput(keyforInput);
 		}
 

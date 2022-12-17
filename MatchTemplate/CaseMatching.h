@@ -2,32 +2,37 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
-#include "DistributorForMatching.h"
-#include "getMat.h"
 #include "StartUp.h"
 using namespace std;
 using namespace cv;
 
 
-class CaseMatching
+
+namespace CaseMatching
 {
 	void OpenCaseAndTakeScreen(vector<POINT> tempPoints, Mat templ, std::string NameOfCase, int page);
-	void MatchingCaseInCase(vector<Mat>& MatScreenVector, vector<POINT> tempPoints, int page);
-	void MoveTopBarTHICCcase();
+	/*void MatchingCaseInCase(vector<Mat>& MatScreenVector, vector<POINT> tempPoints, int page);
+	void MoveTopBarTHICCcase();*/
 
 	vector<vector<POINT>> PointVectorTemp;
 	vector<vector<POINT>> PointVectorCleanUp;
+
+	vector<vector<PointCaseInStash>> pointCaseInStash;
+	vector<vector<PointCaseInCase>> pointCaseInCase;
 
 	void THICCcase() {
 		Mat templ;
 		array<Mat, 11> ReturntMatScreen;
 		vector<POINT> ReturnPoints;
+
+		StartUp::CheckScrollbarPositions();
 		ReturntMatScreen = StartUp::TakeScreenshots();
+
 		templ = imread("ObjectImages/THICCcase.png");
 		String NameOfCase = "THICCcase";
 
-		for (int i = 0; i < 7; i++) {// 5 must later be size 
-			TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.90, false, false, NameOfCase, ReturnPoints, ReturntMatScreen[i]);
+		for (int i = 0; i < 9; i++) {// 5 must later be size 
+			TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.92, false, false, NameOfCase, ReturnPoints, ReturntMatScreen[i]);
 			if (!ReturnPoints.empty()) {
 				PointVectorTemp.push_back(ReturnPoints);
 				ReturnPoints.clear();
@@ -40,19 +45,36 @@ class CaseMatching
 		}
 
 		StartUp::cleanUpVector(PointVectorTemp, PointVectorCleanUp);
+
+		cout << "Clean\n";
+		for (int i = 0; i < PointVectorCleanUp.size(); i++) {
+			for (int i2 = 0; i2 < PointVectorCleanUp[i].size(); i2++) {
+				cout << "---- " << PointVectorCleanUp[i][i2].y << " " << PointVectorCleanUp[i][i2].x << endl;
+			}
+			cout << PointVectorCleanUp[i].size() << endl;
+		}
+
 		StartUp::CheckScrollbarPositions();
 
+		
 		int page = 0;
 		for (int i = 0; i < PointVectorCleanUp.size(); i++) {
 			if (!PointVectorCleanUp[i].size() == 0) {
 				OpenCaseAndTakeScreen(PointVectorCleanUp[i], templ, NameOfCase, page);
 			}
 			else {
-				float keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+				int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 				Keyboard::KeyboardInput(keyforInput);
 			}
 			page++;
 		}
+
+		for (int i = 0; i < pointCaseInStash.size(); i++) {
+			for (int i2 = 0; i2 < pointCaseInStash[i].size(); i2++) {
+				cout << pointCaseInStash[i][i2].point.y << " " << pointCaseInStash[i][i2].point.x << " " << pointCaseInStash[i][i2].nameOfCase << " " << pointCaseInStash[i][i2].color << " " << pointCaseInStash[i][i2].page << endl;
+			}
+		}
+
 		PointVectorTemp.clear();
 		PointVectorCleanUp.clear();
 	}
@@ -98,8 +120,7 @@ class CaseMatching
 	}
 	
 
-	vector<vector<PointCaseInStash>> pointCaseInStash;
-	vector<vector<PointCaseInCase>> pointCaseInCase;
+	
 
 	class OtherCasesClass {
 		vector<vector<PointCaseInStash>> PointCaseInStasTemp;
@@ -142,7 +163,10 @@ class CaseMatching
 			PointCaseInStash pointCasetempStash;
 			vector<PointCaseInStash> pointCasetempStashVector;
 			array<Mat, 11> ReturntMatScreen;
+
+			StartUp::CheckScrollbarPositions();
 			ReturntMatScreen = StartUp::TakeScreenshots();
+			
 			Color color{};
 			Mat templ;
 
@@ -157,15 +181,7 @@ class CaseMatching
 						for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
 							Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, templ.cols, templ.rows);
 							color = TemplateMatching::ColorMatching(Rec, ReturntMatScreen[i]);
-
-							pointCasetempStash.point = ReturnDataCase[i3];
-							pointCasetempStash.nameOfCase = NameOfItemCases[i2];
-							pointCasetempStash.color = color;
-							pointCasetempStash.heightTempl = templ.rows;
-							pointCasetempStash.widthTempl = templ.cols;
-							pointCasetempStash.page = i;
-
-							pointCasetempStashVector.emplace_back(pointCasetempStash);
+							pointCasetempStashVector.emplace_back(ReturnDataCase[i3], NameOfItemCases[i2], color, templ.rows, templ.cols, i);
 						}
 						ReturnDataCase.clear();
 					}
@@ -201,26 +217,28 @@ class CaseMatching
 		
 		pointCaseInStash.emplace_back(pointCasetempStash);
 		pointCasetempStash.clear();
+
 		
-		POINT point{};
-		for (int i = 0; i < pointCasetempStash.size(); i++) {
-			point.y = (pointCasetempStash[i].heightTempl / 2) + pointCasetempStash[i].point.y;
-			point.x = (pointCasetempStash[i].widthTempl / 2) + pointCasetempStash[i].point.x;
-			Mouse::MoverPOINTandPressTwoTimes(point);
-			
-			if (NameOfCase == "THICCcase") {
-				MoveTopBarTHICCcase();
-			}
-			
-			HWND hWND = FindeWindow();
-			SetForegroundWindow(hWND);
-			MatScreenVector.push_back(getMat(hWND));
+		
+		//POINT point{};
+		//for (int i = 0; i < pointCasetempStash.size(); i++) {
+		//	point.y = (pointCasetempStash[i].heightTempl / 2) + pointCasetempStash[i].point.y;
+		//	point.x = (pointCasetempStash[i].widthTempl / 2) + pointCasetempStash[i].point.x;
+		//	Mouse::MoverPOINTandPressTwoTimes(point);
+		//	
+		//	if (NameOfCase == "THICCcase") {
+		//		MoveTopBarTHICCcase();
+		//	}
+		//	
+		//	HWND hWND = FindeWindow();
+		//	SetForegroundWindow(hWND);
+		//	MatScreenVector.push_back(getMat(hWND));
 
-			float keyforInput = 0x1B;// virtual-key code for the "ESC button" key
-			Keyboard::KeyboardInput(keyforInput);
-		}
+		//	float keyforInput = 0x1B;// virtual-key code for the "ESC button" key
+		//	Keyboard::KeyboardInput(keyforInput);
+		//}
 
-		MatchingCaseInCase(MatScreenVector, tempPoints, page);
+		/*MatchingCaseInCase(MatScreenVector, tempPoints, page);*/
 	}
 
 

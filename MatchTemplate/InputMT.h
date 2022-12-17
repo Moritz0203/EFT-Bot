@@ -44,7 +44,7 @@ namespace Mouse {
 }
 
 namespace Keyboard {
-	bool KeyboardInput(float keyforInput) {
+	void KeyboardInput(int keyforInput) {
 		INPUT ip{};
 		// Set up a generic keyboard event.
 		ip.type = INPUT_KEYBOARD;
@@ -61,7 +61,6 @@ namespace Keyboard {
 		ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
 		SendInput(1, &ip, sizeof(INPUT));
 
-
-		return true;
+		cout << "keyboard presst" << endl;
 	}
 }

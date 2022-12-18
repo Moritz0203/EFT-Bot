@@ -31,8 +31,8 @@ namespace CaseMatching
 		templ = imread("ObjectImages/THICCcase.png");
 		String NameOfCase = "THICCcase";
 
-		for (int i = 0; i < 2; i++) {// 5 must later be size 
-			TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.91, false, false, NameOfCase, ReturnPoints, ReturntMatScreen[i]);
+		for (int i = 0; i < 8; i++) {// 5 must later be size 
+			TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.92, false, false, NameOfCase, ReturnPoints, ReturntMatScreen[i]);
 			if (!ReturnPoints.empty()) {
 				PointVectorTemp.push_back(ReturnPoints);
 				ReturnPoints.clear();

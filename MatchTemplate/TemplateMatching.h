@@ -149,23 +149,25 @@ public:
 public:
 	static Color ColorMatching(Rect Rec, Mat MatScreen) {
 		array<cv::Scalar, 7> ScalarLow{
-			cv::Scalar(178, 255, 102), /*redLow*/
+			//cv::Scalar(178, 255, 102), /*redLow*/
+			cv::Scalar(0, 60, 150), /*redLow    if more leight*/
 			cv::Scalar(48, 195, 195), /*orangshLow*/
 			cv::Scalar(28, 197, 215), /*greenLow*/
 			cv::Scalar(23, 230, 248), /*blueLow*/
 			cv::Scalar(27, 227, 255), /*purpleLow*/
 			cv::Scalar(20, 227, 255), /*pinkLow*/
-			cv::Scalar(27, 227, 255), /*grayLow */
+			cv::Scalar(27, 229, 254), /*grayLow */
 		};
 
 		array<cv::Scalar, 7> ScalarHigh{
-			cv::Scalar(181, 267, 114), /*redHigh     1*/
+			//cv::Scalar(178, 255, 102), /*redLow*/
+			cv::Scalar(280, 280, 280), /*redHigh     1*/
 			cv::Scalar(55, 200, 200), /*orangshHigh  2*/
 			cv::Scalar(33, 202, 220), /*greenHigh    3*/
 			cv::Scalar(30, 240, 255), /*blueHigh*    4*/
 			cv::Scalar(30, 233, 260), /*purpleHigh   5*/
 			cv::Scalar(27, 228, 260), /*pinkHigh     6*/
-			cv::Scalar(28, 230, 256), /*grayHigh     7*/
+			cv::Scalar(28, 230, 255), /*grayHigh     7*/
 		};
 		int count = 1;
 		for (int i = 0; i < 7; i++) {
@@ -186,13 +188,12 @@ public:
 				case 5:
 					return Color::PINK;
 				case 6:
-					return Color::GRAY;
-				default:
-					return Color::NOCOLOR;
+					return Color::GRAY;					
 				}
 				break;
 			}
 		}
+		return Color::NOCOLOR;
 	};
 	
 	static bool GetColor(Mat MatScreen, cv::Scalar low, cv::Scalar high, Rect Rec, int count) {

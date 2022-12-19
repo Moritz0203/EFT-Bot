@@ -34,18 +34,47 @@ int main() {
 		templ = imread("ObjectImages/THICCcase.png");
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
+		/*const char* image_window2 = "Source Image2222222222";
+		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.91, false, false, "thicc", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.90, false, false, "thicc", ReturnPoints, MatScreen);
 		
 		cout << "------" << endl;
 		
-		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, templ.cols, templ.rows);
+		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, 40, 13/*templ.rows*/);
 
+		Mat Roi2;
 		Mat Roi = MatScreen(Rec);
+		/*cv::cvtColor(Roi, Roi, cv::COLOR_BGR2HSV);*/
+
+		//if (!ReturnPoints[0].y <= 500) {
+		//	/*Roi2 = Roi + cv::Scalar(-17, -17, -17);*/
+		//	Roi2 = Roi + cv::Scalar(-20, -20, -20);
+		//	cout << "hey" << endl;
+		//}
+
+		//int i{}, i2{}, i3{};
+		//while (true)
+		//{
+		//	i--;
+		//	i2--;
+		//	i3--;
+		//	Roi2 = Roi + cv::Scalar(i, i2, i3);	
+
+		//	color = TemplateMatching::ColorMatching(Rec, Roi2);
+
+		//	system("cls");
+		//	cout << color << " " << "color " << i << " " << i2 << " " << i3 <<  endl;
+		//	if (color == 4)// Green -34 / Blue -64 / 
+		//		break;
+		//}
+
+
 		imshow(image_window, Roi);
+		/*imshow(image_window2, Roi2);*/
 		waitKey(0);
 
-		color = TemplateMatching::ColorMatching(Rec, MatScreen);
+		color = TemplateMatching::ColorMatching(Rec, Roi);
 		
 		
 		cout << color << " " << "color" << endl;

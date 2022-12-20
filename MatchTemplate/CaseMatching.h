@@ -234,24 +234,24 @@ namespace CaseMatching
 		pointCasetempStash.clear();
 
 		
-		
-		//POINT point{};
-		//for (int i = 0; i < pointCasetempStash.size(); i++) {
-		//	point.y = (pointCasetempStash[i].heightTempl / 2) + pointCasetempStash[i].point.y;
-		//	point.x = (pointCasetempStash[i].widthTempl / 2) + pointCasetempStash[i].point.x;
-		//	Mouse::MoverPOINTandPressTwoTimes(point);
-		//	
-		//	if (NameOfCase == "THICCcase") {
-		//		MoveTopBarTHICCcase();
-		//	}
-		//	
-		//	HWND hWND = FindeWindow();
-		//	SetForegroundWindow(hWND);
-		//	MatScreenVector.push_back(getMat(hWND));
+		// testen 
+		POINT point{};
+		for (int i = 0; i < pointCasetempStash.size(); i++) {
+			point.y = (pointCasetempStash[i].heightTempl / 2) + pointCasetempStash[i].point.y;
+			point.x = (pointCasetempStash[i].widthTempl / 2) + pointCasetempStash[i].point.x;
+			Mouse::MoverPOINTandPressTwoTimes(point);
+			
+			if (NameOfCase == "THICCcase") {
+				MoveTopBarTHICCcase();
+			}
+			
+			HWND hWND = FindeWindow();
+			SetForegroundWindow(hWND);
+			MatScreenVector.push_back(getMat(hWND));
 
-		//	float keyforInput = 0x1B;// virtual-key code for the "ESC button" key
-		//	Keyboard::KeyboardInput(keyforInput);
-		//}
+			float keyforInput = 0x1B;// virtual-key code for the "ESC button" key
+			Keyboard::KeyboardInput(keyforInput);
+		}
 
 		/*MatchingCaseInCase(MatScreenVector, tempPoints, page);*/
 	}

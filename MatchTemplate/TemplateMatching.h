@@ -220,6 +220,7 @@ public:
 		int x1 = countNonZero(Output);
 		
 
+
 		cout << endl;
 		cout << "---- " << x1 << " " << count <<endl;
 

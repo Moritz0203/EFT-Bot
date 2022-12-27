@@ -226,25 +226,25 @@ namespace CaseMatching
 			imshow(image_window, Roi);
 			waitKey(0);
 		}
-		
 
-		
+
+
 
 		pointCaseInStash.emplace_back(pointCasetempStash);
 		pointCasetempStash.clear();
 
-		
+
 		// testen 
 		POINT point{};
 		for (int i = 0; i < pointCasetempStash.size(); i++) {
 			point.y = (pointCasetempStash[i].heightTempl / 2) + pointCasetempStash[i].point.y;
 			point.x = (pointCasetempStash[i].widthTempl / 2) + pointCasetempStash[i].point.x;
 			Mouse::MoverPOINTandPressTwoTimes(point);
-			
+
 			if (NameOfCase == "THICCcase") {
 				MoveTopBarTHICCcase();
 			}
-			
+
 			HWND hWND = FindeWindow();
 			SetForegroundWindow(hWND);
 			MatScreenVector.push_back(getMat(hWND));
@@ -254,8 +254,8 @@ namespace CaseMatching
 		}
 
 		/*MatchingCaseInCase(MatScreenVector, tempPoints, page);*/
-	}
 
+	}
 
 
 	std::array<std::string, 6> CasesInCase{

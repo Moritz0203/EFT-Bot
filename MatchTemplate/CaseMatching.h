@@ -11,8 +11,8 @@ using namespace cv;
 namespace CaseMatching
 {
 	void OpenCaseAndTakeScreen(vector<POINT> tempPoints, Mat templ, std::string NameOfCase, int page);
-	/*void MatchingCaseInCase(vector<Mat>& MatScreenVector, vector<POINT> tempPoints, int page);
-	void MoveTopBarTHICCcase();*/
+	void MatchingCaseInCase(vector<Mat>& MatScreenVector, vector<POINT> tempPoints, int page);
+	void MoveTopBarTHICCcase();
 
 	vector<vector<POINT>> PointVectorTemp;
 	vector<vector<POINT>> PointVectorCleanUp;

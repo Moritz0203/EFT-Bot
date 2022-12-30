@@ -1,6 +1,7 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include <tesseract/baseapi.h>
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -227,4 +228,9 @@ public:
 
 		return false;
 	}
+};
+
+class TextMatching {
+public:
+
 };

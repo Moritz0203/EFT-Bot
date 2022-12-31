@@ -230,7 +230,29 @@ public:
 	}
 };
 
-class TextMatching {
-public:
-	
-}; 
+namespace TextMatching {
+	string textMatching(Mat MatScreen, Rect Rec)
+	{
+		Mat Roi = MatScreen(Rec);
+		std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
+		tess->Init(nullptr, "eng");
+
+		tess->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
+
+		
+				
+		tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
+		tess->SetSourceResolution(70);
+
+		std::unique_ptr<char[]> txt(tess->GetUTF8Text());
+			
+		if (not txt)
+			return 0; 
+
+		std::string str = txt.get();
+
+		std::cout << str << std::endl;
+
+		return str;
+	}
+};

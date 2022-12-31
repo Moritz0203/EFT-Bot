@@ -115,7 +115,7 @@ namespace CaseMatching
 				OpenCaseAndTakeScreen(PointVectorCleanUp[i], templ, NameOfCase, page);
 			}
 			else {
-				float keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+				int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 				Keyboard::KeyboardInput(keyforInput);
 			}
 			page++;
@@ -249,7 +249,7 @@ namespace CaseMatching
 			SetForegroundWindow(hWND);
 			MatScreenVector.push_back(getMat(hWND));
 
-			float keyforInput = 0x1B;// virtual-key code for the "ESC button" key
+			int keyforInput = 0x1B;// virtual-key code for the "ESC button" key
 			Keyboard::KeyboardInput(keyforInput);
 		}
 

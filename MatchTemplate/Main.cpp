@@ -28,23 +28,36 @@ int main() {
 	}
 	if (Start == "test") {
 		Mat templ;
-		Color color;
+	/*	Color color;*/
 		
 		vector<POINT> ReturnPoints;
-		templ = imread("ObjectImages/THICCcase.png");
+		templ = imread("itemImages/CaseImages/AmmoCase.png");
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("ObjectImages/THICCcase.png", 0.90, false, false, "thicc", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("itemImages/CaseImages/AmmoCase.png", 0.90, false, false, "AmmoCase", ReturnPoints, MatScreen);
 		
 		cout << "------" << endl;
 		
-		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, 40, 13/*templ.rows*/);
+		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, templ.cols, templ.rows);
 
 		Mat Roi2;
 		Mat Roi = MatScreen(Rec);
+		
+		string str = TextMatching::textMatching(MatScreen, Rec);
+		
+		cout << str << endl;
+
+		imshow(image_window, Roi);
+		/*imshow(image_window2, Roi2);*/
+		waitKey(0);
+		
+		
+		
+		
+		
 		/*cv::cvtColor(Roi, Roi, cv::COLOR_BGR2HSV);*/
 
 		//if (!ReturnPoints[0].y <= 500) {
@@ -70,14 +83,12 @@ int main() {
 		//}
 
 
-		imshow(image_window, Roi);
-		/*imshow(image_window2, Roi2);*/
-		waitKey(0);
+		
 
-		color = TemplateMatching::ColorMatching(Rec, Roi);
+	/*	color = TemplateMatching::ColorMatching(Rec, Roi);
 		
 		
-		cout << color << " " << "color" << endl;
+		cout << color << " " << "color" << endl;*/
 
 
 

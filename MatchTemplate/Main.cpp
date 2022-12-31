@@ -37,7 +37,7 @@ int main() {
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("itemImages/CaseImages/AmmoCase.png", 0.90, false, false, "AmmoCase", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("itemImages/CaseImages/AmmoCase.png", 0.80, false, false, "AmmoCase", ReturnPoints, MatScreen);
 		
 		cout << "------" << endl;
 		
@@ -46,9 +46,10 @@ int main() {
 		Mat Roi2;
 		Mat Roi = MatScreen(Rec);
 		
-		string str = TextMatching::textMatching(MatScreen, Rec);
+		/*string str;
+		TextMatching::textMatching(MatScreen, Rec, str);
 		
-		cout << str << endl;
+		cout << str << endl;*/
 
 		imshow(image_window, Roi);
 		/*imshow(image_window2, Roi2);*/

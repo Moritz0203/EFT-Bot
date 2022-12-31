@@ -231,7 +231,7 @@ public:
 };
 
 namespace TextMatching {
-	string textMatching(Mat MatScreen, Rect Rec)
+	void textMatching(Mat MatScreen, Rect Rec, string Text)
 	{
 		Mat Roi = MatScreen(Rec);
 		std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
@@ -247,12 +247,8 @@ namespace TextMatching {
 		std::unique_ptr<char[]> txt(tess->GetUTF8Text());
 			
 		if (not txt)
-			return 0; 
+			return;
 
-		std::string str = txt.get();
-
-		std::cout << str << std::endl;
-
-		return str;
+		Text = txt.get();
 	}
 };

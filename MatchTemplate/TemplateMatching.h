@@ -231,7 +231,7 @@ public:
 };
 
 namespace TextMatching {
-	void textMatching(Mat MatScreen, Rect Rec, string Text)
+	const string textMatching(Mat MatScreen, Rect Rec)
 	{
 		Mat Roi = MatScreen(Rec);
 		std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
@@ -239,16 +239,49 @@ namespace TextMatching {
 
 		tess->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
 
-		
-				
 		tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
 		tess->SetSourceResolution(70);
 
 		std::unique_ptr<char[]> txt(tess->GetUTF8Text());
-			
-		if (not txt)
-			return;
 
-		Text = txt.get();
+		if (!not txt) {
+			const string str = txt.get();
+			return str;
+		}
+	}
+
+	int txttest(Mat MatScreen)
+	{
+		try
+		{
+			std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
+			tess->Init(nullptr, "eng");
+
+			tess->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
+
+
+				
+				
+				
+				tess->SetImage(MatScreen.data, MatScreen.cols, MatScreen.rows, MatScreen.channels(), MatScreen.step1());
+				tess->SetSourceResolution(70);
+
+				std::unique_ptr<char[]> txt(tess->GetUTF8Text());
+				if (not txt) throw std::invalid_argument("failed to detect any text");
+				const std::string str = txt.get();
+
+				std::cout << str << std::endl;
+
+				cv::imshow("mat", MatScreen);
+				const auto key = cv::waitKey();
+				
+		
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+
+		return 0;
 	}
 };

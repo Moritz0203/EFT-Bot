@@ -41,20 +41,25 @@ int main() {
 		
 		cout << "------" << endl;
 		
-		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, templ.cols, templ.rows);
+		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, 68, 13/*templ.cols, templ.rows*/);
 
 		Mat Roi2;
 		Mat Roi = MatScreen(Rec);
+	
+		/*Mat blacktext = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_5.png");
+
+		cv::imshow(image_window, blacktext);
+
+		TextMatching::txttest(blacktext);*/
+
 		
-		/*string str;
-		TextMatching::textMatching(MatScreen, Rec, str);
+		const string str = TextMatching::textMatching(MatScreen, Rec);
 		
-		cout << str << endl;*/
+		cout << str << endl;
 
 		imshow(image_window, Roi);
 		/*imshow(image_window2, Roi2);*/
 		waitKey(0);
-		
 		
 		
 		

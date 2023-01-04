@@ -146,88 +146,74 @@ public:
 	};
 	
 	
+// Color Matching not working - do not use
 
-public:
-	static Color ColorMatching(Rect Rec, Mat MatScreen) {
-		array<cv::Scalar, 7> ScalarLow{
-			cv::Scalar(150, 230, 80), /*redLow*/
-			//cv::Scalar(0, 60, 150), /*redLow    if more leight*/
-			cv::Scalar(48, 195, 195), /*orangshLow*/
-			cv::Scalar(28, 197, 215), /*greenLow*/
-			cv::Scalar(23, 230, 248), /*blueLow*/
-			//cv::Scalar(27, 227, 255), /*purpleLow*/
-
-			cv::Scalar(0, 10, 10), /*purpleLow*/
-
-			cv::Scalar(20, 227, 255), /*pinkLow*/
-			cv::Scalar(27, 229, 254), /*grayLow */
-		};
-
-		array<cv::Scalar, 7> ScalarHigh{
-			cv::Scalar(200, 280, 130), /*redHigh     1*/
-			//cv::Scalar(280, 280, 280), /*redHigh     1*/
-			cv::Scalar(55, 200, 200), /*orangshHigh  2*/
-			cv::Scalar(33, 202, 220), /*greenHigh    3*/
-			cv::Scalar(30, 240, 255), /*blueHigh*    4*/
-			//cv::Scalar(30, 233, 260), /*purpleHigh   5*/
-
-			cv::Scalar(300, 300, 300), /*purpleHigh   5*/
-
-			cv::Scalar(27, 228, 260), /*pinkHigh     6*/
-			cv::Scalar(28, 230, 255), /*grayHigh     7*/
-		};
-		int count = 1;
-		for (int i = 0; i < 7; i++) {
-			bool found = GetColor(MatScreen, ScalarLow[i], ScalarHigh[i], Rec, count++);
-			if (found == true) {
-				switch (i)
-				{
-				case 0:
-					return Color::RED;
-				case 1:
-					return Color::ORANGSH;
-				case 2:
-					return Color::GREEN;
-				case 3:
-					return Color::BLUE;
-				case 4:
-					return Color::PURPLE;
-				case 5:
-					return Color::PINK;
-				case 6:
-					return Color::GRAY;					
-				}
-				break;
-			}
-		}
-		return Color::NOCOLOR;
-	};
-	
-	static bool GetColor(Mat MatScreen, cv::Scalar low, cv::Scalar high, Rect Rec, int count) {
-		Mat Roi = MatScreen/*(Rec)*/;
-		Mat Output;
-
-		/*cvtColor(Roi, Roi, cv::COLOR_RGB2BGR);*/
-		const char* image_window = "Source Image";
-		namedWindow(image_window, WINDOW_AUTOSIZE);
-
-		cv::cvtColor(Roi, Roi, cv::COLOR_BGR2HSV);
-
-		cv::inRange(Roi, low, high, Output);
-
-		imshow(image_window, Output);
-		waitKey(0);
-		
-		int x1 = countNonZero(Output);
-		
-		cout << endl;
-		cout << "---- " << x1 << " " << count <<endl;
-
-		if (x1 >= 420)
-			return true;
-
-		return false;
-	}
+//public:
+//	static Color ColorMatching(Rect Rec, Mat MatScreen) {
+//		array<cv::Scalar, 7> ScalarLow{
+//			cv::Scalar(0, 0, 0), /*redLow*/
+//			////cv::Scalar(0, 60, 150), /*redLow    if more leight*/
+//			//cv::Scalar(48, 195, 195), /*orangshLow*/
+//			//cv::Scalar(28, 197, 215), /*greenLow*/
+//			//cv::Scalar(23, 230, 248), /*blueLow*/
+//			////cv::Scalar(27, 227, 255), /*purpleLow*/
+//
+//			//cv::Scalar(0, 10, 10), /*purpleLow*/
+//
+//			//cv::Scalar(20, 227, 255), /*pinkLow*/
+//			//cv::Scalar(27, 229, 254), /*grayLow */
+//		};
+//
+//		array<cv::Scalar, 7> ScalarHigh{
+//			cv::Scalar(200, 280, 130), /*redHigh     1*/
+//			////cv::Scalar(280, 280, 280), /*redHigh     1*/
+//			//cv::Scalar(55, 200, 200), /*orangshHigh  2*/
+//			//cv::Scalar(33, 202, 220), /*greenHigh    3*/
+//			//cv::Scalar(30, 240, 255), /*blueHigh*    4*/
+//			////cv::Scalar(30, 233, 260), /*purpleHigh   5*/
+//
+//			//cv::Scalar(300, 300, 300), /*purpleHigh   5*/
+//
+//			//cv::Scalar(27, 228, 260), /*pinkHigh     6*/
+//			//cv::Scalar(28, 230, 255), /*grayHigh     7*/
+//		};
+//		int count = 1;
+//		
+//		bool found = GetColor(MatScreen, ScalarLow[0], ScalarHigh[0], Rec, count++);
+//		if (found == true) {
+//				
+//			return Color::RED;
+//			
+//		}
+//		
+//		return Color::NOCOLOR;
+//	};
+//	
+//	static bool GetColor(Mat MatScreen, cv::Scalar low, cv::Scalar high, Rect Rec, int count) {
+//		Mat Roi = MatScreen/*(Rec)*/;
+//		Mat Output;
+//
+//		/*cvtColor(Roi, Roi, cv::COLOR_RGB2BGR);*/
+//		const char* image_window = "Source Image";
+//		namedWindow(image_window, WINDOW_AUTOSIZE);
+//
+//		cv::cvtColor(Roi, Roi, cv::COLOR_BGR2HSV);
+//
+//		cv::inRange(Roi, low, high, Output);
+//
+//		imshow(image_window, Output);
+//		waitKey(0);
+//		
+//		int x1 = countNonZero(Output);
+//		
+//		cout << endl;
+//		cout << "---- " << x1 << " " << count <<endl;
+//
+//		if (x1 >= 420)
+//			return true;
+//
+//		return false;
+//	} 
 };
 
 namespace TextMatching {
@@ -248,40 +234,5 @@ namespace TextMatching {
 			const string str = txt.get();
 			return str;
 		}
-	}
-
-	int txttest(Mat MatScreen)
-	{
-		try
-		{
-			std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
-			tess->Init(nullptr, "eng");
-
-			tess->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
-
-
-				
-				
-				
-				tess->SetImage(MatScreen.data, MatScreen.cols, MatScreen.rows, MatScreen.channels(), MatScreen.step1());
-				tess->SetSourceResolution(70);
-
-				std::unique_ptr<char[]> txt(tess->GetUTF8Text());
-				if (not txt) throw std::invalid_argument("failed to detect any text");
-				const std::string str = txt.get();
-
-				std::cout << str << std::endl;
-
-				cv::imshow("mat", MatScreen);
-				const auto key = cv::waitKey();
-				
-		
-		}
-		catch (const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-
-		return 0;
 	}
 };

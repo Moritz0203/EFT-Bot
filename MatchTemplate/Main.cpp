@@ -28,7 +28,6 @@ int main() {
 	}
 	if (Start == "test") {
 		Mat templ;
-	/*	Color color;*/
 		
 		vector<POINT> ReturnPoints;
 		templ = imread("itemImages/CaseImages/AmmoCase.png");
@@ -41,7 +40,7 @@ int main() {
 		
 		cout << "------" << endl;
 		
-		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, 68, 13/*templ.cols, templ.rows*/);
+		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, 75, 13/*templ.cols, templ.rows*/);
 
 		Mat Roi2;
 		Mat Roi = MatScreen(Rec);
@@ -84,15 +83,11 @@ int main() {
 
 		//	system("cls");
 		//	cout << color << " " << "color " << i << " " << i2 << " " << i3 <<  endl;
-		//	if (color == 4)// Green -34 / Blue -64 / 
+		//	if (color == 0)// Green -34 / Blue -64 / 
 		//		break;
 		//}
 
-
-		
-
-	/*	color = TemplateMatching::ColorMatching(Rec, Roi);
-		
+		/*color = TemplateMatching::ColorMatching(Rec, Roi);
 		
 		cout << color << " " << "color" << endl;*/
 
@@ -101,8 +96,6 @@ int main() {
 
 
 		/*CaseMatching::THICCcase();*/
-	}
-	else if (Start == "2test") {
 	}
 
 	/*for (int i = 0; i < Returner.size(); i++) {

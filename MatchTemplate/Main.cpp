@@ -59,6 +59,7 @@ int main() {
 
 		cout << str << endl;
 
+
 		const char test = '-';
 		/*if (str[9] == test) {
 			cout << "test" << endl;

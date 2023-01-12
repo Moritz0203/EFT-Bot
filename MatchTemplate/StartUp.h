@@ -95,6 +95,14 @@ namespace StartUp {
 		return ReturnMatScreen;
 	}
 
+	bool check_second_last_char(const string tagCase) {
+		int length = tagCase.length();
+		if (length >= 2) {
+			return (tagCase[length - 2] != '-');
+		}
+		return false;
+	}
+
 	vector<vector<POINT>> PointVectorTemp;
 	vector<vector<POINT>> PointVectorCleanUp;
 

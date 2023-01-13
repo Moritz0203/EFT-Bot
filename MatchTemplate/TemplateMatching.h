@@ -6,7 +6,6 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
-#include "Point.h"
 using namespace std;
 using namespace cv;
 

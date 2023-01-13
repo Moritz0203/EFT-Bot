@@ -5,6 +5,7 @@
 #include "getMat.h"
 #include "InputMT.h"
 #include "DistributorForMatching.h"
+#include "globalvector.h"
 using namespace std;
 using namespace cv;
 

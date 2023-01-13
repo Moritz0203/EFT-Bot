@@ -17,8 +17,7 @@ namespace CaseMatching
 	vector<vector<POINT>> PointVectorTemp;
 	vector<vector<POINT>> PointVectorCleanUp;
 
-	vector<vector<PointCaseInStash>> pointCaseInStash;
-	vector<vector<PointCaseInCase>> pointCaseInCase;
+	
 
 	void THICCcase() {
 		Mat templ;
@@ -74,11 +73,11 @@ namespace CaseMatching
 			page++;
 		}
 
-		for (int i = 0; i < pointCaseInStash.size(); i++) {
-			for (int i2 = 0; i2 < pointCaseInStash[i].size(); i2++) {
-				cout << pointCaseInStash[i][i2].point.y << " " << pointCaseInStash[i][i2].point.x << " " << pointCaseInStash[i][i2].nameOfCase << " " <</* pointCaseInStash[i][i2].color <<*/ " " << pointCaseInStash[i][i2].page << endl;
-			}
-		}
+		//for (int i = 0; i < globalvecto::pointCaseInStash.size(); i++) {
+		//	for (int i2 = 0; i2 < globalvecto::pointCaseInStash[i].size(); i2++) {
+		//		cout << globalvecto::pointCaseInStash[i][i2].point.y << " " << globalvecto::pointCaseInStash[i][i2].point.x << " " << globalvecto::pointCaseInStash[i][i2].nameOfCase << " " <</* pointCaseInStash[i][i2].color <<*/ " " << globalvecto::pointCaseInStash[i][i2].page << endl;
+		//	}
+		//}
 
 		PointVectorTemp.clear();
 		PointVectorCleanUp.clear();
@@ -233,7 +232,7 @@ namespace CaseMatching
 
 
 
-		pointCaseInStash.emplace_back(pointCasetempStash);
+		globalvector::pointCaseInStash.emplace_back(pointCasetempStash);
 		pointCasetempStash.clear();
 
 
@@ -313,7 +312,7 @@ namespace CaseMatching
 					}
 				}
 			}
-			pointCaseInCase.emplace_back(pointCaseInCasetemp);
+			globalvector::pointCaseInCase.emplace_back(pointCaseInCasetemp);
 			pointCaseInCasetemp.clear();
 		}
 		

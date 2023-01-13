@@ -4,8 +4,5 @@
 #include <windows.h>
 #include "Point.h"
 
-namespace globalvector
-{
-	 std::vector<std::vector<PointCaseInStash>> pointCaseInStash;
-	 std::vector<std::vector<PointCaseInCase>> pointCaseInCase;
-};
+std::vector<std::vector<PointCaseInStash>> pointCaseInStash;
+std::vector<std::vector<PointCaseInCase>> pointCaseInCase;

@@ -232,7 +232,7 @@ namespace CaseMatching
 
 
 
-		globalvector::pointCaseInStash.emplace_back(pointCasetempStash);
+		pointCaseInStash.emplace_back(pointCasetempStash);
 		pointCasetempStash.clear();
 
 
@@ -312,7 +312,7 @@ namespace CaseMatching
 					}
 				}
 			}
-			globalvector::pointCaseInCase.emplace_back(pointCaseInCasetemp);
+			pointCaseInCase.emplace_back(pointCaseInCasetemp);
 			pointCaseInCasetemp.clear();
 		}
 		

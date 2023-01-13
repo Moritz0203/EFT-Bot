@@ -96,7 +96,7 @@ namespace StartUp {
 		return ReturnMatScreen;
 	}
 
-	bool check_second_last_char(const string tagCase) {
+	bool checkSecondLastChar(const string tagCase) {
 		int length = tagCase.length();
 		if (length >= 2) {
 			return (tagCase[static_cast<std::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type>(length) - 2] != '-');
@@ -113,7 +113,6 @@ namespace StartUp {
 		ReturntMatScreen = TakeScreenshots();
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
-
 
 		int size = sizeof(ReturntMatScreen) / sizeof(Mat);
 		for (int i = 0; i < size; i++) {

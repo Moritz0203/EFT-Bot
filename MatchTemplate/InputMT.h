@@ -19,8 +19,6 @@ namespace Mouse {
 		mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 		cout << "MouseMovPress" << endl;
-
-		return;
 	}
 	void MoverPOINTandPressTwoTimes(POINT Points) {
 		SetCursorPos(Points.x, Points.y);
@@ -29,8 +27,6 @@ namespace Mouse {
 		mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 		cout << "MouseMovPressTwoTimes" << endl;
-
-		return;
 	}
 	void MouseMoveAtoB(POINT PointA, POINT PointB) {
 		SetCursorPos(PointA.x, PointA.y);
@@ -38,8 +34,6 @@ namespace Mouse {
 		SetCursorPos(PointB.x, PointB.y);
 		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 		cout << "MouseMoveAtoB" << endl;
-
-		return;
 	}
 }
 

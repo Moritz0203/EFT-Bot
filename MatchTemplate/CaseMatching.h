@@ -185,7 +185,7 @@ namespace CaseMatching
 							Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, templ.cols, templ.rows);
 
 							const string tagCase = TextMatching::textMatching(ReturntMatScreen[i], Rec);
-							if (StartUp::check_second_last_char(tagCase)) {
+							if (StartUp::checkSecondLastChar(tagCase)) {
 								pointCasetempStashVector.emplace_back(ReturnDataCase[i3], NameOfItemCases[i2], tagCase, templ.rows, templ.cols, i);
 							}
 						}
@@ -220,7 +220,7 @@ namespace CaseMatching
 			Rect Rec(tempPoints[i].x, tempPoints[i].y, templ.cols, templ.rows);
 			
 			const string tagCase = TextMatching::textMatching(MatScreen, Rec);
-			if (StartUp::check_second_last_char(tagCase)) {
+			if (StartUp::checkSecondLastChar(tagCase)) {
 				pointCasetempStash.emplace_back(tempPoints[i], NameOfCase, tagCase, templ.rows, templ.cols, page);
 			}
 
@@ -307,7 +307,7 @@ namespace CaseMatching
 					Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, templ.cols, templ.rows);
 
 					const string tagCase = TextMatching::textMatching(MatScreenVector[i], Rec);
-					if (StartUp::check_second_last_char(tagCase)) {
+					if (StartUp::checkSecondLastChar(tagCase)) {
 						pointCaseInCasetemp.emplace_back(ReturnDataCase[i3], tempPoints[i], NameOfItemCasesInCase[i], tagCase, templ.rows, templ.cols, page);
 					}
 				}

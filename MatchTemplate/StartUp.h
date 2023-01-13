@@ -184,7 +184,7 @@ namespace StartUp {
 					bool FoundDuplicate = false;
 
 					POINT pointLookForLast = PointVectorTemp[i][i2];
-					pointLookForLast.y + 340;
+					pointLookForLast.y = 340 + pointLookForLast.y;
 					POINT pointTempGround = PointVectorTemp[iTemp][i3];
 					pointTempGround.y = 340 + pointTempGround.y;
 
@@ -241,7 +241,7 @@ namespace StartUp {
 					bool FoundDuplicate = false;
 
 					POINT pointLookForLast = PointVectorTemp[i][i2].point;
-					pointLookForLast.y + 340;
+					pointLookForLast.y = 340 + pointLookForLast.y;
 					POINT pointTempGround = PointVectorTemp[iTemp][i3].point;
 					pointTempGround.y = 340 + pointTempGround.y;
 

@@ -99,7 +99,7 @@ namespace StartUp {
 	bool check_second_last_char(const string tagCase) {
 		int length = tagCase.length();
 		if (length >= 2) {
-			return (tagCase[length - 2] != '-');
+			return (tagCase[static_cast<std::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type>(length) - 2] != '-');
 		}
 		return false;
 	}

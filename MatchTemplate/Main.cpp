@@ -53,25 +53,25 @@ int main() {
 
 		/*MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_5.png");*/
 
-		const string str = TextMatching::textMatching(MatScreen, Rec);
+		//const string str = TextMatching::textMatching(MatScreen, Rec);
 
-		
+		//
 
-		cout << str << endl;
+		//cout << str << endl;
 
 
-		const char test = '-';
-		/*if (str[9] == test) {
-			cout << "test" << endl;
-		}*/
+		//const char test = '-';
+		///*if (str[9] == test) {
+		//	cout << "test" << endl;
+		//}*/
 
-		int i1 = -1;
-		for (int i = 0; i < str.length(); i++) {
-			i1++;
-			cout << str[i] << " --- " << i1 << endl;
-		}
+		//int i1 = -1;
+		//for (int i = 0; i < str.length(); i++) {
+		//	i1++;
+		//	cout << str[i] << " --- " << i1 << endl;
+		//}
 
-		cout << str[str.back() - 1] << "<------ " << i1 << endl;
+		//cout << str[str.back() - 1] << "<------ " << i1 << endl;
 
 		cout << "123" << endl;
 		imshow(image_window, Roi);

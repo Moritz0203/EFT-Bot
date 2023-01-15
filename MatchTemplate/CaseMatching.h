@@ -182,7 +182,7 @@ namespace CaseMatching
 
 					if (!ReturnDataCase.empty()) {
 						for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
-							Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, templ.cols, templ.rows);
+							Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13/*templ.cols*/, templ.rows);
 
 							const string tagCase = TextMatching::textMatching(ReturntMatScreen[i], Rec);
 							if (StartUp::checkSecondLastChar(tagCase)) {
@@ -217,7 +217,7 @@ namespace CaseMatching
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		for (int i = 0; i < tempPoints.size(); i++) {
-			Rect Rec(tempPoints[i].x, tempPoints[i].y, templ.cols, templ.rows);
+			Rect Rec(tempPoints[i].x, tempPoints[i].y, 13/*templ.cols*/, templ.rows);
 			
 			const string tagCase = TextMatching::textMatching(MatScreen, Rec);
 			if (StartUp::checkSecondLastChar(tagCase)) {
@@ -299,7 +299,7 @@ namespace CaseMatching
 				TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemCasesInCase[i], ReturnDataCase, MatScreenVector[i]);
 
 				for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
-					Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, templ.cols, templ.rows);
+					Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13/*templ.cols*/, templ.rows);
 
 					const string tagCase = TextMatching::textMatching(MatScreenVector[i], Rec);
 					if (StartUp::checkSecondLastChar(tagCase)) {

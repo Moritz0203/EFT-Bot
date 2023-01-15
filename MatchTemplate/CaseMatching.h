@@ -229,12 +229,8 @@ namespace CaseMatching
 			waitKey(0);
 		}
 
-
-
-
 		pointCaseInStash.emplace_back(pointCasetempStash);
 		pointCasetempStash.clear();
-
 
 		// testen 
 		POINT point{};
@@ -256,7 +252,6 @@ namespace CaseMatching
 		}
 
 		/*MatchingCaseInCase(MatScreenVector, tempPoints, page);*/
-
 	}
 
 
@@ -315,7 +310,6 @@ namespace CaseMatching
 			pointCaseInCase.emplace_back(pointCaseInCasetemp);
 			pointCaseInCasetemp.clear();
 		}
-		
 	}
 
 	void MoveTopBarTHICCcase() {

@@ -79,6 +79,8 @@ namespace CaseMatching
 		//	}
 		//}
 
+
+
 		PointVectorTemp.clear();
 		PointVectorCleanUp.clear();
 	}

@@ -25,7 +25,7 @@
     <ClInclude Include="DistributorForMatching.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputMT.h">
+    <ClInclude Include="InputMK.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="getMat.h">

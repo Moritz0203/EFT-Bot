@@ -137,7 +137,7 @@
     <ClInclude Include="DistributorForMatching.h" />
     <ClInclude Include="getMat.h" />
     <ClInclude Include="globalvector.h" />
-    <ClInclude Include="InputMT.h" />
+    <ClInclude Include="InputMK.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="StartUp.h" />
     <ClInclude Include="TemplateMatching.h" />

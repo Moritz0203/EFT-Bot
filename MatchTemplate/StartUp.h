@@ -3,9 +3,9 @@
 #include <conio.h>
 #include <windows.h>
 #include "getMat.h"
-#include "InputMT.h"
 #include "DistributorForMatching.h"
 #include "globalvector.h"
+#include "InputMK.h"
 using namespace std;
 using namespace cv;
 

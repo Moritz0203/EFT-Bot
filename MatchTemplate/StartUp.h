@@ -258,16 +258,16 @@ namespace StartUp {
 					}
 
 					if (FoundDuplicate == true) {//If a duplicate was found the point that was compared is pushed to temp
-						temp.push_back(PointVectorTemp[i][i2]);
+						temp.emplace_back(PointVectorTemp[i][i2]);
 					}
 				}
 			}
 			if (!temp.empty()) {
-				PointVectorCleanUp.push_back(temp);
+				PointVectorCleanUp.emplace_back(temp);
 				temp.clear();
 			}
 			else {
-				PointVectorCleanUp.push_back(temp);
+				PointVectorCleanUp.emplace_back(temp);
 				temp.clear();
 			}
 		}

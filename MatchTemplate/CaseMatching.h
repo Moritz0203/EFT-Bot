@@ -177,7 +177,7 @@ namespace CaseMatching
 
 			vector<POINT> ReturnDataCase;
 			int size = sizeof(Cases) / sizeof(string);
-			for (int i = 0; i < 7; i++) {// 5 must later be size 
+			for (int i = 0; i < size; i++) {// 5 must later be size 
 				for (int i2 = 0; i2 < size; i2++) {
 					TemplateMatching::templateMatchingItems(Cases[i2], CasesThreshold[i2], false, false, NameOfItemCases[i2], ReturnDataCase, ReturntMatScreen[i]);
 					templ = imread(Cases[i2]);

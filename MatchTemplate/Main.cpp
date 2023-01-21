@@ -30,17 +30,17 @@ int main() {
 		Mat templ;
 		
 		vector<POINT> ReturnPoints;
-		templ = imread("itemImages/CaseImages/AmmoCase.png");
+		templ = imread("itemImages/AmmunitionImages/7.62RUS/PS.png");
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("itemImages/CaseImages/AmmoCase.png", 0.80, false, false, "AmmoCase", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("itemImages/AmmunitionImages/7.62RUS/PS.png", 0.88, false, true, "bp", ReturnPoints, MatScreen);
 		
 		cout << "------" << endl;
 		
-		Rect Rec(ReturnPoints[0].x, ReturnPoints[0].y, 79, 13/*templ.cols, templ.rows*/);
+		Rect Rec(ReturnPoints[0].x + 44, ReturnPoints[0].y + 48, templ.cols - 44, templ.rows - 48);
 
 		Mat Roi2;
 		Mat Roi = MatScreen(Rec);
@@ -53,11 +53,11 @@ int main() {
 
 		/*MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_5.png");*/
 
-		//const string str = TextMatching::textMatching(MatScreen, Rec);
+		/*const string str = TextMatching::textMatching(MatScreen, Rec);
 
-		//
+		
 
-		//cout << str << endl;
+		cout << str << endl;*/
 
 
 		//const char test = '-';
@@ -73,7 +73,7 @@ int main() {
 
 		//cout << str[str.back() - 1] << "<------ " << i1 << endl;
 
-		cout << "123" << endl;
+		/*cout << "123" << endl;*/
 		imshow(image_window, Roi);
 		/*imshow(image_window2, Roi2);*/
 		waitKey(0);

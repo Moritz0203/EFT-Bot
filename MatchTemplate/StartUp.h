@@ -120,18 +120,9 @@ namespace StartUp {
 		}
 
 
-		for (int i = 0; i < 7; i++) {// 5 must later be size 
-			ReturnPoints = Matching::AmmunitionMatching(ReturntMatScreen);
-			if (!ReturnPoints.empty()) {
-				PointVectorTemp.push_back(ReturnPoints);
-				ReturnPoints.clear();
-			}
-			else {
-				PointVectorTemp.push_back(ReturnPoints);
-				ReturnPoints.clear();
-			}
-			cout << "-----------------------------------------------------------------------------------\n";
-		}
+		
+		Matching::AmmunitionMatching(ReturntMatScreen);
+		
 
 		
 		cleanUpVector(PointVectorTemp, PointVectorCleanUp);

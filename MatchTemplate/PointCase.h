@@ -29,4 +29,3 @@ public:
 	PointCaseInCase();
 	PointCaseInCase(POINT pointInCase, POINT pointFromParentCase, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int pageOfParentCase);
 };
-

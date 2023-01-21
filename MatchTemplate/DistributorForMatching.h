@@ -66,8 +66,10 @@ namespace Matching {
 		double	threshold;
 		int sizeString = sizeof(Ammunition) / sizeof(string);
 		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
+		Mat templ;
 
 		vector<POINT> ReturnDataAM;
+		vector<PointAmmunition> pointAmmunitiontemp;
 		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
 				threshold = AmmunitionThreshold[i];
@@ -75,8 +77,12 @@ namespace Matching {
 
 				TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM, arrayMatScreen[i1]);
 
+				templ = imread(templatename);
 				for (int i2 = 0; i2 < ReturnDataAM.size(); i2++) {
-
+					Rect Rec(ReturnDataAM[i2].x + 44, ReturnDataAM[i2].y + 48, templ.cols - 44, templ.rows - 48);
+					const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
+					int tagCaseConvertet = stoi(tagCase);
+					pointAmmunitiontemp.emplace_back(ReturnDataAM[i2], NameOfItemAmmunition[i], tagCaseConvertet, templ.rows, templ.cols, i1);
 				}
 			}
 		}

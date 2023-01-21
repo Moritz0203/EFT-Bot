@@ -1,4 +1,4 @@
-#include "Point.h"
+#include "PointCase.h"
 
 PointCaseInStash::PointCaseInStash()
 {

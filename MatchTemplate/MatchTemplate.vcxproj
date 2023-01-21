@@ -130,7 +130,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="PointCase.cpp" />
+    <ClCompile Include="PointItems.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaseMatching.h" />
@@ -138,7 +139,8 @@
     <ClInclude Include="getMat.h" />
     <ClInclude Include="globalvector.h" />
     <ClInclude Include="InputMK.h" />
-    <ClInclude Include="Point.h" />
+    <ClInclude Include="PointCase.h" />
+    <ClInclude Include="PointItems.h" />
     <ClInclude Include="StartUp.h" />
     <ClInclude Include="TemplateMatching.h" />
   </ItemGroup>

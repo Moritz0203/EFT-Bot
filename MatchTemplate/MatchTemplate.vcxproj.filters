@@ -14,7 +14,10 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
+    <ClCompile Include="PointCase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PointItems.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,10 +40,13 @@
     <ClInclude Include="CaseMatching.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Point.h">
+    <ClInclude Include="PointCase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="globalvector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PointItems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

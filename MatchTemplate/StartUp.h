@@ -4,7 +4,6 @@
 #include <windows.h>
 #include "getMat.h"
 #include "DistributorForMatching.h"
-#include "globalvector.h"
 #include "InputMK.h"
 using namespace std;
 using namespace cv;
@@ -122,7 +121,7 @@ namespace StartUp {
 
 
 		for (int i = 0; i < 7; i++) {// 5 must later be size 
-			ReturnPoints = Matching::AmmunitionMatching(ReturntMatScreen[i]);
+			ReturnPoints = Matching::AmmunitionMatching(ReturntMatScreen);
 			if (!ReturnPoints.empty()) {
 				PointVectorTemp.push_back(ReturnPoints);
 				ReturnPoints.clear();

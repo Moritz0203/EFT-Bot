@@ -1,4 +1,5 @@
 #include "TemplateMatching.h"
+#include "globalvector.h"
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -60,20 +61,25 @@ namespace Matching {
 			0.90,//US
 	};
 
-	vector<POINT> AmmunitionMatching(Mat Screen) {
+	void AmmunitionMatching(array<Mat, 11> arrayMatScreen) {
 		string  filename, templatename;
 		double	threshold;
-		int size = sizeof(Ammunition) / sizeof(string);
+		int sizeString = sizeof(Ammunition) / sizeof(string);
+		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 
 		vector<POINT> ReturnDataAM;
+		for (int i1 = 0; i1 < sizeMat; i1++) {
+			for (int i = 0; i < sizeString; i++) {
+				threshold = AmmunitionThreshold[i];
+				templatename = Ammunition[i];
 
-		for (int i = 0; i < size; i++) {
-			threshold = AmmunitionThreshold[i];
-			templatename = Ammunition[i];
+				TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM, arrayMatScreen[i1]);
 
-			TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM, Screen);
+				for (int i2 = 0; i2 < ReturnDataAM.size(); i2++) {
+
+				}
+			}
 		}
-		return ReturnDataAM;
 	}
 
 

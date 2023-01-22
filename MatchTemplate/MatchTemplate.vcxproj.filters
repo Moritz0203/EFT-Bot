@@ -20,6 +20,9 @@
     <ClCompile Include="PointItems.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CleanVector.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TemplateMatching.h">
@@ -37,7 +40,7 @@
     <ClInclude Include="StartUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CaseMatching.h">
+    <ClInclude Include="CaseProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PointCase.h">

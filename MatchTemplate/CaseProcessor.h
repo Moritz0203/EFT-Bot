@@ -3,22 +3,40 @@
 #include <conio.h>
 #include <windows.h>
 #include "StartUp.h"
+#include "CleanVector.h"
 using namespace std;
 using namespace cv;
 
 
 
-namespace CaseMatching
+namespace CaseProcessor
 {
 	void OpenCaseAndTakeScreen(vector<POINT> tempPoints, Mat templ, std::string NameOfCase, int page);
 	void MatchingCaseInCase(vector<Mat>& MatScreenVector, vector<POINT> tempPoints, int page);
 	void MoveTopBarTHICCcase();
 
+
+
+	void caseProcess() {
+		array<Mat, 11> ReturntMatScreen;
+
+		StartUp::CheckScrollbarPositions();
+		ReturntMatScreen = StartUp::TakeScreenshots();
+
+
+		Matching::CaseMatching(ReturntMatScreen);
+		cleanVector::cleanUpVectorCase();
+
+	}
+
+
+
+
+
+
 	vector<vector<POINT>> PointVectorTemp;
 	vector<vector<POINT>> PointVectorCleanUp;
-
-	
-
+		
 	void THICCcase() {
 		Mat templ;
 		array<Mat, 11> ReturntMatScreen;
@@ -43,7 +61,7 @@ namespace CaseMatching
 			cout << "-----------------------------------------------------------------------------------\n";
 		}
 
-		StartUp::cleanUpVector(PointVectorTemp, PointVectorCleanUp);
+		//StartUp::cleanUpVector(PointVectorTemp, PointVectorCleanUp);
 
 		cout << "Clean\n";
 		for (int i = 0; i < PointVectorCleanUp.size(); i++) {
@@ -107,7 +125,7 @@ namespace CaseMatching
 			cout << "-----------------------------------------------------------------------------------\n";
 		}
 
-		StartUp::cleanUpVector(PointVectorTemp, PointVectorCleanUp);
+		//StartUp::cleanUpVector(PointVectorTemp, PointVectorCleanUp);
 		StartUp::CheckScrollbarPositions();
 
 		int page = 0;
@@ -128,80 +146,80 @@ namespace CaseMatching
 
 	
 
-	class OtherCasesClass {
-		vector<vector<PointCaseInStash>> PointCaseInStasTemp;
-		vector<vector<PointCaseInStash>> PointCaseInStasCleanUp;
+	//class OtherCasesClass {
+	//	vector<vector<PointCaseInStash>> PointCaseInStasTemp;
+	//	vector<vector<PointCaseInStash>> PointCaseInStasCleanUp;
 
-		std::array<std::string, 8> Cases{
-			"itemImages/CaseImages/AmmoCase.png",
-			"itemImages/CaseImages/GrenadCase.png",
-			"itemImages/CaseImages/HolodilnickCase.png",
-			"itemImages/CaseImages/MagCase.png",
-			"itemImages/CaseImages/MedCase.png",
-			"itemImages/CaseImages/MoneyCase.png",
-			"itemImages/CaseImages/JunkCase.png",
-			"itemImages/CaseImages/WeaponsCase.png",
-		};
+	//	std::array<std::string, 8> Cases{
+	//		"itemImages/CaseImages/AmmoCase.png",
+	//		"itemImages/CaseImages/GrenadCase.png",
+	//		"itemImages/CaseImages/HolodilnickCase.png",
+	//		"itemImages/CaseImages/MagCase.png",
+	//		"itemImages/CaseImages/MedCase.png",
+	//		"itemImages/CaseImages/MoneyCase.png",
+	//		"itemImages/CaseImages/JunkCase.png",
+	//		"itemImages/CaseImages/WeaponsCase.png",
+	//	};
 
-		std::array<std::string, 8> NameOfItemCases{
-			"AmmoCase",
-			"GrenadCase",
-			"HolodilnickCase",
-			"MagCase",
-			"MedCase",
-			"MoneyCase",
-			"JunkCase",
-			"WeaponsCase",
-		};
+	//	std::array<std::string, 8> NameOfItemCases{
+	//		"AmmoCase",
+	//		"GrenadCase",
+	//		"HolodilnickCase",
+	//		"MagCase",
+	//		"MedCase",
+	//		"MoneyCase",
+	//		"JunkCase",
+	//		"WeaponsCase",
+	//	};
 
-		std::array<double, 8> CasesThreshold{
-			0.90,//AmmoCase
-			0.90,//GrenadCase
-			0.90,//HolodilnickCase
-			0.90,//MagCase
-			0.90,//MedCase
-			0.90,//MoneyCase
-			0.90,//JunkCase
-			0.90,//WeaponsCase
-		};
+	//	std::array<double, 8> CasesThreshold{
+	//		0.90,//AmmoCase
+	//		0.90,//GrenadCase
+	//		0.90,//HolodilnickCase
+	//		0.90,//MagCase
+	//		0.90,//MedCase
+	//		0.90,//MoneyCase
+	//		0.90,//JunkCase
+	//		0.90,//WeaponsCase
+	//	};
 
-		void OtherCases() {
-			PointCaseInStash pointCasetempStash;
-			vector<PointCaseInStash> pointCasetempStashVector;
-			array<Mat, 11> ReturntMatScreen;
+	//	void OtherCases() {
+	//		PointCaseInStash pointCasetempStash;
+	//		vector<PointCaseInStash> pointCasetempStashVector;
+	//		array<Mat, 11> ReturntMatScreen;
 
-			StartUp::CheckScrollbarPositions();
-			ReturntMatScreen = StartUp::TakeScreenshots();
+	//		StartUp::CheckScrollbarPositions();
+	//		ReturntMatScreen = StartUp::TakeScreenshots();
 
-			Mat templ;
+	//		Mat templ;
 
-			vector<POINT> ReturnDataCase;
-			int size = sizeof(Cases) / sizeof(string);
-			for (int i = 0; i < size; i++) {// 5 must later be size 
-				for (int i2 = 0; i2 < size; i2++) {
-					TemplateMatching::templateMatchingItems(Cases[i2], CasesThreshold[i2], false, false, NameOfItemCases[i2], ReturnDataCase, ReturntMatScreen[i]);
-					templ = imread(Cases[i2]);
+	//		vector<POINT> ReturnDataCase;
+	//		int size = sizeof(Cases) / sizeof(string);
+	//		for (int i = 0; i < size; i++) {// 5 must later be size 
+	//			for (int i2 = 0; i2 < size; i2++) {
+	//				TemplateMatching::templateMatchingItems(Cases[i2], CasesThreshold[i2], false, false, NameOfItemCases[i2], ReturnDataCase, ReturntMatScreen[i]);
+	//				templ = imread(Cases[i2]);
 
-					if (!ReturnDataCase.empty()) {
-						for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
-							Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13/*templ.cols*/, templ.rows);
+	//				if (!ReturnDataCase.empty()) {
+	//					for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
+	//						Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13/*templ.cols*/, templ.rows);
 
-							const string tagCase = TextMatching::textMatching(ReturntMatScreen[i], Rec);
-							if (StartUp::checkSecondLastChar(tagCase)) {
-								pointCasetempStashVector.emplace_back(ReturnDataCase[i3], NameOfItemCases[i2], tagCase, templ.rows, templ.cols, i);
-							}
-						}
-						ReturnDataCase.clear();
-					}
-				}
-				PointCaseInStasTemp.emplace_back(pointCasetempStashVector);
-				pointCasetempStashVector.clear();
-				cout << "-----------------------------------------------------------------------------------\n";
-			}
+	//						const string tagCase = TextMatching::textMatching(ReturntMatScreen[i], Rec);
+	//						if (StartUp::checkSecondLastChar(tagCase)) {
+	//							pointCasetempStashVector.emplace_back(ReturnDataCase[i3], NameOfItemCases[i2], tagCase, templ.rows, templ.cols, i);
+	//						}
+	//					}
+	//					ReturnDataCase.clear();
+	//				}
+	//			}
+	//			PointCaseInStasTemp.emplace_back(pointCasetempStashVector);
+	//			pointCasetempStashVector.clear();
+	//			cout << "-----------------------------------------------------------------------------------\n";
+	//		}
 
-			StartUp::cleanUpVectorOnParameters(PointCaseInStasTemp, PointCaseInStasCleanUp);
-		}
-	};
+	//		StartUp::cleanUpVectorCase(PointCaseInStasTemp, PointCaseInStasCleanUp);
+	//	}
+	//};
 	
 
 
@@ -222,7 +240,7 @@ namespace CaseMatching
 			Rect Rec(tempPoints[i].x, tempPoints[i].y, 13/*templ.cols*/, templ.rows);
 			
 			const string tagCase = TextMatching::textMatching(MatScreen, Rec);
-			if (StartUp::checkSecondLastChar(tagCase)) {
+			if (Matching::checkSecondLastChar(tagCase)) {
 				pointCasetempStash.emplace_back(tempPoints[i], NameOfCase, tagCase, templ.rows, templ.cols, page);
 			}
 
@@ -231,7 +249,7 @@ namespace CaseMatching
 			waitKey(0);
 		}
 
-		pointCaseInStash.emplace_back(pointCasetempStash);
+		//pointCaseInStash.emplace_back(pointCasetempStash);
 		pointCasetempStash.clear();
 
 		// testen 
@@ -304,7 +322,7 @@ namespace CaseMatching
 					Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13/*templ.cols*/, templ.rows);
 
 					const string tagCase = TextMatching::textMatching(MatScreenVector[i], Rec);
-					if (StartUp::checkSecondLastChar(tagCase)) {
+					if (Matching::checkSecondLastChar(tagCase)) {
 						pointCaseInCasetemp.emplace_back(ReturnDataCase[i3], tempPoints[i], NameOfItemCasesInCase[i], tagCase, templ.rows, templ.cols, page);
 					}
 				}

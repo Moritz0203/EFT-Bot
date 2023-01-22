@@ -8,6 +8,14 @@ using namespace std;
 
 namespace Matching {
 
+	bool checkSecondLastChar(const string tagCase) {
+		int length = tagCase.length();
+		if (length >= 2) {
+			return (tagCase[static_cast<std::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type>(length) - 2] != '-');
+		}
+		return false;
+	}
+
 	std::array<std::string, 12> Ammunition{
 		//NATO 7.62
 			"itemImages/AmmunitionImages/7.62NATO/M80.png",//M80
@@ -62,31 +70,107 @@ namespace Matching {
 	};
 
 	void AmmunitionMatching(array<Mat, 11> arrayMatScreen) {
-		string  filename, templatename;
-		double	threshold;
 		int sizeString = sizeof(Ammunition) / sizeof(string);
 		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 		Mat templ;
 
 		vector<POINT> ReturnDataAM;
-		vector<PointAmmunition> pointAmmunitiontemp;
+		vector<PointAmmunition> pointAmmunitionTemp;
 		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
-				threshold = AmmunitionThreshold[i];
-				templatename = Ammunition[i];
+				TemplateMatching::templateMatchingItems(Ammunition[i], AmmunitionThreshold[i], false, true, NameOfItemAmmunition[i], ReturnDataAM, arrayMatScreen[i1]);
 
-				TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemAmmunition[i], ReturnDataAM, arrayMatScreen[i1]);
-
-				templ = imread(templatename);
-				for (int i2 = 0; i2 < ReturnDataAM.size(); i2++) {
-					Rect Rec(ReturnDataAM[i2].x + 44, ReturnDataAM[i2].y + 48, templ.cols - 44, templ.rows - 48);
-					const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
-					int tagCaseConvertet = stoi(tagCase);
-					pointAmmunitiontemp.emplace_back(ReturnDataAM[i2], NameOfItemAmmunition[i], tagCaseConvertet, templ.rows, templ.cols, i1);
+				templ = imread(Ammunition[i]);
+				if (!ReturnDataAM.empty()) {
+					for (int i2 = 0; i2 < ReturnDataAM.size(); i2++) {
+						Rect Rec(ReturnDataAM[i2].x + 44, ReturnDataAM[i2].y + 48, templ.cols - 44, templ.rows - 48);
+						const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
+						int tagCaseConvertet = stoi(tagCase);
+						pointAmmunitionTemp.emplace_back(ReturnDataAM[i2], NameOfItemAmmunition[i], tagCaseConvertet, templ.rows, templ.cols, i1);
+					}
+					ReturnDataAM.clear();
 				}
 			}
+			pointAmmunition_NC.emplace_back(pointAmmunitionTemp);
+			pointAmmunitionTemp.clear();
 		}
 	}
+
+
+	std::array<std::string, 10> Cases{
+		"CaseImages/AmmoCase.png",
+		"CaseImages/GrenadCase.png",
+		"CaseImages/HolodilnickCase.png",
+		"CaseImages/MagCase.png",
+		"CaseImages/MedCase.png",
+		"CaseImages/MoneyCase.png",
+		"CaseImages/JunkCase.png",
+		"CaseImages/WeaponsCase.png",
+		"CaseImages/ItemsCase.png",
+		"CaseImages/THICCcase.png",
+	};
+
+	std::array<std::string, 10> NameOfItemCases{
+		"AmmoCase",
+		"GrenadCase",
+		"HolodilnickCase",
+		"MagCase",
+		"MedCase",
+		"MoneyCase",
+		"JunkCase",
+		"WeaponsCase",
+		"ItemsCase",
+		"THICCcase",
+	};
+
+	std::array<double, 10> CasesThreshold{
+		0.90,//AmmoCase
+		0.90,//GrenadCase
+		0.90,//HolodilnickCase
+		0.90,//MagCase
+		0.90,//MedCase
+		0.90,//MoneyCase
+		0.90,//JunkCase
+		0.90,//WeaponsCase
+		0.90,//ItemsCase
+		0.90,//THICCcase
+	};
+
+	void CaseMatching(array<Mat, 11> arrayMatScreen) {
+		int sizeString = sizeof(Cases) / sizeof(string);
+		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
+		Mat templ;
+
+		vector<POINT> ReturnDataCase;
+		vector<PointCaseInStash> pointCasetempStashTemp;
+		for (int i1 = 0; i1 < sizeMat; i1++) {
+			for (int i = 0; i < sizeString; i++) {
+				TemplateMatching::templateMatchingItems(Cases[i], CasesThreshold[i], false, false, NameOfItemCases[i], ReturnDataCase, arrayMatScreen[i1]);
+				
+				templ = imread(Cases[i]);
+				if (!ReturnDataCase.empty()) {
+					for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
+						Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13, templ.rows);
+						const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
+						if (checkSecondLastChar(tagCase)) {
+							pointCasetempStashTemp.emplace_back(ReturnDataCase[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i);
+						}
+					}
+					ReturnDataCase.clear();
+				}
+			}
+			pointCaseInStash_NC.emplace_back(pointCasetempStashTemp);
+			pointCasetempStashTemp.clear();
+		}
+	}
+
+
+
+
+
+
+
+
 
 
 	std::array<std::string, 8> Magazine{

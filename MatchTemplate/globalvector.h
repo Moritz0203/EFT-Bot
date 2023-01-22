@@ -5,7 +5,10 @@
 #include "PointCase.h"
 #include "PointItems.h"
 
-std::vector<std::vector<PointCaseInStash>> pointCaseInStash;
+std::vector<std::vector<PointCaseInStash>> pointCaseInStash_C;
+std::vector<std::vector<PointCaseInStash>> pointCaseInStash_NC;
+
 std::vector<std::vector<PointCaseInCase>> pointCaseInCase;
 
-std::vector<std::vector<PointAmmunition>> pointAmmunition;
+std::vector<std::vector<PointAmmunition>> pointAmmunition_C; 
+std::vector<std::vector<PointAmmunition>> pointAmmunition_NC;

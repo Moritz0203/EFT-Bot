@@ -11,6 +11,7 @@ using namespace cv;
 
 
 
+
 namespace StartUp {
 	void CheckForFails();
 	void CheckScrollbarPositions();

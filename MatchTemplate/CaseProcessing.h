@@ -15,8 +15,6 @@ namespace CaseProcessor
 	void MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCasePoints);
 	void MoveTopBarTHICCcase();
 
-
-
 	void caseProcess() {
 		array<Mat, 11> ReturntMatScreen;
 

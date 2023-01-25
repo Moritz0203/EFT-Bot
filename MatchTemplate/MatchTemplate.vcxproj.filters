@@ -40,7 +40,7 @@
     <ClInclude Include="StartUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CaseProcessor.h">
+    <ClInclude Include="CaseProcessing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PointCase.h">
@@ -50,6 +50,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PointItems.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsProcessing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

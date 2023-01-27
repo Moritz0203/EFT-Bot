@@ -84,9 +84,9 @@ namespace Matching {
 				if (!ReturnDataAM.empty()) {
 					for (int i2 = 0; i2 < ReturnDataAM.size(); i2++) {
 						Rect Rec(ReturnDataAM[i2].x + 44, ReturnDataAM[i2].y + 48, templ.cols - 44, templ.rows - 48);
-						const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
-						int tagCaseConvertet = stoi(tagCase);
-						pointAmmunitionTemp.emplace_back(ReturnDataAM[i2], NameOfItemAmmunition[i], tagCaseConvertet, templ.rows, templ.cols, i1);
+						const string stackSize = TextMatching::textMatching(arrayMatScreen[i1], Rec);
+						int stackSizeConvertet = stoi(stackSize);
+						pointAmmunitionTemp.emplace_back(ReturnDataAM[i2], NameOfItemAmmunition[i], stackSizeConvertet, templ.rows, templ.cols, i1);
 					}
 					ReturnDataAM.clear();
 				}
@@ -153,7 +153,7 @@ namespace Matching {
 						Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13, templ.rows);
 						const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
 						if (checkSecondLastChar(tagCase)) {
-							pointCasetempStashTemp.emplace_back(ReturnDataCase[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i);
+							pointCasetempStashTemp.emplace_back(ReturnDataCase[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1);
 						}
 					}
 					ReturnDataCase.clear();
@@ -232,6 +232,37 @@ namespace Matching {
 		}
 		return ReturnDataMA;
 	}
+
+	void MagazineMatching(array<Mat, 11> arrayMatScreen) {
+		int sizeString = sizeof(Magazine) / sizeof(string);
+		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
+		Mat templ;
+
+		vector<POINT> ReturnDataMA;
+		vector<PointMagazine> pointMagazineTemp;// ----
+		for (int i1 = 0; i1 < sizeMat; i1++) {
+			for (int i = 0; i < sizeString; i++) {
+				TemplateMatching::templateMatchingItems(Magazine[i], MagazineThreshold[i], true, false, NameOfItemMagazine[i], ReturnDataMA, arrayMatScreen[i1]);
+
+				templ = imread(Magazine[i]);
+				if (!ReturnDataMA.empty()) {
+					for (int i3 = 0; i3 < ReturnDataMA.size(); i3++) {
+						Rect Rec(ReturnDataMA[i3].x + 44, ReturnDataMA[i3].y + 48, templ.cols - 44, templ.rows - 48);
+						const string fillStatus = TextMatching::textMatching(arrayMatScreen[i1], Rec);
+						int fillStatusConvertet = stoi(fillStatus);
+						pointMagazineTemp.emplace_back(ReturnDataMA[i3], NameOfItemMagazine[i], fillStatusConvertet, templ.rows, templ.cols, i1);
+						
+					}
+					ReturnDataMA.clear();
+				}
+			}
+			pointMagazine_NC.emplace_back(pointMagazineTemp);
+			pointMagazineTemp.clear();
+		}
+	}
+
+
+
 
 
 

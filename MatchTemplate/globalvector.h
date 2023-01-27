@@ -12,3 +12,6 @@ std::vector<std::vector<PointCaseInCase>> pointCaseInCase;
 
 std::vector<std::vector<PointAmmunition>> pointAmmunition_C; 
 std::vector<std::vector<PointAmmunition>> pointAmmunition_NC;
+
+std::vector<std::vector<PointMagazine>> pointMagazine_C;
+std::vector<std::vector<PointMagazine>> pointMagazine_NC;

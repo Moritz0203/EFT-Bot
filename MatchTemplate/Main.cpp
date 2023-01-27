@@ -1,4 +1,4 @@
-#include "CaseMatching.h"
+#include "StartUp.h"
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -30,17 +30,18 @@ int main() {
 		Mat templ;
 		
 		vector<POINT> ReturnPoints;
-		templ = imread("itemImages/AmmunitionImages/7.62RUS/PS.png");
+		templ = imread("itemImages/MagazineImgas/7.62RUS/GEN-M3.png");
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("itemImages/AmmunitionImages/7.62RUS/PS.png", 0.88, false, true, "bp", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("itemImages/MagazineImgas/7.62RUS/GEN-M3.png", 0.80, false, true, "GEN-3", ReturnPoints, MatScreen);
 		
 		cout << "------" << endl;
 		
-		Rect Rec(ReturnPoints[0].x + 44, ReturnPoints[0].y + 48, templ.cols - 44, templ.rows - 48);
+		Rect Rec(ReturnPoints[0].x + 25, ReturnPoints[0].y + 110, templ.cols - 40, templ.rows - 110);
+		//Rect Rec(ReturnPoints[0].x , ReturnPoints[0].y , templ.cols, templ.rows );
 
 		Mat Roi2;
 		Mat Roi = MatScreen(Rec);
@@ -53,11 +54,11 @@ int main() {
 
 		/*MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_5.png");*/
 
-		/*const string str = TextMatching::textMatching(MatScreen, Rec);
+		const string str = TextMatching::textMatching(MatScreen, Rec);
 
-		
+		int str1 = stoi(str);
 
-		cout << str << endl;*/
+		cout << str1 << endl;
 
 
 		//const char test = '-';

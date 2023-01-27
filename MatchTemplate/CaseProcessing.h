@@ -3,7 +3,6 @@
 #include <conio.h>
 #include <windows.h>
 #include "StartUp.h"
-#include "CleanVector.h"
 using namespace std;
 using namespace cv;
 
@@ -20,7 +19,6 @@ namespace CaseProcessor
 
 		StartUp::CheckScrollbarPositions();
 		ReturntMatScreen = StartUp::TakeScreenshots();
-
 
 		Matching::CaseMatching(ReturntMatScreen);
 		cleanVector::cleanUpVectorCase();

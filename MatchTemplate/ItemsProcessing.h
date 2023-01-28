@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -17,11 +16,11 @@ namespace ItemsProcessing {
 		ReturntMatScreen = StartUp::TakeScreenshots();
 
 		Matching::AmmunitionMatching(ReturntMatScreen);
-		cleanUpVectorItems();
+		cleanUpVectorItemsAmmunition();
 	}
 }
 
-void cleanUpVectorItems() {
+void cleanUpVectorItemsAmmunition() {
 	vector<PointAmmunition> temp;
 	if (!pointAmmunition_NC.size() >= 1)
 		return;

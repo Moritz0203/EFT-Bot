@@ -30,17 +30,17 @@ int main() {
 		Mat templ;
 		
 		vector<POINT> ReturnPoints;
-		templ = imread("itemImages/MagazineImgas/7.62RUS/GEN-M3.png");
+		templ = imread("itemImages/BarterImages/OneSlot/Bolts.png");
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("itemImages/MagazineImgas/7.62RUS/GEN-M3.png", 0.80, false, true, "GEN-3", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("itemImages/BarterImages/OneSlot/Bolts.png", 0.80, false, true, "bolt", ReturnPoints, MatScreen);
 		
 		cout << "------" << endl;
 		
-		Rect Rec(ReturnPoints[0].x + 25, ReturnPoints[0].y + 110, templ.cols - 40, templ.rows - 110);
+		Rect Rec(ReturnPoints[0].x + 43, ReturnPoints[0].y + 46, templ.cols - 43, templ.rows - 46);
 		//Rect Rec(ReturnPoints[0].x , ReturnPoints[0].y , templ.cols, templ.rows );
 
 		Mat Roi2;
@@ -56,9 +56,9 @@ int main() {
 
 		const string str = TextMatching::textMatching(MatScreen, Rec);
 
-		int str1 = stoi(str);
+		
 
-		cout << str1 << endl;
+		cout << str << endl;
 
 
 		//const char test = '-';

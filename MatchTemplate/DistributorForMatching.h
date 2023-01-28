@@ -164,14 +164,6 @@ namespace Matching {
 	}
 
 
-
-
-
-
-
-
-
-
 	std::array<std::string, 8> Magazine{
 		//MP
 			"itemImages/MagazineImgas/4.6HK/MP7.png",
@@ -214,23 +206,6 @@ namespace Matching {
 			0.87,//AK30
 			0.87,//GEN-M3
 	};
-
-	vector<POINT> MagazineMatching() {
-		Mat Screen;
-		string  filename, templatename;
-		double	threshold;
-		int size = sizeof(Magazine) / sizeof(string);
-
-		vector<POINT> ReturnDataMA;
-
-		for (int i = 0; i < size; i++) {
-			threshold = MagazineThreshold[i];
-			templatename = Magazine[i];
-
-			TemplateMatching::templateMatchingItems(templatename, threshold, true, false, NameOfItemMagazine[i], ReturnDataMA, Screen);
-		}
-		return ReturnDataMA;
-	}
 
 	void MagazineMatching(array<Mat, 11> arrayMatScreen) {
 		int sizeString = sizeof(Magazine) / sizeof(string);

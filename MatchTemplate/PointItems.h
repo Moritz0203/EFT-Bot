@@ -27,3 +27,4 @@ public:
 	PointMagazine();
 	PointMagazine(POINT point, std::string nameOfMagazine, int fillStatus, int heightTempl, int widthTempl, int page);
 };
+

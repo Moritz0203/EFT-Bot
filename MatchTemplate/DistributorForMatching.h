@@ -236,10 +236,6 @@ namespace Matching {
 	}
 
 
-
-
-
-
 	std::array<std::string, 7> Barter{
 		//OneSlot
 			"itemImages/BarterImages/OneSlot/Bolts.png",
@@ -279,20 +275,42 @@ namespace Matching {
 			0.96,//Lion
 	};
 
-	vector<POINT> BarterMatching() {
-		Mat Screen;
-		string  filename, templatename;
-		double	threshold;
-		int size = sizeof(Barter) / sizeof(string);
+
+	std::array<std::string, 2> FoundInRaid{
+		"ObjectImages/FoundInRaid/FoundInRaid-Blue.png",
+		"ObjectImages/FoundInRaid/FoundInRaid-Red.png"
+	};
+
+	void BarterMatching(array<Mat, 11> arrayMatScreen) {
+		int sizeString = sizeof(Cases) / sizeof(string);
+		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
+		int sizeFoundInRaid = sizeof(FoundInRaid) / sizeof(String);
+		Mat templ;
 
 		vector<POINT> ReturnDataBA;
+		vector<PointBarter> pointBarterTemp;
+		for (int i1 = 0; i1 < sizeMat; i1++) {
+			for (int i = 0; i < sizeString; i++) {
+				TemplateMatching::templateMatchingItems(Barter[i], BarterThreshold[i], false, false, NameOfItemBarter[i], ReturnDataBA, arrayMatScreen[i1]);
 
-		for (int i = 0; i < size; i++) {
-			threshold = BarterThreshold[i];
-			templatename = Barter[i];
-
-			TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemBarter[i], ReturnDataBA, Screen);
+				templ = imread(Barter[i]);
+				if (!ReturnDataBA.empty()) {
+					for (int i3 = 0; i3 < ReturnDataBA.size(); i3++) {
+						Rect Rec(ReturnDataBA[i3].x + 45, ReturnDataBA[i3].y + 46, templ.cols - 45, templ.rows - 46);
+						
+						for (int i4 = 0; i4 < sizeFoundInRaid; i4++) {
+							Mat temp = imread(FoundInRaid[i4]);
+							if (TemplateMatching::templateMatchingBool(arrayMatScreen[i1](Rec), temp, 0.99)) 
+								pointBarterTemp.emplace_back(ReturnDataBA[i3], NameOfItemBarter[i], true, templ.rows, templ.cols, i1);
+							else
+								pointBarterTemp.emplace_back(ReturnDataBA[i3], NameOfItemBarter[i], false, templ.rows, templ.cols, i1);
+						}
+					}
+					ReturnDataBA.clear();
+				}
+			}
+			pointBarter_NC.emplace_back(pointBarterTemp);
+			pointBarterTemp.clear();
 		}
-		return ReturnDataBA;
 	}
 }

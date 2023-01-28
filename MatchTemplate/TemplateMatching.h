@@ -102,17 +102,10 @@ public:
 		Mat result;
 		POINT PointReturn = {};
 
-		/*if (MatScreen.empty() || templ.empty())
-		{
-			cout << "Error reading file(s) in templateMatching Funkion!" << endl;
-		}*/
 		namedWindow(image_window, WINDOW_AUTOSIZE);
-		/*namedWindow(Test, WINDOW_AUTOSIZE);*/
 
 		Mat img_display;
 		MatScreen.copyTo(img_display);
-
-		//imshow(Test, templ);
 
 		matchTemplate(MatScreen, templ, result, match_method);
 		double minVal; double maxVal; Point minLoc; Point maxLoc;
@@ -126,7 +119,6 @@ public:
 				matchLoc = maxLoc;
 				cv::rectangle(img_display, matchLoc, Point(matchLoc.x + templ.cols, matchLoc.y + templ.rows), CV_RGB(0, 255, 0), 1);
 				cv::line(img_display, matchLoc, Point(0, 0), CV_RGB(0, 255, 0), 1);
-				/*cv::line(img_display, Point(matchLoc.x + templ.cols / 2, matchLoc.y), Point(MatScreen.cols / 2, 0), CV_RGB(0, 255, 0), 1);*/
 				floodFill(result, matchLoc, 0); //mark drawn blob
 				if (matchLoc.y && matchLoc.x != 0) {
 					cout << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
@@ -142,7 +134,38 @@ public:
 		waitKey(200);
 
 		return PointReturn;
+	};
 
+public:
+	static bool templateMatchingBool(Mat MatScreen, Mat templ, double threshold) {
+		int height = {}, width = {};
+		int match_method = 5;
+		Mat result;
+			
+		Mat img_display;
+		MatScreen.copyTo(img_display);
+
+		matchTemplate(MatScreen, templ, result, match_method);
+		double minVal; double maxVal; Point minLoc; Point maxLoc;
+		Point matchLoc;
+
+		while (true)
+		{
+			minMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, Mat());
+			if (maxVal >= threshold)
+			{
+				matchLoc = maxLoc;
+				cv::rectangle(img_display, matchLoc, Point(matchLoc.x + templ.cols, matchLoc.y + templ.rows), CV_RGB(0, 255, 0), 1);
+				cv::line(img_display, matchLoc, Point(0, 0), CV_RGB(0, 255, 0), 1);				
+				floodFill(result, matchLoc, 0); //mark drawn blob
+				if (matchLoc.y && matchLoc.x != 0) {
+					return true;
+				}
+			}
+			else
+				break;
+		}
+		return false;
 	};
 	
 	

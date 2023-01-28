@@ -28,3 +28,14 @@ public:
 	PointMagazine(POINT point, std::string nameOfMagazine, int fillStatus, int heightTempl, int widthTempl, int page);
 };
 
+class PointBarter
+{
+public:
+	bool isFoundInRaid = {};
+	POINT point = {};
+	int heightTempl = {}, widthTempl = {}, page = {};
+	std::string nameOfBarter = {};
+
+	PointBarter();
+	PointBarter(POINT point, std::string nameOfBarter, bool isFoundInRaid, int heightTempl, int widthTempl, int page);
+};

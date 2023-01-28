@@ -27,3 +27,17 @@ PointMagazine::PointMagazine(POINT point, std::string nameOfMagazine, int fillSt
 	this->widthTempl = widthTempl;
 	this->page = page;
 }
+
+PointBarter::PointBarter()
+{
+}
+
+PointBarter::PointBarter(POINT point, std::string nameOfBarter, bool isFoundInRaid, int heightTempl, int widthTempl, int page)
+{
+	this->point = point;
+	this->nameOfBarter = nameOfBarter;
+	this->isFoundInRaid = isFoundInRaid;
+	this->heightTempl = heightTempl;
+	this->widthTempl = widthTempl;
+	this->page = page;
+}

@@ -30,22 +30,28 @@ int main() {
 		Mat templ;
 		
 		vector<POINT> ReturnPoints;
-		templ = imread("itemImages/BarterImages/OneSlot/Bolts.png");
+		templ = imread("itemImages/BarterImages/OneSlot/Bulb.png");
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("itemImages/BarterImages/OneSlot/Bolts.png", 0.80, false, true, "bolt", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("itemImages/BarterImages/OneSlot/Bulb.png", 0.80, false, true, "bolt", ReturnPoints, MatScreen);
 		
 		cout << "------" << endl;
 		
-		Rect Rec(ReturnPoints[0].x + 43, ReturnPoints[0].y + 46, templ.cols - 43, templ.rows - 46);
+		Rect Rec(ReturnPoints[0].x + 45, ReturnPoints[0].y + 46, templ.cols - 45, templ.rows - 46);
 		//Rect Rec(ReturnPoints[0].x , ReturnPoints[0].y , templ.cols, templ.rows );
 
 		Mat Roi2;
 		Mat Roi = MatScreen(Rec);
 	
+
+		/*Mat temp = imread("ObjectImages/FoundInRaid/FoundInRaid-Blue.png");
+		if (TemplateMatching::templateMatchingBool(Roi, temp, 0.99)) {
+			cout << "found in raid" << endl;
+		}*/
+
 		/*Mat blacktext = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_5.png");
 
 		cv::imshow(image_window, blacktext);
@@ -54,11 +60,9 @@ int main() {
 
 		/*MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_5.png");*/
 
-		const string str = TextMatching::textMatching(MatScreen, Rec);
+		/*const string str = TextMatching::textMatching(MatScreen, Rec);
 
-		
-
-		cout << str << endl;
+		cout << str << endl;*/
 
 
 		//const char test = '-';

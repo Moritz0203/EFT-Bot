@@ -5,13 +5,13 @@
 #include "PointCase.h"
 #include "PointItems.h"
 
-std::vector<std::vector<PointCaseInStash>> pointCaseInStash_C;
-std::vector<std::vector<PointCaseInStash>> pointCaseInStash_NC;
+static std::vector<std::vector<PointCaseInStash>> pointCaseInStash_C;
+static std::vector<std::vector<PointCaseInStash>> pointCaseInStash_NC;
 
-std::vector<std::vector<PointCaseInCase>> pointCaseInCase;
+static std::vector<std::vector<PointCaseInCase>> pointCaseInCase;
 
-std::vector<std::vector<PointAmmunition>> pointAmmunition_C; 
-std::vector<std::vector<PointAmmunition>> pointAmmunition_NC;
+static std::vector<std::vector<PointAmmunition>> pointAmmunition_C;
+static std::vector<std::vector<PointAmmunition>> pointAmmunition_NC;
 
-std::vector<std::vector<PointMagazine>> pointMagazine_C;
-std::vector<std::vector<PointMagazine>> pointMagazine_NC;
+static std::vector<std::vector<PointMagazine>> pointMagazine_C;
+static std::vector<std::vector<PointMagazine>> pointMagazine_NC;

@@ -6,6 +6,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+#include "globalvector.h"
 using namespace std;
 using namespace cv;
 
@@ -215,8 +216,9 @@ public:
 //	} 
 };
 
-namespace TextMatching {
-	const string textMatching(Mat MatScreen, Rect Rec)
+class TextMatching {
+public:
+	static const string textMatching(Mat MatScreen, Rect Rec)
 	{
 		Mat Roi = MatScreen(Rec);
 		std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());

@@ -3,9 +3,8 @@
 #include <conio.h>
 #include <windows.h>
 #include "getMat.h"
-#include "DistributorForMatching.h"
 #include "InputMK.h"
-#include "CleanVector.h"
+#include "DistributorForMatching.h"
 using namespace std;
 using namespace cv;
 

@@ -1,5 +1,4 @@
 #include "TemplateMatching.h"
-#include "globalvector.h"
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -239,7 +238,7 @@ namespace Matching {
 		Mat templ;
 
 		vector<POINT> ReturnDataMA;
-		vector<PointMagazine> pointMagazineTemp;// ----
+		vector<PointMagazine> pointMagazineTemp;
 		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
 				TemplateMatching::templateMatchingItems(Magazine[i], MagazineThreshold[i], true, false, NameOfItemMagazine[i], ReturnDataMA, arrayMatScreen[i1]);
@@ -247,7 +246,7 @@ namespace Matching {
 				templ = imread(Magazine[i]);
 				if (!ReturnDataMA.empty()) {
 					for (int i3 = 0; i3 < ReturnDataMA.size(); i3++) {
-						Rect Rec(ReturnDataMA[i3].x + 44, ReturnDataMA[i3].y + 48, templ.cols - 44, templ.rows - 48);
+						Rect Rec(ReturnDataMA[i3].x + 25, ReturnDataMA[i3].y + 110, templ.cols - 40, templ.rows - 110);
 						const string fillStatus = TextMatching::textMatching(arrayMatScreen[i1], Rec);
 						int fillStatusConvertet = stoi(fillStatus);
 						pointMagazineTemp.emplace_back(ReturnDataMA[i3], NameOfItemMagazine[i], fillStatusConvertet, templ.rows, templ.cols, i1);

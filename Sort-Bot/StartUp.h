@@ -13,17 +13,11 @@ using namespace cv;
 namespace StartUp {
 	void CheckForFails();
 	void CheckScrollbarPositions();
-	void Magic();
 	array<Mat, 11> TakeScreenshots();
 
 	void Entrance() {
-
 		CheckForFails();
-
-		CheckScrollbarPositions();
-
-		Magic();
-		
+		CheckScrollbarPositions();		
 	}
 
 	void CheckForFails() {
@@ -91,49 +85,5 @@ namespace StartUp {
 		}
 
 		return ReturnMatScreen;
-	}
-
-
-	vector<vector<POINT>> PointVectorTemp;
-	vector<vector<POINT>> PointVectorCleanUp;
-
-	void Magic() {
-		array<Mat, 11> ReturntMatScreen;
-		vector<POINT> ReturnPoints;
-		ReturntMatScreen = TakeScreenshots();
-		const char* image_window = "Source Image";
-		namedWindow(image_window, WINDOW_AUTOSIZE);
-
-		int size = sizeof(ReturntMatScreen) / sizeof(Mat);
-		for (int i = 0; i < size; i++) {
-			imshow(image_window, ReturntMatScreen[i]);
-			waitKey(0);
-		}
-
-		Matching::AmmunitionMatching(ReturntMatScreen);
-		
-
-		
-		/*cleanUpVector(PointVectorTemp, PointVectorCleanUp);*/
-
-
-		/*cout << "Not Clean\n";
-		for (int i = 0; i < PointVectorTemp.size(); i++) {
-			for (int i2 = 0; i2 < PointVectorTemp[i].size(); i2++) {
-				cout << PointVectorTemp[i][i2].y << " " << PointVectorTemp[i][i2].x << endl;
-			}
-		}
-
-		cout << "Clean\n";
-		for (int i = 0; i < PointVectorCleanUp.size(); i++) {
-			for (int i2 = 0; i2 < PointVectorCleanUp[i].size(); i2++) {
-				cout << "---- " << PointVectorCleanUp[i][i2].y << " " << PointVectorCleanUp[i][i2].x << endl;
-			}
-			cout << PointVectorCleanUp[i].size() << endl;
-		}
-		cout << endl;
-		cout << PointVectorTemp.size() << endl;
-		cout << PointVectorCleanUp.size() << endl; */
-		
 	}
 }

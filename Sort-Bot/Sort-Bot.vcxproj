@@ -21,9 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ee43baf7-efc9-4375-a98a-8a329ac45664}</ProjectGuid>
-    <RootNamespace>MatchTemplate</RootNamespace>
+    <ProjectGuid>{17FD9725-115E-4FFB-BD74-1E75A6D4CD55}</ProjectGuid>
+    <RootNamespace>Sort-Bot</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Sort-Bot</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

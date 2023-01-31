@@ -141,6 +141,7 @@
     <ClInclude Include="getMat.h" />
     <ClInclude Include="globalvector.h" />
     <ClInclude Include="InputMK.h" />
+    <ClInclude Include="ItemMoving.h" />
     <ClInclude Include="ItemsProcessing.h" />
     <ClInclude Include="PointCase.h" />
     <ClInclude Include="PointItems.h" />

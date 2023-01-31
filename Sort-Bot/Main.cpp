@@ -28,23 +28,98 @@ int main() {
 	}
 	if (Start == "test") {
 		Mat templ;
+		Mat templ1;
 		
 		vector<POINT> ReturnPoints;
-		templ = imread("itemImages/BarterImages/OneSlot/Bulb.png");
+		vector<POINT> ReturnPoints1;
+		templ = imread("itemImages/AmmunitionImages/7.62RUS/PS.png");
+		templ1 = imread("CaseImages/AmmoCase.png");
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("itemImages/BarterImages/OneSlot/Bulb.png", 0.80, false, true, "bolt", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("itemImages/AmmunitionImages/7.62RUS/PS.png", 0.89, false, true, "BP", ReturnPoints, MatScreen);
 		
-		cout << "------" << endl;
-		
-		Rect Rec(ReturnPoints[0].x + 45, ReturnPoints[0].y + 46, templ.cols - 45, templ.rows - 46);
-		//Rect Rec(ReturnPoints[0].x , ReturnPoints[0].y , templ.cols, templ.rows );
+		TemplateMatching::templateMatchingItems("CaseImages/AmmoCase.png", 0.90, false, false, "amo", ReturnPoints1, MatScreen);
 
-		Mat Roi2;
-		Mat Roi = MatScreen(Rec);
+		/*cout << ReturnPoints[0].y << " " << ReturnPoints[0].x << endl;
+		cout << ReturnPoints1[0].y << " " << ReturnPoints1[0].x << endl;*/
+
+		POINT pointA{};
+		POINT pointB{};
+
+		pointB.y = (templ1.rows / 2) + ReturnPoints1[0].y;
+		pointB.x = (templ1.cols / 2) + ReturnPoints1[0].x;
+
+		vector<POINT> neu;
+		for (int i = 0; i < ReturnPoints.size(); i++) {
+			/*cout << "--1" << endl;*/
+			bool noture = false;
+			for (int i2 = 0; i2 < ReturnPoints.size(); i2++) {
+				/*cout << "--2" << endl;*/
+
+				int temp = 0;
+			
+				temp = ReturnPoints[i].x;
+				
+
+				temp = temp - 1;
+			
+
+				cout << temp << endl;
+				
+				
+				for (int i3 = 0; i3 < 3; i3++) {
+					cout << "--3" << endl;
+					
+
+					if (ReturnPoints[i2].x == temp) {
+						cout << "-- " << ReturnPoints[i2].x << " " << temp << " " << i << "<- i  i2 ->" << i2 << endl;
+						if (i == i2) {
+							cout << "true---" << endl;
+							break;
+						}
+						else if (i != i2){
+							cout << "---true" << endl;
+							int temp = 0;
+							temp = i2;
+							temp - 1;
+							ReturnPoints.erase(ReturnPoints.begin() + temp);
+							noture = true;
+						}
+					}
+					temp = temp + 1;
+				}
+			}
+			if(noture)
+				neu.push_back(ReturnPoints[i]);
+		}
+
+		for (int i = 0; i < neu.size(); i++) {
+			cout << neu[i].y << " " << neu[i].x << " ----" << endl;
+		}
+		/*for (int i = 0; i < ReturnPoints.size(); i++) {
+			cout << ReturnPoints[i].y << " " << ReturnPoints[i].x << "----2" << endl;
+		}*/
+
+
+	/*	for (int i = 0; i < ReturnPoints.size(); i++) {
+			pointA.y = (templ.rows / 2) + ReturnPoints[i].y;
+			pointA.x = (templ.cols / 2) + ReturnPoints[i].x;
+
+			Mouse::MouseMoveAtoB(pointA, pointB);
+
+			Sleep(60);
+		}*/
+		
+		//cout << "------" << endl;
+		//
+		//Rect Rec(ReturnPoints[0].x + 45, ReturnPoints[0].y + 46, templ.cols - 45, templ.rows - 46);
+		////Rect Rec(ReturnPoints[0].x , ReturnPoints[0].y , templ.cols, templ.rows );
+
+		//Mat Roi2;
+		//Mat Roi = MatScreen(Rec);
 	
 
 		/*Mat temp = imread("ObjectImages/FoundInRaid/FoundInRaid-Blue.png");
@@ -79,9 +154,9 @@ int main() {
 		//cout << str[str.back() - 1] << "<------ " << i1 << endl;
 
 		/*cout << "123" << endl;*/
-		imshow(image_window, Roi);
-		/*imshow(image_window2, Roi2);*/
-		waitKey(0);
+		//imshow(image_window, Roi);
+		///*imshow(image_window2, Roi2);*/
+		//waitKey(0);
 		
 		
 		

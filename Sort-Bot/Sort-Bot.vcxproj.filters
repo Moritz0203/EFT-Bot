@@ -55,6 +55,9 @@
     <ClInclude Include="ItemsProcessing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ItemMoving.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

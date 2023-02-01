@@ -3,6 +3,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+#include <unordered_set>
 using namespace std;
 
 //external controllers for applications / ECFA
@@ -53,51 +54,67 @@ int main() {
 		pointB.x = (templ1.cols / 2) + ReturnPoints1[0].x;
 
 		vector<POINT> neu;
-		for (int i = 0; i < ReturnPoints.size(); i++) {
-			/*cout << "--1" << endl;*/
-			bool noture = false;
-			for (int i2 = 0; i2 < ReturnPoints.size(); i2++) {
-				/*cout << "--2" << endl;*/
+		//for (int i = 0; i < ReturnPoints.size(); i++) {
+		//	/*cout << "--1" << endl;*/
+		//	bool noture = false;
+		//	for (int i2 = 0; i2 < ReturnPoints.size(); i2++) {
+		//		/*cout << "--2" << endl;*/
 
-				int temp = 0;
-			
-				temp = ReturnPoints[i].x;
-				
+		//		int temp = 0;
+		//	
+		//		temp = ReturnPoints[i].x;
+		//		
 
-				temp = temp - 1;
-			
+		//		temp = temp - 1;
+		//	
 
-				cout << temp << endl;
-				
-				
-				for (int i3 = 0; i3 < 3; i3++) {
-					cout << "--3" << endl;
-					
+		//		cout << temp << endl;
+		//		
+		//		
+		//		for (int i3 = 0; i3 < 3; i3++) {
+		//			cout << "--3" << endl;
+		//			
 
-					if (ReturnPoints[i2].x == temp) {
-						cout << "-- " << ReturnPoints[i2].x << " " << temp << " " << i << "<- i  i2 ->" << i2 << endl;
-						if (i == i2) {
-							cout << "true---" << endl;
-							break;
-						}
-						else if (i != i2){
-							cout << "---true" << endl;
-							int temp = 0;
-							temp = i2;
-							temp - 1;
-							ReturnPoints.erase(ReturnPoints.begin() + temp);
-							noture = true;
-						}
-					}
-					temp = temp + 1;
-				}
+		//			if (ReturnPoints[i2].x == temp) {
+		//				cout << "-- " << ReturnPoints[i2].x << " " << temp << " " << i << "<- i  i2 ->" << i2 << endl;
+		//				if (i == i2) {
+		//					cout << "true---" << endl;
+		//					break;
+		//				}
+		//				else if (i != i2){
+		//					cout << "---true" << endl;
+		//					int temp = 0;
+		//					temp = i2;
+		//					temp - 1;
+		//					ReturnPoints.erase(ReturnPoints.begin() + temp);
+		//					noture = true;
+		//				}
+		//			}
+		//			temp = temp + 1;
+		//		}
+		//	}
+		//	if(noture)
+		//		neu.push_back(ReturnPoints[i]);
+		//}
+
+
+
+		unordered_set<int> seen;
+		vector<POINT> result;
+		for (POINT point : ReturnPoints) {
+			int x_minus_1 = point.x - 1;
+			int x_plus_1 = point.x + 1;
+			if (seen.find(point.x) == seen.end() && seen.find(x_minus_1) == seen.end() && seen.find(x_plus_1) == seen.end()) {
+				result.push_back(point);
+				seen.insert(point.x);
+				seen.insert(x_minus_1);
+				seen.insert(x_plus_1);
 			}
-			if(noture)
-				neu.push_back(ReturnPoints[i]);
 		}
 
-		for (int i = 0; i < neu.size(); i++) {
-			cout << neu[i].y << " " << neu[i].x << " ----" << endl;
+
+		for (int i = 0; i < result.size(); i++) {
+			cout << result[i].y << " " << result[i].x << " ----" << endl;
 		}
 		/*for (int i = 0; i < ReturnPoints.size(); i++) {
 			cout << ReturnPoints[i].y << " " << ReturnPoints[i].x << "----2" << endl;

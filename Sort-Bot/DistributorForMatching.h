@@ -3,6 +3,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+#include <unordered_set>
 using namespace std;
 
 namespace Matching {
@@ -13,6 +14,22 @@ namespace Matching {
 			return (tagCase[static_cast<std::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type>(length) - 2] != '-');
 		}
 		return false;
+	}
+
+	vector<POINT> removeDuplicates(vector<POINT>& points) {
+		unordered_set<int> unSet;
+		vector<POINT> result;
+		for (POINT point : points) {
+			int xminus_1 = point.x - 1;
+			int xplus_1 = point.x + 1;
+			if (unSet.find(point.x) == unSet.end() && unSet.find(xminus_1) == unSet.end() && unSet.find(xplus_1) == unSet.end()) {
+				result.push_back(point);
+				unSet.insert(point.x);
+				unSet.insert(xminus_1);
+				unSet.insert(xplus_1);
+			}
+		}
+		return result;
 	}
 
 	std::array<std::string, 12> Ammunition{
@@ -68,12 +85,13 @@ namespace Matching {
 			0.90,//US
 	};
 
-	void AmmunitionMatching(array<Mat, 11> arrayMatScreen) {
+	void AmmunitionMatching(array<Mat, 11> &arrayMatScreen) {
 		int sizeString = sizeof(Ammunition) / sizeof(string);
 		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 		Mat templ;
 
 		vector<POINT> ReturnDataAM;
+		vector<POINT> ReturnDataAM_Clean;
 		vector<PointAmmunition> pointAmmunitionTemp;
 		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
@@ -81,13 +99,15 @@ namespace Matching {
 
 				templ = imread(Ammunition[i]);
 				if (!ReturnDataAM.empty()) {
-					for (int i2 = 0; i2 < ReturnDataAM.size(); i2++) {
-						Rect Rec(ReturnDataAM[i2].x + 44, ReturnDataAM[i2].y + 48, templ.cols - 44, templ.rows - 48);
+					ReturnDataAM_Clean = removeDuplicates(ReturnDataAM);
+					for (int i2 = 0; i2 < ReturnDataAM_Clean.size(); i2++) {
+						Rect Rec(ReturnDataAM_Clean[i2].x + 44, ReturnDataAM_Clean[i2].y + 48, templ.cols - 44, templ.rows - 48);
 						const string stackSize = TextMatching::textMatching(arrayMatScreen[i1], Rec);
 						int stackSizeConvertet = stoi(stackSize);
-						pointAmmunitionTemp.emplace_back(ReturnDataAM[i2], NameOfItemAmmunition[i], stackSizeConvertet, templ.rows, templ.cols, i1);
+						pointAmmunitionTemp.emplace_back(ReturnDataAM_Clean[i2], NameOfItemAmmunition[i], stackSizeConvertet, templ.rows, templ.cols, i1);
 					}
 					ReturnDataAM.clear();
+					ReturnDataAM_Clean.clear();
 				}
 			}
 			pointAmmunition_NC.emplace_back(pointAmmunitionTemp);
@@ -135,12 +155,13 @@ namespace Matching {
 		0.90,//THICCcase
 	};
 
-	void CaseMatching(array<Mat, 11> arrayMatScreen) {
+	void CaseMatching(array<Mat, 11> &arrayMatScreen) {
 		int sizeString = sizeof(Cases) / sizeof(string);
 		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 		Mat templ;
 
 		vector<POINT> ReturnDataCase;
+		vector<POINT> ReturnDataCase_Clean;
 		vector<PointCaseInStash> pointCasetempStashTemp;
 		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
@@ -148,14 +169,16 @@ namespace Matching {
 				
 				templ = imread(Cases[i]);
 				if (!ReturnDataCase.empty()) {
-					for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
-						Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13, templ.rows);
+					ReturnDataCase_Clean = removeDuplicates(ReturnDataCase);
+					for (int i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
+						Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, 13, templ.rows);
 						const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
 						if (checkSecondLastChar(tagCase)) {
-							pointCasetempStashTemp.emplace_back(ReturnDataCase[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1);
+							pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1);
 						}
 					}
 					ReturnDataCase.clear();
+					ReturnDataCase_Clean.clear();
 				}
 			}
 			pointCaseInStash_NC.emplace_back(pointCasetempStashTemp);
@@ -207,12 +230,13 @@ namespace Matching {
 			0.87,//GEN-M3
 	};
 
-	void MagazineMatching(array<Mat, 11> arrayMatScreen) {
+	void MagazineMatching(array<Mat, 11> &arrayMatScreen) {
 		int sizeString = sizeof(Magazine) / sizeof(string);
 		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 		Mat templ;
 
 		vector<POINT> ReturnDataMA;
+		vector<POINT> ReturnDataMA_Clean;
 		vector<PointMagazine> pointMagazineTemp;
 		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
@@ -220,14 +244,15 @@ namespace Matching {
 
 				templ = imread(Magazine[i]);
 				if (!ReturnDataMA.empty()) {
-					for (int i3 = 0; i3 < ReturnDataMA.size(); i3++) {
-						Rect Rec(ReturnDataMA[i3].x + 25, ReturnDataMA[i3].y + 110, templ.cols - 40, templ.rows - 110);
+					ReturnDataMA_Clean = removeDuplicates(ReturnDataMA);
+					for (int i3 = 0; i3 < ReturnDataMA_Clean.size(); i3++) {
+						Rect Rec(ReturnDataMA_Clean[i3].x + 25, ReturnDataMA_Clean[i3].y + 110, templ.cols - 40, templ.rows - 110);
 						const string fillStatus = TextMatching::textMatching(arrayMatScreen[i1], Rec);
 						int fillStatusConvertet = stoi(fillStatus);
-						pointMagazineTemp.emplace_back(ReturnDataMA[i3], NameOfItemMagazine[i], fillStatusConvertet, templ.rows, templ.cols, i1);
-						
+						pointMagazineTemp.emplace_back(ReturnDataMA_Clean[i3], NameOfItemMagazine[i], fillStatusConvertet, templ.rows, templ.cols, i1);
 					}
 					ReturnDataMA.clear();
+					ReturnDataMA_Clean.clear();
 				}
 			}
 			pointMagazine_NC.emplace_back(pointMagazineTemp);
@@ -281,13 +306,14 @@ namespace Matching {
 		"ObjectImages/FoundInRaid/FoundInRaid-Red.png"
 	};
 
-	void BarterMatching(array<Mat, 11> arrayMatScreen) {
+	void BarterMatching(array<Mat, 11> &arrayMatScreen) {
 		int sizeString = sizeof(Cases) / sizeof(string);
 		int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 		int sizeFoundInRaid = sizeof(FoundInRaid) / sizeof(String);
 		Mat templ;
 
 		vector<POINT> ReturnDataBA;
+		vector<POINT> ReturnDataBA_Clean;
 		vector<PointBarter> pointBarterTemp;
 		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
@@ -295,18 +321,19 @@ namespace Matching {
 
 				templ = imread(Barter[i]);
 				if (!ReturnDataBA.empty()) {
-					for (int i3 = 0; i3 < ReturnDataBA.size(); i3++) {
-						Rect Rec(ReturnDataBA[i3].x + 45, ReturnDataBA[i3].y + 46, templ.cols - 45, templ.rows - 46);
-						
+					ReturnDataBA_Clean = removeDuplicates(ReturnDataBA);
+					for (int i3 = 0; i3 < ReturnDataBA_Clean.size(); i3++) {
+						Rect Rec(ReturnDataBA_Clean[i3].x + 45, ReturnDataBA_Clean[i3].y + 46, templ.cols - 45, templ.rows - 46);
 						for (int i4 = 0; i4 < sizeFoundInRaid; i4++) {
 							Mat temp = imread(FoundInRaid[i4]);
 							if (TemplateMatching::templateMatchingBool(arrayMatScreen[i1](Rec), temp, 0.99)) 
-								pointBarterTemp.emplace_back(ReturnDataBA[i3], NameOfItemBarter[i], true, templ.rows, templ.cols, i1);
+								pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], NameOfItemBarter[i], true, templ.rows, templ.cols, i1);
 							else
-								pointBarterTemp.emplace_back(ReturnDataBA[i3], NameOfItemBarter[i], false, templ.rows, templ.cols, i1);
+								pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], NameOfItemBarter[i], false, templ.rows, templ.cols, i1);
 						}
 					}
 					ReturnDataBA.clear();
+					ReturnDataBA_Clean.clear();
 				}
 			}
 			pointBarter_NC.emplace_back(pointBarterTemp);

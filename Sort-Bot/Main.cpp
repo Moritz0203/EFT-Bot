@@ -4,12 +4,19 @@
 #include <conio.h>
 #include <windows.h>
 #include <unordered_set>
+#include <utility>
+#include <functional>
 using namespace std;
 
 //external controllers for applications / ECFA
 //Rick and Morty Staffel 4 - Folge 4
 
-
+struct pair_hash {
+	template <class T1, class T2>
+	size_t operator()(const pair<T1, T2>& p) const {
+		return hash<T1>()(p.first) ^ hash<T2>()(p.second);
+	}
+};
 
 int main() {
 	vector<POINT> Returner;
@@ -35,12 +42,12 @@ int main() {
 		vector<POINT> ReturnPoints1;
 		templ = imread("itemImages/AmmunitionImages/7.62RUS/PS.png");
 		templ1 = imread("CaseImages/AmmoCase.png");
-		const char* image_window = "Source Image";
-		namedWindow(image_window, WINDOW_AUTOSIZE);
+		/*const char* image_window = "Source Image";
+		namedWindow(image_window, WINDOW_AUTOSIZE);*/
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("itemImages/AmmunitionImages/7.62RUS/PS.png", 0.89, false, true, "BP", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("itemImages/AmmunitionImages/7.62RUS/PS.png", 0.88, false, true, "BP", ReturnPoints, MatScreen);
 		
 		TemplateMatching::templateMatchingItems("CaseImages/AmmoCase.png", 0.90, false, false, "amo", ReturnPoints1, MatScreen);
 
@@ -55,7 +62,7 @@ int main() {
 
 
 
-		unordered_set<int> unSet;
+		/*unordered_set<int> unSet;
 		vector<POINT> result;
 		for (POINT point : ReturnPoints) {
 			int x_minus_1 = point.x - 1;
@@ -66,7 +73,35 @@ int main() {
 				unSet.insert(x_minus_1);
 				unSet.insert(x_plus_1);
 			}
+		}*/
+
+
+		unordered_set<pair<int, int>, pair_hash> unSet;
+		vector<POINT> result;
+		for (POINT& point : ReturnPoints) {
+			int x_minus_1 = point.x - 1;
+			int x_plus_1 = point.x + 1;
+			int y_minus_1 = point.y - 1;
+			int y_plus_1 = point.y + 1;
+			pair<int, int> point_x = make_pair(point.x, point.y);
+			pair<int, int> point_x_minus_1 = make_pair(x_minus_1, point.y);
+			pair<int, int> point_x_plus_1 = make_pair(x_plus_1, point.y);
+			pair<int, int> point_y = make_pair(point.x, point.y);
+			pair<int, int> point_y_minus_1 = make_pair(point.x, y_minus_1);
+			pair<int, int> point_y_plus_1 = make_pair(point.x, y_plus_1);
+			if (unSet.find(point_x) == unSet.end() && unSet.find(point_x_minus_1) == unSet.end() && unSet.find(point_x_plus_1) == unSet.end()
+				&& unSet.find(point_y) == unSet.end() && unSet.find(point_y_minus_1) == unSet.end() && unSet.find(point_y_plus_1) == unSet.end()) {
+				result.push_back(point);
+				unSet.insert(point_x);
+				unSet.insert(point_x_minus_1);
+				unSet.insert(point_x_plus_1);
+				unSet.insert(point_y);
+				unSet.insert(point_y_minus_1);
+				unSet.insert(point_y_plus_1);
+			}
 		}
+
+
 
 
 		for (int i = 0; i < result.size(); i++) {
@@ -77,14 +112,12 @@ int main() {
 		}*/
 
 
-	/*	for (int i = 0; i < ReturnPoints.size(); i++) {
-			pointA.y = (templ.rows / 2) + ReturnPoints[i].y;
-			pointA.x = (templ.cols / 2) + ReturnPoints[i].x;
+		for (int i = 0; i < result.size(); i++) {
+			pointA.y = (templ.rows / 2) + result[i].y;
+			pointA.x = (templ.cols / 2) + result[i].x;
 
 			Mouse::MouseMoveAtoB(pointA, pointB);
-
-			Sleep(60);
-		}*/
+		}
 		
 		//cout << "------" << endl;
 		//

@@ -8,6 +8,13 @@ using namespace std;
 
 namespace Matching {
 
+	struct pair_hash {
+		template <class T1, class T2>
+		size_t operator()(const pair<T1, T2>& p) const {
+			return hash<T1>()(p.first) ^ hash<T2>()(p.second);
+		}
+	};
+
 	bool checkSecondLastChar(const string tagCase) {
 		int length = tagCase.length();
 		if (length >= 2) {
@@ -17,16 +24,31 @@ namespace Matching {
 	}
 
 	vector<POINT> removeDuplicates(vector<POINT>& points) {
-		unordered_set<int> unSet;
+		unordered_set<pair<int, int>, pair_hash> unSet;
 		vector<POINT> result;
-		for (POINT point : points) {
-			int xminus_1 = point.x - 1;
-			int xplus_1 = point.x + 1;
-			if (unSet.find(point.x) == unSet.end() && unSet.find(xminus_1) == unSet.end() && unSet.find(xplus_1) == unSet.end()) {
+		for (POINT& point : points) {
+			int x_minus_1 = point.x - 1;
+			int x_plus_1 = point.x + 1;
+			int y_minus_1 = point.y - 1;
+			int y_plus_1 = point.y + 1;
+
+			pair<int, int> point_x = make_pair(point.x, point.y);
+			pair<int, int> point_x_minus_1 = make_pair(x_minus_1, point.y);
+			pair<int, int> point_x_plus_1 = make_pair(x_plus_1, point.y);
+			pair<int, int> point_y = make_pair(point.x, point.y);
+			pair<int, int> point_y_minus_1 = make_pair(point.x, y_minus_1);
+			pair<int, int> point_y_plus_1 = make_pair(point.x, y_plus_1);
+
+			if (unSet.find(point_x) == unSet.end() && unSet.find(point_x_minus_1) == unSet.end() && unSet.find(point_x_plus_1) == unSet.end() 
+				&& unSet.find(point_y) == unSet.end() && unSet.find(point_y_minus_1) == unSet.end() && unSet.find(point_y_plus_1) == unSet.end()) 
+			{
 				result.push_back(point);
-				unSet.insert(point.x);
-				unSet.insert(xminus_1);
-				unSet.insert(xplus_1);
+				unSet.insert(point_x);
+				unSet.insert(point_x_minus_1);
+				unSet.insert(point_x_plus_1);
+				unSet.insert(point_y);
+				unSet.insert(point_y_minus_1);
+				unSet.insert(point_y_plus_1);
 			}
 		}
 		return result;

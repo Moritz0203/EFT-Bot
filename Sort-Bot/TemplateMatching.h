@@ -30,8 +30,8 @@ public:
 			cout << "Error reading file(s) in templateMatching Funkion!" << endl;
 			return false;
 		}
-		namedWindow(image_window, WINDOW_AUTOSIZE);
-		namedWindow(Test, WINDOW_AUTOSIZE);
+		/*namedWindow(image_window, WINDOW_AUTOSIZE);
+		namedWindow(Test, WINDOW_AUTOSIZE);*/
 
 
 		Mat img_display;
@@ -54,7 +54,7 @@ public:
 
 		Rect Rec(StartY, StartX, width, height);
 		Mat Roi = templ(Rec);
-		imshow(Test, Roi);
+		/*imshow(Test, Roi);*/
 
 		matchTemplate(img, Roi,result, match_method);
 		double minVal; double maxVal; Point minLoc; Point maxLoc;
@@ -87,9 +87,9 @@ public:
 				break;
 		}
 		cout << count << endl;
-		cv::imshow(image_window, img_display);
+		/*cv::imshow(image_window, img_display);
 
-		waitKey(1);
+		waitKey(1);*/
 		return templ.cols, templ.rows;
 	};
 
@@ -129,7 +129,7 @@ public:
 			else
 				break;
 		}
-		cv::imshow(image_window, img_display);
+		/*cv::imshow(image_window, img_display);*/
 
 		waitKey(200);
 

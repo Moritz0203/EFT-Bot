@@ -20,6 +20,7 @@ namespace Mouse {
 	}
 	void MouseMoveAtoB(POINT PointA, POINT PointB) {
 		SetCursorPos(PointA.x, PointA.y);
+		Sleep(1);
 		mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 		Sleep(17);//17
 		SetCursorPos(PointB.x, PointB.y);

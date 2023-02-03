@@ -7,6 +7,9 @@
 
 
 namespace ItemMoving{
+	
+	void AmmunitionMoving() {
 
+	}
 
 }

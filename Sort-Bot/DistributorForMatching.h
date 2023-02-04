@@ -54,57 +54,57 @@ namespace Matching {
 		return result;
 	}
 
-	std::array<std::string, 12> Ammunition{
-		//NATO 7.62
-			"itemImages/AmmunitionImages/7.62NATO/M80.png",//M80
-			"itemImages/AmmunitionImages/7.62NATO/M62.png",//M62
-			"itemImages/AmmunitionImages/7.62NATO/M61.png",//M61
-			"itemImages/AmmunitionImages/7.62NATO/M993.png",//M993
-			"itemImages/AmmunitionImages/7.62NATO/BCPFMJ.png",//BCPFMJ
-			"itemImages/AmmunitionImages/7.62NATO/TCWSP.png",//TCWSP
-			"itemImages/AmmunitionImages/7.62NATO/UltraNosi.png",//UltraNosi
-		//RUS 7.62
-			"itemImages/AmmunitionImages/7.62RUS/BP.png",//BP
-			"itemImages/AmmunitionImages/7.62RUS/HP.png",//HP
-			//"itemImages/AmmunitionImages/7.62RUS/MAIAP.png",//MAIAP
+	std::array<std::string, 1> Ammunition{
+		////NATO 7.62
+		//	"itemImages/AmmunitionImages/7.62NATO/M80.png",//M80
+		//	"itemImages/AmmunitionImages/7.62NATO/M62.png",//M62
+		//	"itemImages/AmmunitionImages/7.62NATO/M61.png",//M61
+		//	"itemImages/AmmunitionImages/7.62NATO/M993.png",//M993
+		//	"itemImages/AmmunitionImages/7.62NATO/BCPFMJ.png",//BCPFMJ
+		//	"itemImages/AmmunitionImages/7.62NATO/TCWSP.png",//TCWSP
+		//	"itemImages/AmmunitionImages/7.62NATO/UltraNosi.png",//UltraNosi
+		////RUS 7.62
+		//	"itemImages/AmmunitionImages/7.62RUS/BP.png",//BP
+		//	"itemImages/AmmunitionImages/7.62RUS/HP.png",//HP
+		//	//"itemImages/AmmunitionImages/7.62RUS/MAIAP.png",//MAIAP
 			"itemImages/AmmunitionImages/7.62RUS/PS.png",//PS
-			"itemImages/AmmunitionImages/7.62RUS/T45M1.png",//T45M1
-			"itemImages/AmmunitionImages/7.62RUS/US.png",//US
+			//"itemImages/AmmunitionImages/7.62RUS/T45M1.png",//T45M1
+			//"itemImages/AmmunitionImages/7.62RUS/US.png",//US
 	};
 
-	std::array<std::string, 12> NameOfItemAmmunition{
+	std::array<std::string, 1> NameOfItemAmmunition{
 		//NATO 7.62
-			"M80",
-			"M62",
-			"M61",
-			"M993",
-			"BCPFMJ",
-			"TCWSP",
-			"UltraNosi",
-		//RUS 7.62
-			"BP",
-			"HP",
+		//	"M80",
+		//	"M62",
+		//	"M61",
+		//	"M993",
+		//	"BCPFMJ",
+		//	"TCWSP",
+		//	"UltraNosi",
+		////RUS 7.62
+		//	"BP",
+		//	"HP",
 			"PS",
-			"T45M1",
-			"US",
+		/*	"T45M1",
+			"US",*/
 	};
 
-	std::array<double, 12> AmmunitionThreshold{
-		//NATO 7.62
-			0.90,//M80
-			0.88,//M62
-			0.90,//M61
-			0.90,//M993
-			0.84,//BCPFMJ
-			0.86,//TCWSP
-			0.88,//UltraNosi
-		//RUS 7.62
-			0.88,//BP
-			0.90,//HP
-			//0.84,//MAIAP
-			0.90,//PS
-			0.90,//T45M1
-			0.90,//US
+	std::array<double, 1> AmmunitionThreshold{
+		////NATO 7.62
+		//	0.90,//M80
+		//	0.88,//M62
+		//	0.90,//M61
+		//	0.90,//M993
+		//	0.84,//BCPFMJ
+		//	0.86,//TCWSP
+		//	0.88,//UltraNosi
+		////RUS 7.62
+		//	0.88,//BP
+		//	0.90,//HP
+		//	//0.84,//MAIAP
+			0.86,//PS
+			//0.90,//T45M1
+			//0.90,//US
 	};
 
 	void AmmunitionMatching(array<Mat, 11> &arrayMatScreen) {
@@ -115,13 +115,20 @@ namespace Matching {
 		vector<POINT> ReturnDataAM;
 		vector<POINT> ReturnDataAM_Clean;
 		vector<PointAmmunition> pointAmmunitionTemp;
-		for (int i1 = 0; i1 < sizeMat; i1++) {
+
+		int count = 0;
+		for (int i1 = 0; i1 < 4; i1++) {
 			for (int i = 0; i < sizeString; i++) {
 				TemplateMatching::templateMatchingItems(Ammunition[i], AmmunitionThreshold[i], false, true, NameOfItemAmmunition[i], ReturnDataAM, arrayMatScreen[i1]);
 
 				templ = imread(Ammunition[i]);
 				if (!ReturnDataAM.empty()) {
 					ReturnDataAM_Clean = removeDuplicates(ReturnDataAM);
+
+					for (POINT po : ReturnDataAM_Clean) {
+						cout << po.y << " " << po.x << endl;
+					}
+
 					for (int i2 = 0; i2 < ReturnDataAM_Clean.size(); i2++) {
 						Rect Rec(ReturnDataAM_Clean[i2].x + 44, ReturnDataAM_Clean[i2].y + 48, templ.cols - 44, templ.rows - 48);
 						const string stackSize = TextMatching::textMatching(arrayMatScreen[i1], Rec);
@@ -134,7 +141,11 @@ namespace Matching {
 			}
 			pointAmmunition_NC.emplace_back(pointAmmunitionTemp);
 			pointAmmunitionTemp.clear();
+
+			cout << "--------------- " << count++ << endl;
 		}
+
+		cout << "matching done" << endl;
 	}
 
 

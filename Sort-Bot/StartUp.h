@@ -78,8 +78,9 @@ namespace StartUp {
 
 		int size = sizeof(ReturnMatScreen) / sizeof(Mat);
 		for (int i = 0; i < size; i++) {
-			Sleep(500);
+			Sleep(200);
 			ReturnMatScreen[i] = getMat(hWND);
+			Sleep(200);
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 			Keyboard::KeyboardInput(keyforInput);
 		}

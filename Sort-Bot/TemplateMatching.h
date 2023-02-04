@@ -30,8 +30,8 @@ public:
 			cout << "Error reading file(s) in templateMatching Funkion!" << endl;
 			return false;
 		}
-		/*namedWindow(image_window, WINDOW_AUTOSIZE);
-		namedWindow(Test, WINDOW_AUTOSIZE);*/
+		namedWindow(image_window, WINDOW_AUTOSIZE);
+		/*namedWindow(Test, WINDOW_AUTOSIZE);*/
 
 
 		Mat img_display;
@@ -60,7 +60,7 @@ public:
 		double minVal; double maxVal; Point minLoc; Point maxLoc;
 		Point matchLoc;
 
-		int count = 0;
+		/*int count = 0;*/
 		POINT PointReturn{};
 		cout << NameOfItem << endl;
 		while (true)
@@ -78,7 +78,7 @@ public:
 					PointReturn.y = matchLoc.y;
 					PointReturn.x = matchLoc.x;
 					ReturnData.push_back(PointReturn);
-					count++;
+					/*count++;*/
 				}
 				else
 					return false;
@@ -86,23 +86,23 @@ public:
 			else
 				break;
 		}
-		cout << count << endl;
-		/*cv::imshow(image_window, img_display);
+		/*cout << count << endl;*/
+		cv::imshow(image_window, img_display);
 
-		waitKey(1);*/
+		waitKey(1000);
 		return templ.cols, templ.rows;
 	};
 
 public:
 	static POINT templateMatchingObjects(Mat MatScreen, Mat templ, double threshold) {
 		int height = {}, width = {};
-		const char* image_window = "Source Image";
-		const char* Test = "Item Image";
+		/*const char* image_window = "Source Image";
+		const char* Test = "Item Image";*/
 		int match_method = 5;
 		Mat result;
 		POINT PointReturn = {};
 
-		namedWindow(image_window, WINDOW_AUTOSIZE);
+		/*namedWindow(image_window, WINDOW_AUTOSIZE);*/
 
 		Mat img_display;
 		MatScreen.copyTo(img_display);
@@ -131,7 +131,7 @@ public:
 		}
 		/*cv::imshow(image_window, img_display);*/
 
-		waitKey(200);
+		/*waitKey(200);*/
 
 		return PointReturn;
 	};

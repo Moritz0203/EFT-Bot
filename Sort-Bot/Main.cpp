@@ -1,4 +1,4 @@
-#include "StartUp.h"
+//#include "StartUp.h"
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include <utility>
 #include <functional>
+#include "ItemMoving.h"
 using namespace std;
 
 //external controllers for applications / ECFA
@@ -19,105 +20,113 @@ struct pair_hash {
 };
 
 int main() {
-	vector<POINT> Returner;
 	
 	
-	HWND hWND = FindeWindow();
+	
+	/*HWND hWND = FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(100);
 	Mat MatScreen = getMat(hWND);
-	
+	*/
 
 	string Start;
 	cin >> Start;
 
-	if (Start == "start") {
+	/*if (Start == "start") {
 		StartUp::Entrance();
-	}
+	}*/
 	if (Start == "test") {
-		Mat templ;
-		Mat templ1;
-		
-		vector<POINT> ReturnPoints;
-		vector<POINT> ReturnPoints1;
-		templ = imread("itemImages/AmmunitionImages/7.62RUS/PS.png");
-		templ1 = imread("CaseImages/AmmoCase.png");
-		/*const char* image_window = "Source Image";
-		namedWindow(image_window, WINDOW_AUTOSIZE);*/
-		/*const char* image_window2 = "Source Image2222222222";
-		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
-
-		TemplateMatching::templateMatchingItems("itemImages/AmmunitionImages/7.62RUS/PS.png", 0.88, false, true, "BP", ReturnPoints, MatScreen);
-		
-		TemplateMatching::templateMatchingItems("CaseImages/AmmoCase.png", 0.90, false, false, "amo", ReturnPoints1, MatScreen);
-
-		/*cout << ReturnPoints[0].y << " " << ReturnPoints[0].x << endl;
-		cout << ReturnPoints1[0].y << " " << ReturnPoints1[0].x << endl;*/
-
-		POINT pointA{};
-		POINT pointB{};
-
-		pointB.y = (templ1.rows / 2) + ReturnPoints1[0].y;
-		pointB.x = (templ1.cols / 2) + ReturnPoints1[0].x;
 
 
 
-		/*unordered_set<int> unSet;
-		vector<POINT> result;
-		for (POINT point : ReturnPoints) {
-			int x_minus_1 = point.x - 1;
-			int x_plus_1 = point.x + 1;
-			if (unSet.find(point.x) == unSet.end() && unSet.find(x_minus_1) == unSet.end() && unSet.find(x_plus_1) == unSet.end()) {
-				result.push_back(point);
-				unSet.insert(point.x);
-				unSet.insert(x_minus_1);
-				unSet.insert(x_plus_1);
-			}
-		}*/
-
-
-		unordered_set<pair<int, int>, pair_hash> unSet;
-		vector<POINT> result;
-		for (POINT& point : ReturnPoints) {
-			int x_minus_1 = point.x - 1;
-			int x_plus_1 = point.x + 1;
-			int y_minus_1 = point.y - 1;
-			int y_plus_1 = point.y + 1;
-			pair<int, int> point_x = make_pair(point.x, point.y);
-			pair<int, int> point_x_minus_1 = make_pair(x_minus_1, point.y);
-			pair<int, int> point_x_plus_1 = make_pair(x_plus_1, point.y);
-			pair<int, int> point_y = make_pair(point.x, point.y);
-			pair<int, int> point_y_minus_1 = make_pair(point.x, y_minus_1);
-			pair<int, int> point_y_plus_1 = make_pair(point.x, y_plus_1);
-			if (unSet.find(point_x) == unSet.end() && unSet.find(point_x_minus_1) == unSet.end() && unSet.find(point_x_plus_1) == unSet.end()
-				&& unSet.find(point_y) == unSet.end() && unSet.find(point_y_minus_1) == unSet.end() && unSet.find(point_y_plus_1) == unSet.end()) {
-				result.push_back(point);
-				unSet.insert(point_x);
-				unSet.insert(point_x_minus_1);
-				unSet.insert(point_x_plus_1);
-				unSet.insert(point_y);
-				unSet.insert(point_y_minus_1);
-				unSet.insert(point_y_plus_1);
-			}
-		}
+		ItemMoving::AmmunitionMoving();
 
 
 
 
-		for (int i = 0; i < result.size(); i++) {
-			cout << result[i].y << " " << result[i].x << " ----" << endl;
-		}
-		/*for (int i = 0; i < ReturnPoints.size(); i++) {
-			cout << ReturnPoints[i].y << " " << ReturnPoints[i].x << "----2" << endl;
-		}*/
+		//Mat templ;
+		//Mat templ1;
+		//
+		/*vector<POINT> ReturnPoints;*/
+		//vector<POINT> ReturnPoints1;
+		//templ = imread("itemImages/AmmunitionImages/7.62RUS/PS.png");
+		//templ1 = imread("CaseImages/AmmoCase.png");
+		///*const char* image_window = "Source Image";
+		//namedWindow(image_window, WINDOW_AUTOSIZE);*/
+		///*const char* image_window2 = "Source Image2222222222";
+		//namedWindow(image_window2, WINDOW_AUTOSIZE);*/
+
+		/*TemplateMatching::templateMatchingItems("itemImages/AmmunitionImages/7.62RUS/PS.png", 0.78, false, true, "BP", ReturnPoints, MatScreen);*/
+		//
+		//TemplateMatching::templateMatchingItems("CaseImages/AmmoCase.png", 0.90, false, false, "amo", ReturnPoints1, MatScreen);
+
+		///*cout << ReturnPoints[0].y << " " << ReturnPoints[0].x << endl;
+		//cout << ReturnPoints1[0].y << " " << ReturnPoints1[0].x << endl;*/
+
+		//POINT pointA{};
+		//POINT pointB{};
+
+		//pointB.y = (templ1.rows / 2) + ReturnPoints1[0].y;
+		//pointB.x = (templ1.cols / 2) + ReturnPoints1[0].x;
 
 
-		for (int i = 0; i < result.size(); i++) {
-			pointA.y = (templ.rows / 2) + result[i].y;
-			pointA.x = (templ.cols / 2) + result[i].x;
 
-			Mouse::MouseMoveAtoB(pointA, pointB);
-		}
+		///*unordered_set<int> unSet;
+		//vector<POINT> result;
+		//for (POINT point : ReturnPoints) {
+		//	int x_minus_1 = point.x - 1;
+		//	int x_plus_1 = point.x + 1;
+		//	if (unSet.find(point.x) == unSet.end() && unSet.find(x_minus_1) == unSet.end() && unSet.find(x_plus_1) == unSet.end()) {
+		//		result.push_back(point);
+		//		unSet.insert(point.x);
+		//		unSet.insert(x_minus_1);
+		//		unSet.insert(x_plus_1);
+		//	}
+		//}*/
+
+
+		//unordered_set<pair<int, int>, pair_hash> unSet;
+		//vector<POINT> result;
+		//for (POINT& point : ReturnPoints) {
+		//	int x_minus_1 = point.x - 1;
+		//	int x_plus_1 = point.x + 1;
+		//	int y_minus_1 = point.y - 1;
+		//	int y_plus_1 = point.y + 1;
+		//	pair<int, int> point_x = make_pair(point.x, point.y);
+		//	pair<int, int> point_x_minus_1 = make_pair(x_minus_1, point.y);
+		//	pair<int, int> point_x_plus_1 = make_pair(x_plus_1, point.y);
+		//	pair<int, int> point_y = make_pair(point.x, point.y);
+		//	pair<int, int> point_y_minus_1 = make_pair(point.x, y_minus_1);
+		//	pair<int, int> point_y_plus_1 = make_pair(point.x, y_plus_1);
+		//	if (unSet.find(point_x) == unSet.end() && unSet.find(point_x_minus_1) == unSet.end() && unSet.find(point_x_plus_1) == unSet.end()
+		//		&& unSet.find(point_y) == unSet.end() && unSet.find(point_y_minus_1) == unSet.end() && unSet.find(point_y_plus_1) == unSet.end()) {
+		//		result.push_back(point);
+		//		unSet.insert(point_x);
+		//		unSet.insert(point_x_minus_1);
+		//		unSet.insert(point_x_plus_1);
+		//		unSet.insert(point_y);
+		//		unSet.insert(point_y_minus_1);
+		//		unSet.insert(point_y_plus_1);
+		//	}
+		//}
+
+
+
+
+		//for (int i = 0; i < result.size(); i++) {
+		//	cout << result[i].y << " " << result[i].x << " ----" << endl;
+		//}
+		///*for (int i = 0; i < ReturnPoints.size(); i++) {
+		//	cout << ReturnPoints[i].y << " " << ReturnPoints[i].x << "----2" << endl;
+		//}*/
+
+
+		//for (int i = 0; i < result.size(); i++) {
+		//	pointA.y = (templ.rows / 2) + result[i].y;
+		//	pointA.x = (templ.cols / 2) + result[i].x;
+
+		//	Mouse::MouseMoveAtoB(pointA, pointB);
+		//}
 		
 		//cout << "------" << endl;
 		//

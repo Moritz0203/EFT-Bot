@@ -102,7 +102,7 @@ namespace Matching {
 		//	0.88,//BP
 		//	0.90,//HP
 		//	//0.84,//MAIAP
-			0.86,//PS
+			0.82,//PS
 			//0.90,//T45M1
 			//0.90,//US
 	};
@@ -117,7 +117,7 @@ namespace Matching {
 		vector<PointAmmunition> pointAmmunitionTemp;
 
 		int count = 0;
-		for (int i1 = 0; i1 < 4; i1++) {
+		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
 				TemplateMatching::templateMatchingItems(Ammunition[i], AmmunitionThreshold[i], false, true, NameOfItemAmmunition[i], ReturnDataAM, arrayMatScreen[i1]);
 
@@ -131,7 +131,7 @@ namespace Matching {
 
 					for (int i2 = 0; i2 < ReturnDataAM_Clean.size(); i2++) {
 						Rect Rec(ReturnDataAM_Clean[i2].x + 44, ReturnDataAM_Clean[i2].y + 48, templ.cols - 44, templ.rows - 48);
-						const string stackSize = TextMatching::textMatching(arrayMatScreen[i1], Rec);
+						const string stackSize = "2"/*TextMatching::textMatching(arrayMatScreen[i1], Rec)*/;
 						int stackSizeConvertet = stoi(stackSize);
 						pointAmmunitionTemp.emplace_back(ReturnDataAM_Clean[i2], NameOfItemAmmunition[i], stackSizeConvertet, templ.rows, templ.cols, i1);
 					}
@@ -142,7 +142,7 @@ namespace Matching {
 			pointAmmunition_NC.emplace_back(pointAmmunitionTemp);
 			pointAmmunitionTemp.clear();
 
-			cout << "--------------- " << count++ << endl;
+			cout << "--------------- " << ++count << endl;
 		}
 
 		cout << "matching done" << endl;

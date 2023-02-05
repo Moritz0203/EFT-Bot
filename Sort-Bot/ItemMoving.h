@@ -26,7 +26,6 @@ namespace ItemMoving{
 								cout << inPointAM.nameOfAmmunition << " <-inPointAm pointAM-> " << pointAM.nameOfAmmunition <<endl;
 							}
 						}
-						
 					}
 				}
 			}

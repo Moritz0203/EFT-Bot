@@ -15,7 +15,7 @@ namespace ItemsProcessing {
 		array<Mat, 11> ReturntMatScreen;
 
 		StartUp::CheckScrollbarPositions();
-		Sleep(5);
+		Sleep(10);
 		ReturntMatScreen = StartUp::TakeScreenshots();
 
 		Matching::AmmunitionMatching(ReturntMatScreen);
@@ -52,22 +52,84 @@ namespace ItemsProcessing {
 
 	void cleanUpVectorItemsAmmunition() {
 		vector<PointAmmunition> temp;
-		if (!pointAmmunition_NC.size() >= 1)
-			return;
 
 		temp = pointAmmunition_NC[0];
 		pointAmmunition_C.emplace_back(temp);
 		temp.clear();
 
-		pointAmmunition_NC.emplace_back(temp);
+		/*pointAmmunition_NC.emplace_back(temp);*/
+
+
+		unordered_set<int> unset;
+		int iTemp = 1;
+		for (int i = 1; i < pointAmmunition_NC.size(); i++) {
+			iTemp++;
+
+			if (iTemp == pointAmmunition_NC.size())
+				break;
+
+			/*cout << pointAmmunition_NC.size() << endl;*/
+			for (PointAmmunition pointAM : pointAmmunition_NC[i]) {
+				cout << "first " << pointAM.point.y << " " << pointAM.point.x << endl;
+				
+
+				/*cout << i << " " << iTemp << endl;*/
+
+
+				/*if (pointAmmunition_NC[iTemp].size() == 0)
+					temp.emplace_back(pointAM);*/
+
+				for (PointAmmunition inPointAM : pointAmmunition_NC[iTemp]) {
+					cout << "---second " << inPointAM.point.y << " " << inPointAM.point.x << endl;
+					
+
+					PointAmmunition tempPointAM = inPointAM;
+					tempPointAM.point.y = tempPointAM.point.y + 343;
+
+					cout << "---second " << tempPointAM.point.y << endl;
+					int x_minus_1 = tempPointAM.point.x - 1;
+					int x_plus_1 = tempPointAM.point.x + 1;
+
+					/*int y_plus_1 = tempPointAM.point.y + 1;
+					int y_plus_2 = tempPointAM.point.y + 2;
+					int y_plus_3 = tempPointAM.point.y + 3;
+					int y_plus_4 = tempPointAM.point.y + 4;
+					int y_plus_5 = tempPointAM.point.y + 5;*/
+
+					if (tempPointAM.point.y == pointAM.point.y) {
+						if (tempPointAM.point.x == pointAM.point.x || x_minus_1 == pointAM.point.x || x_plus_1 == pointAM.point.x) {
 
 
 
-		
+							//unset.insert(x_minus_1);
+
+							//unset.insert(x_plus_1);
+
+							//unset.insert(tempPointAM.point.x);
 
 
+							temp.emplace_back(pointAM);
+							cout << "------in " << tempPointAM.point.x << endl;
+						}
+					}
+
+				}
+				cout << endl;
+			}
+			if (iTemp == 10) {
+				for (PointAmmunition pointAM : pointAmmunition_NC[iTemp]) {
+					if (pointAM.point.y >= 618) {
+						temp.emplace_back(pointAM);
+					}
+				}
+			}
+			pointAmmunition_C.emplace_back(temp);
+			unset.clear();
+			temp.clear();
+		}
 
 
+		//618
 
 
 		//int iTemp = 1;

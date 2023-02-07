@@ -47,9 +47,6 @@ namespace ItemsProcessing {
 	}
 
 
-
-
-
 	void cleanUpVectorItemsAmmunition() {
 		vector<PointAmmunition> temp;
 

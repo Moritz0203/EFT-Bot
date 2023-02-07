@@ -67,7 +67,7 @@ namespace ItemsProcessing {
 					tempPointAM.point.y = tempPointAM.point.y + 343;
 
 					int x_minus_1 = tempPointAM.point.x - 1;
-					int x_plus_1 = tempPointAM.point.x + 1;
+					int x_plus_1 = tempPointAM.point.x + 1; 
 
 					if (tempPointAM.point.y == pointAM.point.y) {
 						if (tempPointAM.point.x == pointAM.point.x || x_minus_1 == pointAM.point.x || x_plus_1 == pointAM.point.x) {

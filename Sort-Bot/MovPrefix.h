@@ -6,13 +6,16 @@
 
 class MovPrefix {
 public:
-	std::string nameofItem{};
+	std::string nameOfItem{};
+	std::vector<Prefix> prefix{};
 
+	MovPrefix();
+	MovPrefix(std::string nameOfItem, std::vector<Prefix> prefix);
 };
 
 class Prefix {
 public:
-	const std::string tagOfCase{};
+	std::string tagOfCase{};
 	bool isFull{};
 
 	Prefix();

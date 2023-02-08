@@ -1,4 +1,13 @@
 #include "MovPrefix.h"
+MovPrefix::MovPrefix()
+{
+}
+
+MovPrefix::MovPrefix(std::string nameOfItem, std::vector<Prefix> prefix)
+{
+	this->nameOfItem = nameOfItem;
+	this->prefix = prefix;
+}
 
 Prefix::Prefix()
 {

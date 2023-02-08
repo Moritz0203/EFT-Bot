@@ -23,6 +23,9 @@
     <ClCompile Include="CleanVector.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="MovPrefix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TemplateMatching.h">
@@ -56,6 +59,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ItemMoving.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovPrefix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

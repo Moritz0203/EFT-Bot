@@ -31,8 +31,4 @@ namespace ItemMoving{
 			}
 		}
 	}
-
-
-
-
 }

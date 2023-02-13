@@ -141,6 +141,7 @@
     <ClInclude Include="DistributorForMatching.h" />
     <ClInclude Include="getMat.h" />
     <ClInclude Include="globalvector.h" />
+    <ClInclude Include="InitializeMovPrefix.h" />
     <ClInclude Include="InputMK.h" />
     <ClInclude Include="ItemMoving.h" />
     <ClInclude Include="ItemsProcessing.h" />

@@ -64,6 +64,9 @@
     <ClInclude Include="MovPrefix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InitializeMovPrefix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

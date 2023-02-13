@@ -4,13 +4,22 @@
 #include <conio.h>
 #include <windows.h>
 
-class MovPrefix {
+class MovPrefixItem {
 public:
 	std::string nameOfItem{};
 	std::vector<Prefix> prefix{};
 
-	MovPrefix();
-	MovPrefix(std::string nameOfItem, std::vector<Prefix> prefix);
+	MovPrefixItem();
+	MovPrefixItem(std::string nameOfItem, std::vector<Prefix> prefix);
+};
+
+class MovPrefixGroup {
+public:
+	std::vector<std::string> nameOfItems{};
+	std::vector<Prefix> prefix{};
+	
+	MovPrefixGroup();
+	MovPrefixGroup(std::vector<std::string> nameOfItems, std::vector<Prefix> prefix);
 };
 
 class Prefix {

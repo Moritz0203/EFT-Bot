@@ -7,6 +7,7 @@
 #include <utility>
 #include <functional>
 #include "ItemMoving.h"
+#include "InitializeMovPrefix.h"
 using namespace std;
 
 //external controllers for applications / ECFA
@@ -22,7 +23,26 @@ struct pair_hash {
 int main() {
 	
 	
+	/*cout << "//    ___ ___ _____         ___  ___  ___ _____         ___  ___ _____  " << endl;
+	cout << "//   | __| __|_   _|  ___  / __|/ _ \| _ \_   _|  ___  | _ )/ _ \_   _| " << endl;
+	cout << "//   | _|| _|  | |   |___| \__ \ (_) |   / | |   |___| | _ \ (_) || |   " << endl;
+	cout << "//   |___|_|   |_|      _  |___/\___/|_|_\_|_|_ _      |___/\___/ |_|   " << endl;
+	cout << "//                     | |__ _  _  | __/ __| __/_\                      " << endl;
+	cout << "//                     | '_ \ || | | _| (__| _/ _ \                     " << endl;
+	cout << "//                     |_.__/\_, | |___\___|_/_/ \_\                    " << endl;
+	cout << "//                           |__/                                       " << endl;*/
+
+	cout << "Welcome to EFT-SORT-BOT" << endl;
+	cout << "by ECFA" << endl;
+	cout << endl;
+		
+
+
 	
+	InitializeMovPrefix::Initialize();
+
+
+
 	/*HWND hWND = FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(100);

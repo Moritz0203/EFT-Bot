@@ -1,4 +1,5 @@
-#pragma once
+
+ #pragma once
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -30,4 +31,3 @@ public:
 	MovPrefixGroup();
 	MovPrefixGroup(std::vector<std::string> nameOfItems, std::vector<Prefix> prefix);
 };
-

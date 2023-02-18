@@ -140,7 +140,7 @@
     <ClInclude Include="CaseProcessing.h" />
     <ClInclude Include="DistributorForMatching.h" />
     <ClInclude Include="getMat.h" />
-    <ClInclude Include="globalvector.h" />
+    <ClInclude Include="PointGlobalVector.h" />
     <ClInclude Include="InitializeMovPrefix.h" />
     <ClInclude Include="InputMK.h" />
     <ClInclude Include="ItemMoving.h" />

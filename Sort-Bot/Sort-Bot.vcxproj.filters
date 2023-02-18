@@ -49,7 +49,7 @@
     <ClInclude Include="PointCase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="globalvector.h">
+    <ClInclude Include="PointGlobalVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PointItems.h">

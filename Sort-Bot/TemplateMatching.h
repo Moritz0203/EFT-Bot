@@ -6,7 +6,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
-#include "globalvector.h"
+#include "PointGlobalVector.h"
 using namespace std;
 using namespace cv;
 

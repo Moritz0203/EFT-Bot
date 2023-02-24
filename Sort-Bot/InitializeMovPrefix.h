@@ -16,7 +16,7 @@ namespace InitializeMovPrefix {
 	}
 
 	void setup() {
-
+		
 	}
 
 	std::array<std::string, 7> Rus762x25{

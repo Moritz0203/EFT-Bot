@@ -70,6 +70,9 @@
     <ClInclude Include="MovPrefixGlobalVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ItemArraysHEXtoText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

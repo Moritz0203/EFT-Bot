@@ -27,7 +27,4 @@ namespace InitializeMovPrefix {
 		movPrefixGroup.emplace_back(ArraysText::Rus762x39, prefix);
 		movPrefixGroup.emplace_back(ArraysText::Nato762x51, prefix);
 	}
-
-
-	
 }

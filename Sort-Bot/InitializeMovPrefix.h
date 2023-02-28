@@ -23,7 +23,6 @@ namespace InitializeMovPrefix {
 		vector<Prefix> prefix;
 
 		prefix[0].tagOfCase = "Amo";
-
 		movPrefixGroup.emplace_back(ArraysText::Rus762x39, prefix);
 		movPrefixGroup.emplace_back(ArraysText::Nato762x51, prefix);
 	}

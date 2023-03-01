@@ -44,7 +44,7 @@ namespace InitializeMovPrefix {
 		for (int i = 0; i < groupedMovPrefixGroup.size(); i++) {
 			for (MovPrefixGroup mov : groupedMovPrefixGroup[i]) {
 				for (string out : mov.nameOfItems) {
-					cout << out << endl;
+					cout << out << " " << mov.prefix[0].tagOfCase << endl;
 				}
 			}
 		}

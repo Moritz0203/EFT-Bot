@@ -1,5 +1,15 @@
 #include "MovPrefix.h"
 
+Prefix::Prefix()
+{
+}
+
+Prefix::Prefix(const std::string tagOfCase, bool isFull)
+{
+	this->tagOfCase = tagOfCase;
+	this->isFull = isFull;
+}
+
 MovPrefixItem::MovPrefixItem()
 {
 }
@@ -20,12 +30,3 @@ MovPrefixGroup::MovPrefixGroup(std::vector<std::string> nameOfItems, std::vector
 	this->prefix = prefix;
 }
 
-Prefix::Prefix()
-{
-}
-
-Prefix::Prefix(const std::string tagOfCase, bool isFull)
-{
-	this->tagOfCase = tagOfCase;
-	this->isFull = isFull;
-}

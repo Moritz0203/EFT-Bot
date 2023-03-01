@@ -70,7 +70,7 @@
     <ClInclude Include="MovPrefixGlobalVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ItemArraysHEXtoText.h">
+    <ClInclude Include="ItemVectorHEXtoText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,9 +1,10 @@
 #pragma once
 #include <windows.h>
 #include <iostream>
+#include <vector>
 
-namespace ArraysText {
-	std::array<std::string, 7> Rus762x25{
+namespace VectorText {
+	std::vector<std::string> Rus762x25{
 		"TTAKBS",
 		"TTFMJ43",
 		"TTLRN",
@@ -13,7 +14,7 @@ namespace ArraysText {
 		"TTPT"
 	};
 
-	std::array<std::string, 5> Nato762x35{
+	std::vector<std::string> Nato762x35{
 		"BlackoutAP",
 		"BlackoutBCPFMJ",
 		"BlackoutM62Tracer",
@@ -21,7 +22,7 @@ namespace ArraysText {
 		"Whisper"
 	};
 
-	std::array<std::string, 6> Rus762x39{
+	std::vector<std::string> Rus762x39{
 		"BP",
 		"HP",
 		"MAIAP",
@@ -30,7 +31,7 @@ namespace ArraysText {
 		"US"
 	};
 
-	std::array<std::string, 7> Nato762x51{
+	std::vector<std::string> Nato762x51{
 		"M80",
 		"M62",
 		"M61",
@@ -40,7 +41,7 @@ namespace ArraysText {
 		"UltraNosi"
 	};
 
-	std::array<std::string, 6> Rus762x54R{
+	std::vector<std::string> Rus762x54R{
 		"RBS",
 		"RBT",
 		"RLPS",

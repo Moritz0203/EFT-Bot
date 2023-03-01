@@ -33,8 +33,6 @@ namespace InitializeMovPrefix {
 
 		prefix.push_back(InPrefix);
 		
-
-		
 		movPrefixGroup.emplace_back(VectorText::Rus762x39, prefix);
 		movPrefixGroup.emplace_back(VectorText::Nato762x51, prefix);
 

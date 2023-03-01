@@ -25,9 +25,9 @@ namespace InitializeMovPrefix {
 
 	void setup() {
 		vector<Prefix> prefix;
-		
-		const string tagCase = "amo";
 		Prefix InPrefix;
+
+		const string tagCase = "amo";
 		InPrefix.tagOfCase = tagCase;
 		InPrefix.isFull = false;
 
@@ -37,7 +37,6 @@ namespace InitializeMovPrefix {
 		movPrefixGroup.emplace_back(VectorText::Nato762x51, prefix);
 
 		groupedMovPrefixGroup.emplace_back(movPrefixGroup);
-
 
 		for (int i = 0; i < groupedMovPrefixGroup.size(); i++) {
 			for (MovPrefixGroup mov : groupedMovPrefixGroup[i]) {

@@ -25,7 +25,7 @@ namespace ItemMoving{
 						for (PointAmmunition inPointAM : pointAmmunition_C[in1]) {
 							if (inPointAM.nameOfAmmunition == pointAM.nameOfAmmunition) {
 								cout << inPointAM.nameOfAmmunition << " <-inPointAm pointAM-> " << pointAM.nameOfAmmunition <<endl;
-								
+								groupedMovPrefixGroup;
 							}
 						}
 					}

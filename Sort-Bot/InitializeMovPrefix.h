@@ -27,23 +27,42 @@ namespace InitializeMovPrefix {
 	void setup() {
 		vector<Prefix> prefix;
 		Prefix InPrefix;
+		Prefix InPrefix1;
+		TagMovPrefixGroup test;
 
-		const string tagCase = "amo";
+		const string tagCase = "amo1";
 		InPrefix.tagOfCase = tagCase;
 		InPrefix.isFull = false;
 
+		const string tagCase1 = "amo2";
+		InPrefix1.tagOfCase = tagCase1;
+		InPrefix1.isFull = true;
+
 		prefix.push_back(InPrefix);
+		prefix.push_back(InPrefix1);
 		
 		movPrefixGroup.emplace_back(VectorText::Rus762x39, prefix);
 		movPrefixGroup.emplace_back(VectorText::Nato762x51, prefix);
 
-		groupedMovPrefixGroup.emplace_back(movPrefixGroup);
+		test.identyfierAsHEX = 0x1;
+		test.movPrefixGroup = movPrefixGroup;
 
-		for (int i = 0; i < groupedMovPrefixGroup.size(); i++) {
-			for (MovPrefixGroup mov : groupedMovPrefixGroup[i]) {
-				for (string out : mov.nameOfItems) {
-					cout << out << " " << mov.prefix[0].tagOfCase << endl;
+		groupedMovPrefixGroup.push_back(test);
+
+		for (TagMovPrefixGroup v1 : groupedMovPrefixGroup) {
+			cout << v1.identyfierAsHEX << endl;
+			for (MovPrefixGroup v2 : v1.movPrefixGroup) {
+				
+
+				for (string str : v2.nameOfItems) {
+					cout << "|-> " << str << " -->   ";
+					for (Prefix pre : v2.prefix) {
+						cout << pre.tagOfCase << " - " << pre.isFull << ", ";
+					}
+					cout << endl;
 				}
+
+				
 			}
 		}
 	}

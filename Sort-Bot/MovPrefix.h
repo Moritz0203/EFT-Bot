@@ -30,3 +30,12 @@ public:
 	MovPrefixGroup();
 	MovPrefixGroup(std::vector<std::string> nameOfItems, std::vector<Prefix> prefix);
 };
+
+class TagMovPrefixGroup {
+public:
+	std::vector<MovPrefixGroup> movPrefixGroup{};
+	int identyfierAsHEX{};
+
+	TagMovPrefixGroup();
+	TagMovPrefixGroup(int identyfierAsHEX, std::vector<MovPrefixGroup> movPrefixGroup);
+};

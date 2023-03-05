@@ -50,12 +50,19 @@ namespace InitializeMovPrefix {
 		groupedMovPrefixGroup.push_back(test);
 
 		for (TagMovPrefixGroup v1 : groupedMovPrefixGroup) {
-			cout << v1.identyfierAsHEX << endl;
+			cout << "Identyfier ->   0x" << v1.identyfierAsHEX << "   = Ammunition" << endl;
 			for (MovPrefixGroup v2 : v1.movPrefixGroup) {
 				
 
 				for (string str : v2.nameOfItems) {
-					cout << "|-> " << str << " -->   ";
+					int length = 15 - str.length();
+					
+					cout << "                 |-> " << str;
+					for (int i = 0; i < length; i++) {
+						cout << " ";
+					}
+					cout << "-->    ";
+
 					for (Prefix pre : v2.prefix) {
 						cout << pre.tagOfCase << " - " << pre.isFull << ", ";
 					}

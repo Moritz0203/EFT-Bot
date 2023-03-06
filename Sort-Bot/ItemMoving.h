@@ -18,8 +18,10 @@ namespace ItemMoving{
 		int identyfierAsHEX = 0x01;
 		std::unique_ptr<MovPrefixGroup> ptrBuffer;
 
-		for (int i1 = 0; i1 < pointAmmunition_C.size(); i1++) {                  // loop through the first vector 
+		for (int i1 = 0; i1 < pointAmmunition_C.size(); i1++) {					 // loop through the first vector 
+
 			for (PointAmmunition pointAM : pointAmmunition_C[i1]) {              // take out the first point 
+
 				if (unset.find(pointAM.nameOfAmmunition) == unset.end()) {       // see if the first point exists 
 					unset.insert(pointAM.nameOfAmmunition);						 // it does not exist is added to use it only once
 

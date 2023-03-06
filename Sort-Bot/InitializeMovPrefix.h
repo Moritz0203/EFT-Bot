@@ -44,15 +44,14 @@ namespace InitializeMovPrefix {
 		movPrefixGroup.emplace_back(VectorText::Rus762x39, prefix);
 		movPrefixGroup.emplace_back(VectorText::Nato762x51, prefix);
 
-		test.identyfierAsHEX = 0x1;
+		test.identyfierAsHEX = 0x01;
 		test.movPrefixGroup = movPrefixGroup;
 
 		groupedMovPrefixGroup.push_back(test);
 
 		for (TagMovPrefixGroup v1 : groupedMovPrefixGroup) {
-			cout << "Identyfier ->   0x" << v1.identyfierAsHEX << "   = Ammunition" << endl;
+			cout << "Identyfier ->   0x" << hex << v1.identyfierAsHEX << "   = Ammunition" << endl;
 			for (MovPrefixGroup v2 : v1.movPrefixGroup) {
-				
 
 				for (string str : v2.nameOfItems) {
 					int length = 15 - str.length();
@@ -68,8 +67,6 @@ namespace InitializeMovPrefix {
 					}
 					cout << endl;
 				}
-
-				
 			}
 		}
 	}

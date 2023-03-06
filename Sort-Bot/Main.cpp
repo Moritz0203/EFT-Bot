@@ -36,8 +36,6 @@ int main() {
 	cout << "by ECFA" << endl;
 	cout << endl;
 		
-
-
 	
 	InitializeMovPrefix::Initialize();
 

@@ -16,11 +16,12 @@ namespace ItemMoving{
 
 		unordered_set<string> unset;
 		int identyfierAsHEX = 0x01;
+		std::unique_ptr<MovPrefixGroup> ptrBuffer;
+
 		for (int i1 = 0; i1 < pointAmmunition_C.size(); i1++) {                  // loop through the first vector 
 			for (PointAmmunition pointAM : pointAmmunition_C[i1]) {              // take out the first point 
 				if (unset.find(pointAM.nameOfAmmunition) == unset.end()) {       // see if the first point exists 
-					unset.insert(pointAM.nameOfAmmunition); 
-					std::unique_ptr<MovPrefixGroup> ptrBuffer;         // it does not exist is added to use it only once 
+					unset.insert(pointAM.nameOfAmmunition);						 // it does not exist is added to use it only once
 
 					for (int in1 = 0; in1 < pointAmmunition_C.size(); in1++) {   // loop through the vector to find each of the points with the same name  
 
@@ -30,22 +31,31 @@ namespace ItemMoving{
 
 								cout << inPointAM.nameOfAmmunition << " <-inPointAm pointAM-> " << pointAM.nameOfAmmunition <<endl;
 
-								for (TagMovPrefixGroup TagMov : groupedMovPrefixGroup) {
+								if (ptrBuffer != nullptr) {
+									for (Prefix Prefix : ptrBuffer->prefix) {
 
-									if (TagMov.identyfierAsHEX == identyfierAsHEX) {
+									}
+								}
+								else {
+									for (TagMovPrefixGroup TagMov : groupedMovPrefixGroup) {
 
-										for (MovPrefixGroup movPrefix : TagMov.movPrefixGroup) {
+										if (TagMov.identyfierAsHEX == identyfierAsHEX) {
 
-											for (string str : movPrefix.nameOfItems) {
-												
-												if (str == inPointAM.nameOfAmmunition) {
+											for (MovPrefixGroup movPrefix : TagMov.movPrefixGroup) {
 
+												for (string str : movPrefix.nameOfItems) {
 
-													ptrBuffer = std::make_unique<MovPrefixGroup>(movPrefix);
+													if (str == inPointAM.nameOfAmmunition) {
+
+														for (Prefix Prefix : movPrefix.prefix) {
+
+														}
+
+														ptrBuffer = std::make_unique<MovPrefixGroup>(movPrefix);
+													}
 												}
 											}
 										}
-										
 									}
 								}
 							}

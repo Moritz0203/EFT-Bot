@@ -10,7 +10,7 @@ using namespace cv;
 
 namespace CaseProcessor
 {
-	void OpenCaseAndTakeScreen(int i, int i1);
+	void OpenCaseAndTakeScreen(std::unique_ptr<PointCaseInStash> ptr_PCIS);
 	void MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCasePoints);
 	void MoveTopBarTHICCcase();
 
@@ -23,10 +23,14 @@ namespace CaseProcessor
 		Matching::CaseMatching(ReturntMatScreen);
 		cleanUpVectorCase();
 
+		std::unique_ptr<PointCaseInStash> ptr_PCIS;
+
+
 		for (int i = 0; i < pointCaseInStash_C.size(); i++) {
-			for (int i1 = 0; i1 < pointCaseInStash_C[i].size(); i1++) {
-				if (pointCaseInStash_C[i][i1].nameOfCase == "THICCcase" || pointCaseInStash_C[i][i1].nameOfCase == "ItemsCase") {
-					OpenCaseAndTakeScreen(i, i1);
+			for (PointCaseInStash INpointCase : pointCaseInStash_C[i]) {
+				if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
+					ptr_PCIS = std::make_unique<PointCaseInStash>(INpointCase);
+					OpenCaseAndTakeScreen(std::move(ptr_PCIS)); // pass a unique_ptr to a funtion with out copy 
 				}
 			}
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
@@ -36,15 +40,15 @@ namespace CaseProcessor
 	}
 
 
-	void OpenCaseAndTakeScreen(int i, int i1) {		
+	void OpenCaseAndTakeScreen(std::unique_ptr<PointCaseInStash> ptr_PCIS) {
 		Mat MatScreen;
 		POINT point{};
 		
-		point.y = (pointCaseInStash_C[i][i1].heightTempl / 2) + pointCaseInStash_C[i][i1].point.y;
-		point.x = (pointCaseInStash_C[i][i1].widthTempl / 2) + pointCaseInStash_C[i][i1].point.x;
+		point.y = (ptr_PCIS->heightTempl / 2) + ptr_PCIS->point.y;
+		point.x = (ptr_PCIS->widthTempl / 2) + ptr_PCIS->point.x;
 		Mouse::MoverPOINTandPressTwoTimes(point);
 
-		if (pointCaseInStash_C[i][i1].nameOfCase == "THICCcase") {
+		if (ptr_PCIS->nameOfCase == "THICCcase") {
 			MoveTopBarTHICCcase();
 		}
 
@@ -55,7 +59,7 @@ namespace CaseProcessor
 		int keyforInput = 0x1B;// virtual-key code for the "ESC button" key
 		Keyboard::KeyboardInput(keyforInput);
 		
-		MatchingCaseInCase(MatScreen, pointCaseInStash_C[i][i1].page, pointCaseInStash_C[i][i1].point);
+		MatchingCaseInCase(MatScreen, ptr_PCIS->page, ptr_PCIS->point);
 	}
 
 

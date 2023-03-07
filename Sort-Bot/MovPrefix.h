@@ -4,13 +4,16 @@
 #include <conio.h>
 #include <windows.h>
 
+
 class Prefix {
 public:
 	std::string tagOfCase{};
 	bool isFull{};
+	std::shared_ptr<PointCaseInStash> ptr_PCIS{};
+	std::shared_ptr<PointCaseInCase> ptr_PCIC{};
 
 	Prefix();
-	Prefix(const std::string tagOfCase, bool isFull);
+	Prefix(const std::string tagOfCase, std::shared_ptr<PointCaseInStash> ptr_PCIS, std::shared_ptr<PointCaseInCase> ptr_PCIC, bool isFull);
 };
 
 class MovPrefixItem {

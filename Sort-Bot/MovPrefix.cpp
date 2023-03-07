@@ -1,13 +1,16 @@
 #include "MovPrefix.h"
+#include "PointCase.h"
 
 Prefix::Prefix()
 {
 }
 
-Prefix::Prefix(const std::string tagOfCase, bool isFull)
+Prefix::Prefix(const std::string tagOfCase, std::shared_ptr<PointCaseInStash> ptr_PCIS, std::shared_ptr<PointCaseInCase> ptr_PCIC, bool isFull)
 {
 	this->tagOfCase = tagOfCase;
 	this->isFull = isFull;
+	this->ptr_PCIS = ptr_PCIS;
+	this->ptr_PCIC = ptr_PCIC;
 }
 
 MovPrefixItem::MovPrefixItem()

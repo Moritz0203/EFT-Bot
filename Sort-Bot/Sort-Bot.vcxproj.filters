@@ -73,6 +73,9 @@
     <ClInclude Include="ItemVectorHEXtoText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PrefixProcessing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

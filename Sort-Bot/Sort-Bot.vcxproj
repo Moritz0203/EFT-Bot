@@ -150,6 +150,7 @@
     <ClInclude Include="MovPrefix.h" />
     <ClInclude Include="PointCase.h" />
     <ClInclude Include="PointItems.h" />
+    <ClInclude Include="PrefixProcessing.h" />
     <ClInclude Include="StartUp.h" />
     <ClInclude Include="TemplateMatching.h" />
   </ItemGroup>

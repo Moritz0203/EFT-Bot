@@ -132,57 +132,41 @@ namespace CaseProcessor
 
 void cleanUpVectorCase() {
 	vector<PointCaseInStash> temp;
-	if (!pointCaseInStash_NC.size() >= 1)
-		return;
 
 	temp = pointCaseInStash_NC[0];
 	pointCaseInStash_C.emplace_back(temp);
 	temp.clear();
 
-	pointCaseInStash_NC.emplace_back(temp);
-
 	int iTemp = 1;
-	for (int i = 1; i < pointCaseInStash_NC.size(); i++) {// Loop the vector
+	for (int i = 1; i < pointCaseInStash_NC.size(); i++) {
 		iTemp++;
 
 		if (iTemp == pointCaseInStash_NC.size())
 			break;
 
-		for (int i2 = 0; i2 < pointCaseInStash_NC[i].size(); i2++) {//Loop through the vector of vector 
+		for (PointCaseInStash pointCase : pointCaseInStash_NC[i]) {
+			for (PointCaseInStash inPointCase : pointCaseInStash_NC[iTemp]) {
+				PointCaseInStash tempPointCase = inPointCase;
+				tempPointCase.point.y = tempPointCase.point.y + 343;
 
-			for (int i3 = 0; i3 < pointCaseInStash_NC[iTemp].size(); i3++) {//Loop through the next vector of vector  
-				bool FoundDuplicate = false;
+				int x_minus_1 = tempPointCase.point.x - 1;
+				int x_plus_1 = tempPointCase.point.x + 1;
 
-				POINT pointLookForLast = pointCaseInStash_NC[i][i2].point;
-				pointLookForLast.y = 340 + pointLookForLast.y;
-				POINT pointTempGround = pointCaseInStash_NC[iTemp][i3].point;
-				pointTempGround.y = 340 + pointTempGround.y;
-
-				if (pointLookForLast.y == pointCaseInStash_NC[iTemp][i3].point.y && pointLookForLast.x == pointCaseInStash_NC[iTemp][i3].point.x)
-					break;
-
-				for (int i4 = 0; i4 < 6; i4++) {//To run pointTemp from 340 to 345 and compare with the current point in the next vector of vector 
-					POINT pointTemp = pointTempGround;
-					pointTemp.y = pointTemp.y + i4;
-
-					if (pointCaseInStash_NC[i][i2].point.y == pointTemp.y && pointCaseInStash_NC[i][i2].point.x == pointTemp.x) {//Check if pointTemp is equal to the current point in the next vector of vector
-						FoundDuplicate = true;
-						break;
+				if (tempPointCase.point.y == pointCase.point.y) {
+					if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
+						temp.emplace_back(pointCase);
 					}
-				}
-
-				if (FoundDuplicate == true) {//If a duplicate was found the point that was compared is pushed to temp
-					temp.emplace_back(pointCaseInStash_NC[i][i2]);
 				}
 			}
 		}
-		if (!temp.empty()) {
-			pointCaseInStash_C.emplace_back(temp);
-			temp.clear();
+		if (iTemp == 10) {
+			for (PointCaseInStash pointCase : pointCaseInStash_NC[iTemp]) {
+				if (pointCase.point.y >= 618) {
+					temp.emplace_back(pointCase);
+				}
+			}
 		}
-		else {
-			pointCaseInStash_C.emplace_back(temp);
-			temp.clear();
-		}
+		pointCaseInStash_C.emplace_back(temp);
+		temp.clear();
 	}
 }

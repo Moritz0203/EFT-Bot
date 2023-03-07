@@ -1,5 +1,4 @@
 #include "MovPrefix.h"
-#include "PointCase.h"
 
 Prefix::Prefix()
 {

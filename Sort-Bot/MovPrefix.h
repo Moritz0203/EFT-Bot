@@ -3,6 +3,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+#include "PointCase.h"
 
 
 class Prefix {

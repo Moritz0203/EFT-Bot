@@ -34,6 +34,7 @@ namespace InitializeMovPrefix {
 		InPrefix.tagOfCase = tagCase;
 		InPrefix.isFull = false;
 
+
 		const string tagCase1 = "amo2";
 		InPrefix1.tagOfCase = tagCase1;
 		InPrefix1.isFull = true;

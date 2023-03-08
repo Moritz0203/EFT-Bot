@@ -77,7 +77,7 @@ namespace ItemMoving{
 		}
 	}
 
-	//template <typename T>
+	//template <typename T> // try class with T 
 	//void movNoType(const vector<vector<T>>* ptr, std::shared_ptr<T> &ptrClass) {
 
 	//	std::unique_ptr<MovPrefixGroup> ptrBuffer;

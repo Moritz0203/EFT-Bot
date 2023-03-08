@@ -10,10 +10,10 @@ public:
 	int stackSize = {};
 	POINT point = {};
 	int heightTempl = {}, widthTempl = {}, page = {};
-	std::string nameOfAmmunition = {};
+	std::string nameOf = {};
 
 	PointAmmunition();
-	PointAmmunition(POINT point, std::string nameOfAmmunition, int stackSize, int heightTempl, int widthTempl, int page);
+	PointAmmunition(POINT point, std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page);
 };
 
 class PointMagazine

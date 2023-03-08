@@ -196,7 +196,7 @@ namespace Matching {
 		vector<POINT> ReturnDataCase;
 		vector<POINT> ReturnDataCase_Clean;
 		vector<PointCaseInStash> pointCasetempStashTemp;
-		int identyfierAsHEX = 0x1;
+		int identyfierAsHEX_ST = 0x00;
 
 		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
@@ -212,9 +212,9 @@ namespace Matching {
 							switch (i)
 							{
 							case 0:
-								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, identyfierAsHEX);
+								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, 0x01);
 							default:
-								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1);
+								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, identyfierAsHEX_ST);
 							}
 							
 						}

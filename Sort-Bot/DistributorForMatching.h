@@ -196,6 +196,8 @@ namespace Matching {
 		vector<POINT> ReturnDataCase;
 		vector<POINT> ReturnDataCase_Clean;
 		vector<PointCaseInStash> pointCasetempStashTemp;
+		int identyfierAsHEX = 0x1;
+
 		for (int i1 = 0; i1 < sizeMat; i1++) {
 			for (int i = 0; i < sizeString; i++) {
 				TemplateMatching::templateMatchingItems(Cases[i], CasesThreshold[i], false, false, NameOfItemCases[i], ReturnDataCase, arrayMatScreen[i1]);
@@ -207,7 +209,14 @@ namespace Matching {
 						Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, 13, templ.rows);
 						const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
 						if (checkSecondLastChar(tagCase)) {
-							pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1);
+							switch (i)
+							{
+							case 0:
+								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, identyfierAsHEX);
+							default:
+								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1);
+							}
+							
 						}
 					}
 					ReturnDataCase.clear();

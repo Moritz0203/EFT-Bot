@@ -34,7 +34,8 @@ namespace ItemMoving{
 								cout << inPointAM.nameOfAmmunition << " <-inPointAm pointAM-> " << pointAM.nameOfAmmunition <<endl;
 
 								if (ptrBuffer != nullptr) {
-									for (Prefix Prefix : ptrBuffer->prefix) {
+
+									for (Prefix prefix : ptrBuffer->prefix) {
 
 									}
 								}
@@ -49,8 +50,8 @@ namespace ItemMoving{
 
 													if (str == inPointAM.nameOfAmmunition) {
 
-														for (Prefix Prefix : movPrefix.prefix) {
-
+														for (Prefix prefix : movPrefix.prefix) {
+															
 														}
 
 														ptrBuffer = std::make_unique<MovPrefixGroup>(movPrefix);

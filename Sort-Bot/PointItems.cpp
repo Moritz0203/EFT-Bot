@@ -4,7 +4,7 @@ PointAmmunition::PointAmmunition()
 {
 }
 
-PointAmmunition::PointAmmunition(POINT point, std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page)
+PointAmmunition::PointAmmunition(POINT point,const std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page)
 {
 	this->point = point;
 	this->nameOf = nameOf;

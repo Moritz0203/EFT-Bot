@@ -13,7 +13,7 @@ public:
 	std::string nameOf = {};
 
 	PointAmmunition();
-	PointAmmunition(POINT point, std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page);
+	PointAmmunition(POINT point,const std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page);
 };
 
 class PointMagazine

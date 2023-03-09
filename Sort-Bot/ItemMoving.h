@@ -8,9 +8,9 @@
 #include "MovPrefixGlobalVector.h"
 
 
-namespace ItemMoving{
-	/*template <typename T>
-	void movNoType(const vector<vector<T>>* ptr, std::shared_ptr<T> &ptrClass);*/
+namespace ItemMoving {
+	template <typename T>
+	void movNoType(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& pointAM);
 
 	void AmmunitionMoving() {
 		ItemsProcessing::AmmunitionProcess();
@@ -28,8 +28,11 @@ namespace ItemMoving{
 
 				if (unset.find(pointAM.nameOf) == unset.end()) {       // see if the first point exists 
 					unset.insert(pointAM.nameOf);						 // it does not exist is added to use it only once
+
 					
-					/*movNoType(&pointAmmunition_C, ptrClass);*/
+					movNoType(&pointAmmunition_C, identyfierAsHEX, pointAM);
+
+
 
 					for (int in1 = 0; in1 < pointAmmunition_C.size(); in1++) {   // loop through the vector to find each of the points with the same name  
 
@@ -77,50 +80,52 @@ namespace ItemMoving{
 		}
 	}
 
-	//template <typename T> // try class with T 
-	//void movNoType(const vector<vector<T>>* ptr, std::shared_ptr<T> &ptrClass) {
+	template <typename T> 
+	void movNoType(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& point) {
 
-	//	std::unique_ptr<MovPrefixGroup> ptrBuffer;
+		std::unique_ptr<MovPrefixGroup> ptrBuffer;
 
-	//	for (int in1 = 0; in1 < ptr->size(); in1++) {   // loop through the vector to find each of the points with the same name  
+		for (int in1 = 0; in1 < ptr->size(); in1++) {  
 
-	//		for (ptrClass inPoint : ptr->[in1]) {
+			for (T inPoint : (*ptr)[in1]) {
 
-	//			if (inPoint.nameOf == inPoint.nameOf) {
+				if (inPoint.nameOf == point.nameOf) {
 
-	//				cout << inPoint.nameOf << " <-inPointAm pointAM-> " << inPoint.nameOf << endl;
+					cout << inPoint.nameOf << " <-inPointAm pointAM-> " << point.nameOf << endl;
 
-	//				if (ptrBuffer != nullptr) {
+					if (ptrBuffer != nullptr) {
 
-	//					for (Prefix prefix : ptrBuffer->prefix) {
+						for (Prefix prefix : ptrBuffer->prefix) {
 
-	//					}
-	//				}
-	//				else {
-	//					for (TagMovPrefixGroup TagMov : groupedMovPrefixGroup) {
+						}
+					}
+					else {
+						for (TagMovPrefixGroup TagMov : groupedMovPrefixGroup) {
 
-	//						if (TagMov.identyfierAsHEX == identyfierAsHEX) {
+							if (TagMov.identyfierAsHEX == identyfierAsHEX) {
 
-	//							for (MovPrefixGroup movPrefix : TagMov.movPrefixGroup) {
+								for (MovPrefixGroup movPrefix : TagMov.movPrefixGroup) {
 
-	//								for (string str : movPrefix.nameOfItems) {
+									for (string str : movPrefix.nameOfItems) {
 
-	//									if (str == inPoint.nameOf) {
+										if (str == inPoint.nameOf) {
 
-	//										for (Prefix prefix : movPrefix.prefix) {
+											for (Prefix prefix : movPrefix.prefix) {
 
-	//										}
+											}
 
-	//										ptrBuffer = std::make_unique<MovPrefixGroup>(movPrefix);
-	//									}
-	//								}
-	//							}
-	//						}
-	//					}
-	//				}
-	//			}
-	//		}
-	//	}
-	//	ptrBuffer.reset();
-	//}
+											ptrBuffer = std::make_unique<MovPrefixGroup>(movPrefix);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		ptrBuffer.reset();
+	}
+
+
 }

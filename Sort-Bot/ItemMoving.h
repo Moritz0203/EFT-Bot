@@ -6,6 +6,8 @@
 #include <unordered_set>
 #include "ItemsProcessing.h"
 #include "MovPrefixGlobalVector.h"
+#include "InputMK.h"
+
 
 
 namespace ItemMoving {
@@ -49,6 +51,7 @@ namespace ItemMoving {
 
 						for (Prefix prefix : ptrBuffer->prefix) {
 
+
 						}
 					}
 					else {
@@ -58,12 +61,17 @@ namespace ItemMoving {
 
 								for (MovPrefixGroup movPrefix : TagMov.movPrefixGroup) {
 
-									for (string str : movPrefix.nameOfItems) {
+									for (string name : movPrefix.nameOfItems) {
 
-										if (str == inPoint.nameOf) {
+										if (name == inPoint.nameOf) {
 
 											for (Prefix prefix : movPrefix.prefix) {
 
+												if (prefix.isFull == false && prefix.ptr_PCIC != nullptr && prefix.ptr_PCIS != nullptr) {
+
+													if (prefix.ptr_PCIS != nullptr) { /*FunkionXY()*/ };
+													if else (prefix.ptr_PCIC != nullptr) { /*FunkionYX*/ };
+												}
 											}
 
 											ptrBuffer = std::make_unique<MovPrefixGroup>(movPrefix);

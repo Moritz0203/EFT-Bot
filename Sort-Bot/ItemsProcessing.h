@@ -13,8 +13,9 @@ namespace ItemsProcessing {
 
 	void AmmunitionProcess() { // NOTE : TakeScreenshots muss auch global gemacht werden um performens zu steigern 
 		array<Mat, 11> ReturntMatScreen;
-
-		StartUp::CheckScrollbarPositions();
+		checksPublic checks;
+		
+		checks.CheckScrollbarPositions();
 		Sleep(10);
 		ReturntMatScreen = StartUp::TakeScreenshots();
 
@@ -38,8 +39,9 @@ namespace ItemsProcessing {
 
 	void BarterItemsProcess() {
 		array<Mat, 11> ReturntMatScreen;
+		checksPublic checks;
 
-		StartUp::CheckScrollbarPositions();
+		checks.CheckScrollbarPositions();
 		ReturntMatScreen = StartUp::TakeScreenshots();
 
 		Matching::BarterMatching(ReturntMatScreen);

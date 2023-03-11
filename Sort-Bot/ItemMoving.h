@@ -6,7 +6,6 @@
 #include <unordered_set>
 #include "ItemsProcessing.h"
 #include "MovPrefixGlobalVector.h"
-#include "InputMK.h"
 
 
 
@@ -25,7 +24,7 @@ namespace ItemMoving {
 
 			for (PointAmmunition pointAM : pointAmmunition_C[i1]) {              // take out the first point 
 
-				if (unset.find(pointAM.nameOf) == unset.end()) {				// see if the first point exists 
+				if (unset.find(pointAM.nameOf) == unset.end()) {				 // see if the first point exists 
 					unset.insert(pointAM.nameOf);								 // it does not exist is added to use it only once
 
 					movItemsTypeles(&pointAmmunition_C, identyfierAsHEX, pointAM);
@@ -36,7 +35,7 @@ namespace ItemMoving {
 
 	template <typename T> 
 	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& point) {
-
+		checksPublic obj;
 		std::unique_ptr<MovPrefixGroup> ptrBuffer;
 
 		for (int in1 = 0; in1 < ptr->size(); in1++) {  
@@ -50,8 +49,8 @@ namespace ItemMoving {
 					if (ptrBuffer != nullptr) {
 
 						for (Prefix prefix : ptrBuffer->prefix) {
-
-
+							
+							
 						}
 					}
 					else {
@@ -69,8 +68,8 @@ namespace ItemMoving {
 
 												if (prefix.isFull == false && prefix.ptr_PCIC != nullptr && prefix.ptr_PCIS != nullptr) {
 
-													if (prefix.ptr_PCIS != nullptr) { /*FunkionXY()*/ };
-													if else (prefix.ptr_PCIC != nullptr) { /*FunkionYX*/ };
+													if (prefix.ptr_PCIS != nullptr) { /*FunkionXY()*/ }
+													else if (prefix.ptr_PCIC != nullptr) { /*FunkionYX()*/ }
 												}
 											}
 
@@ -84,8 +83,8 @@ namespace ItemMoving {
 				}
 			}
 		}
-
 		ptrBuffer.reset();
+		delete ptr;
 	}
 
 

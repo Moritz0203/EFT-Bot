@@ -35,7 +35,7 @@ namespace ItemMoving {
 
 	template <typename T> 
 	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& point) {
-		checksPublic obj;
+		checksPublic chechs;
 		std::unique_ptr<MovPrefixGroup> ptrBuffer;
 
 		for (int in1 = 0; in1 < ptr->size(); in1++) {  

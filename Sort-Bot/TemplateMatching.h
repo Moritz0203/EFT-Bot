@@ -22,7 +22,6 @@ public:
 		Mat result;
 		Mat img;
 
-
 		img = MatScreen;
 		Mat templ = cv::imread(templatename);
 		if (img.empty() || templ.empty())

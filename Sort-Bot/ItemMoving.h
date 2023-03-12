@@ -11,7 +11,7 @@
 
 namespace ItemMoving {
 	template <typename T>
-	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& pointAM);
+	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& pointAM, shared_ptr<unordered_set<string>> unset_ptr);
 
 	void AmmunitionMoving() {
 		ItemsProcessing::AmmunitionProcess();
@@ -27,14 +27,15 @@ namespace ItemMoving {
 				if (unset.find(pointAM.nameOf) == unset.end()) {				 // see if the first point exists 
 					unset.insert(pointAM.nameOf);								 // it does not exist is added to use it only once
 
-					movItemsTypeles(&pointAmmunition_C, identyfierAsHEX, pointAM);
+					shared_ptr<unordered_set<string>> unset_ptr = make_shared<unordered_set<string>>(unset);
+					movItemsTypeles(&pointAmmunition_C, identyfierAsHEX, pointAM, unset_ptr);
 				}
 			}
 		}
 	}
 
 	template <typename T> 
-	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& point) {
+	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& point, shared_ptr<unordered_set<string>> unset_ptr) {
 		std::unique_ptr<MovPrefixGroup> ptrBuffer;
 
 		for (int in1 = 0; in1 < ptr->size(); in1++) {  
@@ -68,7 +69,7 @@ namespace ItemMoving {
 												if (prefix.isFull == false && prefix.ptr_PCIC != nullptr && prefix.ptr_PCIS != nullptr) {
 
 													if (prefix.ptr_PCIS != nullptr) { /*FunkionXY()*/ }
-													else if (prefix.ptr_PCIC != nullptr) { openMovINCase(prefix) }
+													else if (prefix.ptr_PCIC != nullptr) { openMovINCase(prefix, unset_ptr, movPrefix) }
 												}
 											}
 
@@ -86,11 +87,19 @@ namespace ItemMoving {
 		delete ptr;
 	}
 
-	void openMovINCase(Prefix prefix) {
+	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix) {
 		checksPublic chechs;
 
 		chechs.CheckScrollbarPositions();
 
-		prefix.ptr_PCIC->pageOfParentCase;
+		for (int i = 0; i < prefix.ptr_PCIC->pageOfParentCase; i++) {
+			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+			Keyboard::KeyboardInput(keyforInput);
+			Sleep(500);
+		}
+
+		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
+
+
 	}
 }

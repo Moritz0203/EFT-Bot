@@ -12,6 +12,8 @@
 namespace ItemMoving {
 	template <typename T>
 	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& pointAM, shared_ptr<unordered_set<string>> unset_ptr);
+	template <typename T>
+	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const vector<vector<T>>* vector_ptr);
 
 	void AmmunitionMoving() {
 		ItemsProcessing::AmmunitionProcess();
@@ -35,12 +37,12 @@ namespace ItemMoving {
 	}
 
 	template <typename T> 
-	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& point, shared_ptr<unordered_set<string>> unset_ptr) {
+	void movItemsTypeles(const vector<vector<T>>* vector_ptr, int identyfierAsHEX, const T& point, shared_ptr<unordered_set<string>> unset_ptr) {
 		std::unique_ptr<MovPrefixGroup> ptrBuffer;
 
-		for (int in1 = 0; in1 < ptr->size(); in1++) {  
+		for (int in1 = 0; in1 < vector_ptr->size(); in1++) {
 
-			for (T inPoint : (*ptr)[in1]) {
+			for (T inPoint : (*vector_ptr)[in1]) {
 
 				if (inPoint.nameOf == point.nameOf) {
 
@@ -69,7 +71,7 @@ namespace ItemMoving {
 												if (prefix.isFull == false && prefix.ptr_PCIC != nullptr && prefix.ptr_PCIS != nullptr) {
 
 													if (prefix.ptr_PCIS != nullptr) { /*FunkionXY()*/ }
-													else if (prefix.ptr_PCIC != nullptr) { openMovINCase(prefix, unset_ptr, movPrefix) }
+													else if (prefix.ptr_PCIC != nullptr) { openMovINCase(prefix, unset_ptr, movPrefix, vector_ptr); }
 												}
 											}
 
@@ -84,10 +86,11 @@ namespace ItemMoving {
 			}
 		}
 		ptrBuffer.reset();
-		delete ptr;
+		delete vector_ptr;
 	}
 
-	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix) {
+	template <typename T>
+	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const vector<vector<T>>* vector_ptr) {
 		checksPublic chechs;
 
 		chechs.CheckScrollbarPositions();
@@ -100,6 +103,14 @@ namespace ItemMoving {
 
 		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
 
+
+		for (int in1 = 0; in1 < vector_ptr->size(); in1++) {
+
+			for (T inPoint : (*vector_ptr)[in1]) {
+
+				
+			}
+		}
 
 	}
 }

@@ -104,13 +104,23 @@ namespace ItemMoving {
 		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
 
 
-		for (int in1 = 0; in1 < vector_ptr->size(); in1++) {
+		for (string nameOfItemPrefix : movPrefix.nameOfItems) {
 
-			for (T inPoint : (*vector_ptr)[in1]) {
+			for (int in1 = 0; in1 < vector_ptr->size(); in1++) {
 
-				
+				for (T inPoint : (*vector_ptr)[in1]) {
+
+					if (nameOfItemPrefix == inPoint.nameOf) {
+						Mouse::MouseMoveAtoB(inPoint.point, prefix.ptr_PCIC->pointInCase);
+
+						unset_ptr->insert(inPoint.nameOf);
+
+					}
+
+				}
 			}
 		}
+		
 
 	}
 }

@@ -35,7 +35,6 @@ namespace ItemMoving {
 
 	template <typename T> 
 	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& point) {
-		checksPublic chechs;
 		std::unique_ptr<MovPrefixGroup> ptrBuffer;
 
 		for (int in1 = 0; in1 < ptr->size(); in1++) {  
@@ -69,7 +68,7 @@ namespace ItemMoving {
 												if (prefix.isFull == false && prefix.ptr_PCIC != nullptr && prefix.ptr_PCIS != nullptr) {
 
 													if (prefix.ptr_PCIS != nullptr) { /*FunkionXY()*/ }
-													else if (prefix.ptr_PCIC != nullptr) { /*FunkionYX()*/ }
+													else if (prefix.ptr_PCIC != nullptr) { openMovINCase(prefix) }
 												}
 											}
 
@@ -87,5 +86,11 @@ namespace ItemMoving {
 		delete ptr;
 	}
 
+	void openMovINCase(Prefix prefix) {
+		checksPublic chechs;
 
+		chechs.CheckScrollbarPositions();
+
+		prefix.ptr_PCIC->pageOfParentCase;
+	}
 }

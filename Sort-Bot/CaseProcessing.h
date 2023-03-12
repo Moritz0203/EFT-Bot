@@ -10,27 +10,28 @@ using namespace cv;
 
 namespace CaseProcessor
 {
-	void OpenCaseAndTakeScreen(std::unique_ptr<PointCaseInStash> ptr_PCIS);
+	void OpenCaseAndTakeScreen(std::shared_ptr<PointCaseInStash> ptr_PCIS);
 	void MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCasePoints);
 	void MoveTopBarTHICCcase();
 
 	void caseProcess() {
 		array<Mat, 11> ReturntMatScreen;
+		checksPublic checks;
 
-		StartUp::CheckScrollbarPositions();
+		checks.CheckScrollbarPositions();
 		ReturntMatScreen = StartUp::TakeScreenshots();
 
 		Matching::CaseMatching(ReturntMatScreen);
 		cleanUpVectorCase();
 
-		std::unique_ptr<PointCaseInStash> ptr_PCIS;
+		std::shared_ptr<PointCaseInStash> ptr_PCIS;
 
 
 		for (int i = 0; i < pointCaseInStash_C.size(); i++) {
 			for (PointCaseInStash INpointCase : pointCaseInStash_C[i]) {
 				if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
-					ptr_PCIS = std::make_unique<PointCaseInStash>(INpointCase);
-					OpenCaseAndTakeScreen(std::move(ptr_PCIS)); // pass a unique_ptr to a funtion with out copy 
+					ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+					OpenCaseAndTakeScreen(ptr_PCIS); // pass a unique_ptr to a funtion with out copy 
 				}
 			}
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
@@ -40,7 +41,7 @@ namespace CaseProcessor
 	}
 
 
-	void OpenCaseAndTakeScreen(std::unique_ptr<PointCaseInStash> ptr_PCIS) {
+	void OpenCaseAndTakeScreen(std::shared_ptr<PointCaseInStash> ptr_PCIS) {
 		Mat MatScreen;
 		POINT point{};
 		

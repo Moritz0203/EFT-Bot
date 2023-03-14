@@ -37,18 +37,18 @@ int main() {
 	cout << endl;
 		
 	
-	InitializeMovPrefix::Initialize();
+	/*InitializeMovPrefix::Initialize();*/
 
 
 
 	/*HWND hWND = FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(100);
-	Mat MatScreen = getMat(hWND);
-	*/
+	Mat MatScreen = getMat(hWND);*/
+	
 
-	string Start;
-	cin >> Start;
+	string Start = "test";
+	
 
 	/*if (Start == "start") {
 		StartUp::Entrance();
@@ -57,24 +57,48 @@ int main() {
 
 
 
-		ItemMoving::AmmunitionMoving();
+		/*ItemMoving::AmmunitionMoving();*/
 
 
 
 
-		//Mat templ;
-		//Mat templ1;
-		//
+		Mat templ;
+		Mat templ1;
+
+		Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_1.png");
+		
 		/*vector<POINT> ReturnPoints;*/
-		//vector<POINT> ReturnPoints1;
-		//templ = imread("itemImages/AmmunitionImages/7.62RUS/PS.png");
-		//templ1 = imread("CaseImages/AmmoCase.png");
-		///*const char* image_window = "Source Image";
-		//namedWindow(image_window, WINDOW_AUTOSIZE);*/
-		///*const char* image_window2 = "Source Image2222222222";
-		//namedWindow(image_window2, WINDOW_AUTOSIZE);*/
+		vector<POINT> ReturnPoints;
+		templ = imread("CaseImages/JunkCase.png");
+		/*templ1 = imread("CaseImages/AmmoCase.png");*/
+		const char* image_window = "Source Image";
+		namedWindow(image_window, WINDOW_AUTOSIZE);
+		/*const char* image_window2 = "Source Image2222222222";
+		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		/*TemplateMatching::templateMatchingItems("itemImages/AmmunitionImages/7.62RUS/PS.png", 0.78, false, true, "BP", ReturnPoints, MatScreen);*/
+		TemplateMatching::templateMatchingItems("CaseImages/JunkCase.png", 0.86, false, true, "BP", ReturnPoints, MatScreen);
+
+
+		cv::Rect rec; 
+
+		rec.height = templ.cols;
+		rec.width = templ.rows;
+		rec.x = ReturnPoints[0].x;
+		rec.y = ReturnPoints[0].y;
+	
+		
+
+		ColorMatching::colorMatching(rec, MatScreen);
+
+
+
+
+
+
+
+
+
+
 		//
 		//TemplateMatching::templateMatchingItems("CaseImages/AmmoCase.png", 0.90, false, false, "amo", ReturnPoints1, MatScreen);
 
@@ -194,7 +218,7 @@ int main() {
 		
 		
 		
-		/*cv::cvtColor(Roi, Roi, cv::COLOR_BGR2HSV);*/
+		//cv::cvtColor(Roi, Roi, cv::COLOR_BGR2HSV);
 
 		//if (!ReturnPoints[0].y <= 500) {
 		//	/*Roi2 = Roi + cv::Scalar(-17, -17, -17);*/

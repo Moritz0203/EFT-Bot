@@ -69,14 +69,14 @@ int main() {
 		
 		/*vector<POINT> ReturnPoints;*/
 		vector<POINT> ReturnPoints;
-		templ = imread("CaseImages/JunkCase.png");
+		templ = imread("CaseImages/HolodilnickCase.png");
 		/*templ1 = imread("CaseImages/AmmoCase.png");*/
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("CaseImages/JunkCase.png", 0.86, false, true, "BP", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("CaseImages/HolodilnickCase.png", 0.85, false, true, "BP", ReturnPoints, MatScreen);
 
 
 		cv::Rect rec; 

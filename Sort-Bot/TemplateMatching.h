@@ -198,11 +198,11 @@ class ColorMatching {
 public:
 	static Color colorMatching(Rect Rec, Mat MatScreen) {
 		array<cv::Scalar, 2> ScalarLow{
-			cv::Scalar(0, 150, 60), /*greenLow*/
+			cv::Scalar(0, 100, 60), /*greenLow*/
 		};
 
 		array<cv::Scalar, 2> ScalarHigh{
-			cv::Scalar(100, 200, 80), /*greenHigh     1*/
+			cv::Scalar(120, 200, 200), /*greenHigh     1*/
 		};
 
 		int count = 1;

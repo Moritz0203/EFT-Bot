@@ -11,10 +11,11 @@
 
 namespace ItemMoving {
 	template <typename T>
-	void movItemsTypeles(const vector<vector<T>>* ptr, int identyfierAsHEX, const T& pointAM, shared_ptr<unordered_set<string>> unset_ptr);
+	void movItemsTypeles(shared_ptr<vector<vector<T>>> shared_vector_ptr, int identyfierAsHEX, const T& pointAM, shared_ptr<unordered_set<string>> unset_ptr);
 	template <typename T>
-	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const vector<vector<T>>* vector_ptr);
+	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, shared_ptr<vector<vector<T>>> shared_vector_ptr);
 
+	template <typename T>
 	void AmmunitionMoving() {
 		ItemsProcessing::AmmunitionProcess();
 		cout << "Moving begining" << endl;
@@ -30,19 +31,21 @@ namespace ItemMoving {
 					unset.insert(pointAM.nameOf);								 // it does not exist is added to use it only once
 
 					shared_ptr<unordered_set<string>> unset_ptr = make_shared<unordered_set<string>>(unset);
-					movItemsTypeles(&pointAmmunition_C, identyfierAsHEX, pointAM, unset_ptr);
+					shared_ptr<vector<vector<T>>> shared_vector_ptr = make_shared<vector<vector<T>>>(pointAmmunition_C);
+					movItemsTypeles(shared_vector_ptr, identyfierAsHEX, pointAM, unset_ptr);
 				}
 			}
 		}
 	}
 
 	template <typename T> 
-	void movItemsTypeles(const vector<vector<T>>* vector_ptr, int identyfierAsHEX, const T& point, shared_ptr<unordered_set<string>> unset_ptr) {
+	void movItemsTypeles(shared_ptr<vector<vector<T>>> shared_vector_ptr, int identyfierAsHEX, const T& point, shared_ptr<unordered_set<string>> unset_ptr) {
 		std::unique_ptr<MovPrefixGroup> ptrBuffer;
 
-		for (int in1 = 0; in1 < vector_ptr->size(); in1++) {
 
-			for (T inPoint : (*vector_ptr)[in1]) {
+		for (int in1 = 0; in1 < shared_vector_ptr->size(); in1++) {
+
+			for (T inPoint : (*shared_vector_ptr)[in1]) {
 
 				if (inPoint.nameOf == point.nameOf) {
 
@@ -71,7 +74,7 @@ namespace ItemMoving {
 												if (prefix.isFull == false && prefix.ptr_PCIC != nullptr && prefix.ptr_PCIS != nullptr) {
 
 													if (prefix.ptr_PCIS != nullptr) { /*FunkionXY()*/ }
-													else if (prefix.ptr_PCIC != nullptr) { openMovINCase(prefix, unset_ptr, movPrefix, vector_ptr); }
+													else if (prefix.ptr_PCIC != nullptr) { openMovINCase(prefix, unset_ptr, movPrefix, shared_vector_ptr); }
 												}
 											}
 
@@ -86,12 +89,12 @@ namespace ItemMoving {
 			}
 		}
 		ptrBuffer.reset();
-		delete vector_ptr;
 	}
 
 	template <typename T>
-	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const vector<vector<T>>* vector_ptr) {
+	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, shared_ptr<vector<vector<T>>> shared_vector_ptr) {
 		checksPublic chechs;
+		
 
 		chechs.CheckScrollbarPositions();
 
@@ -106,11 +109,12 @@ namespace ItemMoving {
 
 		for (string nameOfItemPrefix : movPrefix.nameOfItems) {
 
-			for (int in1 = 0; in1 < vector_ptr->size(); in1++) {
+			for (int in1 = 0; in1 < shared_vector_ptr->size(); in1++) {
 
-				for (T inPoint : (*vector_ptr)[in1]) {
+				for (T inPoint : (*shared_vector_ptr)[in1]) {
 
 					if (nameOfItemPrefix == inPoint.nameOf) {
+
 						Mouse::MouseMoveAtoB(inPoint.point, prefix.ptr_PCIC->pointInCase);
 
 						unset_ptr->insert(inPoint.nameOf);

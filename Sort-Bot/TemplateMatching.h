@@ -195,7 +195,8 @@ public:
 class ColorMatching {
 
 public:
-	static bool colorMatching(Rect Rec, Mat MatScreen) {
+	template <typename T>
+	static bool colorMatching(Rect Rec, Mat MatScreen, shared_ptr<vector<vector<T>>> shared_vector_ptr) {
 		bool found = GetColor(MatScreen, cv::Scalar(0, 100, 60)/*greenLow*/, cv::Scalar(120, 200, 200)/*greenHigh*/, Rec);
 
 		if (found == true)

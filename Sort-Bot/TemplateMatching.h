@@ -193,39 +193,19 @@ public:
 
 
 class ColorMatching {
-	enum class Color { GREEN = 0, GRAY = 1 };
 
 public:
-	static Color colorMatching(Rect Rec, Mat MatScreen) {
-		array<cv::Scalar, 2> ScalarLow{
-			cv::Scalar(0, 100, 60), /*greenLow*/
-		};
+	static bool colorMatching(Rect Rec, Mat MatScreen) {
+		bool found = GetColor(MatScreen, cv::Scalar(0, 100, 60)/*greenLow*/, cv::Scalar(120, 200, 200)/*greenHigh*/, Rec);
 
-		array<cv::Scalar, 2> ScalarHigh{
-			cv::Scalar(120, 200, 200), /*greenHigh     1*/
-		};
+		if (found == true)
+			return true;
 
-		int count = 1;
-		bool found = GetColor(MatScreen, ScalarLow[0], ScalarHigh[0], Rec, count++);
-		
-		for (int i = 0; i < 1; i++) {
-			if (found == true) {
-				switch (i)
-				{
-				case 0:
-					return Color::GREEN;
-				case 1:
-					return Color::GRAY;
-				}
-			}
-		}
-		
-
-
+		return false;
 	};
 
 private:
-	 static bool GetColor(Mat MatScreen, cv::Scalar low, cv::Scalar high, Rect Rec, int count) {
+	static bool GetColor(Mat MatScreen, cv::Scalar low, cv::Scalar high, Rect Rec) {
 		Mat Roi = MatScreen(Rec);
 		Mat Output;
 
@@ -243,7 +223,7 @@ private:
 		int x1 = countNonZero(Output);
 
 		cout << endl;
-		cout << "---- " << x1 << " " << count << endl;
+		cout << "---- " << x1 << endl;
 
 		if (x1 >= 420)
 			return true;

@@ -14,13 +14,15 @@ namespace ItemMoving {
 	void movItemsTypeles(shared_ptr<vector<vector<T>>> shared_vector_ptr, int identyfierAsHEX, const T& pointAM, shared_ptr<unordered_set<string>> unset_ptr);
 	template <typename T>
 	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, shared_ptr<vector<vector<T>>> shared_vector_ptr);
-
+	
 	template <typename T>
 	void AmmunitionMoving() {
 		ItemsProcessing::AmmunitionProcess();
 		cout << "Moving begining" << endl;
 
 		unordered_set<string> unset;
+		shared_ptr<unordered_set<string>> unset_ptr;
+		shared_ptr<vector<vector<T>>> shared_vector_ptr;
 		int identyfierAsHEX = 0x01;
 
 		for (int i1 = 0; i1 < pointAmmunition_C.size(); i1++) {					 // loop through the first vector 
@@ -30,8 +32,8 @@ namespace ItemMoving {
 				if (unset.find(pointAM.nameOf) == unset.end()) {				 // see if the first point exists 
 					unset.insert(pointAM.nameOf);								 // it does not exist is added to use it only once
 
-					shared_ptr<unordered_set<string>> unset_ptr = make_shared<unordered_set<string>>(unset);
-					shared_ptr<vector<vector<T>>> shared_vector_ptr = make_shared<vector<vector<T>>>(pointAmmunition_C);
+					unset_ptr = make_shared<unordered_set<string>>(unset);
+					shared_vector_ptr = make_shared<vector<vector<T>>>(pointAmmunition_C);
 					movItemsTypeles(shared_vector_ptr, identyfierAsHEX, pointAM, unset_ptr);
 				}
 			}
@@ -41,7 +43,6 @@ namespace ItemMoving {
 	template <typename T> 
 	void movItemsTypeles(shared_ptr<vector<vector<T>>> shared_vector_ptr, int identyfierAsHEX, const T& point, shared_ptr<unordered_set<string>> unset_ptr) {
 		std::unique_ptr<MovPrefixGroup> ptrBuffer;
-
 
 		for (int in1 = 0; in1 < shared_vector_ptr->size(); in1++) {
 

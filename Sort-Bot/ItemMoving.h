@@ -120,12 +120,11 @@ namespace ItemMoving {
 
 						unset_ptr->insert(inPoint.nameOf);
 
-					}
 
+
+					}
 				}
 			}
 		}
-		
-
 	}
 }

@@ -106,7 +106,7 @@ namespace ItemMoving {
 		}
 
 		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
-
+		/*1.096.502*/
 
 		for (string nameOfItemPrefix : movPrefix.nameOfItems) {
 

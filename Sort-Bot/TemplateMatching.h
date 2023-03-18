@@ -151,7 +151,7 @@ public:
 		matchTemplate(MatScreen, templ, result, match_method);
 		double minVal; double maxVal; Point minLoc; Point maxLoc;
 		Point matchLoc;
-		POINT temp;
+		POINT temp = {};
 
 		while (true)
 		{

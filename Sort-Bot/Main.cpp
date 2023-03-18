@@ -91,8 +91,6 @@ int main() {
 		//rec.width = templ.rows;
 		//rec.x = ReturnPoints[0].x;
 		//rec.y = ReturnPoints[0].y;
-	
-		//
 
 		/*ColorMatching::colorMatching(rec, MatScreen);*/
 

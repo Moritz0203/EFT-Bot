@@ -21,8 +21,8 @@ namespace ItemMoving {
 		cout << "Moving begining" << endl;
 
 		unordered_set<string> unset;
-		shared_ptr<unordered_set<string>> unset_ptr;
-		shared_ptr<vector<vector<T>>> shared_vector_ptr;
+		auto unset_ptr;
+		auto shared_vector_ptr;
 		int identyfierAsHEX = 0x01;
 
 		for (int i1 = 0; i1 < pointAmmunition_C.size(); i1++) {					 // loop through the first vector 
@@ -33,7 +33,7 @@ namespace ItemMoving {
 					unset.insert(pointAM.nameOf);								 // it does not exist is added to use it only once
 
 					unset_ptr = make_shared<unordered_set<string>>(unset);
-					shared_vector_ptr = make_shared<vector<vector<T>>>(pointAmmunition_C);
+					shared_vector_ptr = make_shared<vector<vector<PointAmmunition>>>(pointAmmunition_C);
 					movItemsTypeles(shared_vector_ptr, identyfierAsHEX, pointAM, unset_ptr);
 				}
 			}

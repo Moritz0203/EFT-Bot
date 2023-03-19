@@ -96,8 +96,7 @@ namespace ItemMoving {
 	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, shared_ptr<vector<vector<T>>> shared_vector_ptr) {
 		checksPublic chechs;
 		chechs.CheckScrollbarPositions();
-		Mat MatScreen;
-		Mat templ = imread("ObjectImages/EmptySquare.png");
+		int freeSlotsCount = 0;
 
 		for (int i = 0; i < prefix.ptr_PCIC->pageOfParentCase; i++) {
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
@@ -109,14 +108,7 @@ namespace ItemMoving {
 		/*1.096.502*/
 
 		
-		//SetForegroundWindow(hWND);
-		//Sleep(5);//Delete later
-
-		HWND hWND = FindeWindow();
-		MatScreen = getMat(hWND);
-		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ, 0.99999);
-
-		vector<POINT> Clean_ReturnPoints = Matching::removeDuplicates(ReturnPoints);
+		
 
 
 
@@ -128,11 +120,13 @@ namespace ItemMoving {
 
 					if (nameOfItemPrefix == inPoint.nameOf) {
 
+						if (prefix.ptr_PCIC->freeSlots != freeSlotsCount) {
+							Mouse::MouseMoveAtoB(inPoint.point, prefix.ptr_PCIC->point);
+
+							unset_ptr->insert(inPoint.nameOf);
+						}
+
 						
-
-						Mouse::MouseMoveAtoB(inPoint.point, prefix.ptr_PCIC->pointInCase);
-
-						unset_ptr->insert(inPoint.nameOf);
 
 					}
 				}

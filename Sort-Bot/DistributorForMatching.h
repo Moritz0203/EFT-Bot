@@ -212,9 +212,9 @@ namespace Matching {
 							switch (i)
 							{
 							case 0:
-								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, 0x01);
+								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, 0x01, NULL);
 							default:
-								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, identyfierAsHEX_ST);
+								pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, identyfierAsHEX_ST, NULL);
 							}
 							
 						}

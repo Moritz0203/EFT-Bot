@@ -8,8 +8,7 @@ using namespace cv;
 
 
 
-namespace CaseProcessor
-{
+namespace CaseProcessor {
 	void OpenCaseAndTakeScreen(std::shared_ptr<PointCaseInStash> ptr_PCIS);
 	void MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCasePoints);
 	void MoveTopBarTHICCcase();
@@ -25,13 +24,18 @@ namespace CaseProcessor
 		cleanUpVectorCase();
 
 		std::shared_ptr<PointCaseInStash> ptr_PCIS;
+		findingFreeSlots findeFreeSlot;
 
 
 		for (int i = 0; i < pointCaseInStash_C.size(); i++) {
 			for (PointCaseInStash INpointCase : pointCaseInStash_C[i]) {
+				ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+
 				if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
-					ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
 					OpenCaseAndTakeScreen(ptr_PCIS);
+				}
+				else {
+					findeFreeSlot.findeSlots(ptr_PCIS);
 				}
 			}
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
@@ -96,6 +100,8 @@ namespace CaseProcessor
 		double threshold;
 		int sizeString = sizeof(CasesInCase) / sizeof(string);
 		Mat templ;
+		std::shared_ptr<PointCaseInCase> ptr_PCIC;
+		findingFreeSlots findeFreeSlot;
 
 		vector<POINT> ReturnDataCase;
 		for (int i2 = 0; i2 < sizeString; i2++) {
@@ -110,7 +116,9 @@ namespace CaseProcessor
 
 				const string tagCase = TextMatching::textMatching(MatScreen, Rec);
 				if (Matching::checkSecondLastChar(tagCase)) {
-					pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page);
+					pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, NULL);
+					ptr_PCIC = make_shared<PointCaseInCase>(pointCaseInCase[page]);
+					findeFreeSlot.findeSlots(ptr_PCIC);
 				}
 			}
 		}
@@ -175,3 +183,28 @@ void cleanUpVectorCase() {
 		temp.clear();
 	}
 }
+
+class findingFreeSlots {
+public:
+	template <typename T>
+	void findeSlots(shared_ptr<T> case_shared_ptr) { //parent case must be open to use this function
+		Mat MatScreen;
+		Mat templ = imread("ObjectImages/EmptySquare.png");
+		int freeSlots = {};
+		
+		Mouse::MoverPOINTandPressTwoTimes(case_shared_ptr->point);
+
+		HWND hWND = FindeWindow();
+		SetForegroundWindow(hWND);
+		Sleep(5);//Delete later
+		MatScreen = getMat(hWND);
+
+		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ, 0.99999);
+
+		vector<POINT> Clean_ReturnPoints = Matching::removeDuplicates(ReturnPoints);
+
+		freeSlots = Clean_ReturnPoints.size() - 1;
+
+		case_shared_ptr->freeSlots = freeSlots;
+	}
+};

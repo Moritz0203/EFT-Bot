@@ -107,11 +107,6 @@ namespace ItemMoving {
 		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
 		/*1.096.502*/
 
-		
-		
-
-
-
 		for (string nameOfItemPrefix : movPrefix.nameOfItems) {
 
 			for (int in1 = 0; in1 < shared_vector_ptr->size(); in1++) {
@@ -125,9 +120,6 @@ namespace ItemMoving {
 
 							unset_ptr->insert(inPoint.nameOf);
 						}
-
-						
-
 					}
 				}
 			}

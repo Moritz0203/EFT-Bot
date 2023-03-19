@@ -4,7 +4,7 @@ PointCaseInStash::PointCaseInStash()
 {
 }
 
-PointCaseInStash::PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, int identyfierAsHEX)
+PointCaseInStash::PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, int identyfierAsHEX, int freeSlots)
 {
 	this->point = point;
 	this->nameOfCase = nameOfCase;
@@ -13,15 +13,16 @@ PointCaseInStash::PointCaseInStash(POINT point, std::string nameOfCase, const st
 	this->widthTempl = widthTempl;
 	this->page = page;
 	this->identyfierAsHEX = identyfierAsHEX;
+	this->freeSlots = freeSlots;
 }
 
 PointCaseInCase::PointCaseInCase()
 {
 }
 
-PointCaseInCase::PointCaseInCase(POINT pointInCase, POINT pointFromParentCase, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int pageOfParentCase, int identyfierAsHEX)
+PointCaseInCase::PointCaseInCase(POINT point, POINT pointFromParentCase, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int pageOfParentCase, int identyfierAsHEX, int freeSlots)
 {
-	this->pointInCase = pointInCase;
+	this->point = point;
 	this->pointFromParentCase = pointFromParentCase;
 	this->nameOfCase = nameOfCase;
 	this->tagCase = tagCase;
@@ -29,5 +30,6 @@ PointCaseInCase::PointCaseInCase(POINT pointInCase, POINT pointFromParentCase, s
 	this->widthTempl = widthTempl;
 	this->pageOfParentCase = pageOfParentCase;
 	this->identyfierAsHEX = identyfierAsHEX;
+	this->freeSlots = freeSlots;
 }
 

@@ -4,7 +4,7 @@ PointAmmunition::PointAmmunition()
 {
 }
 
-PointAmmunition::PointAmmunition(POINT point,const std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page)
+PointAmmunition::PointAmmunition(POINT point,const std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page, int slotsPerItem)
 {
 	this->point = point;
 	this->nameOf = nameOf;
@@ -12,13 +12,14 @@ PointAmmunition::PointAmmunition(POINT point,const std::string nameOf, int stack
 	this->heightTempl = heightTempl;
 	this->widthTempl = widthTempl;
 	this->page = page;
+	this->slotsPerItem = slotsPerItem;
 }
 
 PointMagazine::PointMagazine()
 {
 }
 
-PointMagazine::PointMagazine(POINT point, std::string nameOfMagazine, int fillStatus, int heightTempl, int widthTempl, int page)
+PointMagazine::PointMagazine(POINT point, std::string nameOfMagazine, int fillStatus, int heightTempl, int widthTempl, int page, int slotsPerItem)
 {
 	this->point = point;
 	this->nameOfMagazine = nameOfMagazine;
@@ -26,13 +27,14 @@ PointMagazine::PointMagazine(POINT point, std::string nameOfMagazine, int fillSt
 	this->heightTempl = heightTempl;
 	this->widthTempl = widthTempl;
 	this->page = page;
+	this->slotsPerItem = slotsPerItem;
 }
 
 PointBarter::PointBarter()
 {
 }
 
-PointBarter::PointBarter(POINT point, std::string nameOfBarter, bool isFoundInRaid, int heightTempl, int widthTempl, int page)
+PointBarter::PointBarter(POINT point, std::string nameOfBarter, bool isFoundInRaid, int heightTempl, int widthTempl, int page, int slotsPerItem)
 {
 	this->point = point;
 	this->nameOfBarter = nameOfBarter;
@@ -40,4 +42,5 @@ PointBarter::PointBarter(POINT point, std::string nameOfBarter, bool isFoundInRa
 	this->heightTempl = heightTempl;
 	this->widthTempl = widthTempl;
 	this->page = page;
+	this->slotsPerItem = slotsPerItem;
 }

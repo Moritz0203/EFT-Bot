@@ -31,7 +31,7 @@ namespace CaseProcessor
 			for (PointCaseInStash INpointCase : pointCaseInStash_C[i]) {
 				if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
 					ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
-					OpenCaseAndTakeScreen(ptr_PCIS); // pass a unique_ptr to a funtion with out copy 
+					OpenCaseAndTakeScreen(ptr_PCIS);
 				}
 			}
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
@@ -92,8 +92,8 @@ namespace CaseProcessor
 	};
 
 	void MatchingCaseInCase(Mat &MatScreen, int page, POINT parentCasePoints) {
-		string  filename, templatename;
-		double	threshold;
+		string filename, templatename;
+		double threshold;
 		int sizeString = sizeof(CasesInCase) / sizeof(string);
 		Mat templ;
 

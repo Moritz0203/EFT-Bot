@@ -72,7 +72,7 @@ namespace ItemMoving {
 
 											for (Prefix prefix : movPrefix.prefix) {
 
-												if (prefix.isFull == false && prefix.ptr_PCIC != nullptr && prefix.ptr_PCIS != nullptr) {
+												if (prefix.isFull == false && prefix.ptr_PCIC != nullptr || prefix.ptr_PCIS != nullptr) {
 
 													if (prefix.ptr_PCIS != nullptr) { /*FunkionXY()*/ }
 													else if (prefix.ptr_PCIC != nullptr) { openMovINCase(prefix, unset_ptr, movPrefix, shared_vector_ptr); }
@@ -95,9 +95,9 @@ namespace ItemMoving {
 	template <typename T>
 	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, shared_ptr<vector<vector<T>>> shared_vector_ptr) {
 		checksPublic chechs;
-		
-
 		chechs.CheckScrollbarPositions();
+		Mat MatScreen;
+		Mat templ = imread("ObjectImages/EmptySquare.png");
 
 		for (int i = 0; i < prefix.ptr_PCIC->pageOfParentCase; i++) {
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
@@ -108,6 +108,18 @@ namespace ItemMoving {
 		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
 		/*1.096.502*/
 
+		
+		//SetForegroundWindow(hWND);
+		//Sleep(5);//Delete later
+
+		HWND hWND = FindeWindow();
+		MatScreen = getMat(hWND);
+		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ, 0.99999);
+
+		vector<POINT> Clean_ReturnPoints = Matching::removeDuplicates(ReturnPoints);
+
+
+
 		for (string nameOfItemPrefix : movPrefix.nameOfItems) {
 
 			for (int in1 = 0; in1 < shared_vector_ptr->size(); in1++) {
@@ -116,11 +128,11 @@ namespace ItemMoving {
 
 					if (nameOfItemPrefix == inPoint.nameOf) {
 
+						
+
 						Mouse::MouseMoveAtoB(inPoint.point, prefix.ptr_PCIC->pointInCase);
 
 						unset_ptr->insert(inPoint.nameOf);
-
-
 
 					}
 				}

@@ -81,10 +81,11 @@ int main() {
 		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ1, 0.99999);
 
 
-		for (int i = 0; i < ReturnPoints.size(); i++) {
+		/*for (int i = 0; i < ReturnPoints.size(); i++) {
 			cout << ReturnPoints[i].y << " " << ReturnPoints[i].x << "----2 - " << i << endl;
-		}
+		}*/
 
+		
 		//cv::Rect rec; 
 
 		//rec.height = templ.cols;
@@ -163,7 +164,7 @@ int main() {
 			cout << result[i].y << " " << result[i].x << " ---- " << i << endl;
 		}
 		
-
+		cout << ReturnPoints.size() << endl;
 
 		//for (int i = 0; i < result.size(); i++) {
 		//	pointA.y = (templ.rows / 2) + result[i].y;
@@ -259,8 +260,3 @@ int main() {
 			cout << Returner[i].y << " " << Returner[i].x << endl;
 	}*/
 }
-
-
-
-	
-

@@ -133,7 +133,7 @@ namespace Matching {
 						Rect Rec(ReturnDataAM_Clean[i2].x + 44, ReturnDataAM_Clean[i2].y + 48, templ.cols - 44, templ.rows - 48);
 						const string stackSize = "2"/*TextMatching::textMatching(arrayMatScreen[i1], Rec)*/;
 						int stackSizeConvertet = stoi(stackSize);
-						pointAmmunitionTemp.emplace_back(ReturnDataAM_Clean[i2], NameOfItemAmmunition[i], stackSizeConvertet, templ.rows, templ.cols, i1);
+						pointAmmunitionTemp.emplace_back(ReturnDataAM_Clean[i2], NameOfItemAmmunition[i], stackSizeConvertet, templ.rows, templ.cols, i1, 1);
 					}
 					ReturnDataAM.clear();
 					ReturnDataAM_Clean.clear();
@@ -291,7 +291,7 @@ namespace Matching {
 						Rect Rec(ReturnDataMA_Clean[i3].x + 25, ReturnDataMA_Clean[i3].y + 110, templ.cols - 40, templ.rows - 110);
 						const string fillStatus = TextMatching::textMatching(arrayMatScreen[i1], Rec);
 						int fillStatusConvertet = stoi(fillStatus);
-						pointMagazineTemp.emplace_back(ReturnDataMA_Clean[i3], NameOfItemMagazine[i], fillStatusConvertet, templ.rows, templ.cols, i1);
+						pointMagazineTemp.emplace_back(ReturnDataMA_Clean[i3], NameOfItemMagazine[i], fillStatusConvertet, templ.rows, templ.cols, i1, 2);
 					}
 					ReturnDataMA.clear();
 					ReturnDataMA_Clean.clear();
@@ -342,6 +342,19 @@ namespace Matching {
 			0.96,//Lion
 	};
 
+	std::array<int, 7> SlotsPerItem{
+		//OneSlot
+			1,
+			1,
+			1,
+			1,
+			1,
+		//TwoSlot
+			2,
+		//SixSlot
+			6
+	};
+
 
 	std::array<std::string, 2> FoundInRaid{
 		"ObjectImages/FoundInRaid/FoundInRaid-Blue.png",
@@ -369,9 +382,9 @@ namespace Matching {
 						for (int i4 = 0; i4 < sizeFoundInRaid; i4++) {
 							Mat temp = imread(FoundInRaid[i4]);
 							if (TemplateMatching::templateMatchingBool(arrayMatScreen[i1](Rec), temp, 0.99)) 
-								pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], NameOfItemBarter[i], true, templ.rows, templ.cols, i1);
+								pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], NameOfItemBarter[i], true, templ.rows, templ.cols, i1, SlotsPerItem[i]);
 							else
-								pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], NameOfItemBarter[i], false, templ.rows, templ.cols, i1);
+								pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], NameOfItemBarter[i], false, templ.rows, templ.cols, i1, SlotsPerItem[i]);
 						}
 					}
 					ReturnDataBA.clear();

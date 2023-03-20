@@ -93,7 +93,7 @@ namespace ItemMoving {
 	}
 
 	template <typename T>
-	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix,const shared_ptr<vector<vector<T>>> shared_vector_ptr) {
+	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const shared_ptr<vector<vector<T>>> shared_vector_ptr) {
 		checksPublic chechs;
 		chechs.CheckScrollbarPositions();
 		int freeSlotsCount = 0;

@@ -27,10 +27,10 @@ namespace ItemMoving {
 
 		for (const int i1 = 0; i1 < pointAmmunition_C.size(); i1++) {					 // loop through the first vector 
 
-			for (const PointAmmunition pointAM : pointAmmunition_C[i1]) {              // take out the first point 
+			for (const PointAmmunition pointAM : pointAmmunition_C[i1]) {                // take out the first point 
 
-				if (unset.find(pointAM.nameOf) == unset.end()) {				 // see if the first point exists 
-					unset.insert(pointAM.nameOf);								 // it does not exist is added to use it only once
+				if (unset.find(pointAM.nameOf) == unset.end()) {				         // see if the first point exists 
+					unset.insert(pointAM.nameOf);										 // it does not exist is added to use it only once
 
 					unset_ptr = make_shared<unordered_set<string>>(unset);
 					shared_vector_ptr = make_shared<vector<vector<PointAmmunition>>>(pointAmmunition_C);

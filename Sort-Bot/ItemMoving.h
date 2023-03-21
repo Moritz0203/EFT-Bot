@@ -14,6 +14,8 @@ namespace ItemMoving {
 	void movItemsTypeles(shared_ptr<vector<vector<T>>> shared_vector_ptr, int identyfierAsHEX, const T& pointAM, shared_ptr<unordered_set<string>> unset_ptr);
 	template <typename T>
 	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, shared_ptr<vector<vector<T>>> shared_vector_ptr);
+	template <typename T>
+	void movInStash(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const shared_ptr<vector<vector<T>>> shared_vector_ptr);
 	
 	template <typename T>
 	void AmmunitionMoving() {
@@ -74,7 +76,7 @@ namespace ItemMoving {
 
 												if (prefix.isFull == false && prefix.ptr_PCIC != nullptr || prefix.ptr_PCIS != nullptr) {
 
-													if (prefix.ptr_PCIS != nullptr) { /*FunkionXY()*/ }
+													if (prefix.ptr_PCIS != nullptr) { movInStash(prefix, unset_ptr, movPrefix, shared_vector_ptr); }
 													else if (prefix.ptr_PCIC != nullptr) { openMovINCase(prefix, unset_ptr, movPrefix, shared_vector_ptr); }
 												}
 											}
@@ -123,5 +125,10 @@ namespace ItemMoving {
 				}
 			}
 		}
+	}
+
+	template <typename T>
+	void movInStash(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const shared_ptr<vector<vector<T>>> shared_vector_ptr) {
+
 	}
 }

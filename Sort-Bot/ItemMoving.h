@@ -118,8 +118,6 @@ namespace ItemMoving {
 							Mouse::MouseMoveAtoB(inPoint.point, prefix.ptr_PCIC->point);
 
 							unset_ptr->insert(inPoint.nameOf);
-
-
 						}
 					}
 				}

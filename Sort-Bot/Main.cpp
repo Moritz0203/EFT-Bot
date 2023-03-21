@@ -96,15 +96,6 @@ int main() {
 		/*ColorMatching::colorMatching(rec, MatScreen);*/
 
 
-
-
-
-
-
-
-
-
-		//
 		//TemplateMatching::templateMatchingItems("CaseImages/AmmoCase.png", 0.90, false, false, "amo", ReturnPoints1, MatScreen);
 
 		///*cout << ReturnPoints[0].y << " " << ReturnPoints[0].x << endl;

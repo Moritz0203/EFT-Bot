@@ -54,13 +54,7 @@ int main() {
 		StartUp::Entrance();
 	}*/
 	if (Start == "test") {
-
-
-
 		/*ItemMoving::AmmunitionMoving();*/
-
-
-
 
 		Mat templ;
 		Mat templ1;
@@ -210,8 +204,6 @@ int main() {
 		//waitKey(0);
 		
 		
-		
-		
 		//cv::cvtColor(Roi, Roi, cv::COLOR_BGR2HSV);
 
 		//if (!ReturnPoints[0].y <= 500) {
@@ -239,10 +231,6 @@ int main() {
 		/*color = TemplateMatching::ColorMatching(Rec, Roi);
 		
 		cout << color << " " << "color" << endl;*/
-
-
-
-
 
 		/*CaseMatching::THICCcase();*/
 	}

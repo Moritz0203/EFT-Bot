@@ -134,5 +134,6 @@ namespace ItemMoving {
 		int freeSlotsCount = 0;
 
 
+
 	}
 }

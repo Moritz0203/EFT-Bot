@@ -132,5 +132,7 @@ namespace ItemMoving {
 		checksPublic chechs;
 		chechs.CheckScrollbarPositions();
 		int freeSlotsCount = 0;
+
+
 	}
 }

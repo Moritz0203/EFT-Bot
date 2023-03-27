@@ -148,6 +148,28 @@ int main() {
 		for (int i = 0; i < result.size(); i++) {
 			cout << result[i].y << " " << result[i].x << " ---- " << i << endl;
 		}
+
+		/*array<vector<POINT>, 14> JunkCase;
+		int sizeINT = sizeof(JunkCase) / sizeof(vector<POINT>);
+		for (int i = 0; i < sizeINT; i++) {
+			for (POINT point : result) {
+
+			}
+		}*/
+		
+
+		array<vector<POINT>, 14> sortedPoints;
+		for (const auto& point : result) {
+			sortedPoints[point.y].push_back(point);
+		}
+
+
+		int sizeINT = sizeof(sortedPoints) / sizeof(vector<POINT>);
+		for (int i = 0; i < sizeINT; i++) {
+			for (POINT point : sortedPoints[i]) {
+				cout << point.y << " " << point.x << "----" << i << "\n";
+			}
+		}
 		
 		cout << ReturnPoints.size() << endl;
 

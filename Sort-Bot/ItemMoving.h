@@ -22,6 +22,7 @@ namespace ItemMoving {
 		ItemsProcessing::AmmunitionProcess();
 		cout << "Moving begining" << endl;
 
+
 		unordered_set<string> unset;
 		auto unset_ptr;
 		auto shared_vector_ptr;

@@ -153,7 +153,7 @@ int main() {
 		int sizeINT = sizeof(JunkCase) / sizeof(vector<POINT>);
 		for (int i = 0; i < sizeINT; i++) {
 			for (POINT point : result) {
-
+				 
 			}
 		}
 		

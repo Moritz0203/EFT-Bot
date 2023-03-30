@@ -155,17 +155,13 @@ int main() {
 		vector<POINT> temp;
 		unordered_set<int> unset;
 
-		for (POINT point : result)
-		{
-			if (unset.find(point.y) == unset.end())
-			{
+		for (POINT point : result) {
+			if (unset.find(point.y) == unset.end()) {
 				unset.insert(point.y);
 
-				for (POINT pointIN : result)
-				{
+				for (POINT pointIN : result) {
 
-					if (point.y == pointIN.y)
-					{
+					if (point.y == pointIN.y) {
 						temp.push_back(pointIN);
 					}
 				}

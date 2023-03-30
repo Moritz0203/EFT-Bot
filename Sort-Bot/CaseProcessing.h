@@ -205,6 +205,10 @@ public:
 
 		freeSlots = Clean_ReturnPoints.size() - 1;
 
-		case_shared_ptr->freeSlots = freeSlots;
+		/*case_shared_ptr->freeSlots = freeSlots;*/
 	}
+
+
+
+
 };

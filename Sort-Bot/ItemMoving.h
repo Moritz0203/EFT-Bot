@@ -118,11 +118,11 @@ namespace ItemMoving {
 
 					if (nameOfItemPrefix == inPoint.nameOf) {
 
-						if (prefix.ptr_PCIC->freeSlots != freeSlotsCount) {
+						/*if (prefix.ptr_PCIC->freeSlots != freeSlotsCount) {
 							Mouse::MouseMoveAtoB(inPoint.point, prefix.ptr_PCIC->point);
 
 							unset_ptr->insert(inPoint.nameOf);
-						}
+						}*/
 					}
 				}
 			}

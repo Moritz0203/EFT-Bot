@@ -20,10 +20,12 @@ struct pair_hash {
 	}
 };
 
+bool comparePoints(const POINT& a, const POINT& b);
+
 int main() {
 	
 	
-	/*cout << "//    ___ ___ _____         ___  ___  ___ _____         ___  ___ _____  " << endl;
+  /*cout << "//    ___ ___ _____         ___  ___  ___ _____         ___  ___ _____  " << endl;
 	cout << "//   | __| __|_   _|  ___  / __|/ _ \| _ \_   _|  ___  | _ )/ _ \_   _| " << endl;
 	cout << "//   | _|| _|  | |   |___| \__ \ (_) |   / | |   |___| | _ \ (_) || |   " << endl;
 	cout << "//   |___|_|   |_|      _  |___/\___/|_|_\_|_|_ _      |___/\___/ |_|   " << endl;
@@ -149,28 +151,68 @@ int main() {
 			cout << result[i].y << " " << result[i].x << " ---- " << i << endl;
 		}
 
-		array<vector<POINT>, 14> JunkCase;
-		int sizeINT = sizeof(JunkCase) / sizeof(vector<POINT>);
-		for (int i = 0; i < sizeINT; i++) {
-			for (POINT point : result) {
-				 
+		vector<vector<POINT>> JunkCase;
+		vector<POINT> temp;
+		unordered_set<int> unset;
+
+		for (POINT point : result)
+		{
+			if (unset.find(point.y) == unset.end())
+			{
+				unset.insert(point.y);
+
+				for (POINT pointIN : result)
+				{
+
+					if (point.y == pointIN.y)
+					{
+						temp.push_back(pointIN);
+					}
+				}
+				
+				std::sort(temp.begin(), temp.end(), comparePoints);
+				JunkCase.push_back(temp);
+				temp.clear();
 			}
+			
 		}
+			
 		
 
-		/*array<vector<POINT>, 14> sortedPoints;
-		for (const auto& point : result) {
-			sortedPoints[point.y].push_back(point);
-		}*/
+		
+		for (int i = 0; i < JunkCase.size(); i++) {
+			int count = 0;
+			int length = 0;
+			string str = {};
+			string strIE = {};
+			string strER = {};
+			
+			if (JunkCase[i].size() == 0)
+				break;
 
-
-
-
-		int sizeINT = sizeof(JunkCase) / sizeof(vector<POINT>);
-		for (int i = 0; i < sizeINT; i++) {
 			for (POINT point : JunkCase[i]) {
-				cout << point.y << " " << point.x << "----" << i << "\n";
+				string strY = "Y:  " + std::to_string(point.y);
+				string strX = "  ---  X:  " + std::to_string(point.x);
+				strER = "       |-> ";
+				str = strY + strX;
+				
+				cout << strER + str;
+
+				length = 30 - str.length();
+				
+				for (int i2 = 0; i2 < length; i2++) {
+					cout << " ";
+				}
+
+				strIE = "Index: " + std::to_string(i) + "  ---  Empty per line: " + std::to_string(++count);
+				cout << strIE << "\n";
 			}
+			
+			cout << "       |";
+			for (int i2 = 0; i2 < ((strER.length() - 8) + length + str.length() + strIE.length()); i2++) {
+				cout << "-";
+			}
+			cout << " " << strIE << "\n";
 		}
 		
 		cout << ReturnPoints.size() << endl;
@@ -262,4 +304,12 @@ int main() {
 	/*for (int i = 0; i < Returner.size(); i++) {
 			cout << Returner[i].y << " " << Returner[i].x << endl;
 	}*/
+
+
+	
+}
+
+
+bool comparePoints(const POINT& a, const POINT& b) {
+	return a.x < b.x;
 }

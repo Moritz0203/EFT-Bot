@@ -203,12 +203,39 @@ public:
 
 		vector<POINT> Clean_ReturnPoints = Matching::removeDuplicates(ReturnPoints);
 
-		freeSlots = Clean_ReturnPoints.size() - 1;
+		vector<vector<POINT>> Final = SortINrows(Clean_ReturnPoints);
 
-		/*case_shared_ptr->freeSlots = freeSlots;*/
+		case_shared_ptr->freeSlots = Final;
 	}
 
 
+	vector<vector<POINT>> SortINrows(vector<POINT> vector_Input) {
+		vector<vector<POINT>> vector_return;
+		vector<POINT> temp;
+		unordered_set<int> unset;
 
+		for (POINT point : vector_Input) {
+			if (unset.find(point.y) == unset.end()) {
+				unset.insert(point.y);
+
+				for (POINT pointIN : vector_Input) {
+
+					if (point.y == pointIN.y) {
+						temp.push_back(pointIN);
+					}
+				}
+
+				std::sort(temp.begin(), temp.end(), comparePoints);
+				vector_return.push_back(temp);
+				temp.clear();
+			}
+		}
+
+		return vector_return;
+	}
+
+	bool comparePoints(const POINT& a, const POINT& b) {
+		return a.x < b.x;
+	}
 
 };

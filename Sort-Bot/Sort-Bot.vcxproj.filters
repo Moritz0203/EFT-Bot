@@ -40,7 +40,7 @@
     <ClInclude Include="getMat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StartUp.h">
+    <ClInclude Include="Checks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CaseProcessing.h">

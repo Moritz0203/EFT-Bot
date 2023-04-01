@@ -110,6 +110,8 @@ namespace ItemMoving {
 
 		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
 
+		
+
 		for (const string nameOfItemPrefix : movPrefix.nameOfItems) {
 
 			for (const int in1 = 0; in1 < shared_vector_ptr->size(); in1++) {

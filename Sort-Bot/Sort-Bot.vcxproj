@@ -151,7 +151,7 @@
     <ClInclude Include="PointCase.h" />
     <ClInclude Include="PointItems.h" />
     <ClInclude Include="PrefixProcessing.h" />
-    <ClInclude Include="StartUp.h" />
+    <ClInclude Include="Checks.h" />
     <ClInclude Include="TemplateMatching.h" />
   </ItemGroup>
   <ItemGroup>

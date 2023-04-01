@@ -2,7 +2,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
-#include "StartUp.h"
+#include "Checks.h"
 using namespace std;
 using namespace cv;
 
@@ -17,7 +17,7 @@ namespace ItemsProcessing {
 		
 		checks.CheckScrollbarPositions();
 		Sleep(10);
-		ReturntMatScreen = StartUp::TakeScreenshots();
+		ReturntMatScreen = Checks::TakeScreenshots();
 
 		Matching::AmmunitionMatching(ReturntMatScreen);
 		cleanUpVectorItemsAmmunition();
@@ -42,7 +42,7 @@ namespace ItemsProcessing {
 		checksPublic checks;
 
 		checks.CheckScrollbarPositions();
-		ReturntMatScreen = StartUp::TakeScreenshots();
+		ReturntMatScreen = Checks::TakeScreenshots();
 
 		Matching::BarterMatching(ReturntMatScreen);
 		cleanUpVectorItemsBarter();

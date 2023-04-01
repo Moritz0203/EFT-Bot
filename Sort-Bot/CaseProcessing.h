@@ -2,7 +2,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
-#include "StartUp.h"
+#include "Checks.h"
 using namespace std;
 using namespace cv;
 
@@ -184,58 +184,3 @@ void cleanUpVectorCase() {
 	}
 }
 
-class findingFreeSlots {
-public:
-	template <typename T>
-	void findeSlots(shared_ptr<T> case_shared_ptr) { //parent case must be open to use this function
-		Mat MatScreen;
-		Mat templ = imread("ObjectImages/EmptySquare.png");
-		int freeSlots = {};
-		
-		Mouse::MoverPOINTandPressTwoTimes(case_shared_ptr->point);
-
-		HWND hWND = FindeWindow();
-		SetForegroundWindow(hWND);
-		Sleep(5);//Delete later
-		MatScreen = getMat(hWND);
-
-		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ, 0.99999);
-
-		vector<POINT> Clean_ReturnPoints = Matching::removeDuplicates(ReturnPoints);
-
-		vector<vector<POINT>> Final = SortINrows(Clean_ReturnPoints);
-
-		case_shared_ptr->freeSlots = Final;
-	}
-
-
-	vector<vector<POINT>> SortINrows(vector<POINT> vector_Input) {
-		vector<vector<POINT>> vector_return;
-		vector<POINT> temp;
-		unordered_set<int> unset;
-
-		for (POINT point : vector_Input) {
-			if (unset.find(point.y) == unset.end()) {
-				unset.insert(point.y);
-
-				for (POINT pointIN : vector_Input) {
-
-					if (point.y == pointIN.y) {
-						temp.push_back(pointIN);
-					}
-				}
-
-				std::sort(temp.begin(), temp.end(), comparePoints);
-				vector_return.push_back(temp);
-				temp.clear();
-			}
-		}
-
-		return vector_return;
-	}
-
-	bool comparePoints(const POINT& a, const POINT& b) {
-		return a.x < b.x;
-	}
-
-};

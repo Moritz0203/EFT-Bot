@@ -185,7 +185,7 @@ int main() {
 		findFreeSlots1 findFreeSlots1;
 		findFreeSlots1.findeSlots(ReturnPoints);
 
-		/*findFreeSlots1.Print_Out_Case_EmptySlots();*/
+		findFreeSlots1.Print_Out_Case_EmptySlots();
 
 		Mat MatScreen1 = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
 

@@ -18,13 +18,13 @@ namespace CaseProcessor {
 		checksPublic checks;
 
 		checks.CheckScrollbarPositions();
-		ReturntMatScreen = StartUp::TakeScreenshots();
+		ReturntMatScreen = Checks::TakeScreenshots();
 
 		Matching::CaseMatching(ReturntMatScreen);
 		cleanUpVectorCase();
 
 		std::shared_ptr<PointCaseInStash> ptr_PCIS;
-		findingFreeSlots findeFreeSlot;
+		findFreeSlots findeFreeSlot;
 
 
 		for (int i = 0; i < pointCaseInStash_C.size(); i++) {
@@ -101,7 +101,7 @@ namespace CaseProcessor {
 		int sizeString = sizeof(CasesInCase) / sizeof(string);
 		Mat templ;
 		std::shared_ptr<PointCaseInCase> ptr_PCIC;
-		findingFreeSlots findeFreeSlot;
+		findFreeSlots findeFreeSlot;
 
 		vector<POINT> ReturnDataCase;
 		for (int i2 = 0; i2 < sizeString; i2++) {

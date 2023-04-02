@@ -78,7 +78,7 @@ public:
 			int keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key
 			Keyboard::KeyboardInput(keyforInput);
 		}
-
+		
 		POINT pointBarClick{};
 		pointBarClick.y = 171;
 		pointBarClick.x = 1903;
@@ -165,9 +165,7 @@ public:
 					str = strY + strX;
 
 					cout << strER + str;
-
 					length = 30 - str.length();
-
 					for (int i2 = 0; i2 < length; i2++) {
 						cout << " ";
 					}

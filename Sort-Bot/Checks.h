@@ -86,7 +86,7 @@ public:
 	}
 };
 
-class findingFreeSlots {
+class findFreeSlots {
 	vector<vector<POINT>> FinalResults;
 	vector<POINT> Clean_ReturnPoints;
 
@@ -182,11 +182,10 @@ public:
 				}
 				cout << " " << strIE << "\n";
 			}
-
 			FinalResults.clear();
 		}
 		else {
-			cout << "You must first call the function: findingFreeSlots::findSlots()." << endl;
+			cout << "You must first call the function: findFreeSlots::findSlots()." << endl;
 		}
 	}
 };

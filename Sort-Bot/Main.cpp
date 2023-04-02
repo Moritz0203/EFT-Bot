@@ -22,6 +22,111 @@ struct pair_hash {
 
 bool comparePoints(const POINT& a, const POINT& b);
 
+class findFreeSlots1 {
+	vector<vector<POINT>> FinalResults;
+	vector<POINT> Clean_ReturnPoints;
+
+	vector<vector<POINT>> SortINrows(vector<POINT> vector_Input) {
+		vector<vector<POINT>> vector_return;
+		vector<POINT> temp;
+		unordered_set<int> unset;
+
+		for (POINT point : vector_Input) {
+			if (unset.find(point.y) == unset.end()) {
+				unset.insert(point.y);
+
+				for (POINT pointIN : vector_Input) {
+
+					if (point.y == pointIN.y) {
+						temp.push_back(pointIN);
+					}
+				}
+
+				std::sort(temp.begin(), temp.end(), comparePoints);
+				vector_return.push_back(temp);
+				temp.clear();
+			}
+		}
+
+		return vector_return;
+	}
+
+	static bool comparePoints(const POINT& a, const POINT& b) {
+		return a.x < b.x;
+	}
+
+
+public:
+	void findeSlots(vector<POINT> ReturnPoints) { //parent case must be open to use this function
+		//Mat MatScreen;
+		//Mat templ = imread("ObjectImages/EmptySquare.png");
+		//int freeSlots = {};
+
+		//Mouse::MoverPOINTandPressTwoTimes(case_shared_ptr->point);
+
+		//HWND hWND = FindeWindow();
+		//SetForegroundWindow(hWND);
+		//Sleep(5);//Delete later
+		//MatScreen = getMat(hWND);
+
+		/*vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ, 0.99999);*/
+
+		Clean_ReturnPoints = Matching::removeDuplicates(ReturnPoints);
+
+		FinalResults = SortINrows(Clean_ReturnPoints);
+
+		/*case_shared_ptr->freeSlots = FinalResults;*/
+	}
+
+	void Print_Out_Case_EmptySlots() {
+		if (!FinalResults.empty()) {
+			for (int i = 0; i < FinalResults.size(); i++) {
+				if (FinalResults[i].size() == 0) {
+					cout << "       |->";
+					cout << " Lines: " << std::to_string(i) << " Total slots: " << Clean_ReturnPoints.size() - 1 << endl;
+					break;
+				}
+
+				int count = 0;
+				int length = 0;
+				string str = {};
+				string strIE = {};
+				string strER = {};
+
+				for (POINT point : FinalResults[i]) {
+					string strY = "Y:  " + std::to_string(point.y);
+					string strX = "  ---  X:  " + std::to_string(point.x);
+					strER = "       |-> ";
+					str = strY + strX;
+
+					cout << strER + str;
+
+					length = 30 - str.length();
+
+					for (int i2 = 0; i2 < length; i2++) {
+						cout << " ";
+					}
+
+					strIE = "Index: " + std::to_string(i) + "  ---  Empty per line: " + std::to_string(++count);
+					cout << strIE << "\n";
+				}
+
+				cout << "       |";
+				for (int i2 = 0; i2 < ((strER.length() - 8) + length + str.length() + strIE.length()); i2++) {
+					cout << "-";
+				}
+				cout << " " << strIE << "\n";
+			}
+			FinalResults.clear();
+		}
+		else {
+			cout << "You must first call the function: findFreeSlots::findSlots()." << endl;
+		}
+	}
+};
+
+
+
 int main() {
 	
 	
@@ -77,6 +182,20 @@ int main() {
 		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ1, 0.99999);
 
 
+		findFreeSlots1 findFreeSlots1;
+		findFreeSlots1.findeSlots(ReturnPoints);
+
+		/*findFreeSlots1.Print_Out_Case_EmptySlots();*/
+
+		Mat MatScreen1 = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
+
+		vector<POINT> ReturnPoints1 = TemplateMatching::templateMatchingObjects_Vector(MatScreen1, templ1, 0.99999);
+
+
+		findFreeSlots1.findeSlots(ReturnPoints1);
+
+		findFreeSlots1.Print_Out_Case_EmptySlots();
+
 		/*for (int i = 0; i < ReturnPoints.size(); i++) {
 			cout << ReturnPoints[i].y << " " << ReturnPoints[i].x << "----2 - " << i << endl;
 		}*/
@@ -119,7 +238,7 @@ int main() {
 		//}*/
 
 
-		unordered_set<pair<int, int>, pair_hash> unSet;
+		/*unordered_set<pair<int, int>, pair_hash> unSet;
 		vector<POINT> result;
 		for (POINT& point : ReturnPoints) {
 			int x_minus_1 = point.x - 1;
@@ -211,7 +330,7 @@ int main() {
 			cout << " " << strIE << "\n";
 		}
 		
-		cout << ReturnPoints.size() << endl;
+		cout << ReturnPoints.size() << endl;*/
 
 		//for (int i = 0; i < result.size(); i++) {
 		//	pointA.y = (templ.rows / 2) + result[i].y;
@@ -309,3 +428,6 @@ int main() {
 bool comparePoints(const POINT& a, const POINT& b) {
 	return a.x < b.x;
 }
+
+
+

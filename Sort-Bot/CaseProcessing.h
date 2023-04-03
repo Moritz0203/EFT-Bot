@@ -117,7 +117,7 @@ namespace CaseProcessor {
 				const string tagCase = TextMatching::textMatching(MatScreen, Rec);
 				if (Matching::checkSecondLastChar(tagCase)) {
 					pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, NULL);
-					ptr_PCIC = make_shared<PointCaseInCase>(pointCaseInCase[page]);
+					ptr_PCIC = make_shared<PointCaseInCase>(pointCaseInCase[page].back());
 					findeFreeSlot.findeSlots(ptr_PCIC);
 				}
 			}

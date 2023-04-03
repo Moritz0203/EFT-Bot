@@ -22,7 +22,7 @@ struct pair_hash {
 
 bool comparePoints(const POINT& a, const POINT& b);
 
-class findFreeSlots1 {
+class findFreeSlots_test{
 	vector<vector<POINT>> FinalResults;
 	vector<POINT> Clean_ReturnPoints;
 
@@ -182,7 +182,7 @@ int main() {
 		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ1, 0.99999);
 
 
-		findFreeSlots1 findFreeSlots1;
+		findFreeSlots_test findFreeSlots1;
 		findFreeSlots1.findeSlots(ReturnPoints);
 
 		findFreeSlots1.Print_Out_Case_EmptySlots();
@@ -424,10 +424,6 @@ int main() {
 	
 }
 
-
 bool comparePoints(const POINT& a, const POINT& b) {
 	return a.x < b.x;
 }
-
-
-

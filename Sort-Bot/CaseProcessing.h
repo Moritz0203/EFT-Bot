@@ -16,6 +16,7 @@ namespace CaseProcessor {
 	void caseProcess() {
 		array<Mat, 11> ReturntMatScreen;
 		checksPublic checks;
+		findFreeSlots findeFreeSlot;
 
 		checks.CheckScrollbarPositions();
 		ReturntMatScreen = Checks::TakeScreenshots();
@@ -24,8 +25,6 @@ namespace CaseProcessor {
 		cleanUpVectorCase();
 
 		std::shared_ptr<PointCaseInStash> ptr_PCIS;
-		findFreeSlots findeFreeSlot;
-
 
 		for (int i = 0; i < pointCaseInStash_C.size(); i++) {
 			for (PointCaseInStash INpointCase : pointCaseInStash_C[i]) {

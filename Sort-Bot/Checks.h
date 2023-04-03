@@ -111,7 +111,6 @@ class findFreeSlots {
 				temp.clear();
 			}
 		}
-
 		return vector_return;
 	}
 

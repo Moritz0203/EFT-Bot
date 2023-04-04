@@ -20,10 +20,17 @@ struct pair_hash {
 	}
 };
 
+struct SpecsForItem {
+	int columns;
+	int rows;
+};
+
 bool comparePoints(const POINT& a, const POINT& b);
 bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
 bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
+bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int rows, vector<shared_ptr<POINT>>& vector_ptr_LookUp, int x_FistLook_lastRow);
 bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize);
+
 
 
 class findFreeSlots_test{
@@ -129,26 +136,82 @@ public:
 	}
 };
 
-struct SpecsForItem {
-	int colums;
-	int rows;
-};
+
 
 
 bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
-	vector<shared_ptr<POINT>> pointsForLookUp;
-
+	vector<shared_ptr<POINT>> vector_ptr_LookUp;
+	shared_ptr<vector<POINT>> ptr_vector_row;
+	bool break_tryNew = false;
+	
 	for (int i = 0; i < ptr_vector->size(); i++) {
-		for (POINT pointIN : (*ptr_vector)[i]) {
-			
+		ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[i]);
+
+		if (CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, NULL) || break_tryNew != false) {
+			int index = 0;
+			int index_ptr = i;
+
+			for (int i2 = 1; i2 <= specsForItem.rows; i2++) {
+				ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[index_ptr++]);
+				int x_FirstLook_lastRow = vector_ptr_LookUp[index += specsForItem.columns]->x;
+
+				if (!CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, x_FirstLook_lastRow)) {
+					break_tryNew = true;
+					break;
+				}
+					
+			}
+		}
+		else {
+
 		}
 	}
+
+
 	return true;
 }
 
 bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
 	return true;
 }
+
+
+bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<shared_ptr<POINT>> &vector_ptr_LookUp, int x_FistLook_lastRow) {
+	shared_ptr<POINT> ptr_LookUp;
+	shared_ptr<POINT> ptr_LookUp_In;
+
+	for (int i = 0; i < ptr_vector_row->size(); i++) {
+		POINT temp_lookUp;
+
+
+		ptr_LookUp = make_shared<POINT>((*ptr_vector_row)[i]);
+
+		temp_lookUp.x = ptr_LookUp->x + 63; // weil jedes empty space immer 63 pixel auseinader ist.
+		int count_foundet = 2;
+
+		vector_ptr_LookUp.push_back(ptr_LookUp);
+		for (int i_in = i; i_in < ptr_vector_row->size(); i_in++) {
+
+			ptr_LookUp_In = make_shared<POINT>((*ptr_vector_row)[i_in]);
+
+			if (temp_lookUp.x == ptr_LookUp_In->x) {
+
+				if (count_foundet == column) {
+					return true;
+				}
+				else {
+					temp_lookUp.x += 63; // weil jedes empty space immer 63 pixel auseinader ist.
+					count_foundet++;
+					vector_ptr_LookUp.push_back(ptr_LookUp_In);
+				}
+			}
+			else
+				return false;
+		}
+	}
+}
+
+
 
 bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize) {
 	switch (ItemSize)
@@ -170,7 +233,7 @@ bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize)
 			return false;
 		}
 	}
-		
+	
 
 }
 
@@ -240,10 +303,15 @@ int main() {
 		findFreeSlots1.Print_Out_Case_EmptySlots();
 
 
-		int ItemSize = 6;
+		int ItemSize = 0;
 
+		for (int i = 0; i < 2; i++)
+		{
+			ItemSize += 3;
+
+			cout << ItemSize << endl;
+		}
 		
-
 
 
 

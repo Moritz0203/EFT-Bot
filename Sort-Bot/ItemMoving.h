@@ -100,7 +100,6 @@ namespace ItemMoving {
 	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const shared_ptr<vector<vector<T>>> shared_vector_ptr) {
 		checksPublic chechs;
 		chechs.CheckScrollbarPositions();
-		int freeSlotsCount = 0;
 
 		for (int i = 0; i < prefix.ptr_PCIC->pageOfParentCase; i++) {
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
@@ -135,7 +134,6 @@ namespace ItemMoving {
 	void movInStash(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const shared_ptr<vector<vector<T>>> shared_vector_ptr) {
 		checksPublic chechs;
 		chechs.CheckScrollbarPositions();
-		int freeSlotsCount = 0;
 
 
 

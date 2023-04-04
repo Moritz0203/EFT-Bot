@@ -21,6 +21,10 @@ struct pair_hash {
 };
 
 bool comparePoints(const POINT& a, const POINT& b);
+bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
+bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
+bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize);
+
 
 class findFreeSlots_test{
 	vector<vector<POINT>> FinalResults;
@@ -57,7 +61,7 @@ class findFreeSlots_test{
 
 
 public:
-	void findeSlots(vector<POINT> ReturnPoints) { //parent case must be open to use this function
+	vector<vector<POINT>> findeSlots(vector<POINT> ReturnPoints) { //parent case must be open to use this function
 		//Mat MatScreen;
 		//Mat templ = imread("ObjectImages/EmptySquare.png");
 		//int freeSlots = {};
@@ -73,7 +77,7 @@ public:
 
 		Clean_ReturnPoints = Matching::removeDuplicates(ReturnPoints);
 
-		FinalResults = SortINrows(Clean_ReturnPoints);
+		return FinalResults = SortINrows(Clean_ReturnPoints);
 
 		/*case_shared_ptr->freeSlots = FinalResults;*/
 	}
@@ -124,6 +128,53 @@ public:
 		}
 	}
 };
+
+struct SpecsForItem {
+	int colums;
+	int rows;
+};
+
+
+bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
+	vector<shared_ptr<POINT>> pointsForLookUp;
+
+	for (int i = 0; i < ptr_vector->size(); i++) {
+		for (POINT pointIN : (*ptr_vector)[i]) {
+			
+		}
+	}
+	return true;
+}
+
+bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
+	return true;
+}
+
+bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize) {
+	switch (ItemSize)
+	{
+	case 6:
+		SpecsForItem SixSlotsVertical(3, 2);
+		SpecsForItem SixSlotsHorizontal(2, 3);
+
+		if (Vertical(ptr_vector, SixSlotsVertical)) {
+			cout << "es ist genug platz vor handen" << endl;
+			return true; // genug Platz vor handen
+		}
+		else if (Horizontal(ptr_vector, SixSlotsHorizontal)) {
+			cout << "es ist genug platz vor handen" << endl;
+			return true; // genug Platz vor handen
+		}
+		else {
+			//Do something : wenn beides fehlschlägt
+			return false;
+		}
+	}
+		
+
+}
+
+
 
 
 
@@ -181,20 +232,34 @@ int main() {
 
 		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ1, 0.99999);
 
+		
 
 		findFreeSlots_test findFreeSlots1;
-		findFreeSlots1.findeSlots(ReturnPoints);
+		vector<vector<POINT>> FinalResult = findFreeSlots1.findeSlots(ReturnPoints);
 
 		findFreeSlots1.Print_Out_Case_EmptySlots();
 
-		Mat MatScreen1 = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
+
+		int ItemSize = 6;
+
+		
+
+
+
+
+
+
+
+
+
+		/*Mat MatScreen1 = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
 
 		vector<POINT> ReturnPoints1 = TemplateMatching::templateMatchingObjects_Vector(MatScreen1, templ1, 0.99999);
 
 
 		findFreeSlots1.findeSlots(ReturnPoints1);
 
-		findFreeSlots1.Print_Out_Case_EmptySlots();
+		findFreeSlots1.Print_Out_Case_EmptySlots();*/
 
 		/*for (int i = 0; i < ReturnPoints.size(); i++) {
 			cout << ReturnPoints[i].y << " " << ReturnPoints[i].x << "----2 - " << i << endl;

@@ -139,7 +139,6 @@ public:
 
 
 
-
 bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
 	vector<shared_ptr<POINT>> vector_ptr_LookUp;
 	shared_ptr<vector<POINT>> ptr_vector_row;

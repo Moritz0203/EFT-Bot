@@ -28,6 +28,7 @@ struct SpecsForItem {
 bool comparePoints(const POINT& a, const POINT& b);
 bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
 bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
+void remove_points(std::shared_ptr<std::vector<std::vector<POINT>>> &ptr_vector, std::vector<std::shared_ptr<POINT>> &vector_ptr_LookUp);
 bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int rows, vector<shared_ptr<POINT>>& vector_ptr_LookUp, int x_FistLook_lastRow);
 bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize);
 
@@ -153,26 +154,70 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 
 			for (int i2 = 1; i2 <= specsForItem.rows; i2++) {
 				ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[index_ptr++]);
-				int x_FirstLook_lastRow = vector_ptr_LookUp[index += specsForItem.columns]->x;
+				int x_FirstLook_lastRow = vector_ptr_LookUp[index]->x;
+				index += specsForItem.columns;
 
 				if (!CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, x_FirstLook_lastRow)) {
 					break_tryNew = true;
 					break;
 				}
-					
 			}
+
+			if (break_tryNew == false) {
+				remove_points(ptr_vector, vector_ptr_LookUp);
+				return true;
+			}	
 		}
 		else {
-
+			vector_ptr_LookUp.clear();
 		}
 	}
-
-
-	return true;
+	return false;
 }
 
 bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
-	return true;
+	vector<shared_ptr<POINT>> vector_ptr_LookUp;
+	shared_ptr<vector<POINT>> ptr_vector_row;
+	bool break_tryNew = false;
+
+	for (int i = 0; i < ptr_vector->size(); i++) {
+		ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[i]);
+
+		if (CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, NULL) || break_tryNew != false) {
+			int index = 0;
+			int index_ptr = i;
+
+			for (int i2 = 1; i2 <= specsForItem.rows; i2++) {
+				ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[index_ptr++]);
+				int x_FirstLook_lastRow = vector_ptr_LookUp[index]->x;
+				index += specsForItem.columns;
+
+				if (!CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, x_FirstLook_lastRow)) {
+					break_tryNew = true;
+					break;
+				}
+			}
+
+			if (break_tryNew == false) {
+				remove_points(ptr_vector, vector_ptr_LookUp);
+				return true;
+			}
+		}
+		else {
+			vector_ptr_LookUp.clear();
+		}
+	}
+	return false;
+}
+
+
+void remove_points(std::shared_ptr<std::vector<std::vector<POINT>>> &ptr_vector, std::vector<std::shared_ptr<POINT>> &vector_ptr_LookUp) {
+	for (vector<POINT> vector_point : (*ptr_vector)) {
+		for (shared_ptr<POINT> remuve_point : vector_ptr_LookUp) {
+			vector_point.erase(std::remove_if(vector_point.begin(), vector_point.end(), [&](const POINT& p) {  return p.x == remuve_point->x && p.y == remuve_point->y;  }), vector_point.end());
+		}
+	}
+	ptr_vector->shrink_to_fit();
 }
 
 
@@ -182,8 +227,6 @@ bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<sh
 
 	for (int i = 0; i < ptr_vector_row->size(); i++) {
 		POINT temp_lookUp;
-
-
 		ptr_LookUp = make_shared<POINT>((*ptr_vector_row)[i]);
 
 		temp_lookUp.x = ptr_LookUp->x + 63; // weil jedes empty space immer 63 pixel auseinader ist.

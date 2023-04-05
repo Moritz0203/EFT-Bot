@@ -256,9 +256,9 @@ bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<sh
 
 
 bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize) {
-	switch (ItemSize)
-	{
-	case 6:
+	//switch (ItemSize)
+	//{
+	//case 6:
 		SpecsForItem SixSlotsVertical(3, 2);
 		SpecsForItem SixSlotsHorizontal(2, 3);
 
@@ -272,9 +272,10 @@ bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize)
 		}
 		else {
 			//Do something : wenn beides fehlschlägt
+			cout << "beides fehlgeschlagen" << endl;
 			return false;
 		}
-	}
+	//}
 	
 
 }
@@ -344,16 +345,9 @@ int main() {
 
 		findFreeSlots1.Print_Out_Case_EmptySlots();
 
+		shared_ptr<vector<vector<POINT>>> ptr_vector = make_shared<vector<vector<POINT>>>(FinalResult);
 
-		int ItemSize = 0;
-
-		for (int i = 0; i < 2; i++)
-		{
-			ItemSize += 3;
-
-			cout << ItemSize << endl;
-		}
-		
+		cout << Check_for_Space(ptr_vector, 6) << endl;
 
 
 

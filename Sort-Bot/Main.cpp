@@ -160,14 +160,19 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 		if (checkColumn == true || break_tryNew != false) {
 			int index = 0;
 			int index_ptr = i;
+			int x_FirstLook_lastRow{};
 
-			cout << "    --- Inner Check ---" << endl;
+			cout << "     --- Inner Check ---" << endl;
 
 			for (int i2 = 1; i2 < specsForItem.rows; i2++) {
 				ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[index_ptr++]);
-				int x_FirstLook_lastRow = vector_ptr_LookUp[index]->x;
 
-				cout << "    --- Index ->" << i2 << endl;
+				if (index != vector_ptr_LookUp.size()) {
+					x_FirstLook_lastRow = vector_ptr_LookUp[index]->x;
+				}
+				
+
+				cout << "     --- Index -> " << i2 << endl;
 
 				index += specsForItem.columns;
 
@@ -242,6 +247,7 @@ bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<sh
 	vector<POINT> vector_row = (*ptr_vector_row);
 	cout << "column size -> " << column << endl;
 	cout << "vector row size -> " << vector_row.size() << endl;
+	int count_foundet = 0;
 
 	for (int i = 0; i < vector_row.size(); i++) {
 		POINT temp_lookUp;
@@ -252,11 +258,12 @@ bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<sh
 		temp_lookUp.x = ptr_LookUp->x + 63; // weil jedes empty space immer 63 pixel auseinader ist.
 
 		cout << temp_lookUp.x << endl;
-		int count_foundet = 2;
+		
 
 		vector_ptr_LookUp.push_back(ptr_LookUp);
 
 		int i_in = i + 1;
+		
 		for (; i_in < vector_row.size(); i_in++) {
 
 			ptr_LookUp_In = make_shared<POINT>(vector_row[i_in]);
@@ -264,19 +271,26 @@ bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<sh
 			cout << "Points vergleichen ->     " << temp_lookUp.x << " <- -- -> " << ptr_LookUp_In->x << endl;
 
 			if (temp_lookUp.x == ptr_LookUp_In->x) {
+				count_foundet++;
+				cout << count_foundet << " " << column << endl;
+
 				cout << "--- Die Points sind gleich\n" << endl;
-				if (count_foundet > column) {
+				if (count_foundet == column) {
 					cout << "true --- Funktion Check Column ende" << endl;
 					return true;
 				}
 				else {
+					cout << "das ende der funktion wurde nicht erreicht" << endl;
 					temp_lookUp.x += 63; // weil jedes empty space immer 63 pixel auseinader ist.
-					count_foundet++;
 					vector_ptr_LookUp.push_back(ptr_LookUp_In);
 				}
 			}
-			else
-				cout << "--- Points sind nicht gleich\n" << endl; break;
+			else {
+				cout << "--- Points sind nicht gleich\n" << endl; 
+				count_foundet = 0;
+				break;
+			}
+				
 		}
 	}
 	return false;

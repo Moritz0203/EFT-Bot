@@ -183,6 +183,7 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 			}	
 		}
 		else {
+
 			vector_ptr_LookUp.clear();
 		}
 	}
@@ -278,6 +279,7 @@ bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<sh
 				cout << "--- Points sind nicht gleich\n" << endl; break;
 		}
 	}
+	return false;
 }
 
 

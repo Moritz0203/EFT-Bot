@@ -147,13 +147,28 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 	for (int i = 0; i < ptr_vector->size(); i++) {
 		ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[i]);
 
-		if (CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, NULL) || break_tryNew != false) {
+		cout << "index -> " << i << endl;
+		bool checkColumn = CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, NULL);
+
+		if (checkColumn) {
+			cout << "--- Reuckgabewert ist true ---\n" << endl;
+		} else {
+			cout << "--- Reuckgabewert ist false ---\n" << endl;
+		}
+		
+
+		if (checkColumn == true || break_tryNew != false) {
 			int index = 0;
 			int index_ptr = i;
 
-			for (int i2 = 1; i2 <= specsForItem.rows; i2++) {
+			cout << "    --- Inner Check ---" << endl;
+
+			for (int i2 = 1; i2 < specsForItem.rows; i2++) {
 				ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[index_ptr++]);
 				int x_FirstLook_lastRow = vector_ptr_LookUp[index]->x;
+
+				cout << "    --- Index ->" << i2 << endl;
+
 				index += specsForItem.columns;
 
 				if (!CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, x_FirstLook_lastRow)) {
@@ -223,22 +238,34 @@ void remove_points(std::shared_ptr<std::vector<std::vector<POINT>>> &ptr_vector,
 bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<shared_ptr<POINT>> &vector_ptr_LookUp, int x_FistLook_lastRow) {
 	shared_ptr<POINT> ptr_LookUp;
 	shared_ptr<POINT> ptr_LookUp_In;
+	vector<POINT> vector_row = (*ptr_vector_row);
+	cout << "column size -> " << column << endl;
+	cout << "vector row size -> " << vector_row.size() << endl;
 
-	for (int i = 0; i < ptr_vector_row->size(); i++) {
+	for (int i = 0; i < vector_row.size(); i++) {
 		POINT temp_lookUp;
-		ptr_LookUp = make_shared<POINT>((*ptr_vector_row)[i]);
+		ptr_LookUp = make_shared<POINT>(vector_row[i]);
+
+		cout << "Berechnung -> " << ptr_LookUp->x << " ";
 
 		temp_lookUp.x = ptr_LookUp->x + 63; // weil jedes empty space immer 63 pixel auseinader ist.
+
+		cout << temp_lookUp.x << endl;
 		int count_foundet = 2;
 
 		vector_ptr_LookUp.push_back(ptr_LookUp);
-		for (int i_in = i; i_in < ptr_vector_row->size(); i_in++) {
 
-			ptr_LookUp_In = make_shared<POINT>((*ptr_vector_row)[i_in]);
+		int i_in = i + 1;
+		for (; i_in < vector_row.size(); i_in++) {
+
+			ptr_LookUp_In = make_shared<POINT>(vector_row[i_in]);
+
+			cout << "Points vergleichen ->     " << temp_lookUp.x << " <- -- -> " << ptr_LookUp_In->x << endl;
 
 			if (temp_lookUp.x == ptr_LookUp_In->x) {
-
-				if (count_foundet == column) {
+				cout << "--- Die Points sind gleich\n" << endl;
+				if (count_foundet > column) {
+					cout << "true --- Funktion Check Column ende" << endl;
 					return true;
 				}
 				else {
@@ -248,7 +275,7 @@ bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<sh
 				}
 			}
 			else
-				return false;
+				cout << "--- Points sind nicht gleich\n" << endl; break;
 		}
 	}
 }
@@ -259,17 +286,17 @@ bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize)
 	//switch (ItemSize)
 	//{
 	//case 6:
-		SpecsForItem SixSlotsVertical(3, 2);
-		SpecsForItem SixSlotsHorizontal(2, 3);
+		SpecsForItem SixSlotsVertical(2, 3);
+		SpecsForItem SixSlotsHorizontal(3, 2);
 
 		if (Vertical(ptr_vector, SixSlotsVertical)) {
 			cout << "es ist genug platz vor handen" << endl;
 			return true; // genug Platz vor handen
 		}
-		else if (Horizontal(ptr_vector, SixSlotsHorizontal)) {
-			cout << "es ist genug platz vor handen" << endl;
-			return true; // genug Platz vor handen
-		}
+		//else if (Horizontal(ptr_vector, SixSlotsHorizontal)) {
+		//	cout << "es ist genug platz vor handen" << endl;
+		//	return true; // genug Platz vor handen
+		//}
 		else {
 			//Do something : wenn beides fehlschlägt
 			cout << "beides fehlgeschlagen" << endl;
@@ -323,7 +350,7 @@ int main() {
 		Mat templ;
 		Mat templ1;
 
-		Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_7.png");
+		Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
 		
 		/*vector<POINT> ReturnPoints;*/
 		//vector<POINT> ReturnPoints;

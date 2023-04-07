@@ -140,20 +140,60 @@ public:
 
 
 bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
-	vector<shared_ptr<POINT>> vector_ptr_LookUp;
+	vector<vector<POINT>> vector_row = (*ptr_vector);
+	vector<vector<vector<int>>> points_for_LookUp{};
+	vector<vector<int>> temp_points_for_LookUp{};
+	vector<int> IN_temp_Pairs_for_LookUp{};
+
+
+	for (int i = 0; i < vector_row.size(); i++) {
+		for (int i2 = 0; i2 < vector_row[i].size(); i2++) {
+			int index = i + 1;
+			int temp_LookUp = vector_row[i][i2].x + 63;
+			bool break_tryNew = false;
+
+			IN_temp_Pairs_for_LookUp.push_back(vector_row[i][i2].x);
+			for (int i_in = 1; i_in < specsForItem.columns; i_in) {
+
+				if (temp_LookUp == vector_row[i][index].x) {
+					IN_temp_Pairs_for_LookUp.push_back(vector_row[i][index].x);
+					index++;
+					temp_LookUp += 63;
+				} else {
+					break_tryNew = true;
+					IN_temp_Pairs_for_LookUp.clear();
+				}
+				
+			}
+
+			if (break_tryNew != true)
+				temp_points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp);
+
+		}
+
+		if (temp_points_for_LookUp.size() != 0) {
+			points_for_LookUp.push_back(temp_points_for_LookUp);
+		}
+	}
+
+
+
+
+	/*vector<shared_ptr<POINT>> vector_ptr_LookUp;
 	shared_ptr<vector<POINT>> ptr_vector_row;
-	bool break_tryNew = false;
+	
 	
 	for (int i = 0; i < ptr_vector->size(); i++) {
+		bool break_tryNew = false;
 		ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[i]);
 
 		cout << "index -> " << i << endl;
 		bool checkColumn = CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, NULL);
 
 		if (checkColumn) {
-			cout << "--- Reuckgabewert ist true ---\n" << endl;
+			cout << "------------------ Reuckgabewert ist true ---------\n" << endl;
 		} else {
-			cout << "--- Reuckgabewert ist false ---\n" << endl;
+			cout << "------------------ Reuckgabewert ist false --------- neu start\n\n" << endl;
 		}
 		
 
@@ -162,7 +202,7 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 			int index_ptr = i;
 			int x_FirstLook_lastRow{};
 
-			cout << "     --- Inner Check ---" << endl;
+			cout << "     ----------- Inner Check -----------" << endl;
 
 			for (int i2 = 1; i2 < specsForItem.rows; i2++) {
 				ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[index_ptr++]);
@@ -172,17 +212,24 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 				}
 				
 
-				cout << "     --- Index -> " << i2 << endl;
+				cout << "     --- Index -> " << index_ptr << " --- Inner Check Index -> " << i2 << endl;
 
 				index += specsForItem.columns;
 
 				if (!CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, x_FirstLook_lastRow)) {
+					cout << "------------------ Reuckgabewert ist false ---------\n" << endl;
+					cout << "----------------------------------------------------------------------------------------------------------\n\n" << endl;
 					break_tryNew = true;
 					break;
+				}
+				else
+				{
+					cout << "------------------ Reuckgabewert ist true ---------\n" << endl;
 				}
 			}
 
 			if (break_tryNew == false) {
+				cout << "------------ Die Finktion gibt ein true aus und hat somit genug platz ------------" << endl;
 				remove_points(ptr_vector, vector_ptr_LookUp);
 				return true;
 			}	
@@ -191,7 +238,7 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 
 			vector_ptr_LookUp.clear();
 		}
-	}
+	}*/
 	return false;
 }
 
@@ -242,57 +289,62 @@ void remove_points(std::shared_ptr<std::vector<std::vector<POINT>>> &ptr_vector,
 
 
 bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<shared_ptr<POINT>> &vector_ptr_LookUp, int x_FistLook_lastRow) {
-	shared_ptr<POINT> ptr_LookUp;
-	shared_ptr<POINT> ptr_LookUp_In;
-	vector<POINT> vector_row = (*ptr_vector_row);
-	cout << "column size -> " << column << endl;
-	cout << "vector row size -> " << vector_row.size() << endl;
-	int count_foundet = 0;
 
-	for (int i = 0; i < vector_row.size(); i++) {
-		POINT temp_lookUp;
-		ptr_LookUp = make_shared<POINT>(vector_row[i]);
 
-		cout << "Berechnung -> " << ptr_LookUp->x << " ";
 
-		temp_lookUp.x = ptr_LookUp->x + 63; // weil jedes empty space immer 63 pixel auseinader ist.
 
-		cout << temp_lookUp.x << endl;
-		
+	//shared_ptr<POINT> ptr_LookUp;
+	//shared_ptr<POINT> ptr_LookUp_In;
+	//vector<POINT> vector_row = (*ptr_vector_row);
+	//cout << "column size -> " << column << endl;
+	//cout << "vector row size -> " << vector_row.size() << endl;
+	//int count_foundet = 0;
 
-		vector_ptr_LookUp.push_back(ptr_LookUp);
+	//for (int i = 0; i < vector_row.size(); i++) {
+	//	POINT temp_lookUp;
+	//	ptr_LookUp = make_shared<POINT>(vector_row[i]);
 
-		int i_in = i + 1;
-		
-		for (; i_in < vector_row.size(); i_in++) {
+	//	cout << "Berechnung -> " << ptr_LookUp->x << " ";
 
-			ptr_LookUp_In = make_shared<POINT>(vector_row[i_in]);
+	//	temp_lookUp.x = ptr_LookUp->x + 63; // weil jedes empty space immer 63 pixel auseinader ist.
 
-			cout << "Points vergleichen ->     " << temp_lookUp.x << " <- -- -> " << ptr_LookUp_In->x << endl;
+	//	cout << temp_lookUp.x << endl;
+	//	
 
-			if (temp_lookUp.x == ptr_LookUp_In->x) {
-				count_foundet++;
-				cout << count_foundet << " " << column << endl;
+	//	vector_ptr_LookUp.push_back(ptr_LookUp);
 
-				cout << "--- Die Points sind gleich\n" << endl;
-				if (count_foundet == column) {
-					cout << "true --- Funktion Check Column ende" << endl;
-					return true;
-				}
-				else {
-					cout << "das ende der funktion wurde nicht erreicht" << endl;
-					temp_lookUp.x += 63; // weil jedes empty space immer 63 pixel auseinader ist.
-					vector_ptr_LookUp.push_back(ptr_LookUp_In);
-				}
-			}
-			else {
-				cout << "--- Points sind nicht gleich\n" << endl; 
-				count_foundet = 0;
-				break;
-			}
-				
-		}
-	}
+	//	int i_in = i + 1;
+	//	
+	//	for (; i_in < vector_row.size(); i_in++) {
+
+	//		ptr_LookUp_In = make_shared<POINT>(vector_row[i_in]);
+	//		cout << "-------------------------------------------------------------------\n";
+
+	//		cout << "Points vergleichen ->     " << temp_lookUp.x << " <- -- -> " << ptr_LookUp_In->x << endl;
+
+	//		if (temp_lookUp.x == ptr_LookUp_In->x) {
+	//			count_foundet++;
+	//			cout << count_foundet << " " << column << endl;
+
+	//			cout << "--- Die Points sind gleich\n" << endl;
+	//			if (count_foundet == column) {
+	//				cout << "true --- Funktion Check Column ende" << endl;
+	//				return true;
+	//			}
+	//			else {
+	//				cout << "das ende der funktion wurde nicht erreicht" << endl;
+	//				temp_lookUp.x += 63; // weil jedes empty space immer 63 pixel auseinader ist.
+	//				vector_ptr_LookUp.push_back(ptr_LookUp_In);
+	//			}
+	//		}
+	//		else {
+	//			cout << "------ Points sind nicht gleich --- new try with new start point\n" << endl; 
+	//			count_foundet = 0;
+	//			break;
+	//		}
+	//			
+	//	}
+	//}
 	return false;
 }
 

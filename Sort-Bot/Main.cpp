@@ -144,6 +144,7 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 	vector<vector<vector<int>>> points_for_LookUp{};
 	vector<vector<int>> temp_points_for_LookUp{};
 	vector<int> IN_temp_Pairs_for_LookUp{};
+	shared_ptr<vector<POINT>> ptr_vector_row{};
 
 
 	for (int i = 0; i < vector_row.size(); i++) {
@@ -153,7 +154,7 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 			bool break_tryNew = false;
 
 			IN_temp_Pairs_for_LookUp.push_back(vector_row[i][i2].x);
-			for (int i_in = 1; i_in < specsForItem.columns; i_in) {
+			for (int column = 1; column < specsForItem.columns; column) {
 
 				if (temp_LookUp == vector_row[i][index].x) {
 					IN_temp_Pairs_for_LookUp.push_back(vector_row[i][index].x);
@@ -163,20 +164,27 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 					break_tryNew = true;
 					IN_temp_Pairs_for_LookUp.clear();
 				}
-				
 			}
 
 			if (break_tryNew != true)
-				temp_points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp);
+				temp_points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp); IN_temp_Pairs_for_LookUp.clear();
 
 		}
 
 		if (temp_points_for_LookUp.size() != 0) {
+			
+			int index = i;
+			for (int rows = 1; rows < specsForItem.rows; rows++) {
+				ptr_vector_row = make_shared<vector<POINT>>(vector_row[++index]);
+
+				if (!check_Column(temp_points_for_LookUp, ptr_vector_row)) {
+
+				}
+			}
 			points_for_LookUp.push_back(temp_points_for_LookUp);
+			temp_points_for_LookUp.clear();
 		}
 	}
-
-
 
 
 	/*vector<shared_ptr<POINT>> vector_ptr_LookUp;
@@ -278,9 +286,23 @@ bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specs
 }
 
 
+bool check_Column(std::vector<std::vector<int>> input, std::shared_ptr<std::vector<POINT>> points) {
+	for (const vector<int>& inner_vector : input) {
+		for (const POINT& point : *points) {
+			if (std::find(inner_vector.begin(), inner_vector.end(), point.x) != inner_vector.end()) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+
+
+
 void remove_points(std::shared_ptr<std::vector<std::vector<POINT>>> &ptr_vector, std::vector<std::shared_ptr<POINT>> &vector_ptr_LookUp) {
 	for (vector<POINT> vector_point : (*ptr_vector)) {
-		for (shared_ptr<POINT> remuve_point : vector_ptr_LookUp) {
+		for (const shared_ptr<POINT> remuve_point : vector_ptr_LookUp) {
 			vector_point.erase(std::remove_if(vector_point.begin(), vector_point.end(), [&](const POINT& p) {  return p.x == remuve_point->x && p.y == remuve_point->y;  }), vector_point.end());
 		}
 	}

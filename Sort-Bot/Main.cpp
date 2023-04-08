@@ -166,7 +166,6 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 				}
 			}
 
-
 			if (break_tryNew != true)
 				temp_points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp); IN_temp_Pairs_for_LookUp.clear();
 

@@ -147,14 +147,19 @@ bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForI
 	shared_ptr<vector<int>> ptr_vector_for_clean{};
 
 	for (int i = 0; i < vector_row.size(); i++) {
+		cout << "first in" << endl;
 		for (int i2 = 0; i2 < vector_row[i].size(); i2++) {
+			cout << "second in" << endl;
 			int index = i2 + 1;
 			int temp_LookUp = vector_row[i][i2].x + 63;
 			bool break_tryNew = false;
 
-			IN_temp_Pairs_for_LookUp.push_back(vector_row[i][i2].x);
-			for (int column = 1; column < specsForItem.columns; column) {
+			if (index == vector_row[i].size())
+				break;
 
+			IN_temp_Pairs_for_LookUp.push_back(vector_row[i][i2].x);
+			for (int column = 1; column < specsForItem.columns; column++) {
+				cout << "in -- in " << endl;
 				if (temp_LookUp == vector_row[i][index].x) {
 					IN_temp_Pairs_for_LookUp.push_back(vector_row[i][index].x);
 					index++;

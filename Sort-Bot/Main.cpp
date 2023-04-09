@@ -286,19 +286,58 @@ bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specs
 }
 
 
-bool check_Column(std::vector<std::vector<int>> input, std::shared_ptr<std::vector<POINT>> points) {
-	for (const vector<int>& inner_vector : input) {
-		for (const POINT& point : *points) {
-			if (std::find(inner_vector.begin(), inner_vector.end(), point.x) != inner_vector.end()) {
+//bool check_Column(std::vector<std::vector<int>> input, std::shared_ptr<std::vector<POINT>> points) {
+//	for (const vector<int>& inner_vector : input) {
+//		for (const POINT& point : *points) {
+//			if (std::find(inner_vector.begin(), inner_vector.end(), point.x) != inner_vector.end()) {
+//				return true;
+//			}
+//		}
+//	}
+//	return false;
+//}
+
+bool check_Column_Lambda(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>> points) {
+	bool found = false;
+	input.erase(std::remove_if(input.begin(), input.end(), [&](const std::vector<int>& vec) {
+		for (const auto& val : vec) {
+			if (std::find_if(points->begin(), points->end(), [&](const POINT& point) { return point.x == val; }) == points->end()) {
 				return true;
 			}
 		}
-	}
-	return false;
+		found = true;
+		return false;
+	}), input.end());
+
+	return found;
 }
 
-
-
+bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>> points) {
+	bool found = false;
+	std::vector<std::vector<int>> result;
+	for (const auto& vec : input) {
+		bool allMatch = true;
+		for (const auto& val : vec) {
+			bool match = false;
+			for (const auto& point : *points) {
+				if (point.x == val) {
+					match = true;
+					break;
+				}
+			}
+			if (!match) {
+				allMatch = false;
+				break;
+			}
+		}
+		if (allMatch) {
+			found = true;
+			result.push_back(vec);
+		}
+	}
+	input = result;
+	return found;
+}
 
 void remove_points(std::shared_ptr<std::vector<std::vector<POINT>>> &ptr_vector, std::vector<std::shared_ptr<POINT>> &vector_ptr_LookUp) {
 	for (vector<POINT> vector_point : (*ptr_vector)) {

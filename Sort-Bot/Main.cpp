@@ -26,10 +26,9 @@ struct SpecsForItem {
 };
 
 bool comparePoints(const POINT& a, const POINT& b);
-bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
-bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
-void remove_points(std::shared_ptr<std::vector<std::vector<POINT>>> &ptr_vector, std::vector<std::shared_ptr<POINT>> &vector_ptr_LookUp);
-bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int rows, vector<shared_ptr<POINT>>& vector_ptr_LookUp, int x_FistLook_lastRow);
+bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
+void remove_duplicates(std::vector<std::shared_ptr<std::vector<POINT>>>& points, std::shared_ptr<std::vector<int>> values);
+bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>>& points);
 bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize);
 
 
@@ -139,17 +138,17 @@ public:
 
 
 
-bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
+bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
 	vector<vector<POINT>> vector_row = (*ptr_vector);
-	vector<vector<vector<int>>> points_for_LookUp{};
-	vector<vector<int>> temp_points_for_LookUp{};
+	vector<vector<int>> points_for_LookUp{};
 	vector<int> IN_temp_Pairs_for_LookUp{};
 	shared_ptr<vector<POINT>> ptr_vector_row{};
-
+	vector<shared_ptr<vector<POINT>>> vector_ptr_vector_row{};
+	shared_ptr<vector<int>> ptr_vector_for_clean{};
 
 	for (int i = 0; i < vector_row.size(); i++) {
 		for (int i2 = 0; i2 < vector_row[i].size(); i2++) {
-			int index = i + 1;
+			int index = i2 + 1;
 			int temp_LookUp = vector_row[i][i2].x + 63;
 			bool break_tryNew = false;
 
@@ -167,152 +166,63 @@ bool Vertical(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsFo
 			}
 
 			if (break_tryNew != true)
-				temp_points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp); IN_temp_Pairs_for_LookUp.clear();
-
+				points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp); IN_temp_Pairs_for_LookUp.clear();
 		}
 
-		if (temp_points_for_LookUp.size() != 0) {
-			
+		if (points_for_LookUp.size() != 0) {
+			bool space_is_free = true;
 			int index = i;
+
 			for (int rows = 1; rows < specsForItem.rows; rows++) {
 				ptr_vector_row = make_shared<vector<POINT>>(vector_row[++index]);
+				vector_ptr_vector_row.push_back(ptr_vector_row);
 
-				if (!check_Column(temp_points_for_LookUp, ptr_vector_row)) {
-
-				}
-			}
-			points_for_LookUp.push_back(temp_points_for_LookUp);
-			temp_points_for_LookUp.clear();
-		}
-	}
-
-
-	/*vector<shared_ptr<POINT>> vector_ptr_LookUp;
-	shared_ptr<vector<POINT>> ptr_vector_row;
-	
-	
-	for (int i = 0; i < ptr_vector->size(); i++) {
-		bool break_tryNew = false;
-		ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[i]);
-
-		cout << "index -> " << i << endl;
-		bool checkColumn = CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, NULL);
-
-		if (checkColumn) {
-			cout << "------------------ Reuckgabewert ist true ---------\n" << endl;
-		} else {
-			cout << "------------------ Reuckgabewert ist false --------- neu start\n\n" << endl;
-		}
-		
-
-		if (checkColumn == true || break_tryNew != false) {
-			int index = 0;
-			int index_ptr = i;
-			int x_FirstLook_lastRow{};
-
-			cout << "     ----------- Inner Check -----------" << endl;
-
-			for (int i2 = 1; i2 < specsForItem.rows; i2++) {
-				ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[index_ptr++]);
-
-				if (index != vector_ptr_LookUp.size()) {
-					x_FirstLook_lastRow = vector_ptr_LookUp[index]->x;
-				}
-				
-
-				cout << "     --- Index -> " << index_ptr << " --- Inner Check Index -> " << i2 << endl;
-
-				index += specsForItem.columns;
-
-				if (!CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, x_FirstLook_lastRow)) {
-					cout << "------------------ Reuckgabewert ist false ---------\n" << endl;
-					cout << "----------------------------------------------------------------------------------------------------------\n\n" << endl;
-					break_tryNew = true;
-					break;
-				}
-				else
-				{
-					cout << "------------------ Reuckgabewert ist true ---------\n" << endl;
-				}
-			}
-
-			if (break_tryNew == false) {
-				cout << "------------ Die Finktion gibt ein true aus und hat somit genug platz ------------" << endl;
-				remove_points(ptr_vector, vector_ptr_LookUp);
-				return true;
-			}	
-		}
-		else {
-
-			vector_ptr_LookUp.clear();
-		}
-	}*/
-	return false;
-}
-
-bool Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
-	vector<shared_ptr<POINT>> vector_ptr_LookUp;
-	shared_ptr<vector<POINT>> ptr_vector_row;
-	bool break_tryNew = false;
-
-	for (int i = 0; i < ptr_vector->size(); i++) {
-		ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[i]);
-
-		if (CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, NULL) || break_tryNew != false) {
-			int index = 0;
-			int index_ptr = i;
-
-			for (int i2 = 1; i2 <= specsForItem.rows; i2++) {
-				ptr_vector_row = make_shared<vector<POINT>>((*ptr_vector)[index_ptr++]);
-				int x_FirstLook_lastRow = vector_ptr_LookUp[index]->x;
-				index += specsForItem.columns;
-
-				if (!CheckColumn(ptr_vector_row, specsForItem.columns, vector_ptr_LookUp, x_FirstLook_lastRow)) {
-					break_tryNew = true;
+				if (!check_Column(points_for_LookUp, ptr_vector_row)) {
+					space_is_free = false;
 					break;
 				}
 			}
 
-			if (break_tryNew == false) {
-				remove_points(ptr_vector, vector_ptr_LookUp);
+			if (space_is_free) {
+				ptr_vector_for_clean = make_shared<vector<int>>(points_for_LookUp[0]);
+				remove_duplicates(vector_ptr_vector_row, ptr_vector_for_clean);
 				return true;
+			} else {
+				vector_ptr_vector_row.clear();
 			}
-		}
-		else {
-			vector_ptr_LookUp.clear();
+			
+			points_for_LookUp.clear();
 		}
 	}
+
 	return false;
 }
 
+void remove_duplicates(std::vector<std::shared_ptr<std::vector<POINT>>>& points, std::shared_ptr<std::vector<int>> values) {
+	for (auto& vec : points) {
+		vec->erase(std::remove_if(vec->begin(), vec->end(),
+			[&](const POINT& p) {
+				return std::find(values->begin(), values->end(), p.x) != values->end();
+			}), vec->end());
+	}
+}
 
-//bool check_Column(std::vector<std::vector<int>> input, std::shared_ptr<std::vector<POINT>> points) {
-//	for (const vector<int>& inner_vector : input) {
-//		for (const POINT& point : *points) {
-//			if (std::find(inner_vector.begin(), inner_vector.end(), point.x) != inner_vector.end()) {
+//bool check_Column_Lambda(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>> points) {
+//	bool found = false;
+//	input.erase(std::remove_if(input.begin(), input.end(), [&](const std::vector<int>& vec) {
+//		for (const auto& val : vec) {
+//			if (std::find_if(points->begin(), points->end(), [&](const POINT& point) { return point.x == val; }) == points->end()) {
 //				return true;
 //			}
 //		}
-//	}
-//	return false;
+//		found = true;
+//		return false;
+//	}), input.end());
+//
+//	return found;
 //}
 
-bool check_Column_Lambda(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>> points) {
-	bool found = false;
-	input.erase(std::remove_if(input.begin(), input.end(), [&](const std::vector<int>& vec) {
-		for (const auto& val : vec) {
-			if (std::find_if(points->begin(), points->end(), [&](const POINT& point) { return point.x == val; }) == points->end()) {
-				return true;
-			}
-		}
-		found = true;
-		return false;
-	}), input.end());
-
-	return found;
-}
-
-bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>> points) {
+bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>>& points) {
 	bool found = false;
 	std::vector<std::vector<int>> result;
 	for (const auto& vec : input) {
@@ -339,77 +249,6 @@ bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vec
 	return found;
 }
 
-void remove_points(std::shared_ptr<std::vector<std::vector<POINT>>> &ptr_vector, std::vector<std::shared_ptr<POINT>> &vector_ptr_LookUp) {
-	for (vector<POINT> vector_point : (*ptr_vector)) {
-		for (const shared_ptr<POINT> remuve_point : vector_ptr_LookUp) {
-			vector_point.erase(std::remove_if(vector_point.begin(), vector_point.end(), [&](const POINT& p) {  return p.x == remuve_point->x && p.y == remuve_point->y;  }), vector_point.end());
-		}
-	}
-	ptr_vector->shrink_to_fit();
-}
-
-
-bool CheckColumn(shared_ptr<vector<POINT>> ptr_vector_row, int column, vector<shared_ptr<POINT>> &vector_ptr_LookUp, int x_FistLook_lastRow) {
-
-
-
-
-	//shared_ptr<POINT> ptr_LookUp;
-	//shared_ptr<POINT> ptr_LookUp_In;
-	//vector<POINT> vector_row = (*ptr_vector_row);
-	//cout << "column size -> " << column << endl;
-	//cout << "vector row size -> " << vector_row.size() << endl;
-	//int count_foundet = 0;
-
-	//for (int i = 0; i < vector_row.size(); i++) {
-	//	POINT temp_lookUp;
-	//	ptr_LookUp = make_shared<POINT>(vector_row[i]);
-
-	//	cout << "Berechnung -> " << ptr_LookUp->x << " ";
-
-	//	temp_lookUp.x = ptr_LookUp->x + 63; // weil jedes empty space immer 63 pixel auseinader ist.
-
-	//	cout << temp_lookUp.x << endl;
-	//	
-
-	//	vector_ptr_LookUp.push_back(ptr_LookUp);
-
-	//	int i_in = i + 1;
-	//	
-	//	for (; i_in < vector_row.size(); i_in++) {
-
-	//		ptr_LookUp_In = make_shared<POINT>(vector_row[i_in]);
-	//		cout << "-------------------------------------------------------------------\n";
-
-	//		cout << "Points vergleichen ->     " << temp_lookUp.x << " <- -- -> " << ptr_LookUp_In->x << endl;
-
-	//		if (temp_lookUp.x == ptr_LookUp_In->x) {
-	//			count_foundet++;
-	//			cout << count_foundet << " " << column << endl;
-
-	//			cout << "--- Die Points sind gleich\n" << endl;
-	//			if (count_foundet == column) {
-	//				cout << "true --- Funktion Check Column ende" << endl;
-	//				return true;
-	//			}
-	//			else {
-	//				cout << "das ende der funktion wurde nicht erreicht" << endl;
-	//				temp_lookUp.x += 63; // weil jedes empty space immer 63 pixel auseinader ist.
-	//				vector_ptr_LookUp.push_back(ptr_LookUp_In);
-	//			}
-	//		}
-	//		else {
-	//			cout << "------ Points sind nicht gleich --- new try with new start point\n" << endl; 
-	//			count_foundet = 0;
-	//			break;
-	//		}
-	//			
-	//	}
-	//}
-	return false;
-}
-
-
 
 bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize) {
 	//switch (ItemSize)
@@ -418,14 +257,14 @@ bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize)
 		SpecsForItem SixSlotsVertical(2, 3);
 		SpecsForItem SixSlotsHorizontal(3, 2);
 
-		if (Vertical(ptr_vector, SixSlotsVertical)) {
-			cout << "es ist genug platz vor handen" << endl;
+		if (Vertical_Horizontal(ptr_vector, SixSlotsVertical)) {
+			cout << "es ist genug platz vor handen Vertical" << endl;
 			return true; // genug Platz vor handen
 		}
-		//else if (Horizontal(ptr_vector, SixSlotsHorizontal)) {
-		//	cout << "es ist genug platz vor handen" << endl;
-		//	return true; // genug Platz vor handen
-		//}
+		else if (Vertical_Horizontal(ptr_vector, SixSlotsHorizontal)) {
+			cout << "es ist genug platz vor handen Horizontal" << endl;
+			return true; // genug Platz vor handen
+		}
 		else {
 			//Do something : wenn beides fehlschlägt
 			cout << "beides fehlgeschlagen" << endl;

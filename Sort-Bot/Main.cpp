@@ -147,31 +147,53 @@ bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForI
 	shared_ptr<vector<int>> ptr_vector_for_clean{};
 
 	for (int i = 0; i < vector_row.size(); i++) {
-		cout << "first in" << endl;
+		cout << "\nfirst in INDEX: " << i << endl;
 		for (int i2 = 0; i2 < vector_row[i].size(); i2++) {
 			cout << "second in" << endl;
 			int index = i2 + 1;
 			int temp_LookUp = vector_row[i][i2].x + 63;
 			bool break_tryNew = false;
 
-			if (index == vector_row[i].size())
+			
+			if (index == vector_row[i].size()) {
+				cout << "Vector out of range\n" << endl;
 				break;
+			}
 
 			IN_temp_Pairs_for_LookUp.push_back(vector_row[i][i2].x);
 			for (int column = 1; column < specsForItem.columns; column++) {
-				cout << "in -- in " << endl;
+				
+				
+
+				cout << "in -- in " << index << endl;
 				if (temp_LookUp == vector_row[i][index].x) {
+					cout << "Points sind gleich --- " << temp_LookUp << " " << vector_row[i][index].x << "\n" << endl;
 					IN_temp_Pairs_for_LookUp.push_back(vector_row[i][index].x);
-					index++;
+
+					int index_check = index + 1;
+					if (index_check != vector_row[i].size())
+						index++;
+					else
+						break;
+
 					temp_LookUp += 63;
 				} else {
+					cout << "die points sind nicht gleich --- " << temp_LookUp << " " << vector_row[i][index].x << "\n" << endl;
 					break_tryNew = true;
 					IN_temp_Pairs_for_LookUp.clear();
+					break;
 				}
 			}
 
-			if (break_tryNew != true)
-				points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp); IN_temp_Pairs_for_LookUp.clear();
+			if (break_tryNew == false) {
+				for (int x : IN_temp_Pairs_for_LookUp) {
+					cout << "X: " << x << " ";
+				}
+				points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp); 
+				IN_temp_Pairs_for_LookUp.clear();
+				cout << "--- Es wurden alle in einer reie gefunden\n\n" << endl;
+			}
+				
 		}
 
 		if (points_for_LookUp.size() != 0) {
@@ -179,7 +201,13 @@ bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForI
 			int index = i;
 
 			for (int rows = 1; rows < specsForItem.rows; rows++) {
-				ptr_vector_row = make_shared<vector<POINT>>(vector_row[++index]);
+				if (++index == vector_row.size()) {
+					space_is_free = false;
+					cout << "Check row vector out of range" << endl;
+					break;
+				}
+
+				ptr_vector_row = make_shared<vector<POINT>>(vector_row[index]);
 				vector_ptr_vector_row.push_back(ptr_vector_row);
 
 				if (!check_Column(points_for_LookUp, ptr_vector_row)) {
@@ -323,7 +351,7 @@ int main() {
 		Mat templ;
 		Mat templ1;
 
-		Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
+		Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_7.png");
 		
 		/*vector<POINT> ReturnPoints;*/
 		//vector<POINT> ReturnPoints;

@@ -162,8 +162,8 @@ bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForI
 
 			IN_temp_Pairs_for_LookUp.push_back(vector_row[i][i2].x);
 			for (int column = 1; column < specsForItem.columns; column++) {
-				
-				
+								
+
 
 				cout << "in -- in " << index << endl;
 				if (temp_LookUp == vector_row[i][index].x) {
@@ -351,7 +351,7 @@ int main() {
 		Mat templ;
 		Mat templ1;
 
-		Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_7.png");
+		Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
 		
 		/*vector<POINT> ReturnPoints;*/
 		//vector<POINT> ReturnPoints;

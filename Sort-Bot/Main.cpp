@@ -20,10 +20,7 @@ struct pair_hash {
 	}
 };
 
-struct SpecsForItem {
-	int columns;
-	int rows;
-};
+
 
 bool comparePoints(const POINT& a, const POINT& b);
 class findFreeSlots_test{
@@ -139,6 +136,22 @@ public:
 
 
 class Check_for_Space {
+	struct SpecsForItem {
+		int columns;
+		int rows;
+	};
+
+
+	bool One_Slot(shared_ptr<vector<vector<POINT>>> ptr_vector) {
+		for (vector<POINT>& row : *ptr_vector) {
+			for (auto iterrator = row.begin(); iterrator != row.end(); ++iterrator) {
+				row.erase(iterrator);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
 		vector<vector<POINT>> vector_row = (*ptr_vector);
 		vector<vector<int>> points_for_LookUp{};
@@ -235,7 +248,7 @@ class Check_for_Space {
 	}
 
 	void remove_duplicates(std::vector<std::shared_ptr<std::vector<POINT>>>& points, std::shared_ptr<std::vector<int>> values) {
-		for (auto& vec : points) {
+		for (shared_ptr<vector<POINT>>& vec : points) {
 			vec->erase(std::remove_if(vec->begin(), vec->end(),
 				[&](const POINT& p) {
 					return std::find(values->begin(), values->end(), p.x) != values->end();
@@ -246,11 +259,13 @@ class Check_for_Space {
 	bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>>& points) {
 		bool found = false;
 		std::vector<std::vector<int>> result;
-		for (const auto& vec : input) {
+		for (const vector<int>& vec : input) {
+
 			bool allMatch = true;
-			for (const auto& val : vec) {
+			for (const int& val : vec) {
+
 				bool match = false;
-				for (const auto& point : *points) {
+				for (const POINT& point : *points) {
 					if (point.x == val) {
 						match = true;
 						break;
@@ -287,26 +302,63 @@ class Check_for_Space {
 
 public:
 	bool check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize) {
-		//switch (ItemSize)
-		//{
-		//case 6:
-		SpecsForItem SixSlotsVertical(2, 3);
-		SpecsForItem SixSlotsHorizontal(3, 2);
+		SpecsForItem SlotsVertical;
+		SpecsForItem SlotsHorizontal;
 
-		if (Vertical_Horizontal(ptr_vector, SixSlotsVertical)) {
-			cout << "es ist genug platz vor handen Vertical" << endl;
-			return true; // genug Platz vor handen
+		switch (ItemSize)
+		{
+		case 1:
+			if (One_Slot(ptr_vector)) {
+				cout << "es ist genug platz vorhanden" << endl;
+				return true;
+			}
+			else {
+				cout << "es ist nicht genug platz vorhanden" << endl;
+				return false;
+			}
+
+		case 2:
+			SlotsVertical.rows = 1;
+			SlotsVertical.columns = 2;
+
+			SlotsHorizontal.rows = 2;
+			SlotsHorizontal.columns = 1;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+				cout << "es ist genug platz vorhanden Vertical" << endl;
+				return true; // genug Platz vorhanden
+			}
+			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
+				cout << "es ist genug platz vorhanden Horizontal" << endl;
+				return true; // genug Platz vorhanden
+			}
+			else {
+				//Do something : wenn beides fehlschlägt
+				cout << "beides fehlgeschlagen" << endl;
+				return false;
+			}
+
+		case 6:
+			SlotsVertical.columns = 3;
+			SlotsVertical.rows = 2;
+			
+			SlotsHorizontal.columns = 2;
+			SlotsHorizontal.rows = 3;
+			
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+				cout << "es ist genug platz vor handen Vertical" << endl;
+				return true; // genug Platz vor handen
+			}
+			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
+				cout << "es ist genug platz vor handen Horizontal" << endl;
+				return true; // genug Platz vor handen
+			}
+			else {
+				//Do something : wenn beides fehlschlägt
+				cout << "beides fehlgeschlagen" << endl;
+				return false;
+			}
 		}
-		else if (Vertical_Horizontal(ptr_vector, SixSlotsHorizontal)) {
-			cout << "es ist genug platz vor handen Horizontal" << endl;
-			return true; // genug Platz vor handen
-		}
-		else {
-			//Do something : wenn beides fehlschlägt
-			cout << "beides fehlgeschlagen" << endl;
-			return false;
-		}
-		//}
 
 
 	}
@@ -381,7 +433,8 @@ int main() {
 
 		shared_ptr<vector<vector<POINT>>> ptr_vector = make_shared<vector<vector<POINT>>>(FinalResult);
 
-	
+		Check_for_Space check_Space;
+		check_Space.check_for_Space(ptr_vector, 2);
 
 
 

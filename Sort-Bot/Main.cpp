@@ -129,10 +129,13 @@ public:
 	}
 };
 
+
+
 bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
 void remove_duplicates(std::vector<std::shared_ptr<std::vector<POINT>>>& points, std::shared_ptr<std::vector<int>> values);
 bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>>& points);
 bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize);
+
 
 bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
 	vector<vector<POINT>> vector_row = (*ptr_vector);

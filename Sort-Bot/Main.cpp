@@ -338,13 +338,49 @@ public:
 				return false;
 			}
 
+		case 3:
+			SlotsVertical.rows = 1;
+			SlotsVertical.columns = 3;
+
+			SlotsHorizontal.rows = 3;
+			SlotsHorizontal.columns = 1;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+				cout << "es ist genug platz vorhanden Vertical" << endl;
+				return true; // genug Platz vorhanden
+			}
+			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
+				cout << "es ist genug platz vorhanden Horizontal" << endl;
+				return true; // genug Platz vorhanden
+			}
+			else {
+				//Do something : wenn beides fehlschlägt
+				cout << "beides fehlgeschlagen" << endl;
+				return false;
+			}
+
+		case 4:
+			//only vertical because it is a rectangle  
+			SlotsVertical.rows = 2;
+			SlotsVertical.columns = 2;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+				cout << "es ist genug platz vorhanden" << endl;
+				return true; // genug Platz vorhanden
+			}
+			else {
+				//Do something : wenn beides fehlschlägt
+				cout << "fehlgeschlagen" << endl;
+				return false;
+			}
+
 		case 6:
 			SlotsVertical.columns = 3;
 			SlotsVertical.rows = 2;
-			
+
 			SlotsHorizontal.columns = 2;
 			SlotsHorizontal.rows = 3;
-			
+
 			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
 				cout << "es ist genug platz vor handen Vertical" << endl;
 				return true; // genug Platz vor handen
@@ -356,6 +392,41 @@ public:
 			else {
 				//Do something : wenn beides fehlschlägt
 				cout << "beides fehlgeschlagen" << endl;
+				return false;
+			}
+
+		case 8:
+			SlotsVertical.columns = 2;
+			SlotsVertical.rows = 4;
+
+			SlotsHorizontal.columns = 4;
+			SlotsHorizontal.rows = 2;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+				cout << "es ist genug platz vor handen Vertical" << endl;
+				return true; // genug Platz vor handen
+			}
+			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
+				cout << "es ist genug platz vor handen Horizontal" << endl;
+				return true; // genug Platz vor handen
+			}
+			else {
+				//Do something : wenn beides fehlschlägt
+				cout << "beides fehlgeschlagen" << endl;
+				return false;
+			}
+
+		case 9:
+			SlotsVertical.columns = 3;
+			SlotsVertical.rows = 3;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+				cout << "es ist genug platz vor handen" << endl;
+				return true; // genug Platz vor handen
+			}
+			else {
+				//Do something : wenn beides fehlschlägt
+				cout << "fehlgeschlagen" << endl;
 				return false;
 			}
 		}

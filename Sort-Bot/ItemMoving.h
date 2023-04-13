@@ -99,6 +99,8 @@ namespace ItemMoving {
 	template <typename T>
 	void openMovINCase(Prefix prefix, shared_ptr<unordered_set<string>> unset_ptr, MovPrefixGroup movPrefix, const shared_ptr<vector<vector<T>>> shared_vector_ptr) {
 		checksPublic chechs;
+		Check_for_Space check_Space;
+		shared_ptr<vector<vector<POINT>>> ptr_free_spaces;
 		chechs.CheckScrollbarPositions();
 
 		for (int i = 0; i < prefix.ptr_PCIC->pageOfParentCase; i++) {
@@ -107,9 +109,9 @@ namespace ItemMoving {
 			Sleep(500);
 		}
 
-		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
+		movPrefix.prefix[0].ptr_PCIC->freeSlots
 
-		
+		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
 
 		for (const string nameOfItemPrefix : movPrefix.nameOfItems) {
 
@@ -119,11 +121,9 @@ namespace ItemMoving {
 
 					if (nameOfItemPrefix == inPoint.nameOf) {
 
-						/*if (prefix.ptr_PCIC->freeSlots != freeSlotsCount) {
-							Mouse::MouseMoveAtoB(inPoint.point, prefix.ptr_PCIC->point);
-
-							unset_ptr->insert(inPoint.nameOf);
-						}*/
+						ptr_free_spaces = make_shared<vector<vector<POINT>>()
+						if(check_Space.check_for_Space())
+						
 					}
 				}
 			}

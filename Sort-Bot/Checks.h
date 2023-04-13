@@ -186,3 +186,245 @@ public:
 		}
 	}
 };
+
+class Check_for_Space {
+	struct SpecsForItem {
+		int columns;
+		int rows;
+	};
+
+	bool One_Slot(shared_ptr<vector<vector<POINT>>>& ptr_vector) {
+		for (vector<POINT>& row : *ptr_vector) {
+			for (auto iterrator = row.begin(); iterrator != row.end(); ++iterrator) {
+				row.erase(iterrator);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>>& ptr_vector, const SpecsForItem specsForItem) {
+		vector<vector<POINT>> vector_row = (*ptr_vector);
+		vector<vector<int>> points_for_LookUp{};
+		vector<int> IN_temp_Pairs_for_LookUp{};
+		shared_ptr<vector<POINT>> ptr_vector_row{};
+		vector<shared_ptr<vector<POINT>>> vector_ptr_vector_row{};
+		shared_ptr<vector<int>> ptr_vector_for_clean{};
+
+		for (int i = 0; i < vector_row.size(); i++) {
+			for (int i2 = 0; i2 < vector_row[i].size(); i2++) {
+				int index = i2 + 1;
+				int temp_LookUp = vector_row[i][i2].x + 63;
+				bool break_tryNew = false;
+
+				if (index == vector_row[i].size())
+					break;
+
+				IN_temp_Pairs_for_LookUp.push_back(vector_row[i][i2].x);
+				for (int column = 1; column < specsForItem.columns; column++) {
+
+					if (temp_LookUp == vector_row[i][index].x) {
+						IN_temp_Pairs_for_LookUp.push_back(vector_row[i][index].x);
+
+						int index_check = index + 1;
+						if (index_check != vector_row[i].size())
+							index++;
+						else
+							break;
+
+						temp_LookUp += 63;
+					}
+					else {
+						break_tryNew = true;
+						IN_temp_Pairs_for_LookUp.clear();
+						break;
+					}
+				}
+
+				if (break_tryNew == false) {
+					points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp);
+					IN_temp_Pairs_for_LookUp.clear();
+				}
+
+			}
+
+			if (points_for_LookUp.size() != 0) {
+				bool space_is_free = true;
+				int index = i;
+
+				for (int rows = 1; rows < specsForItem.rows; rows++) {
+
+					if (++index == vector_row.size()) {
+						space_is_free = false;
+						break;
+					}
+
+					ptr_vector_row = make_shared<vector<POINT>>(vector_row[index]);
+					vector_ptr_vector_row.push_back(ptr_vector_row);
+
+					if (!check_Column(points_for_LookUp, ptr_vector_row)) {
+						space_is_free = false;
+						break;
+					}
+				}
+
+				if (space_is_free) {
+					ptr_vector_for_clean = make_shared<vector<int>>(points_for_LookUp[0]);
+					remove_duplicates(vector_ptr_vector_row, ptr_vector_for_clean);
+					return true;
+				}
+				else
+					vector_ptr_vector_row.clear();
+
+				points_for_LookUp.clear();
+			}
+		}
+		return false;
+	}
+
+	void remove_duplicates(std::vector<std::shared_ptr<std::vector<POINT>>>& points, const std::shared_ptr<std::vector<int>>& values) {
+		for (shared_ptr<vector<POINT>>& vec : points) {
+			vec->erase(std::remove_if(vec->begin(), vec->end(),
+				[&](const POINT& p) {
+					return std::find(values->begin(), values->end(), p.x) != values->end();
+				}), vec->end());
+		}
+	}
+
+	bool check_Column(std::vector<std::vector<int>>& input, const std::shared_ptr<std::vector<POINT>>& points) {
+		bool found = false;
+		std::vector<std::vector<int>> result;
+		for (const vector<int>& vec : input) {
+
+			bool allMatch = true;
+			for (const int& val : vec) {
+
+				bool match = false;
+				for (const POINT& point : *points) {
+					if (point.x == val) {
+						match = true;
+						break;
+					}
+				}
+				if (!match) {
+					allMatch = false;
+					break;
+				}
+			}
+			if (allMatch) {
+				found = true;
+				result.push_back(vec);
+			}
+		}
+		input = result;
+		return found;
+	}
+
+	//bool check_Column_Lambda(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>> points) {
+	//	bool found = false;
+	//	input.erase(std::remove_if(input.begin(), input.end(), [&](const std::vector<int>& vec) {
+	//		for (const auto& val : vec) {
+	//			if (std::find_if(points->begin(), points->end(), [&](const POINT& point) { return point.x == val; }) == points->end()) {
+	//				return true;
+	//			}
+	//		}
+	//		found = true;
+	//		return false;
+	//	}), input.end());
+	//
+	//	return found;
+	//}
+
+public:
+	bool check_for_Space(shared_ptr<vector<vector<POINT>>>& ptr_vector, const int ItemSize) {
+		SpecsForItem SlotsVertical;
+		SpecsForItem SlotsHorizontal;
+
+		switch (ItemSize)
+		{
+		case 1:
+			if (One_Slot(ptr_vector))
+				return true;
+			else
+				return false;
+
+		case 2:
+			SlotsVertical.rows = 1;
+			SlotsVertical.columns = 2;
+
+			SlotsHorizontal.rows = 2;
+			SlotsHorizontal.columns = 1;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical))
+				return true;
+			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal))
+				return true;
+			else
+				return false;
+
+
+		case 3:
+			SlotsVertical.rows = 1;
+			SlotsVertical.columns = 3;
+
+			SlotsHorizontal.rows = 3;
+			SlotsHorizontal.columns = 1;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical))
+				return true;
+			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal))
+				return true;
+			else
+				return false;
+
+
+		case 4:
+			//only vertical because it is a rectangle  
+			SlotsVertical.rows = 2;
+			SlotsVertical.columns = 2;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical))
+				return true;
+			else
+				return false;
+
+
+		case 6:
+			SlotsVertical.columns = 3;
+			SlotsVertical.rows = 2;
+
+			SlotsHorizontal.columns = 2;
+			SlotsHorizontal.rows = 3;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical))
+				return true;
+			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal))
+				return true;
+			else
+				return false;
+
+		case 8:
+			SlotsVertical.columns = 2;
+			SlotsVertical.rows = 4;
+
+			SlotsHorizontal.columns = 4;
+			SlotsHorizontal.rows = 2;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical))
+				return true;
+			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal))
+				return true;
+			else
+				return false;
+
+		case 9:
+			SlotsVertical.columns = 3;
+			SlotsVertical.rows = 3;
+
+			if (Vertical_Horizontal(ptr_vector, SlotsVertical))
+				return true;
+			else
+				return false;
+		}
+	}
+};

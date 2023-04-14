@@ -109,7 +109,7 @@ namespace ItemMoving {
 			Sleep(500);
 		}
 
-		movPrefix.prefix[0].ptr_PCIC->freeSlots
+		
 
 		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
 
@@ -121,8 +121,11 @@ namespace ItemMoving {
 
 					if (nameOfItemPrefix == inPoint.nameOf) {
 
-						ptr_free_spaces = make_shared<vector<vector<POINT>>()
-						if(check_Space.check_for_Space())
+						ptr_free_spaces = make_shared<vector<vector<POINT>>>(prefix.ptr_PCIC->freeSlots);
+						//ptr_free_spaces = make_shared < vector<vector<POINT>>(prefix.ptr_PCIC->freeSlots);
+						if (check_Space.check_for_Space()) {
+
+						}
 						
 					}
 				}

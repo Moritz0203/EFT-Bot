@@ -135,7 +135,7 @@ public:
 
 
 
-class Check_for_Space {
+class Check_for_Space_test {
 	struct SpecsForItem {
 		int columns;
 		int rows;
@@ -504,7 +504,7 @@ int main() {
 
 		shared_ptr<vector<vector<POINT>>> ptr_vector = make_shared<vector<vector<POINT>>>(FinalResult);
 
-		Check_for_Space check_Space;
+		Check_for_Space_test check_Space;
 		check_Space.check_for_Space(ptr_vector, 2);
 
 

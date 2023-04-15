@@ -67,7 +67,7 @@ namespace ItemMoving {
 
 							if (TagMov.identyfierAsHEX == identyfierAsHEX) {
 
-								for (const MovPrefixGroup movPrefix : TagMov.movPrefixGroup) {
+								for (const movPrefix : TagMov.movPrefixGroup) {
 
 									for (const string name : movPrefix.nameOfItems) {
 
@@ -123,7 +123,7 @@ namespace ItemMoving {
 
 						ptr_free_spaces = make_shared<vector<vector<POINT>>>(prefix.ptr_PCIC->freeSlots);
 						//ptr_free_spaces = make_shared < vector<vector<POINT>>(prefix.ptr_PCIC->freeSlots);
-						if (check_Space.check_for_Space()) {
+						if (check_Space.check_for_Space(ptr_free_spaces, inPoint.slotsPerItem)) {
 
 						}
 						

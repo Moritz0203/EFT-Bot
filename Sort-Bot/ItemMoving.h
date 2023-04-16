@@ -124,6 +124,9 @@ namespace ItemMoving {
 						//ptr_free_spaces = make_shared < vector<vector<POINT>>(prefix.ptr_PCIC->freeSlots);
 						if (check_Space.check_for_Space(ptr_free_spaces, inPoint.slotsPerItem)) {
 
+
+
+
 						}
 						
 					}

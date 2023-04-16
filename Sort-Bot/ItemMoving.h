@@ -116,19 +116,19 @@ namespace ItemMoving {
 
 			for (const int in1 = 0; in1 < shared_vector_ptr->size(); in1++) {
 
-				for (const T inPoint : (*shared_vector_ptr)[in1]) {
+				for (const PointAmmunition inPoint : (*shared_vector_ptr)[in1]) {// PointAmmuniton to T 
 
 					if (nameOfItemPrefix == inPoint.nameOf) {
 
 						ptr_free_spaces = make_shared<vector<vector<POINT>>>(prefix.ptr_PCIC->freeSlots);
-						//ptr_free_spaces = make_shared < vector<vector<POINT>>(prefix.ptr_PCIC->freeSlots);
 						if (check_Space.check_for_Space(ptr_free_spaces, inPoint.slotsPerItem)) {
 
+							for (const int page : inPoint.page) {
 
+							}
 
-
+							
 						}
-						
 					}
 				}
 			}

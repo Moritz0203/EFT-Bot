@@ -109,7 +109,6 @@ namespace ItemMoving {
 			Sleep(500);
 		}
 
-
 		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
 
 		for (const string nameOfItemPrefix : movPrefix.nameOfItems) {
@@ -126,8 +125,6 @@ namespace ItemMoving {
 							for (const int page : inPoint.page) {
 
 							}
-
-							
 						}
 					}
 				}

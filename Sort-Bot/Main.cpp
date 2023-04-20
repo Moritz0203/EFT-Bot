@@ -258,7 +258,7 @@ class Check_for_Space_test {
 
 	bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>>& points) {
 		bool found = false;
-		std::vector<std::vector<int>> result;
+		vector<vector<int>> result;
 		for (const vector<int>& vec : input) {
 
 			bool allMatch = true;

@@ -106,7 +106,7 @@ namespace ItemMoving {
 		for (int i = 0; i < prefix.ptr_PCIC->pageOfParentCase; i++) {
 			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 			Keyboard::KeyboardInput(keyforInput);
-			Sleep(500);
+			Sleep(200);
 		}
 
 
@@ -137,7 +137,9 @@ namespace ItemMoving {
 						}
 					}
 
-					 
+					int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+					Keyboard::KeyboardInput(keyforInput);
+					Sleep(200);
 				}	
 			}
 		}

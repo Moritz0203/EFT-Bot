@@ -67,7 +67,7 @@ namespace ItemMoving {
 
 							if (TagMov.identyfierAsHEX == identyfierAsHEX) {
 
-								for (const movPrefix : TagMov.movPrefixGroup) {
+								for (const MovPrefixGroup movPrefix : TagMov.movPrefixGroup) {
 
 									for (const string name : movPrefix.nameOfItems) {
 
@@ -113,23 +113,32 @@ namespace ItemMoving {
 
 		Mouse::MoverPOINTandPressTwoTimes(prefix.ptr_PCIC->pointFromParentCase);
 
+		chechs.CheckScrollbarPositions();
+ 
+
 		for (const string nameOfItemPrefix : movPrefix.nameOfItems) {
 
 			for (const int in1 = 0; in1 < shared_vector_ptr->size(); in1++) {
 
-				for (const PointAmmunition inPoint : (*shared_vector_ptr)[in1]) {// PointAmmuniton to T 
+				for (const int page : 11) {
 
-					if (nameOfItemPrefix == inPoint.nameOf) {
+					for (const PointAmmunition inPoint : (*shared_vector_ptr)[in1]) {// PointAmmuniton to T 
+
+						if (page != inPoint.page)
+							continue;
+
+						if (nameOfItemPrefix != inPoint.nameOf)
+							continue;
 
 						ptr_free_spaces = make_shared<vector<vector<POINT>>>(prefix.ptr_PCIC->freeSlots);
-						if (check_Space.check_for_Space(ptr_free_spaces, inPoint.slotsPerItem)) {
+						if (!check_Space.check_for_Space(ptr_free_spaces, inPoint.slotsPerItem)) {
 
-							for (const int page : inPoint.page) {
 
-							}
 						}
 					}
-				}
+
+					 
+				}	
 			}
 		}
 	}

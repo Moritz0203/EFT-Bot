@@ -11,6 +11,7 @@ namespace InitializeMovPrefix {
 	std::vector<MovPrefixItem> movPrefixItem;*/
 
 	/*void setup();*/
+	void setup_prefix();
 
 	void Initialize() {
 		string settingsForMoving;
@@ -20,9 +21,24 @@ namespace InitializeMovPrefix {
 		cin >> settingsForMoving;*/
 
 		/*setup();*/
+
+		setup_prefix();
 	}
 
+	void setup_prefix() {
+		Prefix prefix;
+		AssignPrefix assingPrefix_temp;
 
+		prefix.isFull = false;
+		prefix.nameOfItems = VectorText::Rus762x39;
+
+		shared_ptr<Prefix> ptr_prefix = make_shared<Prefix>(prefix);
+
+		assingPrefix_temp.ptr_Prefix = ptr_prefix;
+		assingPrefix_temp.tagOfCase = "amo1";
+
+		assignPrefix.push_back(assingPrefix_temp);
+	}
 
 	/*void setup() {
 		vector<Prefix> prefix;

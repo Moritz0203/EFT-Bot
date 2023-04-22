@@ -99,6 +99,7 @@ namespace CaseProcessor {
 		double threshold;
 		int sizeString = sizeof(CasesInCase) / sizeof(string);
 		Mat templ;
+		shared_ptr<Prefix> prefix{};
 		std::shared_ptr<PointCaseInCase> ptr_PCIC;
 		findFreeSlots findeFreeSlot;
 
@@ -115,7 +116,7 @@ namespace CaseProcessor {
 
 				const string tagCase = TextMatching::textMatching(MatScreen, Rec);
 				if (Matching::checkSecondLastChar(tagCase)) {
-					pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, NULL);
+					pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, NULL, prefix);
 					ptr_PCIC = make_shared<PointCaseInCase>(pointCaseInCase[page].back());
 					findeFreeSlot.findeSlots(ptr_PCIC);
 				}

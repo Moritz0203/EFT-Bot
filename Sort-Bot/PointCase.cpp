@@ -4,7 +4,7 @@ PointCaseInStash::PointCaseInStash()
 {
 }
 
-PointCaseInStash::PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots)
+PointCaseInStash::PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots, std::shared_ptr<Prefix> prefix)
 {
 	this->point = point;
 	this->nameOfCase = nameOfCase;
@@ -14,13 +14,14 @@ PointCaseInStash::PointCaseInStash(POINT point, std::string nameOfCase, const st
 	this->page = page;
 	this->identyfierAsHEX = identyfierAsHEX;
 	this->freeSlots = freeSlots;
+	this->prefix = prefix;
 }
 
 PointCaseInCase::PointCaseInCase()
 {
 }
 
-PointCaseInCase::PointCaseInCase(POINT point, POINT pointFromParentCase, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int pageOfParentCase, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots)
+PointCaseInCase::PointCaseInCase(POINT point, POINT pointFromParentCase, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int pageOfParentCase, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots, std::shared_ptr<Prefix> prefix)
 {
 	this->point = point;
 	this->pointFromParentCase = pointFromParentCase;
@@ -31,5 +32,6 @@ PointCaseInCase::PointCaseInCase(POINT point, POINT pointFromParentCase, std::st
 	this->pageOfParentCase = pageOfParentCase;
 	this->identyfierAsHEX = identyfierAsHEX;
 	this->freeSlots = freeSlots;
+	this->prefix = prefix;
 }
 

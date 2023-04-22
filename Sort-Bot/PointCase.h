@@ -3,7 +3,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
-#include <vector>
+#include "MovPrefix.h"
 using namespace std;
 
 //enum Color { RED, ORANGSH, GREEN, BLUE, PURPLE, PINK, GRAY, NOCOLOR };
@@ -17,9 +17,10 @@ public:
 	std::string nameOfCase = {};
 	int identyfierAsHEX{};
 	std::vector<std::vector<POINT>> freeSlots{};
+	std::shared_ptr<Prefix> prefix{};
 
 	PointCaseInStash();
-	PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots);
+	PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots, std::shared_ptr<Prefix> prefix);
 };
 
 class PointCaseInCase
@@ -31,7 +32,8 @@ public:
 	std::string nameOfCase = {};
 	int identyfierAsHEX{};
 	std::vector<std::vector<POINT>> freeSlots{};
+	std::shared_ptr<Prefix> prefix{};
 
 	PointCaseInCase();
-	PointCaseInCase(POINT point, POINT pointFromParentCase, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int pageOfParentCase, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots);
+	PointCaseInCase(POINT point, POINT pointFromParentCase, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int pageOfParentCase, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots, std::shared_ptr<Prefix> prefix);
 };

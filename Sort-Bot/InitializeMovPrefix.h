@@ -7,10 +7,10 @@
 using namespace std;
 
 namespace InitializeMovPrefix {
-	std::vector<MovPrefixGroup> movPrefixGroup;
-	std::vector<MovPrefixItem> movPrefixItem;
+	/*std::vector<MovPrefixGroup> movPrefixGroup;
+	std::vector<MovPrefixItem> movPrefixItem;*/
 
-	void setup();
+	/*void setup();*/
 
 	void Initialize() {
 		string settingsForMoving;
@@ -19,12 +19,12 @@ namespace InitializeMovPrefix {
 		cout << ": ";
 		cin >> settingsForMoving;*/
 
-		setup();
+		/*setup();*/
 	}
 
 
 
-	void setup() {
+	/*void setup() {
 		vector<Prefix> prefix;
 		Prefix InPrefix;
 		Prefix InPrefix1;
@@ -70,5 +70,5 @@ namespace InitializeMovPrefix {
 				}
 			}
 		}
-	}
+	}*/
 }

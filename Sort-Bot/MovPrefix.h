@@ -3,43 +3,63 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
-#include "PointCase.h"
+
+
+//class Prefix_Old {
+//public:
+//	std::string tagOfCase{};
+//	bool isFull{};
+//	std::shared_ptr<PointCaseInStash> ptr_PCIS{};
+//	std::shared_ptr<PointCaseInCase> ptr_PCIC{};
+//
+//	Prefix_Old();
+//	Prefix_Old(const std::string tagOfCase, std::shared_ptr<PointCaseInStash> ptr_PCIS, std::shared_ptr<PointCaseInCase> ptr_PCIC, bool isFull);
+//};
+//
+//class MovPrefixItem {
+//public:
+//	std::string nameOfItem{};
+//	std::vector<Prefix> prefix{};
+//
+//	MovPrefixItem();
+//	MovPrefixItem(std::string nameOfItem, std::vector<Prefix> prefix);
+//};
+//
+//class MovPrefixGroup {
+//public:
+//	std::vector<std::string> nameOfItems{};
+//	std::vector<Prefix> prefix{};
+//	
+//	MovPrefixGroup();
+//	MovPrefixGroup(std::vector<std::string> nameOfItems, std::vector<Prefix> prefix);
+//};
+//
+//class TagMovPrefixGroup {
+//public:
+//	std::vector<MovPrefixGroup> movPrefixGroup{};
+//	int identyfierAsHEX{};
+//
+//	TagMovPrefixGroup();
+//	TagMovPrefixGroup(int identyfierAsHEX, std::vector<MovPrefixGroup> movPrefixGroup);
+//};
+
+
 
 
 class Prefix {
 public:
-	std::string tagOfCase{};
 	bool isFull{};
-	std::shared_ptr<PointCaseInStash> ptr_PCIS{};
-	std::shared_ptr<PointCaseInCase> ptr_PCIC{};
+	std::vector<std::string> nameOfItems{};
 
 	Prefix();
-	Prefix(const std::string tagOfCase, std::shared_ptr<PointCaseInStash> ptr_PCIS, std::shared_ptr<PointCaseInCase> ptr_PCIC, bool isFull);
+	Prefix(bool isFull, std::vector<std::string> nameOfItems);
 };
 
-class MovPrefixItem {
+class AssignPrefix {
 public:
-	std::string nameOfItem{};
-	std::vector<Prefix> prefix{};
+	std::string tagOfCase{};
+	std::shared_ptr<Prefix> ptr_Prefix{};
 
-	MovPrefixItem();
-	MovPrefixItem(std::string nameOfItem, std::vector<Prefix> prefix);
-};
-
-class MovPrefixGroup {
-public:
-	std::vector<std::string> nameOfItems{};
-	std::vector<Prefix> prefix{};
-	
-	MovPrefixGroup();
-	MovPrefixGroup(std::vector<std::string> nameOfItems, std::vector<Prefix> prefix);
-};
-
-class TagMovPrefixGroup {
-public:
-	std::vector<MovPrefixGroup> movPrefixGroup{};
-	int identyfierAsHEX{};
-
-	TagMovPrefixGroup();
-	TagMovPrefixGroup(int identyfierAsHEX, std::vector<MovPrefixGroup> movPrefixGroup);
+	AssignPrefix();
+	AssignPrefix(std::string tagOfCase, std::shared_ptr<Prefix> ptr_Prefix);
 };

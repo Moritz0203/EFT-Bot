@@ -14,7 +14,7 @@ public:
 	int slotsPerItem = {};
 
 	PointAmmunition();
-	PointAmmunition(POINT point,const std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page, int slotsPerItem);
+	PointAmmunition(POINT point, std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page, int slotsPerItem);
 };
 
 class PointMagazine

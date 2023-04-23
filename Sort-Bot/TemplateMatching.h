@@ -86,22 +86,24 @@ public:
 				break;
 		}
 		/*cout << count << endl;*/
-		cv::imshow(image_window, img_display);
+		/*cv::imshow(image_window, img_display);
 
-		waitKey(0);
+		waitKey(0);*/
 		return templ.cols, templ.rows;
 	};
 
 public:
 	static POINT templateMatchingObjects(Mat MatScreen, Mat templ, double threshold) {
 		int height = {}, width = {};
-		/*const char* image_window = "Source Image";
-		const char* Test = "Item Image";*/
+
+		const char* image_window = "Source Image";
+		const char* Test = "Item Image";
+
 		int match_method = 5;
 		Mat result;
 		POINT PointReturn = {};
 
-		/*namedWindow(image_window, WINDOW_AUTOSIZE);*/
+		namedWindow(image_window, WINDOW_AUTOSIZE);
 
 		Mat img_display;
 		MatScreen.copyTo(img_display);
@@ -128,9 +130,9 @@ public:
 			else
 				break;
 		}
-		/*cv::imshow(image_window, img_display);*/
+		/*cv::imshow(image_window, img_display);
 
-		/*waitKey(200);*/
+		waitKey(0);*/
 
 		return PointReturn;
 	};

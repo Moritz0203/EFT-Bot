@@ -8,6 +8,73 @@
 #include "MovPrefixGlobalVector.h"
 
 
+template <typename T>
+class ItemMoving {
+	vector<vector<vector<T>>> ItemVectorCombine;
+	vector<vector<T>> ItemVectorCombine_Page;
+
+	void CombineVectors() {
+		if (!pointAmmunition_C.empty())
+			ItemVectorCombine.push_back(pointAmmunition_C);
+		else if (!pointMagazine_C.empty())
+			ItemVectorCombine.push_back(pointMagazine_C);
+		else if (!pointBarter_C.empty())
+			ItemVectorCombine.push_back(pointBarter_C);
+	}
+
+	void mergeVectors(const std::vector<std::vector<std::vector<T>>>& vectors) {
+		size_t maxSize = 0;
+		for (const auto& vec : vectors) {
+			maxSize = std::max(maxSize, vec.size());
+		}
+
+		for (size_t i = 0; i < maxSize; ++i) {
+			for (const auto& vec : vectors) {
+				if (i < vec.size()) {
+					ItemVectorCombine_Page.push_back(vec[i]);
+				}
+			}
+		}
+	}
+
+
+	void MovInStash(shared_ptr<PointCaseInStash> ptr_Stash) {
+		checksPublic::CheckScrollbarPositions();
+
+		for (int i = 0; i < ptr_Stash->page; i++) {
+			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+			Keyboard::KeyboardInput(keyforInput);
+			Sleep(200);
+		}
+
+
+	}
+
+	void MovInCase(shared_ptr<PointCaseInCase> ptr_Case) {
+		checksPublic::CheckScrollbarPositions();
+
+	}
+
+public:
+	void itemMoving() {
+		CombineVectors();
+		mergeVectors(ItemVectorCombine);
+
+		for (int i = 0; i < pointCaseInStash_C.size(); i++) {
+			for (PointCaseInStash pointCase : pointCaseInStash_C[i]) {
+				shared_ptr<PointCaseInStash> ptr = make_shared<PointCaseInStash>(pointCase);
+				MovInStash(ptr);
+			}
+		}
+
+		for (int i = 0; i < pointCaseInCase.size(); i++) {
+			for (PointCaseInCase pointCase : pointCaseInCase[i]) {
+				shared_ptr<PointCaseInCase> ptr = make_shared<PointCaseInCase>(pointCase);
+				MovInCase(ptr);
+			}
+		}
+	}
+};
 
 //namespace ItemMoving {
 //	template <typename T>

@@ -456,10 +456,10 @@ int main() {
 
 
 
-	/*HWND hWND = FindeWindow();
+	HWND hWND = FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(100);
-	Mat MatScreen = getMat(hWND);*/
+	Mat MatScreen = getMat(hWND);
 	
 
 	string Start = "test";
@@ -474,32 +474,62 @@ int main() {
 		Mat templ;
 		Mat templ1;
 
-		Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
+		//Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
 		
 		/*vector<POINT> ReturnPoints;*/
-		//vector<POINT> ReturnPoints;
-		/*templ = imread("CaseImages/HolodilnickCase.png");*/
+		vector<POINT> ReturnPoints;
+		templ = imread("ObjectImages/SortingTable.png");
 		templ1 = imread("ObjectImages/EmptySquare.png");
 		const char* image_window = "Source Image";
 		namedWindow(image_window, WINDOW_AUTOSIZE);
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		//TemplateMatching::templateMatchingItems("ObjectImages/EmptySquare.png", 0.99999, false, false, "BP", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("CaseImages/MedCase.png", 0.89, false, false, "BP", ReturnPoints, MatScreen);
 
-		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ1, 0.99999);
+		ReturnPoints = Matching::removeDuplicates(ReturnPoints);
+
+
+		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
+
+		point.y = (templ.rows / 2) + point.y;
+		point.x = (templ.cols / 2) + point.x;
+
+		Mouse::MoverPOINTandPress(point);
+
+		Sleep(200);
+
+		POINT pointA, pointB;
+
+		pointA.y = (templ.rows / 2) + ReturnPoints[0].y;
+		pointA.x = (templ.cols / 2) + ReturnPoints[0].x;
+
+		pointB.y = MatScreen.rows / 2;
+		pointB.x = MatScreen.cols / 2;
+
+		Mouse::MouseMoveAtoB(pointA, pointB);
+
+		cout << MatScreen.cols << " " << MatScreen.rows;
+
+
+
+		/*Sleep(40);
+
+		Mat MatScreen = getMat(hWND);
+
+		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ1, 0.99);
 
 		
 
 		findFreeSlots_test findFreeSlots1;
 		vector<vector<POINT>> FinalResult = findFreeSlots1.findeSlots(ReturnPoints);
 
-		findFreeSlots1.Print_Out_Case_EmptySlots();
+		findFreeSlots1.Print_Out_Case_EmptySlots();*/
 
-		shared_ptr<vector<vector<POINT>>> ptr_vector = make_shared<vector<vector<POINT>>>(FinalResult);
+		/*shared_ptr<vector<vector<POINT>>> ptr_vector = make_shared<vector<vector<POINT>>>(FinalResult);
 
 		Check_for_Space_test check_Space;
-		check_Space.check_for_Space(ptr_vector, 2);
+		check_Space.check_for_Space(ptr_vector, 2);*/
 
 
 

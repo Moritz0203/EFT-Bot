@@ -485,9 +485,14 @@ int main() {
 		/*const char* image_window2 = "Source Image2222222222";
 		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("CaseImages/MedCase.png", 0.89, false, false, "BP", ReturnPoints, MatScreen);
+		TemplateMatching::templateMatchingItems("CaseImages/JunkCase.png", 0.88, false, false, "BP", ReturnPoints, MatScreen);
 
 		ReturnPoints = Matching::removeDuplicates(ReturnPoints);
+
+		cout << endl;
+		for (POINT point : ReturnPoints) {
+			cout << point.y << " " << point.x << endl;
+		}
 
 
 		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);

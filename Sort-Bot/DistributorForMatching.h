@@ -23,7 +23,7 @@ namespace Matching {
 		return false;
 	}
 
-	vector<POINT> removeDuplicates(vector<POINT>& points) {
+	/*vector<POINT> removeDuplicates(vector<POINT>& points) {
 		unordered_set<pair<int, int>, pair_hash> unSet;
 		vector<POINT> result;
 		for (POINT& point : points) {
@@ -52,7 +52,35 @@ namespace Matching {
 			}
 		}
 		return result;
+	}*/
+
+	vector<POINT> removeDuplicates(vector<POINT>& points) {
+		unordered_set<pair<int, int>, pair_hash> unSet;
+		vector<POINT> result;
+		for (POINT& point : points) {
+			bool shouldInsert = true;
+			for (int i = -4; i <= 4; i++) {
+				pair<int, int> point_x = make_pair(point.x + i, point.y);
+				pair<int, int> point_y = make_pair(point.x, point.y + i);
+				if (unSet.find(point_x) != unSet.end() || unSet.find(point_y) != unSet.end()) {
+					shouldInsert = false;
+					break;
+				}
+			}
+			if (shouldInsert) {
+				result.push_back(point);
+				for (int i = -4; i <= 4; i++) {
+					pair<int, int> point_x = make_pair(point.x + i, point.y);
+					pair<int, int> point_y = make_pair(point.x, point.y + i);
+					unSet.insert(point_x);
+					unSet.insert(point_y);
+				}
+			}
+		}
+		return result;
 	}
+
+
 
 	std::array<std::string, 1> Ammunition{
 		////NATO 7.62

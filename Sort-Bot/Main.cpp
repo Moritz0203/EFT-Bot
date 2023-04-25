@@ -495,6 +495,8 @@ int main() {
 		}
 
 
+
+
 		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
 
 		point.y = (templ.rows / 2) + point.y;

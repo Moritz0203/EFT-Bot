@@ -37,17 +37,69 @@ class ItemMoving {
 		}
 	}
 
+	void removeDuplicates(std::shared_ptr<std::vector<T>> vec1, std::shared_ptr<std::vector<POINT>> vec2) {
+		for (auto it = vec1->begin(); it != vec1->end(); ) {
+			if (std::find(vec2->begin(), vec2->end(), it->point) != vec2->end()) {
+				it = vec1->erase(it);
+			}
+			else {
+				++it;
+			}
+		}
+	}
+
 
 	void MovInStash(shared_ptr<PointCaseInStash> ptr_Stash) {
-		checksPublic::CheckScrollbarPositions();
+		HWND hWND = FindeWindow();
+		Mat MatScreen = getMat(hWND);
+		Mat templ = imread("ObjectImages/SortingTable.png");
+		POINT pointA, pointB;
+		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+		shared_ptr<vector<vector<POINT>>> ptr_free_spaces;
+		vector<POINT> vector_for_clean{};
+		shared_ptr<vector<POINT>> ptr_vector_clean;
+		shared_ptr<vector<T>> ptr_vector_page;
 
+		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
+		point.y = (templ.rows / 2) + point.y;
+		point.x = (templ.cols / 2) + point.x;
+		Mouse::MoverPOINTandPress(point);
+
+		checksPublic::CheckScrollbarPositions();
 		for (int i = 0; i < ptr_Stash->page; i++) {
-			int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 			Keyboard::KeyboardInput(keyforInput);
 			Sleep(200);
 		}
 
+		pointA.y = (templ.rows / 2) + ptr_Stash->point.y;
+		pointA.x = (templ.cols / 2) + ptr_Stash->point.x;
+		pointB.y = MatScreen.rows / 2;
+		pointB.x = MatScreen.cols / 2;
+		Mouse::MouseMoveAtoB(pointA, pointB);//Mov Case in SortingTable
 
+		checksPublic::CheckScrollbarPositions();
+		for (const vector<T> vector_Page : ItemVectorCombine_Page) {// PointAmmunition to T 
+			for (const T pointforMov : vector_Page) {
+				if (!std::find(ptr_Stash->prefix->nameOfItems.begin(), ptr_Stash->prefix->nameOfItems.end(), pointforMov.nameOf) != ptr_Stash->prefix->nameOfItems.end())
+					continue;
+
+				ptr_free_spaces = make_shared<vector<vector<POINT>>>(ptr_Stash->freeSlots);
+				if (!Check_for_Space::check_for_Space(ptr_free_spaces, pointforMov.slotsPerItem))
+					continue;
+				
+				Mouse::MouseMoveAtoB(pointforMov.point, pointB);
+				vector_for_clean.push_back(pointforMov.point);
+			}
+			ptr_vector_page = make_shared<vector<T>>(vector_Page);
+			ptr_vector_clean = make_shared<vector<POINT>>(vector_for_clean);
+			removeDuplicates(ptr_vector_page, ptr_vector_clean);
+			vector_for_clean.clear();
+
+			Keyboard::KeyboardInput(keyforInput);
+			if (vector_Page.empty())
+				Sleep(200);
+		}
+		Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
 	}
 
 	void MovInCase(shared_ptr<PointCaseInCase> ptr_Case) {

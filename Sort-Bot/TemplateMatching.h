@@ -86,9 +86,9 @@ public:
 				break;
 		}
 		/*cout << count << endl;*/
-		cv::imshow(image_window, img_display);
+		/*cv::imshow(image_window, img_display);
 
-		waitKey(0);
+		waitKey(0);*/
 		return templ.cols, templ.rows;
 	};
 

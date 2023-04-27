@@ -11,6 +11,10 @@ namespace ItemsProcessing {
 	void cleanUpVectorItemsAmmunition();
 	void cleanUpVectorItemsBarter();
 
+	void CallAll() {
+
+	}
+
 	void AmmunitionProcess() { // NOTE : TakeScreenshots muss auch global gemacht werden um performens zu steigern 
 		array<Mat, 11> ReturntMatScreen;
 		checksPublic checks;

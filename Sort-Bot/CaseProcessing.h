@@ -123,25 +123,25 @@ namespace CaseProcessor {
 			}
 		}
 	}
-
-	void MoveTopBarTHICCcase() {
-		Mat MatScreen;
-		Mat templ;
-
-		HWND hWND = FindeWindow();
-		SetForegroundWindow(hWND);
-		MatScreen = getMat(hWND);
-
-		templ = imread("ObjectImages/THICCtopBar.png");
-		POINT pointA = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.70);
-		pointA.y = (templ.rows / 2) + pointA.y;
-		pointA.x = (templ.cols / 2) + pointA.x;
-
-		POINT pointB{};
-		pointB.x = pointA.x - 200;
-		Mouse::MouseMoveAtoB(pointA, pointB);
-	}
 };
+
+void MoveTopBarTHICCcase() {
+	Mat MatScreen;
+	Mat templ;
+
+	HWND hWND = FindeWindow();
+	SetForegroundWindow(hWND);
+	MatScreen = getMat(hWND);
+
+	templ = imread("ObjectImages/THICCtopBar.png");
+	POINT pointA = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.70);
+	pointA.y = (templ.rows / 2) + pointA.y;
+	pointA.x = (templ.cols / 2) + pointA.x;
+
+	POINT pointB{};
+	pointB.x = pointA.x - 200;
+	Mouse::MouseMoveAtoB(pointA, pointB);
+}
 
 void cleanUpVectorCase() {
 	vector<PointCaseInStash> temp;

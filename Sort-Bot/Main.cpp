@@ -494,11 +494,7 @@ int main() {
 			cout << point.y << " " << point.x << endl;
 		}
 
-
-
-
 		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
-
 		point.y = (templ.rows / 2) + point.y;
 		point.x = (templ.cols / 2) + point.x;
 

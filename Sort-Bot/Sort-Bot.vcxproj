@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CleanVector.h" />
+    <ClCompile Include="ItemMoving.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MovPrefix.cpp" />
     <ClCompile Include="PointCase.cpp" />

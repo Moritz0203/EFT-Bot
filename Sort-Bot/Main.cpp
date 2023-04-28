@@ -434,6 +434,7 @@ public:
 
 
 
+extern void CombinePrefixAndCase();
 
 int main() {
 	
@@ -465,11 +466,47 @@ int main() {
 	string Start = "test";
 	
 
-	/*if (Start == "start") {
-		StartUp::Entrance();
-	}*/
+	if (Start == "start") {
+		InitializeMovPrefix::Initialize();
+		
+		ItemsProcessing::AmmunitionProcess();
+
+	}
 	if (Start == "test") {
-		/*ItemMoving::AmmunitionMoving();*/
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		Mat templ;
 		Mat templ1;

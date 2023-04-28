@@ -436,6 +436,7 @@ public:
 
 extern void CombinePrefixAndCase();
 
+template <typename T>
 int main() {
 	
 	
@@ -465,47 +466,17 @@ int main() {
 
 	string Start = "test";
 	
+	
+	ItemMoving<T> Moving;
 
 	if (Start == "start") {
 		InitializeMovPrefix::Initialize();
-		
+		CombinePrefixAndCase();
 		ItemsProcessing::AmmunitionProcess();
-
+		Moving.itemMoving();
 	}
 	if (Start == "test") {
 		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 		Mat templ;

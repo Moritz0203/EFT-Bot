@@ -73,7 +73,6 @@ vector<vector<POINT>> findFreeSlots::SortINrows(vector<POINT> vector_Input) {
 					temp.push_back(pointIN);
 				}
 			}
-
 			std::sort(temp.begin(), temp.end(), comparePoints);
 			vector_return.push_back(temp);
 			temp.clear();
@@ -91,7 +90,6 @@ void findFreeSlots::findeSlots(POINT pointCase, shared_ptr<std::vector<std::vect
 	Mat MatScreen;
 	Mat templ = imread("ObjectImages/EmptySquare.png");
 	Matching matching;
-
 
 	Mouse::MoverPOINTandPressTwoTimes(pointCase);
 

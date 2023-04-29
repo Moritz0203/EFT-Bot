@@ -462,80 +462,80 @@ int main() {
 	cout << "//                     |_.__/\_, | |___\___|_/_/ \_\                    " << endl;
 	cout << "//                           |__/                                       " << endl;*/
 
-	//cout << "Welcome to EFT-SORT-BOT" << endl;
-	//cout << "by ECFA" << endl;
-	//cout << endl;
-	//	
-	//
-	///*InitializeMovPrefix::Initialize();*/
+	cout << "Welcome to EFT-SORT-BOT" << endl;
+	cout << "by ECFA" << endl;
+	cout << endl;
+		
+	
+	/*InitializeMovPrefix::Initialize();*/
 
 
 
-	//HWND hWND = GetMat::FindeWindow();
-	//SetForegroundWindow(hWND);
-	//Sleep(100);
-	//Mat MatScreen = GetMat::getMat(hWND);
-	//
+	HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(100);
+	Mat MatScreen = GetMat::getMat(hWND);
+	
 
-	//string Start = "test";
-	//
-	//
+	string Start = "test";
+	
+	
 
-	//if (Start == "start") {
-	//	/*ItemMoving moving;
-
-
-	//	InitializeMovPrefix::Initialize();
-	//	CombinePrefixAndCase();
-	//	ItemsProcessing::AmmunitionProcess();
-	//	moving.itemMoving<T>();*/
-	//}
-	//if (Start == "test") {
-	//	
+	if (Start == "start") {
+		/*ItemMoving moving;
 
 
-	//	Mat templ;
-	//	Mat templ1;
+		InitializeMovPrefix::Initialize();
+		CombinePrefixAndCase();
+		ItemsProcessing::AmmunitionProcess();
+		moving.itemMoving<T>();*/
+	}
+	if (Start == "test") {
 
-	//	//Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
-	//	
-	//	/*vector<POINT> ReturnPoints;*/
-	//	vector<POINT> ReturnPoints;
-	//	templ = imread("ObjectImages/SortingTable.png");
-	//	templ1 = imread("ObjectImages/EmptySquare.png");
-	//	const char* image_window = "Source Image";
-	//	namedWindow(image_window, WINDOW_AUTOSIZE);
-	//	/*const char* image_window2 = "Source Image2222222222";
-	//	namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-	//	TemplateMatching::templateMatchingItems("CaseImages/JunkCase.png", 0.88, false, false, "BP", ReturnPoints, MatScreen);
 
-	//	ReturnPoints = Matching::removeDuplicates(ReturnPoints);
+		//Mat templ;
+		//Mat templ1;
 
-	//	cout << endl;
-	//	for (POINT point : ReturnPoints) {
-	//		cout << point.y << " " << point.x << endl;
-	//	}
+		////Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
+		//
+		///*vector<POINT> ReturnPoints;*/
+		//vector<POINT> ReturnPoints;
+		//templ = imread("ObjectImages/SortingTable.png");
+		//templ1 = imread("ObjectImages/EmptySquare.png");
+		//const char* image_window = "Source Image";
+		//namedWindow(image_window, WINDOW_AUTOSIZE);
+		///*const char* image_window2 = "Source Image2222222222";
+		//namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-	//	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
-	//	point.y = (templ.rows / 2) + point.y;
-	//	point.x = (templ.cols / 2) + point.x;
+		//TemplateMatching::templateMatchingItems("CaseImages/JunkCase.png", 0.88, false, false, "BP", ReturnPoints, MatScreen);
 
-	//	//Mouse::MoverPOINTandPress(point);
+		//ReturnPoints = Matching::removeDuplicates(ReturnPoints);
 
-	//	Sleep(200);
+		//cout << endl;
+		//for (POINT point : ReturnPoints) {
+		//	cout << point.y << " " << point.x << endl;
+		//}
 
-	//	POINT pointA, pointB;
+		//POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
+		//point.y = (templ.rows / 2) + point.y;
+		//point.x = (templ.cols / 2) + point.x;
 
-	//	pointA.y = (templ.rows / 2) + ReturnPoints[0].y;
-	//	pointA.x = (templ.cols / 2) + ReturnPoints[0].x;
+		////Mouse::MoverPOINTandPress(point);
 
-	//	pointB.y = MatScreen.rows / 2;
-	//	pointB.x = MatScreen.cols / 2;
+		//Sleep(200);
 
-	//	//Mouse::MouseMoveAtoB(pointA, pointB);
+		//POINT pointA, pointB;
 
-	//	cout << MatScreen.cols << " " << MatScreen.rows;
+		//pointA.y = (templ.rows / 2) + ReturnPoints[0].y;
+		//pointA.x = (templ.cols / 2) + ReturnPoints[0].x;
+
+		//pointB.y = MatScreen.rows / 2;
+		//pointB.x = MatScreen.cols / 2;
+
+		////Mouse::MouseMoveAtoB(pointA, pointB);
+
+		//cout << MatScreen.cols << " " << MatScreen.rows;
 
 
 
@@ -545,7 +545,7 @@ int main() {
 
 		vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ1, 0.99);
 
-		
+
 
 		findFreeSlots_test findFreeSlots1;
 		vector<vector<POINT>> FinalResult = findFreeSlots1.findeSlots(ReturnPoints);
@@ -577,7 +577,7 @@ int main() {
 			cout << ReturnPoints[i].y << " " << ReturnPoints[i].x << "----2 - " << i << endl;
 		}*/
 
-		
+
 		//cv::Rect rec; 
 
 		//rec.height = templ.cols;
@@ -661,24 +661,24 @@ int main() {
 						temp.push_back(pointIN);
 					}
 				}
-				
+
 				std::sort(temp.begin(), temp.end(), comparePoints);
 				JunkCase.push_back(temp);
 				temp.clear();
 			}
-			
-		}
-			
-		
 
-		
+		}
+
+
+
+
 		for (int i = 0; i < JunkCase.size(); i++) {
 			int count = 0;
 			int length = 0;
 			string str = {};
 			string strIE = {};
 			string strER = {};
-			
+
 			if (JunkCase[i].size() == 0)
 				break;
 
@@ -687,11 +687,11 @@ int main() {
 				string strX = "  ---  X:  " + std::to_string(point.x);
 				strER = "       |-> ";
 				str = strY + strX;
-				
+
 				cout << strER + str;
 
 				length = 30 - str.length();
-				
+
 				for (int i2 = 0; i2 < length; i2++) {
 					cout << " ";
 				}
@@ -699,14 +699,14 @@ int main() {
 				strIE = "Index: " + std::to_string(i) + "  ---  Empty per line: " + std::to_string(++count);
 				cout << strIE << "\n";
 			}
-			
+
 			cout << "       |";
 			for (int i2 = 0; i2 < ((strER.length() - 8) + length + str.length() + strIE.length()); i2++) {
 				cout << "-";
 			}
 			cout << " " << strIE << "\n";
 		}
-		
+
 		cout << ReturnPoints.size() << endl;*/
 
 		//for (int i = 0; i < result.size(); i++) {
@@ -715,7 +715,7 @@ int main() {
 
 		//	Mouse::MouseMoveAtoB(pointA, pointB);
 		//}
-		
+
 		//cout << "------" << endl;
 		//
 		//Rect Rec(ReturnPoints[0].x + 45, ReturnPoints[0].y + 46, templ.cols - 45, templ.rows - 46);
@@ -723,7 +723,7 @@ int main() {
 
 		//Mat Roi2;
 		//Mat Roi = MatScreen(Rec);
-	
+
 
 		/*Mat temp = imread("ObjectImages/FoundInRaid/FoundInRaid-Blue.png");
 		if (TemplateMatching::templateMatchingBool(Roi, temp, 0.99)) {
@@ -760,8 +760,8 @@ int main() {
 		//imshow(image_window, Roi);
 		///*imshow(image_window2, Roi2);*/
 		//waitKey(0);
-		
-		
+
+
 		//cv::cvtColor(Roi, Roi, cv::COLOR_BGR2HSV);
 
 		//if (!ReturnPoints[0].y <= 500) {
@@ -787,7 +787,7 @@ int main() {
 		//}
 
 		/*color = TemplateMatching::ColorMatching(Rec, Roi);
-		
+
 		cout << color << " " << "color" << endl;*/
 
 		/*CaseMatching::THICCcase();*/
@@ -797,7 +797,7 @@ int main() {
 			cout << Returner[i].y << " " << Returner[i].x << endl;
 	}*/
 
-
+	}
 	
 }
 

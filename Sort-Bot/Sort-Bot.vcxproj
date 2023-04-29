@@ -130,18 +130,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CleanVector.h" />
+    <ClCompile Include="CaseProcessing.cpp" />
+    <ClCompile Include="Checks.cpp" />
+    <ClCompile Include="DistributorForMatching.cpp" />
+    <ClCompile Include="getMat.cpp" />
+    <ClCompile Include="InputMK.cpp" />
     <ClCompile Include="ItemMoving.cpp" />
+    <ClCompile Include="ItemsProcessing.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MovPrefix.cpp" />
     <ClCompile Include="PointCase.cpp" />
     <ClCompile Include="PointItems.cpp" />
+    <ClCompile Include="PrefixProcessing.cpp" />
+    <ClCompile Include="TemplateMatching.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaseProcessing.h" />
     <ClInclude Include="DistributorForMatching.h" />
     <ClInclude Include="getMat.h" />
+    <ClInclude Include="Includes.h" />
     <ClInclude Include="ItemVectorHEXtoText.h" />
+    <ClInclude Include="MatScreenGlobalArray.h" />
     <ClInclude Include="MovPrefixGlobalVector.h" />
     <ClInclude Include="PointGlobalVector.h" />
     <ClInclude Include="InitializeMovPrefix.h" />

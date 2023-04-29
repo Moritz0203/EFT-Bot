@@ -1,8 +1,30 @@
+#pragma once
+#include <iostream>
+#include <vector>
+#include <conio.h>
+#include <windows.h>
+#include <unordered_set>
+#include "ItemsProcessing.h"
+#include "MovPrefixGlobalVector.h"
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include "Checks.h"
 #include "ItemMoving.h"
-
+#include "getMat.h"
+#include "InputMK.h"
+#include "PointGlobalVector.h"
+#include "TemplateMatching.h"
+using namespace cv;
 
 template <typename T>
-void ItemMoving<T>::CombineVectors() {
+vector<vector<vector<T>>> ItemVectorCombine;
+
+template <typename T>
+vector<vector<T>> ItemVectorCombine_Page;
+
+template <typename T>
+void ItemMoving::CombineVectors() {
     if (!pointAmmunition_C.empty())
         ItemVectorCombine.push_back(pointAmmunition_C);
     else if (!pointMagazine_C.empty())
@@ -12,7 +34,7 @@ void ItemMoving<T>::CombineVectors() {
 }
 
 template <typename T>
-void ItemMoving<T>::mergeVectors(const std::vector<std::vector<std::vector<T>>>& vectors) {
+void ItemMoving::mergeVectors(const std::vector<std::vector<std::vector<T>>>& vectors) {
     size_t maxSize = 0;
     for (const auto& vec : vectors) {
         maxSize = std::max(maxSize, vec.size());
@@ -29,7 +51,7 @@ void ItemMoving<T>::mergeVectors(const std::vector<std::vector<std::vector<T>>>&
 
 
 template <typename T>
-void ItemMoving<T>::removeDuplicates(std::shared_ptr<std::vector<T>> vec1, std::shared_ptr<std::vector<POINT>> vec2) {
+void ItemMoving::removeDuplicates(std::shared_ptr<std::vector<T>> vec1, std::shared_ptr<std::vector<POINT>> vec2) {
 	for (auto it = vec1->begin(); it != vec1->end(); ) {
 		if (std::find(vec2->begin(), vec2->end(), it->point) != vec2->end())
 			it = vec1->erase(it);
@@ -39,9 +61,9 @@ void ItemMoving<T>::removeDuplicates(std::shared_ptr<std::vector<T>> vec1, std::
 }
 
 template <typename T>
-void ItemMoving<T>::MovInStash(shared_ptr<PointCaseInStash> ptr_Stash) {
-	HWND hWND = FindeWindow();
-	Mat MatScreen = getMat(hWND);
+void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> ptr_Stash) {
+	HWND hWND = GetMat::FindeWindow();
+	Mat MatScreen = GetMat::getMat(hWND);
 	Mat templ = imread("ObjectImages/SortingTable.png");
 	POINT pointA, pointB;
 	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
@@ -93,7 +115,7 @@ void ItemMoving<T>::MovInStash(shared_ptr<PointCaseInStash> ptr_Stash) {
 }
 
 template <typename T>
-void ItemMoving<T>::MovInCase(shared_ptr<PointCaseInCase> ptr_Case) {
+void ItemMoving::MovInCase(shared_ptr<PointCaseInCase> ptr_Case) {
 	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 	shared_ptr<vector<vector<POINT>>> ptr_free_spaces;
 	vector<POINT> vector_for_clean{};
@@ -136,7 +158,7 @@ void ItemMoving<T>::MovInCase(shared_ptr<PointCaseInCase> ptr_Case) {
 }
 
 template <typename T>
-void ItemMoving<T>::itemMoving() {
+void ItemMoving::itemMoving() {
 	CombineVectors();
 	mergeVectors(ItemVectorCombine);
 

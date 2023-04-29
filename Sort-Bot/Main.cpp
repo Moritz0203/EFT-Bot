@@ -1,4 +1,5 @@
 //#include "StartUp.h"
+#pragma once
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -8,435 +9,447 @@
 #include <functional>
 #include "ItemMoving.h"
 #include "InitializeMovPrefix.h"
+#include "DistributorForMatching.h"
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include "TemplateMatching.h"
+#include "getMat.h"
 using namespace std;
+using namespace cv;
 
 //external controllers for applications / ECFA
 //Rick and Morty Staffel 4 - Folge 4
 
-struct pair_hash {
-	template <class T1, class T2>
-	size_t operator()(const pair<T1, T2>& p) const {
-		return hash<T1>()(p.first) ^ hash<T2>()(p.second);
-	}
-};
-bool comparePoints(const POINT& a, const POINT& b);
+//struct pair_hash {
+//	template <class T1, class T2>
+//	size_t operator()(const pair<T1, T2>& p) const {
+//		return hash<T1>()(p.first) ^ hash<T2>()(p.second);
+//	}
+//};
+//bool comparePoints(const POINT& a, const POINT& b);
 
-class findFreeSlots_test{
-	vector<vector<POINT>> FinalResults;
-	vector<POINT> Clean_ReturnPoints;
-
-	vector<vector<POINT>> SortINrows(vector<POINT> vector_Input) {
-		vector<vector<POINT>> vector_return;
-		vector<POINT> temp;
-		unordered_set<int> unset;
-
-		for (POINT point : vector_Input) {
-			if (unset.find(point.y) == unset.end()) {
-				unset.insert(point.y);
-
-				for (POINT pointIN : vector_Input) {
-
-					if (point.y == pointIN.y) {
-						temp.push_back(pointIN);
-					}
-				}
-
-				std::sort(temp.begin(), temp.end(), comparePoints);
-				vector_return.push_back(temp);
-				temp.clear();
-			}
-		}
-
-		return vector_return;
-	}
-
-	static bool comparePoints(const POINT& a, const POINT& b) {
-		return a.x < b.x;
-	}
-
-
-public:
-	vector<vector<POINT>> findeSlots(vector<POINT> ReturnPoints) { //parent case must be open to use this function
-		//Mat MatScreen;
-		//Mat templ = imread("ObjectImages/EmptySquare.png");
-		//int freeSlots = {};
-
-		//Mouse::MoverPOINTandPressTwoTimes(case_shared_ptr->point);
-
-		//HWND hWND = FindeWindow();
-		//SetForegroundWindow(hWND);
-		//Sleep(5);//Delete later
-		//MatScreen = getMat(hWND);
-
-		/*vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ, 0.99999);*/
-
-		Clean_ReturnPoints = Matching::removeDuplicates(ReturnPoints);
-
-		return FinalResults = SortINrows(Clean_ReturnPoints);
-
-		/*case_shared_ptr->freeSlots = FinalResults;*/
-	}
-
-	void Print_Out_Case_EmptySlots() {
-		if (!FinalResults.empty()) {
-			for (int i = 0; i < FinalResults.size(); i++) {
-				if (FinalResults[i].size() == 0) {
-					cout << "       |->";
-					cout << " Lines: " << std::to_string(i) << " Total slots: " << Clean_ReturnPoints.size() - 1 << endl;
-					break;
-				}
-
-				int count = 0;
-				int length = 0;
-				string str = {};
-				string strIE = {};
-				string strER = {};
-
-				for (POINT point : FinalResults[i]) {
-					string strY = "Y:  " + std::to_string(point.y);
-					string strX = "  ---  X:  " + std::to_string(point.x);
-					strER = "       |-> ";
-					str = strY + strX;
-
-					cout << strER + str;
-
-					length = 30 - str.length();
-
-					for (int i2 = 0; i2 < length; i2++) {
-						cout << " ";
-					}
-
-					strIE = "Index: " + std::to_string(i) + "  ---  Empty per line: " + std::to_string(++count);
-					cout << strIE << "\n";
-				}
-
-				cout << "       |";
-				for (int i2 = 0; i2 < ((strER.length() - 8) + length + str.length() + strIE.length()); i2++) {
-					cout << "-";
-				}
-				cout << " " << strIE << "\n";
-			}
-			FinalResults.clear();
-		}
-		else {
-			cout << "You must first call the function: findFreeSlots::findSlots()." << endl;
-		}
-	}
-};
+//class findFreeSlots_test{
+//	vector<vector<POINT>> FinalResults;
+//	vector<POINT> Clean_ReturnPoints;
+//
+//	vector<vector<POINT>> SortINrows(vector<POINT> vector_Input) {
+//		vector<vector<POINT>> vector_return;
+//		vector<POINT> temp;
+//		unordered_set<int> unset;
+//
+//		for (POINT point : vector_Input) {
+//			if (unset.find(point.y) == unset.end()) {
+//				unset.insert(point.y);
+//
+//				for (POINT pointIN : vector_Input) {
+//
+//					if (point.y == pointIN.y) {
+//						temp.push_back(pointIN);
+//					}
+//				}
+//
+//				std::sort(temp.begin(), temp.end(), comparePoints);
+//				vector_return.push_back(temp);
+//				temp.clear();
+//			}
+//		}
+//
+//		return vector_return;
+//	}
+//
+//	static bool comparePoints(const POINT& a, const POINT& b) {
+//		return a.x < b.x;
+//	}
+//
+//
+//public:
+//	vector<vector<POINT>> findeSlots(vector<POINT> ReturnPoints) { //parent case must be open to use this function
+//		//Mat MatScreen;
+//		//Mat templ = imread("ObjectImages/EmptySquare.png");
+//		//int freeSlots = {};
+//
+//		//Mouse::MoverPOINTandPressTwoTimes(case_shared_ptr->point);
+//
+//		//HWND hWND = FindeWindow();
+//		//SetForegroundWindow(hWND);
+//		//Sleep(5);//Delete later
+//		//MatScreen = getMat(hWND);
+//
+//		/*vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ, 0.99999);*/
+//
+//		Matching matching;
+//
+//		Clean_ReturnPoints = matching.removeDuplicates(ReturnPoints);
+//
+//		return FinalResults = SortINrows(Clean_ReturnPoints);
+//
+//		/*case_shared_ptr->freeSlots = FinalResults;*/
+//	}
+//
+//	void Print_Out_Case_EmptySlots() {
+//		if (!FinalResults.empty()) {
+//			for (int i = 0; i < FinalResults.size(); i++) {
+//				if (FinalResults[i].size() == 0) {
+//					cout << "       |->";
+//					cout << " Lines: " << std::to_string(i) << " Total slots: " << Clean_ReturnPoints.size() - 1 << endl;
+//					break;
+//				}
+//
+//				int count = 0;
+//				int length = 0;
+//				string str = {};
+//				string strIE = {};
+//				string strER = {};
+//
+//				for (POINT point : FinalResults[i]) {
+//					string strY = "Y:  " + std::to_string(point.y);
+//					string strX = "  ---  X:  " + std::to_string(point.x);
+//					strER = "       |-> ";
+//					str = strY + strX;
+//
+//					cout << strER + str;
+//
+//					length = 30 - str.length();
+//
+//					for (int i2 = 0; i2 < length; i2++) {
+//						cout << " ";
+//					}
+//
+//					strIE = "Index: " + std::to_string(i) + "  ---  Empty per line: " + std::to_string(++count);
+//					cout << strIE << "\n";
+//				}
+//
+//				cout << "       |";
+//				for (int i2 = 0; i2 < ((strER.length() - 8) + length + str.length() + strIE.length()); i2++) {
+//					cout << "-";
+//				}
+//				cout << " " << strIE << "\n";
+//			}
+//			FinalResults.clear();
+//		}
+//		else {
+//			cout << "You must first call the function: findFreeSlots::findSlots()." << endl;
+//		}
+//	}
+//};
 
 //bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem);
 //void remove_duplicates(std::vector<std::shared_ptr<std::vector<POINT>>>& points, std::shared_ptr<std::vector<int>> values);
 //bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>>& points);
 //bool Check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize);
 
-class Check_for_Space_test {
-	struct SpecsForItem {
-		int columns;
-		int rows;
-	};
-
-
-	bool One_Slot(shared_ptr<vector<vector<POINT>>> ptr_vector) {
-		for (vector<POINT>& row : *ptr_vector) {
-			for (auto iterrator = row.begin(); iterrator != row.end(); ++iterrator) {
-				row.erase(iterrator);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
-		vector<vector<POINT>> vector_row = (*ptr_vector);
-		vector<vector<int>> points_for_LookUp{};
-		vector<int> IN_temp_Pairs_for_LookUp{};
-		shared_ptr<vector<POINT>> ptr_vector_row{};
-		vector<shared_ptr<vector<POINT>>> vector_ptr_vector_row{};
-		shared_ptr<vector<int>> ptr_vector_for_clean{};
-
-		for (int i = 0; i < vector_row.size(); i++) {
-			cout << "\nfirst in INDEX: " << i << endl;
-			for (int i2 = 0; i2 < vector_row[i].size(); i2++) {
-				cout << "second in" << endl;
-				int index = i2 + 1;
-				int temp_LookUp = vector_row[i][i2].x + 63;
-				bool break_tryNew = false;
-
-
-				if (index == vector_row[i].size()) {
-					cout << "Vector out of range\n" << endl;
-					break;
-				}
-
-				IN_temp_Pairs_for_LookUp.push_back(vector_row[i][i2].x);
-				for (int column = 1; column < specsForItem.columns; column++) {
-
-
-
-					cout << "in -- in " << index << endl;
-					if (temp_LookUp == vector_row[i][index].x) {
-						cout << "Points sind gleich --- " << temp_LookUp << " " << vector_row[i][index].x << "\n" << endl;
-						IN_temp_Pairs_for_LookUp.push_back(vector_row[i][index].x);
-
-						int index_check = index + 1;
-						if (index_check != vector_row[i].size())
-							index++;
-						else
-							break;
-
-						temp_LookUp += 63;
-					}
-					else {
-						cout << "die points sind nicht gleich --- " << temp_LookUp << " " << vector_row[i][index].x << "\n" << endl;
-						break_tryNew = true;
-						IN_temp_Pairs_for_LookUp.clear();
-						break;
-					}
-				}
-
-				if (break_tryNew == false) {
-					for (int x : IN_temp_Pairs_for_LookUp) {
-						cout << "X: " << x << " ";
-					}
-					points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp);
-					IN_temp_Pairs_for_LookUp.clear();
-					cout << "--- Es wurden alle in einer reie gefunden\n\n" << endl;
-				}
-
-			}
-
-			if (points_for_LookUp.size() != 0) {
-				bool space_is_free = true;
-				int index = i;
-
-				for (int rows = 1; rows < specsForItem.rows; rows++) {
-					if (++index == vector_row.size()) {
-						space_is_free = false;
-						cout << "Check row vector out of range" << endl;
-						break;
-					}
-
-					ptr_vector_row = make_shared<vector<POINT>>(vector_row[index]);
-					vector_ptr_vector_row.push_back(ptr_vector_row);
-
-					if (!check_Column(points_for_LookUp, ptr_vector_row)) {
-						space_is_free = false;
-						break;
-					}
-				}
-
-				if (space_is_free) {
-					ptr_vector_for_clean = make_shared<vector<int>>(points_for_LookUp[0]);
-					remove_duplicates(vector_ptr_vector_row, ptr_vector_for_clean);
-					return true;
-				}
-				else {
-					vector_ptr_vector_row.clear();
-				}
-
-				points_for_LookUp.clear();
-			}
-		}
-
-		return false;
-	}
-
-	void remove_duplicates(std::vector<std::shared_ptr<std::vector<POINT>>>& points, std::shared_ptr<std::vector<int>> values) {
-		for (shared_ptr<vector<POINT>>& vec : points) {
-			vec->erase(std::remove_if(vec->begin(), vec->end(),
-				[&](const POINT& p) {
-					return std::find(values->begin(), values->end(), p.x) != values->end();
-				}), vec->end());
-		}
-	}
-
-	bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>>& points) {
-		bool found = false;
-		vector<vector<int>> result;
-		for (const vector<int>& vec : input) {
-
-			bool allMatch = true;
-			for (const int& val : vec) {
-
-				bool match = false;
-				for (const POINT& point : *points) {
-					if (point.x == val) {
-						match = true;
-						break;
-					}
-				}
-				if (!match) {
-					allMatch = false;
-					break;
-				}
-			}
-			if (allMatch) {
-				found = true;
-				result.push_back(vec);
-			}
-		}
-		input = result;
-		return found;
-	}
-
-	//bool check_Column_Lambda(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>> points) {
-	//	bool found = false;
-	//	input.erase(std::remove_if(input.begin(), input.end(), [&](const std::vector<int>& vec) {
-	//		for (const auto& val : vec) {
-	//			if (std::find_if(points->begin(), points->end(), [&](const POINT& point) { return point.x == val; }) == points->end()) {
-	//				return true;
-	//			}
-	//		}
-	//		found = true;
-	//		return false;
-	//	}), input.end());
-	//
-	//	return found;
-	//}
-
-public:
-	bool check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize) {
-		SpecsForItem SlotsVertical;
-		SpecsForItem SlotsHorizontal;
-
-		switch (ItemSize)
-		{
-		case 1:
-			if (One_Slot(ptr_vector)) {
-				cout << "es ist genug platz vorhanden" << endl;
-				return true;
-			}
-			else {
-				cout << "es ist nicht genug platz vorhanden" << endl;
-				return false;
-			}
-
-		case 2:
-			SlotsVertical.rows = 1;
-			SlotsVertical.columns = 2;
-
-			SlotsHorizontal.rows = 2;
-			SlotsHorizontal.columns = 1;
-
-			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
-				cout << "es ist genug platz vorhanden Vertical" << endl;
-				return true; // genug Platz vorhanden
-			}
-			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
-				cout << "es ist genug platz vorhanden Horizontal" << endl;
-				return true; // genug Platz vorhanden
-			}
-			else {
-				//Do something : wenn beides fehlschlägt
-				cout << "beides fehlgeschlagen" << endl;
-				return false;
-			}
-
-		case 3:
-			SlotsVertical.rows = 1;
-			SlotsVertical.columns = 3;
-
-			SlotsHorizontal.rows = 3;
-			SlotsHorizontal.columns = 1;
-
-			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
-				cout << "es ist genug platz vorhanden Vertical" << endl;
-				return true; // genug Platz vorhanden
-			}
-			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
-				cout << "es ist genug platz vorhanden Horizontal" << endl;
-				return true; // genug Platz vorhanden
-			}
-			else {
-				//Do something : wenn beides fehlschlägt
-				cout << "beides fehlgeschlagen" << endl;
-				return false;
-			}
-
-		case 4:
-			//only vertical because it is a rectangle  
-			SlotsVertical.rows = 2;
-			SlotsVertical.columns = 2;
-
-			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
-				cout << "es ist genug platz vorhanden" << endl;
-				return true; // genug Platz vorhanden
-			}
-			else {
-				//Do something : wenn beides fehlschlägt
-				cout << "fehlgeschlagen" << endl;
-				return false;
-			}
-
-		case 6:
-			SlotsVertical.columns = 3;
-			SlotsVertical.rows = 2;
-
-			SlotsHorizontal.columns = 2;
-			SlotsHorizontal.rows = 3;
-
-			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
-				cout << "es ist genug platz vor handen Vertical" << endl;
-				return true; // genug Platz vor handen
-			}
-			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
-				cout << "es ist genug platz vor handen Horizontal" << endl;
-				return true; // genug Platz vor handen
-			}
-			else {
-				//Do something : wenn beides fehlschlägt
-				cout << "beides fehlgeschlagen" << endl;
-				return false;
-			}
-
-		case 8:
-			SlotsVertical.columns = 2;
-			SlotsVertical.rows = 4;
-
-			SlotsHorizontal.columns = 4;
-			SlotsHorizontal.rows = 2;
-
-			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
-				cout << "es ist genug platz vor handen Vertical" << endl;
-				return true; // genug Platz vor handen
-			}
-			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
-				cout << "es ist genug platz vor handen Horizontal" << endl;
-				return true; // genug Platz vor handen
-			}
-			else {
-				//Do something : wenn beides fehlschlägt
-				cout << "beides fehlgeschlagen" << endl;
-				return false;
-			}
-
-		case 9:
-			SlotsVertical.columns = 3;
-			SlotsVertical.rows = 3;
-
-			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
-				cout << "es ist genug platz vor handen" << endl;
-				return true; // genug Platz vor handen
-			}
-			else {
-				//Do something : wenn beides fehlschlägt
-				cout << "fehlgeschlagen" << endl;
-				return false;
-			}
-		}
-
-
-	}
-};
-
-
-
+//class Check_for_Space_test {
+//	struct SpecsForItem {
+//		int columns;
+//		int rows;
+//	};
+//
+//
+//	bool One_Slot(shared_ptr<vector<vector<POINT>>> ptr_vector) {
+//		for (vector<POINT>& row : *ptr_vector) {
+//			for (auto iterrator = row.begin(); iterrator != row.end(); ++iterrator) {
+//				row.erase(iterrator);
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//
+//	bool Vertical_Horizontal(shared_ptr<vector<vector<POINT>>> ptr_vector, SpecsForItem specsForItem) {
+//		vector<vector<POINT>> vector_row = (*ptr_vector);
+//		vector<vector<int>> points_for_LookUp{};
+//		vector<int> IN_temp_Pairs_for_LookUp{};
+//		shared_ptr<vector<POINT>> ptr_vector_row{};
+//		vector<shared_ptr<vector<POINT>>> vector_ptr_vector_row{};
+//		shared_ptr<vector<int>> ptr_vector_for_clean{};
+//
+//		for (int i = 0; i < vector_row.size(); i++) {
+//			cout << "\nfirst in INDEX: " << i << endl;
+//			for (int i2 = 0; i2 < vector_row[i].size(); i2++) {
+//				cout << "second in" << endl;
+//				int index = i2 + 1;
+//				int temp_LookUp = vector_row[i][i2].x + 63;
+//				bool break_tryNew = false;
+//
+//
+//				if (index == vector_row[i].size()) {
+//					cout << "Vector out of range\n" << endl;
+//					break;
+//				}
+//
+//				IN_temp_Pairs_for_LookUp.push_back(vector_row[i][i2].x);
+//				for (int column = 1; column < specsForItem.columns; column++) {
+//
+//
+//
+//					cout << "in -- in " << index << endl;
+//					if (temp_LookUp == vector_row[i][index].x) {
+//						cout << "Points sind gleich --- " << temp_LookUp << " " << vector_row[i][index].x << "\n" << endl;
+//						IN_temp_Pairs_for_LookUp.push_back(vector_row[i][index].x);
+//
+//						int index_check = index + 1;
+//						if (index_check != vector_row[i].size())
+//							index++;
+//						else
+//							break;
+//
+//						temp_LookUp += 63;
+//					}
+//					else {
+//						cout << "die points sind nicht gleich --- " << temp_LookUp << " " << vector_row[i][index].x << "\n" << endl;
+//						break_tryNew = true;
+//						IN_temp_Pairs_for_LookUp.clear();
+//						break;
+//					}
+//				}
+//
+//				if (break_tryNew == false) {
+//					for (int x : IN_temp_Pairs_for_LookUp) {
+//						cout << "X: " << x << " ";
+//					}
+//					points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp);
+//					IN_temp_Pairs_for_LookUp.clear();
+//					cout << "--- Es wurden alle in einer reie gefunden\n\n" << endl;
+//				}
+//
+//			}
+//
+//			if (points_for_LookUp.size() != 0) {
+//				bool space_is_free = true;
+//				int index = i;
+//
+//				for (int rows = 1; rows < specsForItem.rows; rows++) {
+//					if (++index == vector_row.size()) {
+//						space_is_free = false;
+//						cout << "Check row vector out of range" << endl;
+//						break;
+//					}
+//
+//					ptr_vector_row = make_shared<vector<POINT>>(vector_row[index]);
+//					vector_ptr_vector_row.push_back(ptr_vector_row);
+//
+//					if (!check_Column(points_for_LookUp, ptr_vector_row)) {
+//						space_is_free = false;
+//						break;
+//					}
+//				}
+//
+//				if (space_is_free) {
+//					ptr_vector_for_clean = make_shared<vector<int>>(points_for_LookUp[0]);
+//					remove_duplicates(vector_ptr_vector_row, ptr_vector_for_clean);
+//					return true;
+//				}
+//				else {
+//					vector_ptr_vector_row.clear();
+//				}
+//
+//				points_for_LookUp.clear();
+//			}
+//		}
+//
+//		return false;
+//	}
+//
+//	void remove_duplicates(std::vector<std::shared_ptr<std::vector<POINT>>>& points, std::shared_ptr<std::vector<int>> values) {
+//		for (shared_ptr<vector<POINT>>& vec : points) {
+//			vec->erase(std::remove_if(vec->begin(), vec->end(),
+//				[&](const POINT& p) {
+//					return std::find(values->begin(), values->end(), p.x) != values->end();
+//				}), vec->end());
+//		}
+//	}
+//
+//	bool check_Column(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>>& points) {
+//		bool found = false;
+//		vector<vector<int>> result;
+//		for (const vector<int>& vec : input) {
+//
+//			bool allMatch = true;
+//			for (const int& val : vec) {
+//
+//				bool match = false;
+//				for (const POINT& point : *points) {
+//					if (point.x == val) {
+//						match = true;
+//						break;
+//					}
+//				}
+//				if (!match) {
+//					allMatch = false;
+//					break;
+//				}
+//			}
+//			if (allMatch) {
+//				found = true;
+//				result.push_back(vec);
+//			}
+//		}
+//		input = result;
+//		return found;
+//	}
+//
+//	//bool check_Column_Lambda(std::vector<std::vector<int>>& input, std::shared_ptr<std::vector<POINT>> points) {
+//	//	bool found = false;
+//	//	input.erase(std::remove_if(input.begin(), input.end(), [&](const std::vector<int>& vec) {
+//	//		for (const auto& val : vec) {
+//	//			if (std::find_if(points->begin(), points->end(), [&](const POINT& point) { return point.x == val; }) == points->end()) {
+//	//				return true;
+//	//			}
+//	//		}
+//	//		found = true;
+//	//		return false;
+//	//	}), input.end());
+//	//
+//	//	return found;
+//	//}
+//
+//public:
+//	bool check_for_Space(shared_ptr<vector<vector<POINT>>> ptr_vector, int ItemSize) {
+//		SpecsForItem SlotsVertical;
+//		SpecsForItem SlotsHorizontal;
+//
+//		switch (ItemSize)
+//		{
+//		case 1:
+//			if (One_Slot(ptr_vector)) {
+//				cout << "es ist genug platz vorhanden" << endl;
+//				return true;
+//			}
+//			else {
+//				cout << "es ist nicht genug platz vorhanden" << endl;
+//				return false;
+//			}
+//
+//		case 2:
+//			SlotsVertical.rows = 1;
+//			SlotsVertical.columns = 2;
+//
+//			SlotsHorizontal.rows = 2;
+//			SlotsHorizontal.columns = 1;
+//
+//			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+//				cout << "es ist genug platz vorhanden Vertical" << endl;
+//				return true; // genug Platz vorhanden
+//			}
+//			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
+//				cout << "es ist genug platz vorhanden Horizontal" << endl;
+//				return true; // genug Platz vorhanden
+//			}
+//			else {
+//				//Do something : wenn beides fehlschlägt
+//				cout << "beides fehlgeschlagen" << endl;
+//				return false;
+//			}
+//
+//		case 3:
+//			SlotsVertical.rows = 1;
+//			SlotsVertical.columns = 3;
+//
+//			SlotsHorizontal.rows = 3;
+//			SlotsHorizontal.columns = 1;
+//
+//			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+//				cout << "es ist genug platz vorhanden Vertical" << endl;
+//				return true; // genug Platz vorhanden
+//			}
+//			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
+//				cout << "es ist genug platz vorhanden Horizontal" << endl;
+//				return true; // genug Platz vorhanden
+//			}
+//			else {
+//				//Do something : wenn beides fehlschlägt
+//				cout << "beides fehlgeschlagen" << endl;
+//				return false;
+//			}
+//
+//		case 4:
+//			//only vertical because it is a rectangle  
+//			SlotsVertical.rows = 2;
+//			SlotsVertical.columns = 2;
+//
+//			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+//				cout << "es ist genug platz vorhanden" << endl;
+//				return true; // genug Platz vorhanden
+//			}
+//			else {
+//				//Do something : wenn beides fehlschlägt
+//				cout << "fehlgeschlagen" << endl;
+//				return false;
+//			}
+//
+//		case 6:
+//			SlotsVertical.columns = 3;
+//			SlotsVertical.rows = 2;
+//
+//			SlotsHorizontal.columns = 2;
+//			SlotsHorizontal.rows = 3;
+//
+//			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+//				cout << "es ist genug platz vor handen Vertical" << endl;
+//				return true; // genug Platz vor handen
+//			}
+//			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
+//				cout << "es ist genug platz vor handen Horizontal" << endl;
+//				return true; // genug Platz vor handen
+//			}
+//			else {
+//				//Do something : wenn beides fehlschlägt
+//				cout << "beides fehlgeschlagen" << endl;
+//				return false;
+//			}
+//
+//		case 8:
+//			SlotsVertical.columns = 2;
+//			SlotsVertical.rows = 4;
+//
+//			SlotsHorizontal.columns = 4;
+//			SlotsHorizontal.rows = 2;
+//
+//			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+//				cout << "es ist genug platz vor handen Vertical" << endl;
+//				return true; // genug Platz vor handen
+//			}
+//			else if (Vertical_Horizontal(ptr_vector, SlotsHorizontal)) {
+//				cout << "es ist genug platz vor handen Horizontal" << endl;
+//				return true; // genug Platz vor handen
+//			}
+//			else {
+//				//Do something : wenn beides fehlschlägt
+//				cout << "beides fehlgeschlagen" << endl;
+//				return false;
+//			}
+//
+//		case 9:
+//			SlotsVertical.columns = 3;
+//			SlotsVertical.rows = 3;
+//
+//			if (Vertical_Horizontal(ptr_vector, SlotsVertical)) {
+//				cout << "es ist genug platz vor handen" << endl;
+//				return true; // genug Platz vor handen
+//			}
+//			else {
+//				//Do something : wenn beides fehlschlägt
+//				cout << "fehlgeschlagen" << endl;
+//				return false;
+//			}
+//		}
+//
+//
+//	}
+//};
 
 
 
-extern void CombinePrefixAndCase();
 
-template <typename T>
+
+
+//extern void CombinePrefixAndCase();
+
+
+
+
+
 int main() {
 	
 	
@@ -449,78 +462,80 @@ int main() {
 	cout << "//                     |_.__/\_, | |___\___|_/_/ \_\                    " << endl;
 	cout << "//                           |__/                                       " << endl;*/
 
-	cout << "Welcome to EFT-SORT-BOT" << endl;
-	cout << "by ECFA" << endl;
-	cout << endl;
-		
-	
-	/*InitializeMovPrefix::Initialize();*/
+	//cout << "Welcome to EFT-SORT-BOT" << endl;
+	//cout << "by ECFA" << endl;
+	//cout << endl;
+	//	
+	//
+	///*InitializeMovPrefix::Initialize();*/
 
 
 
-	HWND hWND = FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(100);
-	Mat MatScreen = getMat(hWND);
-	
+	//HWND hWND = GetMat::FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(100);
+	//Mat MatScreen = GetMat::getMat(hWND);
+	//
 
-	string Start = "test";
-	
-	
-	ItemMoving<T> Moving;
+	//string Start = "test";
+	//
+	//
 
-	if (Start == "start") {
-		InitializeMovPrefix::Initialize();
-		CombinePrefixAndCase();
-		ItemsProcessing::AmmunitionProcess();
-		Moving.itemMoving();
-	}
-	if (Start == "test") {
-		
+	//if (Start == "start") {
+	//	/*ItemMoving moving;
 
 
-		Mat templ;
-		Mat templ1;
+	//	InitializeMovPrefix::Initialize();
+	//	CombinePrefixAndCase();
+	//	ItemsProcessing::AmmunitionProcess();
+	//	moving.itemMoving<T>();*/
+	//}
+	//if (Start == "test") {
+	//	
 
-		//Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
-		
-		/*vector<POINT> ReturnPoints;*/
-		vector<POINT> ReturnPoints;
-		templ = imread("ObjectImages/SortingTable.png");
-		templ1 = imread("ObjectImages/EmptySquare.png");
-		const char* image_window = "Source Image";
-		namedWindow(image_window, WINDOW_AUTOSIZE);
-		/*const char* image_window2 = "Source Image2222222222";
-		namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		TemplateMatching::templateMatchingItems("CaseImages/JunkCase.png", 0.88, false, false, "BP", ReturnPoints, MatScreen);
+	//	Mat templ;
+	//	Mat templ1;
 
-		ReturnPoints = Matching::removeDuplicates(ReturnPoints);
+	//	//Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");
+	//	
+	//	/*vector<POINT> ReturnPoints;*/
+	//	vector<POINT> ReturnPoints;
+	//	templ = imread("ObjectImages/SortingTable.png");
+	//	templ1 = imread("ObjectImages/EmptySquare.png");
+	//	const char* image_window = "Source Image";
+	//	namedWindow(image_window, WINDOW_AUTOSIZE);
+	//	/*const char* image_window2 = "Source Image2222222222";
+	//	namedWindow(image_window2, WINDOW_AUTOSIZE);*/
 
-		cout << endl;
-		for (POINT point : ReturnPoints) {
-			cout << point.y << " " << point.x << endl;
-		}
+	//	TemplateMatching::templateMatchingItems("CaseImages/JunkCase.png", 0.88, false, false, "BP", ReturnPoints, MatScreen);
 
-		POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
-		point.y = (templ.rows / 2) + point.y;
-		point.x = (templ.cols / 2) + point.x;
+	//	ReturnPoints = Matching::removeDuplicates(ReturnPoints);
 
-		Mouse::MoverPOINTandPress(point);
+	//	cout << endl;
+	//	for (POINT point : ReturnPoints) {
+	//		cout << point.y << " " << point.x << endl;
+	//	}
 
-		Sleep(200);
+	//	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
+	//	point.y = (templ.rows / 2) + point.y;
+	//	point.x = (templ.cols / 2) + point.x;
 
-		POINT pointA, pointB;
+	//	//Mouse::MoverPOINTandPress(point);
 
-		pointA.y = (templ.rows / 2) + ReturnPoints[0].y;
-		pointA.x = (templ.cols / 2) + ReturnPoints[0].x;
+	//	Sleep(200);
 
-		pointB.y = MatScreen.rows / 2;
-		pointB.x = MatScreen.cols / 2;
+	//	POINT pointA, pointB;
 
-		Mouse::MouseMoveAtoB(pointA, pointB);
+	//	pointA.y = (templ.rows / 2) + ReturnPoints[0].y;
+	//	pointA.x = (templ.cols / 2) + ReturnPoints[0].x;
 
-		cout << MatScreen.cols << " " << MatScreen.rows;
+	//	pointB.y = MatScreen.rows / 2;
+	//	pointB.x = MatScreen.cols / 2;
+
+	//	//Mouse::MouseMoveAtoB(pointA, pointB);
+
+	//	cout << MatScreen.cols << " " << MatScreen.rows;
 
 
 
@@ -776,7 +791,7 @@ int main() {
 		cout << color << " " << "color" << endl;*/
 
 		/*CaseMatching::THICCcase();*/
-	}
+	//}
 
 	/*for (int i = 0; i < Returner.size(); i++) {
 			cout << Returner[i].y << " " << Returner[i].x << endl;

@@ -9,75 +9,135 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\TypeClass">
+      <UniqueIdentifier>{f7997e34-0a6c-495e-819c-abe1b900db2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TypeClass">
+      <UniqueIdentifier>{d1d77d49-c81f-4838-a341-856aa9109163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TypeClass\Vector">
+      <UniqueIdentifier>{6c797e62-ae19-4630-8694-df171518f182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Prefix">
+      <UniqueIdentifier>{2de43d41-07be-4f1b-9e49-a615a69831ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TemplateMatching">
+      <UniqueIdentifier>{aa9c30bd-30ca-4c35-b6d0-c13075494018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MK">
+      <UniqueIdentifier>{dd5a0f69-3978-44c3-8a2e-7f35f86cf21c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Processing-Moving">
+      <UniqueIdentifier>{79acc70a-dd3b-4c1f-9b7b-6e7f372a8c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Processing-Moving">
+      <UniqueIdentifier>{b7e6393d-660e-40ce-9fe3-dbc036bac6dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TemplateMatching">
+      <UniqueIdentifier>{8c66227b-ed59-41eb-bab5-7e51f85b81d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Prefix">
+      <UniqueIdentifier>{6e208fe6-f18d-4f2e-aba2-7478fb0fd515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MK">
+      <UniqueIdentifier>{960cfbab-7a76-4ef7-aa6d-c35012ee803c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PointCase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PointItems.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\TypeClass</Filter>
     </ClCompile>
-    <ClCompile Include="CleanVector.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="PointCase.cpp">
+      <Filter>Source Files\TypeClass</Filter>
     </ClCompile>
     <ClCompile Include="MovPrefix.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\TypeClass</Filter>
+    </ClCompile>
+    <ClCompile Include="CaseProcessing.cpp">
+      <Filter>Source Files\Processing-Moving</Filter>
     </ClCompile>
     <ClCompile Include="ItemMoving.cpp">
+      <Filter>Source Files\Processing-Moving</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemsProcessing.cpp">
+      <Filter>Source Files\Processing-Moving</Filter>
+    </ClCompile>
+    <ClCompile Include="DistributorForMatching.cpp">
+      <Filter>Source Files\TemplateMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="getMat.cpp">
+      <Filter>Source Files\TemplateMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="TemplateMatching.cpp">
+      <Filter>Source Files\TemplateMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="PrefixProcessing.cpp">
+      <Filter>Source Files\Prefix</Filter>
+    </ClCompile>
+    <ClCompile Include="Checks.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputMK.cpp">
+      <Filter>Source Files\MK</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TemplateMatching.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DistributorForMatching.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputMK.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="getMat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Checks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CaseProcessing.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PointItems.h">
+      <Filter>Header Files\TypeClass</Filter>
     </ClInclude>
     <ClInclude Include="PointCase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PointGlobalVector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PointItems.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemsProcessing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemMoving.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\TypeClass</Filter>
     </ClInclude>
     <ClInclude Include="MovPrefix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InitializeMovPrefix.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\TypeClass</Filter>
     </ClInclude>
     <ClInclude Include="MovPrefixGlobalVector.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\TypeClass\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="PointGlobalVector.h">
+      <Filter>Header Files\TypeClass\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="InitializeMovPrefix.h">
+      <Filter>Header Files\Prefix</Filter>
     </ClInclude>
     <ClInclude Include="ItemVectorHEXtoText.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Prefix</Filter>
     </ClInclude>
     <ClInclude Include="PrefixProcessing.h">
+      <Filter>Header Files\Prefix</Filter>
+    </ClInclude>
+    <ClInclude Include="TemplateMatching.h">
+      <Filter>Header Files\TemplateMatching</Filter>
+    </ClInclude>
+    <ClInclude Include="DistributorForMatching.h">
+      <Filter>Header Files\TemplateMatching</Filter>
+    </ClInclude>
+    <ClInclude Include="getMat.h">
+      <Filter>Header Files\TemplateMatching</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMK.h">
+      <Filter>Header Files\MK</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsProcessing.h">
+      <Filter>Header Files\Processing-Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemMoving.h">
+      <Filter>Header Files\Processing-Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="CaseProcessing.h">
+      <Filter>Header Files\Processing-Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MatScreenGlobalArray.h">
+      <Filter>Header Files\TypeClass\Vector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

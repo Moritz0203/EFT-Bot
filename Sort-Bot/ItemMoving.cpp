@@ -46,7 +46,7 @@ bool operator==(const POINT& lhs, const POINT& rhs) {
 	return lhs.x == rhs.x && lhs.y == rhs.y;
 }
 
-void deleteMatchingPoints(std::vector<PointItem*>& pointItems, std::shared_ptr<std::vector<POINT>> points) {
+void deleteMatchingPoints(std::vector<PointItem*>& pointItems, std::shared_ptr<std::vector<POINT>>& points) {
 	std::vector<PointItem*> result;
 	for (auto it = pointItems.begin(); it != pointItems.end(); ++it) {
 		bool matchFound = false;

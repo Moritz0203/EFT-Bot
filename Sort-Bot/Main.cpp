@@ -494,7 +494,7 @@ int main() {
 
 
 
-		//Mat templ;
+		//Mat templ;+
 		//Mat templ1;
 
 		////Mat MatScreen = imread("C:/Users/morit/OneDrive/Desktop/EFT-Sort-Bot/Images/Screenshot_3.png");

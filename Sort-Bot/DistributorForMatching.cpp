@@ -122,7 +122,7 @@ void Matching::AmmunitionMatching(array<Mat, 11>& arrayMatScreen) {
 	int count = 0;
 	for (int i1 = 0; i1 < sizeMat; i1++) {
 		for (int i = 0; i < sizeString; i++) {
-			TemplateMatching::templateMatchingItems(Ammunition::Ammunition[i], Ammunition::AmmunitionThreshold[i], false, true, Ammunition::NameOfItemAmmunition[i], ReturnDataAM, arrayMatScreen[i1]);
+			ReturnDataAM = TemplateMatching::templateMatchingItems(Ammunition::Ammunition[i], Ammunition::AmmunitionThreshold[i], false, true, Ammunition::NameOfItemAmmunition[i], arrayMatScreen[i1]);
 
 			templ = imread(Ammunition::Ammunition[i]);
 			if (!ReturnDataAM.empty()) {
@@ -206,7 +206,7 @@ void Matching::CaseMatching(array<Mat, 11>& arrayMatScreen) {
 
 	for (int i1 = 0; i1 < sizeMat; i1++) {
 		for (int i = 0; i < sizeString; i++) {
-			TemplateMatching::templateMatchingItems(Case::Cases[i], Case::CasesThreshold[i], false, false, Case::NameOfItemCases[i], ReturnDataCase, arrayMatScreen[i1]);
+			ReturnDataCase = TemplateMatching::templateMatchingItems(Case::Cases[i], Case::CasesThreshold[i], false, false, Case::NameOfItemCases[i], arrayMatScreen[i1]);
 
 			templ = imread(Case::Cases[i]);
 			if (!ReturnDataCase.empty()) {
@@ -289,7 +289,7 @@ void Matching::MagazineMatching(array<Mat, 11>& arrayMatScreen) {
 	vector<PointMagazine> pointMagazineTemp;
 	for (int i1 = 0; i1 < sizeMat; i1++) {
 		for (int i = 0; i < sizeString; i++) {
-			TemplateMatching::templateMatchingItems(Magazine::Magazine[i], Magazine::MagazineThreshold[i], true, false, Magazine::NameOfItemMagazine[i], ReturnDataMA, arrayMatScreen[i1]);
+			ReturnDataMA = TemplateMatching::templateMatchingItems(Magazine::Magazine[i], Magazine::MagazineThreshold[i], true, false, Magazine::NameOfItemMagazine[i], arrayMatScreen[i1]);
 
 			templ = imread(Magazine::Magazine[i]);
 			if (!ReturnDataMA.empty()) {
@@ -380,7 +380,7 @@ void Matching::BarterMatching(array<Mat, 11>& arrayMatScreen) {
 	vector<PointBarter> pointBarterTemp;
 	for (int i1 = 0; i1 < sizeMat; i1++) {
 		for (int i = 0; i < sizeString; i++) {
-			TemplateMatching::templateMatchingItems(Barter::Barter[i], Barter::BarterThreshold[i], false, false, Barter::NameOfItemBarter[i], ReturnDataBA, arrayMatScreen[i1]);
+			ReturnDataBA = TemplateMatching::templateMatchingItems(Barter::Barter[i], Barter::BarterThreshold[i], false, false, Barter::NameOfItemBarter[i], arrayMatScreen[i1]);
 
 			templ = imread(Barter::Barter[i]);
 			if (!ReturnDataBA.empty()) {

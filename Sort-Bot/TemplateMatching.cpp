@@ -11,8 +11,8 @@
 using namespace std;
 using namespace cv;
 
-int TemplateMatching::templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, vector<POINT>& ReturnData, Mat MatScreen)
-{
+vector<POINT> TemplateMatching::templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, Mat MatScreen) {
+	vector<POINT> ReturnData;
 	int height = {}, width = {};
 	const char* image_window = "Source Image";
 	const char* Test = "Item Image";
@@ -23,10 +23,8 @@ int TemplateMatching::templateMatchingItems(string templatename, double threshol
 	img = MatScreen;
 	Mat templ = cv::imread(templatename);
 	if (img.empty() || templ.empty())
-	{
 		cout << "Error reading file(s) in templateMatching Funkion!" << endl;
-		return false;
-	}
+	
 	namedWindow(image_window, WINDOW_AUTOSIZE);
 	/*namedWindow(Test, WINDOW_AUTOSIZE);*/
 
@@ -78,7 +76,7 @@ int TemplateMatching::templateMatchingItems(string templatename, double threshol
 				/*count++;*/
 			}
 			else
-				return false;
+				break;
 		}
 		else
 			break;
@@ -87,7 +85,7 @@ int TemplateMatching::templateMatchingItems(string templatename, double threshol
 	/*cv::imshow(image_window, img_display);
 
 	waitKey(0);*/
-	return templ.cols, templ.rows;
+	return ReturnData;
 }
 
 POINT TemplateMatching::templateMatchingObjects(Mat MatScreen, Mat templ, double threshold) {

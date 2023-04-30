@@ -5,7 +5,7 @@ using namespace std;
 
 class TemplateMatching {
 public:
-	static int templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, vector<POINT>& ReturnData, Mat MatScreen);
+	static vector<POINT> templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, Mat MatScreen);
 
 	static POINT templateMatchingObjects(Mat MatScreen, Mat templ, double threshold);
 

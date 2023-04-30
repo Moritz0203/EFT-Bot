@@ -81,7 +81,7 @@ vector<vector<POINT>> findFreeSlots::SortINrows(vector<POINT> vector_Input) {
 	return vector_return;
 }
 
-bool findFreeSlots::comparePoints(const POINT& a, const POINT& b) {
+__forceinline bool findFreeSlots::comparePoints(const POINT& a, const POINT& b) {
 	return a.x < b.x;
 }
 

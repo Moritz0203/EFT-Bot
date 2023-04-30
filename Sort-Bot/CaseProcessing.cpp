@@ -129,7 +129,7 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 		templatename = CasesInCase[i2];
 		templ = imread(CasesInCase[i2]);
 
-		TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemCasesInCase[i2], ReturnDataCase, MatScreen);
+		ReturnDataCase = TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemCasesInCase[i2], MatScreen);
 
 		for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
 			Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13/*templ.cols*/, templ.rows);

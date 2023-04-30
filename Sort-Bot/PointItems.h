@@ -4,41 +4,41 @@
 #include <conio.h>
 #include <windows.h>
 
-class PointAmmunition
+
+class PointItem {
+public:
+	POINT point = {};
+	int heightTempl = {}, widthTempl = {}, page = {}, slotsPerItem = {};
+	std::string nameOfItem = {};
+
+	PointItem();
+	PointItem(POINT point, std::string nameOfItem, int heightTempl, int widthTempl, int page, int slotsPerItem);
+	virtual ~PointItem() {}
+};
+
+class PointAmmunition: public PointItem
 {
 public:
 	int stackSize = {};
-	POINT point = {};
-	int heightTempl = {}, widthTempl = {}, page = {};
-	std::string nameOf = {};
-	int slotsPerItem = {};
 
 	PointAmmunition();
-	PointAmmunition(POINT point, std::string nameOf, int stackSize, int heightTempl, int widthTempl, int page, int slotsPerItem);
+	PointAmmunition(POINT point, std::string nameOfItem, int heightTempl, int widthTempl, int page, int slotsPerItem, int stackSize);
 };
 
-class PointMagazine
+class PointMagazine: public PointItem
 {
 public:
 	int fillStatus = {};
-	POINT point = {};
-	int heightTempl = {}, widthTempl = {}, page = {};
-	std::string nameOfMagazine = {};
-	int slotsPerItem = {};
 
 	PointMagazine();
-	PointMagazine(POINT point, std::string nameOfMagazine, int fillStatus, int heightTempl, int widthTempl, int page, int slotsPerItem);
+	PointMagazine(POINT point, std::string nameOfItem, int heightTempl, int widthTempl, int page, int slotsPerItem, int fillStatus);
 };
 
-class PointBarter
+class PointBarter: public PointItem
 {
 public:
 	bool isFoundInRaid = {};
-	POINT point = {};
-	int heightTempl = {}, widthTempl = {}, page = {};
-	std::string nameOfBarter = {};
-	int slotsPerItem = {};
 
 	PointBarter();
-	PointBarter(POINT point, std::string nameOfBarter, bool isFoundInRaid, int heightTempl, int widthTempl, int page, int slotsPerItem);
+	PointBarter(POINT point, std::string nameOfItem, int heightTempl, int widthTempl, int page, int slotsPerItem, bool isFoundInRaid);
 };

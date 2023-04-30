@@ -16,21 +16,19 @@ using namespace std;
 using namespace cv;
 
 void checksPublic::CheckScrollbarPositions() {
-	Mat MatScreen;
-	Mat templ;
+	const int keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key
 
-	HWND hWND = GetMat::FindeWindow();
+	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
-	MatScreen = GetMat::getMat(hWND);
+	const Mat MatScreen = GetMat::getMat(hWND);
 
-	templ = imread("ObjectImages/scrollbar.png");
+	const Mat templ = imread("ObjectImages/scrollbar.png");
 	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.70);
 	if (point.y > 79) {// Later with screen resolution
 		point.y = (templ.rows / 2) + point.y;
 		point.x = (templ.cols / 2) + point.x;
 		Mouse::MoverPOINTandPress(point);
-		int keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key
 		Keyboard::KeyboardInput(keyforInput);
 	}
 
@@ -41,19 +39,17 @@ void checksPublic::CheckScrollbarPositions() {
 }
 
 void checksPublic::CheckForFails() {
-	Mat MatScreen;
-	Mat templ;
-	POINT pointMouse = {};
+	POINT pointMouse{};
 	pointMouse.y = 729;
 	pointMouse.x = 961;
 
-	HWND hWND = GetMat::FindeWindow();
+	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
-	MatScreen = GetMat::getMat(hWND);
+	const Mat MatScreen = GetMat::getMat(hWND);
 
-	templ = imread("ObjectImages/Banner.png");
-	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.98);
+	const Mat templ = imread("ObjectImages/Banner.png");
+	const POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.98);
 	if (point.y || point.x != 0)
 		Mouse::MoverPOINTandPress(pointMouse); //729 961
 }
@@ -86,17 +82,16 @@ __forceinline bool findFreeSlots::comparePoints(const POINT& a, const POINT& b) 
 }
 
 
-void findFreeSlots::findeSlots(POINT pointCase, shared_ptr<std::vector<std::vector<POINT>>> freeSlots) { //parent case must be open to use this function
-	Mat MatScreen;
-	Mat templ = imread("ObjectImages/EmptySquare.png");
+void findFreeSlots::findeSlots(const POINT pointCase, shared_ptr<std::vector<std::vector<POINT>>> freeSlots) { //parent case must be open to use this function
+	const Mat templ = imread("ObjectImages/EmptySquare.png");
 	Matching matching;
 
 	Mouse::MoverPOINTandPressTwoTimes(pointCase);
 
-	HWND hWND = GetMat::FindeWindow();
+	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
-	MatScreen = GetMat::getMat(hWND);
+	const Mat MatScreen = GetMat::getMat(hWND);
 
 	vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ, 0.99999);
 
@@ -122,7 +117,7 @@ void findFreeSlots::Print_Out_Case_EmptySlots() {
 			string strIE = {};
 			string strER = {};
 
-			for (POINT point : FinalResults[i]) {
+			for (const POINT point : FinalResults[i]) {
 				string strY = "Y:  " + std::to_string(point.y);
 				string strX = "  ---  X:  " + std::to_string(point.x);
 				strER = "       |-> ";

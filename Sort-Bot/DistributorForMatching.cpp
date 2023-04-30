@@ -21,7 +21,7 @@ struct pair_hash {
 	}
 };
 
-bool Matching::checkSecondLastChar(const string tagCase) {
+__forceinline bool Matching::checkSecondLastChar(const string tagCase) {
 	int length = tagCase.length();
 	if (length >= 2) {
 		return (tagCase[static_cast<std::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type>(length) - 2] != '-');
@@ -111,8 +111,8 @@ namespace Ammunition {
 }
 
 void Matching::AmmunitionMatching(array<Mat, 11>& arrayMatScreen) {
-	int sizeString = sizeof(Ammunition::Ammunition) / sizeof(string);
-	int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
+	const int sizeString = sizeof(Ammunition::Ammunition) / sizeof(string);
+	const int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 	Mat templ;
 
 	vector<POINT> ReturnDataAM;
@@ -128,14 +128,14 @@ void Matching::AmmunitionMatching(array<Mat, 11>& arrayMatScreen) {
 			if (!ReturnDataAM.empty()) {
 				ReturnDataAM_Clean = removeDuplicates(ReturnDataAM);
 
-				for (POINT po : ReturnDataAM_Clean) {
+				for (const POINT po : ReturnDataAM_Clean) {
 					cout << po.y << " " << po.x << endl;
 				}
 
 				for (int i2 = 0; i2 < ReturnDataAM_Clean.size(); i2++) {
-					Rect Rec(ReturnDataAM_Clean[i2].x + 44, ReturnDataAM_Clean[i2].y + 48, templ.cols - 44, templ.rows - 48);
+					const Rect Rec(ReturnDataAM_Clean[i2].x + 44, ReturnDataAM_Clean[i2].y + 48, templ.cols - 44, templ.rows - 48);
 					const string stackSize = "2"/*TextMatching::textMatching(arrayMatScreen[i1], Rec)*/;
-					int stackSizeConvertet = stoi(stackSize);
+					const int stackSizeConvertet = stoi(stackSize);
 					pointAmmunitionTemp.emplace_back(ReturnDataAM_Clean[i2], Ammunition::NameOfItemAmmunition[i], stackSizeConvertet, templ.rows, templ.cols, i1, 1);
 				}
 				ReturnDataAM.clear();
@@ -193,8 +193,8 @@ namespace Case {
 }
 
 void Matching::CaseMatching(array<Mat, 11>& arrayMatScreen) {
-	int sizeString = sizeof(Case::Cases) / sizeof(string);
-	int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
+	const int sizeString = sizeof(Case::Cases) / sizeof(string);
+	const int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 	Mat templ;
 
 	vector<POINT> ReturnDataCase;
@@ -212,7 +212,7 @@ void Matching::CaseMatching(array<Mat, 11>& arrayMatScreen) {
 			if (!ReturnDataCase.empty()) {
 				ReturnDataCase_Clean = removeDuplicates(ReturnDataCase);
 				for (int i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
-					Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, 13, templ.rows);
+					const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, 13, templ.rows);
 					const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
 					if (checkSecondLastChar(tagCase)) {
 						switch (i)
@@ -280,8 +280,8 @@ namespace Magazine {
 }
 
 void Matching::MagazineMatching(array<Mat, 11>& arrayMatScreen) {
-	int sizeString = sizeof(Magazine::Magazine) / sizeof(string);
-	int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
+	const int sizeString = sizeof(Magazine::Magazine) / sizeof(string);
+	const int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 	Mat templ;
 
 	vector<POINT> ReturnDataMA;
@@ -295,9 +295,9 @@ void Matching::MagazineMatching(array<Mat, 11>& arrayMatScreen) {
 			if (!ReturnDataMA.empty()) {
 				ReturnDataMA_Clean = removeDuplicates(ReturnDataMA);
 				for (int i3 = 0; i3 < ReturnDataMA_Clean.size(); i3++) {
-					Rect Rec(ReturnDataMA_Clean[i3].x + 25, ReturnDataMA_Clean[i3].y + 110, templ.cols - 40, templ.rows - 110);
+					const Rect Rec(ReturnDataMA_Clean[i3].x + 25, ReturnDataMA_Clean[i3].y + 110, templ.cols - 40, templ.rows - 110);
 					const string fillStatus = TextMatching::textMatching(arrayMatScreen[i1], Rec);
-					int fillStatusConvertet = stoi(fillStatus);
+					const int fillStatusConvertet = stoi(fillStatus);
 					pointMagazineTemp.emplace_back(ReturnDataMA_Clean[i3], Magazine::NameOfItemMagazine[i], fillStatusConvertet, templ.rows, templ.cols, i1, 2);
 				}
 				ReturnDataMA.clear();
@@ -370,9 +370,9 @@ namespace Barter {
 }
 
 void Matching::BarterMatching(array<Mat, 11>& arrayMatScreen) {
-	int sizeString = sizeof(Barter::Barter) / sizeof(string);
-	int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
-	int sizeFoundInRaid = sizeof(Barter::FoundInRaid) / sizeof(String);
+	const int sizeString = sizeof(Barter::Barter) / sizeof(string);
+	const int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
+	const int sizeFoundInRaid = sizeof(Barter::FoundInRaid) / sizeof(String);
 	Mat templ;
 
 	vector<POINT> ReturnDataBA;
@@ -386,7 +386,7 @@ void Matching::BarterMatching(array<Mat, 11>& arrayMatScreen) {
 			if (!ReturnDataBA.empty()) {
 				ReturnDataBA_Clean = removeDuplicates(ReturnDataBA);
 				for (int i3 = 0; i3 < ReturnDataBA_Clean.size(); i3++) {
-					Rect Rec(ReturnDataBA_Clean[i3].x + 45, ReturnDataBA_Clean[i3].y + 46, templ.cols - 45, templ.rows - 46);
+					const Rect Rec(ReturnDataBA_Clean[i3].x + 45, ReturnDataBA_Clean[i3].y + 46, templ.cols - 45, templ.rows - 46);
 					for (int i4 = 0; i4 < sizeFoundInRaid; i4++) {
 						Mat temp = imread(Barter::FoundInRaid[i4]);
 						if (TemplateMatching::templateMatchingBool(arrayMatScreen[i1](Rec), temp, 0.99))

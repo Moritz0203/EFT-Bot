@@ -15,6 +15,7 @@
 #include <opencv2/imgproc.hpp>
 #include "TemplateMatching.h"
 #include "getMat.h"
+#include "PointItems.h"
 using namespace std;
 using namespace cv;
 
@@ -448,6 +449,59 @@ using namespace cv;
 
 
 
+//std::vector<std::vector<PointItem*>> combineVectors(
+//	const std::vector<std::vector<PointAmmunition>>& vecAmmunition,
+//	const std::vector<std::vector<PointMagazine>>& vecMagazine,
+//	const std::vector<std::vector<PointBarter>>& vecBarter) {
+//
+//	std::vector<std::vector<PointItem*>> result;
+//
+//	size_t max_size = std::max({ vecAmmunition.size(), vecMagazine.size(), vecBarter.size() });
+//
+//	for (size_t i = 0; i < max_size; ++i) {
+//		std::vector<PointItem*> row;
+//		if (i < vecAmmunition.size()) {
+//			for (const auto& item : vecAmmunition[i]) {
+//				row.push_back(new PointAmmunition(item));
+//			}
+//		}
+//		if (i < vecMagazine.size()) {
+//			for (const auto& item : vecMagazine[i]) {
+//				row.push_back(new PointMagazine(item));
+//			}
+//		}
+//		if (i < vecBarter.size()) {
+//			for (const auto& item : vecBarter[i]) {
+//				row.push_back(new PointBarter(item));
+//			}
+//		}
+//		result.push_back(row);
+//	}
+//
+//	return result;
+//}
+
+
+//bool operator==(const POINT& lhs, const POINT& rhs) {
+//	return lhs.x == rhs.x && lhs.y == rhs.y;
+//}
+//
+//void deleteMatchingPoints_test(std::vector<PointItem*>& pointItems, std::shared_ptr<std::vector<POINT>> points) {
+//	std::vector<PointItem*> result;
+//	for (auto it = pointItems.begin(); it != pointItems.end(); ++it) {
+//		bool matchFound = false;
+//		for (auto jt = points->begin(); jt != points->end(); ++jt) {
+//			if ((*it)->point == *jt) {
+//				matchFound = true;
+//				break;
+//			}
+//		}
+//		if (!matchFound) {
+//			result.push_back(*it);
+//		}
+//	}
+//	pointItems = result;
+//}
 
 
 int main() {
@@ -471,11 +525,11 @@ int main() {
 
 
 
-	HWND hWND = GetMat::FindeWindow();
+	/*HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(100);
 	Mat MatScreen = GetMat::getMat(hWND);
-	
+	*/
 
 	string Start = "test";
 	
@@ -492,6 +546,201 @@ int main() {
 	}
 	if (Start == "test") {
 
+
+
+
+
+
+
+
+
+
+
+
+
+		//PointAmmunition pointAmmo;
+		//pointAmmo.heightTempl = {};
+		//pointAmmo.widthTempl = {};
+		//pointAmmo.nameOfItem = "ItemAmo";
+		//pointAmmo.page = 0;
+		//pointAmmo.point.y = 2;
+		//pointAmmo.point.x = 4;
+		//pointAmmo.stackSize = 354;
+
+		//PointAmmunition pointAmmo1;
+		//pointAmmo1.heightTempl = {};
+		//pointAmmo1.widthTempl = {};
+		//pointAmmo1.nameOfItem = "ItemAmo1";
+		//pointAmmo1.page = 1;
+		//pointAmmo1.point.y = 2;
+		//pointAmmo1.point.x = 4;
+		//pointAmmo1.stackSize = 354;
+
+		//PointAmmunition pointAmmo2;
+		//pointAmmo2.heightTempl = {};
+		//pointAmmo2.widthTempl = {};
+		//pointAmmo2.nameOfItem = "ItemAmo2";
+		//pointAmmo2.page = 2;
+		//pointAmmo2.point.y = 2;
+		//pointAmmo2.point.x = 4;
+		//pointAmmo2.stackSize = 354;
+
+		//PointAmmunition pointAmmo4;
+		//pointAmmo4.heightTempl = {};
+		//pointAmmo4.widthTempl = {};
+		//pointAmmo4.nameOfItem = "ItemAmo3";
+		//pointAmmo4.page = 3;
+		//pointAmmo4.point.y = 2;
+		//pointAmmo4.point.x = 4;
+		//pointAmmo4.stackSize = 354;
+
+		//vector<vector<PointAmmunition>> vecAmmo{ {pointAmmo,pointAmmo,pointAmmo,pointAmmo,pointAmmo},{pointAmmo1,pointAmmo1,pointAmmo1,pointAmmo1,pointAmmo1},{pointAmmo2,pointAmmo2,pointAmmo2,pointAmmo2,pointAmmo2,pointAmmo2},{pointAmmo4,pointAmmo4,pointAmmo4,pointAmmo4} };
+
+
+		//PointMagazine pointMag;
+		//pointMag.heightTempl = {};
+		//pointMag.widthTempl = {};
+		//pointMag.nameOfItem = "ItemMag";
+		//pointMag.page = 0;
+		//pointMag.point.y = 2;
+		//pointMag.point.x = 4;
+		//pointMag.fillStatus = 34;
+
+		//PointMagazine pointMag1;
+		//pointMag1.heightTempl = {};
+		//pointMag1.widthTempl = {};
+		//pointMag1.nameOfItem = "ItemMag1";
+		//pointMag1.page = 1;
+		//pointMag1.point.y = 2;
+		//pointMag1.point.x = 4;
+		//pointMag1.fillStatus = 34;
+
+		//PointMagazine pointMag2;
+		//pointMag2.heightTempl = {};
+		//pointMag2.widthTempl = {};
+		//pointMag2.nameOfItem = "ItemMag2";
+		//pointMag2.page = 2;
+		//pointMag2.point.y = 24;
+		//pointMag2.point.x = 4;
+		//pointMag2.fillStatus = 34;
+
+		//PointMagazine pointMag3;
+		//pointMag3.heightTempl = {};
+		//pointMag3.widthTempl = {};
+		//pointMag3.nameOfItem = "ItemMag3";
+		//pointMag3.page = 3;
+		//pointMag3.point.y = 24;
+		//pointMag3.point.x = 4;
+		//pointMag3.fillStatus = 34;
+
+		//vector<vector<PointMagazine>> vecMag{ {pointMag,pointMag,pointMag,pointMag,pointMag},{pointMag1,pointMag1,pointMag1,pointMag1,pointMag1,pointMag1,pointMag1,pointMag1,pointMag1,pointMag1,pointMag1,pointMag1,pointMag1,pointMag1},{pointMag2,pointMag2,pointMag2,pointMag2,pointMag2,pointMag2},{pointMag3,pointMag3,pointMag3,pointMag3} };
+
+
+		//PointBarter pointBar;
+		//pointBar.heightTempl = {};
+		//pointBar.widthTempl = {};
+		//pointBar.nameOfItem = "ItemBar";
+		//pointBar.page = 0;
+		//pointBar.point.y = 4;
+		//pointBar.point.x = 2;
+		//pointBar.isFoundInRaid = false;
+
+		//PointBarter pointBar1;
+		//pointBar1.heightTempl = {};
+		//pointBar1.widthTempl = {};
+		//pointBar1.nameOfItem = "ItemBar1";
+		//pointBar1.page = 1;
+		//pointBar1.point.y = 2;
+		//pointBar1.point.x = 4;
+		//pointBar1.isFoundInRaid = true;
+
+		//PointBarter pointBar2;
+		//pointBar2.heightTempl = {};
+		//pointBar2.widthTempl = {};
+		//pointBar2.nameOfItem = "ItemBar2";
+		//pointBar2.page = 2;
+		//pointBar2.point.y = 22;
+		//pointBar2.point.x = 4;
+		//pointBar2.isFoundInRaid = false;
+
+		//PointBarter pointBar3;
+		//pointBar3.heightTempl = {};
+		//pointBar3.widthTempl = {};
+		//pointBar3.nameOfItem = "ItemBar3";
+		//pointBar3.page = 3;
+		//pointBar3.point.y = 23;
+		//pointBar3.point.x = 4;
+		//pointBar3.isFoundInRaid = true;
+
+		//vector<vector<PointBarter>> vecBar{ {pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar},{pointBar1,pointBar1,pointBar1,pointBar1,pointBar1},{pointBar2,pointBar2,pointBar2,pointBar2,pointBar2,pointBar2},{pointBar3,pointBar3,pointBar3,pointBar3}, {pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar,pointBar} };
+
+		//POINT point;
+		//point.y = 2;
+		//point.x = 4;
+
+		//vector<POINT> toclear{ point, point,point,point,point,point,point,point };
+
+
+		//std::vector<std::vector<PointItem*>> result = combineVectors(vecAmmo, vecMag, vecBar);
+
+		////for (const auto& row : result) {
+		//	for (PointItem* item : result[0]) {
+		//		if (PointAmmunition* ammo = dynamic_cast<PointAmmunition*>(item)) {
+		//			// item is a PointAmmunition object, so we can access its members and methods through the ammo pointer
+		//			cout << ammo->page << " " << ammo->nameOfItem << " " << ammo->stackSize << endl;
+		//		}
+		//		else if (PointMagazine* mag = dynamic_cast<PointMagazine*>(item)) {
+		//			// item is a PointMagazine object, so we can access its members and methods through the mag pointer
+		//			cout << mag->page << " " << mag->nameOfItem << " " << mag->fillStatus << endl;
+		//		}
+		//		else if (PointBarter* barter = dynamic_cast<PointBarter*>(item)) {
+		//			// item is a PointBarter object, so we can access its members and methods through the barter pointer
+		//			cout << barter->page << " " << barter->nameOfItem << " " << barter->isFoundInRaid << endl;
+		//		}
+		//		/*else {
+		//			cout << item->page << " " << item->nameOfItem << endl;
+		//		}*/
+		//	}
+		//	cout << "\n" << endl;
+		////}
+		//	std::vector<PointItem*> test2 = result[0];
+		//
+		//	shared_ptr<std::vector<PointItem*>> clear = make_shared< std::vector<PointItem*>>(test2);
+		//	shared_ptr<std::vector<POINT>> to_clear = make_shared< std::vector<POINT>>(toclear);
+
+		//	deleteMatchingPoints_test(test2, to_clear);
+
+		//	std::vector<PointItem*> updatedClear = *clear;
+
+		//	//result[0] = New;
+
+		//	
+
+		//	for (PointItem* item : test2) {
+		//		if (PointAmmunition* ammo = dynamic_cast<PointAmmunition*>(item)) {
+		//			// item is a PointAmmunition object, so we can access its members and methods through the ammo pointer
+		//			cout << ammo->page << " " << ammo->nameOfItem << " " << ammo->stackSize << endl;
+		//		}
+		//		else if (PointMagazine* mag = dynamic_cast<PointMagazine*>(item)) {
+		//			// item is a PointMagazine object, so we can access its members and methods through the mag pointer
+		//			cout << mag->page << " " << mag->nameOfItem << " " << mag->fillStatus << endl;
+		//		}
+		//		else if (PointBarter* barter = dynamic_cast<PointBarter*>(item)) {
+		//			// item is a PointBarter object, so we can access its members and methods through the barter pointer
+		//			cout << barter->page << " " << barter->nameOfItem << " " << barter->isFoundInRaid << endl;
+		//		}
+		//		/*else {
+		//			cout << item->page << " " << item->nameOfItem << endl;
+		//		}*/
+		//	}
+		//	cout << "\n" << endl;
+
+		/*for (vector<PointItem*> in : result) {
+^^			for (PointItem* point : in) {
+				cout << point->page << " " << point->nameOfItem << endl;
+			}
+			cout <<  "\n" << endl;
+		}*/
 
 
 		//Mat templ;+

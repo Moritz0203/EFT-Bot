@@ -1,6 +1,5 @@
 #pragma once
 #include "getMat.h"
-#include "MatScreenGlobalArray.h"
 #include "InputMK.h"
 #include <iostream>
 #include <vector>
@@ -75,9 +74,11 @@ cv::Mat GetMat::getMat(HWND hWND) {
 	delete[] bmp_pixels;
 }
 
+std::vector<cv::Mat> GetMat::MatScreenVector;
+
 void GetMat::TakeScreenshots(){
 	Mat MatScreen;
-
+	
 	HWND hWND = FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
@@ -87,13 +88,20 @@ void GetMat::TakeScreenshots(){
 	point.x = 1903;
 	Mouse::MoverPOINTandPress(point);
 
-	int size = sizeof(MatScreenArray) / sizeof(Mat);
-	for (int i = 0; i < size; i++) {
-		Sleep(200);
-		MatScreenArray[i] = getMat(hWND);
+	
+	for (int i = 0; i < 11; i++) {
+		Sleep(200);      
+		MatScreenVector.push_back(getMat(hWND));
 		Sleep(200);
 		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 		Keyboard::KeyboardInput(keyforInput);
+	}
+
+	const char* image_window = "Source Image";
+	
+	for (Mat mat : MatScreenVector) {
+		cv::imshow(image_window, mat);
+		waitKey(5);
 	}
 }
 

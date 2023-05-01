@@ -6,7 +6,6 @@
 #include <windows.h>
 #include "TemplateMatching.h"
 #include "PointGlobalVector.h"
-#include "MatScreenGlobalArray.h"
 #include "DistributorForMatching.h"
 #include "getMat.h"
 #include "InputMK.h"
@@ -47,26 +46,26 @@ void CaseProcessor::caseProcess() {
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
 
-	matching.CaseMatching(MatScreenArray);
+	matching.CaseMatching();
 	cleanUpVectorCase();
 
-	std::shared_ptr<PointCaseInStash> ptr_PCIS;
-	for (int i = 0; i < pointCaseInStash_C.size(); i++) {
-		for (PointCaseInStash INpointCase : pointCaseInStash_C[i]) {
-			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+	//std::shared_ptr<PointCaseInStash> ptr_PCIS;
+	//for (int i = 0; i < pointCaseInStash_C.size(); i++) {
+	//	for (PointCaseInStash INpointCase : pointCaseInStash_C[i]) {
+	//		ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
 
-			if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
-				OpenCaseAndTakeScreen(ptr_PCIS);
-			}
-			else {
-				ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
-				FindFreeSlots.findeSlots(INpointCase.point, ptr_FreeSlots);
-			}
-		}
-		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
-		Keyboard::KeyboardInput(keyforInput);
-		Sleep(500);
-	}
+	//		if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
+	//			OpenCaseAndTakeScreen(ptr_PCIS);
+	//		}
+	//		else {
+	//			ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
+	//			FindFreeSlots.findeSlots(INpointCase.point, ptr_FreeSlots);
+	//		}
+	//	}
+	//	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+	//	Keyboard::KeyboardInput(keyforInput);
+	//	Sleep(500);
+	//}
 }
 
 void CaseProcessor::MoveTopBarTHICCcase() {
@@ -134,12 +133,12 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 		for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
 			Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13/*templ.cols*/, templ.rows);
 
-			const string tagCase = TextMatching::textMatching(MatScreen, Rec);
+			/*const string tagCase = TextMatching::textMatching(MatScreen, Rec);
 			if (Matching::checkSecondLastChar(tagCase)) {
 				pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, 0x0, freeSlots_empty, prefix);
 				ptr_FreeSlots = make_shared<vector<vector<POINT>>>(pointCaseInCase[page].back().freeSlots);
 				FindFreeSlots.findeSlots(pointCaseInCase[page].back().point, ptr_FreeSlots);
-			}
+			}*/
 		}
 	}
 }
@@ -147,11 +146,11 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 void CaseProcessor::cleanUpVectorCase() {
 	vector<PointCaseInStash> temp;
 
-	temp = pointCaseInStash_NC[0];
-	pointCaseInStash_C.emplace_back(temp);
-	temp.clear();
+	//temp = pointCaseInStash_NC[0];
+	/*pointCaseInStash_C.emplace_back(temp);
+	temp.clear();*/
 
-	int iTemp = 1;
+	/*int iTemp = 1;
 	for (int i = 1; i < pointCaseInStash_NC.size(); i++) {
 		iTemp++;
 
@@ -182,5 +181,5 @@ void CaseProcessor::cleanUpVectorCase() {
 		}
 		pointCaseInStash_C.emplace_back(temp);
 		temp.clear();
-	}
+	}*/
 }

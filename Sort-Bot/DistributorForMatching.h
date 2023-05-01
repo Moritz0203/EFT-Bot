@@ -10,7 +10,7 @@ public:
 
 	void AmmunitionMatching(array<Mat, 11>& arrayMatScreen);
 
-	void CaseMatching(array<Mat, 11>& arrayMatScreen);
+	void CaseMatching();
 
 	void MagazineMatching(array<Mat, 11>& arrayMatScreen);
 

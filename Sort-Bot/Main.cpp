@@ -16,6 +16,9 @@
 #include "TemplateMatching.h"
 #include "getMat.h"
 #include "PointItems.h"
+#include "ItemsProcessing.h"
+#include "PrefixProcessing.h"
+#include "Checks.h"
 using namespace std;
 using namespace cv;
 
@@ -525,26 +528,33 @@ int main() {
 
 
 
-	/*HWND hWND = GetMat::FindeWindow();
+	HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(100);
 	Mat MatScreen = GetMat::getMat(hWND);
-	*/
+	
 
 	string Start = "test";
 	
-	
+	cin >> Start;
 
 	if (Start == "start") {
-		/*ItemMoving moving;
+		ItemMoving itemMoving;
+		PrefixProcessing prefixProcessing;
+		ItemsProcessing	itemsProcessing;		
+		checksPublic ChecksPublic;
+		GetMat getMat;
 
+
+		ChecksPublic.CheckScrollbarPositions();
+		getMat.TakeScreenshots();
 
 		InitializeMovPrefix::Initialize();
-		CombinePrefixAndCase();
-		ItemsProcessing::AmmunitionProcess();
-		moving.itemMoving<T>();*/
+		prefixProcessing.CombinePrefixAndCase();
+		//itemsProcessing.AmmunitionProcess();
+		//itemMoving.itemMoving();
 	}
-	if (Start == "test") {
+	else {
 
 
 

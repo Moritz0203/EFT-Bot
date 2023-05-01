@@ -5,9 +5,13 @@ using namespace std;
 struct GetMat {
 	static cv::Mat getMat(HWND hWND);
 
-	static void TakeScreenshots();
+	void TakeScreenshots();
 
 	static HWND FindeWindow();
+
+	__forceinline const std::vector<cv::Mat>& GetMatVector() { return MatScreenVector; }
+private:
+	static std::vector<cv::Mat> MatScreenVector;
 };
 
 //cv::Mat getMatNotWorking(HWND hWND) {

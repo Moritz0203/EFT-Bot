@@ -153,7 +153,6 @@
     <ClInclude Include="getMat.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="ItemVectorHEXtoText.h" />
-    <ClInclude Include="MatScreenGlobalArray.h" />
     <ClInclude Include="MovPrefixGlobalVector.h" />
     <ClInclude Include="PointGlobalVector.h" />
     <ClInclude Include="InitializeMovPrefix.h" />

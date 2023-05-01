@@ -145,9 +145,6 @@
     <ClInclude Include="Includes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MatScreenGlobalArray.h">
-      <Filter>Header Files\SortBot\TypeClass\Vector</Filter>
-    </ClInclude>
     <ClInclude Include="SortStartUp.h">
       <Filter>Header Files\SortBot</Filter>
     </ClInclude>

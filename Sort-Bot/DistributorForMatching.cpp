@@ -10,6 +10,8 @@
 #include <conio.h>
 #include <windows.h>
 #include <unordered_set>
+#include "getMat.h"
+//#include "MatScreenGlobalArray.h"
 using namespace std;
 using namespace cv;
 
@@ -34,7 +36,7 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 	vector<POINT> result;
 	for (POINT& point : points) {
 		bool shouldInsert = true;
-		for (int i = -4; i <= 4; i++) {
+		for (int i = -10; i <= 10; i++) {
 			pair<int, int> point_x = make_pair(point.x + i, point.y);
 			pair<int, int> point_y = make_pair(point.x, point.y + i);
 			if (unSet.find(point_x) != unSet.end() || unSet.find(point_y) != unSet.end()) {
@@ -111,6 +113,7 @@ namespace Ammunition {
 }
 
 void Matching::AmmunitionMatching(array<Mat, 11>& arrayMatScreen) {
+	cout << "amo matching" << endl;
 	const int sizeString = sizeof(Ammunition::Ammunition) / sizeof(string);
 	const int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 	Mat templ;
@@ -179,23 +182,37 @@ namespace Case {
 	};
 
 	std::array<double, 10> CasesThreshold{
-		0.90,//AmmoCase
-		0.90,//GrenadCase
-		0.90,//HolodilnickCase
-		0.90,//MagCase
-		0.90,//MedCase
-		0.90,//MoneyCase
-		0.90,//JunkCase
-		0.90,//WeaponsCase
-		0.90,//ItemsCase
-		0.90,//THICCcase
+		0.88,//AmmoCase
+		0.909,//GrenadCase
+		0.909,//HolodilnickCase
+		0.89,//MagCase
+		0.898,//MedCase
+		0.88,//MoneyCase
+		0.898,//JunkCase
+		0.88,//WeaponsCase
+		0.88,//ItemsCase
+		0.88,//THICCcase
 	};
 }
 
-void Matching::CaseMatching(array<Mat, 11>& arrayMatScreen) {
+void Matching::CaseMatching() {
+	cout << "case matching" << endl;
 	const int sizeString = sizeof(Case::Cases) / sizeof(string);
-	const int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 	Mat templ;
+	GetMat getMat;
+
+	std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
+
+
+	const char* image_window = "Source Image";
+
+	cout << MatScreenVector.size() << endl;
+		
+	//for (Mat mat : MatScreenVector) {
+	//	cv::imshow(image_window, mat);
+	//	waitKey(0);
+	//}
+
 
 	vector<POINT> ReturnDataCase;
 	vector<POINT> ReturnDataCase_Clean;
@@ -203,24 +220,36 @@ void Matching::CaseMatching(array<Mat, 11>& arrayMatScreen) {
 	vector<PointCaseInStash> pointCasetempStashTemp;
 	int identyfierAsHEX_ST = 0x00;
 	shared_ptr<Prefix> prefix{};
+	int page = 0;
 
-	for (int i1 = 0; i1 < sizeMat; i1++) {
+	for (Mat MatScreen : MatScreenVector) {
+		cout << "in1" << endl;
+		cv::imshow(image_window, MatScreen);
+		waitKey(5);
 		for (int i = 0; i < sizeString; i++) {
-			ReturnDataCase = TemplateMatching::templateMatchingItems(Case::Cases[i], Case::CasesThreshold[i], false, false, Case::NameOfItemCases[i], arrayMatScreen[i1]);
+			cout << "---in2" << endl;
+
+			
+			ReturnDataCase = TemplateMatching::templateMatchingItems(Case::Cases[i], Case::CasesThreshold[i], false, false, Case::NameOfItemCases[i], MatScreen);
 
 			templ = imread(Case::Cases[i]);
 			if (!ReturnDataCase.empty()) {
 				ReturnDataCase_Clean = removeDuplicates(ReturnDataCase);
+
+				for (POINT coutPoint : ReturnDataCase_Clean) {
+					cout << coutPoint.y << " " << coutPoint.x << endl;
+				}
+
 				for (int i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
 					const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, 13, templ.rows);
-					const string tagCase = TextMatching::textMatching(arrayMatScreen[i1], Rec);
+					const string tagCase = TextMatching::textMatching(MatScreen, Rec);
 					if (checkSecondLastChar(tagCase)) {
 						switch (i)
 						{
 						case 0:
-							pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], Case::NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, 0x01, freeSlots_empty, prefix);
+							pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], Case::NameOfItemCases[i], tagCase, templ.rows, templ.cols, page, 0x01, freeSlots_empty, prefix);
 						default:
-							pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], Case::NameOfItemCases[i], tagCase, templ.rows, templ.cols, i1, identyfierAsHEX_ST, freeSlots_empty, prefix);
+							pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], Case::NameOfItemCases[i], tagCase, templ.rows, templ.cols, page, identyfierAsHEX_ST, freeSlots_empty, prefix);
 						}
 
 					}
@@ -231,7 +260,10 @@ void Matching::CaseMatching(array<Mat, 11>& arrayMatScreen) {
 		}
 		pointCaseInStash_NC.emplace_back(pointCasetempStashTemp);
 		pointCasetempStashTemp.clear();
+		page++;
 	}
+
+	cout << " end " << endl;
 }
 
 namespace Magazine {

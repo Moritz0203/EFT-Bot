@@ -22,7 +22,7 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 
 	img = MatScreen;
 	Mat templ = cv::imread(templatename);
-	if (img.empty() || templ.empty())
+	if (MatScreen.empty() || templ.empty())
 		cout << "Error reading file(s) in templateMatching Funkion!" << endl;
 	
 	namedWindow(image_window, WINDOW_AUTOSIZE);
@@ -82,9 +82,9 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 			break;
 	}
 	/*cout << count << endl;*/
-	/*cv::imshow(image_window, img_display);
+	cv::imshow(image_window, img_display);
 
-	waitKey(0);*/
+	waitKey(100);
 	return ReturnData;
 }
 

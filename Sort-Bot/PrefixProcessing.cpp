@@ -23,7 +23,9 @@ void PrefixProcessing::prefixSearch(shared_ptr<PointCaseInStash> ptrStash, share
 
 void PrefixProcessing::CombinePrefixAndCase() {
 	CaseProcessor::caseProcess();
-	for (int i = 0; i < pointCaseInStash_C.size(); i++) {
+
+	cout << " anfang " << endl;
+	/*for (int i = 0; i < pointCaseInStash_C.size(); i++) {
 		for (PointCaseInStash pointCase : pointCaseInStash_C[i]) {
 			shared_ptr<PointCaseInStash> ptr = make_shared<PointCaseInStash>(pointCase);
 			prefixSearch(ptr, nullptr);
@@ -35,5 +37,5 @@ void PrefixProcessing::CombinePrefixAndCase() {
 			shared_ptr<PointCaseInCase> ptr = make_shared<PointCaseInCase>(pointCase);
 			prefixSearch(nullptr, ptr);
 		}
-	}
+	}*/
 }

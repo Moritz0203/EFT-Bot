@@ -9,7 +9,6 @@
 #include <windows.h>
 #include "Checks.h"
 #include "DistributorForMatching.h"
-#include "MatScreenGlobalArray.h"
 #include "getMat.h"
 #include "PointGlobalVector.h"
 using namespace std;
@@ -18,7 +17,7 @@ using namespace cv;
 Matching matching;
 
 void ItemsProcessing::CallAll() {
-	GetMat::TakeScreenshots();
+	//GetMat::TakeScreenshots();
 
 	AmmunitionProcess();
 	//BarterItemsProcess();
@@ -26,7 +25,7 @@ void ItemsProcessing::CallAll() {
 
 void ItemsProcessing::AmmunitionProcess() {
 
-	matching.AmmunitionMatching(MatScreenArray);
+	//matching.AmmunitionMatching(MatScreenVector);
 	cleanUpVectorItemsAmmunition();
 
 	for (int i = 0; i < pointAmmunition_NC.size(); i++) {
@@ -46,7 +45,7 @@ void ItemsProcessing::AmmunitionProcess() {
 
 void ItemsProcessing::BarterItemsProcess() {
 
-	matching.BarterMatching(MatScreenArray);
+	//matching.BarterMatching(MatScreenVector);
 	cleanUpVectorItemsBarter();
 }
 

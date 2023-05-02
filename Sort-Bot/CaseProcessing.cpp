@@ -47,6 +47,7 @@ void CaseProcessor::caseProcess() {
 	findFreeSlots FindFreeSlots;
 
 	matching.CaseMatching();
+	cout << PointCaseInStash::pointCaseInStash_NC.size() << endl;
 	cleanUpVectorCase();
 
 	//std::shared_ptr<PointCaseInStash> ptr_PCIS;
@@ -133,12 +134,12 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 		for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
 			Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13/*templ.cols*/, templ.rows);
 
-			/*const string tagCase = TextMatching::textMatching(MatScreen, Rec);
+			const string tagCase = TextMatching::textMatching(MatScreen, Rec);
 			if (Matching::checkSecondLastChar(tagCase)) {
-				pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, 0x0, freeSlots_empty, prefix);
-				ptr_FreeSlots = make_shared<vector<vector<POINT>>>(pointCaseInCase[page].back().freeSlots);
-				FindFreeSlots.findeSlots(pointCaseInCase[page].back().point, ptr_FreeSlots);
-			}*/
+				PointCaseInCase::pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, 0x0, freeSlots_empty, prefix);
+				ptr_FreeSlots = make_shared<vector<vector<POINT>>>(PointCaseInCase::pointCaseInCase[page].back().freeSlots);
+				FindFreeSlots.findeSlots(PointCaseInCase::pointCaseInCase[page].back().point, ptr_FreeSlots);
+			}
 		}
 	}
 }
@@ -146,19 +147,19 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 void CaseProcessor::cleanUpVectorCase() {
 	vector<PointCaseInStash> temp;
 
-	//temp = pointCaseInStash_NC[0];
-	/*pointCaseInStash_C.emplace_back(temp);
-	temp.clear();*/
+	temp = PointCaseInStash::pointCaseInStash_NC[0];
+	PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
+	temp.clear();
 
-	/*int iTemp = 1;
-	for (int i = 1; i < pointCaseInStash_NC.size(); i++) {
+	int iTemp = 1;
+	for (int i = 1; i < PointCaseInStash::pointCaseInStash_NC.size(); i++) {
 		iTemp++;
 
-		if (iTemp == pointCaseInStash_NC.size())
+		if (iTemp == PointCaseInStash::pointCaseInStash_NC.size())
 			break;
 
-		for (PointCaseInStash pointCase : pointCaseInStash_NC[i]) {
-			for (PointCaseInStash inPointCase : pointCaseInStash_NC[iTemp]) {
+		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_NC[i]) {
+			for (PointCaseInStash inPointCase : PointCaseInStash::pointCaseInStash_NC[iTemp]) {
 				PointCaseInStash tempPointCase = inPointCase;
 				tempPointCase.point.y = tempPointCase.point.y + 343;
 
@@ -173,13 +174,13 @@ void CaseProcessor::cleanUpVectorCase() {
 			}
 		}
 		if (iTemp == 10) {
-			for (PointCaseInStash pointCase : pointCaseInStash_NC[iTemp]) {
+			for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_NC[iTemp]) {
 				if (pointCase.point.y >= 618) {
 					temp.emplace_back(pointCase);
 				}
 			}
 		}
-		pointCaseInStash_C.emplace_back(temp);
+		PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
 		temp.clear();
-	}*/
+	}
 }

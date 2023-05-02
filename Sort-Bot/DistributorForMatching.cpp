@@ -258,7 +258,7 @@ void Matching::CaseMatching() {
 				ReturnDataCase_Clean.clear();
 			}
 		}
-		pointCaseInStash_NC.emplace_back(pointCasetempStashTemp);
+		PointCaseInStash::pointCaseInStash_NC.emplace_back(pointCasetempStashTemp);
 		pointCasetempStashTemp.clear();
 		page++;
 	}

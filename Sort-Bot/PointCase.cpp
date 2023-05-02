@@ -17,6 +17,9 @@ PointCaseInStash::PointCaseInStash(POINT point, std::string nameOfCase, const st
 	this->prefix = prefix;
 }
 
+std::vector<std::vector<PointCaseInStash>> PointCaseInStash::pointCaseInStash_C;
+std::vector<std::vector<PointCaseInStash>> PointCaseInStash::pointCaseInStash_NC;
+
 PointCaseInCase::PointCaseInCase()
 {
 }
@@ -35,3 +38,4 @@ PointCaseInCase::PointCaseInCase(POINT point, POINT pointFromParentCase, std::st
 	this->prefix = prefix;
 }
 
+std::vector<std::vector<PointCaseInCase>> PointCaseInCase::pointCaseInCase;

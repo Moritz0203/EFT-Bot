@@ -161,15 +161,15 @@ void ItemMoving::MovInCase(shared_ptr<PointCaseInCase> &ptr_Case) {
 void ItemMoving::itemMoving() {
 	combineVectors(pointAmmunition_C, pointMagazine_C, pointBarter_C);
 
-	for (int i = 0; i < pointCaseInStash_C.size(); i++) {
-		for (PointCaseInStash pointCase : pointCaseInStash_C[i]) {
+	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_C[i]) {
 			shared_ptr<PointCaseInStash> ptr = make_shared<PointCaseInStash>(pointCase);
 			MovInStash(ptr);
 		}
 	}
 
-	for (int i = 0; i < pointCaseInCase.size(); i++) {
-		for (PointCaseInCase pointCase : pointCaseInCase[i]) {
+	for (int i = 0; i < PointCaseInCase::pointCaseInCase.size(); i++) {
+		for (PointCaseInCase pointCase : PointCaseInCase::pointCaseInCase[i]) {
 			shared_ptr<PointCaseInCase> ptr = make_shared<PointCaseInCase>(pointCase);
 			MovInCase(ptr);
 		}

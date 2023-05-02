@@ -534,9 +534,9 @@ int main() {
 	Mat MatScreen = GetMat::getMat(hWND);
 	
 
-	string Start = "test";
+	string Start = "start";
 	
-	cin >> Start;
+	//cin >> Start;
 
 	if (Start == "start") {
 		ItemMoving itemMoving;
@@ -547,6 +547,7 @@ int main() {
 
 
 		ChecksPublic.CheckScrollbarPositions();
+		Sleep(100);
 		getMat.TakeScreenshots();
 
 		InitializeMovPrefix::Initialize();

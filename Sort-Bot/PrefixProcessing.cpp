@@ -5,16 +5,18 @@
 #include <conio.h>
 #include <windows.h>
 #include "PointGlobalVector.h"
-#include "MovPrefixGlobalVector.h"
 #include <unordered_set>
 #include "CaseProcessing.h"
 using namespace std;
 
 void PrefixProcessing::prefixSearch(shared_ptr<PointCaseInStash> ptrStash, shared_ptr<PointCaseInCase> ptrCase) {
-	for (AssignPrefix assign_prefix : assignPrefix) {
-		if (assign_prefix.tagOfCase == ptrStash->tagCase)
+	for (AssignPrefix assign_prefix : AssignPrefix::assignPrefix) {
+		if (ptrStash->tagCase == "" && ptrCase->tagCase == "")
+			continue;
+
+		if (assign_prefix.tagOfCase == ptrStash->tagCase && ptrStash != nullptr)
 			ptrStash->prefix = assign_prefix.ptr_Prefix;
-		else if (assign_prefix.tagOfCase == ptrCase->tagCase)
+		else if (assign_prefix.tagOfCase == ptrCase->tagCase && ptrCase != nullptr)
 			ptrCase->prefix = assign_prefix.ptr_Prefix;
 		else
 			continue;
@@ -25,17 +27,19 @@ void PrefixProcessing::CombinePrefixAndCase() {
 	CaseProcessor::caseProcess();
 
 	cout << " anfang " << endl;
-	/*for (int i = 0; i < pointCaseInStash_C.size(); i++) {
-		for (PointCaseInStash pointCase : pointCaseInStash_C[i]) {
+	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_C[i]) {
 			shared_ptr<PointCaseInStash> ptr = make_shared<PointCaseInStash>(pointCase);
 			prefixSearch(ptr, nullptr);
 		}
 	}
 
-	for (int i = 0; i < pointCaseInCase.size(); i++) {
-		for (PointCaseInCase pointCase : pointCaseInCase[i]) {
+	for (int i = 0; i < PointCaseInCase::pointCaseInCase.size(); i++) {
+		for (PointCaseInCase pointCase : PointCaseInCase::pointCaseInCase[i]) {
 			shared_ptr<PointCaseInCase> ptr = make_shared<PointCaseInCase>(pointCase);
 			prefixSearch(nullptr, ptr);
 		}
-	}*/
+	}
+
+	cout << " ende " << endl;
 }

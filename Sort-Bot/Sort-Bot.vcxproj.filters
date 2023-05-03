@@ -106,9 +106,6 @@
     <ClInclude Include="MovPrefix.h">
       <Filter>Header Files\SortBot\TypeClass</Filter>
     </ClInclude>
-    <ClInclude Include="MovPrefixGlobalVector.h">
-      <Filter>Header Files\SortBot\TypeClass\Vector</Filter>
-    </ClInclude>
     <ClInclude Include="PointGlobalVector.h">
       <Filter>Header Files\SortBot\TypeClass\Vector</Filter>
     </ClInclude>

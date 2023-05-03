@@ -62,4 +62,7 @@ public:
 
 	AssignPrefix();
 	AssignPrefix(std::string tagOfCase, std::shared_ptr<Prefix> ptr_Prefix);
+
+public:
+	static std::vector<AssignPrefix> assignPrefix;
 };

@@ -45,28 +45,30 @@ void CaseProcessor::caseProcess() {
 	Matching matching;
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
+	checksPublic ChecksPublic;
 
 	matching.CaseMatching();
 	cout << PointCaseInStash::pointCaseInStash_NC.size() << endl;
 	cleanUpVectorCase();
 
-	//std::shared_ptr<PointCaseInStash> ptr_PCIS;
-	//for (int i = 0; i < pointCaseInStash_C.size(); i++) {
-	//	for (PointCaseInStash INpointCase : pointCaseInStash_C[i]) {
-	//		ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+	std::shared_ptr<PointCaseInStash> ptr_PCIS;
+	ChecksPublic.CheckScrollbarPositions();
+	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+		for (PointCaseInStash INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
+			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
 
-	//		if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
-	//			OpenCaseAndTakeScreen(ptr_PCIS);
-	//		}
-	//		else {
-	//			ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
-	//			FindFreeSlots.findeSlots(INpointCase.point, ptr_FreeSlots);
-	//		}
-	//	}
-	//	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
-	//	Keyboard::KeyboardInput(keyforInput);
-	//	Sleep(500);
-	//}
+			if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
+				//OpenCaseAndTakeScreen(ptr_PCIS);
+			}
+			else {
+				//ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
+				//FindFreeSlots.findeSlots(INpointCase.point, ptr_FreeSlots);
+			}
+		}
+		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+		Keyboard::KeyboardInput(keyforInput);
+		Sleep(500);
+	}
 }
 
 void CaseProcessor::MoveTopBarTHICCcase() {

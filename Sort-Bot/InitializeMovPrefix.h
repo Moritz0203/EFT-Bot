@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include <windows.h>
-#include "MovPrefixGlobalVector.h"
 #include "ItemVectorHEXtoText.h"
 using namespace std;
 
@@ -41,7 +40,7 @@ namespace InitializeMovPrefix {
 		assingPrefix_temp.ptr_Prefix = ptr_prefix;
 		assingPrefix_temp.tagOfCase = "amo1";
 
-		assignPrefix.push_back(assingPrefix_temp);
+		AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
 	}
 
 	/*void setup() {

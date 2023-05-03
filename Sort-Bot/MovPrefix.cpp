@@ -65,3 +65,5 @@ AssignPrefix::AssignPrefix(std::string tagOfCase, std::shared_ptr<Prefix> ptr_Pr
 	this->tagOfCase = tagOfCase;
 	this->ptr_Prefix = ptr_Prefix;
 }
+
+std::vector<AssignPrefix> AssignPrefix::assignPrefix;

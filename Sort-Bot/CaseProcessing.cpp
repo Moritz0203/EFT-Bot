@@ -65,7 +65,7 @@ void CaseProcessor::caseProcess() {
 	cout << "clean" << endl;
 	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 		for (PointCaseInStash Point : vec) {
-			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.point.y << " " <<  Point.point.x << " " << Point.page << endl;
+			cout << Point.nameOfCase /*<< " " << Point.tagCase*/ << " " << Point.point.y << " " <<  Point.point.x << " " << Point.page << endl;
 		}
 	}
 
@@ -179,6 +179,53 @@ void CaseProcessor::cleanUpVectorCase() {
 			break;
 
 		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_NC[i]) {
+			bool matchFound = false;
+			for (PointCaseInStash inPointCase : PointCaseInStash::pointCaseInStash_NC[iTemp]) {
+				PointCaseInStash tempPointCase = inPointCase;
+				tempPointCase.point.y = tempPointCase.point.y + 343;
+
+				int x_minus_1 = tempPointCase.point.x - 1;
+				int x_plus_1 = tempPointCase.point.x + 1;
+
+				if (tempPointCase.point.y == pointCase.point.y) {
+					if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
+						matchFound = true;
+						break;
+					}
+				}
+			}
+			if (matchFound) {
+				temp.emplace_back(pointCase);
+			}
+		}
+		if (iTemp == 10) {
+			for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_NC[iTemp]) {
+				if (pointCase.point.y >= 618) {
+					temp.emplace_back(pointCase);
+				}
+			}
+		}
+		PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
+		temp.clear();
+	}
+
+
+
+
+	/*vector<PointCaseInStash> temp;
+
+	temp = PointCaseInStash::pointCaseInStash_NC[0];
+	PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
+	temp.clear();
+
+	int iTemp = 1;
+	for (int i = 1; i < PointCaseInStash::pointCaseInStash_NC.size(); i++) {
+		iTemp++;
+
+		if (iTemp == PointCaseInStash::pointCaseInStash_NC.size())
+			break;
+
+		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_NC[i]) {
 			for (PointCaseInStash inPointCase : PointCaseInStash::pointCaseInStash_NC[iTemp]) {
 				PointCaseInStash tempPointCase = inPointCase;
 				tempPointCase.point.y = tempPointCase.point.y + 343;
@@ -202,5 +249,5 @@ void CaseProcessor::cleanUpVectorCase() {
 		}
 		PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
 		temp.clear();
-	}
+	}*/
 }

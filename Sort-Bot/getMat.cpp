@@ -99,10 +99,10 @@ void GetMat::TakeScreenshots(){
 
 	const char* image_window = "Source Image";
 	
-	for (Mat mat : MatScreenVector) {
+	/*for (Mat mat : MatScreenVector) {
 		cv::imshow(image_window, mat);
 		waitKey(5);
-	}
+	}*/
 }
 
 HWND GetMat::FindeWindow() {

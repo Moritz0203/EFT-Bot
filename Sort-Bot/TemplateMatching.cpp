@@ -57,19 +57,24 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 
 	/*int count = 0;*/
 	POINT PointReturn{};
-	cout << NameOfItem << endl;
+	bool test = true;
 	while (true)
 	{
 		minMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, Mat());
 		if (maxVal >= threshold)
 		{
+			if (test == true) {
+				cout << NameOfItem << endl;
+				test = false;
+			}
+
 			matchLoc = maxLoc;
 			cv::rectangle(img_display, matchLoc, Point(matchLoc.x + templ.cols, matchLoc.y + templ.rows), CV_RGB(0, 255, 0), 1);
 			/*cv::line(img_display, matchLoc, Point(0 , 0), CV_RGB(0, 255, 0), 1);*/
 			//cv::line(img_display, Point(matchLoc.x + templ.cols / 2, matchLoc.y), Point(img.cols / 2, 0), CV_RGB(0, 255, 0), 1);
 			floodFill(result, matchLoc, 0); //mark drawn blob
 			if (matchLoc.y && matchLoc.x != 0) {
-				cout << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
+				//cout << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
 				PointReturn.y = matchLoc.y;
 				PointReturn.x = matchLoc.x;
 				ReturnData.push_back(PointReturn);
@@ -82,9 +87,9 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 			break;
 	}
 	/*cout << count << endl;*/
-	/*cv::imshow(image_window, img_display);
+	cv::imshow(image_window, img_display);
 
-	waitKey(100);*/
+	waitKey(100);
 	return ReturnData;
 }
 
@@ -212,6 +217,13 @@ bool TemplateMatching::templateMatchingBool(Mat MatScreen, Mat templ, double thr
 
 const string TextMatching::textMatching(Mat MatScreen, Rect Rec) {
 	Mat Roi = MatScreen(Rec);
+
+	const char* image_window = "test 123";
+	namedWindow(image_window, WINDOW_AUTOSIZE);
+
+	imshow(image_window, Roi);
+	waitKey(1000);
+
 	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
 	tess->Init(nullptr, "eng");
 

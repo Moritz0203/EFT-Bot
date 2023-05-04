@@ -12,8 +12,9 @@
 #include <unordered_set>
 #include "getMat.h"
 //#include "MatScreenGlobalArray.h"
-using namespace std;
 using namespace cv;
+using namespace std;
+
 
 
 struct pair_hash {
@@ -182,7 +183,7 @@ namespace Case {
 	};
 
 	std::array<double, 10> CasesThreshold{
-		0.88,//AmmoCase
+		0.87,//AmmoCase
 		0.909,//GrenadCase
 		0.909,//HolodilnickCase
 		0.89,//MagCase
@@ -223,12 +224,9 @@ void Matching::CaseMatching() {
 	int page = 0;
 
 	for (Mat MatScreen : MatScreenVector) {
-		cout << "in1" << endl;
 		cv::imshow(image_window, MatScreen);
 		waitKey(5);
-		for (int i = 0; i < sizeString; i++) {
-			cout << "---in2" << endl;
-
+		for (int i = 0; i < sizeString; i++) { 
 			
 			ReturnDataCase = TemplateMatching::templateMatchingItems(Case::Cases[i], Case::CasesThreshold[i], false, false, Case::NameOfItemCases[i], MatScreen);
 
@@ -241,26 +239,29 @@ void Matching::CaseMatching() {
 				}
 
 				for (int i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
-					const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, 13, templ.rows);
-					const string tagCase = TextMatching::textMatching(MatScreen, Rec);
-					if (checkSecondLastChar(tagCase)) {
-						switch (i)
-						{
-						case 0:
-							pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], Case::NameOfItemCases[i], tagCase, templ.rows, templ.cols, page, 0x01, freeSlots_empty, prefix);
-						default:
-							pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], Case::NameOfItemCases[i], tagCase, templ.rows, templ.cols, page, identyfierAsHEX_ST, freeSlots_empty, prefix);
-						}
+					double rows = templ.rows;
+					rows -= rows/3.0;
 
+					//cout << rows << " " << templ.rows << endl;
+					const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, rows, 10);
+					const string tagCase = TextMatching::textMatching(MatScreen, Rec);
+
+					cout << tagCase << tagCase.length() <<  endl;
+
+					if (checkSecondLastChar(tagCase)) {
+						cout << "checkSecondLastChar = is okay" << endl;
+						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], Case::NameOfItemCases[i], tagCase, templ.rows, templ.cols, page, identyfierAsHEX_ST, freeSlots_empty, prefix);
 					}
 				}
 				ReturnDataCase.clear();
 				ReturnDataCase_Clean.clear();
+				cout << endl;
 			}
 		}
 		PointCaseInStash::pointCaseInStash_NC.emplace_back(pointCasetempStashTemp);
 		pointCasetempStashTemp.clear();
 		page++;
+		cout << endl;
 	}
 
 	cout << " end " << endl;

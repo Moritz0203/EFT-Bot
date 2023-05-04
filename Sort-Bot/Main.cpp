@@ -547,13 +547,13 @@ int main() {
 
 
 		ChecksPublic.CheckScrollbarPositions();
-		Sleep(100);
+		Sleep(300);
 		getMat.TakeScreenshots();
 
 		InitializeMovPrefix::Initialize();
 		prefixProcessing.CombinePrefixAndCase();
 
-		for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
+		/*for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 			for (PointCaseInStash Point : vec) {
 				cout << Point.nameOfCase << " " << Point.tagCase << " ";
 				for (string str : Point.prefix->nameOfItems) {
@@ -561,7 +561,7 @@ int main() {
 				}
 			}
 			cout << "\n" << endl;
-		}
+		}*/
 		//itemsProcessing.AmmunitionProcess();
 		//itemMoving.itemMoving();
 	}

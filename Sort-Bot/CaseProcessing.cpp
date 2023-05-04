@@ -49,26 +49,44 @@ void CaseProcessor::caseProcess() {
 
 	matching.CaseMatching();
 	cout << PointCaseInStash::pointCaseInStash_NC.size() << endl;
+	
+	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_NC) {
+		cout << vec.size() << endl;
+		for (PointCaseInStash Point : vec) {
+			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.point.y << " " <<  Point.point.x << " " << Point.page << "\n" << endl;
+		}
+	}
+	
 	cleanUpVectorCase();
 
-	std::shared_ptr<PointCaseInStash> ptr_PCIS;
-	ChecksPublic.CheckScrollbarPositions();
-	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
-		for (PointCaseInStash INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
-			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+	cout << "\n" << endl;
 
-			if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
-				//OpenCaseAndTakeScreen(ptr_PCIS);
-			}
-			else {
-				//ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
-				//FindFreeSlots.findeSlots(INpointCase.point, ptr_FreeSlots);
-			}
+
+	cout << "clean" << endl;
+	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
+		for (PointCaseInStash Point : vec) {
+			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.point.y << " " <<  Point.point.x << " " << Point.page << endl;
 		}
-		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
-		Keyboard::KeyboardInput(keyforInput);
-		Sleep(500);
 	}
+
+	//std::shared_ptr<PointCaseInStash> ptr_PCIS;
+	//ChecksPublic.CheckScrollbarPositions();
+	//for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+	//	for (PointCaseInStash INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
+	//		ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+
+	//		if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
+	//			//OpenCaseAndTakeScreen(ptr_PCIS);
+	//		}
+	//		else {
+	//			//ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
+	//			//FindFreeSlots.findeSlots(INpointCase.point, ptr_FreeSlots);
+	//		}
+	//	}
+	//	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+	//	Keyboard::KeyboardInput(keyforInput);
+	//	Sleep(500);
+	//}
 }
 
 void CaseProcessor::MoveTopBarTHICCcase() {

@@ -22,7 +22,7 @@ vector<vector<PointItem*>> ItemVectorCombine_Page;
 void combineVectors(const std::vector<std::vector<PointAmmunition>>& vecAmmunition, const std::vector<std::vector<PointMagazine>>& vecMagazine, const std::vector<std::vector<PointBarter>>& vecBarter) {
 	const size_t max_size = std::max({ vecAmmunition.size(), vecMagazine.size(), vecBarter.size() });
 
-	for (size_t i = 0; i < max_size; ++i) {
+	for (size_t i = 0; i < max_size; ++i) { // NOTE: Löschen der erzeugten mit new 
 		std::vector<PointItem*> row;
 		if (i < vecAmmunition.size()) {
 			for (const auto& item : vecAmmunition[i]) {

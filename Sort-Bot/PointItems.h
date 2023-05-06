@@ -13,7 +13,7 @@ public:
 
 	PointItem();
 	PointItem(POINT point, std::string nameOfItem, int heightTempl, int widthTempl, int page, int slotsPerItem);
-	virtual ~PointItem() {}
+	virtual ~PointItem() {};
 };
 
 class PointAmmunition: public PointItem

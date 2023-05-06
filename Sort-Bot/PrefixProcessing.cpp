@@ -26,6 +26,8 @@ void PrefixProcessing::prefixSearch(PointCaseInStash &Stash, PointCaseInCase &Ca
 void PrefixProcessing::CombinePrefixAndCase() {
 	CaseProcessor::caseProcess();
 
+	cout << "start Prefix Processing" << endl;
+
 	PointCaseInCase PointCaseInCase_null;
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
 		for (PointCaseInStash& pointCase : PointCaseInStash::pointCaseInStash_C[i]) {
@@ -39,4 +41,7 @@ void PrefixProcessing::CombinePrefixAndCase() {
 			prefixSearch(PointCaseInStash_null, pointCase);
 		}
 	}
+
+	cout << "end Prefix Processing" << endl;
+
 }

@@ -18,7 +18,7 @@ class findFreeSlots {
 	static bool comparePoints(const POINT& a, const POINT& b);
 
 public:
-	void findeSlots(POINT pointCase, shared_ptr<std::vector<std::vector<POINT>>> freeSlots);
+	void findeSlots(const PointCase* pointCase, shared_ptr<std::vector<std::vector<POINT>>> freeSlots);
 
 	void Print_Out_Case_EmptySlots();
 };

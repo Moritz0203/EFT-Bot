@@ -82,32 +82,38 @@ __forceinline bool findFreeSlots::comparePoints(const POINT& a, const POINT& b) 
 }
 
 
-void findFreeSlots::findeSlots(const POINT pointCase, shared_ptr<std::vector<std::vector<POINT>>> freeSlots) { //parent case must be open to use this function
+void findFreeSlots::findeSlots(const PointCase* pointCase, shared_ptr<std::vector<std::vector<POINT>>> freeSlots) { //parent case must be open to use this function
 	const Mat templ = imread("ObjectImages/EmptySquare.png");
 	Matching matching;
 
-	Mouse::MoverPOINTandPressTwoTimes(pointCase);
+	POINT point;
+	point.y = (pointCase->heightTempl / 2) + pointCase->point.y;
+	point.x = (pointCase->widthTempl / 2) + pointCase->point.x;
 
-	const HWND hWND = GetMat::FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(5);//Delete later
+	Mouse::MoverPOINTandPressTwoTimes(point);
+
+	const HWND hWND = GetMat::FindeWindow();//NOTE: später besser anpassen 
+	Sleep(500);
 	const Mat MatScreen = GetMat::getMat(hWND);
+	Sleep(500);
 
 	vector<POINT> ReturnPoints = TemplateMatching::templateMatchingObjects_Vector(MatScreen, templ, 0.99999);
 
-	Clean_ReturnPoints = matching.removeDuplicates(ReturnPoints);
+	findFreeSlots::Clean_ReturnPoints = matching.removeDuplicates(ReturnPoints);
 
-	FinalResults = SortINrows(Clean_ReturnPoints);
+	findFreeSlots::FinalResults = SortINrows(findFreeSlots::Clean_ReturnPoints);
 
-	*freeSlots = FinalResults;
+	*freeSlots = findFreeSlots::FinalResults;
+
+	Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
 }
 
 void findFreeSlots::Print_Out_Case_EmptySlots() {
-	if (!FinalResults.empty()) {
-		for (int i = 0; i < FinalResults.size(); i++) {
-			if (FinalResults[i].size() == 0) {
+	if (!findFreeSlots::FinalResults.empty()) {
+		for (int i = 0; i < findFreeSlots::FinalResults.size(); i++) {
+			if (findFreeSlots::FinalResults[i].size() == 0) {
 				cout << "       |->";
-				cout << " Lines: " << std::to_string(i) << " Total slots: " << Clean_ReturnPoints.size() - 1 << endl;
+				cout << " Lines: " << std::to_string(i) << " Total slots: " << findFreeSlots::Clean_ReturnPoints.size() - 1 << endl;
 				break;
 			}
 
@@ -117,7 +123,7 @@ void findFreeSlots::Print_Out_Case_EmptySlots() {
 			string strIE = {};
 			string strER = {};
 
-			for (const POINT point : FinalResults[i]) {
+			for (const POINT point : findFreeSlots::FinalResults[i]) {
 				string strY = "Y:  " + std::to_string(point.y);
 				string strX = "  ---  X:  " + std::to_string(point.x);
 				strER = "       |-> ";
@@ -139,7 +145,7 @@ void findFreeSlots::Print_Out_Case_EmptySlots() {
 			}
 			cout << " " << strIE << "\n";
 		}
-		FinalResults.clear();
+		findFreeSlots::FinalResults.clear();
 	}
 	else {
 		cout << "You must first call the function: findFreeSlots::findSlots()." << endl;

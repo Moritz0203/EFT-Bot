@@ -15,8 +15,10 @@ void Mouse::MoverPOINTandPress(POINT Points)
 void Mouse::MoverPOINTandPressTwoTimes(POINT Points)
 {
 	SetCursorPos(Points.x, Points.y);
+	Sleep(1);
 	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+	Sleep(1);
 	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 	cout << "MouseMovPressTwoTimes" << endl;

@@ -53,7 +53,7 @@ void CaseProcessor::caseProcess() {
 	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_NC) {
 		cout << vec.size() << endl;
 		for (PointCaseInStash Point : vec) {
-			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.point.y << " " <<  Point.point.x << " " << Point.page << "\n" << endl;
+			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " << Point.point.x << " " << Point.page << "\n" << endl;
 		}
 	}
 	
@@ -65,28 +65,55 @@ void CaseProcessor::caseProcess() {
 	cout << "clean" << endl;
 	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 		for (PointCaseInStash Point : vec) {
-			cout << Point.nameOfCase /*<< " " << Point.tagCase*/ << " " << Point.point.y << " " <<  Point.point.x << " " << Point.page << endl;
+			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " <<  Point.point.x << " " << Point.page << endl;
 		}
 	}
 
-	//std::shared_ptr<PointCaseInStash> ptr_PCIS;
-	//ChecksPublic.CheckScrollbarPositions();
-	//for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
-	//	for (PointCaseInStash INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
-	//		ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
 
-	//		if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
-	//			//OpenCaseAndTakeScreen(ptr_PCIS);
-	//		}
-	//		else {
-	//			//ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
-	//			//FindFreeSlots.findeSlots(INpointCase.point, ptr_FreeSlots);
-	//		}
-	//	}
-	//	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
-	//	Keyboard::KeyboardInput(keyforInput);
-	//	Sleep(500);
-	//}
+	cout << "start case processing" << endl;
+	std::shared_ptr<PointCaseInStash> ptr_PCIS;
+
+	ChecksPublic.CheckScrollbarPositions();
+
+	
+
+	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+
+		cout << "in1 " << i << endl;
+		cout << " --- " << PointCaseInStash::pointCaseInStash_C[i].size() << endl;
+
+
+		
+
+		for (PointCaseInStash INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
+			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+
+
+			cout << "in2" << endl;
+
+			cout << INpointCase.page << ' ' << i << endl;
+
+
+			if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
+				//OpenCaseAndTakeScreen(ptr_PCIS);
+			}
+			else {
+				Sleep(700);
+				ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
+				PointCaseInStash* ptr_pointCaseInStash = new PointCaseInStash(INpointCase);
+				FindFreeSlots.findeSlots(ptr_pointCaseInStash, ptr_FreeSlots);
+				FindFreeSlots.Print_Out_Case_EmptySlots();
+				delete ptr_pointCaseInStash;
+			}
+		}
+
+		Sleep(400);
+		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+		Keyboard::KeyboardInput(keyforInput);
+	}
+
+	cout << "ende case processing" << endl;
+
 }
 
 void CaseProcessor::MoveTopBarTHICCcase() {
@@ -140,8 +167,6 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
 	vector<vector<POINT>> freeSlots_empty{};
-	
-
 
 	vector<POINT> ReturnDataCase;
 	for (int i2 = 0; i2 < sizeString; i2++) {
@@ -158,7 +183,9 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 			if (Matching::checkSecondLastChar(tagCase)) {
 				PointCaseInCase::pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, 0x0, freeSlots_empty, prefix);
 				ptr_FreeSlots = make_shared<vector<vector<POINT>>>(PointCaseInCase::pointCaseInCase[page].back().freeSlots);
-				FindFreeSlots.findeSlots(PointCaseInCase::pointCaseInCase[page].back().point, ptr_FreeSlots);
+				PointCaseInCase* ptr_pointCaseInCase = new PointCaseInCase(PointCaseInCase::pointCaseInCase[page].back());
+				FindFreeSlots.findeSlots(ptr_pointCaseInCase, ptr_FreeSlots);
+				delete ptr_pointCaseInCase;
 			}
 		}
 	}
@@ -186,13 +213,13 @@ void CaseProcessor::cleanUpVectorCase() {
 				int x_minus_1 = tempPointCase.point.x - 1;
 				int x_plus_1 = tempPointCase.point.x + 1;
 
-				if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
-					cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << endl;
+				//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
+				//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << endl;
 
 				if (tempPointCase.point.y == pointCase.point.y) {
 					if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
-						if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
-							cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
+						//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
+						//cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
 						temp.emplace_back(pointCase);
 					}
 				}

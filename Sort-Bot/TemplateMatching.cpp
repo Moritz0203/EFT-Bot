@@ -122,7 +122,7 @@ POINT TemplateMatching::templateMatchingObjects(Mat MatScreen, Mat templ, double
 			cv::line(img_display, matchLoc, Point(0, 0), CV_RGB(0, 255, 0), 1);
 			floodFill(result, matchLoc, 0); //mark drawn blob
 			if (matchLoc.y && matchLoc.x != 0) {
-				cout << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
+				cout << "templateMatchingObjects -- " << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
 				PointReturn.y = matchLoc.y;
 				PointReturn.x = matchLoc.x;
 			}
@@ -164,7 +164,7 @@ vector<POINT> TemplateMatching::templateMatchingObjects_Vector(Mat MatScreen, Ma
 			//cv::line(img_display, matchLoc, Point(0, 0), CV_RGB(0, 255, 0), 1);
 			floodFill(result, matchLoc, 0); //mark drawn blob
 			if (matchLoc.y && matchLoc.x != 0) {
-				cout << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
+				cout << "templateMatchingObjects_Vector --" << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
 				temp.y = matchLoc.y;
 				temp.x = matchLoc.x;
 				PointReturn.push_back(temp);
@@ -176,7 +176,7 @@ vector<POINT> TemplateMatching::templateMatchingObjects_Vector(Mat MatScreen, Ma
 
 	cv::imshow(image_window, img_display);
 
-	waitKey(0);
+	waitKey(500);
 
 	return PointReturn;
 }

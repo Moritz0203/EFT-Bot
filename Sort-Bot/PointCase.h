@@ -8,17 +8,22 @@ using namespace std;
 
 //enum Color { RED, ORANGSH, GREEN, BLUE, PURPLE, PINK, GRAY, NOCOLOR };
 
-class PointCaseInStash
-{
+class PointCase {
 public:
-	std::string tagCase = {};
+	std::string tagCase = {}, nameOfCase = {};
 	POINT point = {};
-	int heightTempl = {}, widthTempl = {}, page = {};
-	std::string nameOfCase = {};
-	int identyfierAsHEX{};
+	int heightTempl = {}, widthTempl = {}, page = {}, identyfierAsHEX = {};
 	std::vector<std::vector<POINT>> freeSlots{};
 	Prefix prefix;
 
+	PointCase();
+	PointCase(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots, Prefix prefix);
+	virtual ~PointCase() {};
+};
+
+class PointCaseInStash: public PointCase
+{
+public:
 	PointCaseInStash();
 	PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots, Prefix prefix);
 
@@ -27,16 +32,11 @@ public:
 	static std::vector<std::vector<PointCaseInStash>> pointCaseInStash_NC;
 };
 
-class PointCaseInCase
+class PointCaseInCase: public PointCase
 {
 public:
-	std::string tagCase = {};
-	POINT point = {}, pointFromParentCase = {};
-	int heightTempl = {}, widthTempl = {}, pageOfParentCase = {};
-	std::string nameOfCase = {};
-	int identyfierAsHEX{};
-	std::vector<std::vector<POINT>> freeSlots{};
-	Prefix prefix;
+	POINT pointFromParentCase = {};
+	int pageOfParentCase = {};
 
 	PointCaseInCase();
 	PointCaseInCase(POINT point, POINT pointFromParentCase, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int pageOfParentCase, int identyfierAsHEX, std::vector<std::vector<POINT>> freeSlots, Prefix prefix);

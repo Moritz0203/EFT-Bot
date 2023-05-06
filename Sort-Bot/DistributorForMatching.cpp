@@ -188,7 +188,7 @@ namespace Case {
 	};
 
 	std::array<double, 10> CasesThreshold{
-		0.85,//AmmoCase
+		0.83,//AmmoCase
 		0.909,//GrenadCase
 		0.909,//HolodilnickCase
 		0.89,//MagCase

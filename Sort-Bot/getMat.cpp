@@ -89,7 +89,7 @@ void GetMat::TakeScreenshots(){
 	Mouse::MoverPOINTandPress(point);
 
 	
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 4; i++) {
 		Sleep(200);      
 		MatScreenVector.push_back(getMat(hWND));
 		Sleep(200);

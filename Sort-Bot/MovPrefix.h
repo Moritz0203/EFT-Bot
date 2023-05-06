@@ -58,10 +58,10 @@ public:
 class AssignPrefix {
 public:
 	std::string tagOfCase{};
-	std::shared_ptr<Prefix> ptr_Prefix{};
+	Prefix prefix;
 
 	AssignPrefix();
-	AssignPrefix(std::string tagOfCase, std::shared_ptr<Prefix> ptr_Prefix);
+	AssignPrefix(std::string tagOfCase, Prefix pefix);
 
 public:
 	static std::vector<AssignPrefix> assignPrefix;

@@ -35,10 +35,12 @@ namespace InitializeMovPrefix {
 		prefix.isFull = false;
 		prefix.nameOfItems = VectorText::Rus762x39;
 
-		shared_ptr<Prefix> ptr_prefix = make_shared<Prefix>(prefix);
+				for (string str : prefix.nameOfItems) {
+					cout << str << endl;
+				}
 
-		assingPrefix_temp.ptr_Prefix = ptr_prefix;
-		assingPrefix_temp.tagOfCase = "amo1";
+		assingPrefix_temp.prefix = prefix;
+		assingPrefix_temp.tagOfCase = "AMO1|";
 
 		AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
 	}

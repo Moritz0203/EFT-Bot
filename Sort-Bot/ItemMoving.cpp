@@ -94,7 +94,7 @@ void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 	Checkspublic.CheckScrollbarPositions();
 	for (vector<PointItem*> vector_Page : ItemVectorCombine_Page) {// PointAmmunition to T 
 		for (const PointItem* pointforMov : vector_Page) {
-			if (std::find(ptr_Stash->prefix->nameOfItems.begin(), ptr_Stash->prefix->nameOfItems.end(), pointforMov->nameOfItem) == ptr_Stash->prefix->nameOfItems.end())
+			if (std::find(ptr_Stash->prefix.nameOfItems.begin(), ptr_Stash->prefix.nameOfItems.end(), pointforMov->nameOfItem) == ptr_Stash->prefix.nameOfItems.end())
 				continue;
 
 			ptr_free_spaces = make_shared<vector<vector<POINT>>>(ptr_Stash->freeSlots);
@@ -136,7 +136,7 @@ void ItemMoving::MovInCase(shared_ptr<PointCaseInCase> &ptr_Case) {
 	Checkspublic.CheckScrollbarPositions();
 	for (vector<PointItem*> vector_Page : ItemVectorCombine_Page) {// PointAmmunition to T 
 		for (const PointItem* pointforMov : vector_Page) {
-			if (std::find(ptr_Case->prefix->nameOfItems.begin(), ptr_Case->prefix->nameOfItems.end(), pointforMov->nameOfItem) == ptr_Case->prefix->nameOfItems.end())
+			if (std::find(ptr_Case->prefix.nameOfItems.begin(), ptr_Case->prefix.nameOfItems.end(), pointforMov->nameOfItem) == ptr_Case->prefix.nameOfItems.end())
 				continue;
 
 			ptr_free_spaces = make_shared<vector<vector<POINT>>>(ptr_Case->freeSlots);

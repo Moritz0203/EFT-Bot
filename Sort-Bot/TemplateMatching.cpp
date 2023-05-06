@@ -218,11 +218,13 @@ bool TemplateMatching::templateMatchingBool(Mat MatScreen, Mat templ, double thr
 const string TextMatching::textMatching(Mat MatScreen, Rect Rec) {
 	Mat Roi = MatScreen(Rec);
 
-	const char* image_window = "test 123";
+	//cv::resize(Roi, Roi, cv::Size(Roi.cols * 1.9, 20));
+
+	/*const char* image_window = "test 123";
 	namedWindow(image_window, WINDOW_AUTOSIZE);
 
 	imshow(image_window, Roi);
-	waitKey(1000);
+	waitKey(0);*/
 
 	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
 	tess->Init(nullptr, "eng");
@@ -230,9 +232,11 @@ const string TextMatching::textMatching(Mat MatScreen, Rect Rec) {
 	tess->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
 
 	tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
-	tess->SetSourceResolution(70);
+	tess->SetSourceResolution(80);
 
 	std::unique_ptr<char[]> txt(tess->GetUTF8Text());
+
+	//cout << "text -- " << txt << endl;
 
 	if (!not txt) {
 		const string str = txt.get();

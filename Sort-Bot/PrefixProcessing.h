@@ -3,7 +3,7 @@
 using namespace std;
 
 class PrefixProcessing {
-	void prefixSearch(shared_ptr<PointCaseInStash> ptrStash, shared_ptr<PointCaseInCase> ptrCase);
+	void prefixSearch(PointCaseInStash &ptrStash, PointCaseInCase &ptrCase);
 
 public:
 	void CombinePrefixAndCase();

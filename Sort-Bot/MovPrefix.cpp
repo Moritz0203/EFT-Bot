@@ -60,10 +60,10 @@ AssignPrefix::AssignPrefix()
 {
 }
 
-AssignPrefix::AssignPrefix(std::string tagOfCase, std::shared_ptr<Prefix> ptr_Prefix)
+AssignPrefix::AssignPrefix(std::string tagOfCase, Prefix prefix)
 {
 	this->tagOfCase = tagOfCase;
-	this->ptr_Prefix = ptr_Prefix;
+	this->prefix = prefix;
 }
 
 std::vector<AssignPrefix> AssignPrefix::assignPrefix;

@@ -11,7 +11,6 @@
 #include <windows.h>
 #include <unordered_set>
 #include "getMat.h"
-//#include "MatScreenGlobalArray.h"
 using namespace cv;
 using namespace std;
 
@@ -24,10 +23,16 @@ struct pair_hash {
 	}
 };
 
-__forceinline bool Matching::checkSecondLastChar(const string tagCase) {
+__forceinline bool Matching::checkSecondLastChar(string& tagCase) {
+	tagCase.erase(remove(tagCase.begin(), tagCase.end(), ' '), tagCase.end());
 	int length = tagCase.length();
+	
+	if (!tagCase.empty()) {
+		tagCase.pop_back();
+	}
+
 	if (length >= 2) {
-		return (tagCase[static_cast<std::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type>(length) - 2] != '-');
+		return (tagCase[static_cast<std::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type>(length) - 2] != '/');
 	}
 	return false;
 }
@@ -183,7 +188,7 @@ namespace Case {
 	};
 
 	std::array<double, 10> CasesThreshold{
-		0.87,//AmmoCase
+		0.85,//AmmoCase
 		0.909,//GrenadCase
 		0.909,//HolodilnickCase
 		0.89,//MagCase
@@ -220,7 +225,7 @@ void Matching::CaseMatching() {
 	vector<vector<POINT>> freeSlots_empty{};
 	vector<PointCaseInStash> pointCasetempStashTemp;
 	int identyfierAsHEX_ST = 0x00;
-	shared_ptr<Prefix> prefix{};
+	Prefix prefix;
 	int page = 0;
 
 	for (Mat MatScreen : MatScreenVector) {
@@ -241,12 +246,8 @@ void Matching::CaseMatching() {
 				for (int i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
 					double rows = templ.rows;
 					rows -= rows/3.0;
-
-					//cout << rows << " " << templ.rows << endl;
-					const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, rows, 10);
-					const string tagCase = TextMatching::textMatching(MatScreen, Rec);
-
-					cout << tagCase << tagCase.length() <<  endl;
+					const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, rows, 12);
+					string tagCase = TextMatching::textMatching(MatScreen, Rec);
 
 					if (checkSecondLastChar(tagCase)) {
 						cout << "checkSecondLastChar = is okay" << endl;

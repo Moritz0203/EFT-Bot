@@ -38,6 +38,20 @@ void checksPublic::CheckScrollbarPositions() {
 	Mouse::MoverPOINTandPress(pointBarClick);
 }
 
+void checksPublic::ClickScrollbarPositions() {
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(5);//Delete later
+	const Mat MatScreen = GetMat::getMat(hWND);
+
+	const Mat templ = imread("ObjectImages/scrollbar.png");
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.70);
+	point.y = (templ.rows / 2) + point.y;
+	point.x = (templ.cols / 2) + point.x;
+
+	Mouse::MoverPOINTandPress(point);
+}
+
 void checksPublic::CheckForFails() {
 	POINT pointMouse{};
 	pointMouse.y = 729;

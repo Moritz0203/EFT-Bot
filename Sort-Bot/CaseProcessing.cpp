@@ -48,24 +48,12 @@ void CaseProcessor::caseProcess() {
 	checksPublic ChecksPublic;
 
 	matching.CaseMatching();
-	cout << PointCaseInStash::pointCaseInStash_NC.size() << endl;
-	
-	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_NC) {
-		cout << vec.size() << endl;
-		for (PointCaseInStash Point : vec) {
-			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " << Point.point.x << " " << Point.page << "\n" << endl;
-		}
-	}
-	
 	cleanUpVectorCase();
-
-	cout << "\n" << endl;
-
 
 	cout << "clean" << endl;
 	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 		for (PointCaseInStash Point : vec) {
-			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " <<  Point.point.x << " " << Point.page << endl;
+			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " << Point.point.x << " " << Point.page << endl;
 		}
 	}
 
@@ -74,46 +62,28 @@ void CaseProcessor::caseProcess() {
 	std::shared_ptr<PointCaseInStash> ptr_PCIS;
 
 	ChecksPublic.CheckScrollbarPositions();
-
-	
-
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
-
-		cout << "in1 " << i << endl;
-		cout << " --- " << PointCaseInStash::pointCaseInStash_C[i].size() << endl;
-
-
-		
-
 		for (PointCaseInStash INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
 			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
-
-
-			cout << "in2" << endl;
-
-			cout << INpointCase.page << ' ' << i << endl;
-
 
 			if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
 				//OpenCaseAndTakeScreen(ptr_PCIS);
 			}
 			else {
-				Sleep(700);
+				Sleep(500);
 				ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
 				PointCaseInStash* ptr_pointCaseInStash = new PointCaseInStash(INpointCase);
 				FindFreeSlots.findeSlots(ptr_pointCaseInStash, ptr_FreeSlots);
 				FindFreeSlots.Print_Out_Case_EmptySlots();
 				delete ptr_pointCaseInStash;
 			}
+			ChecksPublic.ClickScrollbarPositions();
 		}
-
 		Sleep(400);
 		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 		Keyboard::KeyboardInput(keyforInput);
 	}
-
 	cout << "ende case processing" << endl;
-
 }
 
 void CaseProcessor::MoveTopBarTHICCcase() {
@@ -167,25 +137,33 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
 	vector<vector<POINT>> freeSlots_empty{};
-
+	Matching matching;
+	vector<POINT> ReturnDataCase_Clean;
 	vector<POINT> ReturnDataCase;
+
 	for (int i2 = 0; i2 < sizeString; i2++) {
 		threshold = CasesInCaseThreshold[i2];
-		templatename = CasesInCase[i2];
+		templatename = NameOfItemCasesInCase[i2];
 		templ = imread(CasesInCase[i2]);
 
 		ReturnDataCase = TemplateMatching::templateMatchingItems(templatename, threshold, false, true, NameOfItemCasesInCase[i2], MatScreen);
 
-		for (int i3 = 0; i3 < ReturnDataCase.size(); i3++) {
-			Rect Rec(ReturnDataCase[i3].x, ReturnDataCase[i3].y, 13/*templ.cols*/, templ.rows);
+		if (!ReturnDataCase.empty()) {
+			ReturnDataCase_Clean = matching.removeDuplicates(ReturnDataCase);
 
-			string tagCase = TextMatching::textMatching(MatScreen, Rec);
-			if (Matching::checkSecondLastChar(tagCase)) {
-				PointCaseInCase::pointCaseInCase[page].emplace_back(ReturnDataCase[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, 0x0, freeSlots_empty, prefix);
-				ptr_FreeSlots = make_shared<vector<vector<POINT>>>(PointCaseInCase::pointCaseInCase[page].back().freeSlots);
-				PointCaseInCase* ptr_pointCaseInCase = new PointCaseInCase(PointCaseInCase::pointCaseInCase[page].back());
-				FindFreeSlots.findeSlots(ptr_pointCaseInCase, ptr_FreeSlots);
-				delete ptr_pointCaseInCase;
+			for (int i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
+				double rows = templ.rows;
+				rows -= rows / 3.0;
+				const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, rows, 12);
+
+				string tagCase = TextMatching::textMatching(MatScreen, Rec);
+				if (Matching::checkSecondLastChar(tagCase)) {
+					PointCaseInCase::pointCaseInCase[page].emplace_back(ReturnDataCase_Clean[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, 0x0, freeSlots_empty, prefix);
+					ptr_FreeSlots = make_shared<vector<vector<POINT>>>(PointCaseInCase::pointCaseInCase[page].back().freeSlots);
+					PointCaseInCase* ptr_pointCaseInCase = new PointCaseInCase(PointCaseInCase::pointCaseInCase[page].back());
+					FindFreeSlots.findeSlots(ptr_pointCaseInCase, ptr_FreeSlots);
+					delete ptr_pointCaseInCase;
+				}
 			}
 		}
 	}

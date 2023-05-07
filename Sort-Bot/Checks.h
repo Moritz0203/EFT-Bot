@@ -6,6 +6,8 @@ class checksPublic {
 public:
 	void CheckScrollbarPositions();
 
+	void ClickScrollbarPositions();
+
 	void CheckForFails();
 };
 

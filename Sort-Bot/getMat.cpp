@@ -5,6 +5,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+#include "Checks.h"
 using namespace std;
 using namespace cv;
 
@@ -78,16 +79,12 @@ std::vector<cv::Mat> GetMat::MatScreenVector;
 
 void GetMat::TakeScreenshots(){
 	Mat MatScreen;
+	checksPublic ChecksPublic;
 	
-	HWND hWND = FindeWindow();
+	const HWND hWND = FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
-
-	POINT point{}; // NOTE: scrollbar
-	point.y = 171;
-	point.x = 1903;
-	Mouse::MoverPOINTandPress(point);
-
+	ChecksPublic.ClickScrollbarPositions();
 	
 	for (int i = 0; i < 7; i++) {
 		Sleep(200);      
@@ -96,13 +93,6 @@ void GetMat::TakeScreenshots(){
 		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 		Keyboard::KeyboardInput(keyforInput);
 	}
-
-	const char* image_window = "Source Image";
-	
-	/*for (Mat mat : MatScreenVector) {
-		cv::imshow(image_window, mat);
-		waitKey(5);
-	}*/
 }
 
 HWND GetMat::FindeWindow() {

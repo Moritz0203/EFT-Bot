@@ -556,7 +556,7 @@ int main() {
 
 		for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 			for (PointCaseInStash Point : vec) {
-				cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.prefix.nameOfItems.size() << " \n";
+				cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.prefix.nameOfItems.size() <<" \n";
 				for (string str : Point.prefix.nameOfItems) {
 					cout << str << endl;
 				}
@@ -564,6 +564,8 @@ int main() {
 			}
 			cout << "\n" << endl;
 		}
+
+
 		//itemsProcessing.AmmunitionProcess();
 		//itemMoving.itemMoving();
 	}

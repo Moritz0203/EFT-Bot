@@ -104,7 +104,6 @@ void CaseProcessor::MoveTopBarTHICCcase() {
 	Mouse::MouseMoveAtoB(pointA, pointB);
 }
 
-
 void CaseProcessor::OpenCaseAndTakeScreen(std::shared_ptr<PointCaseInStash> ptr_PCIS) {
 	Mat MatScreen;
 	POINT point{};

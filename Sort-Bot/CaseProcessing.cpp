@@ -57,7 +57,6 @@ void CaseProcessor::caseProcess() {
 		}
 	}
 
-
 	cout << "start case processing" << endl;
 	std::shared_ptr<PointCaseInStash> ptr_PCIS;
 

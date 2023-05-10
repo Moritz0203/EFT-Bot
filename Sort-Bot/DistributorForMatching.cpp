@@ -118,20 +118,21 @@ namespace Ammunition {
 	};
 }
 
-void Matching::AmmunitionMatching(array<Mat, 11>& arrayMatScreen) {
+void Matching::AmmunitionMatching() {
 	cout << "amo matching" << endl;
 	const int sizeString = sizeof(Ammunition::Ammunition) / sizeof(string);
-	const int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 	Mat templ;
+	GetMat getMat;
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
 	vector<POINT> ReturnDataAM;
 	vector<POINT> ReturnDataAM_Clean;
 	vector<PointAmmunition> pointAmmunitionTemp;
 
 	int count = 0;
-	for (int i1 = 0; i1 < sizeMat; i1++) {
+	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
 		for (int i = 0; i < sizeString; i++) {
-			ReturnDataAM = TemplateMatching::templateMatchingItems(Ammunition::Ammunition[i], Ammunition::AmmunitionThreshold[i], false, true, Ammunition::NameOfItemAmmunition[i], arrayMatScreen[i1]);
+			ReturnDataAM = TemplateMatching::templateMatchingItems(Ammunition::Ammunition[i], Ammunition::AmmunitionThreshold[i], false, true, Ammunition::NameOfItemAmmunition[i], MatScreenVector[i1]);
 
 			templ = imread(Ammunition::Ammunition[i]);
 			if (!ReturnDataAM.empty()) {
@@ -207,7 +208,7 @@ void Matching::CaseMatching() {
 	Mat templ;
 	GetMat getMat;
 
-	std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
 
 	const char* image_window = "Source Image";
@@ -313,24 +314,25 @@ namespace Magazine {
 	};
 }
 
-void Matching::MagazineMatching(array<Mat, 11>& arrayMatScreen) {
+void Matching::MagazineMatching() {
 	const int sizeString = sizeof(Magazine::Magazine) / sizeof(string);
-	const int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 	Mat templ;
+	GetMat getMat;
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
 	vector<POINT> ReturnDataMA;
 	vector<POINT> ReturnDataMA_Clean;
 	vector<PointMagazine> pointMagazineTemp;
-	for (int i1 = 0; i1 < sizeMat; i1++) {
+	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
 		for (int i = 0; i < sizeString; i++) {
-			ReturnDataMA = TemplateMatching::templateMatchingItems(Magazine::Magazine[i], Magazine::MagazineThreshold[i], true, false, Magazine::NameOfItemMagazine[i], arrayMatScreen[i1]);
+			ReturnDataMA = TemplateMatching::templateMatchingItems(Magazine::Magazine[i], Magazine::MagazineThreshold[i], true, false, Magazine::NameOfItemMagazine[i], MatScreenVector[i1]);
 
 			templ = imread(Magazine::Magazine[i]);
 			if (!ReturnDataMA.empty()) {
 				ReturnDataMA_Clean = removeDuplicates(ReturnDataMA);
 				for (int i3 = 0; i3 < ReturnDataMA_Clean.size(); i3++) {
 					const Rect Rec(ReturnDataMA_Clean[i3].x + 25, ReturnDataMA_Clean[i3].y + 110, templ.cols - 40, templ.rows - 110);
-					const string fillStatus = TextMatching::textMatching(arrayMatScreen[i1], Rec);
+					const string fillStatus = TextMatching::textMatching(MatScreenVector[i1], Rec);
 					const int fillStatusConvertet = stoi(fillStatus);
 					pointMagazineTemp.emplace_back(ReturnDataMA_Clean[i3], Magazine::NameOfItemMagazine[i], fillStatusConvertet, templ.rows, templ.cols, i1, 2);
 				}
@@ -403,18 +405,19 @@ namespace Barter {
 	};
 }
 
-void Matching::BarterMatching(array<Mat, 11>& arrayMatScreen) {
+void Matching::BarterMatching() {
 	const int sizeString = sizeof(Barter::Barter) / sizeof(string);
-	const int sizeMat = sizeof(arrayMatScreen) / sizeof(Mat);
 	const int sizeFoundInRaid = sizeof(Barter::FoundInRaid) / sizeof(String);
 	Mat templ;
+	GetMat getMat;
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
 	vector<POINT> ReturnDataBA;
 	vector<POINT> ReturnDataBA_Clean;
 	vector<PointBarter> pointBarterTemp;
-	for (int i1 = 0; i1 < sizeMat; i1++) {
+	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
 		for (int i = 0; i < sizeString; i++) {
-			ReturnDataBA = TemplateMatching::templateMatchingItems(Barter::Barter[i], Barter::BarterThreshold[i], false, false, Barter::NameOfItemBarter[i], arrayMatScreen[i1]);
+			ReturnDataBA = TemplateMatching::templateMatchingItems(Barter::Barter[i], Barter::BarterThreshold[i], false, false, Barter::NameOfItemBarter[i], MatScreenVector[i1]);
 
 			templ = imread(Barter::Barter[i]);
 			if (!ReturnDataBA.empty()) {
@@ -423,7 +426,7 @@ void Matching::BarterMatching(array<Mat, 11>& arrayMatScreen) {
 					const Rect Rec(ReturnDataBA_Clean[i3].x + 45, ReturnDataBA_Clean[i3].y + 46, templ.cols - 45, templ.rows - 46);
 					for (int i4 = 0; i4 < sizeFoundInRaid; i4++) {
 						Mat temp = imread(Barter::FoundInRaid[i4]);
-						if (TemplateMatching::templateMatchingBool(arrayMatScreen[i1](Rec), temp, 0.99))
+						if (TemplateMatching::templateMatchingBool(MatScreenVector[i1](Rec), temp, 0.99))
 							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], Barter::NameOfItemBarter[i], true, templ.rows, templ.cols, i1, Barter::SlotsPerItem[i]);
 						else
 							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], Barter::NameOfItemBarter[i], false, templ.rows, templ.cols, i1, Barter::SlotsPerItem[i]);

@@ -8,11 +8,11 @@ public:
 
 	vector<POINT> removeDuplicates(vector<POINT>& points);
 
-	void AmmunitionMatching(array<Mat, 11>& arrayMatScreen);
+	void AmmunitionMatching();
 
 	void CaseMatching();
 
-	void MagazineMatching(array<Mat, 11>& arrayMatScreen);
+	void MagazineMatching();
 
-	void BarterMatching(array<Mat, 11>& arrayMatScreen);	
+	void BarterMatching();	
 };

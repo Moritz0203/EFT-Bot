@@ -10,6 +10,7 @@
 #include "getMat.h"
 #include "InputMK.h"
 #include "Checks.h"
+#include <set>
 using namespace std;
 using namespace cv;
 
@@ -167,8 +168,20 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 	}
 }
 
+
+struct POINT_PAGE
+{
+	POINT point;
+	int page;
+	bool operator<(const POINT_PAGE& other) const {
+		return point.x < other.point.x || (point.x == other.point.x && (point.y < other.point.y || (point.y == other.point.y && page < other.page)));
+	}
+};
+
 void CaseProcessor::cleanUpVectorCase() {
 	vector<PointCaseInStash> temp;
+	std::set<POINT_PAGE> set_POINT_PAGE;
+
 
 	temp = PointCaseInStash::pointCaseInStash_NC[0];
 	PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
@@ -182,24 +195,31 @@ void CaseProcessor::cleanUpVectorCase() {
 			break;
 
 		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_NC[i]) {
-			for (PointCaseInStash inPointCase : PointCaseInStash::pointCaseInStash_NC[iTemp]) {
-				PointCaseInStash tempPointCase = inPointCase;
-				tempPointCase.point.y = tempPointCase.point.y + 343;
+			
+			for (int iTempLoop = iTemp; iTempLoop < PointCaseInStash::pointCaseInStash_NC.size() || iTempLoop < iTemp + 3; iTempLoop++) {
+				
+				for (PointCaseInStash inPointCase : PointCaseInStash::pointCaseInStash_NC[iTempLoop]) {
+					PointCaseInStash tempPointCase = inPointCase;
+					tempPointCase.point.y = tempPointCase.point.y + 343;
 
-				int x_minus_1 = tempPointCase.point.x - 1;
-				int x_plus_1 = tempPointCase.point.x + 1;
+					int x_minus_1 = tempPointCase.point.x - 1;
+					int x_plus_1 = tempPointCase.point.x + 1;
 
-				//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
-				//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << endl;
+					//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
+					//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << endl;
 
-				if (tempPointCase.point.y == pointCase.point.y) {
-					if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
-						//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
-						//cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
-						temp.emplace_back(pointCase);
+					if (tempPointCase.point.y == pointCase.point.y) {
+						if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
+							//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
+							//cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
+							temp.emplace_back(pointCase);
+						}
+					
 					}
 				}
 			}
+			
+
 		}
 		if (iTemp == 10) {
 			for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_NC[iTemp]) {
@@ -211,4 +231,7 @@ void CaseProcessor::cleanUpVectorCase() {
 		PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
 		temp.clear();
 	}
+
+
+	// Abgleich zwischen set und pointCaseInStash_NC und nur die rein in pointCaseInStash_C die nicht im set sind 
 }

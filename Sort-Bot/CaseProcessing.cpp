@@ -169,8 +169,7 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 }
 
 
-struct POINT_PAGE
-{
+struct POINT_PAGE {
 	POINT point;
 	int page;
 	bool operator<(const POINT_PAGE& other) const {
@@ -180,6 +179,8 @@ struct POINT_PAGE
 
 void CaseProcessor::cleanUpVectorCase() {
 	vector<PointCaseInStash> temp;
+	POINT_PAGE point_page;
+	POINT_PAGE inPoint_page;
 	std::set<POINT_PAGE> set_POINT_PAGE;
 
 
@@ -195,21 +196,33 @@ void CaseProcessor::cleanUpVectorCase() {
 			break;
 
 		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_NC[i]) {
-			
+			point_page.page = pointCase.page;
+			point_page.point = pointCase.point;
+
+			if (set_POINT_PAGE.count(point_page) > 0)
+				continue;
+
 			for (int iTempLoop = iTemp; iTempLoop < PointCaseInStash::pointCaseInStash_NC.size() || iTempLoop < iTemp + 3; iTempLoop++) {
 				
 				for (PointCaseInStash inPointCase : PointCaseInStash::pointCaseInStash_NC[iTempLoop]) {
 					PointCaseInStash tempPointCase = inPointCase;
 					tempPointCase.point.y = tempPointCase.point.y + 343;
+					inPoint_page.page = inPointCase.page;
+					inPoint_page.point = inPointCase.point;
 
-					int x_minus_1 = tempPointCase.point.x - 1;
+					int x_minus_1 = tempPointCase.point.x - 1;					
 					int x_plus_1 = tempPointCase.point.x + 1;
+
 
 					//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
 					//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << endl;
 
+					if (set_POINT_PAGE.count(inPoint_page) > 0)
+						continue;
+
 					if (tempPointCase.point.y == pointCase.point.y) {
 						if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
+							set_POINT_PAGE.insert(inPoint_page);
 							//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
 							//cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
 							temp.emplace_back(pointCase);

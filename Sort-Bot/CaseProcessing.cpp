@@ -49,6 +49,13 @@ void CaseProcessor::caseProcess() {
 	checksPublic ChecksPublic;
 
 	matching.CaseMatching();
+
+	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_NC) {
+		for (PointCaseInStash Point : vec) {
+			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " << Point.point.x << " " << Point.page << endl;
+		}
+	}
+
 	cleanUpVectorCase();
 
 	cout << "clean" << endl;
@@ -61,28 +68,28 @@ void CaseProcessor::caseProcess() {
 	cout << "start case processing" << endl;
 	std::shared_ptr<PointCaseInStash> ptr_PCIS;
 
-	ChecksPublic.CheckScrollbarPositions();
-	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
-		for (PointCaseInStash INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
-			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+	//ChecksPublic.CheckScrollbarPositions();
+	//for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+	//	for (PointCaseInStash INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
+	//		ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
 
-			if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
-				//OpenCaseAndTakeScreen(ptr_PCIS);
-			}
-			else {
-				Sleep(500);
-				ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
-				PointCaseInStash* ptr_pointCaseInStash = new PointCaseInStash(INpointCase);
-				FindFreeSlots.findeSlots(ptr_pointCaseInStash, ptr_FreeSlots);
-				FindFreeSlots.Print_Out_Case_EmptySlots();
-				delete ptr_pointCaseInStash;
-			}
-			ChecksPublic.ClickScrollbarPositions();
-		}
-		Sleep(400);
-		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
-		Keyboard::KeyboardInput(keyforInput);
-	}
+	//		if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
+	//			//OpenCaseAndTakeScreen(ptr_PCIS);
+	//		}
+	//		else {
+	//			Sleep(500);
+	//			ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
+	//			PointCaseInStash* ptr_pointCaseInStash = new PointCaseInStash(INpointCase);
+	//			FindFreeSlots.findeSlots(ptr_pointCaseInStash, ptr_FreeSlots);
+	//			FindFreeSlots.Print_Out_Case_EmptySlots();
+	//			delete ptr_pointCaseInStash;
+	//		}
+	//		ChecksPublic.ClickScrollbarPositions();
+	//	}
+	//	Sleep(400);
+	//	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+	//	Keyboard::KeyboardInput(keyforInput);
+	//}
 	cout << "ende case processing" << endl;
 }
 
@@ -201,38 +208,42 @@ void CaseProcessor::cleanUpVectorCase() {
 
 			if (set_POINT_PAGE.count(point_page) > 0)
 				continue;
+			
+			bool Found = false;
+			int count_multiplier = 1;
+			for (int iTempLoop = iTemp; iTempLoop < PointCaseInStash::pointCaseInStash_NC.size() - 1 || iTempLoop < iTemp + 3; iTempLoop++) {
 
-			for (int iTempLoop = iTemp; iTempLoop < PointCaseInStash::pointCaseInStash_NC.size() || iTempLoop < iTemp + 3; iTempLoop++) {
-				
 				for (PointCaseInStash inPointCase : PointCaseInStash::pointCaseInStash_NC[iTempLoop]) {
 					PointCaseInStash tempPointCase = inPointCase;
-					tempPointCase.point.y = tempPointCase.point.y + 343;
+					tempPointCase.point.y = tempPointCase.point.y + (343 * count_multiplier);
 					inPoint_page.page = inPointCase.page;
 					inPoint_page.point = inPointCase.point;
 
-					int x_minus_1 = tempPointCase.point.x - 1;					
+					int y_minus_1 = tempPointCase.point.y - 1;
+					int y_plus_1 = tempPointCase.point.y + 1;
+					int x_minus_1 = tempPointCase.point.x - 1;
 					int x_plus_1 = tempPointCase.point.x + 1;
+					
 
-
-					//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
-					//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << endl;
+					//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
+						cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << " " << count_multiplier << endl;
 
 					if (set_POINT_PAGE.count(inPoint_page) > 0)
 						continue;
 
-					if (tempPointCase.point.y == pointCase.point.y) {
+					if (tempPointCase.point.y == pointCase.point.y || y_minus_1 == pointCase.point.y || y_plus_1 == pointCase.point.y) {
 						if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
 							set_POINT_PAGE.insert(inPoint_page);
-							//if (pointCase.nameOfCase == "MagCase" && tempPointCase.nameOfCase == "MagCase")
-							//cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
-							temp.emplace_back(pointCase);
+							Found = true;
+							//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
+								cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
 						}
-					
 					}
 				}
+				count_multiplier++;
 			}
-			
-
+			if (Found)
+				temp.emplace_back(pointCase);
 		}
 		if (iTemp == 10) {
 			for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_NC[iTemp]) {

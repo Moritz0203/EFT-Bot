@@ -96,7 +96,7 @@ __forceinline bool findFreeSlots::comparePoints(const POINT& a, const POINT& b) 
 }
 
 
-void findFreeSlots::findeSlots(const PointCase* pointCase, shared_ptr<std::vector<std::vector<POINT>>> freeSlots) { //parent case must be open to use this function
+void findFreeSlots::findeSlots(const PointCase* pointCase, std::vector<std::vector<POINT>>& freeSlots) { //parent case must be open to use this function
 	const Mat templ = imread("ObjectImages/EmptySquare.png");
 	Matching matching;
 
@@ -117,7 +117,7 @@ void findFreeSlots::findeSlots(const PointCase* pointCase, shared_ptr<std::vecto
 
 	findFreeSlots::FinalResults = SortINrows(findFreeSlots::Clean_ReturnPoints);
 
-	*freeSlots = findFreeSlots::FinalResults;
+	freeSlots = findFreeSlots::FinalResults;
 
 	Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
 }

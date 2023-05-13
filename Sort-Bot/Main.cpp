@@ -561,6 +561,11 @@ int main() {
 					cout << str << endl;
 				}
 				cout << endl;
+
+				cout << Point.freeSlots.size() << endl;
+				for (vector<POINT> vecstr : Point.freeSlots) {
+					cout << vecstr.size() << endl;
+				}
 			}
 			cout << "\n" << endl;
 		}

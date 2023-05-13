@@ -68,28 +68,28 @@ void CaseProcessor::caseProcess() {
 	cout << "start case processing" << endl;
 	std::shared_ptr<PointCaseInStash> ptr_PCIS;
 
-	//ChecksPublic.CheckScrollbarPositions();
-	//for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
-	//	for (PointCaseInStash INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
-	//		ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+	ChecksPublic.CheckScrollbarPositions();
+	for (uint8_t i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+		for (PointCaseInStash& INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
+			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
 
-	//		if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
-	//			//OpenCaseAndTakeScreen(ptr_PCIS);
-	//		}
-	//		else {
-	//			Sleep(500);
-	//			ptr_FreeSlots = make_shared<vector<vector<POINT>>>(INpointCase.freeSlots);
-	//			PointCaseInStash* ptr_pointCaseInStash = new PointCaseInStash(INpointCase);
-	//			FindFreeSlots.findeSlots(ptr_pointCaseInStash, ptr_FreeSlots);
-	//			FindFreeSlots.Print_Out_Case_EmptySlots();
-	//			delete ptr_pointCaseInStash;
-	//		}
-	//		ChecksPublic.ClickScrollbarPositions();
-	//	}
-	//	Sleep(400);
-	//	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
-	//	Keyboard::KeyboardInput(keyforInput);
-	//}
+			if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
+				//OpenCaseAndTakeScreen(ptr_PCIS);
+			}
+			else {
+				Sleep(500);
+				PointCaseInStash* ptr_pointCaseInStash = new PointCaseInStash(INpointCase);
+
+				FindFreeSlots.findeSlots(ptr_pointCaseInStash, INpointCase.freeSlots);
+				FindFreeSlots.Print_Out_Case_EmptySlots();
+				delete ptr_pointCaseInStash;
+			}
+			ChecksPublic.ClickScrollbarPositions();
+		}
+		Sleep(400);
+		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+		Keyboard::KeyboardInput(keyforInput);
+	}
 	cout << "ende case processing" << endl;
 }
 
@@ -134,20 +134,19 @@ void CaseProcessor::OpenCaseAndTakeScreen(std::shared_ptr<PointCaseInStash> ptr_
 	MatchingCaseInCase(MatScreen, ptr_PCIS->page, ptr_PCIS->point);
 }
 
-void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCasePoints) {
+void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, uint8_t page, POINT parentCasePoints) {
 	string filename, templatename;
 	double threshold;
 	int sizeString = sizeof(CasesInCase) / sizeof(string);
 	Mat templ;
 	Prefix prefix;
-	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
 	vector<vector<POINT>> freeSlots_empty{};
 	Matching matching;
 	vector<POINT> ReturnDataCase_Clean;
 	vector<POINT> ReturnDataCase;
 
-	for (int i2 = 0; i2 < sizeString; i2++) {
+	for (uint8_t i2 = 0; i2 < sizeString; i2++) {
 		threshold = CasesInCaseThreshold[i2];
 		templatename = NameOfItemCasesInCase[i2];
 		templ = imread(CasesInCase[i2]);
@@ -157,7 +156,7 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 		if (!ReturnDataCase.empty()) {
 			ReturnDataCase_Clean = matching.removeDuplicates(ReturnDataCase);
 
-			for (int i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
+			for (uint16_t i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
 				double rows = templ.rows;
 				rows -= rows / 3.0;
 				const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, rows, 12);
@@ -165,9 +164,9 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 				string tagCase = TextMatching::textMatching(MatScreen, Rec);
 				if (Matching::checkSecondLastChar(tagCase)) {
 					PointCaseInCase::pointCaseInCase[page].emplace_back(ReturnDataCase_Clean[i3], parentCasePoints, NameOfItemCasesInCase[i2], tagCase, templ.rows, templ.cols, page, 0x0, freeSlots_empty, prefix);
-					ptr_FreeSlots = make_shared<vector<vector<POINT>>>(PointCaseInCase::pointCaseInCase[page].back().freeSlots);
 					PointCaseInCase* ptr_pointCaseInCase = new PointCaseInCase(PointCaseInCase::pointCaseInCase[page].back());
-					FindFreeSlots.findeSlots(ptr_pointCaseInCase, ptr_FreeSlots);
+
+					FindFreeSlots.findeSlots(ptr_pointCaseInCase, PointCaseInCase::pointCaseInCase[page].back().freeSlots);
 					delete ptr_pointCaseInCase;
 				}
 			}
@@ -178,7 +177,7 @@ void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, int page, POINT parentCas
 
 struct POINT_PAGE {
 	POINT point;
-	int page;
+	uint8_t page;
 	bool operator<(const POINT_PAGE& other) const {
 		return point.x < other.point.x || (point.x == other.point.x && (point.y < other.point.y || (point.y == other.point.y && page < other.page)));
 	}
@@ -186,8 +185,8 @@ struct POINT_PAGE {
 
 void CaseProcessor::cleanUpVectorCase() {
 	vector<PointCaseInStash> temp;
-	POINT_PAGE point_page;
-	POINT_PAGE inPoint_page;
+	POINT_PAGE point_page{};
+	POINT_PAGE inPoint_page{};
 	std::set<POINT_PAGE> set_POINT_PAGE;
 
 
@@ -195,8 +194,8 @@ void CaseProcessor::cleanUpVectorCase() {
 	PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
 	temp.clear();
 
-	int iTemp = 1;
-	for (int i = 1; i < PointCaseInStash::pointCaseInStash_NC.size(); i++) {
+	uint8_t iTemp = 1;
+	for (uint8_t i = 1; i < PointCaseInStash::pointCaseInStash_NC.size(); i++) {
 		iTemp++;
 
 		if (iTemp == PointCaseInStash::pointCaseInStash_NC.size())
@@ -210,8 +209,8 @@ void CaseProcessor::cleanUpVectorCase() {
 				continue;
 			
 			bool Found = false;
-			int count_multiplier = 1;
-			for (int iTempLoop = iTemp; iTempLoop < PointCaseInStash::pointCaseInStash_NC.size() - 1 || iTempLoop < iTemp + 3; iTempLoop++) {
+			uint8_t count_multiplier = 1;
+			for (uint8_t iTempLoop = iTemp; iTempLoop < PointCaseInStash::pointCaseInStash_NC.size() - 1 || iTempLoop < iTemp + 3; iTempLoop++) {
 
 				for (PointCaseInStash inPointCase : PointCaseInStash::pointCaseInStash_NC[iTempLoop]) {
 					PointCaseInStash tempPointCase = inPointCase;
@@ -219,10 +218,10 @@ void CaseProcessor::cleanUpVectorCase() {
 					inPoint_page.page = inPointCase.page;
 					inPoint_page.point = inPointCase.point;
 
-					int y_minus_1 = tempPointCase.point.y - 1;
-					int y_plus_1 = tempPointCase.point.y + 1;
-					int x_minus_1 = tempPointCase.point.x - 1;
-					int x_plus_1 = tempPointCase.point.x + 1;
+					uint16_t y_minus_1 = tempPointCase.point.y - 1;
+					uint16_t y_plus_1 = tempPointCase.point.y + 1;
+					uint16_t x_minus_1 = tempPointCase.point.x - 1;
+					uint16_t x_plus_1 = tempPointCase.point.x + 1;
 					
 
 					//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
@@ -255,7 +254,4 @@ void CaseProcessor::cleanUpVectorCase() {
 		PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
 		temp.clear();
 	}
-
-
-	// Abgleich zwischen set und pointCaseInStash_NC und nur die rein in pointCaseInStash_C die nicht im set sind 
 }

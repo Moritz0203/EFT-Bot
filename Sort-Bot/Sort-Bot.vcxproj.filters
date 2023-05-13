@@ -42,9 +42,6 @@
     <Filter Include="Header Files\SortBot\TypeClass">
       <UniqueIdentifier>{f7997e34-0a6c-495e-819c-abe1b900db2a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\SortBot\TypeClass\Vector">
-      <UniqueIdentifier>{6c797e62-ae19-4630-8694-df171518f182}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\SortBot\TypeClass">
       <UniqueIdentifier>{d1d77d49-c81f-4838-a341-856aa9109163}</UniqueIdentifier>
     </Filter>
@@ -105,9 +102,6 @@
     </ClInclude>
     <ClInclude Include="MovPrefix.h">
       <Filter>Header Files\SortBot\TypeClass</Filter>
-    </ClInclude>
-    <ClInclude Include="PointGlobalVector.h">
-      <Filter>Header Files\SortBot\TypeClass\Vector</Filter>
     </ClInclude>
     <ClInclude Include="InitializeMovPrefix.h">
       <Filter>Header Files\SortBot\Prefix</Filter>

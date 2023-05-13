@@ -24,6 +24,9 @@ PointAmmunition::PointAmmunition(POINT point, std::string nameOfItem, int height
 	this->stackSize = stackSize;
 }
 
+std::vector<std::vector<PointAmmunition>> PointAmmunition::pointAmmunition_C;
+std::vector<std::vector<PointAmmunition>> PointAmmunition::pointAmmunition_NC;
+
 PointMagazine::PointMagazine()
 {
 }
@@ -33,6 +36,9 @@ PointMagazine::PointMagazine(POINT point, std::string nameOfItem, int heightTemp
 {
 	this->fillStatus = fillStatus;
 }
+
+std::vector<std::vector<PointMagazine>> PointMagazine::pointMagazine_C;
+std::vector<std::vector<PointMagazine>> PointMagazine::pointMagazine_NC;
 
 PointBarter::PointBarter()
 {
@@ -44,4 +50,5 @@ PointBarter::PointBarter(POINT point, std::string nameOfItem, int heightTempl, i
 	this->isFoundInRaid = isFoundInRaid;
 }
 
-
+std::vector<std::vector<PointBarter>> PointBarter::pointBarter_C;
+std::vector<std::vector<PointBarter>> PointBarter::pointBarter_NC;

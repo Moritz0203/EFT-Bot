@@ -107,10 +107,10 @@ namespace Ammunition {
 			0.86,//TCWSP
 			0.88,//UltraNosi
 		//RUS 7.62
-			0.80,//BP
+			0.86,//BP
 			0.90,//HP
 			//0.84,//MAIAP
-			0.80,//PS
+			0.86,//PS
 			0.90,//T45M1
 			0.90,//US
 	};

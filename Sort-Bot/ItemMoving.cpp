@@ -41,6 +41,7 @@ void combineVectors(const std::vector<std::vector<PointAmmunition>>& vecAmmuniti
 	}
 }
 
+
 bool operator==(const POINT& lhs, const POINT& rhs) {
 	return lhs.x == rhs.x && lhs.y == rhs.y;
 }

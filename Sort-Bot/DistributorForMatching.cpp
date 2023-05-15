@@ -187,11 +187,11 @@ namespace Case {
 	};
 
 	std::array<double, 10> CasesThreshold{
-		0.83,//AmmoCase
+		0.80,//AmmoCase
 		0.909,//GrenadCase
 		0.909,//HolodilnickCase
 		0.89,//MagCase
-		0.898,//MedCase
+		0.91,//MedCase
 		0.88,//MoneyCase
 		0.898,//JunkCase
 		0.88,//WeaponsCase
@@ -264,7 +264,7 @@ void Matching::CaseMatching() {
 		cout << endl;
 	}
 
-	cout << " end " << endl;
+	cout << "ende case Matching " << endl;
 }
 
 namespace Magazine {

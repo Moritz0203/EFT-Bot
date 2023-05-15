@@ -551,9 +551,12 @@ int main() {
 		Sleep(300);
 		getMat.TakeScreenshots();
 
-		/*InitializeMovPrefix::Initialize();
+		InitializeMovPrefix::Initialize();
 		prefixProcessing.CombinePrefixAndCase();
 
+
+
+		itemsProcessing.AmmunitionProcess();
 		for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 			for (PointCaseInStash Point : vec) {
 				cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.prefix.nameOfItems.size() <<" \n";
@@ -563,11 +566,10 @@ int main() {
 				cout << Point.freeSlots.size() << endl;
 			}
 			cout << "\n" << endl;
-		}*/
+		}
 
-
-		itemsProcessing.AmmunitionProcess();
-		//itemMoving.itemMoving();
+		cin; 
+		itemMoving.itemMoving();
 	}
 	else {
 

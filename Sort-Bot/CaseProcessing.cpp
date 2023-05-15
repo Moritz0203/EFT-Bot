@@ -67,9 +67,11 @@ void CaseProcessor::caseProcess() {
 
 	cout << "start case processing" << endl;
 	std::shared_ptr<PointCaseInStash> ptr_PCIS;
+	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 
 	ChecksPublic.CheckScrollbarPositions();
 	for (uint8_t i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+		bool moved = false;
 		for (PointCaseInStash& INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
 			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
 
@@ -83,11 +85,13 @@ void CaseProcessor::caseProcess() {
 				FindFreeSlots.findeSlots(ptr_pointCaseInStash, INpointCase.freeSlots);
 				FindFreeSlots.Print_Out_Case_EmptySlots();
 				delete ptr_pointCaseInStash;
+				moved = true;
 			}
-			ChecksPublic.ClickScrollbarPositions();
 		}
+		if (moved)
+			ChecksPublic.ClickScrollbarPositions();
+
 		Sleep(400);
-		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 		Keyboard::KeyboardInput(keyforInput);
 	}
 	cout << "ende case processing" << endl;

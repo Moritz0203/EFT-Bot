@@ -71,7 +71,7 @@ void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 	shared_ptr<vector<vector<POINT>>> ptr_free_spaces;
 	vector<POINT> vector_for_clean{};
 	shared_ptr<vector<POINT>> ptr_vector_clean;
-	checksPublic Checkspublic;
+	checksPublic ChecksPublic;
 	Check_for_Space CheckForSpace;
 
 	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
@@ -79,20 +79,26 @@ void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 	point.x = (templ.cols / 2) + point.x;
 	Mouse::MoverPOINTandPress(point);
 
-	Checkspublic.CheckScrollbarPositions();
+	Sleep(500);
+	ChecksPublic.CheckScrollbarPositions();
 	for (int i = 0; i < ptr_Stash->page; i++) {
+		Sleep(400);
 		Keyboard::KeyboardInput(keyforInput);
-		Sleep(200);
 	}
 
+	Sleep(500);
 	pointA.y = (templ.rows / 2) + ptr_Stash->point.y;
 	pointA.x = (templ.cols / 2) + ptr_Stash->point.x;
 	pointB.y = MatScreen.rows / 2;
 	pointB.x = MatScreen.cols / 2;
 	Mouse::MouseMoveAtoB(pointA, pointB);//Mov Case in SortingTable
 
-	Checkspublic.CheckScrollbarPositions();
+	Sleep(500);
+	ChecksPublic.CheckScrollbarPositions();
+	Sleep(500);
 	for (vector<PointItem*> vector_Page : ItemVectorCombine_Page) {// PointAmmunition to T 
+		bool moved = false;
+
 		for (const PointItem* pointforMov : vector_Page) {
 			if (std::find(ptr_Stash->prefix.nameOfItems.begin(), ptr_Stash->prefix.nameOfItems.end(), pointforMov->nameOfItem) == ptr_Stash->prefix.nameOfItems.end())
 				continue;
@@ -100,19 +106,29 @@ void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 			ptr_free_spaces = make_shared<vector<vector<POINT>>>(ptr_Stash->freeSlots);
 			if (!CheckForSpace.check_for_Space(ptr_free_spaces, pointforMov->slotsPerItem))
 				continue;
+			else
+				moved = true;
 
-			Mouse::MouseMoveAtoB(pointforMov->point, pointB);
+			pointA.y = (pointforMov->heightTempl / 2) + pointforMov->point.y;
+			pointA.x = (pointforMov->widthTempl / 2) + pointforMov->point.x;
+
+			Mouse::MouseMoveAtoB(pointA, pointB);
 			vector_for_clean.push_back(pointforMov->point);
+			Sleep(200);
 		}
+		if (moved)
+			ChecksPublic.ClickScrollbarPositions();
+
 		ptr_vector_clean = make_shared<vector<POINT>>(vector_for_clean);
 		deleteMatchingPoints(vector_Page, ptr_vector_clean);
 		vector_for_clean.clear();
 
+		Sleep(500);
 		Keyboard::KeyboardInput(keyforInput);
-		if (vector_Page.empty())
-			Sleep(200);
+		Sleep(500);
 	}
 	Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
+	Sleep(1000);
 }
 
 void ItemMoving::MovInCase(shared_ptr<PointCaseInCase> &ptr_Case) {
@@ -167,10 +183,10 @@ void ItemMoving::itemMoving() {
 		}
 	}
 
-	for (int i = 0; i < PointCaseInCase::pointCaseInCase.size(); i++) {
+	/*for (int i = 0; i < PointCaseInCase::pointCaseInCase.size(); i++) {
 		for (PointCaseInCase pointCase : PointCaseInCase::pointCaseInCase[i]) {
 			shared_ptr<PointCaseInCase> ptr = make_shared<PointCaseInCase>(pointCase);
 			MovInCase(ptr);
 		}
-	}
+	}*/
 }	

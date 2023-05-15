@@ -43,6 +43,19 @@ namespace InitializeMovPrefix {
 		assingPrefix_temp.tagOfCase = "AMO1|";
 
 		AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
+
+
+		prefix.isFull = false;
+		prefix.nameOfItems = VectorText::Nato762x51;
+
+		for (string str : prefix.nameOfItems) {
+			cout << str << endl;
+		}
+
+		assingPrefix_temp.prefix = prefix;
+		assingPrefix_temp.tagOfCase = "AMO-2|";
+
+		AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
 	}
 
 	/*void setup() {

@@ -66,7 +66,7 @@ void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 	const HWND hWND = GetMat::FindeWindow();
 	const Mat MatScreen = GetMat::getMat(hWND);
 	const Mat templ = imread("ObjectImages/SortingTable.png");
-	POINT pointA, pointB;
+	POINT pointA{}, pointB{};
 	const int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 	shared_ptr<vector<vector<POINT>>> ptr_free_spaces;
 	vector<POINT> vector_for_clean{};
@@ -158,7 +158,7 @@ void ItemMoving::MovInCase(shared_ptr<PointCaseInCase> &ptr_Case) {
 }
 
 void ItemMoving::itemMoving() {
-	combineVectors(pointAmmunition_C, pointMagazine_C, pointBarter_C);
+	combineVectors(PointAmmunition::pointAmmunition_C, PointMagazine::pointMagazine_C, PointBarter::pointBarter_C);
 
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
 		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_C[i]) {

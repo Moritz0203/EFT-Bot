@@ -14,8 +14,6 @@
 using namespace cv;
 using namespace std;
 
-
-
 struct pair_hash {
 	template <class T1, class T2>
 	size_t operator()(const pair<T1, T2>& p) const {
@@ -64,57 +62,57 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 }
 
 namespace Ammunition {
-	std::array<std::string, 1> Ammunition{
-		////NATO 7.62
-		//	"itemImages/AmmunitionImages/7.62NATO/M80.png",//M80
-		//	"itemImages/AmmunitionImages/7.62NATO/M62.png",//M62
-		//	"itemImages/AmmunitionImages/7.62NATO/M61.png",//M61
-		//	"itemImages/AmmunitionImages/7.62NATO/M993.png",//M993
-		//	"itemImages/AmmunitionImages/7.62NATO/BCPFMJ.png",//BCPFMJ
-		//	"itemImages/AmmunitionImages/7.62NATO/TCWSP.png",//TCWSP
-		//	"itemImages/AmmunitionImages/7.62NATO/UltraNosi.png",//UltraNosi
-		////RUS 7.62
-		//	"itemImages/AmmunitionImages/7.62RUS/BP.png",//BP
-		//	"itemImages/AmmunitionImages/7.62RUS/HP.png",//HP
-		//	//"itemImages/AmmunitionImages/7.62RUS/MAIAP.png",//MAIAP
-			"itemImages/AmmunitionImages/7.62RUS/PS.png",//PS
-			//"itemImages/AmmunitionImages/7.62RUS/T45M1.png",//T45M1
-			//"itemImages/AmmunitionImages/7.62RUS/US.png",//US
-	};
-
-	std::array<std::string, 1> NameOfItemAmmunition{
+	std::array<std::string, 12> Ammunition{
 		//NATO 7.62
-		//	"M80",
-		//	"M62",
-		//	"M61",
-		//	"M993",
-		//	"BCPFMJ",
-		//	"TCWSP",
-		//	"UltraNosi",
-		////RUS 7.62
-		//	"BP",
-		//	"HP",
-			"PS",
-			/*	"T45M1",
-				"US",*/
+			"itemImages/AmmunitionImages/7.62NATO/M80.png",//M80
+			"itemImages/AmmunitionImages/7.62NATO/M62.png",//M62
+			"itemImages/AmmunitionImages/7.62NATO/M61.png",//M61
+			"itemImages/AmmunitionImages/7.62NATO/M993.png",//M993
+			"itemImages/AmmunitionImages/7.62NATO/BCPFMJ.png",//BCPFMJ
+			"itemImages/AmmunitionImages/7.62NATO/TCWSP.png",//TCWSP
+			"itemImages/AmmunitionImages/7.62NATO/UltraNosi.png",//UltraNosi
+		//RUS 7.62
+			"itemImages/AmmunitionImages/7.62RUS/BP.png",//BP
+			"itemImages/AmmunitionImages/7.62RUS/HP.png",//HP
+			//"itemImages/AmmunitionImages/7.62RUS/MAIAP.png",//MAIAP
+			"itemImages/AmmunitionImages/7.62RUS/PS.png",//PS
+			"itemImages/AmmunitionImages/7.62RUS/T45M1.png",//T45M1
+			"itemImages/AmmunitionImages/7.62RUS/US.png",//US
 	};
 
-	std::array<double, 1> AmmunitionThreshold{
-		////NATO 7.62
-		//	0.90,//M80
-		//	0.88,//M62
-		//	0.90,//M61
-		//	0.90,//M993
-		//	0.84,//BCPFMJ
-		//	0.86,//TCWSP
-		//	0.88,//UltraNosi
-		////RUS 7.62
-		//	0.88,//BP
-		//	0.90,//HP
-		//	//0.84,//MAIAP
-			0.82,//PS
-			//0.90,//T45M1
-			//0.90,//US
+	std::array<std::string, 12> NameOfItemAmmunition{
+		//NATO 7.62
+			"M80",
+			"M62",
+			"M61",
+			"M993",
+			"BCPFMJ",
+			"TCWSP",
+			"UltraNosi",
+		//RUS 7.62
+			"BP",
+			"HP",
+			"PS",
+			"T45M1",
+			"US",
+	};
+
+	std::array<double, 12> AmmunitionThreshold{
+		//NATO 7.62
+			0.90,//M80
+			0.87,//M62
+			0.89,//M61
+			0.90,//M993
+			0.84,//BCPFMJ
+			0.86,//TCWSP
+			0.88,//UltraNosi
+		//RUS 7.62
+			0.80,//BP
+			0.90,//HP
+			//0.84,//MAIAP
+			0.80,//PS
+			0.90,//T45M1
+			0.90,//US
 	};
 }
 
@@ -152,7 +150,7 @@ void Matching::AmmunitionMatching() {
 				ReturnDataAM_Clean.clear();
 			}
 		}
-		pointAmmunition_NC.emplace_back(pointAmmunitionTemp);
+		PointAmmunition::pointAmmunition_NC.emplace_back(pointAmmunitionTemp);
 		pointAmmunitionTemp.clear();
 
 		cout << "--------------- " << ++count << endl;
@@ -340,7 +338,7 @@ void Matching::MagazineMatching() {
 				ReturnDataMA_Clean.clear();
 			}
 		}
-		pointMagazine_NC.emplace_back(pointMagazineTemp);
+		PointMagazine::pointMagazine_NC.emplace_back(pointMagazineTemp);
 		pointMagazineTemp.clear();
 	}
 }
@@ -436,7 +434,7 @@ void Matching::BarterMatching() {
 				ReturnDataBA_Clean.clear();
 			}
 		}
-		pointBarter_NC.emplace_back(pointBarterTemp);
+		PointBarter::pointBarter_NC.emplace_back(pointBarterTemp);
 		pointBarterTemp.clear();
 	}
 }

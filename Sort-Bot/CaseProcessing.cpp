@@ -209,12 +209,12 @@ void CaseProcessor::cleanUpVectorCase() {
 				continue;
 			
 			bool Found = false;
-			uint8_t count_multiplier = 1;
+			uint8_t multiplier = 1;
 			for (uint8_t iTempLoop = iTemp; iTempLoop < PointCaseInStash::pointCaseInStash_NC.size() - 1 || iTempLoop < iTemp + 3; iTempLoop++) {
 
 				for (PointCaseInStash inPointCase : PointCaseInStash::pointCaseInStash_NC[iTempLoop]) {
 					PointCaseInStash tempPointCase = inPointCase;
-					tempPointCase.point.y = tempPointCase.point.y + (343 * count_multiplier);
+					tempPointCase.point.y = tempPointCase.point.y + (343 * multiplier);
 					inPoint_page.page = inPointCase.page;
 					inPoint_page.point = inPointCase.point;
 
@@ -225,7 +225,10 @@ void CaseProcessor::cleanUpVectorCase() {
 					
 
 					//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
-						cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << " " << count_multiplier << endl;
+						cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << " " << multiplier << endl;
+
+					if (pointCase.nameOfCase != inPointCase.nameOfCase)
+						continue;
 
 					if (set_POINT_PAGE.count(inPoint_page) > 0)
 						continue;
@@ -239,7 +242,7 @@ void CaseProcessor::cleanUpVectorCase() {
 						}
 					}
 				}
-				count_multiplier++;
+				multiplier++;
 			}
 			if (Found)
 				temp.emplace_back(pointCase);

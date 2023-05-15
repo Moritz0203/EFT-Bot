@@ -551,7 +551,7 @@ int main() {
 		Sleep(300);
 		getMat.TakeScreenshots();
 
-		InitializeMovPrefix::Initialize();
+		/*InitializeMovPrefix::Initialize();
 		prefixProcessing.CombinePrefixAndCase();
 
 		for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
@@ -563,10 +563,10 @@ int main() {
 				cout << Point.freeSlots.size() << endl;
 			}
 			cout << "\n" << endl;
-		}
+		}*/
 
 
-		//itemsProcessing.AmmunitionProcess();
+		itemsProcessing.AmmunitionProcess();
 		//itemMoving.itemMoving();
 	}
 	else {

@@ -4,23 +4,22 @@
 #include <vector>
 
 namespace VectorText {
-	std::vector<std::string> Rus762x25{
-		"TTAKBS",
-		"TTFMJ43",
-		"TTLRN",
-		"TTLRNPC",
-		"TTP",
-		"TTPst",
-		"TTPT"
+	
+
+	std::vector<std::string> Nato556x45{
+		"FMJ",
+		"HP",
+		"M855",
+		"M855A1",
+		"M856",
+		"M856A1",
+		"M955",
+		"RRLP",
+		"SOST",
+		"Warmage",
 	};
 
-	std::vector<std::string> Nato762x35{
-		"BlackoutAP",
-		"BlackoutBCPFMJ",
-		"BlackoutM62Tracer",
-		"BlackoutV-Max",
-		"Whisper"
-	};
+	
 
 	std::vector<std::string> Rus762x39{
 		"BP",
@@ -41,12 +40,21 @@ namespace VectorText {
 		"UltraNosi"
 	};
 
-	std::vector<std::string> Rus762x54R{
-		"RBS",
-		"RBT",
-		"RLPS",
-		"RPS",
-		"RSNB",
-		"RT-46M"
+
+	std::vector<std::string> Rus545x39{
+		"7N40",
+		"BP",
+		"BS",
+		"BT",
+		"FMJ",
+		"HP",
+		"PP",
+		"PPBS",
+		"PRS",
+		"PS",
+		"SP",
+		"T",
+		"US",
 	};
+	
 }

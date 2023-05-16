@@ -62,7 +62,7 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 }
 
 namespace Ammunition {
-	std::array<std::string, 13> Ammunition{
+	std::array<std::string, 36> Ammunition{
 		//NATO 7.62
 			"itemImages/AmmunitionImages/7.62NATO/M80.png",//M80
 			"itemImages/AmmunitionImages/7.62NATO/M62.png",//M62
@@ -78,9 +78,34 @@ namespace Ammunition {
 			"itemImages/AmmunitionImages/7.62RUS/PS.png",//PS
 			"itemImages/AmmunitionImages/7.62RUS/T45M1.png",//T45M1
 			"itemImages/AmmunitionImages/7.62RUS/US.png",//US
+		//NATO 5.56
+			"itemImages/AmmunitionImages/5.56NATO/FMJ.png",//FMJ
+			"itemImages/AmmunitionImages/5.56NATO/HP.png",//HP
+			"itemImages/AmmunitionImages/5.56NATO/M855.png",//M855
+			"itemImages/AmmunitionImages/5.56NATO/M855A1.png",//M855A1
+			"itemImages/AmmunitionImages/5.56NATO/M856.png",//M856
+			"itemImages/AmmunitionImages/5.56NATO/M856A1.png",//M856A1
+			"itemImages/AmmunitionImages/5.56NATO/M995.png",//M955
+			"itemImages/AmmunitionImages/5.56NATO/RRLP.png",//RRLP
+			"itemImages/AmmunitionImages/5.56NATO/SOST.png",//SOST
+			"itemImages/AmmunitionImages/5.56NATO/Warmage.png",//Warmage
+		//RUS 5.45
+			"itemImages/AmmunitionImages/5.45RUS/7N40.png",//7N40
+			"itemImages/AmmunitionImages/5.45RUS/BP.png",//BP
+			"itemImages/AmmunitionImages/5.45RUS/BS.png",//BS
+			"itemImages/AmmunitionImages/5.45RUS/BT.png",//BT
+			"itemImages/AmmunitionImages/5.45RUS/FMJ.png",//FMJ
+			"itemImages/AmmunitionImages/5.45RUS/HP.png",//HP
+			"itemImages/AmmunitionImages/5.45RUS/PP.png",//PP
+			"itemImages/AmmunitionImages/5.45RUS/PPBS.png",//PPBS
+			"itemImages/AmmunitionImages/5.45RUS/PRS.png",//PRS
+			"itemImages/AmmunitionImages/5.45RUS/PS.png",//PS
+			"itemImages/AmmunitionImages/5.45RUS/SP.png",//SP
+			"itemImages/AmmunitionImages/5.45RUS/T.png",//T
+			"itemImages/AmmunitionImages/5.45RUS/US.png",//US
 	};
 
-	std::array<std::string, 13> NameOfItemAmmunition{
+	std::array<std::string, 36> NameOfItemAmmunition{
 		//NATO 7.62
 			"M80",
 			"M62",
@@ -96,9 +121,34 @@ namespace Ammunition {
 			"PS",
 			"T45M1",
 			"US",
+		//NATO 5.56
+			"FMJ",
+			"HP",
+			"M855",
+			"M855A1",
+			"M856",
+			"M856A1",
+			"M955",
+			"RRLP",
+			"SOST",
+			"Warmage",
+		//RUS 5.45 
+			"7N40",
+			"BP",
+			"BS",
+			"BT",
+			"FMJ",
+			"HP",
+			"PP",
+			"PPBS",
+			"PRS",
+			"PS",
+			"SP",
+			"T",
+			"US",
 	};
 
-	std::array<double, 13> AmmunitionThreshold{
+	std::array<double, 36> AmmunitionThreshold{
 		//NATO 7.62
 			0.90,//M80
 			0.87,//M62
@@ -108,12 +158,37 @@ namespace Ammunition {
 			0.86,//TCWSP
 			0.88,//UltraNosi
 		//RUS 7.62
-			0.86,//BP
+			0.90,//BP
 			0.90,//HP
 			0.90,//MAIAP
-			0.86,//PS
+			0.90,//PS
 			0.90,//T45M1
 			0.90,//US
+		//NATO 5.56
+			0.93,//FMJ
+			0.93,//HP
+			0.93,//M855
+			0.93,//M855A1
+			0.93,//M856
+			0.93,//M856A1
+			0.93,//M955
+			0.93,//RRLP
+			0.93,//SOST
+			0.93,//Warmage
+		//RUS 5.45 
+			0.93,//7N40
+			0.93,//BP
+			0.93,//BS
+			0.93,//BT
+			0.93,//FMJ
+			0.93,//HP
+			0.93,//PP
+			0.93,//PPBS
+			0.93,//PRS
+			0.93,//PS
+			0.93,//SP
+			0.93,//T
+			0.93,//US
 	};
 }
 

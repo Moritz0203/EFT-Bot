@@ -33,7 +33,12 @@ namespace InitializeMovPrefix {
 		AssignPrefix assingPrefix_temp;
 
 		prefix.isFull = false;
-		prefix.nameOfItems = VectorText::Rus762x39;
+		for (string str : VectorText::Nato762x51) {
+			prefix.nameOfItems.push_back(str);
+		}
+		for (string str : VectorText::Nato556x45) {
+			prefix.nameOfItems.push_back(str);
+		}
 
 				for (string str : prefix.nameOfItems) {
 					cout << str << endl;
@@ -46,7 +51,15 @@ namespace InitializeMovPrefix {
 
 
 		prefix.isFull = false;
-		prefix.nameOfItems = VectorText::Nato762x51;
+		prefix.nameOfItems = VectorText::Rus762x39;
+
+		for (string str : VectorText::Rus762x39) {
+			prefix.nameOfItems.push_back(str);
+		}
+		for (string str : VectorText::Rus545x39) {
+			prefix.nameOfItems.push_back(str);
+		}
+
 
 		for (string str : prefix.nameOfItems) {
 			cout << str << endl;

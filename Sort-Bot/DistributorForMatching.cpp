@@ -62,7 +62,7 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 }
 
 namespace Ammunition {
-	std::array<std::string, 12> Ammunition{
+	std::array<std::string, 13> Ammunition{
 		//NATO 7.62
 			"itemImages/AmmunitionImages/7.62NATO/M80.png",//M80
 			"itemImages/AmmunitionImages/7.62NATO/M62.png",//M62
@@ -74,13 +74,13 @@ namespace Ammunition {
 		//RUS 7.62
 			"itemImages/AmmunitionImages/7.62RUS/BP.png",//BP
 			"itemImages/AmmunitionImages/7.62RUS/HP.png",//HP
-			//"itemImages/AmmunitionImages/7.62RUS/MAIAP.png",//MAIAP
+			"itemImages/AmmunitionImages/7.62RUS/MAIAP.png",//MAIAP
 			"itemImages/AmmunitionImages/7.62RUS/PS.png",//PS
 			"itemImages/AmmunitionImages/7.62RUS/T45M1.png",//T45M1
 			"itemImages/AmmunitionImages/7.62RUS/US.png",//US
 	};
 
-	std::array<std::string, 12> NameOfItemAmmunition{
+	std::array<std::string, 13> NameOfItemAmmunition{
 		//NATO 7.62
 			"M80",
 			"M62",
@@ -92,12 +92,13 @@ namespace Ammunition {
 		//RUS 7.62
 			"BP",
 			"HP",
+			"MAIAP",
 			"PS",
 			"T45M1",
 			"US",
 	};
 
-	std::array<double, 12> AmmunitionThreshold{
+	std::array<double, 13> AmmunitionThreshold{
 		//NATO 7.62
 			0.90,//M80
 			0.87,//M62
@@ -109,7 +110,7 @@ namespace Ammunition {
 		//RUS 7.62
 			0.86,//BP
 			0.90,//HP
-			//0.84,//MAIAP
+			0.90,//MAIAP
 			0.86,//PS
 			0.90,//T45M1
 			0.90,//US

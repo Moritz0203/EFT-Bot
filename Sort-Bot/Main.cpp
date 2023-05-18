@@ -451,7 +451,7 @@ using namespace cv;
 
 //extern void CombinePrefixAndCase();
 
-
+ 
 
 //std::vector<std::vector<PointItem*>> combineVectors(
 //	const std::vector<std::vector<PointAmmunition>>& vecAmmunition,
@@ -552,8 +552,8 @@ int main() {
 		Sleep(300);
 		getMat.TakeScreenshots();
 
-	/*	InitializeMovPrefix::Initialize();
-		prefixProcessing.CombinePrefixAndCase();*/
+		InitializeMovPrefix::Initialize();
+		prefixProcessing.CombinePrefixAndCase();
 
 
 

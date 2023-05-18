@@ -92,9 +92,9 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 	/*cout << count << endl;*/
 	cv::imshow(image_window, img_display);
 
-	if (ReturnData.size() != 0)
+	/*if (ReturnData.size() != 0)
 		waitKey(0);
-	else
+	else*/
 		waitKey(20);
 
 	return ReturnData;

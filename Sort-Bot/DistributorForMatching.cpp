@@ -165,30 +165,30 @@ namespace Ammunition {
 			0.90,//T45M1
 			0.90,//US
 		//NATO 5.56
-			0.93,//FMJ
-			0.93,//HP
-			0.93,//M855
-			0.93,//M855A1
-			0.93,//M856
-			0.93,//M856A1
-			0.93,//M955
-			0.93,//RRLP
-			0.93,//SOST
-			0.93,//Warmage
+			0.94,//FMJ
+			0.94,//HP
+			0.94,//M855
+			0.94,//M855A1
+			0.94,//M856
+			0.94,//M856A1
+			0.96,//M955
+			0.94,//RRLP
+			0.94,//SOST
+			0.94,//Warmage
 		//RUS 5.45 
 			0.93,//7N40
 			0.93,//BP
-			0.93,//BS
+			0.95,//BS
 			0.93,//BT
 			0.93,//FMJ
 			0.93,//HP
 			0.93,//PP
 			0.93,//PPBS
 			0.93,//PRS
-			0.93,//PS
+			0.96,//PS
 			0.93,//SP
 			0.93,//T
-			0.93,//US
+			0.96,//US
 	};
 }
 
@@ -207,6 +207,10 @@ void Matching::AmmunitionMatching() {
 	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
 		for (int i = 0; i < sizeString; i++) {
 			ReturnDataAM = TemplateMatching::templateMatchingItems(Ammunition::Ammunition[i], Ammunition::AmmunitionThreshold[i], false, true, Ammunition::NameOfItemAmmunition[i], MatScreenVector[i1]);
+
+			for (const POINT po : ReturnDataAM) {
+				cout << "--" << po.y << " " << po.x << endl;
+			}
 
 			templ = imread(Ammunition::Ammunition[i]);
 			if (!ReturnDataAM.empty()) {

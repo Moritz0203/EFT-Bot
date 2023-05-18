@@ -58,15 +58,18 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 	/*int count = 0;*/
 	POINT PointReturn{};
 	bool test = true;
+
+	cout << NameOfItem << endl;
+
 	while (true)
 	{
 		minMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc, Mat());
 		if (maxVal >= threshold)
 		{
-			if (test == true) {
-				cout << NameOfItem << endl;
+			/*if (test == true) {
+				
 				test = false;
-			}
+			}*/
 
 			matchLoc = maxLoc;
 			cv::rectangle(img_display, matchLoc, Point(matchLoc.x + templ.cols, matchLoc.y + templ.rows), CV_RGB(0, 255, 0), 1);
@@ -89,7 +92,11 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 	/*cout << count << endl;*/
 	cv::imshow(image_window, img_display);
 
-	waitKey(100);
+	if (ReturnData.size() != 0)
+		waitKey(0);
+	else
+		waitKey(20);
+
 	return ReturnData;
 }
 

@@ -552,8 +552,8 @@ int main() {
 		Sleep(300);
 		getMat.TakeScreenshots();
 
-		InitializeMovPrefix::Initialize();
-		prefixProcessing.CombinePrefixAndCase();
+	/*	InitializeMovPrefix::Initialize();
+		prefixProcessing.CombinePrefixAndCase();*/
 
 
 

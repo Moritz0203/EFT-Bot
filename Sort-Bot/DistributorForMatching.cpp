@@ -50,7 +50,7 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 		}
 		if (shouldInsert) {
 			result.push_back(point);
-			for (int i = -4; i <= 4; i++) {
+			for (int i = -10; i <= 10; i++) {
 				pair<int, int> point_x = make_pair(point.x + i, point.y);
 				pair<int, int> point_y = make_pair(point.x, point.y + i);
 				unSet.insert(point_x);
@@ -58,6 +58,11 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 			}
 		}
 	}
+
+	for (POINT& point : result) {
+		point.x += 1200;
+	}
+
 	return result;
 }
 
@@ -196,6 +201,7 @@ void Matching::AmmunitionMatching() {
 	cout << "amo matching" << endl;
 	const int sizeString = sizeof(Ammunition::Ammunition) / sizeof(string);
 	Mat templ;
+	Mat MatScreen;
 	GetMat getMat;
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
@@ -203,10 +209,22 @@ void Matching::AmmunitionMatching() {
 	vector<POINT> ReturnDataAM_Clean;
 	vector<PointAmmunition> pointAmmunitionTemp;
 
+	const char* image_window = "Source Image";
+
+
+
 	int count = 0;
 	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
+
+		Rect Rec(1200, 0, MatScreenVector[i1].cols - 1200, MatScreenVector[i1].rows);
+		MatScreen = MatScreenVector[i1](Rec);
+		
+		cv::imshow(image_window, MatScreen);
+
 		for (int i = 0; i < sizeString; i++) {
-			ReturnDataAM = TemplateMatching::templateMatchingItems(Ammunition::Ammunition[i], Ammunition::AmmunitionThreshold[i], false, true, Ammunition::NameOfItemAmmunition[i], MatScreenVector[i1]);
+			ReturnDataAM = TemplateMatching::templateMatchingItems(Ammunition::Ammunition[i], Ammunition::AmmunitionThreshold[i], false, true, Ammunition::NameOfItemAmmunition[i], MatScreen);
+
+			
 
 			for (const POINT po : ReturnDataAM) {
 				cout << "--" << po.y << " " << po.x << endl;
@@ -308,11 +326,15 @@ void Matching::CaseMatching() {
 	int page = 0;
 
 	for (Mat MatScreen : MatScreenVector) {
-		cv::imshow(image_window, MatScreen);
+
+		Rect Rec(1200, 0, MatScreen.cols - 1200, MatScreen.rows);
+		Mat MatScreenTemp = MatScreen(Rec);
+		cv::imshow(image_window, MatScreenTemp);
 		waitKey(5);
+
 		for (int i = 0; i < sizeString; i++) { 
 			
-			ReturnDataCase = TemplateMatching::templateMatchingItems(Case::Cases[i], Case::CasesThreshold[i], false, false, Case::NameOfItemCases[i], MatScreen);
+			ReturnDataCase = TemplateMatching::templateMatchingItems(Case::Cases[i], Case::CasesThreshold[i], false, false, Case::NameOfItemCases[i], MatScreenTemp);
 
 			templ = imread(Case::Cases[i]);
 			if (!ReturnDataCase.empty()) {

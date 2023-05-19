@@ -556,7 +556,6 @@ int main() {
 		prefixProcessing.CombinePrefixAndCase();
 
 
-
 		itemsProcessing.AmmunitionProcess();
 		for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 			for (PointCaseInStash Point : vec) {

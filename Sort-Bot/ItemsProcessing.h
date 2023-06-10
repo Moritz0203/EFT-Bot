@@ -1,3 +1,9 @@
+struct PathNameThreshold {
+	const char* Path;
+	const char* Name;
+	const double Threshold;
+};
+
 class ItemsProcessing {
 	void BarterItemsProcess();
 

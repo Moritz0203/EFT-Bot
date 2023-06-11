@@ -75,6 +75,23 @@ namespace AmmunitionVector {
 	};
 }
 
+std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::vector<std::vector<PointAmmunition>>>& inputVector) {
+	std::vector<std::vector<PointAmmunition>> outputVector;
+
+	for (const std::vector<std::vector<PointAmmunition>>& innerVector1 : inputVector) {
+		for (const std::vector<PointAmmunition>& innerVector2 : innerVector1) {
+			for (const PointAmmunition& point : innerVector2) {
+				if (point.page >= outputVector.size()) {
+					outputVector.resize(point.page + 1);
+				}
+				outputVector[point.page].push_back(point);
+			}
+		}
+	}
+
+	return outputVector;
+}
+
 
 void ItemsProcessing::CallAll() {
 	//GetMat::TakeScreenshots();
@@ -84,22 +101,16 @@ void ItemsProcessing::CallAll() {
 }
 
 void ItemsProcessing::AmmunitionProcess() {
-
-
+	vector<vector<vector<PointAmmunition>>> CombinePagesVector;
 
 	for (vector<PathNameThreshold> vec : AmmunitionVector::ArrayAmmunition) {
 		matching.AmmunitionMatching(vec);
 	}
 
+	cout << PointAmmunition::pointAmmunition_NC.size() << endl;
 
+	//PointAmmunition::pointAmmunition_NC = VectorInPages(CombinePagesVector);
 
-
-
-	for (int i = 0; i < PointAmmunition::pointAmmunition_NC.size(); i++) {
-		for (int i2 = 0; i2 < PointAmmunition::pointAmmunition_NC[i].size(); i2++) {
-			cout << PointAmmunition::pointAmmunition_NC[i][i2].point.y << " " << PointAmmunition::pointAmmunition_NC[i][i2].point.x << " " << PointAmmunition::pointAmmunition_NC[i][i2].nameOfItem << endl;
-		}
-	}
 
 	cleanUpVectorItemsAmmunition();
 

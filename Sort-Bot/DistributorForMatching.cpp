@@ -239,7 +239,6 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 
 
 
-
 	int count = 0;
 	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
 
@@ -278,14 +277,14 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 		
 		pointAmmunitionTemp = removeDuplicatesPage(pointAmmunitionTemp);
 
-		PointAmmunition::pointAmmunition_NC.emplace_back(pointAmmunitionTemp);
-		pointAmmunitionTemp.clear();
 
+		for (PointAmmunition pointAM : pointAmmunitionTemp) {
+			PointAmmunition::pointAmmunition_NC[i1].emplace_back(pointAM);
+		}
+
+		pointAmmunitionTemp.clear();
 		cout << "--------------- " << ++count << endl;
 	}
-
-
-
 	cout << "matching done" << endl;
 }
 

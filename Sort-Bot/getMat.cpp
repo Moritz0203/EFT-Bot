@@ -84,7 +84,7 @@ void GetMat::TakeScreenshots(){//Please call first CheckScrollbarPositions!!
 	const HWND hWND = FindeWindow();
 	SetForegroundWindow(hWND);
 	
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 8; i++) {
 		Sleep(200);      
 		MatScreenVector.push_back(getMat(hWND));
 		Sleep(200);

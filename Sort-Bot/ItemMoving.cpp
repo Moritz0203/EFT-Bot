@@ -97,8 +97,13 @@ void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 	Sleep(500);
 	ChecksPublic.CheckScrollbarPositions();
 	Sleep(500);
+
+	uint8_t count = 0;
+	cout << ItemVectorCombine_Page.size() << endl;
 	for (vector<PointItem*> vector_Page : ItemVectorCombine_Page) {// PointAmmunition to T 
 		bool moved = false;
+		if (++count >= 12)
+			break;
 
 		for (const PointItem* pointforMov : vector_Page) {
 			if (std::find(ptr_Stash->prefix.nameOfItems.begin(), ptr_Stash->prefix.nameOfItems.end(), pointforMov->nameOfItem) == ptr_Stash->prefix.nameOfItems.end())
@@ -123,6 +128,7 @@ void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 		ptr_vector_clean = make_shared<vector<POINT>>(vector_for_clean);
 		deleteMatchingPoints(vector_Page, ptr_vector_clean);
 		vector_for_clean.clear();
+
 
 		Sleep(500);
 		Keyboard::KeyboardInput(keyforInput);
@@ -177,6 +183,8 @@ void ItemMoving::MovInCase(shared_ptr<PointCaseInCase> &ptr_Case) {
 void ItemMoving::itemMoving() {
 	combineVectors(PointAmmunition::pointAmmunition_C, PointMagazine::pointMagazine_C, PointBarter::pointBarter_C);
 
+	std::cout << PointAmmunition::pointAmmunition_C.size() << " - " << PointMagazine::pointMagazine_C.size() << " - " << PointBarter::pointBarter_C.size() << endl;
+ 
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
 		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_C[i]) {
 			shared_ptr<PointCaseInStash> ptr = make_shared<PointCaseInStash>(pointCase);

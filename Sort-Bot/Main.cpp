@@ -548,6 +548,8 @@ int main() {
 
 
 
+
+
 		ChecksPublic.CheckScrollbarPositions();
 		Sleep(300);
 		getMat.TakeScreenshots();

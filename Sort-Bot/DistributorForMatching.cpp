@@ -250,8 +250,6 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 		for (int i = 0; i < input.size(); i++) {
 			ReturnDataAM = TemplateMatching::templateMatchingItems(input[i].Path, input[i].Threshold, false, true, input[i].Name, MatScreen);
 
-			
-
 			for (const POINT po : ReturnDataAM) {
 				cout << "--" << po.y << " " << po.x << endl;
 			}

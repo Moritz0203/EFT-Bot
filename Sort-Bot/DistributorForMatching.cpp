@@ -237,8 +237,6 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 	vector<POINT> ReturnDataAM_Clean;
 	vector<PointAmmunition> pointAmmunitionTemp;
 
-
-
 	int count = 0;
 	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
 

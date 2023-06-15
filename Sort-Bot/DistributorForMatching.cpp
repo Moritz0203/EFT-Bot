@@ -273,7 +273,6 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 		
 		pointAmmunitionTemp = removeDuplicatesPage(pointAmmunitionTemp);
 
-
 		for (PointAmmunition pointAM : pointAmmunitionTemp) {
 			PointAmmunition::pointAmmunition_NC[i1].emplace_back(pointAM);
 		}

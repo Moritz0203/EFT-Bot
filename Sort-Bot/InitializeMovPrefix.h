@@ -40,12 +40,12 @@ namespace InitializeMovPrefix {
 			prefix.nameOfItems.push_back(str);
 		}
 
-				for (string str : prefix.nameOfItems) {
-					cout << str << endl;
-				}
+		for (string str : prefix.nameOfItems) {
+			cout << str << endl;
+		}
 
 		assingPrefix_temp.prefix = prefix;
-		assingPrefix_temp.tagOfCase = "AMO1|";
+		assingPrefix_temp.tagOfCase = "AMO-1|";
 
 		AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
 

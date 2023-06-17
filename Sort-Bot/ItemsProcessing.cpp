@@ -19,7 +19,7 @@ static Matching matching;
 
 namespace AmmunitionVector {
 	const vector<PathNameThreshold> Nato762 {
-		{ "itemImages/AmmunitionImages/7.62NATO/M80.png", "M80", 0.90 },//M80
+		{ "itemImages/AmmunitionImages/7.62NATO/M80.png",		"M80",			0.90 },//M80
 		{ "itemImages/AmmunitionImages/7.62NATO/M62.png",		"M62",			0.87 },//M62
 		{ "itemImages/AmmunitionImages/7.62NATO/M61.png",		"M61",			0.89 },//M61
 		{ "itemImages/AmmunitionImages/7.62NATO/M993.png",		"M993",			0.90 },//M993
@@ -29,12 +29,12 @@ namespace AmmunitionVector {
 	};
 
 	const vector<PathNameThreshold> Nato556 {
-		{ "itemImages/AmmunitionImages/5.56NATO/FMJ.png", "FMJ", 0.94 },//FMJ
+		{ "itemImages/AmmunitionImages/5.56NATO/FMJ.png",		"FMJ",			0.94 },//FMJ
 		{ "itemImages/AmmunitionImages/5.56NATO/HP.png",		"HP",			0.94 },//HP
-		{ "itemImages/AmmunitionImages/5.56NATO/M855.png",		"M855",			0.95 },//M855
-		{ "itemImages/AmmunitionImages/5.56NATO/M855A1.png",	"M855A1",		0.95 },//M855A1
-		{ "itemImages/AmmunitionImages/5.56NATO/M856.png",		"M856",			0.95 },//M856
-		{ "itemImages/AmmunitionImages/5.56NATO/M856A1.png",	"M856A1",		0.95 },//M856A1
+		{ "itemImages/AmmunitionImages/5.56NATO/M855.png",		"M855",			0.87 },//M855
+		{ "itemImages/AmmunitionImages/5.56NATO/M855A1.png",	"M855A1",		0.87 },//M855A1
+		{ "itemImages/AmmunitionImages/5.56NATO/M856.png",		"M856",			0.87 },//M856
+		{ "itemImages/AmmunitionImages/5.56NATO/M856A1.png",	"M856A1",		0.87 },//M856A1
 		{ "itemImages/AmmunitionImages/5.56NATO/M995.png",		"M995",			0.96 },//M995
 		{ "itemImages/AmmunitionImages/5.56NATO/RRLP.png",		"RRLP",			0.94 },//RRLP
 		{ "itemImages/AmmunitionImages/5.56NATO/SOST.png",		"SOST",			0.94 },//SOST
@@ -42,36 +42,36 @@ namespace AmmunitionVector {
 	};
 
 	const vector<PathNameThreshold> Rus762 {
-		{ "itemImages/AmmunitionImages/7.62RUS/BP.png", "BP", 0.90 },//BP
+		{ "itemImages/AmmunitionImages/7.62RUS/BP.png",			"BP",			0.85 },//BP
 		{ "itemImages/AmmunitionImages/7.62RUS/HP.png",			"HP",			0.90 },//HP
 		{ "itemImages/AmmunitionImages/7.62RUS/MAIAP.png",		"MAIAP",		0.90 },//MAIAP
-		{ "itemImages/AmmunitionImages/7.62RUS/PS.png",			"PS",			0.90 },//PS
+		{ "itemImages/AmmunitionImages/7.62RUS/PS.png",			"PS",			0.88 },//PS
 		{ "itemImages/AmmunitionImages/7.62RUS/T45M1.png",		"T45M1",		0.90 },//T45M1
 		{ "itemImages/AmmunitionImages/7.62RUS/US.png",			"US",			0.90 },//US
 	};
 
 	const vector<PathNameThreshold> Rus545 {
-		{ "itemImages/AmmunitionImages/5.45RUS/7N40.png", "7N40", 0.93 },//7N40
-		{ "itemImages/AmmunitionImages/5.45RUS/BP.png",			"BP",			0.93 },//BP
-		{ "itemImages/AmmunitionImages/5.45RUS/BS.png",			"BS",			0.95 },//BS
-		{ "itemImages/AmmunitionImages/5.45RUS/BT.png",			"BT",			0.93 },//BT
-		{ "itemImages/AmmunitionImages/5.45RUS/FMJ.png",		"FMJ",			0.93 },//FMJ
-		{ "itemImages/AmmunitionImages/5.45RUS/HP.png",			"HP",			0.93 },//HP
-		{ "itemImages/AmmunitionImages/5.45RUS/PP.png",			"PP",			0.93 },//PP
-		{ "itemImages/AmmunitionImages/5.45RUS/PPBS.png",		"PPBS",			0.93 },//PPBS
-		{ "itemImages/AmmunitionImages/5.45RUS/PRS.png",		"PRS",			0.93 },//PRS
-		{ "itemImages/AmmunitionImages/5.45RUS/PS.png",			"PS",			0.96 },//PS
-		{ "itemImages/AmmunitionImages/5.45RUS/SP.png",			"SP",			0.93 },//SP
-		{ "itemImages/AmmunitionImages/5.45RUS/T.png",			"T",			0.93 },//T
-		{ "itemImages/AmmunitionImages/5.45RUS/US.png",			"US",			0.96 },//US
+		{ "itemImages/AmmunitionImages/5.45RUS/7N40.png",		"7N40",			0.92 },//7N40
+		{ "itemImages/AmmunitionImages/5.45RUS/BP.png",			"BP",			0.90 },//BP
+		{ "itemImages/AmmunitionImages/5.45RUS/BS.png",			"BS",			0.90 },//BS
+		{ "itemImages/AmmunitionImages/5.45RUS/BT.png",			"BT",			0.90 },//BT
+		{ "itemImages/AmmunitionImages/5.45RUS/FMJ.png",		"FMJ",			0.92 },//FMJ
+		{ "itemImages/AmmunitionImages/5.45RUS/HP.png",			"HP",			0.92 },//HP
+		{ "itemImages/AmmunitionImages/5.45RUS/PP.png",			"PP",			0.92 },//PP
+		{ "itemImages/AmmunitionImages/5.45RUS/PPBS.png",		"PPBS",			0.90 },//PPBS
+		{ "itemImages/AmmunitionImages/5.45RUS/PRS.png",		"PRS",			0.92 },//PRS
+		{ "itemImages/AmmunitionImages/5.45RUS/PS.png",			"PS",			0.86 },//PS
+		{ "itemImages/AmmunitionImages/5.45RUS/SP.png",			"SP",			0.92 },//SP
+		{ "itemImages/AmmunitionImages/5.45RUS/T.png",			"T",			0.92 },//T
+		{ "itemImages/AmmunitionImages/5.45RUS/US.png",			"US",			0.95 },//US
 	};
 
 
 	const array<vector<PathNameThreshold>, 4> ArrayAmmunition {
 		AmmunitionVector::Nato762,
-			AmmunitionVector::Nato556,
-			AmmunitionVector::Rus762,
-			AmmunitionVector::Rus545,
+		AmmunitionVector::Nato556,
+		AmmunitionVector::Rus762,
+		AmmunitionVector::Rus545,
 	};
 }
 

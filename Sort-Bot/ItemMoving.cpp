@@ -187,8 +187,10 @@ void ItemMoving::itemMoving() {
  
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
 		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_C[i]) {
-			shared_ptr<PointCaseInStash> ptr = make_shared<PointCaseInStash>(pointCase);
-			MovInStash(ptr);
+			if (pointCase.prefix.nameOfItems.size() != 0) {
+				shared_ptr<PointCaseInStash> ptr = make_shared<PointCaseInStash>(pointCase);
+				MovInStash(ptr);
+			}
 		}
 	}
 

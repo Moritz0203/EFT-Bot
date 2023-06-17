@@ -237,8 +237,11 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 	vector<POINT> ReturnDataAM_Clean;
 	vector<PointAmmunition> pointAmmunitionTemp;
 
+	PointAmmunition::pointAmmunition_NC.resize(MatScreenVector.size());
+
 	int count = 0;
 	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
+		cout << i1 << endl;
 
 		Rect Rec(1200, 0, MatScreenVector[i1].cols - 1200, MatScreenVector[i1].rows);
 		MatScreen = MatScreenVector[i1](Rec);
@@ -264,7 +267,7 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 					const Rect Rec(ReturnDataAM_Clean[i2].x + 44, ReturnDataAM_Clean[i2].y + 48, templ.cols - 44, templ.rows - 48);
 					const string stackSize = "2"/*TextMatching::textMatching(arrayMatScreen[i1], Rec)*/;
 					const int stackSizeConvertet = stoi(stackSize);
-					pointAmmunitionTemp.emplace_back(ReturnDataAM_Clean[i2], input[i].Name, stackSizeConvertet, templ.rows, templ.cols, i1, 1);
+					pointAmmunitionTemp.emplace_back(ReturnDataAM_Clean[i2], input[i].Name, templ.rows, templ.cols, i1, 1, stackSizeConvertet);
 				}
 				ReturnDataAM.clear();
 				ReturnDataAM_Clean.clear();
@@ -273,7 +276,7 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 		
 		pointAmmunitionTemp = removeDuplicatesPage(pointAmmunitionTemp);
 
-		for (PointAmmunition pointAM : pointAmmunitionTemp) {
+		for (PointAmmunition &pointAM : pointAmmunitionTemp) {
 			PointAmmunition::pointAmmunition_NC[i1].emplace_back(pointAM);
 		}
 

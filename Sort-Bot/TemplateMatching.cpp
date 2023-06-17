@@ -139,7 +139,7 @@ POINT TemplateMatching::templateMatchingObjects(Mat MatScreen, Mat templ, double
 	}
 	/*cv::imshow(image_window, img_display);
 
-	waitKey(0);*/
+	waitKey(100);*/
 
 	return PointReturn;
 }

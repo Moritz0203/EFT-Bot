@@ -43,7 +43,7 @@ namespace AmmunitionVector {
 
 	const vector<PathNameThreshold> Rus762 {
 		{ "itemImages/AmmunitionImages/7.62RUS/BP.png",			"BP",			0.85 },//BP
-		{ "itemImages/AmmunitionImages/7.62RUS/HP.png",			"HP",			0.90 },//HP
+		{ "itemImages/AmmunitionImages/7.62RUS/HP.png",			"HP",			0.90 },//HP^^
 		{ "itemImages/AmmunitionImages/7.62RUS/MAIAP.png",		"MAIAP",		0.90 },//MAIAP
 		{ "itemImages/AmmunitionImages/7.62RUS/PS.png",			"PS",			0.88 },//PS
 		{ "itemImages/AmmunitionImages/7.62RUS/T45M1.png",		"T45M1",		0.90 },//T45M1

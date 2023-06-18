@@ -293,5 +293,3 @@ void ItemsProcessing::cleanUpVectorItemsBarter() {
 		temp.clear();
 	}
 }
-
-

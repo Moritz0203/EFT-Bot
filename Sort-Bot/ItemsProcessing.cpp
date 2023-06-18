@@ -17,6 +17,8 @@ using namespace cv;
 
 static Matching matching;
 
+//Avangers schauen 
+
 namespace AmmunitionVector {
 	const vector<PathNameThreshold> Nato762 {
 		{ "itemImages/AmmunitionImages/7.62NATO/M80.png",		"M80",			0.90 },//M80
@@ -33,8 +35,8 @@ namespace AmmunitionVector {
 		{ "itemImages/AmmunitionImages/5.56NATO/HP.png",		"HP",			0.94 },//HP
 		{ "itemImages/AmmunitionImages/5.56NATO/M855.png",		"M855",			0.87 },//M855
 		{ "itemImages/AmmunitionImages/5.56NATO/M855A1.png",	"M855A1",		0.87 },//M855A1
-		{ "itemImages/AmmunitionImages/5.56NATO/M856.png",		"M856",			0.87 },//M856
-		{ "itemImages/AmmunitionImages/5.56NATO/M856A1.png",	"M856A1",		0.87 },//M856A1
+		{ "itemImages/AmmunitionImages/5.56NATO/M856.png",		"M856",			0.86 },//M856
+		{ "itemImages/AmmunitionImages/5.56NATO/M856A1.png",	"M856A1",		0.86 },//M856A1
 		{ "itemImages/AmmunitionImages/5.56NATO/M995.png",		"M995",			0.96 },//M995
 		{ "itemImages/AmmunitionImages/5.56NATO/RRLP.png",		"RRLP",			0.94 },//RRLP
 		{ "itemImages/AmmunitionImages/5.56NATO/SOST.png",		"SOST",			0.94 },//SOST
@@ -57,10 +59,10 @@ namespace AmmunitionVector {
 		{ "itemImages/AmmunitionImages/5.45RUS/BT.png",			"BT",			0.90 },//BT
 		{ "itemImages/AmmunitionImages/5.45RUS/FMJ.png",		"FMJ",			0.92 },//FMJ
 		{ "itemImages/AmmunitionImages/5.45RUS/HP.png",			"HP",			0.92 },//HP
-		{ "itemImages/AmmunitionImages/5.45RUS/PP.png",			"PP",			0.92 },//PP
+		{ "itemImages/AmmunitionImages/5.45RUS/PP.png",			"PP",			0.91 },//PP
 		{ "itemImages/AmmunitionImages/5.45RUS/PPBS.png",		"PPBS",			0.90 },//PPBS
 		{ "itemImages/AmmunitionImages/5.45RUS/PRS.png",		"PRS",			0.92 },//PRS
-		{ "itemImages/AmmunitionImages/5.45RUS/PS.png",			"PS",			0.86 },//PS
+		{ "itemImages/AmmunitionImages/5.45RUS/PS.png",			"PS",			0.85 },//PS
 		{ "itemImages/AmmunitionImages/5.45RUS/SP.png",			"SP",			0.92 },//SP
 		{ "itemImages/AmmunitionImages/5.45RUS/T.png",			"T",			0.92 },//T
 		{ "itemImages/AmmunitionImages/5.45RUS/US.png",			"US",			0.95 },//US
@@ -189,8 +191,8 @@ void ItemsProcessing::cleanUpVectorItemsAmmunition() {
 					if (set_POINT_PAGE.count(inPoint_page) > 0)
 						continue;
 
-					if (pointCase.nameOfItem != inPointCase.nameOfItem)
-						continue;
+					/*if (pointCase.nameOfItem != inPointCase.nameOfItem)
+						continue;*/
 
 					if (tempPointCase.point.y == pointCase.point.y || y_minus_1 == pointCase.point.y || y_plus_1 == pointCase.point.y) {
 						if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {

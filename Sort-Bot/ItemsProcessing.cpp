@@ -188,6 +188,11 @@ void ItemsProcessing::cleanUpVectorItemsAmmunition() {
 					//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
 					//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfItem << " " << tempPointCase.nameOfItem << " " << pointCase.page << " " << tempPointCase.page << " " << multiplier << endl;
 
+
+
+
+
+
 					if (set_POINT_PAGE.count(inPoint_page) > 0)
 						continue;
 

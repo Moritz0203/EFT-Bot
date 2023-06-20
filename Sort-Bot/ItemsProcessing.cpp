@@ -169,11 +169,11 @@ void ItemsProcessing::cleanUpVectorItemsAmmunition() {
 
 			if (set_POINT_PAGE.count(point_page) > 0)
 				continue;
-
+			
 			bool Found = false;
 			int multiplier = 1;
 			for (uint8_t iTempLoop = iTemp; iTempLoop < PointAmmunition::pointAmmunition_NC.size() - 1 || iTempLoop < iTemp + 2; iTempLoop++) {
-
+				
 				for (PointAmmunition inPointCase : PointAmmunition::pointAmmunition_NC[iTempLoop]) {
 					PointAmmunition tempPointCase = inPointCase;
 					tempPointCase.point.y = tempPointCase.point.y + (343 * multiplier);
@@ -187,11 +187,6 @@ void ItemsProcessing::cleanUpVectorItemsAmmunition() {
 
 					//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
 					//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfItem << " " << tempPointCase.nameOfItem << " " << pointCase.page << " " << tempPointCase.page << " " << multiplier << endl;
-
-
-
-
-
 
 					if (set_POINT_PAGE.count(inPoint_page) > 0)
 						continue;

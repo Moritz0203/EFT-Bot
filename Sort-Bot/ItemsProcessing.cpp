@@ -111,7 +111,6 @@ void ItemsProcessing::AmmunitionProcess() {
 
 	cout << PointAmmunition::pointAmmunition_NC.size() << endl;
 
-
 	cleanUpVectorItemsAmmunition();
 
 	for (int i = 0; i < PointAmmunition::pointAmmunition_NC.size(); i++) {

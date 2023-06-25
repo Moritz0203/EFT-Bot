@@ -93,7 +93,6 @@ vector<PointAmmunition> Matching::removeDuplicatesPage(vector<PointAmmunition>& 
 	return result;
 }
 
-
 //namespace Ammunition {
 //	std::array<std::string, 36> Ammunition{
 //		//NATO 7.62

@@ -113,6 +113,14 @@ void ItemsProcessing::AmmunitionProcess() {
 
 	cleanUpVectorItemsAmmunition();
 
+
+
+
+
+
+
+
+
 	for (int i = 0; i < PointAmmunition::pointAmmunition_NC.size(); i++) {
 		for (int i2 = 0; i2 < PointAmmunition::pointAmmunition_NC[i].size(); i2++) {
 			cout << PointAmmunition::pointAmmunition_NC[i][i2].point.y << " " << PointAmmunition::pointAmmunition_NC[i][i2].point.x << " " << PointAmmunition::pointAmmunition_NC[i][i2].nameOfItem << " " << PointAmmunition::pointAmmunition_NC[i][i2].page << endl;

@@ -1,4 +1,3 @@
-
 //#include "StartUp.h"
 #pragma once
 #include <iostream>
@@ -526,7 +525,6 @@ int main() {
 		
 	
 	/*InitializeMovPrefix::Initialize();*/
-
 
 
 	HWND hWND = GetMat::FindeWindow();

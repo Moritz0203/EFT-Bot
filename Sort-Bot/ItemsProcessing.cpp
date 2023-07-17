@@ -95,13 +95,6 @@ std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::v
 }
 
 
-void ItemsProcessing::CallAll() {
-	//GetMat::TakeScreenshots();
-
-	AmmunitionProcess();
-	//BarterItemsProcess();
-}
-
 void ItemsProcessing::AmmunitionProcess() {
 	vector<vector<vector<PointAmmunition>>> CombinePagesVector;
 
@@ -131,7 +124,7 @@ void ItemsProcessing::AmmunitionProcess() {
 	cout << "item Process done" << endl;
 }
 
-void ItemsProcessing::BarterItemsProcess() {
+void ItemsProcessing::BarterProcess() {
 
 	//matching.BarterMatching(MatScreenVector);
 	cleanUpVectorItemsBarter();

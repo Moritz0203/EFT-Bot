@@ -1,12 +1,11 @@
 class ItemsProcessing {
-	void BarterItemsProcess();
+	void BarterProcess();
 
 	void cleanUpVectorItemsAmmunition();
 	
 	void cleanUpVectorItemsBarter();
 
 public:
-	void CallAll();
 
 	void AmmunitionProcess();
 };

@@ -24,9 +24,9 @@ void PrefixProcessing::prefixSearch(PointCaseInStash &Stash, PointCaseInCase &Ca
 }
 
 void PrefixProcessing::CombinePrefixAndCase() {
-	CaseProcessor::caseProcess();
+	CaseProcessing::caseProcess();
 
-	cout << "start Prefix Processing" << endl;
+	cout << "start Prefix Processing" << endl; 
 
 	PointCaseInCase PointCaseInCase_null;
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {

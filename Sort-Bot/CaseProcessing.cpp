@@ -42,7 +42,7 @@ std::array<double, 6> CasesInCaseThreshold{
 };
 
 
-void CaseProcessor::caseProcess() {
+void CaseProcessing::caseProcess() {
 	Matching matching;
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
@@ -97,7 +97,7 @@ void CaseProcessor::caseProcess() {
 	cout << "ende case processing" << endl;
 }
 
-void CaseProcessor::MoveTopBarTHICCcase() {
+void CaseProcessing::MoveTopBarTHICCcase() {
 	Mat MatScreen;
 	Mat templ;
 
@@ -115,7 +115,7 @@ void CaseProcessor::MoveTopBarTHICCcase() {
 	Mouse::MouseMoveAtoB(pointA, pointB);
 }
 
-void CaseProcessor::OpenCaseAndTakeScreen(std::shared_ptr<PointCaseInStash> ptr_PCIS) {
+void CaseProcessing::OpenCaseAndTakeScreen(std::shared_ptr<PointCaseInStash> ptr_PCIS) {
 	Mat MatScreen;
 	POINT point{};
 	GetMat getMat;
@@ -138,7 +138,7 @@ void CaseProcessor::OpenCaseAndTakeScreen(std::shared_ptr<PointCaseInStash> ptr_
 	MatchingCaseInCase(MatScreen, ptr_PCIS->page, ptr_PCIS->point);
 }
 
-void CaseProcessor::MatchingCaseInCase(Mat& MatScreen, uint8_t page, POINT parentCasePoints) {
+void CaseProcessing::MatchingCaseInCase(Mat& MatScreen, uint8_t page, POINT parentCasePoints) {
 	string filename, templatename;
 	double threshold;
 	int sizeString = sizeof(CasesInCase) / sizeof(string);
@@ -187,7 +187,7 @@ struct POINT_PAGE {
 	}
 };
 
-void CaseProcessor::cleanUpVectorCase() {
+void CaseProcessing::cleanUpVectorCase() {
 	vector<PointCaseInStash> temp;
 	POINT_PAGE point_page{};
 	POINT_PAGE inPoint_page{};

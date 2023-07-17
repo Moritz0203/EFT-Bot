@@ -154,7 +154,7 @@ void ItemMoving::MovInCase(shared_ptr<PointCaseInCase> &ptr_Case) {
 	Mouse::MoverPOINTandPress(ptr_Case->pointFromParentCase);
 
 	if (ptr_Case->nameOfCase == "THICCcase")
-		CaseProcessor::MoveTopBarTHICCcase();
+		CaseProcessing::MoveTopBarTHICCcase();
 
 	Checkspublic.CheckScrollbarPositions();
 	for (vector<PointItem*> vector_Page : ItemVectorCombine_Page) {// PointAmmunition to T 

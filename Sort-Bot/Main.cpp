@@ -545,12 +545,16 @@ int main() {
 		checksPublic ChecksPublic;
 		GetMat getMat;
 
+		// SortStartUp start
+
 		ChecksPublic.CheckScrollbarPositions();
 		Sleep(300);
 		getMat.TakeScreenshots();
 
 		InitializeMovPrefix::Initialize();
 		prefixProcessing.CombinePrefixAndCase();
+
+		// SortStartUp end
 
 
 

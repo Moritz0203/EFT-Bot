@@ -4,6 +4,7 @@
 #include "Checks.h"
 #include "ItemsProcessing.h"
 #include "CaseProcessing.h"
+#include "ItemMoving.h"
 #include <thread>
 #include <iostream>
 #include <windows.h>
@@ -39,7 +40,7 @@ void ProgrammScheduler::Scheduler() {
 	ItemsProcessing	itemsProcessing;
 	CaseProcessing caseProcessing;
 	ProgrammScheduler programmScheduler;
-
+	ItemMoving itemMoving;
 
 
 	std::thread StartUp_Thread(&SortStartUp::StartUp, &sortStartUp);
@@ -52,7 +53,7 @@ void ProgrammScheduler::Scheduler() {
 	std::thread Thread1(&ProgrammScheduler::SchedulerWorker, programmScheduler);
 	std::thread Thread2(&ProgrammScheduler::SchedulerWorker, programmScheduler);
 
-	{
+	{// new scope to delete the mutex at the end
 		std::lock_guard<std::mutex> lock(m);
 		q.push(std::bind(&ItemsProcessing::AmmunitionProcess, itemsProcessing));
 	}
@@ -60,4 +61,6 @@ void ProgrammScheduler::Scheduler() {
 
 	Thread1.join();
 	Thread2.join();
+
+	itemMoving.itemMoving();
 }

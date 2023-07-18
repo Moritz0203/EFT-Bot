@@ -1,8 +1,8 @@
 #pragma once
 
-
 class SortStartUp
 {
+public:
 	void StartUp() {
 
 	}

@@ -549,7 +549,7 @@ int main() {
 
 		ChecksPublic.CheckScrollbarPositions();
 		Sleep(300);
-		getMat.TakeScreenshots();
+		getMat.TakeScreenshots(8);
 
 		InitializeMovPrefix::Initialize();
 		prefixProcessing.CombinePrefixAndCase();

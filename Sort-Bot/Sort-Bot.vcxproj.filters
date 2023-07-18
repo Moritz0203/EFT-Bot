@@ -89,6 +89,9 @@
     <ClCompile Include="SortStartUp.cpp">
       <Filter>Source Files\SortBot</Filter>
     </ClCompile>
+    <ClCompile Include="ProgrammScheduler.cpp">
+      <Filter>Source Files\SortBot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Checks.h">
@@ -137,6 +140,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SortStartUp.h">
+      <Filter>Header Files\SortBot</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgrammScheduler.h">
       <Filter>Header Files\SortBot</Filter>
     </ClInclude>
   </ItemGroup>

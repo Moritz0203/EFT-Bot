@@ -77,14 +77,14 @@ cv::Mat GetMat::getMat(HWND hWND) {
 
 std::vector<cv::Mat> GetMat::MatScreenVector;
 
-void GetMat::TakeScreenshots(){//Please call first CheckScrollbarPositions!!
+void GetMat::TakeScreenshots(int Screens){//Please call first CheckScrollbarPositions!!
 	Mat MatScreen;
 	checksPublic ChecksPublic;
 	
 	const HWND hWND = FindeWindow();
 	SetForegroundWindow(hWND);
 	
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < Screens; i++) {
 		Sleep(200);      
 		MatScreenVector.push_back(getMat(hWND));
 		Sleep(200);

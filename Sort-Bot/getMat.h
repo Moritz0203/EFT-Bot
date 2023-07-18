@@ -5,7 +5,7 @@ using namespace std;
 struct GetMat {
 	static cv::Mat getMat(HWND hWND);
 
-	void TakeScreenshots();
+	void TakeScreenshots(int Screens);
 
 	static HWND FindeWindow();
 

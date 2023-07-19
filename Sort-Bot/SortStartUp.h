@@ -3,9 +3,7 @@
 class SortStartUp
 {
 public:
-	void StartUp() {
-
-	}
+	void StartUp();
 
 private:
 	bool HasTHICCcase = false;

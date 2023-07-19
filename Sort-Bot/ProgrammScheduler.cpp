@@ -50,12 +50,12 @@ void ProgrammScheduler::Scheduler() {
 	ScreenShots();
 	caseProcessing.caseProcess();
 
-	std::thread Thread1(&ProgrammScheduler::SchedulerWorker, programmScheduler);
-	std::thread Thread2(&ProgrammScheduler::SchedulerWorker, programmScheduler);
+	std::thread Thread1(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
+	std::thread Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 
 	{// new scope to delete the mutex at the end
 		std::lock_guard<std::mutex> lock(m);
-		q.push(std::bind(&ItemsProcessing::AmmunitionProcess, itemsProcessing));
+		q.push(std::bind(&ItemsProcessing::AmmunitionProcess, &itemsProcessing));
 	}
 	c_v.notify_all();
 

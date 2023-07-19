@@ -24,7 +24,7 @@ void PrefixProcessing::prefixSearch(PointCaseInStash &Stash, PointCaseInCase &Ca
 }
 
 void PrefixProcessing::CombinePrefixAndCase() {
-	CaseProcessing::caseProcess();
+	//CaseProcessing::caseProcess();
 
 	cout << "start Prefix Processing" << endl; 
 

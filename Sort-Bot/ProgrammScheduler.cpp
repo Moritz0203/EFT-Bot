@@ -9,6 +9,7 @@
 #include <iostream>
 #include <windows.h>
 #include <queue>
+#include "DistributorForMatching.h"
 
 std::queue<std::function<void()>> q;
 std::mutex m;
@@ -43,25 +44,22 @@ void ProgrammScheduler::Scheduler() {
 	ItemMoving itemMoving; 
 	Matching matching;
 
-	matching.CaseMatching();
-
-
 	std::thread StartUp_Thread(&SortStartUp::StartUp, &sortStartUp);
 
 	while (!HasReceivedVersion){ Sleep(10); }
 
 	ScreenShots();
-	caseProcessing.caseProcess();
 
 	std::thread Thread1(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 	std::thread Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 
 	{// new scope to delete the mutex at the end
 		std::lock_guard<std::mutex> lock(m);
+		q.push(std::bind(&Matching::CaseMatching, &matching));
 		q.push(std::bind(&ItemsProcessing::AmmunitionProcess, &itemsProcessing));
 	}
 	c_v.notify_all();
-
+	
 	Thread1.join();
 	Thread2.join();
 

@@ -333,17 +333,7 @@ void Matching::CaseMatching() {
 	GetMat getMat;
 
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
-
-
 	const char* image_window = "Source Image";
-
-	cout << MatScreenVector.size() << endl;
-		
-	//for (Mat mat : MatScreenVector) {
-	//	cv::imshow(image_window, mat);
-	//	waitKey(0);
-	//}
-
 
 	vector<POINT> ReturnDataCase;
 	vector<POINT> ReturnDataCase_Clean;
@@ -393,6 +383,7 @@ void Matching::CaseMatching() {
 		page++;
 		cout << endl;
 	}
+
 
 	cout << "ende case Matching " << endl;
 }

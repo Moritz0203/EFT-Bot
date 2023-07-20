@@ -43,10 +43,10 @@ std::array<double, 6> CasesInCaseThreshold{
 
 
 void CaseProcessing::caseProcess() {
-	Matching matching;
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
 	checksPublic ChecksPublic;
+	Matching matching;
 
 	matching.CaseMatching();
 

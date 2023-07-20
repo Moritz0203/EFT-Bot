@@ -40,7 +40,10 @@ void ProgrammScheduler::Scheduler() {
 	ItemsProcessing	itemsProcessing;
 	CaseProcessing caseProcessing;
 	ProgrammScheduler programmScheduler;
-	ItemMoving itemMoving;
+	ItemMoving itemMoving; 
+	Matching matching;
+
+	matching.CaseMatching();
 
 
 	std::thread StartUp_Thread(&SortStartUp::StartUp, &sortStartUp);

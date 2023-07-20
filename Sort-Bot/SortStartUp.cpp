@@ -6,6 +6,9 @@ void SortStartUp::StartUp() {
 	PrefixProcessing prefixProcessing;
 
 	InitializeMovPrefix::Initialize();
+
+
+
 	prefixProcessing.CombinePrefixAndCase();
 
 }

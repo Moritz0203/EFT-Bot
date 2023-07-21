@@ -136,6 +136,7 @@
     <ClCompile Include="Checks.cpp" />
     <ClCompile Include="DistributorForMatching.cpp" />
     <ClCompile Include="getMat.cpp" />
+    <ClCompile Include="InitializeMovPrefix.cpp" />
     <ClCompile Include="InputMK.cpp" />
     <ClCompile Include="ItemMoving.cpp" />
     <ClCompile Include="ItemsProcessing.cpp" />
@@ -153,7 +154,6 @@
     <ClInclude Include="DistributorForMatching.h" />
     <ClInclude Include="getMat.h" />
     <ClInclude Include="Includes.h" />
-    <ClInclude Include="ItemVectorHEXtoText.h" />
     <ClInclude Include="InitializeMovPrefix.h" />
     <ClInclude Include="InputMK.h" />
     <ClInclude Include="ItemMoving.h" />

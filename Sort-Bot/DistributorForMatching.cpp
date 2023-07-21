@@ -229,7 +229,7 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 	Mat templ;
 	Mat MatScreen;
 	GetMat getMat;
-	const char* image_window = "Source Image";
+	const char* image_window = "Ammunition Image";
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
 	vector<POINT> ReturnDataAM;
@@ -333,7 +333,7 @@ void Matching::CaseMatching() {
 	GetMat getMat;
 
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
-	const char* image_window = "Source Image";
+	const char* image_window = "Case Image";
 
 	vector<POINT> ReturnDataCase;
 	vector<POINT> ReturnDataCase_Clean;
@@ -383,6 +383,11 @@ void Matching::CaseMatching() {
 		page++;
 		cout << endl;
 	}
+
+
+	std::unique_lock<std::mutex> lock(mtx);
+	ready = true;
+	cv.notify_all();
 
 
 	cout << "ende case Matching " << endl;

@@ -1,26 +1,27 @@
 //#include "StartUp.h"
 #pragma once
 #include <iostream>
-#include <vector>
-#include <conio.h>
-#include <windows.h>
-#include <unordered_set>
-#include <utility>
-#include <functional>
-#include "ItemMoving.h"
-#include "InitializeMovPrefix.h"
-#include "DistributorForMatching.h"
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
-#include "TemplateMatching.h"
-#include "getMat.h"
-#include "PointItems.h"
-#include "ItemsProcessing.h"
-#include "PrefixProcessing.h"
-#include "Checks.h"
+#include "ProgrammScheduler.h"
+//#include <vector>
+//#include <conio.h>
+//#include <windows.h>
+//#include <unordered_set>
+//#include <utility>
+//#include <functional>
+//#include "ItemMoving.h"
+//#include "InitializeMovPrefix.h"
+//#include "DistributorForMatching.h"
+//#include <opencv2/imgcodecs.hpp>
+//#include <opencv2/highgui.hpp>
+//#include <opencv2/imgproc.hpp>
+//#include "TemplateMatching.h"
+//#include "getMat.h"
+//#include "PointItems.h"
+//#include "ItemsProcessing.h"
+//#include "PrefixProcessing.h"
+//#include "Checks.h"
 using namespace std;
-using namespace cv;
+//using namespace cv;
 
 //external controllers for applications / ECFA
 //Rick and Morty Staffel 4 - Folge 4
@@ -527,10 +528,10 @@ int main() {
 	/*InitializeMovPrefix::Initialize();*/
 
 
-	HWND hWND = GetMat::FindeWindow();
+	/*HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(100);
-	Mat MatScreen = GetMat::getMat(hWND);
+	Mat MatScreen = GetMat::getMat(hWND);*/
 	
 
 
@@ -539,40 +540,47 @@ int main() {
 	//cin >> Start;
 
 	if (Start == "start") {
-		ItemMoving itemMoving;
-		PrefixProcessing prefixProcessing;
-		ItemsProcessing	itemsProcessing;		
-		checksPublic ChecksPublic;
-		GetMat getMat;
+		ProgrammScheduler programmScheduler;
 
-		// SortStartUp start
-
-		ChecksPublic.CheckScrollbarPositions();
-		Sleep(300);
-		getMat.TakeScreenshots(8);
-
-		InitializeMovPrefix::Initialize();
-		prefixProcessing.CombinePrefixAndCase();
-
-		// SortStartUp end
+		programmScheduler.Scheduler();
 
 
 
 
-		itemsProcessing.AmmunitionProcess();
-		for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
-			for (PointCaseInStash Point : vec) {
-				cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.prefix.nameOfItems.size() <<" \n";
-				for (string str : Point.prefix.nameOfItems) {
-					cout << str << endl;
-				}
-				cout << Point.freeSlots.size() << endl;
-			}
-			cout << "\n" << endl;
-		}
+		//ItemMoving itemMoving;
+		//PrefixProcessing prefixProcessing;
+		//ItemsProcessing	itemsProcessing;		
+		//checksPublic ChecksPublic;
+		//GetMat getMat;
 
-		cin; 
-		itemMoving.itemMoving();
+		//// SortStartUp start
+
+		//ChecksPublic.CheckScrollbarPositions();
+		//Sleep(300);
+		//getMat.TakeScreenshots(8);
+
+		//InitializeMovPrefix::Initialize();
+		//prefixProcessing.CombinePrefixAndCase();
+
+		//// SortStartUp end
+
+
+
+
+		//itemsProcessing.AmmunitionProcess();
+		//for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
+		//	for (PointCaseInStash Point : vec) {
+		//		cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.prefix.nameOfItems.size() <<" \n";
+		//		for (string str : Point.prefix.nameOfItems) {
+		//			cout << str << endl;
+		//		}
+		//		cout << Point.freeSlots.size() << endl;
+		//	}
+		//	cout << "\n" << endl;
+		//}
+
+		//cin; 
+		//itemMoving.itemMoving();
 	}
 	else {
 
@@ -1080,6 +1088,6 @@ int main() {
 	
 }
 
-bool comparePoints(const POINT& a, const POINT& b) {
-	return a.x < b.x;
-}
+//bool comparePoints(const POINT& a, const POINT& b) {
+//	return a.x < b.x;
+//}

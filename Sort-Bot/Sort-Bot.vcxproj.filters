@@ -92,6 +92,9 @@
     <ClCompile Include="ProgrammScheduler.cpp">
       <Filter>Source Files\SortBot</Filter>
     </ClCompile>
+    <ClCompile Include="InitializeMovPrefix.cpp">
+      <Filter>Source Files\SortBot\Prefix</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Checks.h">
@@ -107,9 +110,6 @@
       <Filter>Header Files\SortBot\TypeClass</Filter>
     </ClInclude>
     <ClInclude Include="InitializeMovPrefix.h">
-      <Filter>Header Files\SortBot\Prefix</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemVectorHEXtoText.h">
       <Filter>Header Files\SortBot\Prefix</Filter>
     </ClInclude>
     <ClInclude Include="PrefixProcessing.h">

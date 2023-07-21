@@ -14,8 +14,8 @@ using namespace cv;
 vector<POINT> TemplateMatching::templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, Mat MatScreen) {
 	vector<POINT> ReturnData;
 	int height = {}, width = {};
-	const char* image_window = "Source Image";
-	const char* Test = "Item Image";
+	//const char* image_window = "Source Image";
+	//const char* Test = "Item Image";
 	int match_method = 5;
 	Mat result;
 	Mat img;
@@ -90,12 +90,12 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 			break;
 	}
 	/*cout << count << endl;*/
-	cv::imshow(image_window, img_display);
+	//cv::imshow(image_window, img_display);
 
 	/*if (ReturnData.size() != 0)
 		waitKey(0);
 	else*/
-		waitKey(20);
+		//waitKey(20);
 
 	return ReturnData;
 }
@@ -103,14 +103,14 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 POINT TemplateMatching::templateMatchingObjects(Mat MatScreen, Mat templ, double threshold) {
 	int height = {}, width = {};
 
-	const char* image_window = "Source Image";
-	const char* Test = "Item Image";
+	/*const char* image_window = "Source Image";
+	const char* Test = "Item Image";*/
 
 	int match_method = 5;
 	Mat result;
 	POINT PointReturn = {};
 
-	namedWindow(image_window, WINDOW_AUTOSIZE);
+	//namedWindow(image_window, WINDOW_AUTOSIZE);
 
 	Mat img_display;
 	MatScreen.copyTo(img_display);
@@ -153,8 +153,8 @@ vector<POINT> TemplateMatching::templateMatchingObjects_Vector(Mat MatScreen, Ma
 	Mat img_display;
 	MatScreen.copyTo(img_display);
 
-	const char* image_window = "Source Image";
-	namedWindow(image_window, WINDOW_AUTOSIZE);
+	/*const char* image_window = "Source Image";
+	namedWindow(image_window, WINDOW_AUTOSIZE);*/
 
 	matchTemplate(MatScreen, templ, result, match_method);
 	double minVal; double maxVal; Point minLoc; Point maxLoc;
@@ -181,9 +181,9 @@ vector<POINT> TemplateMatching::templateMatchingObjects_Vector(Mat MatScreen, Ma
 			break;
 	}
 
-	cv::imshow(image_window, img_display);
+	//cv::imshow(image_window, img_display);
 
-	waitKey(500);
+	//waitKey(500);
 
 	return PointReturn;
 }

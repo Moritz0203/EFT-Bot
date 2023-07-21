@@ -41,6 +41,10 @@ std::array<double, 6> CasesInCaseThreshold{
 	0.90,//MoneyCase
 };
 
+std::mutex Matching::mtx;
+std::condition_variable Matching::cv;
+bool Matching::ready = false;
+
 
 void CaseProcessing::caseProcess() {
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
@@ -48,7 +52,14 @@ void CaseProcessing::caseProcess() {
 	checksPublic ChecksPublic;
 	Matching matching;
 
-	matching.CaseMatching();
+	//matching.CaseMatching();
+
+
+
+	std::unique_lock<std::mutex> lock(Matching::mtx);
+	while (!Matching::ready) Matching::cv.wait(lock);
+
+
 
 	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_NC) {
 		for (PointCaseInStash Point : vec) {

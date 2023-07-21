@@ -22,5 +22,11 @@ public:
 
 	void MagazineMatching();
 
-	void BarterMatching();	
+	void BarterMatching();
+
+private:
+	friend class CaseProcessing;
+	static std::mutex mtx;
+	static std::condition_variable cv;
+	static bool ready;
 };

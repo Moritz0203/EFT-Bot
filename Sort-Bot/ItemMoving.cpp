@@ -41,7 +41,6 @@ void combineVectors(const std::vector<std::vector<PointAmmunition>>& vecAmmuniti
 	}
 }
 
-
 bool operator==(const POINT& lhs, const POINT& rhs) {
 	return lhs.x == rhs.x && lhs.y == rhs.y;
 }
@@ -62,6 +61,7 @@ void deleteMatchingPoints(std::vector<PointItem*>& pointItems, std::shared_ptr<s
 	}
 	pointItems = result;
 }
+
 
 void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 	const HWND hWND = GetMat::FindeWindow();

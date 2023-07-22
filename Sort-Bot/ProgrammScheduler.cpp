@@ -1,16 +1,16 @@
 #pragma once
+#include "DistributorForMatching.h"
 #include "ProgrammScheduler.h"
-#include "SortStartUp.h"
-#include "getMat.h"
-#include "Checks.h"
 #include "ItemsProcessing.h"
 #include "CaseProcessing.h"
+#include "SortStartUp.h"
 #include "ItemMoving.h"
-#include <thread>
-#include <iostream>
+#include "Checks.h"
+#include "getMat.h"
 #include <windows.h>
+#include <iostream>
+#include <thread>
 #include <queue>
-#include "DistributorForMatching.h"
 
 std::queue<std::function<void()>> q;
 std::mutex m;
@@ -58,7 +58,6 @@ void ProgrammScheduler::Scheduler() {
 
 	ScreenShots();
 
-
 	std::thread Thread1(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 	std::thread Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 
@@ -74,9 +73,6 @@ void ProgrammScheduler::Scheduler() {
 	
 	Thread2.join();
 	cout << "Thread2 fertig" << endl;
-
-
-
 
 	StartUp_Thread.join();
 

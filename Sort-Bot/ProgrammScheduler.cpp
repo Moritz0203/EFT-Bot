@@ -58,6 +58,11 @@ void ProgrammScheduler::Scheduler() {
 
 	ScreenShots();
 
+
+
+
+
+
 	std::thread Thread1(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 	std::thread Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 

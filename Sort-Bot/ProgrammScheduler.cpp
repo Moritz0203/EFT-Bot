@@ -52,12 +52,6 @@ void ProgrammScheduler::Scheduler() {
 	ItemMoving itemMoving; 
 	Matching matching;
 
-
-
-
-
-
-
 	std::thread StartUp_Thread(&SortStartUp::StartUp, &sortStartUp);
 
 	while (HasReceivedVersion) { Sleep(10); cout << "wait" << endl; }

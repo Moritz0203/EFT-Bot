@@ -8,6 +8,13 @@ struct PathNameThreshold {
 	const double Threshold;
 };
 
+struct PathNameThresholdItemSize {
+	const char* Path;
+	const char* Name;
+	const double Threshold;
+	const uint8_t ItemSize;
+};
+
 class Matching {
 public:
 	static bool checkSecondLastChar(string &tagCase);

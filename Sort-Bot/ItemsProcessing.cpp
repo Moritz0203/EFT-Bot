@@ -77,6 +77,39 @@ namespace AmmunitionVector {
 	};
 }
 
+namespace BaterVector {
+	const vector<PathNameThresholdItemSize> Building {
+		{ "itemImages/BarterImages/Building/AnalogThermometer.png",			"AnalogThermometer",		0.90, 2 },//AnalogThermometer
+		{ "itemImages/BarterImages/Building/Bolts.png",						"Bolts",					0.90, 1 },//Bolts
+		{ "itemImages/BarterImages/Building/DuctTape.png",					"DuctTape",					0.90, 1 },//DuctTape
+		{ "itemImages/BarterImages/Building/Hose.png",						"Hose",						0.90, 2 },//Hose
+		{ "itemImages/BarterImages/Building/InsulatingTape.png",			"InsulatingTape",			0.90, 1 },//InsulatingTape
+		{ "itemImages/BarterImages/Building/KEKTape.png",					"KEKTape",					0.90, 1 },//KEKTape
+		{ "itemImages/BarterImages/Building/MetalSpare.png",				"MetalSpare",				0.90, 1 },//MetalSpare
+		{ "itemImages/BarterImages/Building/MilitaryCorrugatedTube.png",	"MilitaryCorrugatedTube",	0.90, 1 },//MilitaryCorrugatedTube
+		{ "itemImages/BarterImages/Building/Nails.png",						"Nails",					0.90, 1 },//Nails
+		{ "itemImages/BarterImages/Building/Plexiglass.png",				"Plexiglass",				0.90, 1 },//Plexiglass
+		{ "itemImages/BarterImages/Building/Poxeram.png",					"Poxeram",					0.90, 1 },//Poxeram
+		{ "itemImages/BarterImages/Building/PressureGauge.png",				"PressureGauge",			0.90, 2 },//PressureGauge
+		{ "itemImages/BarterImages/Building/ScrewNuts.png",					"ScrewNuts",				0.90, 1 },//ScrewNuts
+		{ "itemImages/BarterImages/Building/Screws.png",					"Screws",					0.90, 1 },//Screws
+		{ "itemImages/BarterImages/Building/Shus.png",						"Shus",						0.90, 3 },//Shus
+		{ "itemImages/BarterImages/Building/SiliconeTube.png",				"SiliconeTube",				0.90, 1 },//SiliconeTube
+		{ "itemImages/BarterImages/Building/Xeno.png",						"Xeno",						0.90, 3 },//Xeno
+	};
+
+	const vector<PathNameThresholdItemSize> Energy {
+		{ "itemImages/BarterImages/Energy/AABattery.png",					"AABattery",				0.90, 1 },//AABattery
+		{ "itemImages/BarterImages/Energy/AABattery.png", "AABattery", 0.90, 1 },//AABattery
+		{ "itemImages/BarterImages/Energy/AABattery.png", "AABattery", 0.90, 1 },//AABattery
+		{ "itemImages/BarterImages/Energy/AABattery.png", "AABattery", 0.90, 1 },//AABattery
+		{ "itemImages/BarterImages/Energy/AABattery.png", "AABattery", 0.90, 1 },//AABattery
+		{ "itemImages/BarterImages/Energy/AABattery.png", "AABattery", 0.90, 1 },//AABattery
+		{ "itemImages/BarterImages/Energy/AABattery.png", "AABattery", 0.90, 1 },//AABattery
+		{ "itemImages/BarterImages/Energy/AABattery.png", "AABattery", 0.90, 1 },//AABattery
+	};
+}
+
 std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::vector<std::vector<PointAmmunition>>>& inputVector) {
 	std::vector<std::vector<PointAmmunition>> outputVector;
 

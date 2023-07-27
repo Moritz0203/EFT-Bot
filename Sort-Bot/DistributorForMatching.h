@@ -29,7 +29,7 @@ public:
 
 	void MagazineMatching();
 
-	void BarterMatching();
+	void BarterMatching(vector<PathNameThresholdItemSize> input);
 
 private:
 	friend class CaseProcessing;

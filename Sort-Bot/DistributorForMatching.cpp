@@ -93,143 +93,13 @@ vector<PointAmmunition> Matching::removeDuplicatesPage(vector<PointAmmunition>& 
 	return result;
 }
 
-//namespace Ammunition {
-//	std::array<std::string, 36> Ammunition{
-//		//NATO 7.62
-//			"itemImages/AmmunitionImages/7.62NATO/M80.png",//M80
-//			"itemImages/AmmunitionImages/7.62NATO/M62.png",//M62
-//			"itemImages/AmmunitionImages/7.62NATO/M61.png",//M61
-//			"itemImages/AmmunitionImages/7.62NATO/M993.png",//M993
-//			"itemImages/AmmunitionImages/7.62NATO/BCPFMJ.png",//BCPFMJ
-//			"itemImages/AmmunitionImages/7.62NATO/TCWSP.png",//TCWSP
-//			"itemImages/AmmunitionImages/7.62NATO/UltraNosi.png",//UltraNosi
-//		//RUS 7.62
-//			"itemImages/AmmunitionImages/7.62RUS/BP.png",//BP
-//			"itemImages/AmmunitionImages/7.62RUS/HP.png",//HP
-//			"itemImages/AmmunitionImages/7.62RUS/MAIAP.png",//MAIAP
-//			"itemImages/AmmunitionImages/7.62RUS/PS.png",//PS
-//			"itemImages/AmmunitionImages/7.62RUS/T45M1.png",//T45M1
-//			"itemImages/AmmunitionImages/7.62RUS/US.png",//US
-//		//NATO 5.56
-//			"itemImages/AmmunitionImages/5.56NATO/FMJ.png",//FMJ
-//			"itemImages/AmmunitionImages/5.56NATO/HP.png",//HP
-//			"itemImages/AmmunitionImages/5.56NATO/M855.png",//M855
-//			"itemImages/AmmunitionImages/5.56NATO/M855A1.png",//M855A1
-//			"itemImages/AmmunitionImages/5.56NATO/M856.png",//M856
-//			"itemImages/AmmunitionImages/5.56NATO/M856A1.png",//M856A1
-//			"itemImages/AmmunitionImages/5.56NATO/M995.png",//M955
-//			"itemImages/AmmunitionImages/5.56NATO/RRLP.png",//RRLP
-//			"itemImages/AmmunitionImages/5.56NATO/SOST.png",//SOST
-//			"itemImages/AmmunitionImages/5.56NATO/Warmage.png",//Warmage
-//		//RUS 5.45
-//			"itemImages/AmmunitionImages/5.45RUS/7N40.png",//7N40
-//			"itemImages/AmmunitionImages/5.45RUS/BP.png",//BP
-//			"itemImages/AmmunitionImages/5.45RUS/BS.png",//BS
-//			"itemImages/AmmunitionImages/5.45RUS/BT.png",//BT
-//			"itemImages/AmmunitionImages/5.45RUS/FMJ.png",//FMJ
-//			"itemImages/AmmunitionImages/5.45RUS/HP.png",//HP
-//			"itemImages/AmmunitionImages/5.45RUS/PP.png",//PP
-//			"itemImages/AmmunitionImages/5.45RUS/PPBS.png",//PPBS
-//			"itemImages/AmmunitionImages/5.45RUS/PRS.png",//PRS
-//			"itemImages/AmmunitionImages/5.45RUS/PS.png",//PS
-//			"itemImages/AmmunitionImages/5.45RUS/SP.png",//SP
-//			"itemImages/AmmunitionImages/5.45RUS/T.png",//T
-//			"itemImages/AmmunitionImages/5.45RUS/US.png",//US
-//	};
-//
-//	std::array<std::string, 36> NameOfItemAmmunition{
-//		//NATO 7.62
-//			"M80",
-//			"M62",
-//			"M61",
-//			"M993",
-//			"BCPFMJ",
-//			"TCWSP",
-//			"UltraNosi",
-//		//RUS 7.62
-//			"BP",
-//			"HP",
-//			"MAIAP",
-//			"PS",
-//			"T45M1",
-//			"US",
-//		//NATO 5.56
-//			"FMJ",
-//			"HP",
-//			"M855",
-//			"M855A1",
-//			"M856",
-//			"M856A1",
-//			"M955",
-//			"RRLP",
-//			"SOST",
-//			"Warmage",
-//		//RUS 5.45 
-//			"7N40",
-//			"BP",
-//			"BS",
-//			"BT",
-//			"FMJ",
-//			"HP",
-//			"PP",
-//			"PPBS",
-//			"PRS",
-//			"PS",
-//			"SP",
-//			"T",
-//			"US",
-//	};
-//
-//	std::array<double, 36> AmmunitionThreshold{
-//		//NATO 7.62
-//			0.90,//M80
-//			0.87,//M62
-//			0.89,//M61
-//			0.90,//M993
-//			0.84,//BCPFMJ
-//			0.86,//TCWSP
-//			0.88,//UltraNosi
-//		//RUS 7.62
-//			0.90,//BP
-//			0.90,//HP
-//			0.90,//MAIAP
-//			0.90,//PS
-//			0.90,//T45M1
-//			0.90,//US
-//		//NATO 5.56
-//			0.94,//FMJ
-//			0.94,//HP
-//			0.9599,//M855
-//			0.9599,//M855A1
-//			0.9599,//M856
-//			0.9599,//M856A1
-//			0.96,//M955
-//			0.94,//RRLP
-//			0.94,//SOST
-//			0.94,//Warmage
-//		//RUS 5.45 
-//			0.93,//7N40
-//			0.93,//BP
-//			0.9599,//BS
-//			0.93,//BT
-//			0.93,//FMJ
-//			0.93,//HP
-//			0.9399,//PP
-//			0.93,//PPBS
-//			0.93,//PRS
-//			0.96,//PS
-//			0.93,//SP
-//			0.93,//T
-//			0.96,//US
-//	};
-//}
 
 void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 	cout << "amo matching" << endl;
 	Mat templ;
 	Mat MatScreen;
 	GetMat getMat;
-	const char* image_window = "Ammunition Image";
+	//const char* image_window = "Ammunition Image";
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
 	vector<POINT> ReturnDataAM;
@@ -240,27 +110,18 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 
 	int count = 0;
 	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
-		cout << i1 << endl;
 
 		Rect Rec(1200, 0, MatScreenVector[i1].cols - 1200, MatScreenVector[i1].rows);
 		MatScreen = MatScreenVector[i1](Rec);
 		
-		cv::imshow(image_window, MatScreen);
+		//cv::imshow(image_window, MatScreen);
 
 		for (int i = 0; i < input.size(); i++) {
 			ReturnDataAM = TemplateMatching::templateMatchingItems(input[i].Path, input[i].Threshold, false, true, input[i].Name, MatScreen);
 
-			for (const POINT po : ReturnDataAM) {
-				cout << "--" << po.y << " " << po.x << endl;
-			}
-
 			templ = imread(input[i].Path);
 			if (!ReturnDataAM.empty()) {
 				ReturnDataAM_Clean = removeDuplicates(ReturnDataAM);
-
-				for (const POINT po : ReturnDataAM_Clean) {
-					cout << po.y << " " << po.x << endl;
-				}
 
 				for (int i2 = 0; i2 < ReturnDataAM_Clean.size(); i2++) {
 					const Rect Rec(ReturnDataAM_Clean[i2].x + 44, ReturnDataAM_Clean[i2].y + 48, templ.cols - 44, templ.rows - 48);
@@ -282,7 +143,7 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 		pointAmmunitionTemp.clear();
 		cout << "--------------- " << ++count << endl;
 	}
-	cout << "matching done" << endl;
+	cout << "mamo done" << endl;
 }
 
 namespace Case {
@@ -469,98 +330,59 @@ void Matching::MagazineMatching() {
 	}
 }
 
-namespace Barter {
-	std::array<std::string, 7> Barter{
-		//OneSlot
-			"itemImages/BarterImages/OneSlot/Bolts.png",
-			"itemImages/BarterImages/OneSlot/Bulb.png",
-			"itemImages/BarterImages/OneSlot/Defibrillator.png",
-			"itemImages/BarterImages/OneSlot/LEDX.png",
-			"itemImages/BarterImages/OneSlot/SDiary.png",
-			//TwoSlot
-				"itemImages/BarterImages/TwoSlot/Diary.png",
-				//SixSlot
-					"itemImages/BarterImages/SixSlot/Lion.png"
-	};
 
-	std::array<std::string, 7> NameOfItemBarter{
-		//OneSlot
-			"Bolts",
-			"Bulb",
-			"Defibrillator",
-			"LEDX",
-			"SDiary",
-			//TwoSlot
-				"Diary",
-				//SixSlot
-					"Lion",
-	};
+std::array<std::string, 2> FoundInRaid{
+	"ObjectImages/FoundInRaid/FoundInRaid-Blue.png",
+	"ObjectImages/FoundInRaid/FoundInRaid-Red.png"
+};
 
-	std::array<double, 7> BarterThreshold{
-		//OneSlot
-			0.86,//Bolts
-			0.92,//Bulb
-			0.95,//Defibrillator
-			0.88,//LEDX
-			0.86,//SDiary
-			//TwoSlot
-				0.88,//Diary
-				//SixSlot
-					0.96,//Lion
-	};
-
-	std::array<int, 7> SlotsPerItem{
-		//OneSlot
-			1,
-			1,
-			1,
-			1,
-			1,
-			//TwoSlot
-				2,
-				//SixSlot
-					6
-	};
-
-
-	std::array<std::string, 2> FoundInRaid{
-		"ObjectImages/FoundInRaid/FoundInRaid-Blue.png",
-		"ObjectImages/FoundInRaid/FoundInRaid-Red.png"
-	};
-}
-
-void Matching::BarterMatching() {
-	const int sizeString = sizeof(Barter::Barter) / sizeof(string);
-	const int sizeFoundInRaid = sizeof(Barter::FoundInRaid) / sizeof(String);
+void Matching::BarterMatching(vector<PathNameThresholdItemSize> input) {
+	cout << "Barter matching" << endl;
+	const int sizeFoundInRaid = sizeof(FoundInRaid) / sizeof(String);
 	Mat templ;
+	Mat MatScreen;
 	GetMat getMat;
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
 	vector<POINT> ReturnDataBA;
 	vector<POINT> ReturnDataBA_Clean;
 	vector<PointBarter> pointBarterTemp;
-	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
-		for (int i = 0; i < sizeString; i++) {
-			ReturnDataBA = TemplateMatching::templateMatchingItems(Barter::Barter[i], Barter::BarterThreshold[i], false, false, Barter::NameOfItemBarter[i], MatScreenVector[i1]);
 
-			templ = imread(Barter::Barter[i]);
+	PointBarter::pointBarter_NC.resize(MatScreenVector.size());
+
+	int count = 0;
+	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
+		Rect Rec(1200, 0, MatScreenVector[i1].cols - 1200, MatScreenVector[i1].rows);
+		MatScreen = MatScreenVector[i1](Rec);
+
+		for (int i = 0; i < input.size(); i++) {
+			ReturnDataBA = TemplateMatching::templateMatchingItems(input[i].Path, input[i].Threshold, false, true, input[i].Name, MatScreen);
+
+			templ = imread(input[i].Path);
 			if (!ReturnDataBA.empty()) {
 				ReturnDataBA_Clean = removeDuplicates(ReturnDataBA);
+
 				for (int i3 = 0; i3 < ReturnDataBA_Clean.size(); i3++) {
 					const Rect Rec(ReturnDataBA_Clean[i3].x + 45, ReturnDataBA_Clean[i3].y + 46, templ.cols - 45, templ.rows - 46);
 					for (int i4 = 0; i4 < sizeFoundInRaid; i4++) {
-						Mat temp = imread(Barter::FoundInRaid[i4]);
+						Mat temp = imread(FoundInRaid[i4]);
 						if (TemplateMatching::templateMatchingBool(MatScreenVector[i1](Rec), temp, 0.99))
-							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], Barter::NameOfItemBarter[i], true, templ.rows, templ.cols, i1, Barter::SlotsPerItem[i]);
+							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], input[i].Name, true, templ.rows, templ.cols, i1, input[i].ItemSize);
 						else
-							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], Barter::NameOfItemBarter[i], false, templ.rows, templ.cols, i1, Barter::SlotsPerItem[i]);
+							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], input[i].Name, false, templ.rows, templ.cols, i1, input[i].ItemSize);
 					}
 				}
 				ReturnDataBA.clear();
 				ReturnDataBA_Clean.clear();
 			}
 		}
-		PointBarter::pointBarter_NC.emplace_back(pointBarterTemp);
+
+		for (PointBarter& pointAM : pointBarterTemp) {
+			PointBarter::pointBarter_NC[i1].emplace_back(pointAM);
+		}
+
 		pointBarterTemp.clear();
+		cout << "--------------- " << ++count << endl;
 	}
+	cout << "Barter done" << endl;
 }

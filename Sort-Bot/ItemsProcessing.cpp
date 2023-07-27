@@ -306,6 +306,99 @@ namespace BaterVector {
 	};
 }
 
+namespace MedicalVector {
+	const vector<PathNameThresholdItemSize> Medical {
+		{ "itemImages/MedicalImages/Medical/AFAK.png",						"AFAK",						0.90, 1 },//AFAK
+		{ "itemImages/MedicalImages/Medical/AI2.png",						"AI2",						0.90, 1 },//AI2
+		{ "itemImages/MedicalImages/Medical/AluSplint.png",					"AluSplint",				0.90, 1 },//AluSplint
+		{ "itemImages/MedicalImages/Medical/Analgin.png",					"Analgin",					0.90, 1 },//Analgin
+		{ "itemImages/MedicalImages/Medical/ArmyBandage.png",				"ArmyBandage",				0.90, 1 },//ArmyBandage
+		{ "itemImages/MedicalImages/Medical/Augmentin.png",					"Augmentin",				0.90, 1 },//Augmentin
+		{ "itemImages/MedicalImages/Medical/Bandage.png",					"Bandage",					0.90, 1 },//Bandage
+		{ "itemImages/MedicalImages/Medical/CarKit.png",					"CarKit",					0.90, 2 },//CarKit
+		{ "itemImages/MedicalImages/Medical/CAT.png",						"CAT",						0.90, 1 },//CAT
+		{ "itemImages/MedicalImages/Medical/CMS.png",						"CMS",						0.90, 2 },//CMS
+		{ "itemImages/MedicalImages/Medical/Esmarch.png",					"Esmarch",					0.90, 1 },//Esmarch
+		{ "itemImages/MedicalImages/Medical/GoldenStar.png",				"GoldenStar",				0.90, 1 },//GoldenStar
+		{ "itemImages/MedicalImages/Medical/Grizzly.png",					"Grizzly",					0.90, 4 },//Grizzly
+		{ "itemImages/MedicalImages/Medical/Hemostatic.png",				"Hemostatic",				0.90, 1 },//Hemostatic
+		{ "itemImages/MedicalImages/Medical/Ibuprofen.png",					"Ibuprofen",				0.90, 1 },//Ibuprofen
+		{ "itemImages/MedicalImages/Medical/IFAK.png",						"IFAK",						0.90, 1 },//IFAK
+		{ "itemImages/MedicalImages/Medical/Salewa.png",					"Salewa",					0.90, 2 },//Salewa
+		{ "itemImages/MedicalImages/Medical/Splint.png",					"Splint",					0.90, 1 },//Splint
+		{ "itemImages/MedicalImages/Medical/Surv12.png",					"Surv12",					0.90, 3 },//Surv12
+		{ "itemImages/MedicalImages/Medical/Vaseline.png",					"Vaseline",					0.90, 1 },//Vaseline
+	};
+
+	const vector<PathNameThresholdItemSize> Injectors {
+		{ "itemImages/MedicalImages/Injectors/3bTG.png",					"3bTG",						0.90, 1 },//3bTG
+		{ "itemImages/MedicalImages/Injectors/Adrenaline.png",				"Adrenaline",				0.90, 1 },//Adrenaline
+		{ "itemImages/MedicalImages/Injectors/AHF1M.png",					"AHF1M",					0.90, 1 },//AHF1M
+		{ "itemImages/MedicalImages/Injectors/ETG.png",						"ETG",						0.90, 1 },//ETG
+		{ "itemImages/MedicalImages/Injectors/L1.png",						"L1",						0.90, 1 },//L1
+		{ "itemImages/MedicalImages/Injectors/Meldonin.png",				"Meldonin",					0.90, 1 },//Meldonin
+		{ "itemImages/MedicalImages/Injectors/Morphine.png",				"Morphine",					0.90, 1 },//Morphine
+		{ "itemImages/MedicalImages/Injectors/MULE.png",					"MULE",						0.90, 1 },//MULE
+		{ "itemImages/MedicalImages/Injectors/Obdolbos.png",				"Obdolbos",					0.90, 1 },//Obdolbos
+		{ "itemImages/MedicalImages/Injectors/Obdolbos2.png",				"Obdolbos2",				0.90, 1 },//Obdolbos2
+		{ "itemImages/MedicalImages/Injectors/P22.png",						"P22",						0.90, 1 },//P22
+		{ "itemImages/MedicalImages/Injectors/Perfotoran.png",				"Perfotoran",				0.90, 1 },//Perfotoran
+		{ "itemImages/MedicalImages/Injectors/PNB.png",						"PNB",						0.90, 1 },//PNB
+		{ "itemImages/MedicalImages/Injectors/Propital.png",				"Propital",					0.90, 1 },//Propital
+		{ "itemImages/MedicalImages/Injectors/SJ1.png",						"SJ1",						0.90, 1 },//SJ1
+		{ "itemImages/MedicalImages/Injectors/SJ6.png",						"SJ6",						0.90, 1 },//SJ6
+		{ "itemImages/MedicalImages/Injectors/SJ9.png",						"SJ9",						0.90, 1 },//SJ9
+		{ "itemImages/MedicalImages/Injectors/SJ12.png",					"SJ12",						0.90, 1 },//SJ12
+		{ "itemImages/MedicalImages/Injectors/Trimadol.png",				"Trimadol",					0.90, 1 },//Trimadol
+		{ "itemImages/MedicalImages/Injectors/XTG12.png",					"XTG12",					0.90, 1 },//XTG12
+		{ "itemImages/MedicalImages/Injectors/Zagustin.png",				"Zagustin",					0.90, 1 },//Zagustin
+	};
+}
+
+namespace ProvisionsVector {
+	const vector<PathNameThresholdItemSize> Provisions {
+		{ "itemImages/Provisions/Alyonka.png",								"Alyonka",					0.90, 1 },//Alyonka
+		{ "itemImages/Provisions/AppleJuice.png",							"AppleJuice",				0.90, 2 },//AppleJuice
+		{ "itemImages/Provisions/Aquamari.png",								"Aquamari",					0.90, 2 },//Aquamari
+		{ "itemImages/Provisions/BigTushonka.png",							"BigTushonka",				0.90, 1 },//BigTushonka
+		{ "itemImages/Provisions/Condmilk.png",								"Condmilk",					0.90, 1 },//Condmilk
+		{ "itemImages/Provisions/Crackers.png",								"Crackers",					0.90, 1 },//Crackers
+		{ "itemImages/Provisions/Croutons.png",								"Croutons",					0.90, 1 },//Croutons
+		{ "itemImages/Provisions/EmergencyWaterRation.png",					"EmergencyWaterRation",		0.90, 1 },//EmergencyWaterRation
+		{ "itemImages/Provisions/Emeyla.png",								"Emeyla",					0.90, 1 },//Emeyla
+		{ "itemImages/Provisions/GrandJuice.png",							"GrandJuice",				0.90, 2 },//GrandJuice
+		{ "itemImages/Provisions/GreenTea.png",								"GreenTea",					0.90, 1 },//GreenTea
+		{ "itemImages/Provisions/Herring.png",								"Herring",					0.90, 1 },//Herring
+		{ "itemImages/Provisions/HorRod.png",								"HorRod",					0.90, 1 },//HorRod
+		{ "itemImages/Provisions/Humpback.png",								"Humpback",					0.90, 1 },//Humpback
+		{ "itemImages/Provisions/Iskra.png",								"Iskra",					0.90, 2 },//Iskra
+		{ "itemImages/Provisions/Kvass.png",								"Kvass",					0.90, 2 },//Kvass
+		{ "itemImages/Provisions/MaxEnergy.png",							"MaxEnergy",				0.90, 1 },//MaxEnergy
+		{ "itemImages/Provisions/Mayo.png",									"Mayo",						0.90, 1 },//Mayo
+		{ "itemImages/Provisions/Milk.png",									"Milk",						0.90, 2 },//Milk
+		{ "itemImages/Provisions/Moonshine.png",							"Moonshine",				0.90, 2 },//Moonshine
+		{ "itemImages/Provisions/MRE.png",									"MRE",						0.90, 2 },//MRE
+		{ "itemImages/Provisions/Oatflakes.png",							"Oatflakes",				0.90, 2 },//Oatflakes
+		{ "itemImages/Provisions/Peas.png",									"Peas",						0.90, 1 },//Peas
+		{ "itemImages/Provisions/Pevko.png",								"Pevko",					0.90, 2 },//Pevko
+		{ "itemImages/Provisions/Pineapple.png",							"Pineapple",				0.90, 2 },//Pineapple
+		{ "itemImages/Provisions/RatCola.png",								"RatCola",					0.90, 1 },//RatCola
+		{ "itemImages/Provisions/Saury.png",								"Saury",					0.90, 1 },//Saury
+		{ "itemImages/Provisions/Sausage.png",								"Sausage",					0.90, 2 },//Sausage
+		{ "itemImages/Provisions/Slickers.png",								"Slickers",					0.90, 1 },//Slickers
+		{ "itemImages/Provisions/Sprats.png",								"Sprats",					0.90, 1 },//Sprats
+		{ "itemImages/Provisions/Squash.png",								"Squash",					0.90, 1 },//Squash
+		{ "itemImages/Provisions/Sugar.png",								"Sugar",					0.90, 1 },//Sugar
+		{ "itemImages/Provisions/Superwater.png",							"Superwater",				0.90, 4 },//Superwater
+		{ "itemImages/Provisions/TarCola.png",								"TarCola",					0.90, 1 },//TarCola
+		{ "itemImages/Provisions/Tushonka.png",								"Tushonka",					0.90, 1 },//Tushonka
+		{ "itemImages/Provisions/VitaJuice.png",							"VitaJuice",				0.90, 2 },//VitaJuice
+		{ "itemImages/Provisions/Vodka.png",								"Vodka",					0.90, 2 },//Vodka
+		{ "itemImages/Provisions/Water.png",								"Water",					0.90, 2 },//Water
+		{ "itemImages/Provisions/Whiskey.png",								"Whiskey",					0.90, 2 },//Whiskey
+	};
+}
+
 std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::vector<std::vector<PointAmmunition>>>& inputVector) {
 	std::vector<std::vector<PointAmmunition>> outputVector;
 
@@ -325,20 +418,12 @@ std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::v
 
 
 void ItemsProcessing::AmmunitionProcess() {
-	vector<vector<vector<PointAmmunition>>> CombinePagesVector;
-
 	for (vector<PathNameThreshold> vec : AmmunitionVector::ArrayAmmunition) {
 		matching.AmmunitionMatching(vec);
 	}
 
-	cout << PointAmmunition::pointAmmunition_NC.size() << endl;
-
 	cleanUpVectorItemsAmmunition();
-
-
-
-
-	for (int i = 0; i < PointAmmunition::pointAmmunition_NC.size(); i++) {
+	/*for (int i = 0; i < PointAmmunition::pointAmmunition_NC.size(); i++) {
 		for (int i2 = 0; i2 < PointAmmunition::pointAmmunition_NC[i].size(); i2++) {
 			cout << PointAmmunition::pointAmmunition_NC[i][i2].point.y << " " << PointAmmunition::pointAmmunition_NC[i][i2].point.x << " " << PointAmmunition::pointAmmunition_NC[i][i2].nameOfItem << " " << PointAmmunition::pointAmmunition_NC[i][i2].page << endl;
 		}
@@ -348,14 +433,11 @@ void ItemsProcessing::AmmunitionProcess() {
 		for (int i2 = 0; i2 < PointAmmunition::pointAmmunition_C[i].size(); i2++) {
 			cout << PointAmmunition::pointAmmunition_C[i][i2].point.y << " " << PointAmmunition::pointAmmunition_C[i][i2].point.x << " " << PointAmmunition::pointAmmunition_C[i][i2].nameOfItem << " " << PointAmmunition::pointAmmunition_C[i][i2].page << endl;
 		}
-	}
-
-	cout << "item Process done" << endl;
+	}*/
 }
 
 void ItemsProcessing::BarterProcess() {
 
-	//matching.BarterMatching(MatScreenVector);
 	cleanUpVectorItemsBarter();
 }
 

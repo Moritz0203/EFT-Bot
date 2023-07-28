@@ -77,9 +77,4 @@ void ProgrammScheduler::Scheduler() {
 	StartUp_Thread.join();
 
 	itemMoving.itemMoving();
-
-
-
-
-
 }

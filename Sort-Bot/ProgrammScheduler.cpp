@@ -36,8 +36,6 @@ void ProgrammScheduler::ScreenShots() {
 	checksPublic ChecksPublic;
 	GetMat getMat;
 
-	cout << "test test test" << endl;
-
 	ChecksPublic.CheckScrollbarPositions();
 	Sleep(300);
 	getMat.TakeScreenshots(Stash_Version);
@@ -45,11 +43,11 @@ void ProgrammScheduler::ScreenShots() {
 
 
 void ProgrammScheduler::Scheduler() {
-	SortStartUp sortStartUp;
+	ProgrammScheduler programmScheduler;
 	ItemsProcessing	itemsProcessing;
 	CaseProcessing caseProcessing;
-	ProgrammScheduler programmScheduler;
-	ItemMoving itemMoving; 
+	SortStartUp sortStartUp;
+	ItemMoving itemMoving;
 	Matching matching;
 
 	std::thread StartUp_Thread(&SortStartUp::StartUp, &sortStartUp);
@@ -61,14 +59,14 @@ void ProgrammScheduler::Scheduler() {
 	std::thread Thread1(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 	std::thread Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 
-	{// new scope to delete the mutex at the end
+	{//new scope to delete the mutex at the end
 		std::lock_guard<std::mutex> lock(m);
-		q.push(std::bind(&Matching::CaseMatching, &matching));
-		q.push(std::bind(&ItemsProcessing::AmmunitionProcess, &itemsProcessing));
-		q.push(std::bind(&ItemsProcessing::Barter1Process, &itemsProcessing));
-		q.push(std::bind(&ItemsProcessing::Barter2Process, &itemsProcessing));
-		q.push(std::bind(&ItemsProcessing::MedicalProcess, &itemsProcessing));
-		q.push(std::bind(&ItemsProcessing::ProvisionsProcess, &itemsProcessing));
+		q.push(std::bind(&Matching::CaseMatching,				&matching));
+		q.push(std::bind(&ItemsProcessing::AmmunitionProcess,	&itemsProcessing));
+		q.push(std::bind(&ItemsProcessing::Barter1Process,		&itemsProcessing));
+		q.push(std::bind(&ItemsProcessing::Barter2Process,		&itemsProcessing));
+		q.push(std::bind(&ItemsProcessing::MedicalProcess,		&itemsProcessing));
+		q.push(std::bind(&ItemsProcessing::ProvisionsProcess,	&itemsProcessing));
 	}
 	c_v.notify_all();
 	

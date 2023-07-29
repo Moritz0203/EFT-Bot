@@ -1,11 +1,16 @@
 class ItemsProcessing {
-	void BarterProcess();
 
 	void cleanUpVectorItemsAmmunition();
 	
 	void cleanUpVectorItemsBarter();
 
 public:
-
 	void AmmunitionProcess();
+
+	void Barter1Process();
+	void Barter2Process();
+
+	void ProvisionsProcess();
+
+	void MedicalProcess();
 };

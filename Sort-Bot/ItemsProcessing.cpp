@@ -77,7 +77,7 @@ namespace AmmunitionVector {
 	};
 }
 
-namespace BaterVector {
+namespace BarterVector {
 	const vector<PathNameThresholdItemSize> Building {
 		{ "itemImages/BarterImages/Building/AnalogThermometer.png",			"AnalogThermometer",		0.90, 2 },//AnalogThermometer
 		{ "itemImages/BarterImages/Building/Bolts.png",						"Bolts",					0.90, 1 },//Bolts
@@ -304,6 +304,22 @@ namespace BaterVector {
 		{ "itemImages/BarterImages/Valuables/Veritas.png",					"Veritas",					0.90, 1 },//Veritas
 		{ "itemImages/BarterImages/Valuables/WoodenClock.png",				"WoodenClock",				0.90, 4 },//WoodenClock
 	};
+
+	const array<vector<PathNameThresholdItemSize>, 5> ArrayBarter1{
+		BarterVector::Building,
+		BarterVector::Energy,
+		BarterVector::Electronics,
+		BarterVector::Flammable,
+		BarterVector::Household,
+	};	  
+		  
+	const array<vector<PathNameThresholdItemSize>, 5> ArrayBarter2{
+		BarterVector::Info,
+		BarterVector::Medical,
+		BarterVector::Other,
+		BarterVector::Tools,
+		BarterVector::Valuables,
+	};
 }
 
 namespace MedicalVector {
@@ -352,6 +368,11 @@ namespace MedicalVector {
 		{ "itemImages/MedicalImages/Injectors/Trimadol.png",				"Trimadol",					0.90, 1 },//Trimadol
 		{ "itemImages/MedicalImages/Injectors/XTG12.png",					"XTG12",					0.90, 1 },//XTG12
 		{ "itemImages/MedicalImages/Injectors/Zagustin.png",				"Zagustin",					0.90, 1 },//Zagustin
+	};
+
+	const array<vector<PathNameThresholdItemSize>, 2> ArrayMedical{
+		MedicalVector::Medical,
+		MedicalVector::Injectors,
 	};
 }
 
@@ -436,10 +457,38 @@ void ItemsProcessing::AmmunitionProcess() {
 	}*/
 }
 
-void ItemsProcessing::BarterProcess() {
+
+
+void ItemsProcessing::Barter1Process() {
+	for (vector<PathNameThresholdItemSize> vec : BarterVector::ArrayBarter1) {
+		matching.BarterMatching(vec);
+	}
 
 	cleanUpVectorItemsBarter();
 }
+
+void ItemsProcessing::Barter2Process() {
+	for (vector<PathNameThresholdItemSize> vec : BarterVector::ArrayBarter2) {
+		matching.BarterMatching(vec);
+	}
+
+	cleanUpVectorItemsBarter();
+}
+
+void ItemsProcessing::MedicalProcess() {
+	for (vector<PathNameThresholdItemSize> vec : MedicalVector::ArrayMedical) {
+		matching.BarterMatching(vec);
+	}
+
+	cleanUpVectorItemsBarter();
+}
+
+void ItemsProcessing::ProvisionsProcess() {
+	matching.BarterMatching(ProvisionsVector::Provisions);
+
+	cleanUpVectorItemsBarter();
+}
+
 
 
 struct POINT_PAGE {
@@ -564,7 +613,7 @@ void ItemsProcessing::cleanUpVectorItemsBarter() {
 					uint16_t x_plus_1 = tempPointCase.point.x + 1;
 
 					//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
-					cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfItem << " " << tempPointCase.nameOfItem << " " << pointCase.page << " " << tempPointCase.page << " " << multiplier << endl;
+					//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfItem << " " << tempPointCase.nameOfItem << " " << pointCase.page << " " << tempPointCase.page << " " << multiplier << endl;
 
 					if (set_POINT_PAGE.count(inPoint_page) > 0)
 						continue;
@@ -577,7 +626,7 @@ void ItemsProcessing::cleanUpVectorItemsBarter() {
 							set_POINT_PAGE.insert(inPoint_page);
 							Found = true;
 							//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
-							cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfItem << " " << tempPointCase.nameOfItem << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
+							//cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfItem << " " << tempPointCase.nameOfItem << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
 						}
 					}
 				}

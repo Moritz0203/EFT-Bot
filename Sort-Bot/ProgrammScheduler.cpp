@@ -12,6 +12,7 @@
 #include <thread>
 #include <queue>
 
+
 std::queue<std::function<void()>> q;
 std::mutex m;
 std::condition_variable c_v;
@@ -58,6 +59,7 @@ void ProgrammScheduler::Scheduler() {
 
 	std::thread Thread1(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 	std::thread Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
+	std::thread Thread3(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 
 	{//new scope to delete the mutex at the end
 		std::lock_guard<std::mutex> lock(m);
@@ -75,6 +77,9 @@ void ProgrammScheduler::Scheduler() {
 	
 	Thread2.join();
 	cout << "Thread2 fertig" << endl;
+
+	Thread3.join();
+	cout << "Thread3 fertig" << endl;
 
 	StartUp_Thread.join();
 

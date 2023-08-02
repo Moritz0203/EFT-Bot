@@ -1,25 +1,26 @@
 //#include "StartUp.h"
 #pragma once
 #include <iostream>
-#include "ProgrammScheduler.h"
-//#include <vector>
-//#include <conio.h>
-//#include <windows.h>
-//#include <unordered_set>
-//#include <utility>
-//#include <functional>
-//#include "ItemMoving.h"
-//#include "InitializeMovPrefix.h"
-//#include "DistributorForMatching.h"
-//#include <opencv2/imgcodecs.hpp>
-//#include <opencv2/highgui.hpp>
-//#include <opencv2/imgproc.hpp>
-//#include "TemplateMatching.h"
-//#include "getMat.h"
-//#include "PointItems.h"
-//#include "ItemsProcessing.h"
-//#include "PrefixProcessing.h"
-//#include "Checks.h"
+//#include "ProgrammScheduler.h"
+// 
+#include <vector>
+#include <conio.h>
+#include <windows.h>
+#include <unordered_set>
+#include <utility>
+#include <functional>
+#include "ItemMoving.h"
+#include "InitializeMovPrefix.h"
+#include "DistributorForMatching.h"
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include "TemplateMatching.h"
+#include "getMat.h"
+#include "PointItems.h"
+#include "ItemsProcessing.h"
+#include "PrefixProcessing.h"
+#include "Checks.h"
 using namespace std;
 //using namespace cv;
 
@@ -540,34 +541,23 @@ int main() {
 	//cin >> Start;
 
 	if (Start == "start") {
-		ProgrammScheduler programmScheduler;
+		/*ProgrammScheduler programmScheduler;
 
-		programmScheduler.Scheduler();
-
-
-
-
-		//ItemMoving itemMoving;
-		//PrefixProcessing prefixProcessing;
-		//ItemsProcessing	itemsProcessing;		
-		//checksPublic ChecksPublic;
-		//GetMat getMat;
-
-		//// SortStartUp start
-
-		//ChecksPublic.CheckScrollbarPositions();
-		//Sleep(300);
-		//getMat.TakeScreenshots(8);
-
-		//InitializeMovPrefix::Initialize();
-		//prefixProcessing.CombinePrefixAndCase();
-
-		//// SortStartUp end
+		programmScheduler.Scheduler();*/
 
 
 
+		ItemsProcessing	itemsProcessing;		
+		checksPublic ChecksPublic;
+		GetMat getMat;
 
-		//itemsProcessing.AmmunitionProcess();
+
+		ChecksPublic.CheckScrollbarPositions();
+		Sleep(300);
+		getMat.TakeScreenshots(11);
+
+		itemsProcessing.Barter2Process();
+	
 		//for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 		//	for (PointCaseInStash Point : vec) {
 		//		cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.prefix.nameOfItems.size() <<" \n";

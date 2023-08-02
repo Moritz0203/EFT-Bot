@@ -11,11 +11,17 @@
 using namespace std;
 using namespace cv;
 
+#define DebugImage (1)
+
 vector<POINT> TemplateMatching::templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, Mat MatScreen) {
 	vector<POINT> ReturnData;
 	int height = {}, width = {};
-	//const char* image_window = "Source Image";
-	//const char* Test = "Item Image";
+
+#if DebugImage
+	const char* image_window = "Source Image";
+	const char* Test = "Item Image";
+#endif 
+
 	int match_method = 5;
 	Mat result;
 	Mat img;
@@ -24,10 +30,12 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 	Mat templ = cv::imread(templatename);
 	if (MatScreen.empty() || templ.empty())
 		cout << "Error reading file(s) in templateMatching Funkion!" << endl;
-	
-	//namedWindow(image_window, WINDOW_AUTOSIZE);
-	/*namedWindow(Test, WINDOW_AUTOSIZE);*/
 
+
+#if DebugImage
+	namedWindow(image_window, WINDOW_AUTOSIZE);
+	namedWindow(Test, WINDOW_AUTOSIZE);
+#endif 
 
 	Mat img_display;
 	img.copyTo(img_display);
@@ -49,13 +57,19 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 
 	Rect Rec(StartY, StartX, width, height);
 	Mat Roi = templ(Rec);
-	/*imshow(Test, Roi);*/
+
+#if DebugImage
+	imshow(Test, Roi);
+#endif 
 
 	matchTemplate(img, Roi, result, match_method);
 	double minVal; double maxVal; Point minLoc; Point maxLoc;
 	Point matchLoc;
 
-	/*int count = 0;*/
+#if DebugImage
+	int count = 0;
+#endif 
+
 	POINT PointReturn{};
 	bool test = true;
 
@@ -67,7 +81,6 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 		if (maxVal >= threshold)
 		{
 			/*if (test == true) {
-				
 				test = false;
 			}*/
 
@@ -81,7 +94,10 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 				PointReturn.y = matchLoc.y;
 				PointReturn.x = matchLoc.x;
 				ReturnData.push_back(PointReturn);
-				/*count++;*/
+
+#if DebugImage
+				count++;
+#endif 
 			}
 			else
 				break;
@@ -89,13 +105,16 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 		else
 			break;
 	}
-	/*cout << count << endl;*/
-	//cv::imshow(image_window, img_display);
 
-	/*if (ReturnData.size() != 0)
+#if DebugImage
+	cout << count << endl;
+	cv::imshow(image_window, img_display);
+
+	if (ReturnData.size() != 0)
 		waitKey(0);
-	else*/
-		//waitKey(20);
+	else
+		waitKey(20);
+#endif 
 
 	return ReturnData;
 }

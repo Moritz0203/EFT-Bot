@@ -224,7 +224,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Medical/MedicalTools.png",				"MedicalTools",				0.85, 1 },//MedicalTools
 		{ "itemImages/BarterImages/Medical/Meds.png",						"Meds",						0.85, 1 },//Meds
 		{ "itemImages/BarterImages/Medical/Multivitamins.png",				"Multivitamins",			0.85, 1 },//Multivitamins
-		{ "itemImages/BarterImages/Medical/NaCl.png",						"NaCl",						0.85, 1 },//NaCl
+		{ "itemImages/BarterImages/Medical/NaCl.png",						"NaCl",						0.88, 1 },//NaCl
 		{ "itemImages/BarterImages/Medical/Ophthalmoscope.png",				"Ophthalmoscope",			0.85, 1 },//Ophthalmoscope
 		{ "itemImages/BarterImages/Medical/Syringe.png",					"Syringe",					0.85, 1 },//Syringe
 	};																									  
@@ -239,7 +239,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Others/Coffe.png",						"Coffe",					0.85, 1 },//Coffe
 		{ "itemImages/BarterImages/Others/Cordura.png",						"Cordura",					0.85, 2 },//Cordura
 		{ "itemImages/BarterImages/Others/DogtagsBear.png",					"DogtagsBear",				0.85, 1 },//DogtagsBear
-		{ "itemImages/BarterImages/Others/DogtagsUsec.png",					"DogtagsUsec",				0.85, 1 },//DogtagsUsec
+		{ "itemImages/BarterImages/Others/DogtagsUsec.png",					"DogtagsUsec",				0.84, 1 },//DogtagsUsec
 		{ "itemImages/BarterImages/Others/Eagle.png",						"Eagle",					0.85, 2 },//Eagle
 		{ "itemImages/BarterImages/Others/EnglishTea.png",					"EnglishTea",				0.85, 1 },//EnglishTea
 		{ "itemImages/BarterImages/Others/Fleece.png",						"Fleece",					0.85, 2 },//Fleece
@@ -250,7 +250,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Others/LootLord.png",					"LootLord",					0.85, 4 },//LootLord
 		{ "itemImages/BarterImages/Others/Lupo.png",						"Lupo",						0.85, 1 },//Lupo
 		{ "itemImages/BarterImages/Others/Malboro.png",						"Malboro",					0.85, 1 },//Malboro
-		{ "itemImages/BarterImages/Others/NoiceguyPass.png",				"NoiceguyPass",				0.85, 2 },//NoiceguyPass
+		{ "itemImages/BarterImages/Others/NoiceguyPass.png",				"NoiceguyPass",				0.86, 2 },//NoiceguyPass
 		{ "itemImages/BarterImages/Others/OFZShell.png",					"OFZShell",					0.85, 2 },//OFZShell
 		{ "itemImages/BarterImages/Others/Paracord.png",					"Paracord",					0.85, 2 },//Paracord
 		{ "itemImages/BarterImages/Others/Ripstop.png",						"Ripstop",					0.85, 2 },//Ripstop
@@ -293,9 +293,9 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Valuables/GoldenEgg.png",				"GoldenEgg",				0.85, 1 },//GoldenEgg
 		{ "itemImages/BarterImages/Valuables/GpCoin.png",					"GpCoin",					0.85, 1 },//GpCoin
 		{ "itemImages/BarterImages/Valuables/Horse.png",					"Horse",					0.85, 2 },//Horse
-		{ "itemImages/BarterImages/Valuables/Lion.png",						"Lion",						0.85, 6 },//Lion
-		{ "itemImages/BarterImages/Valuables/Prokill.png",					"Prokill",					0.85, 1 },//Prokill
-		{ "itemImages/BarterImages/Valuables/Raven.png",					"Raven",					0.85, 2 },//Raven
+		{ "itemImages/BarterImages/Valuables/Lion.png",						"Lion",						0.83, 6 },//Lion
+		{ "itemImages/BarterImages/Valuables/Prokill.png",					"Prokill",					0.83, 1 },//Prokill
+		{ "itemImages/BarterImages/Valuables/Raven.png",					"Raven",					0.83, 2 },//Raven
 		{ "itemImages/BarterImages/Valuables/Roler.png",					"Roler",					0.85, 1 },//Roler
 		{ "itemImages/BarterImages/Valuables/Rooster.png",					"Rooster",					0.85, 4 },//Rooster
 		{ "itemImages/BarterImages/Valuables/SkullRing.png",				"SkullRing",				0.85, 1 },//SkullRing

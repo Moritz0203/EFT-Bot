@@ -180,7 +180,7 @@ namespace Case {
 		0.89,//MagCase
 		0.91,//MedCase
 		0.88,//MoneyCase
-		0.898,//JunkCase
+		0.87,//JunkCase
 		0.88,//WeaponsCase
 		0.88,//ItemsCase
 		0.88,//THICCcase
@@ -228,8 +228,13 @@ void Matching::CaseMatching() {
 					rows -= rows/3.0;
 					const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, rows, 12);
 					string tagCase = TextMatching::textMatching(MatScreen, Rec);
-
+					
 					if (checkSecondLastChar(tagCase)) {
+						
+						if (Case::NameOfItemCases[i] == "JunkCase") {
+							cout << "test" << endl;
+						}
+
 						cout << "checkSecondLastChar = is okay" << endl;
 						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], Case::NameOfItemCases[i], tagCase, templ.rows, templ.cols, page, identyfierAsHEX_ST, freeSlots_empty, prefix);
 					}

@@ -52,7 +52,7 @@ void CaseProcessing::caseProcess() {
 	checksPublic ChecksPublic;
 	Matching matching;
 
-	//matching.CaseMatching();
+	matching.CaseMatching();
 
 
 

@@ -21,6 +21,7 @@
 #include "ItemsProcessing.h"
 #include "PrefixProcessing.h"
 #include "Checks.h"
+#include "CaseProcessing.h"
 using namespace std;
 //using namespace cv;
 
@@ -547,7 +548,8 @@ int main() {
 
 
 
-		ItemsProcessing	itemsProcessing;		
+		//ItemsProcessing	itemsProcessing;	
+		CaseProcessing caseProcessing;
 		checksPublic ChecksPublic;
 		GetMat getMat;
 
@@ -556,7 +558,9 @@ int main() {
 		Sleep(300);
 		getMat.TakeScreenshots(11);
 
-		itemsProcessing.Barter2Process();
+		caseProcessing.caseProcess();
+
+		//itemsProcessing.Barter2Process();
 	
 		//for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 		//	for (PointCaseInStash Point : vec) {

@@ -545,6 +545,10 @@ int main() {
 		/*ProgrammScheduler programmScheduler;
 
 		programmScheduler.Scheduler();*/
+
+
+
+
 		//ItemsProcessing	itemsProcessing;	
 		CaseProcessing caseProcessing;
 		checksPublic ChecksPublic;

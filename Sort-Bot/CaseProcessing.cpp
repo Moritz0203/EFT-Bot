@@ -55,7 +55,6 @@ void CaseProcessing::caseProcess() {
 	//matching.CaseMatching();
 
 
-
 	std::unique_lock<std::mutex> lock(Matching::mtx);
 	while (!Matching::ready) Matching::cv.wait(lock);
 

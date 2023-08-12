@@ -59,6 +59,9 @@ void CaseProcessing::caseProcess() {
 
 
 
+
+
+
 	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_NC) {
 		for (PointCaseInStash Point : vec) {
 			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " << Point.point.x << " " << Point.page << endl;

@@ -533,14 +533,16 @@ int main() {
 	/*InitializeMovPrefix::Initialize();*/
 
 
-	/*HWND hWND = GetMat::FindeWindow();
+	HWND hWND = GetMat::FindeWindow();
+	cout << hWND << endl;
 	SetForegroundWindow(hWND);
-	Sleep(100);
+
+	/*Sleep(100);
 	Mat MatScreen = GetMat::getMat(hWND);*/
 	
 
 
-	string Start = "start";
+	string Start = "-start";
 	
 	//cin >> Start;
 
@@ -562,7 +564,7 @@ int main() {
 		Sleep(300);
 		getMat.TakeScreenshots(11);
 
-		caseProcessing.caseProcess();
+		//caseProcessing.caseProcess();
 
 		//itemsProcessing.Barter2Process();
 	

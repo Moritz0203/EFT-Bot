@@ -533,16 +533,16 @@ int main() {
 	/*InitializeMovPrefix::Initialize();*/
 
 
-	HWND hWND = GetMat::FindeWindow();
+	/*HWND hWND = GetMat::FindeWindow();
 	cout << hWND << endl;
-	SetForegroundWindow(hWND);
+	SetForegroundWindow(hWND);*/
 
 	/*Sleep(100);
 	Mat MatScreen = GetMat::getMat(hWND);*/
 	
 
 
-	string Start = "-start";
+	string Start = "start";
 	
 	//cin >> Start;
 

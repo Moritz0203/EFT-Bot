@@ -552,7 +552,6 @@ int main() {
 		programmScheduler.Scheduler();*/
 
 
-
 		//ItemsProcessing	itemsProcessing;	
 		CaseProcessing caseProcessing;
 		checksPublic ChecksPublic;

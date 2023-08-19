@@ -534,11 +534,6 @@ int main() {
 
 	/*Sleep(100);
 	Mat MatScreen = GetMat::getMat(hWND);*/
-	
-
-
-
-
 
 
 	string Start = "start";

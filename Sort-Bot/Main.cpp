@@ -26,7 +26,8 @@ using namespace std;
 //using namespace cv;
 
 //external controllers for applications / ECFA
-//Rick and Morty Staffel 4 - Folge 4
+//www.ecfa-bots.com
+//www.ecfa-blackmarket.com 
 
 //struct pair_hash {
 //	template <class T1, class T2>

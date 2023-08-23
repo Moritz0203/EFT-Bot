@@ -73,7 +73,7 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 	POINT PointReturn{};
 	bool test = true;
 
-	cout << NameOfItem << endl;
+	//cout << NameOfItem << endl;
 
 	while (true)
 	{

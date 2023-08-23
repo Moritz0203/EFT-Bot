@@ -1,28 +1,28 @@
 //#include "StartUp.h"
 #pragma once
 #include <iostream>
-//#include "ProgrammScheduler.h"
-// 
-#include <vector>
-#include <conio.h>
-#include <windows.h>
-#include <unordered_set>
-#include <utility>
-#include <functional>
-#include "ItemMoving.h"
-#include "InitializeMovPrefix.h"
-#include "DistributorForMatching.h"
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
-#include "TemplateMatching.h"
-#include "getMat.h"
-#include "PointItems.h"
-#include "ItemsProcessing.h"
-#include "PrefixProcessing.h"
-#include "Checks.h"
-#include "CaseProcessing.h"
-#include "c_log.h"
+#include "ProgrammScheduler.h"
+ 
+//#include <vector>
+//#include <conio.h>
+//#include <windows.h>
+//#include <unordered_set>
+//#include <utility>
+//#include <functional>
+//#include "ItemMoving.h"
+//#include "InitializeMovPrefix.h"
+//#include "DistributorForMatching.h"
+//#include <opencv2/imgcodecs.hpp>
+//#include <opencv2/highgui.hpp>
+//#include <opencv2/imgproc.hpp>
+//#include "TemplateMatching.h"
+//#include "getMat.h"
+//#include "PointItems.h"
+//#include "ItemsProcessing.h"
+//#include "PrefixProcessing.h"
+//#include "Checks.h"
+//#include "CaseProcessing.h"
+//#include "c_log.h"
 using namespace std;
 //using namespace cv;
 
@@ -511,7 +511,7 @@ using namespace std;
 
 
 int main() {
-	
+	//c_log::add_out(new c_log::c_log_consolestream);
 	
   /*cout << "//    ___ ___ _____         ___  ___  ___ _____         ___  ___ _____  " << endl;
 	cout << "//   | __| __|_   _|  ___  / __|/ _ \| _ \_   _|  ___  | _ )/ _ \_   _| " << endl;
@@ -525,7 +525,19 @@ int main() {
 	cout << "Welcome to EFT-SORT-BOT" << endl;
 	cout << "by ECFA" << endl;
 	cout << endl;
-		
+	
+	/*c_log::Info("hi");
+
+	c_log::Info("Config", ">>", "Loading configuration file...");
+
+
+	c_log::Info("gamemode", c_log::LGreen, 1);
+	c_log::Info("name", c_log::LGreen, "name");
+	c_log::Info("maxplayers", c_log::LGreen, 1);
+	c_log::Info("port", c_log::LGreen, 1);
+	c_log::Info("stream-distance", c_log::LGreen, 1);
+	c_log::Info("tickrate", c_log::LGreen, 1);*/
+
 	/*InitializeMovPrefix::Initialize();*/
 
 
@@ -542,20 +554,20 @@ int main() {
 	//cin >> Start;
 
 	if (Start == "start") {
-		/*ProgrammScheduler programmScheduler;
+		ProgrammScheduler programmScheduler;
 
-		programmScheduler.Scheduler();*/
+		programmScheduler.Scheduler();
 
 
 		//ItemsProcessing	itemsProcessing;	
-		CaseProcessing caseProcessing;
+		/*CaseProcessing caseProcessing;
 		checksPublic ChecksPublic;
-		GetMat getMat;
+		GetMat getMat;*/
 
 
-		ChecksPublic.CheckScrollbarPositions();
+		/*ChecksPublic.CheckScrollbarPositions();
 		Sleep(300);
-		getMat.TakeScreenshots(11);
+		getMat.TakeScreenshots(11);*/
 
 		//caseProcessing.caseProcess();
 

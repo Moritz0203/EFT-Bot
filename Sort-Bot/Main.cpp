@@ -22,6 +22,7 @@
 #include "PrefixProcessing.h"
 #include "Checks.h"
 #include "CaseProcessing.h"
+#include "c_log.h"
 using namespace std;
 //using namespace cv;
 
@@ -525,7 +526,6 @@ int main() {
 	cout << "by ECFA" << endl;
 	cout << endl;
 		
-	
 	/*InitializeMovPrefix::Initialize();*/
 
 

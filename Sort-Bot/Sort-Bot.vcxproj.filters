@@ -45,6 +45,9 @@
     <Filter Include="Source Files\SortBot\TypeClass">
       <UniqueIdentifier>{d1d77d49-c81f-4838-a341-856aa9109163}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Console">
+      <UniqueIdentifier>{1c8027ac-4746-4d6a-a1bb-28caafb2d7db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -144,6 +147,9 @@
     </ClInclude>
     <ClInclude Include="ProgrammScheduler.h">
       <Filter>Header Files\SortBot</Filter>
+    </ClInclude>
+    <ClInclude Include="c_log.h">
+      <Filter>Header Files\Console</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

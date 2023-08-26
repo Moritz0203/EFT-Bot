@@ -24,7 +24,7 @@ void checksPublic::CheckScrollbarPositions() {
 	const Mat MatScreen = GetMat::getMat(hWND);
 
 	const Mat templ = imread("ObjectImages/Scrollbar.png");
-	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99); /// WICHITH 
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.99);
 	if (point.y > 79) {// Later with screen resolution
 		point.y = (templ.rows / 2) + point.y;
 		point.x = (templ.cols / 2) + point.x;

@@ -246,11 +246,11 @@ const string TextMatching::textMatching(Mat MatScreen, Rect Rec) {
 
 	//cv::resize(Roi, Roi, cv::Size(Roi.cols * 1.9, 20));
 
-	/*const char* image_window = "test 123";
-	namedWindow(image_window, WINDOW_AUTOSIZE);
+	//const char* image_window = "test 123";
+	//namedWindow(image_window, WINDOW_AUTOSIZE);
 
-	imshow(image_window, Roi);
-	waitKey(0);*/
+	//imshow(image_window, Roi);
+	//waitKey(0);
 
 	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
 	tess->Init(nullptr, "eng");

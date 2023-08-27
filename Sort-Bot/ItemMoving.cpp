@@ -20,7 +20,10 @@ using namespace cv;
 
 vector<vector<PointItem*>> ItemVectorCombine_Page;
 
-void combineVectors(const std::vector<std::vector<PointAmmunition>>& vecAmmunition, const std::vector<std::vector<PointMagazine>>& vecMagazine, const std::vector<std::vector<PointBarter>>& vecBarter) {
+void combineVectors(const std::vector<std::vector<PointAmmunition>>& vecAmmunition, 
+	const std::vector<std::vector<PointMagazine>>& vecMagazine, 
+	const std::vector<std::vector<PointBarter>>& vecBarter) 
+{
 	const size_t max_size = std::max({ vecAmmunition.size(), vecMagazine.size(), vecBarter.size() });
 
 	for (size_t i = 0; i < max_size; ++i) { // NOTE: Löschen der erzeugten mit new 
@@ -100,7 +103,7 @@ void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 	Sleep(500);
 
 	uint8_t count = 0;
-	cout << ItemVectorCombine_Page.size() << endl;
+	//cout << ItemVectorCombine_Page.size() << endl;
 	for (vector<PointItem*> vector_Page : ItemVectorCombine_Page) {// PointAmmunition to T 
 		bool moved = false;
 		if (++count >= 12)
@@ -109,6 +112,8 @@ void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
 		for (const PointItem* pointforMov : vector_Page) {
 			if (std::find(ptr_Stash->prefix.nameOfItems.begin(), ptr_Stash->prefix.nameOfItems.end(), pointforMov->nameOfItem) == ptr_Stash->prefix.nameOfItems.end())
 				continue;
+
+			cout << "Count:" << (int)count << "    Name of Item:" << pointforMov->nameOfItem << endl;
 
 			ptr_free_spaces = make_shared<vector<vector<POINT>>>(ptr_Stash->freeSlots);
 			if (!CheckForSpace.check_for_Space(ptr_free_spaces, pointforMov->slotsPerItem))
@@ -186,6 +191,7 @@ void ItemMoving::itemMoving() {
 
 	combineVectors(PointAmmunition::pointAmmunition_C, PointMagazine::pointMagazine_C, PointBarter::pointBarter_C);
  
+
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
 		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_C[i]) {
 			if (pointCase.prefix.nameOfItems.size() != 0) {

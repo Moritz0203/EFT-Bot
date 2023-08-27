@@ -482,7 +482,7 @@ void InitializeMovPrefix::setup_prefix() {
 	}
 
 	assingPrefix_temp.prefix = prefix;
-	assingPrefix_temp.tagOfCase = "Junk -1|";
+	assingPrefix_temp.tagOfCase = "Junk";
 
 	AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
 }

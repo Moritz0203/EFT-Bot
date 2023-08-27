@@ -29,8 +29,10 @@ void PrefixProcessing::CombinePrefixAndCase() {
 				  
 	PointCaseInCase PointCaseInCase_null;
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+		uint16_t index = 0;
 		for (PointCaseInStash& pointCase : PointCaseInStash::pointCaseInStash_C[i]) {
 			prefixSearch(pointCase, PointCaseInCase_null);
+			c_log::Info("CaseInStash ", "Page Index:", c_log::LGreen, i, c_log::White, "    Index:", c_log::LGreen, index++, c_log::White, "    Case Name:", c_log::LGreen, pointCase.nameOfCase, c_log::White, "    Tag Case:", c_log::LGreen, pointCase.tagCase);
 		}
 	}
 

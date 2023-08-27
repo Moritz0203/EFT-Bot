@@ -423,13 +423,13 @@ namespace ProvisionsVector {
 
 namespace CaseVector {
 	const vector<PathNameThreshold> Case {
-		{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.80 },//AmmoCase
+		{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.79 },//AmmoCase
 		{ "CaseImages/GrenadCase.png",										"GrenadCase",				0.909 },//GrenadCase
 		{ "CaseImages/HolodilnickCase.png",									"HolodilnickCase",			0.909 },//HolodilnickCase
 		{ "CaseImages/MagCase.png",											"MagCase",					0.89 },//MagCase
 		{ "CaseImages/MedCase.png",											"MedCase",					0.91 },//MedCase
 		{ "CaseImages/MoneyCase.png",										"MoneyCase",				0.88 },//MoneyCase
-		{ "CaseImages/JunkCase.png",										"JunkCase",					0.87 },//JunkCase
+		{ "CaseImages/JunkCase.png",										"JunkCase",					0.80 },//JunkCase
 		{ "CaseImages/WeaponsCase.png",										"WeaponsCase",				0.88 },//WeaponsCase
 		{ "CaseImages/ItemsCase.png",										"ItemsCase",				0.88 },//ItemsCase
 		{ "CaseImages/THICCcase.png",										"THICCcase",				0.88 },//THICCcase

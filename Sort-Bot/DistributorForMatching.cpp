@@ -176,7 +176,7 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 				for (int i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
 					double rows = templ.rows;
 					rows -= rows / 3.0;
-					const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, rows, 12);
+					const Rect Rec(ReturnDataCase_Clean[i3].x + 2, ReturnDataCase_Clean[i3].y, rows, 12);
 					string tagCase = TextMatching::textMatching(MatScreen, Rec);
 
 					if (checkSecondLastChar(tagCase)) {

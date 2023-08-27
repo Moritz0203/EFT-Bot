@@ -57,7 +57,7 @@ void CaseProcessing::CaseOperator() {
 	
 	c_log::Start("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 
-	c_log::Info("Waiting", c_log::LBlue, " CaseProcess", c_log::Magenta, "             | [Funktion]", c_log::White, "Parent", c_log::LBlue, "CaseOperator");
+	c_log::Info("Waiting", c_log::LBlue, "  CaseProcess", c_log::Magenta, "             | [Funktion]", c_log::White, "Parent", c_log::LBlue, "CaseOperator");
 	std::unique_lock<std::mutex> lock(ItemsProcessing::mtx);
 	while (!ItemsProcessing::ready) ItemsProcessing::cv.wait(lock);
 	c_log::Info("Finished Waiting", c_log::LBlue, " CaseProcess", c_log::Magenta, "| [Funktion]", c_log::White, "Parent", c_log::LBlue, "CaseOperator");

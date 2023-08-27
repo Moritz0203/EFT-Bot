@@ -12,6 +12,7 @@
 #include "getMat.h"
 #include "PointGlobalVector.h"
 #include <set>
+#include "c_log.h"
 using namespace std;
 using namespace cv;
 
@@ -420,6 +421,21 @@ namespace ProvisionsVector {
 	};
 }
 
+namespace CaseVector {
+	const vector<PathNameThreshold> Case {
+		{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.80 },//AmmoCase
+		{ "CaseImages/GrenadCase.png",										"GrenadCase",				0.909 },//GrenadCase
+		{ "CaseImages/HolodilnickCase.png",									"HolodilnickCase",			0.909 },//HolodilnickCase
+		{ "CaseImages/MagCase.png",											"MagCase",					0.89 },//MagCase
+		{ "CaseImages/MedCase.png",											"MedCase",					0.91 },//MedCase
+		{ "CaseImages/MoneyCase.png",										"MoneyCase",				0.88 },//MoneyCase
+		{ "CaseImages/JunkCase.png",										"JunkCase",					0.87 },//JunkCase
+		{ "CaseImages/WeaponsCase.png",										"WeaponsCase",				0.88 },//WeaponsCase
+		{ "CaseImages/ItemsCase.png",										"ItemsCase",				0.88 },//ItemsCase
+		{ "CaseImages/THICCcase.png",										"THICCcase",				0.88 },//THICCcase
+	};
+}
+
 std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::vector<std::vector<PointAmmunition>>>& inputVector) {
 	std::vector<std::vector<PointAmmunition>> outputVector;
 
@@ -438,7 +454,15 @@ std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::v
 }
 
 
+std::mutex i_M;
+
+
 void ItemsProcessing::AmmunitionProcess() {
+	{
+		std::lock_guard<std::mutex> lock(i_M);
+		c_log::Start("AmmunitionProcess               ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
+	}
+
 	for (vector<PathNameThreshold> vec : AmmunitionVector::ArrayAmmunition) {
 		matching.AmmunitionMatching(vec);
 	}
@@ -455,38 +479,83 @@ void ItemsProcessing::AmmunitionProcess() {
 			cout << PointAmmunition::pointAmmunition_C[i][i2].point.y << " " << PointAmmunition::pointAmmunition_C[i][i2].point.x << " " << PointAmmunition::pointAmmunition_C[i][i2].nameOfItem << " " << PointAmmunition::pointAmmunition_C[i][i2].page << endl;
 		}
 	}*/
+
+	c_log::End("AmmunitionProcess               ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
 }
 
 
 
 void ItemsProcessing::Barter1Process() {
+	{
+		std::lock_guard<std::mutex> lock(i_M);
+		c_log::Start("Barter1Process                  ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
+	}
+
 	for (vector<PathNameThresholdItemSize> vec : BarterVector::ArrayBarter1) {
 		matching.BarterMatching(vec);
 	}
 
 	cleanUpVectorItemsBarter();
+
+	c_log::End("Barter1Process                  ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
 }
 
 void ItemsProcessing::Barter2Process() {
+	{
+		std::lock_guard<std::mutex> lock(i_M);
+		c_log::Start("Barter2Process                  ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
+	}
+
 	for (vector<PathNameThresholdItemSize> vec : BarterVector::ArrayBarter2) {
 		matching.BarterMatching(vec);
 	}
 
 	cleanUpVectorItemsBarter();
+
+	c_log::End("Barter2Process                  ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
 }
 
 void ItemsProcessing::MedicalProcess() {
+	{
+		std::lock_guard<std::mutex> lock(i_M);
+		c_log::Start("MedicalProcess                  ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
+	}
+
 	for (vector<PathNameThresholdItemSize> vec : MedicalVector::ArrayMedical) {
 		matching.BarterMatching(vec);
 	}
 
 	cleanUpVectorItemsBarter();
+
+	c_log::End("MedicalProcess                  ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
 }
 
 void ItemsProcessing::ProvisionsProcess() {
+	{
+		std::lock_guard<std::mutex> lock(i_M);
+		c_log::Start("ProvisionsProcess               ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
+	}
+
 	matching.BarterMatching(ProvisionsVector::Provisions);
 
 	cleanUpVectorItemsBarter();
+
+	c_log::End("ProvisionsProcess               ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
+}
+
+void ItemsProcessing::CaseProcess() {
+	{
+		std::lock_guard<std::mutex> lock(i_M);
+		c_log::Start("CaseProcess                     ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
+	}				  
+
+	matching.CaseMatching(CaseVector::Case);
+
+	c_log::End("CaseProcess                     ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
+
+	std::unique_lock<std::mutex> lock(mtx);
+	ready = true;
+	cv.notify_all();
 }
 
 

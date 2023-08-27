@@ -7,10 +7,12 @@
 #include "TemplateMatching.h"
 #include "PointGlobalVector.h"
 #include "DistributorForMatching.h"
+#include "ItemsProcessing.h"
 #include "getMat.h"
 #include "InputMK.h"
 #include "Checks.h"
 #include <set>
+#include "c_log.h"
 using namespace std;
 using namespace cv;
 
@@ -41,48 +43,42 @@ std::array<double, 6> CasesInCaseThreshold{
 	0.90,//MoneyCase
 };
 
-std::mutex Matching::mtx;
-std::condition_variable Matching::cv;
-bool Matching::ready = false;
+std::mutex ItemsProcessing::mtx;
+std::condition_variable ItemsProcessing::cv;
+bool ItemsProcessing::ready = false;
 
 
-void CaseProcessing::caseProcess() {
+void CaseProcessing::CaseOperator() {
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
 	checksPublic ChecksPublic;
 	Matching matching;
 
-	//matching.CaseMatching();
+	
+	c_log::Start("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 
-	std::unique_lock<std::mutex> lock(Matching::mtx);
-	while (!Matching::ready) Matching::cv.wait(lock);
-
-
-
-
-
+	c_log::Info("Waiting", c_log::LBlue, " CaseProcess", c_log::Magenta, "             | [Funktion]", c_log::White, "Parent", c_log::LBlue, "CaseOperator");
+	std::unique_lock<std::mutex> lock(ItemsProcessing::mtx);
+	while (!ItemsProcessing::ready) ItemsProcessing::cv.wait(lock);
+	c_log::Info("Finished Waiting", c_log::LBlue, " CaseProcess", c_log::Magenta, "| [Funktion]", c_log::White, "Parent", c_log::LBlue, "CaseOperator");
 
 
 
-
-
-
-	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_NC) {
+	/*for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_NC) {
 		for (PointCaseInStash Point : vec) {
 			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " << Point.point.x << " " << Point.page << endl;
 		}
-	}
+	}*/
 
 	cleanUpVectorCase();
 
-	cout << "clean" << endl;
+	/*cout << "clean" << endl;
 	for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 		for (PointCaseInStash Point : vec) {
 			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " << Point.point.x << " " << Point.page << endl;
 		}
-	}
+	}*/
 
-	cout << "start case processing" << endl;
 	std::shared_ptr<PointCaseInStash> ptr_PCIS;
 	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 
@@ -100,7 +96,7 @@ void CaseProcessing::caseProcess() {
 				PointCaseInStash* ptr_pointCaseInStash = new PointCaseInStash(INpointCase);
 
 				FindFreeSlots.findeSlots(ptr_pointCaseInStash, INpointCase.freeSlots);
-				FindFreeSlots.Print_Out_Case_EmptySlots();
+				//FindFreeSlots.Print_Out_Case_EmptySlots();
 				delete ptr_pointCaseInStash;
 				moved = true;
 			}
@@ -111,7 +107,8 @@ void CaseProcessing::caseProcess() {
 		Sleep(400);
 		Keyboard::KeyboardInput(keyforInput);
 	}
-	cout << "ende case processing" << endl;
+
+	c_log::End("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 }
 
 void CaseProcessing::MoveTopBarTHICCcase() {
@@ -246,7 +243,7 @@ void CaseProcessing::cleanUpVectorCase() {
 					
 
 					//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
-						cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << " " << multiplier << endl;
+						//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << " " << multiplier << endl;
 
 					if (pointCase.nameOfCase != inPointCase.nameOfCase)
 						continue;
@@ -259,7 +256,7 @@ void CaseProcessing::cleanUpVectorCase() {
 							set_POINT_PAGE.insert(inPoint_page);
 							Found = true;
 							//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
-								cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
+								//cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
 						}
 					}
 				}

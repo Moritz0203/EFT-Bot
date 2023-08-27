@@ -122,8 +122,8 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 POINT TemplateMatching::templateMatchingObjects(Mat MatScreen, Mat templ, double threshold) {
 	int height = {}, width = {};
 
-	/*const char* image_window = "Source Image";
-	const char* Test = "Item Image";*/
+	//const char* image_window = "Source Image";
+	//const char* Test = "Item Image";
 
 	int match_method = 5;
 	Mat result;
@@ -148,7 +148,7 @@ POINT TemplateMatching::templateMatchingObjects(Mat MatScreen, Mat templ, double
 			cv::line(img_display, matchLoc, Point(0, 0), CV_RGB(0, 255, 0), 1);
 			floodFill(result, matchLoc, 0); //mark drawn blob
 			if (matchLoc.y && matchLoc.x != 0) {
-				cout << "templateMatchingObjects -- " << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
+				//cout << "templateMatchingObjects -- " << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
 				PointReturn.y = matchLoc.y;
 				PointReturn.x = matchLoc.x;
 			}
@@ -190,7 +190,7 @@ vector<POINT> TemplateMatching::templateMatchingObjects_Vector(Mat MatScreen, Ma
 			//cv::line(img_display, matchLoc, Point(0, 0), CV_RGB(0, 255, 0), 1);
 			floodFill(result, matchLoc, 0); //mark drawn blob
 			if (matchLoc.y && matchLoc.x != 0) {
-				cout << "templateMatchingObjects_Vector -- " << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
+				//cout << "templateMatchingObjects_Vector -- " << matchLoc.y << " " << matchLoc.x << " " << templ.cols << " " << templ.rows << " " << endl;
 				temp.y = matchLoc.y;
 				temp.x = matchLoc.x;
 				PointReturn.push_back(temp);

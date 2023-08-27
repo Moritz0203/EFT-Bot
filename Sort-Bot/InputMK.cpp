@@ -13,7 +13,7 @@ void Mouse::MoverPOINTandPress(POINT Points)
 	//Sleep(1);
 	//mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 	//mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-	cout << "MouseMovPress" << endl;
+	//cout << "MouseMovPress" << endl;
 }
 
 void Mouse::MoverPOINTandPressTwoTimes(POINT Points)
@@ -28,7 +28,7 @@ void Mouse::MoverPOINTandPressTwoTimes(POINT Points)
 	Sleep(1);
 	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-	cout << "MouseMovPressTwoTimes" << endl;
+	//cout << "MouseMovPressTwoTimes" << endl;
 }
 
 void Mouse::MouseMoveAtoB(POINT PointA, POINT PointB)
@@ -40,7 +40,7 @@ void Mouse::MouseMoveAtoB(POINT PointA, POINT PointB)
 	SetCursorPos(PointB.x, PointB.y);
 	Sleep(20);//20
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-	cout << "MouseMoveAtoB" << endl;
+	//cout << "MouseMoveAtoB" << endl;
 }
 
 void Keyboard::KeyboardInput(int keyforInput)
@@ -61,5 +61,5 @@ void Keyboard::KeyboardInput(int keyforInput)
 	ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
 	SendInput(1, &ip, sizeof(INPUT));
 
-	cout << "keyboard presst" << " " << keyforInput << endl;
+	//cout << "keyboard presst" << " " << keyforInput << endl;
 }

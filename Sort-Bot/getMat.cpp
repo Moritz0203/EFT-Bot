@@ -106,7 +106,7 @@ HWND GetMat::FindeWindow() {
 	}
 
 	if (hWND) {
-		cout << "Found" << endl;
+		//cout << "Found" << endl;
 		return hWND;
 	}
 }

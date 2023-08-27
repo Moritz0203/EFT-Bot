@@ -95,7 +95,7 @@ vector<PointAmmunition> Matching::removeDuplicatesPage(vector<PointAmmunition>& 
 
 
 void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
-	cout << "amo matching" << endl;
+	//cout << "amo matching" << endl;
 	Mat templ;
 	Mat MatScreen;
 	GetMat getMat;
@@ -114,8 +114,6 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 		Rect Rec(1200, 0, MatScreenVector[i1].cols - 1200, MatScreenVector[i1].rows);
 		MatScreen = MatScreenVector[i1](Rec);
 		
-		//cv::imshow(image_window, MatScreen);
-
 		for (int i = 0; i < input.size(); i++) {
 			ReturnDataAM = TemplateMatching::templateMatchingItems(input[i].Path, input[i].Threshold, false, true, input[i].Name, MatScreen);
 
@@ -141,60 +139,18 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 		}
 
 		pointAmmunitionTemp.clear();
-		cout << "--------------- " << ++count << endl;
+		//cout << "--------------- " << ++count << endl;
 	}
-	cout << "mamo done" << endl;
+	//cout << "mamo done" << endl;
 }
 
-namespace Case {
-	std::array<std::string, 10> Cases{
-		"CaseImages/AmmoCase.png",
-		"CaseImages/GrenadCase.png",
-		"CaseImages/HolodilnickCase.png",
-		"CaseImages/MagCase.png",
-		"CaseImages/MedCase.png",
-		"CaseImages/MoneyCase.png",
-		"CaseImages/JunkCase.png",
-		"CaseImages/WeaponsCase.png",
-		"CaseImages/ItemsCase.png",
-		"CaseImages/THICCcase.png",
-	};
 
-	std::array<std::string, 10> NameOfItemCases{
-		"AmmoCase",
-		"GrenadCase",
-		"HolodilnickCase",
-		"MagCase",
-		"MedCase",
-		"MoneyCase",
-		"JunkCase",
-		"WeaponsCase",
-		"ItemsCase",
-		"THICCcase",
-	};
-
-	std::array<double, 10> CasesThreshold{
-		0.80,//AmmoCase
-		0.909,//GrenadCase
-		0.909,//HolodilnickCase
-		0.89,//MagCase
-		0.91,//MedCase
-		0.88,//MoneyCase
-		0.87,//JunkCase
-		0.88,//WeaponsCase
-		0.88,//ItemsCase
-		0.88,//THICCcase
-	};
-}
-
-void Matching::CaseMatching() {
-	cout << "case matching" << endl;
-	const int sizeString = sizeof(Case::Cases) / sizeof(string);
+void Matching::CaseMatching(vector<PathNameThreshold> input) {
 	Mat templ;
 	GetMat getMat;
 
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
-	const char* image_window = "Case Image";
+	//const char* image_window = "Case Image";
 
 	vector<POINT> ReturnDataCase;
 	vector<POINT> ReturnDataCase_Clean;
@@ -208,55 +164,33 @@ void Matching::CaseMatching() {
 
 		Rect Rec(1200, 0, MatScreen.cols - 1200, MatScreen.rows);
 		Mat MatScreenTemp = MatScreen(Rec);
-		cv::imshow(image_window, MatScreenTemp);
-		waitKey(5);
 
-		for (int i = 0; i < sizeString; i++) { 
-			
-			ReturnDataCase = TemplateMatching::templateMatchingItems(Case::Cases[i], Case::CasesThreshold[i], false, false, Case::NameOfItemCases[i], MatScreenTemp);
+		for (int i = 0; i < input.size(); i++) {
 
-			templ = imread(Case::Cases[i]);
+			ReturnDataCase = TemplateMatching::templateMatchingItems(input[i].Path, input[i].Threshold, false, true, input[i].Name, MatScreenTemp);
+
+			templ = imread(input[i].Path);
 			if (!ReturnDataCase.empty()) {
 				ReturnDataCase_Clean = removeDuplicates(ReturnDataCase);
 
-				for (POINT coutPoint : ReturnDataCase_Clean) {
-					cout << coutPoint.y << " " << coutPoint.x << endl;
-				}
-
 				for (int i3 = 0; i3 < ReturnDataCase_Clean.size(); i3++) {
 					double rows = templ.rows;
-					rows -= rows/3.0;
+					rows -= rows / 3.0;
 					const Rect Rec(ReturnDataCase_Clean[i3].x, ReturnDataCase_Clean[i3].y, rows, 12);
 					string tagCase = TextMatching::textMatching(MatScreen, Rec);
-					
-					if (checkSecondLastChar(tagCase)) {
-						
-						if (Case::NameOfItemCases[i] == "JunkCase") {
-							cout << "test" << endl;
-						}
 
-						cout << "checkSecondLastChar = is okay" << endl;
-						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], Case::NameOfItemCases[i], tagCase, templ.rows, templ.cols, page, identyfierAsHEX_ST, freeSlots_empty, prefix);
+					if (checkSecondLastChar(tagCase)) {
+						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], input[i].Name, tagCase, templ.rows, templ.cols, page, identyfierAsHEX_ST, freeSlots_empty, prefix);
 					}
 				}
 				ReturnDataCase.clear();
 				ReturnDataCase_Clean.clear();
-				cout << endl;
 			}
 		}
 		PointCaseInStash::pointCaseInStash_NC.emplace_back(pointCasetempStashTemp);
 		pointCasetempStashTemp.clear();
 		page++;
-		cout << endl;
 	}
-
-
-	std::unique_lock<std::mutex> lock(mtx);
-	ready = true;
-	cv.notify_all();
-
-
-	cout << "ende case Matching " << endl;
 }
 
 namespace Magazine {
@@ -304,7 +238,7 @@ namespace Magazine {
 	};
 }
 
-void Matching::MagazineMatching() {
+void Matching::MagazineMatching(vector<PathNameThreshold> input) {
 	const int sizeString = sizeof(Magazine::Magazine) / sizeof(string);
 	Mat templ;
 	GetMat getMat;
@@ -342,7 +276,7 @@ std::array<std::string, 2> FoundInRaid{
 };
 
 void Matching::BarterMatching(vector<PathNameThresholdItemSize> input) {
-	cout << "Barter matching" << endl;
+	//cout << "Barter matching" << endl;
 	const int sizeFoundInRaid = sizeof(FoundInRaid) / sizeof(String);
 	Mat templ;
 	Mat MatScreen;
@@ -387,7 +321,7 @@ void Matching::BarterMatching(vector<PathNameThresholdItemSize> input) {
 		}
 
 		pointBarterTemp.clear();
-		cout << "--------------- " << ++count << endl;
+		//cout << "--------------- " << ++count << endl;
 	}
-	cout << "Barter done" << endl;
+	//cout << "Barter done" << endl;
 }

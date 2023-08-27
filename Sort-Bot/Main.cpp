@@ -22,7 +22,7 @@
 //#include "PrefixProcessing.h"
 //#include "Checks.h"
 //#include "CaseProcessing.h"
-//#include "c_log.h"
+#include "c_log.h"
 using namespace std;
 //using namespace cv;
 
@@ -526,17 +526,20 @@ int main() {
 	cout << "by ECFA" << endl;
 	cout << endl;
 	
+	//c_log::add_out(new c_log::c_log_consolestream);
+
 	/*c_log::Info("hi");
 
 	c_log::Info("Config", ">>", "Loading configuration file...");
 
-
-	c_log::Info("gamemode", c_log::LGreen, 1);
 	c_log::Info("name", c_log::LGreen, "name");
 	c_log::Info("maxplayers", c_log::LGreen, 1);
 	c_log::Info("port", c_log::LGreen, 1);
 	c_log::Info("stream-distance", c_log::LGreen, 1);
-	c_log::Info("tickrate", c_log::LGreen, 1);*/
+	c_log::Info("tickrate", c_log::LGreen, 1);
+
+
+	c_log::Info("PLAYER", ">>", "Player", c_log::LYellow, "test", c_log::Reset, "- network_id:", c_log::LYellow, 11, c_log::Reset, "died.");*/
 
 	/*InitializeMovPrefix::Initialize();*/
 

@@ -15,6 +15,7 @@
 #include "PointGlobalVector.h"
 #include "TemplateMatching.h"
 #include "CaseProcessing.h"
+#include "c_log.h"
 using namespace cv;
 
 vector<vector<PointItem*>> ItemVectorCombine_Page;
@@ -181,9 +182,9 @@ void ItemMoving::MovInCase(shared_ptr<PointCaseInCase> &ptr_Case) {
 }
 
 void ItemMoving::itemMoving() {
-	combineVectors(PointAmmunition::pointAmmunition_C, PointMagazine::pointMagazine_C, PointBarter::pointBarter_C);
+	c_log::Start("ItemMoving         ", c_log::Magenta, "              | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");
 
-	std::cout << PointAmmunition::pointAmmunition_C.size() << " - " << PointMagazine::pointMagazine_C.size() << " - " << PointBarter::pointBarter_C.size() << endl;
+	combineVectors(PointAmmunition::pointAmmunition_C, PointMagazine::pointMagazine_C, PointBarter::pointBarter_C);
  
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
 		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_C[i]) {
@@ -200,4 +201,6 @@ void ItemMoving::itemMoving() {
 			MovInCase(ptr);
 		}
 	}*/
+
+	c_log::End("ItemMoving         ", c_log::Magenta, "              | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");
 }	

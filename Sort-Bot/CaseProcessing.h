@@ -10,7 +10,7 @@ class CaseProcessing {
 	static void cleanUpVectorCase();
 
 public:
-	static void caseProcess();
+	static void CaseOperator();
 
 	static void MoveTopBarTHICCcase();
 };

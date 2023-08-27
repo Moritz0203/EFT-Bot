@@ -8,6 +8,8 @@
 #include <vector>
 #include <memory>
 #include <windows.h>
+#include <thread>
+#include <mutex>
 
 class c_log
 {
@@ -109,6 +111,7 @@ public:
 	static c_log& Endl(c_log& log) { return log.put(std::endl).put(std::dec).put_color(color_t::WHITE); }
 	static c_log& Time(c_log& log) { return log.put_time(); }
 
+
 	struct c_log_base
 	{
 		virtual c_log& begin() const = 0;
@@ -129,32 +132,47 @@ public:
 	} Raw{};
 
 	static constexpr struct c_log_done : public c_log_base {
-		c_log& begin() const override { return instance().put(LYellow, Green, " - [DONE]", Reset); }
+		c_log& begin() const override { return instance().put(LYellow, Cyan, " - [DONE]  ", Reset); }
 	} Done{};
 
 	static constexpr struct c_log_debug : public c_log_base {
-		c_log& begin() const override { return instance().put(LYellow, Cyan, " - [DEBUG]", Reset); }
+		c_log& begin() const override { return instance().put(LYellow, Blue, " - [DEBUG] ", Reset); }
 	} Debug{};
 
 	static constexpr struct c_log_crash : public c_log_base {
-		c_log& begin() const override { return instance().put(LYellow, LBlue, " - [TRILOGY]", Reset); }
+		c_log& begin() const override { return instance().put(LYellow, LBlue, " - [CRASH] ", Reset); }
 	} Crash{};
 
 	static constexpr struct c_log_info : public c_log_base {
 	private:
-		c_log& begin() const override { return instance().put(LYellow, Yellow, " - [INFO]", Reset); }
+		c_log& begin() const override { return instance().put(LYellow, Yellow, " - [INFO]  ", Reset); }
 	} Info{};
 
 	static constexpr struct c_log_error : public c_log_base {
 	private:
-		c_log& begin() const override { return instance().put(LYellow, Red, " - [ERROR]", Reset); }
+		c_log& begin() const override { return instance().put(LYellow, Red, " - [ERROR] ", Reset); }
 	} Error{};
 
 	static constexpr struct c_log_input : public c_log_base {
 	private:
-		c_log& begin() const override { return instance().put(LYellow, Green, " - [INPUT]", Reset); }
+		c_log& begin() const override { return instance().put(LYellow, LGreen, " - [INPUT] ", Reset); }
 		bool force_new_line() const override { return false; }
 	} Input{};
+
+	static constexpr struct c_log_start : public c_log_base {
+	private:
+		c_log& begin() const override { return instance().put(LYellow, LGreen, " - [START] ", Reset); }
+	} Start{};
+
+	static constexpr struct c_log_end : public c_log_base {
+	private:
+		c_log& begin() const override { return instance().put(LYellow, Red, " - [END]   ", Reset); }
+	} End{};
+
+	static constexpr struct c_log_thread : public c_log_base {
+	private:
+		c_log& begin() const override { return instance().put(LYellow, LCyan, " - [THREAD]", Reset); }
+	} Thread{};
 
 	static c_log& instance() noexcept
 	{

@@ -25,15 +25,9 @@ public:
 
 	void AmmunitionMatching(vector<PathNameThreshold> input);
 
-	void CaseMatching();
+	void CaseMatching(vector<PathNameThreshold> input);
 
-	void MagazineMatching();
+	void MagazineMatching(vector<PathNameThreshold> input);
 
 	void BarterMatching(vector<PathNameThresholdItemSize> input);
-
-private:
-	friend class CaseProcessing;
-	static std::mutex mtx;
-	static std::condition_variable cv;
-	static bool ready;
 };

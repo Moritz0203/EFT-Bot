@@ -1,3 +1,7 @@
+#pragma once
+#include "Includes.h"
+using namespace cv;
+
 class ItemsProcessing {
 
 	void cleanUpVectorItemsAmmunition();
@@ -13,4 +17,12 @@ public:
 	void ProvisionsProcess();
 
 	void MedicalProcess();
+
+	void CaseProcess();
+
+private:
+	friend class CaseProcessing;
+	static std::mutex mtx;
+	static std::condition_variable cv;
+	static bool ready;
 };

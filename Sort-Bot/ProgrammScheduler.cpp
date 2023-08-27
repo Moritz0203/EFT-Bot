@@ -7,6 +7,7 @@
 #include "ItemMoving.h"
 #include "Checks.h"
 #include "getMat.h"
+#include "c_log.h"
 #include <windows.h>
 #include <iostream>
 #include <thread>
@@ -51,19 +52,27 @@ void ProgrammScheduler::Scheduler() {
 	ItemMoving itemMoving;
 	Matching matching;
 
+	c_log::add_out(new c_log::c_log_consolestream);
+
+	c_log::Start("Starting", c_log::LBlue, " ProgrammScheduler");
+
+	c_log::Thread("Starding", c_log::LCyan, " StartUp_Thread        ", c_log::Magenta, " | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");
 	std::thread StartUp_Thread(&SortStartUp::StartUp, &sortStartUp);
 
 	while (HasReceivedVersion) { Sleep(10); cout << "wait" << endl; }
 
 	ScreenShots();
 
-	std::thread Thread1(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
-	std::thread Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
-	std::thread Thread3(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
+	std::thread ItemProcessing_Thread1(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
+	c_log::Thread("Starding", c_log::LCyan, " ItemProcessing_Thread1", c_log::Magenta, " | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");
+	std::thread ItemProcessing_Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
+	c_log::Thread("Starding", c_log::LCyan, " ItemProcessing_Thread2", c_log::Magenta, " | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");
+	std::thread ItemProcessing_Thread3(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
+	c_log::Thread("Starding", c_log::LCyan, " ItemProcessing_Thread3", c_log::Magenta, " | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");
 
 	{//new scope to delete the mutex at the end
 		std::lock_guard<std::mutex> lock(m);
-		q.push(std::bind(&Matching::CaseMatching,				&matching));
+		q.push(std::bind(&ItemsProcessing::CaseProcess,			&itemsProcessing));
 		q.push(std::bind(&ItemsProcessing::AmmunitionProcess,	&itemsProcessing));
 		q.push(std::bind(&ItemsProcessing::Barter1Process,		&itemsProcessing));
 		q.push(std::bind(&ItemsProcessing::Barter2Process,		&itemsProcessing));
@@ -72,16 +81,19 @@ void ProgrammScheduler::Scheduler() {
 	}
 	c_v.notify_all();
 	
-	Thread1.join();
-	cout << "Thread1 fertig" << endl;
-	
-	Thread2.join();
-	cout << "Thread2 fertig" << endl;
+	ItemProcessing_Thread1.join();
+	c_log::Thread("Join", c_log::LRed, " ItemProcessing_Thread1");
 
-	Thread3.join();
-	cout << "Thread3 fertig" << endl;
+	ItemProcessing_Thread2.join();
+	c_log::Thread("Join", c_log::LRed, " ItemProcessing_Thread2");
+
+	ItemProcessing_Thread3.join();
+	c_log::Thread("Join", c_log::LRed, " ItemProcessing_Thread3");
 
 	StartUp_Thread.join();
+	c_log::Thread("Join", c_log::LRed, " StartUp_Thread");
 
 	itemMoving.itemMoving();
+
+	c_log::End("Ending", c_log::LBlue, " ProgrammScheduler");
 }

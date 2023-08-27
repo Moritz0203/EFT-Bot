@@ -2,6 +2,7 @@
 #include <vector>
 #include "InitializeMovPrefix.h"
 #include "MovPrefix.h"
+#include "c_log.h"
 using namespace std;
 
 namespace VectorText_Ammunition {
@@ -389,7 +390,7 @@ namespace VectorText_Provisions {
 void InitializeMovPrefix::Initialize() {
 	string settingsForMoving;
 
-	cout << "start Initialize" << endl;
+	c_log::Start("InitializeMovPrefix             ", c_log::LCyan, " | [Thread]", c_log::White,"Parent Thread", c_log::LCyan, "StartUp_Thread");
 
 	/*cout << "Do you want to keep the default settings for moving the items or set your own \n( type 'yes' for I want to keep them, type 'no' to change them or type 'view' to see the default settings ). \n" << endl;
 	cout << ": ";
@@ -398,7 +399,8 @@ void InitializeMovPrefix::Initialize() {
 	/*setup();*/
 
 	setup_prefix();
-	cout << "end Initialize" << endl;
+
+	c_log::End("InitializeMovPrefix             ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 }
 
 void InitializeMovPrefix::setup_prefix() {

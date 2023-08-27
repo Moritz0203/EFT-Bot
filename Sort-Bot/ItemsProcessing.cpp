@@ -454,7 +454,7 @@ std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::v
 }
 
 
-std::mutex i_M;
+
 
 
 void ItemsProcessing::AmmunitionProcess() {

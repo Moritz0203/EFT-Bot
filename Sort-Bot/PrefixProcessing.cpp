@@ -7,6 +7,7 @@
 #include "PointGlobalVector.h"
 #include <unordered_set>
 #include "CaseProcessing.h"
+#include "c_log.h"
 using namespace std;
 
 void PrefixProcessing::prefixSearch(PointCaseInStash &Stash, PointCaseInCase &Case) {
@@ -24,8 +25,8 @@ void PrefixProcessing::prefixSearch(PointCaseInStash &Stash, PointCaseInCase &Ca
 }
 
 void PrefixProcessing::CombinePrefixAndCase() {
-	cout << "start Prefix Processing" << endl; 
-
+	c_log::Start("CombinePrefixAndCase            ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
+				  
 	PointCaseInCase PointCaseInCase_null;
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
 		for (PointCaseInStash& pointCase : PointCaseInStash::pointCaseInStash_C[i]) {
@@ -40,5 +41,5 @@ void PrefixProcessing::CombinePrefixAndCase() {
 		}
 	}
 
-	cout << "end Prefix Processing" << endl;
+	c_log::End("CombinePrefixAndCase            ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 }

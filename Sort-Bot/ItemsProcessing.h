@@ -25,4 +25,5 @@ private:
 	static std::mutex mtx;
 	static std::condition_variable cv;
 	static bool ready;
+	static std::mutex i_M;
 };

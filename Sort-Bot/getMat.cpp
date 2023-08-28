@@ -85,9 +85,9 @@ void GetMat::TakeScreenshots(int Screens){//Please call first CheckScrollbarPosi
 	SetForegroundWindow(hWND);
 	
 	for (int i = 0; i < Screens; i++) {
-		Sleep(200);      
+		Sleep(300);      
 		MatScreenVector.push_back(getMat(hWND));
-		Sleep(200);
+		Sleep(300);
 		int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 		Keyboard::KeyboardInput(keyforInput);
 	}

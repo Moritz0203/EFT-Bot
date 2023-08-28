@@ -23,8 +23,11 @@ void checksPublic::CheckScrollbarPositions() {
 	Sleep(5);//Delete later
 	const Mat MatScreen = GetMat::getMat(hWND);
 
+	Rect Rec(1890, 0, MatScreen.cols - 1890, MatScreen.rows);
+	Mat MatScreenNew = MatScreen(Rec);
+
 	const Mat templ = imread("ObjectImages/Scrollbar.png");
-	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.98);
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreenNew, templ, 0.989);
 	if (point.y > 79) {// Later with screen resolution
 		point.y = (templ.rows / 2) + point.y;
 		point.x = (templ.cols / 2) + point.x;
@@ -44,10 +47,13 @@ void checksPublic::ClickScrollbarPositions() {
 	Sleep(5);//Delete later
 	const Mat MatScreen = GetMat::getMat(hWND);
 
+	Rect Rec(1890, 0, MatScreen.cols - 1890, MatScreen.rows);
+	Mat MatScreenNew = MatScreen(Rec);
+
 	const Mat templ = imread("ObjectImages/scrollbar.png");
-	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.70);
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreenNew, templ, 0.989);
 	point.y = (templ.rows / 2) + point.y;
-	point.x = (templ.cols / 2) + point.x;
+	point.x = (templ.cols / 2) + point.x + 1890;
 
 	Mouse::MoverPOINTandPress(point);
 }

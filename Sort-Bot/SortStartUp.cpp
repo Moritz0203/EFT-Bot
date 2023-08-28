@@ -14,6 +14,8 @@ void SortStartUp::StartUp() {
 	
 	c_log::Start("StartUp");
 
+
+
 	programmScheduler.setVersion(EdgeOfDarkness);
 
 	initializeMovPrefix.Initialize();

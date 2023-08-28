@@ -40,7 +40,7 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 	vector<POINT> result;
 	for (POINT& point : points) {
 		bool shouldInsert = true;
-		for (int i = -10; i <= 10; i++) {
+		for (int i = -20; i <= 20; i++) {
 			pair<int, int> point_x = make_pair(point.x + i, point.y);
 			pair<int, int> point_y = make_pair(point.x, point.y + i);
 			if (unSet.find(point_x) != unSet.end() || unSet.find(point_y) != unSet.end()) {
@@ -50,7 +50,7 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 		}
 		if (shouldInsert) {
 			result.push_back(point);
-			for (int i = -10; i <= 10; i++) {
+			for (int i = -20; i <= 20; i++) {
 				pair<int, int> point_x = make_pair(point.x + i, point.y);
 				pair<int, int> point_y = make_pair(point.x, point.y + i);
 				unSet.insert(point_x);
@@ -106,11 +106,10 @@ void Matching::AmmunitionMatching(vector<PathNameThreshold> input) {
 	vector<POINT> ReturnDataAM_Clean;
 	vector<PointAmmunition> pointAmmunitionTemp;
 
-	PointAmmunition::pointAmmunition_NC.resize(MatScreenVector.size());
 
 	int count = 0;
 	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
-
+			
 		Rect Rec(1200, 0, MatScreenVector[i1].cols - 1200, MatScreenVector[i1].rows);
 		MatScreen = MatScreenVector[i1](Rec);
 		
@@ -287,7 +286,6 @@ void Matching::BarterMatching(vector<PathNameThresholdItemSize> input) {
 	vector<POINT> ReturnDataBA_Clean;
 	vector<PointBarter> pointBarterTemp;
 
-	PointBarter::pointBarter_NC.resize(MatScreenVector.size());
 
 	int count = 0;
 	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
@@ -303,12 +301,13 @@ void Matching::BarterMatching(vector<PathNameThresholdItemSize> input) {
 
 				for (int i3 = 0; i3 < ReturnDataBA_Clean.size(); i3++) {
 					const Rect Rec(ReturnDataBA_Clean[i3].x + 45, ReturnDataBA_Clean[i3].y + 46, templ.cols - 45, templ.rows - 46);
+
 					for (int i4 = 0; i4 < sizeFoundInRaid; i4++) {
 						Mat temp = imread(FoundInRaid[i4]);
 						if (TemplateMatching::templateMatchingBool(MatScreenVector[i1](Rec), temp, 0.99))
-							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], input[i].Name, true, templ.rows, templ.cols, i1, input[i].ItemSize);
+							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], input[i].Name, templ.rows, templ.cols, i1, input[i].ItemSize, true);
 						else
-							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], input[i].Name, false, templ.rows, templ.cols, i1, input[i].ItemSize);
+							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], input[i].Name, templ.rows, templ.cols, i1, input[i].ItemSize, false);
 					}
 				}
 				ReturnDataBA.clear();
@@ -324,4 +323,7 @@ void Matching::BarterMatching(vector<PathNameThresholdItemSize> input) {
 		//cout << "--------------- " << ++count << endl;
 	}
 	//cout << "Barter done" << endl;
+
+
+	cout << PointBarter::pointBarter_NC.size() << endl;
 }

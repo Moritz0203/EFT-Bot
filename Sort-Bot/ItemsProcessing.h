@@ -9,6 +9,8 @@ class ItemsProcessing {
 	void cleanUpVectorItemsBarter();
 
 public:
+	void Initialize_Vectors();
+
 	void AmmunitionProcess();
 
 	void Barter1Process();

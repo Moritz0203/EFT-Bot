@@ -80,8 +80,8 @@ namespace AmmunitionVector {
 
 namespace BarterVector {
 	const vector<PathNameThresholdItemSize> Building {
-		{ "itemImages/BarterImages/Building/AnalogThermometer.png",			"AnalogThermometer",		0.85, 2 },//AnalogThermometer
-		{ "itemImages/BarterImages/Building/Bolts.png",						"Bolts",					0.85, 1 },//Bolts
+		{ "itemImages/BarterImages/Building/AnalogThermometer.png",			"AnalogThermometer",		0.84, 2 },//AnalogThermometer
+		{ "itemImages/BarterImages/Building/Bolts.png",						"Bolts",					0.84, 1 },//Bolts
 		{ "itemImages/BarterImages/Building/DuctTape.png",					"DuctTape",					0.85, 1 },//DuctTape
 		{ "itemImages/BarterImages/Building/Hose.png",						"Hose",						0.85, 2 },//Hose
 		{ "itemImages/BarterImages/Building/InsulatingTape.png",			"InsulatingTape",			0.85, 1 },//InsulatingTape
@@ -92,7 +92,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Building/Plexiglass.png",				"Plexiglass",				0.85, 1 },//Plexiglass
 		{ "itemImages/BarterImages/Building/Poxeram.png",					"Poxeram",					0.85, 1 },//Poxeram
 		{ "itemImages/BarterImages/Building/PressureGauge.png",				"PressureGauge",			0.85, 2 },//PressureGauge
-		{ "itemImages/BarterImages/Building/ScrewNuts.png",					"ScrewNuts",				0.85, 1 },//ScrewNuts
+		{ "itemImages/BarterImages/Building/ScrewNuts.png",					"ScrewNuts",				0.84, 1 },//ScrewNuts
 		{ "itemImages/BarterImages/Building/Screws.png",					"Screws",					0.85, 1 },//Screws
 		{ "itemImages/BarterImages/Building/Shus.png",						"Shus",						0.85, 3 },//Shus
 		{ "itemImages/BarterImages/Building/SiliconeTube.png",				"SiliconeTube",				0.85, 1 },//SiliconeTube
@@ -163,7 +163,7 @@ namespace BarterVector {
 																										  
 	const vector<PathNameThresholdItemSize> Flammable {													  
 		{ "itemImages/BarterImages/Flammable/Cricket.png",					"Cricket",					0.85, 1 },//Cricket
-		{ "itemImages/BarterImages/Flammable/Dryfuel.png",					"Dryfuel",					0.85, 1 },//Dryfuel
+		{ "itemImages/BarterImages/Flammable/Dryfuel.png",					"Dryfuel",					0.84, 1 },//Dryfuel
 		{ "itemImages/BarterImages/Flammable/ExpeditionaryFueltank.png",	"ExpeditionaryFueltank",	0.85, 4 },//ExpeditionaryFueltank
 		{ "itemImages/BarterImages/Flammable/FireKlean.png",				"FireKlean",				0.85, 1 },//FireKlean
 		{ "itemImages/BarterImages/Flammable/Fuelconditioner.png",			"Fuelconditioner",			0.85, 2 },//Fuelconditioner
@@ -173,7 +173,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Flammable/Propane.png",					"Propane",					0.85, 4 },//Propane
 		{ "itemImages/BarterImages/Flammable/SurvL.png",					"SurvL",					0.85, 1 },//SurvL
 		{ "itemImages/BarterImages/Flammable/Thermite.png",					"Thermite",					0.85, 1 },//Thermite
-		{ "itemImages/BarterImages/Flammable/TNTBrick.png",					"TNTBrick",					0.85, 1 },//TNTBrick
+		{ "itemImages/BarterImages/Flammable/TNTBrick.png",					"TNTBrick",					0.84, 1 },//TNTBrick
 		{ "itemImages/BarterImages/Flammable/Wd40.png",						"Wd40",						0.85, 2 },//Wd40
 		{ "itemImages/BarterImages/Flammable/Zibbo.png",					"Zibbo",					0.85, 1 },//Zibbo
 	};																									  
@@ -257,7 +257,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Others/Ripstop.png",						"Ripstop",					0.85, 2 },//Ripstop
 		{ "itemImages/BarterImages/Others/Strike.png",						"Strike",					0.85, 1 },//Strike
 		{ "itemImages/BarterImages/Others/WaterFilter.png",					"WaterFilter",				0.85, 2 },//WaterFilter
-		{ "itemImages/BarterImages/Others/WeaponParts.png",					"WeaponParts",				0.85, 2 },//WeaponParts
+		{ "itemImages/BarterImages/Others/WeaponParts.png",					"WeaponParts",				0.84, 2 },//WeaponParts
 		{ "itemImages/BarterImages/Others/Wilston.png",						"Wilston",					0.85, 1 },//Wilston
 	};																									  
 																										  
@@ -294,7 +294,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Valuables/GoldenEgg.png",				"GoldenEgg",				0.85, 1 },//GoldenEgg
 		{ "itemImages/BarterImages/Valuables/GpCoin.png",					"GpCoin",					0.85, 1 },//GpCoin
 		{ "itemImages/BarterImages/Valuables/Horse.png",					"Horse",					0.85, 2 },//Horse
-		{ "itemImages/BarterImages/Valuables/Lion.png",						"Lion",						0.83, 6 },//Lion
+		{ "itemImages/BarterImages/Valuables/Lion.png",						"Lion",						0.82, 6 },//Lion
 		{ "itemImages/BarterImages/Valuables/Prokill.png",					"Prokill",					0.83, 1 },//Prokill
 		{ "itemImages/BarterImages/Valuables/Raven.png",					"Raven",					0.83, 2 },//Raven
 		{ "itemImages/BarterImages/Valuables/Roler.png",					"Roler",					0.85, 1 },//Roler
@@ -454,7 +454,18 @@ std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::v
 }
 
 
+void ItemsProcessing::Initialize_Vectors() {
+	GetMat getMat;
+	std::lock_guard<std::mutex> lock(i_M);
 
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
+
+	PointAmmunition::pointAmmunition_NC.resize(MatScreenVector.size());
+	PointAmmunition::pointAmmunition_C.resize(MatScreenVector.size());
+
+	PointBarter::pointBarter_NC.resize(MatScreenVector.size());
+	PointBarter::pointBarter_C.resize(MatScreenVector.size());
+}
 
 
 void ItemsProcessing::AmmunitionProcess() {
@@ -497,6 +508,8 @@ void ItemsProcessing::Barter1Process() {
 
 	cleanUpVectorItemsBarter();
 
+	cout << "barter 1 Size Clean" << PointBarter::pointBarter_C.size() << endl;
+
 	c_log::End("Barter1Process                  ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
 }
 
@@ -511,6 +524,8 @@ void ItemsProcessing::Barter2Process() {
 	}
 
 	cleanUpVectorItemsBarter();
+
+	cout << "barter 2 Size Clean" << PointBarter::pointBarter_C.size() << endl;
 
 	c_log::End("Barter2Process                  ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
 }
@@ -569,14 +584,13 @@ struct POINT_PAGE {
 };
 
 void ItemsProcessing::cleanUpVectorItemsAmmunition() {
-	vector<PointAmmunition> temp;
 	POINT_PAGE point_page{};
 	POINT_PAGE inPoint_page{};
 	std::set<POINT_PAGE> set_POINT_PAGE;
 
-	temp = PointAmmunition::pointAmmunition_NC[0];
-	PointAmmunition::pointAmmunition_C.emplace_back(temp);
-	temp.clear();
+	for (PointAmmunition pointAmmunition : PointAmmunition::pointAmmunition_NC[0]) {
+		PointAmmunition::pointAmmunition_C[0].emplace_back(pointAmmunition);
+	}
 
 	uint8_t iTemp = 1;
 	for (uint8_t i = 1; i < PointAmmunition::pointAmmunition_NC.size(); i++) {
@@ -628,38 +642,47 @@ void ItemsProcessing::cleanUpVectorItemsAmmunition() {
 				multiplier++;
 			}
 			if (Found)
-				temp.emplace_back(pointCase);
+				PointAmmunition::pointAmmunition_C[i].emplace_back(pointCase);
 		}
 		if (iTemp == 10) {
 			for (PointAmmunition pointCase : PointAmmunition::pointAmmunition_NC[iTemp]) {
 				if (pointCase.point.y >= 618) {
-					temp.emplace_back(pointCase);
+					PointAmmunition::pointAmmunition_C[i].emplace_back(pointCase);
 				}
 			}
 		}
-		PointAmmunition::pointAmmunition_C.emplace_back(temp);
-		temp.clear();
 	}
 }
 
+
+
 void ItemsProcessing::cleanUpVectorItemsBarter() {
-	vector<PointBarter> temp;
 	POINT_PAGE point_page{};
 	POINT_PAGE inPoint_page{};
 	std::set<POINT_PAGE> set_POINT_PAGE;
 
-	temp = PointBarter::pointBarter_NC[0];
-	PointBarter::pointBarter_C.emplace_back(temp);
-	temp.clear();
+	/*for (PointBarter pointBarter : PointBarter::pointBarter_NC[0]) {
+		PointBarter::pointBarter_C[0].emplace_back(pointBarter);
+	}*/
 
-	uint8_t iTemp = 1;
-	for (uint8_t i = 1; i < PointBarter::pointBarter_NC.size(); i++) {
+	vector<vector<PointBarter>> CopyPointBarter_NC = PointBarter::pointBarter_NC;
+
+	uint8_t iTemp = 0;
+	for (uint8_t i = 0; i < CopyPointBarter_NC.size(); i++) {
 		iTemp++;
 
-		if (iTemp == PointBarter::pointBarter_NC.size())
+		if (i == 0) {
+			for (PointBarter pointCase : CopyPointBarter_NC[i]) {
+				if (pointCase.point.y <= 400) {
+					PointBarter::pointBarter_C[i].emplace_back(pointCase);
+				}
+			}
+		}
+
+		if (iTemp == CopyPointBarter_NC.size())
 			break;
 
-		for (PointBarter pointCase : PointBarter::pointBarter_NC[i]) {
+		for (PointBarter pointCase : CopyPointBarter_NC[i]) {
 			point_page.page = pointCase.page;
 			point_page.point = pointCase.point;
 
@@ -668,9 +691,9 @@ void ItemsProcessing::cleanUpVectorItemsBarter() {
 
 			bool Found = false;
 			uint8_t multiplier = 1;
-			for (uint8_t iTempLoop = iTemp; iTempLoop < PointBarter::pointBarter_NC.size() - 1 || iTempLoop < iTemp + 3; iTempLoop++) {
+			for (uint8_t iTempLoop = iTemp; iTempLoop < CopyPointBarter_NC.size() - 1 || iTempLoop < iTemp + 3; iTempLoop++) {
 
-				for (PointBarter inPointCase : PointBarter::pointBarter_NC[iTempLoop]) {
+				for (PointBarter inPointCase : CopyPointBarter_NC[iTempLoop]) {
 					PointBarter tempPointCase = inPointCase;
 					tempPointCase.point.y = tempPointCase.point.y + (343 * multiplier);
 					inPoint_page.page = inPointCase.page;
@@ -702,16 +725,14 @@ void ItemsProcessing::cleanUpVectorItemsBarter() {
 				multiplier++;
 			}
 			if (Found)
-				temp.emplace_back(pointCase);
+				PointBarter::pointBarter_C[i].emplace_back(pointCase);
 		}
 		if (iTemp == 10) {
-			for (PointBarter pointCase : PointBarter::pointBarter_NC[iTemp]) {
+			for (PointBarter pointCase : CopyPointBarter_NC[iTemp]) {
 				if (pointCase.point.y >= 618) {
-					temp.emplace_back(pointCase);
+					PointBarter::pointBarter_C[i].emplace_back(pointCase);
 				}
 			}
 		}
-		PointBarter::pointBarter_C.emplace_back(temp);
-		temp.clear();
 	}
 }

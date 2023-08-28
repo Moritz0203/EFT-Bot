@@ -156,9 +156,9 @@ POINT TemplateMatching::templateMatchingObjects(Mat MatScreen, Mat templ, double
 		else
 			break;
 	}
-	//cv::imshow(image_window, img_display);
+	/*cv::imshow(image_window, img_display);
 
-	//waitKey(0);
+	waitKey(0);*/
 
 	return PointReturn;
 }

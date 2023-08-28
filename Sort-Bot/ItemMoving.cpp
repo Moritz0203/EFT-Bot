@@ -26,9 +26,29 @@ void combineVectors(const std::vector<std::vector<PointAmmunition>>& vecAmmuniti
 {
 	const size_t max_size = std::max({ vecAmmunition.size(), vecMagazine.size(), vecBarter.size() });
 
+	/*ItemVectorCombine_Page.resize(max_size);
+
+	for (int i = 0; i < max_size; i++) {
+		if (i < vecAmmunition.size()) {
+			for (const auto& item : vecAmmunition[i]) {
+				ItemVectorCombine_Page[i].push_back(new PointAmmunition(item));
+			}
+		}
+		else if (i < vecMagazine.size()) {
+			for (const auto& item : vecMagazine[i]) {
+				ItemVectorCombine_Page[i].push_back(new PointMagazine(item));
+			}
+		}
+		else if (i < vecBarter.size()) {
+			for (const auto& item : vecBarter[i]) {
+				ItemVectorCombine_Page[i].push_back(new PointBarter(item));
+			}
+		}
+	}*/
+
 	for (size_t i = 0; i < max_size; ++i) { // NOTE: Löschen der erzeugten mit new 
 		std::vector<PointItem*> row;
-		if (i < vecAmmunition.size()) {
+		/*if (i < vecAmmunition.size()) {
 			for (const auto& item : vecAmmunition[i]) {
 				row.push_back(new PointAmmunition(item));
 			}
@@ -36,7 +56,7 @@ void combineVectors(const std::vector<std::vector<PointAmmunition>>& vecAmmuniti
 			for (const auto& item : vecMagazine[i]) {
 				row.push_back(new PointMagazine(item));
 			}
-		} else if (i < vecBarter.size()) {
+		} else */if (i < vecBarter.size()) {
 			for (const auto& item : vecBarter[i]) {
 				row.push_back(new PointBarter(item));
 			}
@@ -191,6 +211,15 @@ void ItemMoving::itemMoving() {
 
 	combineVectors(PointAmmunition::pointAmmunition_C, PointMagazine::pointMagazine_C, PointBarter::pointBarter_C);
  
+
+	cout << ItemVectorCombine_Page.size() << endl;
+
+
+	for (int i = 0; i < ItemVectorCombine_Page.size(); i++) {
+		for (const PointItem* pointforMov : ItemVectorCombine_Page[i]) {
+			cout << "Name of Item: " << pointforMov->nameOfItem << "    Page of Item: " << pointforMov->page << "    ItemVectorCobine Index: " << i << endl;
+		}
+	}
 
 	for (int i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
 		for (PointCaseInStash pointCase : PointCaseInStash::pointCaseInStash_C[i]) {

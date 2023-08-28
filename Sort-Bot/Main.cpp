@@ -22,7 +22,7 @@
 //#include "PrefixProcessing.h"
 //#include "Checks.h"
 //#include "CaseProcessing.h"
-#include "c_log.h"
+//#include "c_log.h"
 using namespace std;
 //using namespace cv;
 
@@ -563,16 +563,16 @@ int main() {
 
 
 		//ItemsProcessing	itemsProcessing;	
-		/*CaseProcessing caseProcessing;
-		checksPublic ChecksPublic;
-		GetMat getMat;*/
+		//CaseProcessing caseProcessing;
+		//checksPublic ChecksPublic;
+		//GetMat getMat;
 
 
-		/*ChecksPublic.CheckScrollbarPositions();
-		Sleep(300);
-		getMat.TakeScreenshots(11);*/
+		//ChecksPublic.CheckScrollbarPositions();
+		//Sleep(300);
+		//getMat.TakeScreenshots(3);
 
-		//caseProcessing.caseProcess();
+		////caseProcessing.caseProcess();
 
 		//itemsProcessing.Barter2Process();
 	

@@ -274,8 +274,7 @@ std::array<std::string, 2> FoundInRaid{
 	"ObjectImages/FoundInRaid/FoundInRaid-Red.png"
 };
 
-void Matching::BarterMatching(vector<PathNameThresholdItemSize> input) {
-	//cout << "Barter matching" << endl;
+void Matching::BarterMatching(vector<PathNameThresholdItemSize> input, vector<vector<PointBarter>> &input_vec) {
 	const int sizeFoundInRaid = sizeof(FoundInRaid) / sizeof(String);
 	Mat templ;
 	Mat MatScreen;
@@ -285,7 +284,6 @@ void Matching::BarterMatching(vector<PathNameThresholdItemSize> input) {
 	vector<POINT> ReturnDataBA;
 	vector<POINT> ReturnDataBA_Clean;
 	vector<PointBarter> pointBarterTemp;
-
 
 	int count = 0;
 	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
@@ -316,14 +314,10 @@ void Matching::BarterMatching(vector<PathNameThresholdItemSize> input) {
 		}
 
 		for (PointBarter& pointAM : pointBarterTemp) {
-			PointBarter::pointBarter_NC[i1].emplace_back(pointAM);
+			input_vec[i1].emplace_back(pointAM);
 		}
 
 		pointBarterTemp.clear();
-		//cout << "--------------- " << ++count << endl;
 	}
-	//cout << "Barter done" << endl;
-
-
-	cout << PointBarter::pointBarter_NC.size() << endl;
+	cout << input_vec.size() << endl;
 }

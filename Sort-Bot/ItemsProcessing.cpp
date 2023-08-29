@@ -454,6 +454,11 @@ std::vector<std::vector<PointAmmunition>> VectorInPages(const std::vector<std::v
 }
 
 
+vector<vector<PointBarter>> ItemsProcessing::pointBarter_Barter1_NC;
+vector<vector<PointBarter>> ItemsProcessing::pointBarter_Barter2_NC;
+vector<vector<PointBarter>> ItemsProcessing::pointBarter_Medical_NC;
+vector<vector<PointBarter>> ItemsProcessing::pointBarter_Provisions_NC;
+
 void ItemsProcessing::Initialize_Vectors() {
 	GetMat getMat;
 	std::lock_guard<std::mutex> lock(i_M);
@@ -463,9 +468,20 @@ void ItemsProcessing::Initialize_Vectors() {
 	PointAmmunition::pointAmmunition_NC.resize(MatScreenVector.size());
 	PointAmmunition::pointAmmunition_C.resize(MatScreenVector.size());
 
-	PointBarter::pointBarter_NC.resize(MatScreenVector.size());
+
 	PointBarter::pointBarter_C.resize(MatScreenVector.size());
+
+
+	pointBarter_Barter1_NC.resize(MatScreenVector.size());
+
+	pointBarter_Barter2_NC.resize(MatScreenVector.size());
+
+	pointBarter_Medical_NC.resize(MatScreenVector.size());
+
+	pointBarter_Provisions_NC.resize(MatScreenVector.size());
 }
+
+
 
 
 void ItemsProcessing::AmmunitionProcess() {
@@ -496,6 +512,7 @@ void ItemsProcessing::AmmunitionProcess() {
 
 
 
+
 void ItemsProcessing::Barter1Process() {
 	{
 		std::lock_guard<std::mutex> lock(i_M);
@@ -503,10 +520,17 @@ void ItemsProcessing::Barter1Process() {
 	}
 
 	for (vector<PathNameThresholdItemSize> vec : BarterVector::ArrayBarter1) {
-		matching.BarterMatching(vec);
+		matching.BarterMatching(vec, pointBarter_Barter1_NC);
 	}
 
-	cleanUpVectorItemsBarter();
+
+	for (int i = 0; i < 2; i++) {
+		for (PointBarter BA : pointBarter_Barter1_NC[i]) {
+			cout << BA.nameOfItem << " y: " << BA.point.y << " x: " << BA.point.x << endl;
+		}
+	}
+
+	cleanUpVectorItemsBarter(pointBarter_Barter1_NC);
 
 	cout << "barter 1 Size Clean" << PointBarter::pointBarter_C.size() << endl;
 
@@ -520,10 +544,10 @@ void ItemsProcessing::Barter2Process() {
 	}
 
 	for (vector<PathNameThresholdItemSize> vec : BarterVector::ArrayBarter2) {
-		matching.BarterMatching(vec);
+		matching.BarterMatching(vec, pointBarter_Barter2_NC);
 	}
 
-	cleanUpVectorItemsBarter();
+	cleanUpVectorItemsBarter(pointBarter_Barter2_NC);
 
 	cout << "barter 2 Size Clean" << PointBarter::pointBarter_C.size() << endl;
 
@@ -537,10 +561,10 @@ void ItemsProcessing::MedicalProcess() {
 	}
 
 	for (vector<PathNameThresholdItemSize> vec : MedicalVector::ArrayMedical) {
-		matching.BarterMatching(vec);
+		matching.BarterMatching(vec, pointBarter_Medical_NC);
 	}
 
-	cleanUpVectorItemsBarter();
+	cleanUpVectorItemsBarter(pointBarter_Medical_NC);
 
 	c_log::End("MedicalProcess                  ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
 }
@@ -551,12 +575,15 @@ void ItemsProcessing::ProvisionsProcess() {
 		c_log::Start("ProvisionsProcess               ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
 	}
 
-	matching.BarterMatching(ProvisionsVector::Provisions);
+	matching.BarterMatching(ProvisionsVector::Provisions, pointBarter_Provisions_NC);
 
-	cleanUpVectorItemsBarter();
+	cleanUpVectorItemsBarter(pointBarter_Provisions_NC);
 
 	c_log::End("ProvisionsProcess               ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "ItemProcessing_Thread");
 }
+
+
+
 
 void ItemsProcessing::CaseProcess() {
 	{
@@ -572,6 +599,7 @@ void ItemsProcessing::CaseProcess() {
 	ready = true;
 	cv.notify_all();
 }
+
 
 
 
@@ -656,28 +684,17 @@ void ItemsProcessing::cleanUpVectorItemsAmmunition() {
 
 
 
-void ItemsProcessing::cleanUpVectorItemsBarter() {
+void ItemsProcessing::cleanUpVectorItemsBarter(vector<vector<PointBarter>> &input_vec) {
 	POINT_PAGE point_page{};
 	POINT_PAGE inPoint_page{};
 	std::set<POINT_PAGE> set_POINT_PAGE;
 
-	/*for (PointBarter pointBarter : PointBarter::pointBarter_NC[0]) {
-		PointBarter::pointBarter_C[0].emplace_back(pointBarter);
-	}*/
-
-	vector<vector<PointBarter>> CopyPointBarter_NC = PointBarter::pointBarter_NC;
+	vector<vector<PointBarter>> CopyPointBarter_NC = input_vec;
 
 	uint8_t iTemp = 0;
 	for (uint8_t i = 0; i < CopyPointBarter_NC.size(); i++) {
 		iTemp++;
 
-		if (i == 0) {
-			for (PointBarter pointCase : CopyPointBarter_NC[i]) {
-				if (pointCase.point.y <= 400) {
-					PointBarter::pointBarter_C[i].emplace_back(pointCase);
-				}
-			}
-		}
 
 		if (iTemp == CopyPointBarter_NC.size())
 			break;
@@ -726,6 +743,14 @@ void ItemsProcessing::cleanUpVectorItemsBarter() {
 			}
 			if (Found)
 				PointBarter::pointBarter_C[i].emplace_back(pointCase);
+		}
+		if (i == 0) {
+			for (PointBarter pointCase : CopyPointBarter_NC[i]) {
+				if (pointCase.point.y <= 400) {
+					PointBarter::pointBarter_C[i].emplace_back(pointCase);
+					cout << pointCase.nameOfItem << endl;
+				}
+			}
 		}
 		if (iTemp == 10) {
 			for (PointBarter pointCase : CopyPointBarter_NC[iTemp]) {

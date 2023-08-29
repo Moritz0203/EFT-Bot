@@ -29,5 +29,5 @@ public:
 
 	void MagazineMatching(vector<PathNameThreshold> input);
 
-	void BarterMatching(vector<PathNameThresholdItemSize> input);
+	void BarterMatching(vector<PathNameThresholdItemSize> input, vector<vector<PointBarter>> &input_vec);
 };

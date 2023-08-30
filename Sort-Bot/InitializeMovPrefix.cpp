@@ -221,8 +221,8 @@ namespace VectorText_Barter {
 		"Buddy",
 		"Coffe",
 		"Cordura",
-		"DogtagsBear",
-		"DogtagsUsec",
+		//"DogtagsBear",
+		//"DogtagsUsec",
 		"Eagle",
 		"EnglishTea",
 		"Fleece",
@@ -415,19 +415,6 @@ void InitializeMovPrefix::setup_prefix() {
 		prefix.nameOfItems.push_back(str);
 	}
 
-	/*for (string str : prefix.nameOfItems) {
-		cout << str << endl;
-	}*/
-
-	assingPrefix_temp.prefix = prefix;
-	assingPrefix_temp.tagOfCase = "AMO-1|";
-
-	AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
-
-
-	prefix.isFull = false;
-	prefix.nameOfItems = {};
-
 	for (string str : VectorText_Ammunition::Rus762x39) {
 		prefix.nameOfItems.push_back(str);
 	}
@@ -440,9 +427,24 @@ void InitializeMovPrefix::setup_prefix() {
 	}*/
 
 	assingPrefix_temp.prefix = prefix;
-	assingPrefix_temp.tagOfCase = "AMO-2|";
+	assingPrefix_temp.tagOfCase = "Amo";
 
 	AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
+
+
+	prefix.isFull = false;
+	prefix.nameOfItems = {};
+
+	
+
+	///*for (string str : prefix.nameOfItems) {
+	//	cout << str << endl;
+	//}*/
+
+	//assingPrefix_temp.prefix = prefix;
+	//assingPrefix_temp.tagOfCase = "AMO-2|";
+
+	//AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
 
 
 

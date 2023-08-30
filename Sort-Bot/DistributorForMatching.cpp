@@ -299,13 +299,17 @@ void Matching::BarterMatching(vector<PathNameThresholdItemSize> input, vector<ve
 
 				for (int i3 = 0; i3 < ReturnDataBA_Clean.size(); i3++) {
 					const Rect Rec(ReturnDataBA_Clean[i3].x + 45, ReturnDataBA_Clean[i3].y + 46, templ.cols - 45, templ.rows - 46);
-
+					
 					for (int i4 = 0; i4 < sizeFoundInRaid; i4++) {
 						Mat temp = imread(FoundInRaid[i4]);
-						if (TemplateMatching::templateMatchingBool(MatScreenVector[i1](Rec), temp, 0.99))
+						if (TemplateMatching::templateMatchingBool(MatScreenVector[i1](Rec), temp, 0.99)) {
 							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], input[i].Name, templ.rows, templ.cols, i1, input[i].ItemSize, true);
-						else
-							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], input[i].Name, templ.rows, templ.cols, i1, input[i].ItemSize, false);
+							break;
+						}
+						else {
+							pointBarterTemp.emplace_back(ReturnDataBA_Clean[i3], input[i].Name, templ.rows, templ.cols, i1, input[i].ItemSize, false); 
+							break;
+						}
 					}
 				}
 				ReturnDataBA.clear();

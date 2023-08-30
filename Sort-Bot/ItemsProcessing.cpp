@@ -80,10 +80,10 @@ namespace AmmunitionVector {
 
 namespace BarterVector {
 	const vector<PathNameThresholdItemSize> Building {
-		{ "itemImages/BarterImages/Building/AnalogThermometer.png",			"AnalogThermometer",		0.84, 2 },//AnalogThermometer
+		{ "itemImages/BarterImages/Building/AnalogThermometer.png",			"AnalogThermometer",		0.82, 2 },//AnalogThermometer
 		{ "itemImages/BarterImages/Building/Bolts.png",						"Bolts",					0.84, 1 },//Bolts
 		{ "itemImages/BarterImages/Building/DuctTape.png",					"DuctTape",					0.85, 1 },//DuctTape
-		{ "itemImages/BarterImages/Building/Hose.png",						"Hose",						0.85, 2 },//Hose
+		{ "itemImages/BarterImages/Building/Hose.png",						"Hose",						0.83, 2 },//Hose
 		{ "itemImages/BarterImages/Building/InsulatingTape.png",			"InsulatingTape",			0.85, 1 },//InsulatingTape
 		{ "itemImages/BarterImages/Building/KEKTape.png",					"KEKTape",					0.85, 1 },//KEKTape
 		{ "itemImages/BarterImages/Building/MetalSpare.png",				"MetalSpare",				0.85, 1 },//MetalSpare
@@ -129,7 +129,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Electronics/GasAnalyzer.png",			"GasAnalyzer",				0.85, 2 },//GasAnalyzer
 		{ "itemImages/BarterImages/Electronics/GeigerMuellerCounter.png",	"GeigerMuellerCounter",		0.85, 2 },//GeigerMuellerCounter
 		{ "itemImages/BarterImages/Electronics/GPSamplifier.png",			"GPSamplifier",				0.85, 1 },//GPSamplifier
-		{ "itemImages/BarterImages/Electronics/GraphicsCard.png",			"GraphicsCard",				0.85, 2 },//GraphicsCard
+		{ "itemImages/BarterImages/Electronics/GraphicsCard.png",			"GraphicsCard",				0.83, 2 },//GraphicsCard
 		//{ "itemImages/BarterImages/Electronics/Gyroscope.png",			"Gyroscope",				0.85, 1 },//Gyroscope
 		{ "itemImages/BarterImages/Electronics/Iridium.png",				"Iridium",					0.85, 1 },//Iridium
 		{ "itemImages/BarterImages/Electronics/Lcd.png",					"Lcd",						0.85, 2 },//Lcd
@@ -257,7 +257,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Others/Ripstop.png",						"Ripstop",					0.85, 2 },//Ripstop
 		{ "itemImages/BarterImages/Others/Strike.png",						"Strike",					0.85, 1 },//Strike
 		{ "itemImages/BarterImages/Others/WaterFilter.png",					"WaterFilter",				0.85, 2 },//WaterFilter
-		{ "itemImages/BarterImages/Others/WeaponParts.png",					"WeaponParts",				0.84, 2 },//WeaponParts
+		{ "itemImages/BarterImages/Others/WeaponParts.png",					"WeaponParts",				0.82, 2 },//WeaponParts
 		{ "itemImages/BarterImages/Others/Wilston.png",						"Wilston",					0.85, 1 },//Wilston
 	};																									  
 																										  
@@ -275,8 +275,8 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Tools/Nippers.png",						"Nippers",					0.85, 1 },//Nippers
 		{ "itemImages/BarterImages/Tools/PGW.png",							"PGW",						0.85, 2 },//PGW
 		{ "itemImages/BarterImages/Tools/Pliers.png",						"Pliers",					0.85, 1 },//Pliers
-		{ "itemImages/BarterImages/Tools/RatchetWrench.png",				"RatchetWrench",			0.85, 2 },//RatchetWrench
-		{ "itemImages/BarterImages/Tools/RoundPliers.png",					"RoundPliers",				0.85, 1 },//RoundPliers
+		{ "itemImages/BarterImages/Tools/RatchetWrench.png",				"RatchetWrench",			0.80, 2 },//RatchetWrench
+		{ "itemImages/BarterImages/Tools/RoundPliers.png",					"RoundPliers",				0.83, 1 },//RoundPliers
 		{ "itemImages/BarterImages/Tools/Screwdriver.png",					"Screwdriver",				0.85, 1 },//Screwdriver
 		{ "itemImages/BarterImages/Tools/SewingKit.png",					"SewingKit",				0.85, 1 },//SewingKit
 		//{ "itemImages/BarterImages/Tools/Sledgehammer.png",				"Sledgehammer",				0.85, 10 },//Sledgehammer
@@ -288,7 +288,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Valuables/Axel.png",						"Axel",						0.85, 2 },//Axel
 		{ "itemImages/BarterImages/Valuables/Badge.png",					"Badge",					0.85, 1 },//Badge
 		{ "itemImages/BarterImages/Valuables/Bitcoin.png",					"Bitcoin",					0.85, 1 },//Bitcoin
-		{ "itemImages/BarterImages/Valuables/Cat.png",						"Cat",						0.85, 3 },//Cat
+		{ "itemImages/BarterImages/Valuables/Cat.png",						"Cat",						0.84, 3 },//Cat
 		{ "itemImages/BarterImages/Valuables/Chainlet.png",					"Chainlet",					0.85, 1 },//Chainlet
 		{ "itemImages/BarterImages/Valuables/GoldChain.png",				"GoldChain",				0.85, 1 },//GoldChain
 		{ "itemImages/BarterImages/Valuables/GoldenEgg.png",				"GoldenEgg",				0.85, 1 },//GoldenEgg
@@ -616,12 +616,12 @@ void ItemsProcessing::cleanUpVectorItemsAmmunition() {
 	POINT_PAGE inPoint_page{};
 	std::set<POINT_PAGE> set_POINT_PAGE;
 
-	for (PointAmmunition pointAmmunition : PointAmmunition::pointAmmunition_NC[0]) {
+	/*for (PointAmmunition pointAmmunition : PointAmmunition::pointAmmunition_NC[0]) {
 		PointAmmunition::pointAmmunition_C[0].emplace_back(pointAmmunition);
-	}
+	}*/
 
-	uint8_t iTemp = 1;
-	for (uint8_t i = 1; i < PointAmmunition::pointAmmunition_NC.size(); i++) {
+	uint8_t iTemp = 0;
+	for (uint8_t i = 0; i < PointAmmunition::pointAmmunition_NC.size(); i++) {
 		iTemp++;
 
 		if (iTemp == PointAmmunition::pointAmmunition_NC.size())
@@ -671,6 +671,13 @@ void ItemsProcessing::cleanUpVectorItemsAmmunition() {
 			}
 			if (Found)
 				PointAmmunition::pointAmmunition_C[i].emplace_back(pointCase);
+		}
+		if (i == 0) {
+			for (PointAmmunition pointCase : PointAmmunition::pointAmmunition_NC[i]) {
+				if (pointCase.point.y <= 400) {
+					PointAmmunition::pointAmmunition_C[i].emplace_back(pointCase);
+				}
+			}
 		}
 		if (iTemp == 10) {
 			for (PointAmmunition pointCase : PointAmmunition::pointAmmunition_NC[iTemp]) {
@@ -748,7 +755,6 @@ void ItemsProcessing::cleanUpVectorItemsBarter(vector<vector<PointBarter>> &inpu
 			for (PointBarter pointCase : CopyPointBarter_NC[i]) {
 				if (pointCase.point.y <= 400) {
 					PointBarter::pointBarter_C[i].emplace_back(pointCase);
-					cout << pointCase.nameOfItem << endl;
 				}
 			}
 		}

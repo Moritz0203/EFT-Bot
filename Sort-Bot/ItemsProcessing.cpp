@@ -119,7 +119,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Electronics/Capacitors.png",				"Capacitors",				0.85, 1 },//Capacitors
 		{ "itemImages/BarterImages/Electronics/COFDM.png",					"COFDM",					0.85, 2 },//COFDM
 		{ "itemImages/BarterImages/Electronics/CPU.png",					"CPU",						0.89, 1 },//CPU
-		{ "itemImages/BarterImages/Electronics/CPUFan.png",					"CPUFan",					0.80, 1 },//CPUFan
+		{ "itemImages/BarterImages/Electronics/CPUFan.png",					"CPUFan",					0.79, 1 },//CPUFan
 		{ "itemImages/BarterImages/Electronics/DamagedHardDrive.png",		"DamagedHardDrive",			0.85, 2 },//DamagedHardDrive
 		{ "itemImages/BarterImages/Electronics/DVDdrive.png",				"DVDdrive",					0.89, 2 },//DVDdrive
 		{ "itemImages/BarterImages/Electronics/ElectricDrill.png",			"ElectricDrill",			0.85, 4 },//ElectricDrill
@@ -163,7 +163,7 @@ namespace BarterVector {
 																										  
 	const vector<PathNameThresholdItemSize> Flammable {													  
 		{ "itemImages/BarterImages/Flammable/Cricket.png",					"Cricket",					0.85, 1 },//Cricket
-		{ "itemImages/BarterImages/Flammable/Dryfuel.png",					"Dryfuel",					0.84, 1 },//Dryfuel
+		{ "itemImages/BarterImages/Flammable/Dryfuel.png",					"Dryfuel",					0.83, 1 },//Dryfuel
 		{ "itemImages/BarterImages/Flammable/ExpeditionaryFueltank.png",	"ExpeditionaryFueltank",	0.85, 4 },//ExpeditionaryFueltank
 		{ "itemImages/BarterImages/Flammable/FireKlean.png",				"FireKlean",				0.85, 1 },//FireKlean
 		{ "itemImages/BarterImages/Flammable/Fuelconditioner.png",			"Fuelconditioner",			0.85, 2 },//Fuelconditioner

@@ -1,8 +1,6 @@
-//#include "StartUp.h"
 #pragma once
-#include <iostream>
 #include "ProgrammScheduler.h"
- 
+//#include <iostream>
 //#include <vector>
 //#include <conio.h>
 //#include <windows.h>
@@ -23,12 +21,47 @@
 //#include "Checks.h"
 //#include "CaseProcessing.h"
 //#include "c_log.h"
-using namespace std;
-//using namespace cv;
+//using namespace std;
 
 //external controllers for applications / ECFA
 //www.ecfa-bots.com
 //www.ecfa-blackmarket.com 
+
+
+
+
+
+
+
+
+
+
+int main() {	
+	ProgrammScheduler programmScheduler;
+
+	programmScheduler.Scheduler();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //struct pair_hash {
 //	template <class T1, class T2>
@@ -500,42 +533,6 @@ using namespace std;
 //	}
 //	pointItems = result;
 //}
-
-
-
-
-
-
-
-
-int main() {	
-	ProgrammScheduler programmScheduler;
-
-	programmScheduler.Scheduler();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void Test() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
@@ -562,11 +559,11 @@ SetForegroundWindow(hWND);*/
 /*Sleep(100);
 Mat MatScreen = GetMat::getMat(hWND);*/
 
-	string Start = "start";
+	//string Start = "start";
 
 	//cin >> Start;
 
-	if (Start == "start") {
+	//if (Start == "start") {
 
 
 
@@ -597,8 +594,8 @@ Mat MatScreen = GetMat::getMat(hWND);*/
 
 		//cin; 
 		//itemMoving.itemMoving();
-	}
-	else {
+	//}
+	//else {
 
 
 
@@ -1100,5 +1097,5 @@ Mat MatScreen = GetMat::getMat(hWND);*/
 			cout << Returner[i].y << " " << Returner[i].x << endl;
 	}*/
 
-	}
+	//}
 }

@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="checksPublic" Collapsed="true">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAIAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Checks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="findFreeSlots" Collapsed="true">
+    <Position X="12.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAIIAAAAAAQAAABAAAAABAA=</HashCode>
+      <FileName>Checks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Check_for_Space" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAIAAAACAAAAAAAQAAAAAAAQ=</HashCode>
+      <FileName>Checks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Matching" Collapsed="true">
+    <Position X="12.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAIAAAIAAAAQAAAAAAAAAAAAAAAABEAAAAAAAAEA=</HashCode>
+      <FileName>DistributorForMatching.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TemplateMatching" Collapsed="true">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABABAAAQAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>TemplateMatching.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColorMatching" Collapsed="true">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>TemplateMatching.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgrammScheduler" Collapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAACAEAAAAAAEAEAAgAAAAA=</HashCode>
+      <FileName>ProgrammScheduler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SortStartUp" Collapsed="true">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAIAAAAAEAAAAAAAA=</HashCode>
+      <FileName>SortStartUp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InitializeMovPrefix" Collapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>InitializeMovPrefix.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrefixProcessing" Collapsed="true">
+    <Position X="9" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PrefixProcessing.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CaseProcessing" Collapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAEAAQAAEABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CaseProcessing.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemMoving" Collapsed="true">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAACAAAAAAAAAAAAAAAAAAAAEABAAAAAAAAAAA=</HashCode>
+      <FileName>ItemMoving.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemsProcessing" Collapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQBAAJAgFAAAAAFgBEAAEgAACIAAAAAAAAg=</HashCode>
+      <FileName>ItemsProcessing.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prefix" Collapsed="true">
+    <Position X="14.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEACAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>MovPrefix.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AssignPrefix" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAgAAAAAQAAAACAA=</HashCode>
+      <FileName>MovPrefix.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PointCase" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEACAAQAAAAAAMAAABAAEAAAABgACAAAAAAAgAAA=</HashCode>
+      <FileName>PointCase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PointCaseInStash" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>PointCase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PointCaseInCase" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAIAA=</HashCode>
+      <FileName>PointCase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PointItem" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAkACAEAAAAAAAEAAACAAAAAAAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>PointItems.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PointAmmunition" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAFAAAAAAAAAAAAAAAAAAAIBAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PointItems.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PointMagazine" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAABAAAAAAAAACAAAAACAAAAAAA=</HashCode>
+      <FileName>PointItems.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PointBarter" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAQAABAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PointItems.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="c_log" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAJGCAUAAWAAD8AgQBCAAAAAFgRAEAEAAAAgAHAIBUA=</HashCode>
+      <FileName>c_log.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="pair_hash" Collapsed="true">
+    <Position X="14.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DistributorForMatching.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="POINT_PAGE" Collapsed="true">
+    <Position X="12.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAEAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>CaseProcessing.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PathNameThreshold" Collapsed="true">
+    <Position X="9" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>DistributorForMatching.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PathNameThresholdItemSize" Collapsed="true">
+    <Position X="10.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAQAAEAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>DistributorForMatching.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GetMat" Collapsed="true">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAEAAQAAAAAAAAAAAAAACAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>getMat.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TextMatching" Collapsed="true">
+    <Position X="14.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TemplateMatching.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Mouse" Collapsed="true">
+    <Position X="12.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InputMK.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Keyboard" Collapsed="true">
+    <Position X="10.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InputMK.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="stash_version" Collapsed="true">
+    <Position X="6.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProgrammScheduler.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="e_stash_version" Collapsed="true">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQABAAAAAAAAAAAAAAAAAIAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>ProgrammScheduler.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

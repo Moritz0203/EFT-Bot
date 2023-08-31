@@ -616,9 +616,6 @@ void ItemsProcessing::cleanUpVectorItemsAmmunition() {
 	POINT_PAGE inPoint_page{};
 	std::set<POINT_PAGE> set_POINT_PAGE;
 
-	/*for (PointAmmunition pointAmmunition : PointAmmunition::pointAmmunition_NC[0]) {
-		PointAmmunition::pointAmmunition_C[0].emplace_back(pointAmmunition);
-	}*/
 
 	uint8_t iTemp = 0;
 	for (uint8_t i = 0; i < PointAmmunition::pointAmmunition_NC.size(); i++) {
@@ -695,13 +692,12 @@ void ItemsProcessing::cleanUpVectorItemsBarter(vector<vector<PointBarter>> &inpu
 	POINT_PAGE point_page{};
 	POINT_PAGE inPoint_page{};
 	std::set<POINT_PAGE> set_POINT_PAGE;
-
 	vector<vector<PointBarter>> CopyPointBarter_NC = input_vec;
+
 
 	uint8_t iTemp = 0;
 	for (uint8_t i = 0; i < CopyPointBarter_NC.size(); i++) {
 		iTemp++;
-
 
 		if (iTemp == CopyPointBarter_NC.size())
 			break;

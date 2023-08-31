@@ -448,13 +448,6 @@ using namespace std;
 //	}
 //};
 
-
-
-
-//extern void CombinePrefixAndCase();
-
- 
-
 //std::vector<std::vector<PointItem*>> combineVectors(
 //	const std::vector<std::vector<PointAmmunition>>& vecAmmunition,
 //	const std::vector<std::vector<PointMagazine>>& vecMagazine,
@@ -487,7 +480,6 @@ using namespace std;
 //	return result;
 //}
 
-
 //bool operator==(const POINT& lhs, const POINT& rhs) {
 //	return lhs.x == rhs.x && lhs.y == rhs.y;
 //}
@@ -510,56 +502,72 @@ using namespace std;
 //}
 
 
-int main() {
+
+
+
+
+
+
+int main() {	
+	ProgrammScheduler programmScheduler;
+
+	programmScheduler.Scheduler();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void Test() {
 	//c_log::add_out(new c_log::c_log_consolestream);
-	
-  /*cout << "//    ___ ___ _____         ___  ___  ___ _____         ___  ___ _____  " << endl;
-	cout << "//   | __| __|_   _|  ___  / __|/ _ \| _ \_   _|  ___  | _ )/ _ \_   _| " << endl;
-	cout << "//   | _|| _|  | |   |___| \__ \ (_) |   / | |   |___| | _ \ (_) || |   " << endl;
-	cout << "//   |___|_|   |_|      _  |___/\___/|_|_\_|_|_ _      |___/\___/ |_|   " << endl;
-	cout << "//                     | |__ _  _  | __/ __| __/_\                      " << endl;
-	cout << "//                     | '_ \ || | | _| (__| _/ _ \                     " << endl;
-	cout << "//                     |_.__/\_, | |___\___|_/_/ \_\                    " << endl;
-	cout << "//                           |__/                                       " << endl;*/
 
-	cout << "Welcome to EFT-SORT-BOT" << endl;
-	cout << "by ECFA" << endl;
-	cout << endl;
-	
-	//c_log::add_out(new c_log::c_log_consolestream);
+/*c_log::Info("hi");
 
-	/*c_log::Info("hi");
+c_log::Info("Config", ">>", "Loading configuration file...");
 
-	c_log::Info("Config", ">>", "Loading configuration file...");
-
-	c_log::Info("name", c_log::LGreen, "name");
-	c_log::Info("maxplayers", c_log::LGreen, 1);
-	c_log::Info("port", c_log::LGreen, 1);
-	c_log::Info("stream-distance", c_log::LGreen, 1);
-	c_log::Info("tickrate", c_log::LGreen, 1);
+c_log::Info("name", c_log::LGreen, "name");
+c_log::Info("maxplayers", c_log::LGreen, 1);
+c_log::Info("port", c_log::LGreen, 1);
+c_log::Info("stream-distance", c_log::LGreen, 1);
+c_log::Info("tickrate", c_log::LGreen, 1);
 
 
-	c_log::Info("PLAYER", ">>", "Player", c_log::LYellow, "test", c_log::Reset, "- network_id:", c_log::LYellow, 11, c_log::Reset, "died.");*/
+c_log::Info("PLAYER", ">>", "Player", c_log::LYellow, "test", c_log::Reset, "- network_id:", c_log::LYellow, 11, c_log::Reset, "died.");*/
 
-	/*InitializeMovPrefix::Initialize();*/
+/*InitializeMovPrefix::Initialize();*/
 
 
-	/*HWND hWND = GetMat::FindeWindow();
-	cout << hWND << endl;
-	SetForegroundWindow(hWND);*/
+/*HWND hWND = GetMat::FindeWindow();
+cout << hWND << endl;
+SetForegroundWindow(hWND);*/
 
-	/*Sleep(100);
-	Mat MatScreen = GetMat::getMat(hWND);*/
-
+/*Sleep(100);
+Mat MatScreen = GetMat::getMat(hWND);*/
 
 	string Start = "start";
-	
+
 	//cin >> Start;
 
 	if (Start == "start") {
-		ProgrammScheduler programmScheduler;
 
-		programmScheduler.Scheduler();
 
 
 		//ItemsProcessing	itemsProcessing;	
@@ -575,7 +583,7 @@ int main() {
 		////caseProcessing.caseProcess();
 
 		//itemsProcessing.Barter2Process();
-	
+
 		//for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_C) {
 		//	for (PointCaseInStash Point : vec) {
 		//		cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.prefix.nameOfItems.size() <<" \n";
@@ -1093,9 +1101,4 @@ int main() {
 	}*/
 
 	}
-	
 }
-
-//bool comparePoints(const POINT& a, const POINT& b) {
-//	return a.x < b.x;
-//}

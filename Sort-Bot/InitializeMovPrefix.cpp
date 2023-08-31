@@ -487,6 +487,21 @@ void InitializeMovPrefix::setup_prefix() {
 	assingPrefix_temp.tagOfCase = "Junk";
 
 	AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
+
+
+
+
+	prefix.isFull = false;
+	prefix.nameOfItems = {};
+
+	for (string str : VectorText_Provisions::Provisions) {
+		prefix.nameOfItems.push_back(str);
+	}
+
+	assingPrefix_temp.prefix = prefix;
+	assingPrefix_temp.tagOfCase = "Holo";
+
+	AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
 }
 
 

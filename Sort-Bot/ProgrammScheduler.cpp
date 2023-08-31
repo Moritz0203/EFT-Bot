@@ -65,8 +65,8 @@ void ProgrammScheduler::Scheduler() {
 
 	std::thread ItemProcessing_Thread1(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 	c_log::Thread("Starding", c_log::LCyan, " ItemProcessing_Thread1", c_log::Magenta, " | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");
-	std::thread ItemProcessing_Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
-	c_log::Thread("Starding", c_log::LCyan, " ItemProcessing_Thread2", c_log::Magenta, " | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");
+	/*std::thread ItemProcessing_Thread2(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
+	c_log::Thread("Starding", c_log::LCyan, " ItemProcessing_Thread2", c_log::Magenta, " | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");*/
 	//std::thread ItemProcessing_Thread3(&ProgrammScheduler::SchedulerWorker, &programmScheduler);
 	//c_log::Thread("Starding", c_log::LCyan, " ItemProcessing_Thread3", c_log::Magenta, " | [Funktion]", c_log::White, "Parent", c_log::LBlue, "ProgrammScheduler");
 
@@ -74,19 +74,19 @@ void ProgrammScheduler::Scheduler() {
 		std::lock_guard<std::mutex> lock(m);
 		q.push(std::bind(&ItemsProcessing::Initialize_Vectors,	&itemsProcessing));
 		q.push(std::bind(&ItemsProcessing::CaseProcess,			&itemsProcessing));
-		q.push(std::bind(&ItemsProcessing::AmmunitionProcess,	&itemsProcessing));
-		q.push(std::bind(&ItemsProcessing::Barter1Process,		&itemsProcessing));
-		q.push(std::bind(&ItemsProcessing::Barter2Process,		&itemsProcessing));
+		//q.push(std::bind(&ItemsProcessing::AmmunitionProcess,	&itemsProcessing));
+		//q.push(std::bind(&ItemsProcessing::Barter1Process,		&itemsProcessing));
+		//q.push(std::bind(&ItemsProcessing::Barter2Process,		&itemsProcessing));
 		//q.push(std::bind(&ItemsProcessing::MedicalProcess,	&itemsProcessing));
-		//q.push(std::bind(&ItemsProcessing::ProvisionsProcess,	&itemsProcessing));
+		q.push(std::bind(&ItemsProcessing::ProvisionsProcess,	&itemsProcessing));
 	}
 	c_v.notify_all();
 	
 	ItemProcessing_Thread1.join();
 	c_log::Thread("Join", c_log::LRed, " ItemProcessing_Thread1");
 
-	ItemProcessing_Thread2.join();
-	c_log::Thread("Join", c_log::LRed, " ItemProcessing_Thread2");
+	/*ItemProcessing_Thread2.join();
+	c_log::Thread("Join", c_log::LRed, " ItemProcessing_Thread2");*/
 
 	//ItemProcessing_Thread3.join();
 	//c_log::Thread("Join", c_log::LRed, " ItemProcessing_Thread3");

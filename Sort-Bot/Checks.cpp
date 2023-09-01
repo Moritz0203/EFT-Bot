@@ -225,7 +225,6 @@ bool Check_for_Space::Vertical_Horizontal(shared_ptr<vector<vector<POINT>>>& ptr
 				points_for_LookUp.push_back(IN_temp_Pairs_for_LookUp);
 				IN_temp_Pairs_for_LookUp.clear();
 			}
-
 		}
 
 		if (points_for_LookUp.size() != 0) {

@@ -230,6 +230,8 @@ void ItemMoving::itemMoving() {
 		}
 	}
 
+
+
 	/*for (int i = 0; i < PointCaseInCase::pointCaseInCase.size(); i++) {
 		for (PointCaseInCase pointCase : PointCaseInCase::pointCaseInCase[i]) {
 			shared_ptr<PointCaseInCase> ptr = make_shared<PointCaseInCase>(pointCase);

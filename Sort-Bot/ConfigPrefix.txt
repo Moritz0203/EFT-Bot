@@ -1,5 +1,5 @@
-[CaseTag{Junk},
-Items{
+[{"Junk"},
+{
 	"Alyonka",
 	"AppleJuice",
 	"Aquamari",
@@ -40,9 +40,8 @@ Items{
 	"Water",
 	"Whiskey",
 }]
-
-[CaseName{Amo},
-Items{
+[{"Amo"}
+,{
 	"7N40",
 	"BP",
 	"BS",

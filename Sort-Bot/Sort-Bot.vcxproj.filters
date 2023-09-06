@@ -98,6 +98,9 @@
     <ClCompile Include="InitializeMovPrefix.cpp">
       <Filter>Source Files\SortBot\Prefix</Filter>
     </ClCompile>
+    <ClCompile Include="ReadConfigFile.cpp">
+      <Filter>Source Files\SortBot\Prefix</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Checks.h">
@@ -150,6 +153,9 @@
     </ClInclude>
     <ClInclude Include="c_log.h">
       <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadConfigFile.h">
+      <Filter>Header Files\SortBot\Prefix</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

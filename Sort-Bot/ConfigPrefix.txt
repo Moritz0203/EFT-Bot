@@ -1,4 +1,6 @@
-[{"Junk"},
+[{
+"Junk"
+},
 {
 	"Alyonka",
 	"AppleJuice",
@@ -40,8 +42,10 @@
 	"Water",
 	"Whiskey",
 }]
-[{"Amo"}
-,{
+[{
+"Amo"
+},
+{
 	"7N40",
 	"BP",
 	"BS",

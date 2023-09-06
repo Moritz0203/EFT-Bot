@@ -43,25 +43,31 @@ private:
         std::vector<std::string> itemVector;
 
         std::string line;
+        bool newBlock = true;
         while (std::getline(file, line)) {
             if (line.find("}]") != std::string::npos) {
                 // Ende des Blocks erreicht
                 data_.emplace_back(std::make_pair(caseName, itemVector));
+                newBlock = true;
                 break;
             }
 
             size_t startPos = line.find("\"") + 1;
             size_t endPos = line.find("\"", startPos); 
 
-            size_t nameStartPos = line.find("[{") + 1;
-            size_t nameEndPos = line.find("},", nameStartPos);
+            /*size_t nameStartPos = line.find("{") + 1;
+            size_t nameEndPos = line.find("},", nameStartPos);*/
 
-            if (nameStartPos != std::string::npos && nameEndPos != std::string::npos) {
-                caseName = line.substr(nameStartPos, nameEndPos - nameStartPos);
+            if (newBlock == true) {
+                if (startPos != std::string::npos && endPos != std::string::npos)
+                    caseName = line.substr(startPos, endPos - startPos);
+                newBlock = false;
             }
-            else if (startPos != std::string::npos && endPos != std::string::npos) {
-                std::string itemName = line.substr(startPos, endPos - startPos);
-                itemVector.push_back(itemName);
+            else {
+                if (startPos != std::string::npos && endPos != std::string::npos) {
+                    std::string itemName = line.substr(startPos, endPos - startPos);
+                    itemVector.push_back(itemName);
+                }
             }
         }
     }

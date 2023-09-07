@@ -18,7 +18,8 @@ using namespace cv;
 void checksPublic::CheckScrollbarPositions() {
 	const int keyforInput = 0x21;// virtual-key code for the "PAGE UP KEY" key
 
-	const HWND hWND = GetMat::FindeWindow();
+	HWND hWND = NULL;
+	hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
 	const Mat MatScreen = GetMat::getMat(hWND);
@@ -42,7 +43,8 @@ void checksPublic::CheckScrollbarPositions() {
 }
 
 void checksPublic::ClickScrollbarPositions() {
-	const HWND hWND = GetMat::FindeWindow();
+	HWND hWND = NULL;
+	hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
 	const Mat MatScreen = GetMat::getMat(hWND);
@@ -112,7 +114,8 @@ void findFreeSlots::findeSlots(const PointCase* pointCase, std::vector<std::vect
 
 	Mouse::MoverPOINTandPressTwoTimes(point);
 
-	const HWND hWND = GetMat::FindeWindow();//NOTE: später besser anpassen 
+	HWND hWND = NULL;
+	hWND = GetMat::FindeWindow();//NOTE: später besser anpassen 
 	Sleep(500);
 	const Mat MatScreen = GetMat::getMat(hWND);
 	Sleep(500);

@@ -88,7 +88,8 @@ void deleteMatchingPoints(std::vector<PointItem*>& pointItems, std::shared_ptr<s
 
 
 void ItemMoving::MovInStash(shared_ptr<PointCaseInStash> &ptr_Stash) {
-	const HWND hWND = GetMat::FindeWindow();
+	HWND hWND = NULL;
+	hWND = GetMat::FindeWindow();
 	const Mat MatScreen = GetMat::getMat(hWND);
 	const Mat templ = imread("ObjectImages/SortingTable.png");
 	POINT pointA{}, pointB{};

@@ -1,6 +1,7 @@
 #pragma once
 #include "ProgrammScheduler.h"
-#include "ReadConfigFile.h"
+
+//#include "ReadConfigFile.h"
 //#include <iostream>
 //#include <vector>
 //#include <conio.h>
@@ -40,14 +41,9 @@
 
 
 int main() {	
-	ReadPrefixConfigFile parser("ConfigPrefix.txt");
-	if (parser.ParseConfig()) {
-		parser.PrintData();
-	}
+	ProgrammScheduler programmScheduler;
 
-	/*ProgrammScheduler programmScheduler;
-
-	programmScheduler.Scheduler();*/
+	programmScheduler.Scheduler();
 }
 
 

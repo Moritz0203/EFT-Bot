@@ -81,7 +81,8 @@ void GetMat::TakeScreenshots(int Screens){//Please call first CheckScrollbarPosi
 	Mat MatScreen;
 	checksPublic ChecksPublic;
 	
-	const HWND hWND = FindeWindow();
+	HWND hWND = NULL;
+	hWND = FindeWindow();
 	SetForegroundWindow(hWND);
 	
 	for (int i = 0; i < Screens; i++) {

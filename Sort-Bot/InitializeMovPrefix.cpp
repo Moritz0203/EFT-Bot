@@ -3,6 +3,7 @@
 #include "InitializeMovPrefix.h"
 #include "MovPrefix.h"
 #include "c_log.h"
+#include "ReadConfigFile.h"
 using namespace std;
 
 namespace VectorText_Ammunition {
@@ -384,9 +385,6 @@ namespace VectorText_Provisions {
 }
 
 
-
-
-
 void InitializeMovPrefix::Initialize() {
 	string settingsForMoving;
 
@@ -397,8 +395,13 @@ void InitializeMovPrefix::Initialize() {
 	cin >> settingsForMoving;*/
 
 	/*setup();*/
+	//setup_prefix();
 
-	setup_prefix();
+
+	ReadPrefixConfigFile parser("ConfigPrefix.txt");
+	parser.ParseConfig();
+	parser.PrintData();
+
 
 	c_log::End("InitializeMovPrefix             ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 }

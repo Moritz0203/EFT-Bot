@@ -3,11 +3,14 @@
 #include <fstream>
 #include <vector>
 #include "MovPrefix.h"
+#include "c_log.h"
+
 
 bool ReadPrefixConfigFile::ParseConfig() {
+    c_log::Start("ReadPrefixConfigFile", c_log::Magenta, "              | [Funktion]", c_log::White, "Parent", c_log::LBlue, "InitializeMovPrefix");
     std::ifstream file(filename_);
     if (!file.is_open()) {
-        std::cerr << "Fehler beim Öffnen der Datei: " << filename_ << std::endl;
+        c_log::Info("Fehler beim Öffnen der Datei:  ", c_log::LGreen, filename_);
         return false;
     }
 
@@ -19,15 +22,17 @@ bool ReadPrefixConfigFile::ParseConfig() {
     }
 
     file.close();
+    PrintData();
+    c_log::End("ReadPrefixConfigFile", c_log::Magenta, "              | [Funktion]", c_log::White, "Parent", c_log::LBlue, "InitializeMovPrefix");
     return true;
 }
 
 void ReadPrefixConfigFile::PrintData() {
     for (const auto& entry : AssignPrefix::assignPrefix) {
-        std::cout << "CaseName: " << entry.tagOfCase << std::endl;
-        std::cout << "ItemVector: \n";
-        for (const auto& item : entry.prefix.nameOfItems) {
-            std::cout << item << "\n";
+        c_log::Info("CaseName: ", c_log::LGreen, entry.tagOfCase);
+        c_log::Info("Items: ", c_log::LGreen, entry.prefix.nameOfItems[0]);
+        for (uint16_t i = 1; i < entry.prefix.nameOfItems.size(); i++) {
+            c_log::Raw("                   ", c_log::LGreen, entry.prefix.nameOfItems[i]);
         }
         std::cout << std::endl;
     }

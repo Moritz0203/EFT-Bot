@@ -400,7 +400,6 @@ void InitializeMovPrefix::Initialize() {
 
 	ReadPrefixConfigFile parser("ConfigPrefix.txt");
 	parser.ParseConfig();
-	parser.PrintData();
 
 
 	c_log::End("InitializeMovPrefix             ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");

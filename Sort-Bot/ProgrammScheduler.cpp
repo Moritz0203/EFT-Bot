@@ -75,10 +75,10 @@ void ProgrammScheduler::Scheduler() {
 		q.push(std::bind(&ItemsProcessing::Initialize_Vectors,	&itemsProcessing));
 		q.push(std::bind(&ItemsProcessing::CaseProcess,			&itemsProcessing));
 		//q.push(std::bind(&ItemsProcessing::AmmunitionProcess,	&itemsProcessing));
-		//q.push(std::bind(&ItemsProcessing::Barter1Process,		&itemsProcessing));
-		//q.push(std::bind(&ItemsProcessing::Barter2Process,		&itemsProcessing));
+		q.push(std::bind(&ItemsProcessing::Barter1Process,		&itemsProcessing));
+		q.push(std::bind(&ItemsProcessing::Barter2Process,		&itemsProcessing));
 		//q.push(std::bind(&ItemsProcessing::MedicalProcess,		&itemsProcessing));
-		q.push(std::bind(&ItemsProcessing::ProvisionsProcess,	&itemsProcessing));
+		//q.push(std::bind(&ItemsProcessing::ProvisionsProcess,	&itemsProcessing));
 	}
 	c_v.notify_all();
 	

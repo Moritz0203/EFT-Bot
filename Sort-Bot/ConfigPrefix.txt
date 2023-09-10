@@ -213,8 +213,6 @@
 "Buddy",
 "Coffe",
 "Cordura",
-//"DogtagsBear",
-//"DogtagsUsec",
 "Eagle",
 "EnglishTea",
 "Fleece",

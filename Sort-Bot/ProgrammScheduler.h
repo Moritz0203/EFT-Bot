@@ -10,16 +10,16 @@ typedef enum e_stash_version {
 
 class ProgrammScheduler {
 	stash_version Stash_Version = EdgeOfDarkness;
-	bool HasReceivedVersion = false;
+	 bool HasReceivedVersion = false;
 
-	void ScreenShots();
+	 void ScreenShots();
 
-	void SchedulerWorker();
+	 void SchedulerWorker();
 
 public:
-	void Scheduler();
+	 void Scheduler();
 
-	void setVersion(stash_version stash_version) {
+	 void setVersion(stash_version stash_version) {
 		Stash_Version = stash_version;
 		HasReceivedVersion = true;
 	}

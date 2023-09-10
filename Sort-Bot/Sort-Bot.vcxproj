@@ -179,6 +179,9 @@
   <ItemGroup>
     <ResourceCompile Include="Sort-Bot.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Images\Exe-Image.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\opencv4.2.2020.5.26\build\native\opencv4.2.targets" Condition="Exists('..\packages\opencv4.2.2020.5.26\build\native\opencv4.2.targets')" />

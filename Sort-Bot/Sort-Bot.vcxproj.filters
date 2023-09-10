@@ -168,4 +168,7 @@
   <ItemGroup>
     <ResourceCompile Include="Sort-Bot.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Images\Exe-Image.ico" />
+  </ItemGroup>
 </Project>

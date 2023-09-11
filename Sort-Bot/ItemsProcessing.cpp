@@ -426,7 +426,7 @@ namespace CaseVector {
 		{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.79 },//AmmoCase
 		{ "CaseImages/GrenadCase.png",										"GrenadCase",				0.909 },//GrenadCase
 		{ "CaseImages/HolodilnickCase.png",									"HolodilnickCase",			0.909 },//HolodilnickCase
-		{ "CaseImages/MagCase.png",											"MagCase",					0.89 },//MagCase
+		{ "CaseImages/MagCase.png",											"MagCase",					0.88 },//MagCase
 		{ "CaseImages/MedCase.png",											"MedCase",					0.91 },//MedCase
 		{ "CaseImages/MoneyCase.png",										"MoneyCase",				0.88 },//MoneyCase
 		{ "CaseImages/JunkCase.png",										"JunkCase",					0.80 },//JunkCase

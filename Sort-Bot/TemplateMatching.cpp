@@ -244,31 +244,32 @@ bool TemplateMatching::templateMatchingBool(Mat MatScreen, Mat templ, double thr
 const string TextMatching::textMatching(Mat MatScreen, Rect Rec) {
 	Mat Roi = MatScreen(Rec);
 
-	//cv::resize(Roi, Roi, cv::Size(Roi.cols * 1.9, 20));
+	// Graustufen-Konvertierung
+	cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
 
-	//const char* image_window = "test 123";
-	//namedWindow(image_window, WINDOW_AUTOSIZE);
-
-	//imshow(image_window, Roi);
-	//waitKey(0);
+	// Binarisierung (z.B. mit einem Schwellenwert von 128)
+	threshold(Roi, Roi, 128, 255, cv::THRESH_BINARY);
 
 	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
 	tess->Init("tessdata/", "eng");
 
 	tess->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
+	tess->SetVariable("tessedit_char_whitelist", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_|1234567890"); // Beispiel Whitelist
+	tess->SetVariable("textord_confidence_threshold", "75"); // Beispielwert
 
 	tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
-	tess->SetSourceResolution(80);
+	tess->SetSourceResolution(100);
 
 	std::unique_ptr<char[]> txt(tess->GetUTF8Text());
 
-	//cout << "text -- " << txt << endl;
-
-	if (!not txt) {
+	if (txt) {
 		const string str = txt.get();
 		return str;
 	}
+
+	return "";
 }
+
 
 
 bool ColorMatching::GetColor(Mat MatScreen, cv::Scalar low, cv::Scalar high, Rect Rec) {

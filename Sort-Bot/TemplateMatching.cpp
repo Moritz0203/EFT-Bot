@@ -253,7 +253,7 @@ const string TextMatching::textMatching(Mat MatScreen, Rect Rec) {
 	//waitKey(0);
 
 	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
-	tess->Init(nullptr, "eng");
+	tess->Init("tessdata/", "eng");
 
 	tess->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
 

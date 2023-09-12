@@ -67,8 +67,6 @@ void CaseProcessing::CaseOperator() {
 		c_log::Info("Finished Waiting", c_log::LBlue, " CaseProcess   ", c_log::Magenta, " | [Funktion]", c_log::White, "Parent", c_log::LBlue, "CaseOperator");
 	}
 
-
-
 	/*for (vector<PointCaseInStash> vec : PointCaseInStash::pointCaseInStash_NC) {
 		for (PointCaseInStash Point : vec) {
 			cout << Point.nameOfCase << " " << Point.tagCase << " " << Point.tagCase.length() << " " << Point.point.y << " " << Point.point.x << " " << Point.page << endl;

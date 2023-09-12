@@ -247,15 +247,15 @@ const string TextMatching::textMatching(Mat MatScreen, Rect Rec) {
 	// Graustufen-Konvertierung
 	cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
 
-	// Binarisierung (z.B. mit einem Schwellenwert von 128)
+	// Binarisierung 
 	threshold(Roi, Roi, 128, 255, cv::THRESH_BINARY);
 
 	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
 	tess->Init("tessdata/", "eng");
 
 	tess->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
-	tess->SetVariable("tessedit_char_whitelist", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_|1234567890"); // Beispiel Whitelist
-	tess->SetVariable("textord_confidence_threshold", "75"); // Beispielwert
+	tess->SetVariable("tessedit_char_whitelist", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_|1234567890"); 
+	tess->SetVariable("textord_confidence_threshold", "75");
 
 	tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
 	tess->SetSourceResolution(100);

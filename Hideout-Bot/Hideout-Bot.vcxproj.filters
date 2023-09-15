@@ -9,14 +9,30 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Header Files\Console">
+      <UniqueIdentifier>{6b53cc49-5337-4073-8a3c-f79685206ff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MK">
+      <UniqueIdentifier>{958c0502-7702-444a-ad69-89e8c15180bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MK">
+      <UniqueIdentifier>{f8250bff-c16f-48a2-a2c1-c4be6de56fb1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hideout-Bot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Sort-Bot\InputMK.cpp">
+      <Filter>Source Files\MK</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sort-Bot\c_log.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sort-Bot\InputMK.h">
+      <Filter>Header Files\MK</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

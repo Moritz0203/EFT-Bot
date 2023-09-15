@@ -127,7 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Sort-Bot\InputMK.cpp" />
     <ClCompile Include="Hideout-Bot.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sort-Bot\c_log.h" />
+    <ClInclude Include="..\Sort-Bot\InputMK.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

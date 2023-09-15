@@ -9,14 +9,30 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Header Files\Console">
+      <UniqueIdentifier>{c758af32-a91d-41ee-90bb-379a5de442ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MK">
+      <UniqueIdentifier>{5074e1e4-0524-428d-a95c-3ded23b3cfdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MK">
+      <UniqueIdentifier>{81a97163-ba5a-4912-bf22-16bf9bc2f834}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game-Bot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Sort-Bot\InputMK.cpp">
+      <Filter>Source Files\MK</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sort-Bot\c_log.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sort-Bot\InputMK.h">
+      <Filter>Header Files\MK</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

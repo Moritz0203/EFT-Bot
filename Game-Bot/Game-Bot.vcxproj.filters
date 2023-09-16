@@ -42,21 +42,21 @@
     <Filter Include="Source Files\TemplateMatching">
       <UniqueIdentifier>{5727f884-3a4d-4627-8089-e78a380e2c6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameBot\TypeClass">
+      <UniqueIdentifier>{aa29efb1-e2b5-48fb-83e7-0f39f46e794f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameBot\TypeClass">
+      <UniqueIdentifier>{d0a8ab8d-d795-4426-bcd2-9f730dba6e7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sort-Bot\InputMK.cpp">
-      <Filter>Source Files\MK</Filter>
-    </ClCompile>
     <ClCompile Include="ProgrammScheduler.cpp">
       <Filter>Source Files\GameBot</Filter>
     </ClCompile>
     <ClCompile Include="Walk.cpp">
-      <Filter>Source Files\GameBot\InGameFunktions</Filter>
-    </ClCompile>
-    <ClCompile Include="Watcher.cpp">
       <Filter>Source Files\GameBot\InGameFunktions</Filter>
     </ClCompile>
     <ClCompile Include="Health.cpp">
@@ -74,14 +74,20 @@
     <ClCompile Include="DistributorForMatching.cpp">
       <Filter>Source Files\TemplateMatching</Filter>
     </ClCompile>
+    <ClCompile Include="ControlerInGame.cpp">
+      <Filter>Source Files\GameBot\InGameFunktions</Filter>
+    </ClCompile>
+    <ClCompile Include="Checks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PointCase.cpp">
+      <Filter>Source Files\GameBot\TypeClass</Filter>
+    </ClCompile>
+    <ClCompile Include="InputMK.cpp">
+      <Filter>Source Files\MK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Sort-Bot\c_log.h">
-      <Filter>Header Files\Console</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sort-Bot\InputMK.h">
-      <Filter>Header Files\MK</Filter>
-    </ClInclude>
     <ClInclude Include="ProgrammScheduler.h">
       <Filter>Header Files\GameBot</Filter>
     </ClInclude>
@@ -89,9 +95,6 @@
       <Filter>Header Files\GameBot\InGameFunktions</Filter>
     </ClInclude>
     <ClInclude Include="Walk.h">
-      <Filter>Header Files\GameBot\InGameFunktions</Filter>
-    </ClInclude>
-    <ClInclude Include="Watcher.h">
       <Filter>Header Files\GameBot\InGameFunktions</Filter>
     </ClInclude>
     <ClInclude Include="Controler.h">
@@ -105,6 +108,24 @@
     </ClInclude>
     <ClInclude Include="TemplateMatching.h">
       <Filter>Header Files\TemplateMatching</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlerInGame.h">
+      <Filter>Header Files\GameBot\InGameFunktions</Filter>
+    </ClInclude>
+    <ClInclude Include="Checks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PointCase.h">
+      <Filter>Header Files\GameBot\TypeClass</Filter>
+    </ClInclude>
+    <ClInclude Include="c_log.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMK.h">
+      <Filter>Header Files\MK</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -127,28 +127,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Sort-Bot\InputMK.cpp" />
+    <ClCompile Include="Checks.cpp" />
     <ClCompile Include="Controler.cpp" />
+    <ClCompile Include="ControlerInGame.cpp" />
     <ClCompile Include="DistributorForMatching.cpp" />
     <ClCompile Include="getMat.cpp" />
     <ClCompile Include="Health.cpp" />
+    <ClCompile Include="InputMK.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PointCase.cpp" />
     <ClCompile Include="ProgrammScheduler.cpp" />
     <ClCompile Include="TemplateMatching.cpp" />
     <ClCompile Include="Walk.cpp" />
-    <ClCompile Include="Watcher.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Sort-Bot\c_log.h" />
-    <ClInclude Include="..\Sort-Bot\InputMK.h" />
+    <ClInclude Include="Checks.h" />
     <ClInclude Include="Controler.h" />
+    <ClInclude Include="ControlerInGame.h" />
+    <ClInclude Include="c_log.h" />
     <ClInclude Include="DistributorForMatching.h" />
     <ClInclude Include="getMat.h" />
     <ClInclude Include="Health.h" />
+    <ClInclude Include="Includes.h" />
+    <ClInclude Include="InputMK.h" />
+    <ClInclude Include="PointCase.h" />
     <ClInclude Include="ProgrammScheduler.h" />
     <ClInclude Include="TemplateMatching.h" />
     <ClInclude Include="Walk.h" />
-    <ClInclude Include="Watcher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

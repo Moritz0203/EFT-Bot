@@ -1,10 +1,6 @@
 #pragma once
 #include "DistributorForMatching.h"
 #include "TemplateMatching.h"
-#include "PointGlobalVector.h"
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
 #include <iostream>
 #include <vector>
 #include <conio.h>
@@ -155,8 +151,6 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 	vector<POINT> ReturnDataCase_Clean;
 	vector<vector<POINT>> freeSlots_empty{};
 	vector<PointCaseInStash> pointCasetempStashTemp;
-	int identyfierAsHEX_ST = 0x00;
-	Prefix prefix;
 	int page = 0;
 
 	for (Mat MatScreen : MatScreenVector) {
@@ -179,7 +173,7 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 					string tagCase = TextMatching::textMatching(MatScreen, Rec);
 
 					if (checkSecondLastChar(tagCase)) {
-						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], input[i].Name, tagCase, templ.rows, templ.cols, page, identyfierAsHEX_ST, freeSlots_empty, prefix);
+						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], input[i].Name, tagCase, templ.rows, templ.cols, page);
 					}
 				}
 				ReturnDataCase.clear();
@@ -189,82 +183,6 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 		PointCaseInStash::pointCaseInStash_NC.emplace_back(pointCasetempStashTemp);
 		pointCasetempStashTemp.clear();
 		page++;
-	}
-}
-
-namespace Magazine {
-	std::array<std::string, 8> Magazine{
-		//MP
-			"itemImages/MagazineImgas/4.6HK/MP7.png",
-			//NATO
-				"itemImages/MagazineImgas/5.56NATO/MAG5-60.png",
-				"itemImages/MagazineImgas/5.56NATO/PMAG-D60.png",
-				"itemImages/MagazineImgas/7.62NARO/PMAG.png",
-				"itemImages/MagazineImgas/7.62NARO/SLR.png",
-				//RUS
-					"itemImages/MagazineImgas/7.62RRUS/SVD.png",
-					"itemImages/MagazineImgas/7.62RUS/AK30.png",
-					"itemImages/MagazineImgas/7.62RUS/GEN-M3.png",
-
-	};
-
-	std::array<std::string, 8> NameOfItemMagazine{
-		//MP
-			"MP7",
-			//NATO
-				"MAG5-60",
-				"PMAG-D60",
-				"PMAG",
-				"SLR",
-				//RUS
-					"SVD",
-					"AK30",
-					"GEN-M3",
-	};
-
-	std::array<double, 8> MagazineThreshold{
-		//MP
-			0.85,//MP7
-			//NATO
-				0.83,//MAG5-60
-				0.83,//PMAG-D60
-				0.83,//PMAG
-				0.85,//SLR
-				//RUS
-					0.87,//SVD
-					0.87,//AK30
-					0.87,//GEN-M3
-	};
-}
-
-void Matching::MagazineMatching(vector<PathNameThreshold> input) {
-	const int sizeString = sizeof(Magazine::Magazine) / sizeof(string);
-	Mat templ;
-	GetMat getMat;
-	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
-
-	vector<POINT> ReturnDataMA;
-	vector<POINT> ReturnDataMA_Clean;
-	vector<PointMagazine> pointMagazineTemp;
-	for (int i1 = 0; i1 < MatScreenVector.size(); i1++) {
-		for (int i = 0; i < sizeString; i++) {
-			ReturnDataMA = TemplateMatching::templateMatchingItems(Magazine::Magazine[i], Magazine::MagazineThreshold[i], true, false, Magazine::NameOfItemMagazine[i], MatScreenVector[i1]);
-
-			templ = imread(Magazine::Magazine[i]);
-			if (!ReturnDataMA.empty()) {
-				ReturnDataMA_Clean = removeDuplicates(ReturnDataMA);
-				for (int i3 = 0; i3 < ReturnDataMA_Clean.size(); i3++) {
-					const Rect Rec(ReturnDataMA_Clean[i3].x + 25, ReturnDataMA_Clean[i3].y + 110, templ.cols - 40, templ.rows - 110);
-					const string fillStatus = TextMatching::textMatching(MatScreenVector[i1], Rec);
-					const int fillStatusConvertet = stoi(fillStatus);
-					pointMagazineTemp.emplace_back(ReturnDataMA_Clean[i3], Magazine::NameOfItemMagazine[i], fillStatusConvertet, templ.rows, templ.cols, i1, 2);
-				}
-				ReturnDataMA.clear();
-				ReturnDataMA_Clean.clear();
-			}
-		}
-		PointMagazine::pointMagazine_NC.emplace_back(pointMagazineTemp);
-		pointMagazineTemp.clear();
 	}
 }
 

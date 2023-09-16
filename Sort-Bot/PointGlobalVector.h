@@ -4,6 +4,3 @@
 #include <windows.h>
 #include "PointCase.h"
 #include "PointItems.h"
-
-
-

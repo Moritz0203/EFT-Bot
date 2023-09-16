@@ -18,9 +18,10 @@ PointCaseInStash::PointCaseInStash()
 {
 }
 
-PointCaseInStash::PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page)
+PointCaseInStash::PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, vector<PointMedical> ItemsInCase)
 	:PointCase(point, nameOfCase, tagCase, heightTempl, widthTempl, page)
 {
+	this->ItemsInCase = ItemsInCase;
 }
 
 std::vector<std::vector<PointCaseInStash>> PointCaseInStash::pointCaseInStash_C;

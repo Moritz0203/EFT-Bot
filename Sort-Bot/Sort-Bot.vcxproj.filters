@@ -68,9 +68,6 @@
     <ClCompile Include="ItemMoving.cpp">
       <Filter>Source Files\SortBot\Processing-Moving</Filter>
     </ClCompile>
-    <ClCompile Include="ItemsProcessing.cpp">
-      <Filter>Source Files\SortBot\Processing-Moving</Filter>
-    </ClCompile>
     <ClCompile Include="DistributorForMatching.cpp">
       <Filter>Source Files\TemplateMatching</Filter>
     </ClCompile>
@@ -100,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="ReadConfigFile.cpp">
       <Filter>Source Files\SortBot\Prefix</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemsProcessing.cpp">
+      <Filter>Source Files\SortBot\Processing-Moving</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,9 +133,6 @@
     <ClInclude Include="InputMK.h">
       <Filter>Header Files\MK</Filter>
     </ClInclude>
-    <ClInclude Include="ItemsProcessing.h">
-      <Filter>Header Files\SortBot\Processing-Moving</Filter>
-    </ClInclude>
     <ClInclude Include="ItemMoving.h">
       <Filter>Header Files\SortBot\Processing-Moving</Filter>
     </ClInclude>
@@ -159,6 +156,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsProcessing.h">
+      <Filter>Header Files\SortBot\Processing-Moving</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

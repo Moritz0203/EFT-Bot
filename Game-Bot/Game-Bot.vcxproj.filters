@@ -48,6 +48,12 @@
     <Filter Include="Source Files\GameBot\TypeClass">
       <UniqueIdentifier>{d0a8ab8d-d795-4426-bcd2-9f730dba6e7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameBot\Matching-Moving">
+      <UniqueIdentifier>{42485660-8185-41c0-a199-e371427d56f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameBot\Matching-Moving">
+      <UniqueIdentifier>{e05a5ce5-743d-44fc-bbc0-92dec4319070}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -88,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="PointItems.cpp">
       <Filter>Source Files\GameBot\TypeClass</Filter>
+    </ClCompile>
+    <ClCompile Include="CaseProcessing.cpp">
+      <Filter>Source Files\GameBot\Matching-Moving</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +141,9 @@
     </ClInclude>
     <ClInclude Include="PointItems.h">
       <Filter>Header Files\GameBot\TypeClass</Filter>
+    </ClInclude>
+    <ClInclude Include="CaseProcessing.h">
+      <Filter>Header Files\GameBot\Matching-Moving</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+#include "PointItems.h"
 using namespace std;
 
 //enum Color { RED, ORANGSH, GREEN, BLUE, PURPLE, PINK, GRAY, NOCOLOR };
@@ -22,8 +23,10 @@ public:
 class PointCaseInStash: public PointCase
 {
 public:
+	vector<PointMedical> ItemsInCase{};
+
 	PointCaseInStash();
-	PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page);
+	PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, vector<PointMedical> ItemsInCase);
 
 public:
 	static std::vector<std::vector<PointCaseInStash>> pointCaseInStash_C;

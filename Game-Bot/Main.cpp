@@ -36,6 +36,7 @@ int main() {
 
 	Matching matching;
 	GetMat getMat;
+	
 
 	vector<PointMedical> MedVec{};
 
@@ -48,4 +49,7 @@ int main() {
 	const Mat MatScreen = GetMat::getMat(hWND);
 
 	matching.MedicalMatching_OneScreen(Medical, ptr_vec, MatScreen);
+
+
+	
 }

@@ -192,7 +192,7 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 	vector<POINT> ReturnDataMedical;
 	vector<POINT> ReturnDataMedical_Clean;
 
-	Rect Rec(800, 0, MatScreen.cols - 400, MatScreen.rows);
+	Rect Rec(730, 300, MatScreen.cols - 1460, MatScreen.rows - 600);
 	Mat MatScreenTemp = MatScreen(Rec);
 
 	for (int i = 0; i < input.size(); i++) {

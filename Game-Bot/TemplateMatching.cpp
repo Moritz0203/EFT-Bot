@@ -275,20 +275,41 @@ const string TextMatching::textMatching_MedicalItems(Mat MatScreen, Rect Rec) {
 
 	//// Graustufen-Konvertierung
 
-	convertScaleAbs(Roi, Roi, 4, 0);
+	convertScaleAbs(Roi, Roi, 1, 0);
 
-	// Binarisierung 
-	//threshold(Roi, Roi, 230, 255, cv::THRESH_BINARY);
+	//// Binarisierung 
+	//threshold(Roi, Roi, 150, 155, cv::THRESH_BINARY);
 
-	//cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
+	////cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
 
+
+	//cv::Mat hsvImage;
+	//cv::cvtColor(Roi, hsvImage, cv::COLOR_BGR2HSV);
+
+	//// Definiere die Farbgrenzen für das Rot im HSV-Farbraum
+	//cv::Scalar lowerRed = cv::Scalar(0, 100, 100);     // Untere Grenze für Rottöne in HSV
+	//cv::Scalar upperRed = cv::Scalar(10, 255, 255); // Obere Grenze für Rottöne in HSV
+
+	//// Erstelle eine Maske für das Rot im Bild
+	//cv::Mat maskRed;
+	//cv::inRange(hsvImage, lowerRed, upperRed, maskRed);
+
+	//// Setze den roten Bereich im Bild auf Weiß
+	//Roi.setTo(cv::Scalar(255, 255, 255), maskRed);
+
+
+	const char* image_window = "Source Image";
+	namedWindow(image_window, WINDOW_AUTOSIZE);
+	imshow(image_window, Roi);
+	waitKey(0);
 
 	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
 	tess->Init("tessdata/", "eng");
 
+	tess->SetVariable("fontconfig_use", "tessdata/font.oft");
 	tess->SetPageSegMode(tesseract::PSM_SINGLE_LINE);
 	tess->SetVariable("tessedit_char_whitelist", "/1234567890");
-	tess->SetVariable("textord_confidence_threshold", "95");
+	tess->SetVariable("textord_confidence_threshold", "75");
 
 	tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
 	tess->SetSourceResolution(100);

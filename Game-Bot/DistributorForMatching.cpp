@@ -250,12 +250,19 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 			ReturnDataMedical_Clean = removeDuplicates_Medical(ReturnDataMedical);
 
 			for (int i3 = 0; i3 < ReturnDataMedical_Clean.size(); i3++) {
-				Rect Rec(ReturnDataMedical_Clean[i3].x, ReturnDataMedical_Clean[i3].y + (templ.rows / 2) + 15, templ.cols , templ.rows - (templ.rows / 2) - 15);
+				string Hp = {};
+				if (input[i].Name == "Grizzly" || input[i].Name == "Salewa") {
+					Rect Rec(ReturnDataMedical_Clean[i3].x, ReturnDataMedical_Clean[i3].y + 112, templ.cols, templ.rows - 112);
+					Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+				}
+				else {
+					Rect Rec(ReturnDataMedical_Clean[i3].x, ReturnDataMedical_Clean[i3].y + 47, templ.cols, templ.rows - 47);
+					Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+				}
 
-				cv::imshow(image_window, MatScreen(Rec));
-				waitKey(0);
+				/*cv::imshow(image_window, MatScreen(Rec));
+				waitKey(0);*/
 
-				string Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
 
 				int HpInt = 0 /*extractAndConvertToInt(Hp)*/;
 				cout << "--- " << Hp << endl;

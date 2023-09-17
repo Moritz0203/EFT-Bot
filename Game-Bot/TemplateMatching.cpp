@@ -270,7 +270,38 @@ const string TextMatching::textMatching(Mat MatScreen, Rect Rec) {
 	return "";
 }
 
+const string TextMatching::textMatching_MedicalItems(Mat MatScreen, Rect Rec) {
+	Mat Roi = MatScreen(Rec);
 
+	//// Graustufen-Konvertierung
+
+	convertScaleAbs(Roi, Roi, 4, 0);
+
+	// Binarisierung 
+	//threshold(Roi, Roi, 230, 255, cv::THRESH_BINARY);
+
+	//cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
+
+
+	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
+	tess->Init("tessdata/", "eng");
+
+	tess->SetPageSegMode(tesseract::PSM_SINGLE_LINE);
+	tess->SetVariable("tessedit_char_whitelist", "/1234567890");
+	tess->SetVariable("textord_confidence_threshold", "95");
+
+	tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
+	tess->SetSourceResolution(100);
+
+	std::unique_ptr<char[]> txt(tess->GetUTF8Text());
+
+	if (txt) {
+		const string str = txt.get();
+		return str;
+	}
+
+	return "";
+}
 
 bool ColorMatching::GetColor(Mat MatScreen, cv::Scalar low, cv::Scalar high, Rect Rec) {
 	Mat Roi = MatScreen(Rec);

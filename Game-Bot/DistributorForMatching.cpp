@@ -31,6 +31,16 @@ __forceinline bool Matching::checkSecondLastChar(string& tagCase) {
 	return false;
 }
 
+__forceinline int extractAndConvertToInt(const std::string& input) {
+	size_t slashPos = input.find('/');
+
+	std::string numberPart = input.substr(0, slashPos);
+
+	int result = std::stoi(numberPart);
+
+	return result;
+}
+
 vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 	unordered_set<pair<int, int>, pair_hash> unSet;
 	vector<POINT> result;
@@ -57,6 +67,38 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 
 	for (POINT& point : result) {
 		point.x += 1200;
+	}
+
+	return result;
+}
+
+vector<POINT> Matching::removeDuplicates_Medical(vector<POINT>& points) {
+	unordered_set<pair<int, int>, pair_hash> unSet;
+	vector<POINT> result;
+	for (POINT& point : points) {
+		bool shouldInsert = true;
+		for (int i = -20; i <= 20; i++) {
+			pair<int, int> point_x = make_pair(point.x + i, point.y);
+			pair<int, int> point_y = make_pair(point.x, point.y + i);
+			if (unSet.find(point_x) != unSet.end() || unSet.find(point_y) != unSet.end()) {
+				shouldInsert = false;
+				break;
+			}
+		}
+		if (shouldInsert) {
+			result.push_back(point);
+			for (int i = -20; i <= 20; i++) {
+				pair<int, int> point_x = make_pair(point.x + i, point.y);
+				pair<int, int> point_y = make_pair(point.x, point.y + i);
+				unSet.insert(point_x);
+				unSet.insert(point_y);
+			}
+		}
+	}
+
+	for (POINT& point : result) {
+		point.x += 730;
+		point.y += 300;
 	}
 
 	return result;
@@ -192,6 +234,10 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 	vector<POINT> ReturnDataMedical;
 	vector<POINT> ReturnDataMedical_Clean;
 
+	const char* image_window = "Source Image";
+	namedWindow(image_window, WINDOW_AUTOSIZE);
+
+
 	Rect Rec(730, 300, MatScreen.cols - 1460, MatScreen.rows - 600);
 	Mat MatScreenTemp = MatScreen(Rec);
 
@@ -201,17 +247,20 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 
 		templ = imread(input[i].Path);
 		if (!ReturnDataMedical.empty()) {
-			ReturnDataMedical_Clean = removeDuplicates(ReturnDataMedical);
+			ReturnDataMedical_Clean = removeDuplicates_Medical(ReturnDataMedical);
 
 			for (int i3 = 0; i3 < ReturnDataMedical_Clean.size(); i3++) {
-				double rows = templ.rows;
-				rows -= rows / 3.0;
-				const Rect Rec(ReturnDataMedical_Clean[i3].x + 2, ReturnDataMedical_Clean[i3].y, rows, 12);
-				string tagCase = TextMatching::textMatching(MatScreen, Rec);
+				Rect Rec(ReturnDataMedical_Clean[i3].x, ReturnDataMedical_Clean[i3].y + (templ.rows / 2) + 15, templ.cols , templ.rows - (templ.rows / 2) - 15);
 
-				if (checkSecondLastChar(tagCase)) {
-					ptr_MedicalVec->emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, 10, input[i].MaxHp);
-				}
+				cv::imshow(image_window, MatScreen(Rec));
+				waitKey(0);
+
+				string Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+
+				int HpInt = 0 /*extractAndConvertToInt(Hp)*/;
+				cout << "--- " << Hp << endl;
+
+				ptr_MedicalVec->emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, HpInt, input[i].MaxHp);
 			}
 		}
 	}

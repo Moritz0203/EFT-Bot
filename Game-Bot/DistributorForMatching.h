@@ -29,6 +29,8 @@ public:
 
 	vector<POINT> removeDuplicates(vector<POINT>& points);
 
+	vector<POINT> removeDuplicates_Medical(vector<POINT>& points);
+
 	//vector<PointAmmunition> removeDuplicatesPage(vector<PointAmmunition>& points);
 
 	//void AmmunitionMatching(vector<PathNameThreshold> input);

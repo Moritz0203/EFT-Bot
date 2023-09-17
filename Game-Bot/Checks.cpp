@@ -106,7 +106,7 @@ __forceinline bool findFreeSlots::comparePoints(const POINT& a, const POINT& b) 
 
 void findFreeSlots::findeSlots(const PointCase* pointCase, std::vector<std::vector<POINT>>& freeSlots) { //parent case must be open to use this function
 	const Mat templ = imread("ObjectImages/EmptySquare.png");
-	Matching matching;
+	Matching matching(0,0);
 
 	POINT point;
 	point.y = (pointCase->heightTempl / 2) + pointCase->point.y;

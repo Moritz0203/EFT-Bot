@@ -165,7 +165,7 @@ void CaseProcessing::CaseOperator() {
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
 	checksPublic ChecksPublic;
-	Matching matching;
+	Matching matching(730, 300);
 	
 	c_log::Start("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 	
@@ -193,6 +193,10 @@ void CaseProcessing::CaseOperator() {
 			hWND = GetMat::FindeWindow();//NOTE: später besser anpassen 
 			Sleep(500);
 			const Mat MatScreen = GetMat::getMat(hWND);
+
+			Rect Rec(730, 300, MatScreen.cols - 1460, MatScreen.rows - 600);
+			Mat MatScreenTemp = MatScreen(Rec);
+
 			matching.MedicalMatching_OneScreen(MedicalVector::Medical, ptr_MedicalVec, MatScreen);
 			Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
 

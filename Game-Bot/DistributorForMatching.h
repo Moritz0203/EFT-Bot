@@ -24,7 +24,14 @@ struct PathNameThresholdItemSizeMaxHP {
 };
 
 class Matching {
+	uint16_t X{}, Y{};
+
 public:
+	Matching(uint16_t x, uint16_t y) {
+		this->X = x;
+		this->Y = y;
+	}
+
 	static bool checkSecondLastChar(string &tagCase);
 
 	vector<POINT> removeDuplicates(vector<POINT>& points);

@@ -98,6 +98,9 @@
     <ClCompile Include="CaseProcessing.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClCompile>
+    <ClCompile Include="PouchProcessing.cpp">
+      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ProgrammScheduler.h">
@@ -143,6 +146,9 @@
       <Filter>Header Files\GameBot\TypeClass</Filter>
     </ClInclude>
     <ClInclude Include="CaseProcessing.h">
+      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="PouchProcessing.h">
       <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClInclude>
   </ItemGroup>

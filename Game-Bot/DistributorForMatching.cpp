@@ -98,9 +98,11 @@ vector<POINT> Matching::removeDuplicates_Medical(vector<POINT>& points) {
 		}
 	}
 
+	cout << X << " " << Y << endl;
+
 	for (POINT& point : result) {
-		point.x += 730;
-		point.y += 300;
+		point.x += X;
+		point.y += Y;
 	}
 
 	return result;
@@ -236,12 +238,9 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 	vector<POINT> ReturnDataMedical;
 	vector<POINT> ReturnDataMedical_Clean;
 
-	Rect Rec(730, 300, MatScreen.cols - 1460, MatScreen.rows - 600);
-	Mat MatScreenTemp = MatScreen(Rec);
-
 	for (int i = 0; i < input.size(); i++) {
 
-		ReturnDataMedical = TemplateMatching::templateMatchingItems(input[i].Path, input[i].Threshold, false, true, input[i].Name, MatScreenTemp);
+		ReturnDataMedical = TemplateMatching::templateMatchingItems(input[i].Path, input[i].Threshold, false, true, input[i].Name, MatScreen);
 
 		templ = imread(input[i].Path);
 		if (!ReturnDataMedical.empty()) {
@@ -250,15 +249,15 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 			for (int i3 = 0; i3 < ReturnDataMedical_Clean.size(); i3++) {
 				string Hp = {};
 				if (input[i].Name == "Grizzly" || input[i].Name == "Salewa") {
-					Rect Rec(ReturnDataMedical_Clean[i3].x, ReturnDataMedical_Clean[i3].y + 112, templ.cols, templ.rows - 112);
+					Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 112 - Y, templ.cols, templ.rows - 112);
 					Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
 				}
 				else {
-					Rect Rec(ReturnDataMedical_Clean[i3].x, ReturnDataMedical_Clean[i3].y + 47, templ.cols, templ.rows - 47);
+					Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 47 - Y, templ.cols, templ.rows - 47);
 					Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
 				}
 
-				int HpInt = extractAndConvertToInt(Hp);
+				int HpInt = extractAndConvertToInt(Hp);// add check if number is grater then HpMax if so cut it down 
 				if (HpInt != 0) {
 					cout << "--- " << HpInt << endl;
 					ptr_MedicalVec->emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, HpInt, input[i].MaxHp);

@@ -11,7 +11,7 @@
 using namespace std;
 using namespace cv;
 
-#define DebugImage (1)
+#define DebugImage (0)
 
 vector<POINT> TemplateMatching::templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, Mat MatScreen) {
 	vector<POINT> ReturnData;
@@ -275,12 +275,12 @@ const string TextMatching::textMatching_MedicalItems(Mat MatScreen, Rect Rec) {
 
 	//// Graustufen-Konvertierung
 
-	convertScaleAbs(Roi, Roi, 1, 0);
+	convertScaleAbs(Roi, Roi, 1.1, 0);// 1 | 0
 
 	//// Binarisierung 
 	//threshold(Roi, Roi, 150, 155, cv::THRESH_BINARY);
 
-	////cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
+	cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
 
 
 	//cv::Mat hsvImage;
@@ -298,10 +298,10 @@ const string TextMatching::textMatching_MedicalItems(Mat MatScreen, Rect Rec) {
 	//Roi.setTo(cv::Scalar(255, 255, 255), maskRed);
 
 
-	const char* image_window = "Source Image";
-	namedWindow(image_window, WINDOW_AUTOSIZE);
-	imshow(image_window, Roi);
-	waitKey(0);
+	//const char* image_window = "Source Image";
+	//namedWindow(image_window, WINDOW_AUTOSIZE);
+	//imshow(image_window, Roi);
+	//waitKey(0);
 
 	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
 	tess->Init("tessdata/", "eng");

@@ -48,27 +48,27 @@ using namespace cv;
 
 
 namespace MedicalVector {
-	const vector<PathNameThresholdItemSize> Medical{
-		{ "itemImages/MedicalImages/Medical/AFAK.png",						"AFAK",						0.85, 1 },//AFAK
-		{ "itemImages/MedicalImages/Medical/AI2.png",						"AI2",						0.85, 1 },//AI2
-		{ "itemImages/MedicalImages/Medical/AluSplint.png",					"AluSplint",				0.85, 1 },//AluSplint
-		{ "itemImages/MedicalImages/Medical/Analgin.png",					"Analgin",					0.85, 1 },//Analgin
-		{ "itemImages/MedicalImages/Medical/ArmyBandage.png",				"ArmyBandage",				0.85, 1 },//ArmyBandage
-		{ "itemImages/MedicalImages/Medical/Augmentin.png",					"Augmentin",				0.85, 1 },//Augmentin
-		{ "itemImages/MedicalImages/Medical/Bandage.png",					"Bandage",					0.85, 1 },//Bandage
-		{ "itemImages/MedicalImages/Medical/CarKit.png",					"CarKit",					0.85, 2 },//CarKit
-		{ "itemImages/MedicalImages/Medical/CAT.png",						"CAT",						0.85, 1 },//CAT
-		{ "itemImages/MedicalImages/Medical/CMS.png",						"CMS",						0.85, 2 },//CMS
-		{ "itemImages/MedicalImages/Medical/Esmarch.png",					"Esmarch",					0.85, 1 },//Esmarch
-		{ "itemImages/MedicalImages/Medical/GoldenStar.png",				"GoldenStar",				0.85, 1 },//GoldenStar
-		{ "itemImages/MedicalImages/Medical/Grizzly.png",					"Grizzly",					0.85, 4 },//Grizzly
-		{ "itemImages/MedicalImages/Medical/Hemostatic.png",				"Hemostatic",				0.85, 1 },//Hemostatic
-		{ "itemImages/MedicalImages/Medical/Ibuprofen.png",					"Ibuprofen",				0.85, 1 },//Ibuprofen
-		{ "itemImages/MedicalImages/Medical/IFAK.png",						"IFAK",						0.85, 1 },//IFAK
-		{ "itemImages/MedicalImages/Medical/Salewa.png",					"Salewa",					0.85, 2 },//Salewa
-		{ "itemImages/MedicalImages/Medical/Splint.png",					"Splint",					0.85, 1 },//Splint
-		{ "itemImages/MedicalImages/Medical/Surv12.png",					"Surv12",					0.85, 3 },//Surv12
-		{ "itemImages/MedicalImages/Medical/Vaseline.png",					"Vaseline",					0.85, 1 },//Vaseline
+	const vector<PathNameThresholdItemSizeMaxHP> Medical{
+		{ "itemImages/MedicalImages/Medical/AFAK.png",						"AFAK",						0.85, 1, 400 },//AFAK
+		{ "itemImages/MedicalImages/Medical/AI2.png",						"AI2",						0.85, 1, 100 },//AI2
+		{ "itemImages/MedicalImages/Medical/AluSplint.png",					"AluSplint",				0.85, 1, 5   },//AluSplint
+		{ "itemImages/MedicalImages/Medical/Analgin.png",					"Analgin",					0.85, 1, 4	 },//Analgin
+		{ "itemImages/MedicalImages/Medical/ArmyBandage.png",				"ArmyBandage",				0.85, 1, 2	 },//ArmyBandage
+		{ "itemImages/MedicalImages/Medical/Augmentin.png",					"Augmentin",				0.85, 1, 1	 },//Augmentin
+		{ "itemImages/MedicalImages/Medical/Bandage.png",					"Bandage",					0.85, 1, 1	 },//Bandage
+		{ "itemImages/MedicalImages/Medical/CarKit.png",					"CarKit",					0.85, 2, 220 },//CarKit
+		{ "itemImages/MedicalImages/Medical/CAT.png",						"CAT",						0.85, 1, 1	 },//CAT
+		{ "itemImages/MedicalImages/Medical/CMS.png",						"CMS",						0.85, 2, 5	 },//CMS
+		{ "itemImages/MedicalImages/Medical/Esmarch.png",					"Esmarch",					0.85, 1, 1	 },//Esmarch
+		{ "itemImages/MedicalImages/Medical/GoldenStar.png",				"GoldenStar",				0.85, 1, 10	 },//GoldenStar
+		{ "itemImages/MedicalImages/Medical/Grizzly.png",					"Grizzly",					0.85, 4, 1800},//Grizzly
+		{ "itemImages/MedicalImages/Medical/Hemostatic.png",				"Hemostatic",				0.85, 1, 3	 },//Hemostatic
+		{ "itemImages/MedicalImages/Medical/Ibuprofen.png",					"Ibuprofen",				0.85, 1, 15	 },//Ibuprofen
+		{ "itemImages/MedicalImages/Medical/IFAK.png",						"IFAK",						0.85, 1, 300 },//IFAK
+		{ "itemImages/MedicalImages/Medical/Salewa.png",					"Salewa",					0.85, 2, 400 },//Salewa
+		{ "itemImages/MedicalImages/Medical/Splint.png",					"Splint",					0.85, 1, 1	 },//Splint
+		{ "itemImages/MedicalImages/Medical/Surv12.png",					"Surv12",					0.85, 3, 15	 },//Surv12
+		{ "itemImages/MedicalImages/Medical/Vaseline.png",					"Vaseline",					0.85, 1, 6	 },//Vaseline
 	};
 
 	const vector<PathNameThresholdItemSize> Injectors{
@@ -95,10 +95,10 @@ namespace MedicalVector {
 		{ "itemImages/MedicalImages/Injectors/Zagustin.png",				"Zagustin",					0.85, 1 },//Zagustin
 	};
 
-	const array<vector<PathNameThresholdItemSize>, 2> ArrayMedical{
+	/*const array<vector<PathNameThresholdItemSize>, 2> ArrayMedical{
 		MedicalVector::Medical,
 		MedicalVector::Injectors,
-	};
+	};*/
 }
 
 namespace ProvisionsVector {
@@ -147,16 +147,16 @@ namespace ProvisionsVector {
 
 namespace CaseVector {
 	const vector<PathNameThreshold> Case{
-		{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.79 },//AmmoCase
-		{ "CaseImages/GrenadCase.png",										"GrenadCase",				0.909 },//GrenadCase
-		{ "CaseImages/HolodilnickCase.png",									"HolodilnickCase",			0.909 },//HolodilnickCase
-		{ "CaseImages/MagCase.png",											"MagCase",					0.88 },//MagCase
-		{ "CaseImages/MedCase.png",											"MedCase",					0.91 },//MedCase
-		{ "CaseImages/MoneyCase.png",										"MoneyCase",				0.88 },//MoneyCase
-		{ "CaseImages/JunkCase.png",										"JunkCase",					0.80 },//JunkCase
-		{ "CaseImages/WeaponsCase.png",										"WeaponsCase",				0.88 },//WeaponsCase
-		{ "CaseImages/ItemsCase.png",										"ItemsCase",				0.88 },//ItemsCase
-		{ "CaseImages/THICCcase.png",										"THICCcase",				0.88 },//THICCcase
+		//{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.79 },//AmmoCase
+		//{ "CaseImages/GrenadCase.png",										"GrenadCase",				0.909 },//GrenadCase
+		//{ "CaseImages/HolodilnickCase.png",									"HolodilnickCase",			0.909 },//HolodilnickCase
+		//{ "CaseImages/MagCase.png",											"MagCase",					0.88 },//MagCase
+		{ "CaseImages/MedCase.png",											"MedCase",					0.92 },//MedCase
+		//{ "CaseImages/MoneyCase.png",										"MoneyCase",				0.88 },//MoneyCase
+		//{ "CaseImages/JunkCase.png",										"JunkCase",					0.80 },//JunkCase
+		//{ "CaseImages/WeaponsCase.png",										"WeaponsCase",				0.88 },//WeaponsCase
+		//{ "CaseImages/ItemsCase.png",										"ItemsCase",				0.88 },//ItemsCase
+		//{ "CaseImages/THICCcase.png",										"THICCcase",				0.88 },//THICCcase
 	};
 }
 
@@ -166,7 +166,6 @@ void CaseProcessing::CaseOperator() {
 	findFreeSlots FindFreeSlots;
 	checksPublic ChecksPublic;
 	Matching matching;
-
 	
 	c_log::Start("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 	
@@ -174,23 +173,30 @@ void CaseProcessing::CaseOperator() {
 
 	cleanUpVectorCase();
 
-	std::shared_ptr<PointCaseInStash> ptr_PCIS;
+	std::shared_ptr<vector<PointMedical>> ptr_MedicalVec;
 	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 
 	ChecksPublic.CheckScrollbarPositions();
 	for (uint8_t i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
 		bool moved = false;
 		for (PointCaseInStash& INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
-			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+			ptr_MedicalVec = std::make_shared<vector<PointMedical>>(INpointCase.ItemsInCase);
+
+			POINT point;
+			point.y = (INpointCase.heightTempl / 2) + INpointCase.point.y;
+			point.x = (INpointCase.widthTempl / 2) + INpointCase.point.x;
 
 			Sleep(500);
-			PointCaseInStash* ptr_pointCaseInStash = new PointCaseInStash(INpointCase);
+			Mouse::MoverPOINTandPressTwoTimes(point);
 
-			FindFreeSlots.findeSlots(ptr_pointCaseInStash, INpointCase.freeSlots);
-			//FindFreeSlots.Print_Out_Case_EmptySlots();
-			delete ptr_pointCaseInStash;
+			HWND hWND = NULL;
+			hWND = GetMat::FindeWindow();//NOTE: später besser anpassen 
+			Sleep(500);
+			const Mat MatScreen = GetMat::getMat(hWND);
+			matching.MedicalMatching_OneScreen(MedicalVector::Medical, ptr_MedicalVec, MatScreen);
+			Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
+
 			moved = true;
-			
 		}
 		if (moved)
 			ChecksPublic.ClickScrollbarPositions();

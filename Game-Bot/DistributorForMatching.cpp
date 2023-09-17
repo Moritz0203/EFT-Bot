@@ -31,12 +31,14 @@ __forceinline bool Matching::checkSecondLastChar(string& tagCase) {
 	return false;
 }
 
-__forceinline int extractAndConvertToInt(const std::string& input) {
+__forceinline int extractAndConvertToInt(std::string input) {
 	size_t slashPos = input.find('/');
 
 	std::string numberPart = input.substr(0, slashPos);
 
-	int result = std::stoi(numberPart);
+	int result = 0;
+	if(numberPart.length() != 0)
+		result = std::stoi(numberPart);
 
 	return result;
 }
@@ -229,14 +231,10 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 	}
 }
 
-void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> input, shared_ptr<vector<PointMedical>> ptr_MedicalVec, Mat MatScreen) {
+void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> input, shared_ptr<vector<PointMedical>>& ptr_MedicalVec, Mat MatScreen) {
 	Mat templ;
 	vector<POINT> ReturnDataMedical;
 	vector<POINT> ReturnDataMedical_Clean;
-
-	const char* image_window = "Source Image";
-	namedWindow(image_window, WINDOW_AUTOSIZE);
-
 
 	Rect Rec(730, 300, MatScreen.cols - 1460, MatScreen.rows - 600);
 	Mat MatScreenTemp = MatScreen(Rec);
@@ -260,14 +258,11 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 					Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
 				}
 
-				/*cv::imshow(image_window, MatScreen(Rec));
-				waitKey(0);*/
-
-
-				int HpInt = 0 /*extractAndConvertToInt(Hp)*/;
-				cout << "--- " << Hp << endl;
-
-				ptr_MedicalVec->emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, HpInt, input[i].MaxHp);
+				int HpInt = extractAndConvertToInt(Hp);
+				if (HpInt != 0) {
+					cout << "--- " << HpInt << endl;
+					ptr_MedicalVec->emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, HpInt, input[i].MaxHp);
+				}
 			}
 		}
 	}

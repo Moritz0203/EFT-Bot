@@ -31,8 +31,11 @@ class PouchProcessing {
 
 	pouch_version Pouch_Version = Default;
 
+	void ShiftOutItems(uint8_t rows, uint8_t cols);
+
 public:
 	void PouchOperator();
+	void PouchOperator_FirstStart();
 
 	PouchProcessing(pouch_version Pouch){
 		this->Pouch_Version = Pouch;

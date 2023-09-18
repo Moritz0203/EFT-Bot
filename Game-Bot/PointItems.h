@@ -44,11 +44,11 @@ public:
 
 class PointMedical : public PointItem {
 public:
-	uint8_t hpItem = {};
-	uint8_t hpItemMax = {};
+	uint16_t hpItem = {};
+	uint16_t hpItemMax = {};
 
 	PointMedical();
-	PointMedical(POINT point, std::string nameOfItem, int heightTempl, int widthTempl, int page, int slotsPerItem, uint8_t hpItem, uint8_t hpItemMax);
+	PointMedical(POINT point, std::string nameOfItem, int heightTempl, int widthTempl, int page, int slotsPerItem, uint16_t hpItem, uint16_t hpItemMax);
 
 public:
 	static std::vector<std::vector<PointMedical>> pointMedical_C;

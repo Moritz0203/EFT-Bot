@@ -31,14 +31,27 @@ __forceinline bool Matching::checkSecondLastChar(string& tagCase) {
 	return false;
 }
 
-__forceinline int extractAndConvertToInt(std::string input) {
+__forceinline int extractAndConvertToInt(std::string input, uint16_t MaxHp) {
 	size_t slashPos = input.find('/');
 
 	std::string numberPart = input.substr(0, slashPos);
 
+	int digitCount = 0;
+	int tempNumber = MaxHp; 
+	while (tempNumber > 0) {
+		int digit = tempNumber % 10; 
+		digitCount++; 
+		tempNumber /= 10; 
+	}
+
+	if (numberPart.length() > digitCount) {
+		numberPart = numberPart.substr(0, digitCount);
+	}
+
 	int result = 0;
-	if(numberPart.length() != 0)
+	if (numberPart.length() != 0) {
 		result = std::stoi(numberPart);
+	}
 
 	return result;
 }
@@ -248,19 +261,25 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 
 			for (int i3 = 0; i3 < ReturnDataMedical_Clean.size(); i3++) {
 				string Hp = {};
-				if (input[i].Name == "Grizzly" || input[i].Name == "Salewa") {
-					Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 112 - Y, templ.cols, templ.rows - 112);
-					Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+				if (input[i].MaxHp != 1) {
+					if (input[i].Name == "Grizzly" || input[i].Name == "Salewa") {
+						Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 112 - Y, templ.cols, templ.rows - 112);
+						Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+					}
+					else {
+						Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 47 - Y, templ.cols, templ.rows - 47);
+						Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+					}
+
+					int HpInt = extractAndConvertToInt(Hp, input[i].MaxHp);// add check if number is grater then HpMax if so cut it down 
+					if (HpInt != 0) {
+						cout << "--- " << HpInt << endl;
+						//cout << "Y: " << ReturnDataMedical_Clean[i3].y << " X: " << ReturnDataMedical_Clean[i3].x << endl;
+						ptr_MedicalVec->emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, HpInt, input[i].MaxHp);
+					}
 				}
 				else {
-					Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 47 - Y, templ.cols, templ.rows - 47);
-					Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
-				}
-
-				int HpInt = extractAndConvertToInt(Hp);// add check if number is grater then HpMax if so cut it down 
-				if (HpInt != 0) {
-					cout << "--- " << HpInt << endl;
-					ptr_MedicalVec->emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, HpInt, input[i].MaxHp);
+					ptr_MedicalVec->emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, 0, input[i].MaxHp);
 				}
 			}
 		}

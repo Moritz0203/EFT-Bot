@@ -44,7 +44,7 @@ PointMedical::PointMedical()
 {
 }
 
-PointMedical::PointMedical(POINT point, std::string nameOfItem, int heightTempl, int widthTempl, int page, int slotsPerItem, uint8_t hpItem, uint8_t hpItemMax)
+PointMedical::PointMedical(POINT point, std::string nameOfItem, int heightTempl, int widthTempl, int page, int slotsPerItem, uint16_t hpItem, uint16_t hpItemMax)
 	:PointItem(point, nameOfItem, heightTempl, widthTempl, page, slotsPerItem)
 {
 	this->hpItem = hpItem;

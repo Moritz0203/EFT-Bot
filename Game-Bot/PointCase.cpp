@@ -1,5 +1,17 @@
 #include "PointCase.h"
 
+Pouch::Pouch()
+{
+}
+
+Pouch::Pouch(std::string nameOfPouch, const POINT pointPouch, vector<PointMedical> ItemsInPouch)
+{
+	this->nameOfPouch = nameOfPouch;
+	this->ItemsInPouch = ItemsInPouch;
+}
+
+Pouch Pouch::pouch;
+
 PointCase::PointCase()
 {
 }
@@ -39,3 +51,4 @@ PointCaseInCase::PointCaseInCase(POINT point, POINT pointFromParentCase, std::st
 }
 
 std::vector<std::vector<PointCaseInCase>> PointCaseInCase::pointCaseInCase;
+

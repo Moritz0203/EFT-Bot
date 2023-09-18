@@ -6,14 +6,24 @@
 #include "PointItems.h"
 using namespace std;
 
-//enum Color { RED, ORANGSH, GREEN, BLUE, PURPLE, PINK, GRAY, NOCOLOR };
+class Pouch {
+public:
+	std::string nameOfPouch = {};
+	const POINT pointPouch = { 680, 745 };// only my screen 
+	vector<PointMedical> ItemsInPouch{};
+
+	Pouch();
+	Pouch(std::string nameOfPouch, const POINT pointPouch, vector<PointMedical> ItemsInPouch);
+
+public:
+	static Pouch pouch;
+};
 
 class PointCase {
 public:
 	std::string tagCase = {}, nameOfCase = {};
 	POINT point = {};
 	int heightTempl = {}, widthTempl = {}, page = {}, identyfierAsHEX = {};
-	std::vector<std::vector<POINT>> freeSlots{};
 
 	PointCase();
 	PointCase(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page);

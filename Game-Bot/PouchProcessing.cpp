@@ -46,7 +46,21 @@ void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 	}
 }
 
+
 void PouchProcessing::PouchOperator() {
+
+
+
+}
+
+void PouchProcessing::MovingInPouch() {
+
+
+
+}
+
+
+void PouchProcessing::PouchMatching() {
 	GetMat getMat;
 	Matching matching(800, 610);
 	vector<PointMedical> MedicalVec{};
@@ -54,28 +68,22 @@ void PouchProcessing::PouchOperator() {
 	shared_ptr<vector<PointMedical>> ptr_MedicalVec = make_shared<vector<PointMedical>>(Pouch::pouch.ItemsInPouch);
 
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
-	
-	//Später zuschneiden des MatScreen 
-	/*Mat Template = imread(PouchVector[Pouch_Version].Path);
-	POINT pointPouch = TemplateMatching::templateMatchingObjects(MatScreenVector[0], Template, PouchVector[Pouch_Version].Threshold);
-
-	POINT pointClick{};
-	pointClick.y = (Template.rows / 2) + pointPouch.y;
-	pointClick.x = (Template.cols / 2) + pointPouch.x;
-
-	cout << "y: " << pointClick.y << " x: " << pointClick.x << endl;*/
-
-	//Mouse::MoverPOINTandPressTwoTimes(pointClick);
 
 	Rect Rec(800, 610, MatScreenVector[0].cols - 1625, MatScreenVector[0].rows - 800);
 	Mat MatScreenTemp = MatScreenVector[0](Rec);
 
 	matching.MedicalMatching_OneScreen(Medical, ptr_MedicalVec, MatScreenTemp);
-
-
 }
 
-void PouchProcessing::PouchOperator_FirstStart() {
+void PouchProcessing::Pouch_FirstStart() {
+	GetMat getMat;
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
+
+	//Später zuschneiden des MatScreen 
+	Mat Template = imread(PouchVector[Pouch_Version].Path);
+	pointPouch = TemplateMatching::templateMatchingObjects(MatScreenVector[0], Template, PouchVector[Pouch_Version].Threshold);
+
+
 	switch (PouchVector[Pouch_Version].Slots)
 	{
 	case 4:
@@ -102,3 +110,4 @@ void PouchProcessing::PouchOperator_FirstStart() {
 		break;
 	}
 }
+

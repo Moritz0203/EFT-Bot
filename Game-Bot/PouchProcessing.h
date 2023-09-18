@@ -33,9 +33,13 @@ class PouchProcessing {
 
 	void ShiftOutItems(uint8_t rows, uint8_t cols);
 
+	POINT pointPouch{};
+
 public:
+	void PouchMatching();
+	void Pouch_FirstStart();
 	void PouchOperator();
-	void PouchOperator_FirstStart();
+	void MovingInPouch();
 
 	PouchProcessing(pouch_version Pouch){
 		this->Pouch_Version = Pouch;

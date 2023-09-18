@@ -24,7 +24,7 @@ int main() {
 
 	//caseProcessing.CaseOperator();
 
-	pouchProcessing.PouchOperator();
+	pouchProcessing.PouchMatching();
 
-	pouchProcessing.PouchOperator_FirstStart();
+	pouchProcessing.Pouch_FirstStart();
 }

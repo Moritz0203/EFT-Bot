@@ -111,8 +111,6 @@ vector<POINT> Matching::removeDuplicates_Medical(vector<POINT>& points) {
 		}
 	}
 
-	cout << X << " " << Y << endl;
-
 	for (POINT& point : result) {
 		point.x += X;
 		point.y += Y;
@@ -271,10 +269,9 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 						Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
 					}
 
-					int HpInt = extractAndConvertToInt(Hp, input[i].MaxHp);// add check if number is grater then HpMax if so cut it down 
+					int HpInt = extractAndConvertToInt(Hp, input[i].MaxHp);
 					if (HpInt != 0) {
 						cout << "--- " << HpInt << endl;
-						//cout << "Y: " << ReturnDataMedical_Clean[i3].y << " X: " << ReturnDataMedical_Clean[i3].x << endl;
 						ptr_MedicalVec->emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, HpInt, input[i].MaxHp);
 					}
 				}

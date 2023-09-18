@@ -11,139 +11,15 @@
 #include "Checks.h"
 #include <set>
 #include "c_log.h"
+#include "ItemProcessing.h"
 using namespace std;
 using namespace cv;
-
-//std::array<std::string, 6> CasesInCase{
-//	"itemImages/CaseImages/AmmoCase.png",
-//	"itemImages/CaseImages/GrenadCase.png",
-//	"itemImages/CaseImages/HolodilnickCase.png",
-//	"itemImages/CaseImages/MagCase.png",
-//	"itemImages/CaseImages/MedCase.png",
-//	"itemImages/CaseImages/MoneyCase.png",
-//};
-//
-//std::array<std::string, 6> NameOfItemCasesInCase{
-//	"AmmoCase",
-//	"GrenadCase",
-//	"HolodilnickCase",
-//	"MagCase",
-//	"MedCase",
-//	"MoneyCase",
-//};
-//
-//std::array<double, 6> CasesInCaseThreshold{
-//	0.90,//AmmoCase
-//	0.90,//GrenadCase
-//	0.90,//HolodilnickCase
-//	0.90,//MagCase
-//	0.90,//MedCase
-//	0.90,//MoneyCase
-//};
 
 //std::mutex ItemsProcessing::mtx;
 //std::condition_variable ItemsProcessing::cv;
 //bool ItemsProcessing::ready = false;
 //std::mutex ItemsProcessing::i_M;
 
-
-namespace MedicalVector {
-	const vector<PathNameThresholdItemSizeMaxHP> Medical{
-		{ "itemImages/MedicalImages/Medical/AFAK.png",						"AFAK",						0.85, 1, 400 },//AFAK
-		{ "itemImages/MedicalImages/Medical/AI2.png",						"AI2",						0.85, 1, 100 },//AI2
-		{ "itemImages/MedicalImages/Medical/AluSplint.png",					"AluSplint",				0.85, 1, 5   },//AluSplint
-		{ "itemImages/MedicalImages/Medical/Analgin.png",					"Analgin",					0.85, 1, 4	 },//Analgin
-		{ "itemImages/MedicalImages/Medical/ArmyBandage.png",				"ArmyBandage",				0.85, 1, 2	 },//ArmyBandage
-		{ "itemImages/MedicalImages/Medical/Augmentin.png",					"Augmentin",				0.85, 1, 1	 },//Augmentin
-		{ "itemImages/MedicalImages/Medical/Bandage.png",					"Bandage",					0.85, 1, 1	 },//Bandage
-		{ "itemImages/MedicalImages/Medical/CarKit.png",					"CarKit",					0.85, 2, 220 },//CarKit
-		{ "itemImages/MedicalImages/Medical/CAT.png",						"CAT",						0.85, 1, 1	 },//CAT
-		{ "itemImages/MedicalImages/Medical/CMS.png",						"CMS",						0.85, 2, 5	 },//CMS
-		{ "itemImages/MedicalImages/Medical/Esmarch.png",					"Esmarch",					0.85, 1, 1	 },//Esmarch
-		{ "itemImages/MedicalImages/Medical/GoldenStar.png",				"GoldenStar",				0.85, 1, 10	 },//GoldenStar
-		{ "itemImages/MedicalImages/Medical/Grizzly.png",					"Grizzly",					0.85, 4, 1800},//Grizzly
-		{ "itemImages/MedicalImages/Medical/Hemostatic.png",				"Hemostatic",				0.85, 1, 3	 },//Hemostatic
-		{ "itemImages/MedicalImages/Medical/Ibuprofen.png",					"Ibuprofen",				0.85, 1, 15	 },//Ibuprofen
-		{ "itemImages/MedicalImages/Medical/IFAK.png",						"IFAK",						0.85, 1, 300 },//IFAK
-		{ "itemImages/MedicalImages/Medical/Salewa.png",					"Salewa",					0.85, 2, 400 },//Salewa
-		{ "itemImages/MedicalImages/Medical/Splint.png",					"Splint",					0.85, 1, 1	 },//Splint
-		{ "itemImages/MedicalImages/Medical/Surv12.png",					"Surv12",					0.85, 3, 15	 },//Surv12
-		{ "itemImages/MedicalImages/Medical/Vaseline.png",					"Vaseline",					0.85, 1, 6	 },//Vaseline
-	};
-
-	const vector<PathNameThresholdItemSize> Injectors{
-		{ "itemImages/MedicalImages/Injectors/3bTG.png",					"3bTG",						0.85, 1 },//3bTG
-		{ "itemImages/MedicalImages/Injectors/Adrenaline.png",				"Adrenaline",				0.85, 1 },//Adrenaline
-		{ "itemImages/MedicalImages/Injectors/AHF1M.png",					"AHF1M",					0.85, 1 },//AHF1M
-		{ "itemImages/MedicalImages/Injectors/ETG.png",						"ETG",						0.85, 1 },//ETG
-		{ "itemImages/MedicalImages/Injectors/L1.png",						"L1",						0.85, 1 },//L1
-		{ "itemImages/MedicalImages/Injectors/Meldonin.png",				"Meldonin",					0.85, 1 },//Meldonin
-		{ "itemImages/MedicalImages/Injectors/Morphine.png",				"Morphine",					0.85, 1 },//Morphine
-		{ "itemImages/MedicalImages/Injectors/MULE.png",					"MULE",						0.85, 1 },//MULE
-		{ "itemImages/MedicalImages/Injectors/Obdolbos.png",				"Obdolbos",					0.85, 1 },//Obdolbos
-		{ "itemImages/MedicalImages/Injectors/Obdolbos2.png",				"Obdolbos2",				0.85, 1 },//Obdolbos2
-		{ "itemImages/MedicalImages/Injectors/P22.png",						"P22",						0.85, 1 },//P22
-		{ "itemImages/MedicalImages/Injectors/Perfotoran.png",				"Perfotoran",				0.85, 1 },//Perfotoran
-		{ "itemImages/MedicalImages/Injectors/PNB.png",						"PNB",						0.85, 1 },//PNB
-		{ "itemImages/MedicalImages/Injectors/Propital.png",				"Propital",					0.85, 1 },//Propital
-		{ "itemImages/MedicalImages/Injectors/SJ1.png",						"SJ1",						0.85, 1 },//SJ1
-		{ "itemImages/MedicalImages/Injectors/SJ6.png",						"SJ6",						0.85, 1 },//SJ6
-		{ "itemImages/MedicalImages/Injectors/SJ9.png",						"SJ9",						0.85, 1 },//SJ9
-		{ "itemImages/MedicalImages/Injectors/SJ12.png",					"SJ12",						0.85, 1 },//SJ12
-		{ "itemImages/MedicalImages/Injectors/Trimadol.png",				"Trimadol",					0.85, 1 },//Trimadol
-		{ "itemImages/MedicalImages/Injectors/XTG12.png",					"XTG12",					0.85, 1 },//XTG12
-		{ "itemImages/MedicalImages/Injectors/Zagustin.png",				"Zagustin",					0.85, 1 },//Zagustin
-	};
-
-	/*const array<vector<PathNameThresholdItemSize>, 2> ArrayMedical{
-		MedicalVector::Medical,
-		MedicalVector::Injectors,
-	};*/
-}
-
-namespace ProvisionsVector {
-	const vector<PathNameThresholdItemSize> Provisions{
-		{ "itemImages/Provisions/Alyonka.png",								"Alyonka",					0.85, 1 },//Alyonka
-		{ "itemImages/Provisions/AppleJuice.png",							"AppleJuice",				0.85, 2 },//AppleJuice
-		{ "itemImages/Provisions/Aquamari.png",								"Aquamari",					0.85, 2 },//Aquamari
-		{ "itemImages/Provisions/BigTushonka.png",							"BigTushonka",				0.85, 1 },//BigTushonka
-		{ "itemImages/Provisions/Condmilk.png",								"Condmilk",					0.85, 1 },//Condmilk
-		{ "itemImages/Provisions/Crackers.png",								"Crackers",					0.85, 1 },//Crackers
-		{ "itemImages/Provisions/Croutons.png",								"Croutons",					0.85, 1 },//Croutons
-		{ "itemImages/Provisions/EmergencyWaterRation.png",					"EmergencyWaterRation",		0.85, 1 },//EmergencyWaterRation
-		{ "itemImages/Provisions/Emeyla.png",								"Emeyla",					0.85, 1 },//Emeyla
-		{ "itemImages/Provisions/GrandJuice.png",							"GrandJuice",				0.85, 2 },//GrandJuice
-		{ "itemImages/Provisions/GreenTea.png",								"GreenTea",					0.85, 1 },//GreenTea
-		{ "itemImages/Provisions/Herring.png",								"Herring",					0.85, 1 },//Herring
-		{ "itemImages/Provisions/HorRod.png",								"HorRod",					0.85, 1 },//HorRod
-		{ "itemImages/Provisions/Humpback.png",								"Humpback",					0.85, 1 },//Humpback
-		{ "itemImages/Provisions/Iskra.png",								"Iskra",					0.85, 2 },//Iskra
-		{ "itemImages/Provisions/Kvass.png",								"Kvass",					0.85, 2 },//Kvass
-		{ "itemImages/Provisions/MaxEnergy.png",							"MaxEnergy",				0.85, 1 },//MaxEnergy
-		{ "itemImages/Provisions/Mayo.png",									"Mayo",						0.85, 1 },//Mayo
-		{ "itemImages/Provisions/Milk.png",									"Milk",						0.85, 2 },//Milk
-		{ "itemImages/Provisions/Moonshine.png",							"Moonshine",				0.85, 2 },//Moonshine
-		{ "itemImages/Provisions/MRE.png",									"MRE",						0.85, 2 },//MRE
-		{ "itemImages/Provisions/Oatflakes.png",							"Oatflakes",				0.85, 2 },//Oatflakes
-		{ "itemImages/Provisions/Peas.png",									"Peas",						0.85, 1 },//Peas
-		{ "itemImages/Provisions/Pevko.png",								"Pevko",					0.85, 2 },//Pevko
-		{ "itemImages/Provisions/Pineapple.png",							"Pineapple",				0.85, 2 },//Pineapple
-		{ "itemImages/Provisions/RatCola.png",								"RatCola",					0.85, 1 },//RatCola
-		{ "itemImages/Provisions/Saury.png",								"Saury",					0.85, 1 },//Saury
-		{ "itemImages/Provisions/Sausage.png",								"Sausage",					0.85, 2 },//Sausage
-		{ "itemImages/Provisions/Slickers.png",								"Slickers",					0.85, 1 },//Slickers
-		{ "itemImages/Provisions/Sprats.png",								"Sprats",					0.85, 1 },//Sprats
-		{ "itemImages/Provisions/Squash.png",								"Squash",					0.85, 1 },//Squash
-		{ "itemImages/Provisions/Sugar.png",								"Sugar",					0.85, 1 },//Sugar
-		{ "itemImages/Provisions/Superwater.png",							"Superwater",				0.85, 4 },//Superwater
-		{ "itemImages/Provisions/TarCola.png",								"TarCola",					0.85, 1 },//TarCola
-		{ "itemImages/Provisions/Tushonka.png",								"Tushonka",					0.85, 1 },//Tushonka
-		{ "itemImages/Provisions/VitaJuice.png",							"VitaJuice",				0.85, 2 },//VitaJuice
-		{ "itemImages/Provisions/Vodka.png",								"Vodka",					0.85, 2 },//Vodka
-		{ "itemImages/Provisions/Water.png",								"Water",					0.85, 2 },//Water
-		{ "itemImages/Provisions/Whiskey.png",								"Whiskey",					0.85, 2 },//Whiskey
-	};
-}
 
 namespace CaseVector {
 	const vector<PathNameThreshold> Case{
@@ -164,6 +40,7 @@ namespace CaseVector {
 void CaseProcessing::CaseOperator() {
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
+	ItemProcessing itemProcessing;
 	checksPublic ChecksPublic;
 	Matching matching(730, 300);
 	
@@ -197,7 +74,7 @@ void CaseProcessing::CaseOperator() {
 			Rect Rec(730, 300, MatScreen.cols - 1460, MatScreen.rows - 600);
 			Mat MatScreenTemp = MatScreen(Rec);
 
-			matching.MedicalMatching_OneScreen(MedicalVector::Medical, ptr_MedicalVec, MatScreen);
+			itemProcessing.MedicalProcess_OneScreen(ptr_MedicalVec, MatScreen);
 			Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
 
 			moved = true;

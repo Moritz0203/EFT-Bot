@@ -27,6 +27,8 @@ class Matching {
 	uint16_t X{}, Y{};
 
 public:
+	Matching();
+
 	Matching(uint16_t x, uint16_t y) {
 		this->X = x;
 		this->Y = y;
@@ -47,4 +49,6 @@ public:
 	//void BarterMatching(vector<PathNameThresholdItemSize> input, vector<vector<PointBarter>> &input_vec);
 
 	void MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> input, shared_ptr<vector<PointMedical>>& ptr_MedicalVec, Mat MatScreen);
+
+	void MedicalMatching(vector<PathNameThresholdItemSizeMaxHP> input);
 };

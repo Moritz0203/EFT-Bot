@@ -3,6 +3,7 @@
 #include "getMat.h"
 #include "InputMK.h"
 #include "DistributorForMatching.h"
+#include "ItemProcessing.h"
 
 const vector<PathNameThresholdItemSizeMaxHP> Medical{
 		{ "itemImages/MedicalImages/Medical/AFAK.png",						"AFAK",						0.85, 1, 400 },//AFAK
@@ -35,7 +36,7 @@ void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 	for (uint8_t row = 0; row < rows; row++) {
 		uint16_t X = XStart;
 		for (uint8_t col = 0; col < cols; col++) {
-			POINT point;
+			POINT point{};
 			point.y = (height / 2) + Y;
 			point.x = (width / 2) + X;
 
@@ -49,20 +50,14 @@ void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 
 void PouchProcessing::PouchOperator() {
 
-
-
-}
-
-void PouchProcessing::MovingInPouch() {
-
-
+	
 
 }
-
 
 void PouchProcessing::PouchMatching() {
 	GetMat getMat;
 	Matching matching(800, 610);
+	ItemProcessing itemProcessing;
 	vector<PointMedical> MedicalVec{};
 	Pouch::pouch.nameOfPouch = PouchVector[Pouch_Version].Name;
 	shared_ptr<vector<PointMedical>> ptr_MedicalVec = make_shared<vector<PointMedical>>(Pouch::pouch.ItemsInPouch);
@@ -72,7 +67,7 @@ void PouchProcessing::PouchMatching() {
 	Rect Rec(800, 610, MatScreenVector[0].cols - 1625, MatScreenVector[0].rows - 800);
 	Mat MatScreenTemp = MatScreenVector[0](Rec);
 
-	matching.MedicalMatching_OneScreen(Medical, ptr_MedicalVec, MatScreenTemp);
+	itemProcessing.MedicalProcess_OneScreen(ptr_MedicalVec, MatScreenVector[0]);
 }
 
 void PouchProcessing::Pouch_FirstStart() {

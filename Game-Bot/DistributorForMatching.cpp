@@ -10,12 +10,17 @@
 using namespace cv;
 using namespace std;
 
+Matching::Matching()
+{
+}
+
 struct pair_hash {
 	template <class T1, class T2>
 	size_t operator()(const pair<T1, T2>& p) const {
 		return hash<T1>()(p.first) ^ hash<T2>()(p.second);
 	}
 };
+
 
 __forceinline bool Matching::checkSecondLastChar(string& tagCase) {
 	tagCase.erase(remove(tagCase.begin(), tagCase.end(), ' '), tagCase.end());
@@ -280,6 +285,62 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 				}
 			}
 		}
+	}
+}
+
+void Matching::MedicalMatching(vector<PathNameThresholdItemSizeMaxHP> input) {
+	Mat templ;
+	GetMat getMat;
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
+
+	vector<POINT> ReturnDataMedical;
+	vector<POINT> ReturnDataMedical_Clean;
+	vector<PointMedical> pointMedical_temp;
+	vector<vector<POINT>> freeSlots_empty{};
+	int page = 0;
+
+	for (Mat MatScreen : MatScreenVector) {
+
+		Rect Rec(1200, 0, MatScreen.cols - 1200, MatScreen.rows);
+		Mat MatScreenTemp = MatScreen(Rec);
+
+		for (int i = 0; i < input.size(); i++) {
+
+			ReturnDataMedical = TemplateMatching::templateMatchingItems(input[i].Path, input[i].Threshold, false, true, input[i].Name, MatScreenTemp);
+
+			templ = imread(input[i].Path);
+			if (!ReturnDataMedical.empty()) {
+				ReturnDataMedical_Clean = removeDuplicates(ReturnDataMedical);
+
+				for (int i3 = 0; i3 < ReturnDataMedical_Clean.size(); i3++) {
+					string Hp = {};
+					if (input[i].MaxHp != 1) {
+						if (input[i].Name == "Grizzly" || input[i].Name == "Salewa") {
+							Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 112 - Y, templ.cols, templ.rows - 112);
+							Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+						}
+						else {
+							Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 47 - Y, templ.cols, templ.rows - 47);
+							Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+						}
+
+						int HpInt = extractAndConvertToInt(Hp, input[i].MaxHp);
+						if (HpInt != 0) {
+							cout << "--- " << HpInt << endl;
+							pointMedical_temp.emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, page, input[i].ItemSize, HpInt, input[i].MaxHp);
+						}
+					}
+					else {
+						pointMedical_temp.emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, page, input[i].ItemSize, 0, input[i].MaxHp);
+					}
+				}
+				ReturnDataMedical.clear();
+				ReturnDataMedical_Clean.clear();
+			}
+		}
+		PointMedical::pointMedical_NC.emplace_back(pointMedical_temp);
+		pointMedical_temp.clear();
+		page++;
 	}
 }
 

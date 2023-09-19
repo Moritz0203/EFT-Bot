@@ -37,7 +37,7 @@ namespace CaseVector {
 }
 
 
-void CaseProcessing::CaseOperator() {
+void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching constructor definition if only MedCase is needed, Make a new class for PointCaseInStashMedical
 	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
 	findFreeSlots FindFreeSlots;
 	ItemProcessing itemProcessing;

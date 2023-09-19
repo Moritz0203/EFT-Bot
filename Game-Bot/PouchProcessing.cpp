@@ -84,7 +84,7 @@ void PouchProcessing::Pouch_FirstStart() {
 
 	//Später zuschneiden des MatScreen 
 	Mat Template = imread(PouchVector[Pouch_Version].Path);
-	pointPouch = TemplateMatching::templateMatchingObjects(MatScreenVector[0], Template, PouchVector[Pouch_Version].Threshold);
+	Pouch::pouch.pointPouch = TemplateMatching::templateMatchingObjects(MatScreenVector[0], Template, PouchVector[Pouch_Version].Threshold);
 
 
 	switch (PouchVector[Pouch_Version].Slots)

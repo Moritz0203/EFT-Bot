@@ -1,5 +1,5 @@
 #pragma once
-class ItemMoving
-{
+class ItemMoving {
+
 };
 

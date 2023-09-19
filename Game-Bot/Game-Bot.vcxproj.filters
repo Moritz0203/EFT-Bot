@@ -104,6 +104,9 @@
     <ClCompile Include="ItemProcessing.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClCompile>
+    <ClCompile Include="ItemMoving.cpp">
+      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ProgrammScheduler.h">
@@ -155,6 +158,9 @@
       <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClInclude>
     <ClInclude Include="ItemProcessing.h">
+      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemMoving.h">
       <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClInclude>
   </ItemGroup>

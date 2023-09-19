@@ -31,6 +31,7 @@ class PouchProcessing {
 
 	pouch_version Pouch_Version = Default;
 	POINT pointPouch{};
+	bool FirstStart = true;
 
 	void ShiftOutItems(uint8_t rows, uint8_t cols);
 

@@ -135,6 +135,7 @@
     <ClCompile Include="getMat.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="InputMK.cpp" />
+    <ClCompile Include="ItemMoving.cpp" />
     <ClCompile Include="ItemProcessing.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PointCase.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Health.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="InputMK.h" />
+    <ClInclude Include="ItemMoving.h" />
     <ClInclude Include="ItemProcessing.h" />
     <ClInclude Include="PointCase.h" />
     <ClInclude Include="PointItems.h" />

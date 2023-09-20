@@ -54,6 +54,12 @@
     <Filter Include="Source Files\GameBot\Lobby-Overall\Matching-Moving">
       <UniqueIdentifier>{e05a5ce5-743d-44fc-bbc0-92dec4319070}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameBot\Lobby-Overall\Matching-Moving\Prefix">
+      <UniqueIdentifier>{291f8994-19f1-4014-920a-3b2818be001b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameBot\Lobby-Overall\Matching-Moving\Prefix">
+      <UniqueIdentifier>{7a8f99aa-a090-4a09-ae22-bfacd54043ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -109,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="MovPrefix.cpp">
       <Filter>Source Files\GameBot\TypeClass</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadConfigFile.cpp">
+      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving\Prefix</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +177,9 @@
     </ClInclude>
     <ClInclude Include="MovPrefix.h">
       <Filter>Header Files\GameBot\TypeClass</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadConfigFile.h">
+      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving\Prefix</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

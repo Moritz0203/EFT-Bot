@@ -19,7 +19,6 @@ class MovPrefix {
 public:
 	string NameOfItem = {};
 	uint8_t IdMov = {};
-	
 
 	MovPrefix();
 	MovPrefix(string NameOfItem, uint8_t IdMov);

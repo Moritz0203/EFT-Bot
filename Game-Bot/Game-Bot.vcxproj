@@ -143,6 +143,7 @@
     <ClCompile Include="PointItems.cpp" />
     <ClCompile Include="PouchProcessing.cpp" />
     <ClCompile Include="ProgrammScheduler.cpp" />
+    <ClCompile Include="ReadConfigFile.cpp" />
     <ClCompile Include="TemplateMatching.cpp" />
     <ClCompile Include="Walk.cpp" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="PointItems.h" />
     <ClInclude Include="PouchProcessing.h" />
     <ClInclude Include="ProgrammScheduler.h" />
+    <ClInclude Include="ReadConfigFile.h" />
     <ClInclude Include="TemplateMatching.h" />
     <ClInclude Include="Walk.h" />
   </ItemGroup>

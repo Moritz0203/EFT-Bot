@@ -8,3 +8,7 @@ void ItemMoving::MovInPouch_Medical() {
 void ItemMoving::MovInPouch() {
 	Pouch::pouch.pointPouch;
 }
+
+void ItemMoving::MovingProcessing() {
+
+}

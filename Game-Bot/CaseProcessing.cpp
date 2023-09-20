@@ -23,16 +23,20 @@ using namespace cv;
 
 namespace CaseVector {
 	const vector<PathNameThreshold> Case{
-		//{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.79 },//AmmoCase
-		//{ "CaseImages/GrenadCase.png",										"GrenadCase",				0.909 },//GrenadCase
-		//{ "CaseImages/HolodilnickCase.png",									"HolodilnickCase",			0.909 },//HolodilnickCase
-		//{ "CaseImages/MagCase.png",											"MagCase",					0.88 },//MagCase
+		{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.79 },//AmmoCase
+		{ "CaseImages/GrenadCase.png",										"GrenadCase",				0.909 },//GrenadCase
+		{ "CaseImages/HolodilnickCase.png",									"HolodilnickCase",			0.909 },//HolodilnickCase
+		{ "CaseImages/MagCase.png",											"MagCase",					0.88 },//MagCase
 		{ "CaseImages/MedCase.png",											"MedCase",					0.92 },//MedCase
-		//{ "CaseImages/MoneyCase.png",										"MoneyCase",				0.88 },//MoneyCase
-		//{ "CaseImages/JunkCase.png",										"JunkCase",					0.80 },//JunkCase
-		//{ "CaseImages/WeaponsCase.png",										"WeaponsCase",				0.88 },//WeaponsCase
-		//{ "CaseImages/ItemsCase.png",										"ItemsCase",				0.88 },//ItemsCase
-		//{ "CaseImages/THICCcase.png",										"THICCcase",				0.88 },//THICCcase
+		{ "CaseImages/MoneyCase.png",										"MoneyCase",				0.88 },//MoneyCase
+		{ "CaseImages/JunkCase.png",										"JunkCase",					0.80 },//JunkCase
+		{ "CaseImages/WeaponsCase.png",										"WeaponsCase",				0.88 },//WeaponsCase
+		{ "CaseImages/ItemsCase.png",										"ItemsCase",				0.88 },//ItemsCase
+		{ "CaseImages/THICCcase.png",										"THICCcase",				0.88 },//THICCcase
+	};
+
+	const vector<PathNameThreshold> CaseMedical{
+		{ "CaseImages/MedCase.png",											"MedCase",					0.92 },//MedCase
 	};
 }
 
@@ -46,7 +50,7 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 	
 	c_log::Start("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 	
-	matching.CaseMatching(CaseVector::Case);
+	matching.CaseMatching(CaseVector::CaseMedical);
 
 	cleanUpVectorCase();
 
@@ -88,6 +92,52 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 
 	c_log::End("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
 }
+
+
+// not in do not use will be later used to match other items in cases
+void CaseProcessing::CaseOperator() { 
+	std::shared_ptr<vector<vector<POINT>>> ptr_FreeSlots;
+	findFreeSlots FindFreeSlots;
+	checksPublic ChecksPublic;
+	Matching matching;
+
+
+	c_log::Start("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
+
+	cleanUpVectorCase();
+
+	std::shared_ptr<PointCaseInStash> ptr_PCIS;
+	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
+
+	ChecksPublic.CheckScrollbarPositions();
+	for (uint8_t i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+		bool moved = false;
+		for (PointCaseInStash& INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
+			ptr_PCIS = std::make_shared<PointCaseInStash>(INpointCase);
+
+			if (INpointCase.nameOfCase == "THICCcase" || INpointCase.nameOfCase == "ItemsCase") {
+				//OpenCaseAndTakeScreen(ptr_PCIS);
+			}
+			else {
+				Sleep(500);
+				PointCaseInStash* ptr_pointCaseInStash = new PointCaseInStash(INpointCase);
+
+				//FindFreeSlots.Print_Out_Case_EmptySlots();
+				delete ptr_pointCaseInStash;
+				moved = true;
+			}
+		}
+		if (moved)
+			ChecksPublic.ClickScrollbarPositions();
+
+		Sleep(400);
+		Keyboard::KeyboardInput(keyforInput);
+	}
+
+	c_log::End("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
+}
+
+
 
 //void CaseProcessing::MoveTopBarTHICCcase() {
 //	Mat MatScreen;

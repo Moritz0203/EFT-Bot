@@ -33,10 +33,10 @@ public:
 class PointCaseInStash: public PointCase
 {
 public:
-	vector<PointMedical> ItemsInCase{};
+	vector<PointItem> ItemsInCase{};// Maybe change later 
 
 	PointCaseInStash();
-	PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, vector<PointMedical> ItemsInCase);
+	PointCaseInStash(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, vector<PointItem> ItemsInCase);
 
 public:
 	static std::vector<std::vector<PointCaseInStash>> pointCaseInStash_C;
@@ -54,4 +54,17 @@ public:
 
 public:
 	static std::vector<std::vector<PointCaseInCase>> pointCaseInCase;
+};
+
+class PointCaseInStashMedical : public PointCase
+{
+public:
+	vector<PointMedical> ItemsInCase{};
+
+	PointCaseInStashMedical();
+	PointCaseInStashMedical(POINT point, std::string nameOfCase, const std::string tagCase, int heightTempl, int widthTempl, int page, vector<PointMedical> ItemsInCase);
+
+public:
+	static std::vector<std::vector<PointCaseInStashMedical>> pointCaseInStashMedical_C;
+	static std::vector<std::vector<PointCaseInStashMedical>> pointCaseInStashMedical_NC;
 };

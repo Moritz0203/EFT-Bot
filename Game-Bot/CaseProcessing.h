@@ -10,8 +10,8 @@ class CaseProcessing {
 	static void cleanUpVectorCase();
 
 public:
-	static void CaseOperator_Medical();
-	static void CaseOperator();
+	void CaseOperator_Medical();
+	void CaseOperator();
 
 	//static void MoveTopBarTHICCcase();
 };

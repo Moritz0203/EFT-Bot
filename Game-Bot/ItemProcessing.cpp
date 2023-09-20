@@ -133,6 +133,7 @@ void ItemProcessing::MedicalProcess_OneScreen(shared_ptr<vector<PointMedical>>& 
 
 
 
+
 struct POINT_PAGE {
 	POINT point;
 	uint8_t page;

@@ -107,6 +107,9 @@
     <ClCompile Include="ItemMoving.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClCompile>
+    <ClCompile Include="MovPrefix.cpp">
+      <Filter>Source Files\GameBot\TypeClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ProgrammScheduler.h">
@@ -162,6 +165,9 @@
     </ClInclude>
     <ClInclude Include="ItemMoving.h">
       <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="MovPrefix.h">
+      <Filter>Header Files\GameBot\TypeClass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

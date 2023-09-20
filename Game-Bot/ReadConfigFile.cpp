@@ -6,7 +6,7 @@
 #include "c_log.h"
 
 
-bool v::ParseConfig() {
+bool ReadPrefixConfigFile::ParseConfig() {
     c_log::Start("ReadPrefixConfigFile", c_log::Magenta, "              | [Funktion]", c_log::White, "Parent", c_log::LBlue, "InitializeMovPrefix");
     std::ifstream file(filename_);
     if (!file.is_open()) {

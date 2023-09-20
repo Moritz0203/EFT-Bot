@@ -57,9 +57,9 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 
 	ChecksPublic.CheckScrollbarPositions();
-	for (uint8_t i = 0; i < PointCaseInStash::pointCaseInStash_C.size(); i++) {
+	for (uint8_t i = 0; i < PointCaseInStashMedical::pointCaseInStashMedical_C.size(); i++) {
 		bool moved = false;
-		for (PointCaseInStash& INpointCase : PointCaseInStash::pointCaseInStash_C[i]) {
+		for (PointCaseInStashMedical& INpointCase : PointCaseInStashMedical::pointCaseInStashMedical_C[i]) {
 			ptr_MedicalVec = std::make_shared<vector<PointMedical>>(INpointCase.ItemsInCase);
 
 			POINT point;

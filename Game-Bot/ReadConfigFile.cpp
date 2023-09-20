@@ -28,17 +28,15 @@ bool ReadPrefixConfigFile::ParseConfig() {
 }
 
 void ReadPrefixConfigFile::PrintData() {
-   /* for (const auto& entry : AssignPrefix::assignPrefix) {
-        c_log::Info("CaseName: ", c_log::LGreen, entry.tagOfCase);
-        c_log::Info("Items: ", c_log::LGreen, entry.prefix.nameOfItems[0]);
-        for (uint16_t i = 1; i < entry.prefix.nameOfItems.size(); i++) {
-            c_log::Raw("                   ", c_log::LGreen, entry.prefix.nameOfItems[i]);
-        }
+    for (const auto& entry : AssignPrefix::assignPrefix) {
+        c_log::Info("CaseName: ", c_log::LGreen, entry.IdMov);
+        c_log::Info("Item: ", c_log::LGreen, entry.NameOfItem);
+        c_log::Info("MinHP: ", c_log::LGreen, entry.MinHp);
         std::cout << std::endl;
-    }*/
+    }
 }
 
-void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
+void ::ParseBlock(std::ifstream& file) { // TODO: Fix error when reading minHpStr and itemName
     AssignPrefix assingPrefix_temp;
 
     std::string line;
@@ -60,6 +58,7 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
 
             if (startPos != std::string::npos && endPos != std::string::npos) {
                 std::string ID = line.substr(startPos, endPos - startPos);
+                cout << ID << endl;
                 assingPrefix_temp.IdMov = std::stoi(ID);
                 newBlock = false;
             }
@@ -70,6 +69,7 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
 
             if (startPos != std::string::npos && endPos != std::string::npos) {
                 std::string itemName = line.substr(startPos, endPos - startPos);
+                cout << itemName << endl;
                 assingPrefix_temp.NameOfItem = itemName;
 
                 // Weiter zum nächsten Wert (MinHp)
@@ -78,6 +78,7 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
 
                 if (startPos != std::string::npos && endPos != std::string::npos) {
                     std::string minHpStr = line.substr(startPos, endPos - startPos);
+                    cout << minHpStr << endl;
                     assingPrefix_temp.MinHp = std::stoi(minHpStr);
                 }
             }

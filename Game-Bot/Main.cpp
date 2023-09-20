@@ -5,7 +5,7 @@
 #include "Checks.h"
 #include "CaseProcessing.h"
 #include "PouchProcessing.h"
-
+#include "ReadConfigFile.h"
 
 
 int main() {
@@ -13,18 +13,24 @@ int main() {
 
 	programmScheduler.Scheduler();*/
 
-	checksPublic ChecksPublic;
-	CaseProcessing caseProcessing;
-	PouchProcessing pouchProcessing(Gamma);
-	GetMat getMat;
+	//checksPublic ChecksPublic;
+	//CaseProcessing caseProcessing;
+	//PouchProcessing pouchProcessing(Gamma);
+	//GetMat getMat;
 
-	ChecksPublic.CheckScrollbarPositions();
-	Sleep(300);
-	getMat.TakeScreenshots(1);
+	//ChecksPublic.CheckScrollbarPositions();
+	//Sleep(300);
+	//getMat.TakeScreenshots(1);
 
-	//caseProcessing.CaseOperator();
+	////caseProcessing.CaseOperator();
 
-	pouchProcessing.PouchMatching();
+	//pouchProcessing.PouchMatching();
 
-	pouchProcessing.Pouch_FirstStart();
+	//pouchProcessing.Pouch_FirstStart();
+
+
+	ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
+
+	readPrefixConfigFile.ParseConfig();
+	readPrefixConfigFile.PrintData();
 }

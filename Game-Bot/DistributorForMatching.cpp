@@ -213,7 +213,7 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 	vector<POINT> ReturnDataCase_Clean;
 	vector<vector<POINT>> freeSlots_empty{};
 	vector<PointCaseInStash> pointCasetempStashTemp;
-	vector<PointMedical> PointMedical_empty{};
+	vector<PointItem> PointItem_empty{};
 	int page = 0;
 
 	for (Mat MatScreen : MatScreenVector) {
@@ -236,7 +236,7 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 					string tagCase = TextMatching::textMatching(MatScreen, Rec);
 
 					if (checkSecondLastChar(tagCase)) {
-						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], input[i].Name, tagCase, templ.rows, templ.cols, page, PointMedical_empty);
+						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], input[i].Name, tagCase, templ.rows, templ.cols, page, PointItem_empty);
 					}
 				}
 				ReturnDataCase.clear();

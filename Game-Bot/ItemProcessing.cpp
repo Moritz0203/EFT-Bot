@@ -125,10 +125,10 @@ void ItemProcessing::MedicalProcess() {
 	cleanUpVectorItemsMedical();
 }
 
-void ItemProcessing::MedicalProcess_OneScreen(shared_ptr<vector<PointMedical>>& ptr_MedicalVec, Mat MatScreen) {
-	Matching matching;
+void ItemProcessing::MedicalProcess_OneScreen(std::shared_ptr<vector<PointMedical>>& ptr_MedicalVec, cv::Mat MatScreen) {
+	/*Matching matching;
 
-	matching.MedicalMatching_OneScreen(MedicalVector::Medical, ptr_MedicalVec, MatScreen);
+	matching.MedicalMatching_OneScreen(MedicalVector::Medical, ptr_MedicalVec, MatScreen);*/
 }
 
 
@@ -203,7 +203,7 @@ void ItemProcessing::cleanUpVectorItemsMedical() {
 		if (i == 0) {
 			for (PointMedical pointMedical : PointMedical::pointMedical_NC[i]) {
 				if (pointMedical.point.y <= 400) {
-					PointAmmunition::pointAmmunition_C[i].emplace_back(pointMedical);
+					PointMedical::pointMedical_C[i].emplace_back(pointMedical);
 				}
 			}
 		}

@@ -1,5 +1,7 @@
 #pragma once
-class PrefixProcessing
-{
+class PrefixProcessing {
+
+public:
+	void PrefixOperator();
 };
 

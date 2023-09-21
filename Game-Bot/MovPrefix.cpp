@@ -4,7 +4,7 @@ AssignPrefix::AssignPrefix()
 {
 }
 
-AssignPrefix::AssignPrefix(string NameOfItem, uint16_t MinHp, uint8_t IdMov)
+AssignPrefix::AssignPrefix(string NameOfItem, uint16_t MinHp, uint16_t IdMov)
 {
 	this->NameOfItem = NameOfItem;
 	this->MinHp = MinHp;

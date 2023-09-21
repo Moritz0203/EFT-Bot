@@ -1,9 +1,21 @@
 [{
-"01"
+"1"
 },
 {
-("Grizzly", "200"),
-("Surv12", "2"),
-("AluSplint", "0"),
-("GoldenStar", "1"),
+(
+"Grizzly",
+"200"
+),
+(
+"Surv12",
+"2"
+),
+(
+"AluSplint",
+"0"
+),
+(
+"GoldenStar",
+"1"
+),
 }]

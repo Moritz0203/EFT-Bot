@@ -22,15 +22,14 @@ bool ReadPrefixConfigFile::ParseConfig() {
     }
 
     file.close();
-    //PrintData();
     c_log::End("ReadPrefixConfigFile", c_log::Magenta, "              | [Funktion]", c_log::White, "Parent", c_log::LBlue, "InitializeMovPrefix");
     return true;
 }
 
 void ReadPrefixConfigFile::PrintData() {
     for (AssignPrefix entry : AssignPrefix::assignPrefix) {
-        c_log::Info("Item:  ", c_log::LGreen, entry.NameOfItem);
         c_log::Info("IDMov: ", c_log::LGreen, entry.IdMov);
+        c_log::Info("Item:  ", c_log::LGreen, entry.NameOfItem);
         c_log::Info("MinHP: ", c_log::LGreen, entry.MinHp);
         std::cout << std::endl;
     }
@@ -46,7 +45,6 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
         if (line.find("}]") != std::string::npos) {
             // Blockende erreicht, füge die assingPrefix_temp zur Liste hinzu
             newBlock = true;
-            break;
         }
 
         // Beginn eines neuen Blocks
@@ -56,7 +54,7 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
 
             if (startPos != std::string::npos && endPos != std::string::npos) {
                 std::string ID = line.substr(startPos, endPos - startPos);
-                cout << ID << endl;
+                //cout << ID << endl;
                 assingPrefix_temp.IdMov = std::stoi(ID);
                 newBlock = false;
             }
@@ -74,7 +72,7 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
                 if (!itemName.empty() && itemName.back() == '"') {
                     itemName.pop_back();
                 }
-                cout << itemName << endl;
+                //cout << itemName << endl;
                 assingPrefix_temp.NameOfItem = itemName;
 
                 // Weiter zum nächsten Wert (MinHp)
@@ -92,7 +90,7 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
                         if (!minHpStr.empty() && minHpStr.back() == '"') {
                             minHpStr.pop_back();
                         }
-                        cout << minHpStr << endl;
+                        //cout << minHpStr << endl;
                         assingPrefix_temp.MinHp = std::stoi(minHpStr);
 
                         AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
@@ -102,3 +100,6 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
         }
     }
 }
+
+
+

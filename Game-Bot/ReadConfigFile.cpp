@@ -100,6 +100,3 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
         }
     }
 }
-
-
-

@@ -142,6 +142,7 @@
     <ClCompile Include="PointCase.cpp" />
     <ClCompile Include="PointItems.cpp" />
     <ClCompile Include="PouchProcessing.cpp" />
+    <ClCompile Include="PrefixProcessing.cpp" />
     <ClCompile Include="ProgrammScheduler.cpp" />
     <ClCompile Include="ReadConfigFile.cpp" />
     <ClCompile Include="TemplateMatching.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="PointCase.h" />
     <ClInclude Include="PointItems.h" />
     <ClInclude Include="PouchProcessing.h" />
+    <ClInclude Include="PrefixProcessing.h" />
     <ClInclude Include="ProgrammScheduler.h" />
     <ClInclude Include="ReadConfigFile.h" />
     <ClInclude Include="TemplateMatching.h" />

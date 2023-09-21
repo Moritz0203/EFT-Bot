@@ -30,7 +30,7 @@ bool ReadPrefixConfigFile::ParseConfig() {
 void ReadPrefixConfigFile::PrintData() {
     for (AssignPrefix entry : AssignPrefix::assignPrefix) {
         c_log::Info("IDMov: ", c_log::LGreen, entry.IdMov);
-        c_log::Info("Item: ", c_log::LGreen, entry.NameOfItem);
+        c_log::Info("Item:  ", c_log::LGreen, entry.NameOfItem);
         c_log::Info("MinHP: ", c_log::LGreen, entry.MinHp);
         std::cout << std::endl;
     }

@@ -6,9 +6,12 @@
 #include "CaseProcessing.h"
 #include "PouchProcessing.h"
 #include "ReadConfigFile.h"
+#include "c_log.h"
 
 
 int main() {
+	c_log::add_out(new c_log::c_log_consolestream);
+
 	/*ProgrammScheduler programmScheduler;
 
 	programmScheduler.Scheduler();*/

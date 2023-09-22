@@ -9,7 +9,7 @@ using namespace std;
 class Pouch {
 public:
 	std::string nameOfPouch = {};
-	POINT pointPouch = {};// only my screen 
+	POINT pointPouch = {};
 	vector<PointMedical> ItemsInPouch{};
 
 	Pouch();

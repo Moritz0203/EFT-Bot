@@ -19,17 +19,30 @@ void PrefixProcessing::PrefixOperator() {
 				if (!medical.hpItem < prefix.MinHp) 
 					continue;
 
+				for (PointMedical medicalPouch : Pouch::pouch.ItemsInPouch) {
+					if (medicalPouch.nameOfItem != medical.nameOfItem)
+						continue;
 
+					if (!(medicalPouch.hpItem > prefix.MinHp)) {
+						//mov Item out of pouch
+						break;
+					}else if(medicalPouch.hpItem > prefix.MinHp) {
+						found = true;
+						break;
+					}
+				}
 
-				movPrefix_temp.NameOfItem = medical.nameOfItem;
-				movPrefix_temp.IdMov = prefix.IdMov;
-				movPrefix_temp.pointCase = nullptr;
-				movPrefix_temp.pointItem = std::make_shared<PointMedical>(medical);
+				if (!found) {
+					movPrefix_temp.NameOfItem = medical.nameOfItem;
+					movPrefix_temp.IdMov = prefix.IdMov;
+					movPrefix_temp.pointCase = nullptr;
+					movPrefix_temp.pointItem = std::make_shared<PointMedical>(medical);
 
-				movPrefix.movPrefix.push_back(movPrefix_temp);
+					movPrefix.movPrefix.push_back(movPrefix_temp);
 
-				found = true;
-				break;
+					found = true;
+					break;
+				}
 			}
 		}
 		

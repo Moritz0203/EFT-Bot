@@ -26,7 +26,8 @@ void PrefixProcessing::PrefixOperator() {
 					if (!(medicalPouch.hpItem > prefix.MinHp)) {
 						//mov Item out of pouch
 						break;
-					}else if(medicalPouch.hpItem > prefix.MinHp) {
+					}
+					else if(medicalPouch.hpItem > prefix.MinHp) {
 						found = true;
 						break;
 					}

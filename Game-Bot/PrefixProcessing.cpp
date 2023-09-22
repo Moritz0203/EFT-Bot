@@ -6,7 +6,7 @@ void PrefixProcessing::PrefixOperator() {
 	MovPrefix movPrefix_temp;
 	MovPrefix movPrefix;
 
-	for (AssignPrefix prefix : assingPrefix.assignPrefix) {
+	for (AssignPrefix prefix : assingPrefix.assignPrefix) {//build check if item in poch has inove hp to be ther and if not move it out and new in 
 		bool found = false;
 		for (int i = 0; i < PointMedical::pointMedical_C.size(); i++) {
 			if(found)
@@ -18,6 +18,8 @@ void PrefixProcessing::PrefixOperator() {
 
 				if (!medical.hpItem < prefix.MinHp) 
 					continue;
+
+
 
 				movPrefix_temp.NameOfItem = medical.nameOfItem;
 				movPrefix_temp.IdMov = prefix.IdMov;

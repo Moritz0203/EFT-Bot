@@ -27,7 +27,7 @@ namespace MedicalVector {
 		{ "itemImages/MedicalImages/Medical/Surv12.png",					"Surv12",					0.85, 3, 15	 },//Surv12
 		{ "itemImages/MedicalImages/Medical/Vaseline.png",					"Vaseline",					0.85, 1, 6	 },//Vaseline
 	};
-
+	
 	const vector<PathNameThresholdItemSize> Injectors{
 		{ "itemImages/MedicalImages/Injectors/3bTG.png",					"3bTG",						0.85, 1 },//3bTG
 		{ "itemImages/MedicalImages/Injectors/Adrenaline.png",				"Adrenaline",				0.85, 1 },//Adrenaline

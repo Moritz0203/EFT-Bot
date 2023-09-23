@@ -1,8 +1,13 @@
 #pragma once
 #include "Includes.h"
 
-class BuyItemsFlea {
+struct InternelNameToFleaName {
+	const char* InternelName;
+	const char* FleaName;
+};
 
+class BuyItemsFlea {
+	void TranslateNameAndCopyToClipboard(const char* nameOfItem);
 public:
 	bool BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity);
 };

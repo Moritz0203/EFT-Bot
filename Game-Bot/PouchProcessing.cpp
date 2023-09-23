@@ -40,7 +40,7 @@ void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 			point.y = (height / 2) + Y;
 			point.x = (width / 2) + X;
 
-			Keyboard::KeyboardInput_MovAndPress(0x11, point); //virtual - key code for the "SHIFT" key
+			MouseAndKeyboard::KeyboardInput_MovAndPress(0x11, point); //virtual - key code for the "SHIFT" key
 			X += width;
 		}
 		Y += height;

@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BuyItemsFlea.cpp" />
     <ClCompile Include="CaseProcessing.cpp" />
     <ClCompile Include="Checks.cpp" />
     <ClCompile Include="Controler.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Walk.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BuyItemsFlea.h" />
     <ClInclude Include="CaseProcessing.h" />
     <ClInclude Include="Checks.h" />
     <ClInclude Include="Controler.h" />

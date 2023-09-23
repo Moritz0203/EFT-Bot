@@ -60,6 +60,12 @@
     <Filter Include="Header Files\GameBot\Lobby-Overall\Matching-Moving\Prefix">
       <UniqueIdentifier>{7a8f99aa-a090-4a09-ae22-bfacd54043ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameBot\Lobby-Overall\Matching-Moving\Processing">
+      <UniqueIdentifier>{839e4aea-78e3-4529-9a1c-a558dec0604c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameBot\Lobby-Overall\Matching-Moving\Processing">
+      <UniqueIdentifier>{55f0f60d-fb0a-4f67-a8e8-8d76bb721949}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -101,15 +107,6 @@
     <ClCompile Include="PointItems.cpp">
       <Filter>Source Files\GameBot\TypeClass</Filter>
     </ClCompile>
-    <ClCompile Include="CaseProcessing.cpp">
-      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
-    </ClCompile>
-    <ClCompile Include="PouchProcessing.cpp">
-      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemProcessing.cpp">
-      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
-    </ClCompile>
     <ClCompile Include="ItemMoving.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClCompile>
@@ -121,6 +118,18 @@
     </ClCompile>
     <ClCompile Include="PrefixProcessing.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving\Prefix</Filter>
+    </ClCompile>
+    <ClCompile Include="CaseProcessing.cpp">
+      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving\Processing</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemProcessing.cpp">
+      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving\Processing</Filter>
+    </ClCompile>
+    <ClCompile Include="PouchProcessing.cpp">
+      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving\Processing</Filter>
+    </ClCompile>
+    <ClCompile Include="BuyItemsFlea.cpp">
+      <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,15 +175,6 @@
     <ClInclude Include="PointItems.h">
       <Filter>Header Files\GameBot\TypeClass</Filter>
     </ClInclude>
-    <ClInclude Include="CaseProcessing.h">
-      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
-    </ClInclude>
-    <ClInclude Include="PouchProcessing.h">
-      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemProcessing.h">
-      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
-    </ClInclude>
     <ClInclude Include="ItemMoving.h">
       <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClInclude>
@@ -186,6 +186,18 @@
     </ClInclude>
     <ClInclude Include="PrefixProcessing.h">
       <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving\Prefix</Filter>
+    </ClInclude>
+    <ClInclude Include="PouchProcessing.h">
+      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving\Processing</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemProcessing.h">
+      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving\Processing</Filter>
+    </ClInclude>
+    <ClInclude Include="CaseProcessing.h">
+      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving\Processing</Filter>
+    </ClInclude>
+    <ClInclude Include="BuyItemsFlea.h">
+      <Filter>Header Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

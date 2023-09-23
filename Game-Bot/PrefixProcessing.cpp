@@ -1,5 +1,6 @@
 #include "PrefixProcessing.h"
 #include "MovPrefix.h"
+#include "InputMK.h"
 
 void PrefixProcessing::PrefixOperator() {
 	AssignPrefix assingPrefix;
@@ -24,7 +25,7 @@ void PrefixProcessing::PrefixOperator() {
 						continue;
 
 					if (!(medicalPouch.hpItem > prefix.MinHp)) {
-						//mov Item out of pouch
+						MouseAndKeyboard::KeyboardInput_MovAndPress(0x11, medicalPouch.point); //virtual - key code for the "SHIFT" key
 						break;
 					}
 					else if(medicalPouch.hpItem > prefix.MinHp) {
@@ -62,18 +63,40 @@ void PrefixProcessing::PrefixOperator() {
 					if (!medical.hpItem < prefix.MinHp)
 						continue;
 
-					movPrefix_temp.NameOfItem = medical.nameOfItem;
-					movPrefix_temp.IdMov = prefix.IdMov;
-					movPrefix_temp.pointCase = std::make_shared<PointCaseInStashMedical>(pointCaseMedical);
-					movPrefix_temp.pointItem = std::make_shared<PointMedical>(medical);
+					for (PointMedical medicalPouch : Pouch::pouch.ItemsInPouch) {
+						if (medicalPouch.nameOfItem != medical.nameOfItem)
+							continue;
 
-					movPrefix.movPrefix.push_back(movPrefix_temp);
+						if (!(medicalPouch.hpItem > prefix.MinHp)) {
+							MouseAndKeyboard::KeyboardInput_MovAndPress(0x11, medicalPouch.point); //virtual - key code for the "SHIFT" key
+							break;
+						}
+						else if (medicalPouch.hpItem > prefix.MinHp) {
+							found = true;
+							break;
+						}
+					}
 
-					found = true;
-					break;
+					if (!found) {
+						movPrefix_temp.NameOfItem = medical.nameOfItem;
+						movPrefix_temp.IdMov = prefix.IdMov;
+						movPrefix_temp.pointCase = std::make_shared<PointCaseInStashMedical>(pointCaseMedical);
+						movPrefix_temp.pointItem = std::make_shared<PointMedical>(medical);
+
+						movPrefix.movPrefix.push_back(movPrefix_temp);
+
+						found = true;
+						break;
+					}
 				}
 			}
 		}
 		// TODO: Add other items
+
+		if (!found) {
+			// buy items from flea market
+			
+		
+		}
 	}
 }

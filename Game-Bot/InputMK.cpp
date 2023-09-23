@@ -57,7 +57,7 @@ void Keyboard::KeyboardInput(int keyforInput)
 	SendInput(1, &ip, sizeof(INPUT));
 }
 
-void Keyboard::KeyboardInput_MovAndPress(int keyforInput, POINT Points)
+void MouseAndKeyboard::KeyboardInput_MovAndPress(int keyforInput, POINT Point)
 {
 	INPUT ip{};
     // Set up a generic keyboard event.
@@ -73,7 +73,7 @@ void Keyboard::KeyboardInput_MovAndPress(int keyforInput, POINT Points)
 
 	Sleep(20);
 
-    SetCursorPos(Points.x, Points.y);
+    SetCursorPos(Point.x, Point.y);
     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 
@@ -84,5 +84,4 @@ void Keyboard::KeyboardInput_MovAndPress(int keyforInput, POINT Points)
     ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
     SendInput(1, &ip, sizeof(INPUT));
 }
-
 

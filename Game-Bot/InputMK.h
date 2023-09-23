@@ -13,5 +13,8 @@ struct Mouse {
 struct Keyboard {
 	static void KeyboardInput(int keyforInput);
 
+};
+
+struct MouseAndKeyboard {
 	static void KeyboardInput_MovAndPress(int keyforInput, POINT Points);
 };

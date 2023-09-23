@@ -57,6 +57,66 @@ void Keyboard::KeyboardInput(int keyforInput)
 	SendInput(1, &ip, sizeof(INPUT));
 }
 
+void Keyboard::KeyboardHoldFirstAndPressSecond(int keyforInput, int keyforInput2) {
+
+	INPUT ip{};
+	// Set up a generic keyboard event.
+	ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0; // hardware scan code for key
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
+
+	INPUT ip2{};
+	// Set up a generic keyboard event.
+	ip2.type = INPUT_KEYBOARD;
+	ip2.ki.wScan = 0; // hardware scan code for key
+	ip2.ki.time = 0;
+	ip2.ki.dwExtraInfo = 0;
+
+	// Hold the key
+	ip.ki.wVk = keyforInput;
+	ip.ki.dwFlags = 0; // 0 for key press
+	SendInput(1, &ip, sizeof(INPUT));
+
+
+		// Press the key
+		ip2.ki.wVk = keyforInput2;
+		ip2.ki.dwFlags = 0; // 0 for key press
+		SendInput(1, &ip2, sizeof(INPUT));
+
+		// Release the key
+		ip2.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
+		SendInput(1, &ip2, sizeof(INPUT));
+
+
+	// Release the key
+	ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
+	SendInput(1, &ip, sizeof(INPUT));
+}
+
+void Keyboard::KeyboardTypeString(const char* string) {
+
+	if (OpenClipboard(NULL)) {
+		EmptyClipboard();
+		HGLOBAL hGlob = GlobalAlloc(GMEM_MOVEABLE, strlen(string) + 1);
+		if (hGlob) {
+			char* pData = (char*)GlobalLock(hGlob);
+			
+			if (!pData) {
+				return;
+			}
+			else {
+				strcpy_s(pData, strlen(string) + 1, string);
+				GlobalUnlock(hGlob);
+				SetClipboardData(CF_TEXT, hGlob);
+			}
+		}
+		CloseClipboard();
+	}
+
+	KeyboardHoldFirstAndPressSecond(0x11, 0x56);//virtual - key code for the "CTRL" key and "V" key
+}
+
 void MouseAndKeyboard::KeyboardInput_MovAndPress(int keyforInput, POINT Point)
 {
 	INPUT ip{};

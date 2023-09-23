@@ -11,13 +11,13 @@
 using namespace std;
 using namespace cv;
 
-#define DebugImage (0)
+#define DebugImage1 (0)
 
 vector<POINT> TemplateMatching::templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, Mat MatScreen) {
 	vector<POINT> ReturnData;
 	int height = {}, width = {};
 
-#if DebugImage
+#if DebugImage1
 	const char* image_window = "Source Image";
 	const char* Test = "Item Image";
 #endif 
@@ -32,7 +32,7 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 		cout << "Error reading file(s) in templateMatching Funkion!" << endl;
 
 
-#if DebugImage
+#if DebugImage1
 	namedWindow(image_window, WINDOW_AUTOSIZE);
 	namedWindow(Test, WINDOW_AUTOSIZE);
 #endif 
@@ -58,7 +58,7 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 	Rect Rec(StartY, StartX, width, height);
 	Mat Roi = templ(Rec);
 
-#if DebugImage
+#if DebugImage1
 	imshow(Test, Roi);
 #endif 
 
@@ -66,7 +66,7 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 	double minVal; double maxVal; Point minLoc; Point maxLoc;
 	Point matchLoc;
 
-#if DebugImage
+#if DebugImage1
 	int count = 0;
 #endif 
 
@@ -95,7 +95,7 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 				PointReturn.x = matchLoc.x;
 				ReturnData.push_back(PointReturn);
 
-#if DebugImage
+#if DebugImage1
 				count++;
 #endif 
 			}
@@ -106,7 +106,7 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 			break;
 	}
 
-#if DebugImage
+#if DebugImage1
 	cout << count << endl;
 	cv::imshow(image_window, img_display);
 
@@ -119,17 +119,25 @@ vector<POINT> TemplateMatching::templateMatchingItems(string templatename, doubl
 	return ReturnData;
 }
 
+
+#define DebugImage2 (0)
+
 POINT TemplateMatching::templateMatchingObjects(Mat MatScreen, Mat templ, double threshold) {
 	int height = {}, width = {};
 
-	//const char* image_window = "Source Image";
+#if DebugImage2
+	const char* image_window = "Source Image";
+#endif
+
 	//const char* Test = "Item Image";
 
 	int match_method = 5;
 	Mat result;
 	POINT PointReturn = {};
 
-	//namedWindow(image_window, WINDOW_AUTOSIZE);
+#if DebugImage2
+	namedWindow(image_window, WINDOW_AUTOSIZE);
+#endif
 
 	Mat img_display;
 	MatScreen.copyTo(img_display);
@@ -157,9 +165,11 @@ POINT TemplateMatching::templateMatchingObjects(Mat MatScreen, Mat templ, double
 			break;
 	}
 
-	/*cv::imshow(image_window, img_display);
+#if DebugImage2
+	cv::imshow(image_window, img_display);
 
-	waitKey(0);*/
+	waitKey(0);
+#endif
 
 	return PointReturn;
 }

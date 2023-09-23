@@ -12,7 +12,8 @@ struct Mouse {
 
 struct Keyboard {
 	static void KeyboardInput(int keyforInput);
-
+	static void KeyboardHoldFirstAndPressSecond(int keyforInput, int keyforInput2);
+	static void KeyboardTypeString(const char* string);
 };
 
 struct MouseAndKeyboard {

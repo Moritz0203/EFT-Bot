@@ -7,7 +7,7 @@ struct InternelNameToFleaName {
 };
 
 class BuyItemsFlea {
-	void TranslateNameAndCopyToClipboard(const char* nameOfItem);
+	void TranslateNameAndPasteIn(const char* nameOfItem);
 public:
 	bool BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity);
 };

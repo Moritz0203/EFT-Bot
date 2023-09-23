@@ -39,11 +39,11 @@ void ItemMoving::MovFromStash(MovPrefix& prefix) {
 	point_b.x = prefix.pointItem->point.x + (prefix.pointItem->widthTempl / 2);
 	point_b.y = prefix.pointItem->point.y + (prefix.pointItem->heightTempl / 2);
 
+	lastPage = prefix.pointItem->page;
 	Mouse::MouseMoveAtoB(point_a, point_b);
 }
 
 void ItemMoving::MovFromCase(MovPrefix& prefix) {
-	checksPublic ChecksPublic;
 	checksPublic ChecksPublic;
 	const int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 
@@ -82,6 +82,7 @@ void ItemMoving::MovFromCase(MovPrefix& prefix) {
 	Sleep(100);
 	Mouse::MouseMoveAtoB(point_a, point_b);
 
+	lastPage = prefix.pointItem->page;
 	Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
 }
 

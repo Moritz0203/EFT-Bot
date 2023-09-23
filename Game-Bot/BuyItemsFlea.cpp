@@ -1,4 +1,7 @@
 #include "BuyItemsFlea.h"
+#include "InputMK.h"
+#include "getMat.h"
+#include "TemplateMatching.h"
 
 vector<InternelNameToFleaName> NameTranslation{
 	{"AFAK",		"AFAK tactical individual first aid kit"},
@@ -23,10 +26,41 @@ vector<InternelNameToFleaName> NameTranslation{
 	{"Vaseline",	"Vaseline balm"},
 };
 
-void BuyItemsFlea::TranslateNameAndCopyToClipboard(const char* nameOfItem)
-{
+void BuyItemsFlea::TranslateNameAndPasteIn(const char* nameOfItem) {
+	for (auto& item : NameTranslation) {
+		if (strcmp(item.InternelName, nameOfItem) == 0) {
+			Keyboard::KeyboardTypeString(item.FleaName);
+			//Keyboard::KeyboardInput(0x0D); //virtual - key code for the "ENTER" key
+			break;
+		}
+	}
 }
 
 bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity) {
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(5);//Delete later
+	const Mat MatScreen = GetMat::getMat(hWND);
 
+	const Mat templ = imread("ObjectImages/FleaSearchBar.png");
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.95);
+	
+	if (point.x == 0 && point.y == 0) {		
+		return false;
+	}
+
+	point.y = (templ.rows / 2) + point.y;
+	point.x = (templ.cols / 2) + point.x;
+	
+	Mouse::MoverPOINTandPress(point);
+
+	TranslateNameAndPasteIn(nameOfItem);
+
+	// buy item 
+
+	Mouse::MoverPOINTandPress(point);
+	Sleep(200);
+	Keyboard::KeyboardInput(0x2E); //virtual - key code for the "DEL" key
+
+	return true;
 }

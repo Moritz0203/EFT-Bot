@@ -7,6 +7,7 @@
 #include "PouchProcessing.h"
 #include "ReadConfigFile.h"
 #include "c_log.h"
+#include "BuyItemsFlea.h"
 
 
 int main() {
@@ -32,8 +33,12 @@ int main() {
 	//pouchProcessing.Pouch_FirstStart();
 
 
-	ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
+	/*ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
 
 	readPrefixConfigFile.ParseConfig();
-	readPrefixConfigFile.PrintData();
+	readPrefixConfigFile.PrintData();*/
+
+	BuyItemsFlea buyItemsFlea;
+
+	buyItemsFlea.BuyItemsFleaOperator("Salewa", 0);
 }

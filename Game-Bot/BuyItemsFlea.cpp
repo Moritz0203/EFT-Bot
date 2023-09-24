@@ -44,11 +44,11 @@ void BuyItemsFlea::BuyItem(uint8_t quantity) { // make buy quantity work so it b
 	Rect Rec(610, 140, MatScreen.cols - 660, MatScreen.rows - 1005);
 	Mat MatScreenTemp = MatScreen(Rec);
 
-	const Mat templ = imread("ObjectImages/PurchaseButton.png");
-	POINT point = TemplateMatching::templateMatchingObjects(MatScreenTemp, templ, 0.90);
+	const Mat templ_PurchaseButton = imread("ObjectImages/PurchaseButton.png");
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreenTemp, templ_PurchaseButton, 0.90);
 	
-	point.y = (templ.rows / 2) + point.y + 140;
-	point.x = (templ.cols / 2) + point.x + 610;
+	point.y = (templ_PurchaseButton.rows / 2) + point.y + 140;
+	point.x = (templ_PurchaseButton.cols / 2) + point.x + 610;
 	
 	Mouse::MoverPOINTandPress(point);
 	Sleep(100);
@@ -59,8 +59,8 @@ void BuyItemsFlea::BuyItem(uint8_t quantity) { // make buy quantity work so it b
 
 	//Check if SecurityCheck is open
 	const Mat MatScreen2 = GetMat::getMat(hWND);
-	const Mat templ2 = imread("ObjectImages/BuySuccessful.png");
-	TemplateMatching::templateMatchingBool(MatScreen2, templ2, 0.95);
+	const Mat templ_BuySuccessful = imread("ObjectImages/BuySuccessful.png");
+	TemplateMatching::templateMatchingBool(MatScreen2, templ_BuySuccessful, 0.95);
 }
 
 void BuyItemsFlea::MakeSecurityCheck() {

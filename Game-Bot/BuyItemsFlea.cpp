@@ -60,7 +60,7 @@ void BuyItemsFlea::BuyItem(uint8_t quantity) { // make buy quantity work so it b
 	//Check if SecurityCheck is open
 	const Mat MatScreen2 = GetMat::getMat(hWND);
 	const Mat templ2 = imread("ObjectImages/BuySuccessful.png");
-	cout << TemplateMatching::templateMatchingBool(MatScreen2, templ2, 0.95) << endl;
+	TemplateMatching::templateMatchingBool(MatScreen2, templ2, 0.95);
 }
 
 bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity) {

@@ -63,6 +63,10 @@ void BuyItemsFlea::BuyItem(uint8_t quantity) { // make buy quantity work so it b
 	TemplateMatching::templateMatchingBool(MatScreen2, templ2, 0.95);
 }
 
+void BuyItemsFlea::MakeSecurityCheck() {
+
+}
+
 bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity) {
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);

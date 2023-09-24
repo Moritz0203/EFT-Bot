@@ -35,6 +35,33 @@ void BuyItemsFlea::TranslateNameAndPasteIn(const char* nameOfItem) {
 	}
 }
 
+void BuyItemsFlea::BuyItem(uint8_t quantity) {
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(5);//Delete later
+	const Mat MatScreen = GetMat::getMat(hWND);
+
+	Rect Rec(610, 140, MatScreen.cols - 660, MatScreen.rows - 1005);
+	Mat MatScreenTemp = MatScreen(Rec);
+
+	const Mat templ = imread("ObjectImages/PurchaseButton.png");
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreenTemp, templ, 0.90);
+	
+	point.y = (templ.rows / 2) + point.y + 140;
+	point.x = (templ.cols / 2) + point.x + 610;
+	
+	Mouse::MoverPOINTandPress(point);
+	Sleep(100);
+	
+	Keyboard::KeyboardInput(0x59); //virtual - key code for the "Y" key
+
+	Sleep(450);
+
+	const Mat MatScreen2 = GetMat::getMat(hWND);
+	const Mat templ2 = imread("ObjectImages/BuySuccessful.png");
+	cout << TemplateMatching::templateMatchingBool(MatScreen2, templ2, 0.95) << endl;
+}
+
 bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity) {
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
@@ -52,9 +79,16 @@ bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity
 	point.x = (templ.cols / 2) + point.x;
 	
 	Mouse::MoverPOINTandPress(point);
-
+	Sleep(20);
 	TranslateNameAndPasteIn(nameOfItem);
+	Sleep(1500);
 
+	POINT point_ClickItem = point;
+	point_ClickItem.y += 45;
+	Mouse::MoverPOINTandPress(point_ClickItem);
+
+	Sleep(1000);
+	BuyItem(quantity);
 	// buy item 
 
 	Mouse::MoverPOINTandPress(point);

@@ -11,7 +11,7 @@
 using namespace std;
 using namespace cv;
 
-#define DebugImage1 (0)
+#define DebugImage1 (1)
 
 vector<POINT> TemplateMatching::templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, Mat MatScreen) {
 	vector<POINT> ReturnData;

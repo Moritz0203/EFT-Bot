@@ -8,6 +8,8 @@ struct InternelNameToFleaName {
 
 class BuyItemsFlea {
 	void TranslateNameAndPasteIn(const char* nameOfItem);
+	void BuyItem(uint8_t quantity);
+
 public:
 	bool BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity);
 };

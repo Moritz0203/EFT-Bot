@@ -35,7 +35,7 @@ void BuyItemsFlea::TranslateNameAndPasteIn(const char* nameOfItem) {
 	}
 }
 
-void BuyItemsFlea::BuyItem(uint8_t quantity) {
+void BuyItemsFlea::BuyItem(uint8_t quantity) { // make buy quantity work so it buys the right amount
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
@@ -57,6 +57,7 @@ void BuyItemsFlea::BuyItem(uint8_t quantity) {
 
 	Sleep(450);
 
+	//Check if SecurityCheck is open
 	const Mat MatScreen2 = GetMat::getMat(hWND);
 	const Mat templ2 = imread("ObjectImages/BuySuccessful.png");
 	cout << TemplateMatching::templateMatchingBool(MatScreen2, templ2, 0.95) << endl;
@@ -89,7 +90,6 @@ bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity
 
 	Sleep(1000);
 	BuyItem(quantity);
-	// buy item 
 
 	Mouse::MoverPOINTandPress(point);
 	Sleep(200);

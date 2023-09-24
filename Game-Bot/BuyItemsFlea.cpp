@@ -30,7 +30,6 @@ void BuyItemsFlea::TranslateNameAndPasteIn(const char* nameOfItem) {
 	for (auto& item : NameTranslation) {
 		if (strcmp(item.InternelName, nameOfItem) == 0) {
 			Keyboard::KeyboardTypeString(item.FleaName);
-			//Keyboard::KeyboardInput(0x0D); //virtual - key code for the "ENTER" key
 			break;
 		}
 	}

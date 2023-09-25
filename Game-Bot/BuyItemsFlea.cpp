@@ -273,8 +273,12 @@ bool SecurityCheck::MakeSecurityCheck() { // testen fehler ausarbeiten
 
 	// If not Try again until passed if time out wait never return until passed
 	
+	Sleep(500);
+
+	Mat MatScreen_New = GetMat::getMat(hWND);
+
 	const Mat templ_SecurityCheck = imread("ObjectImages/SecurityCheck.png");
-	if (TemplateMatching::templateMatchingBool(TemplateMatching, templ_SecurityCheck, 0.95)) {
+	if (TemplateMatching::templateMatchingBool(MatScreen_New, templ_SecurityCheck, 0.95)) {
 		cout << "SecurityCheck good" << endl;
 		OutOfTrys = 5;
 		return true;

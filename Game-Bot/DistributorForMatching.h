@@ -11,6 +11,7 @@ struct PathNameThreshold {
 struct PathNameThresholdItemSize {
 	const char* Path;
 	const char* Name;
+	const char* FleaName;
 	const double Threshold;
 	const uint8_t ItemSize;
 };
@@ -18,6 +19,7 @@ struct PathNameThresholdItemSize {
 struct PathNameThresholdItemSizeMaxHP {
 	const char* Path;
 	const char* Name;
+	const char* FleaName;
 	const double Threshold;
 	const uint8_t ItemSize;
 	const uint16_t MaxHp;

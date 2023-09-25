@@ -163,6 +163,7 @@
     <ClInclude Include="InputMK.h" />
     <ClInclude Include="ItemMoving.h" />
     <ClInclude Include="ItemProcessing.h" />
+    <ClInclude Include="ItemVectors.h" />
     <ClInclude Include="MovPrefix.h" />
     <ClInclude Include="PointCase.h" />
     <ClInclude Include="PointItems.h" />

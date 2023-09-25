@@ -123,19 +123,19 @@ __forceinline string SecurityCheck::ExtraktSpaceAndNewlines(string input) {
 }
 
 
-bool SecurityCheck::MakeSecurityCheck() {
+bool SecurityCheck::MakeSecurityCheck() { // testen fehler ausarbeiten 
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(50);//Delete later
 	const Mat MatScreen = GetMat::getMat(hWND);
 	ItemNamePathThreshold pathNameThreshold{};
-	Matching matching(650, 0);
+	Matching matching(600, 0);
 	bool found = false;
 	POINT point{};
 
 	// GetNameOfItem 
 	
-	Mat MatScreenTest = imread("ObjectImages/Screenshot_3.png");
+	//Mat MatScreenTest = imread("ObjectImages/Screenshot_3.png");
 	const Mat templ_SecurityCheckWithName = imread("ObjectImages/SecurityCheckWithName.png");
 	point = TemplateMatching::templateMatchingObjects(MatScreen, templ_SecurityCheckWithName, 0.60);
 
@@ -188,10 +188,12 @@ bool SecurityCheck::MakeSecurityCheck() {
 
 		Mouse::MoverPOINTandPress(point);
 
-		Sleep(500);
+		Sleep(2000);
+
+		Mat MatScreen_Home = GetMat::getMat(hWND);
 
 		const Mat templ_FleaMarketButton = imread("ObjectImages/FleaMarketButton.png");
-		point = TemplateMatching::templateMatchingObjects(MatScreen, templ_FleaMarketButton, 0.80);
+		point = TemplateMatching::templateMatchingObjects(MatScreen_Home, templ_FleaMarketButton, 0.80);
 
 		point.y = (templ_FleaMarketButton.rows / 2) + point.y;
 		point.x = (templ_FleaMarketButton.cols / 2) + point.x;
@@ -205,7 +207,7 @@ bool SecurityCheck::MakeSecurityCheck() {
 
 
 	// Find Item in SecurityCheck
-	Rect Rec2(600, 0, MatScreenTest.cols - 1200, MatScreenTest.rows);	
+	Rect Rec2(600, 0, MatScreen.cols - 1200, MatScreen.rows);	
 	Mat TemplateMatching = MatScreen(Rec2);
 
 	/*const char* image_window = "Source Image";
@@ -214,9 +216,37 @@ bool SecurityCheck::MakeSecurityCheck() {
 	waitKey(0);*/
 
 	Mat templ = imread(pathNameThreshold.Path);
-	vector<POINT> vecItemsToClick = TemplateMatching::templateMatchingItems(pathNameThreshold.Path, pathNameThreshold.Threshold - 0.2, false, false, pathNameThreshold.Name, TemplateMatching);
+	vector<POINT> vecItemsToClick = TemplateMatching::templateMatchingItems(pathNameThreshold.Path, pathNameThreshold.Threshold , false, false, pathNameThreshold.Name, TemplateMatching);
 	vecItemsToClick = matching.removeDuplicates_Rec(vecItemsToClick);
 	
+
+	if (vecItemsToClick.empty()) {
+		const Mat templ_SecurityCheckCloseButtom = imread("ObjectImages/CloseButton.png");
+		point = TemplateMatching::templateMatchingObjects(MatScreen, templ_SecurityCheckCloseButtom, 0.90);
+
+		point.y = (templ_SecurityCheckCloseButtom.rows / 2) + point.y;
+		point.x = (templ_SecurityCheckCloseButtom.cols / 2) + point.x;
+
+		Mouse::MoverPOINTandPress(point);
+
+		Sleep(2000);
+
+		Mat MatScreen_Home = GetMat::getMat(hWND);
+
+		const Mat templ_FleaMarketButton = imread("ObjectImages/FleaMarketButton.png");
+		point = TemplateMatching::templateMatchingObjects(MatScreen, MatScreen_Home, 0.80);
+
+		point.y = (templ_FleaMarketButton.rows / 2) + point.y;
+		point.x = (templ_FleaMarketButton.cols / 2) + point.x;
+
+		Mouse::MoverPOINTandPress(point);
+
+		Sleep(500);
+
+		MakeSecurityCheck();
+	}
+
+
 	// Click Item
 
 	POINT point_ClickItem{};
@@ -235,7 +265,7 @@ bool SecurityCheck::MakeSecurityCheck() {
 	const Mat templ_SecurityCheckBotton= imread("ObjectImages/ConfirmButton.png");
 	point = TemplateMatching::templateMatchingObjects(TemplateMatching(Rec2), templ_SecurityCheckBotton, 0.80);
 	
-	point.x += 650;
+	point.x += 600;
 
 	cout << point.x << " " << point.y << endl;	
 
@@ -245,6 +275,7 @@ bool SecurityCheck::MakeSecurityCheck() {
 	
 	const Mat templ_SecurityCheck = imread("ObjectImages/SecurityCheck.png");
 	if (TemplateMatching::templateMatchingBool(TemplateMatching, templ_SecurityCheck, 0.95)) {
+		cout << "SecurityCheck good" << endl;
 		OutOfTrys = 5;
 		return true;
 	}else if (OutOfTrys == 0) { 
@@ -252,6 +283,9 @@ bool SecurityCheck::MakeSecurityCheck() {
 		OutOfTrys = 5;
 		return true;
 	}
+
+
+	cout << "weiter" << endl;	
 
 	Sleep(500);
 	OutOfTrys--;

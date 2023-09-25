@@ -56,6 +56,7 @@ namespace MedicalVector {
 	};*/
 }
 
+
 namespace ProvisionsVector {
 	const vector<PathNameThresholdItemSize> Provisions{
 		{ "itemImages/Provisions/Alyonka.png",								"Alyonka",				"Alyonka chocolate bar",				0.85, 1},//Alyonka
@@ -345,3 +346,19 @@ namespace BarterVector {
 		BarterVector::Valuables,
 	};
 }
+
+
+const array<vector<PathNameThresholdItemSize>, 12> ArrayName{
+	MedicalVector::Injectors,
+	ProvisionsVector::Provisions,
+	BarterVector::Building,
+	BarterVector::Energy,
+	BarterVector::Electronics,
+	BarterVector::Flammable,
+	BarterVector::Household,
+	BarterVector::Info,
+	BarterVector::Medical,
+	BarterVector::Other,
+	BarterVector::Tools,
+	BarterVector::Valuables,
+};

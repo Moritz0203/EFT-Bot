@@ -43,7 +43,7 @@ int main() {
 
 	/*BuyItemsFlea buyItemsFlea;
 
-	buyItemsFlea.BuyItemsFleaOperator("Bandage", 0);*/
+	buyItemsFlea.BuyItemsFleaOperator("Bandage", 0, true);*/
 
 	std::vector<POINT> vec{};
 

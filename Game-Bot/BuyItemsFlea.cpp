@@ -2,33 +2,22 @@
 #include "InputMK.h"
 #include "getMat.h"
 #include "TemplateMatching.h"
-
-vector<InternelNameToFleaName> NameTranslation{
-	{"AFAK",		"AFAK tactical individual first aid kit"},
-	{"AI2",			"AI-2 medkit"},
-	{"AluSplint",	"Aluminum splint"},
-	{"Analgin",		"Analgin painkillers"},
-	{"ArmyBandage", "Army bandage"},
-	{"Augmentin",	"Augmentin antibiotic pills"},
-	{"Bandage",		"Aseptic bandage"},
-	{"CarKit",		"Car first aid kit"},
-	{"CAT",			"CAT hemostatic tourniquet"},
-	{"CMS",			"CMS surgical kit"},
-	{"Esmarch",		"Esmarch tourniquet"},
-	{"GoldenStar",	"Golden Star Balsam"},
-	{"Grizzly",		"Grizzly medical kit"},
-	{"Hemostatic",	"CALOK-B hemostatic applicator"},
-	{"Ibuprofen",	"Ibuprofen painkillers"},
-	{"IFAK",		"IFAK individual first aid kit"},
-	{"Salewa",		"Salewa first aid kit"},
-	{"Splint",		"Immobilizing splint"},
-	{"Surv12",		"Surv12 field surgical kit"},
-	{"Vaseline",	"Vaseline balm"},
-};
+#include "ItemVectors.h"
 
 void BuyItemsFlea::TranslateNameAndPasteIn(const char* nameOfItem) {
-	for (auto& item : NameTranslation) {
-		if (strcmp(item.InternelName, nameOfItem) == 0) {
+	for (auto& vec : ArrayName) {
+		for (auto& item : vec) {
+			if (strcmp(item.Name, nameOfItem) == 0) {
+				Keyboard::KeyboardTypeString(item.FleaName);
+				break;
+			}
+		}
+	}
+}
+
+void BuyItemsFlea::TranslateNameAndPasteIn_Medical(const char* nameOfItem) {
+	for (auto& item : MedicalVector::Medical) {
+		if (strcmp(item.Name, nameOfItem) == 0) {
 			Keyboard::KeyboardTypeString(item.FleaName);
 			break;
 		}
@@ -63,11 +52,13 @@ void BuyItemsFlea::BuyItem(uint8_t quantity) { // make buy quantity work so it b
 	TemplateMatching::templateMatchingBool(MatScreen2, templ_BuySuccessful, 0.95);
 }
 
+
 void BuyItemsFlea::MakeSecurityCheck() {
 
 }
 
-bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity) {
+
+bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity, bool IsMedical) {
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
@@ -85,7 +76,12 @@ bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity
 	
 	Mouse::MoverPOINTandPress(point);
 	Sleep(20);
-	TranslateNameAndPasteIn(nameOfItem);
+
+	if(IsMedical)
+		TranslateNameAndPasteIn_Medical(nameOfItem);
+	else
+		TranslateNameAndPasteIn(nameOfItem);
+
 	Sleep(1500);
 
 	POINT point_ClickItem = point;

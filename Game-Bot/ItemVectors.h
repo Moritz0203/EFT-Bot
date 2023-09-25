@@ -74,7 +74,7 @@ namespace ProvisionsVector {
 		{ "itemImages/Provisions/HorRod.png",								"HotRod",				"Can of Hot Rod energy drink",			0.85, 1},//HorRod
 		{ "itemImages/Provisions/Humpback.png",								"Humpback",				"Can of humpback salmon",				0.85, 1},//Humpback
 		{ "itemImages/Provisions/Iskra.png",								"Iskra",				"Iskra ration pack",					0.85, 2},//Iskra
-		{ "itemImages/Provisions/Kvass.png",								"Kvass",				"",										0.85, 2},//Kvass
+		{ "itemImages/Provisions/Kvass.png",								"Kvass",				"Bottle of \"Norvinskiy Yadreniy\"",	0.85, 2},//Kvass
 		{ "itemImages/Provisions/MaxEnergy.png",							"MaxEnergy",			"Can of Max Energy energy drink",		0.85, 1},//MaxEnergy
 		{ "itemImages/Provisions/Mayo.png",									"Mayo",					"Jar of DevilDog mayo",					0.85, 1},//Mayo
 		{ "itemImages/Provisions/Milk.png",									"Milk",					"Pack of milk",							0.85, 2},//Milk
@@ -265,13 +265,13 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Others/Cordura.png",						"Cordura",					"Cordura polyamide fabric",			0.85, 2 },//Cordura
 		{ "itemImages/BarterImages/Others/DogtagsBear.png",					"DogtagsBear",				"",									0.85, 1 },//DogtagsBear
 		{ "itemImages/BarterImages/Others/DogtagsUsec.png",					"DogtagsUsec",				"",									0.84, 1 },//DogtagsUsec
-		{ "itemImages/BarterImages/Others/Eagle.png",						"Eagle",					"",									0.85, 2	},//Eagle
+		{ "itemImages/BarterImages/Others/Eagle.png",						"Eagle",					"Gunpowder \"Eagle\"",				0.85, 2	},//Eagle
 		{ "itemImages/BarterImages/Others/EnglishTea.png",					"EnglishTea",				"42 Signature Blend English Tea",	0.85, 1 },//EnglishTea
 		{ "itemImages/BarterImages/Others/Fleece.png",						"Fleece",					"Fleece fabric",					0.85, 2 },//Fleece
 		{ "itemImages/BarterImages/Others/FP100Filter.png",					"FP100Filter",				"FP-100 filter absorber",			0.85, 9 },//FP100Filter
 		{ "itemImages/BarterImages/Others/Fuze.png",						"Fuze",						"UZRGM grenade fuze",				0.85, 1 },//Fuze
-		{ "itemImages/BarterImages/Others/Hawk.png",						"Hawk",						"",									0.85, 2 },//Hawk
-		{ "itemImages/BarterImages/Others/Kite.png",						"Kite",						"",									0.85, 2 },//Kite
+		{ "itemImages/BarterImages/Others/Hawk.png",						"Hawk",						"Gunpowder \"Hawk\"",				0.85, 2 },//Hawk
+		{ "itemImages/BarterImages/Others/Kite.png",						"Kite",						"Gunpowder \"Kite\"",				0.85, 2 },//Kite
 		{ "itemImages/BarterImages/Others/LootLord.png",					"LootLord",					"Loot Lord plushie",				0.85, 4 },//LootLord
 		{ "itemImages/BarterImages/Others/Lupo.png",						"Lupo",						"Can of Dr. Lupo's coffee beans",	0.85, 1 },//Lupo
 		{ "itemImages/BarterImages/Others/Malboro.png",						"Malboro",					"Malboro Cigarettes",				0.85, 1 },//Malboro
@@ -293,12 +293,12 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Tools/FlatScrewdriver.png",				"FlatScrewdriver",			"Flat screwdriver",					0.85, 1 },//FlatScrewdriver
 		{ "itemImages/BarterImages/Tools/Handdrill.png",					"Handdrill",				"Hand drill",						0.85, 6 },//Handdrill
 		{ "itemImages/BarterImages/Tools/LongScrewdriver.png",				"LongScrewdriver",			"Flat screwdriver (Long)",			0.85, 2 },//LongScrewdriver
-		{ "itemImages/BarterImages/Tools/Master.png",						"Master",					"",									0.85, 4 },//Master
+		{ "itemImages/BarterImages/Tools/Master.png",						"Master",					"Set of files \"Master\"",			0.85, 4 },//Master
 		{ "itemImages/BarterImages/Tools/MScissors.png",					"MScissors",				"Metal cutting scissors",			0.85, 2 },//MScissors
 		{ "itemImages/BarterImages/Tools/MTape.png",						"MTape",					"Construction measuring tape",		0.85, 1 },//MTape
 		{ "itemImages/BarterImages/Tools/Nippers.png",						"Nippers",					"Nippers",							0.85, 1 },//Nippers
 		{ "itemImages/BarterImages/Tools/PGW.png",							"PGW",						"Pipe grip wrench",					0.85, 2 },//PGW
-		{ "itemImages/BarterImages/Tools/Pliers.png",						"Pliers",					"Pliers ",							0.85, 1 },//Pliers
+		{ "itemImages/BarterImages/Tools/Pliers.png",						"Pliers",					"Pliers",							0.85, 1 },//Pliers
 		{ "itemImages/BarterImages/Tools/RatchetWrench.png",				"RatchetWrench",			"Ratchet wrench",					0.80, 2 },//RatchetWrench
 		{ "itemImages/BarterImages/Tools/RoundPliers.png",					"RoundPliers",				"Round pliers",						0.83, 1 },//RoundPliers
 		{ "itemImages/BarterImages/Tools/Screwdriver.png",					"Screwdriver",				"Screwdriver",						0.85, 1 },//Screwdriver

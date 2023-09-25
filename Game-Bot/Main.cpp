@@ -45,7 +45,7 @@ int main() {
 
 	buyItemsFlea.BuyItemsFleaOperator("Bandage", 0, true);*/
 
-	std::vector<POINT> vec{};
+	/*std::vector<POINT> vec{};
 
 	Matching matching;	
 	Mat MatScreen = imread("ObjectImages/SecurityCheck.png");
@@ -55,5 +55,9 @@ int main() {
 
 	for (auto& item : vec) {
 		cout << item.x << " " << item.y << endl;
-	}	
+	}*/	
+
+
+	SecurityCheck securityCheck;
+	securityCheck.MakeSecurityCheck();
 }

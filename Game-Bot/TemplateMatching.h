@@ -18,6 +18,7 @@ public:
 struct TextMatching {
 	static const string textMatching(Mat MatScreen, Rect Rec);
 	static const string textMatching_MedicalItems(Mat MatScreen, Rect Rec);
+	static const string textMatching_ItemName(Mat MatScreen, Rect Rec);
 };
 
 

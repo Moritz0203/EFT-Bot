@@ -335,6 +335,41 @@ const string TextMatching::textMatching_MedicalItems(Mat MatScreen, Rect Rec) {
 	return "";
 }
 
+const string TextMatching::textMatching_ItemName(Mat MatScreen, Rect Rec) {
+	Mat Roi = MatScreen(Rec);
+
+	convertScaleAbs(Roi, Roi, 1.1, 0);// 1 | 0
+
+	cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
+
+	const char* image_window = "Source Image";
+	namedWindow(image_window, WINDOW_AUTOSIZE);
+	imshow(image_window, Roi);
+	waitKey(0);
+
+	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
+	tess->Init("tessdata/", "eng");
+
+	tess->SetVariable("fontconfig_use", "tessdata/font.oft");
+	tess->SetPageSegMode(tesseract::PSM_SINGLE_LINE);
+	tess->SetVariable("tessedit_char_whitelist", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-().1234567890\"");
+	tess->SetVariable("textord_confidence_threshold", "75");
+
+	tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
+	tess->SetSourceResolution(100);
+
+	std::unique_ptr<char[]> txt(tess->GetUTF8Text());
+
+	if (txt) {
+		const string str = txt.get();
+		return str;
+	}
+
+	return "";
+}
+
+
+
 bool ColorMatching::GetColor(Mat MatScreen, cv::Scalar low, cv::Scalar high, Rect Rec) {
 	Mat Roi = MatScreen(Rec);
 	Mat Output;

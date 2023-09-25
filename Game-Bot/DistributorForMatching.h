@@ -5,10 +5,11 @@ using namespace cv;
 struct PathNameThreshold {
 	const char* Path;
 	const char* Name;
+	const char* FleaName;
 	const double Threshold;
 };
 
-struct PathNameThresholdItemSize {
+struct PathNameThresholdItemSize{
 	const char* Path;
 	const char* Name;
 	const char* FleaName;
@@ -19,7 +20,7 @@ struct PathNameThresholdItemSize {
 struct PathNameThresholdItemSizeMaxHP {
 	const char* Path;
 	const char* Name;
-	const char* FleaName;
+	const char*  FleaName;
 	const double Threshold;
 	const uint8_t ItemSize;
 	const uint16_t MaxHp;

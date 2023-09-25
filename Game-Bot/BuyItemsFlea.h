@@ -2,14 +2,17 @@
 #include "Includes.h"
 
 struct ItemNamePathThreshold {
-	char* Path;
-	char* Name;
-	char* FleaName;
+	string Path;
+	string Name;
+	string FleaName;
 	double Threshold;
 };
 
 class SecurityCheck {
-	string ExtraktSpace(string input);
+	string ExtraktSpaceAndNewlines(string input);
+
+	uint8_t OutOfTrys = 5;
+
 public:
 	bool MakeSecurityCheck();
 };

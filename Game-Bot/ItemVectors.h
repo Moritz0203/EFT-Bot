@@ -305,7 +305,7 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Tools/SewingKit.png",					"SewingKit",				"Sewing kit",						0.85, 1 },//SewingKit
 		//{ "itemImages/BarterImages/Tools/Sledgehammer.png",				"Sledgehammer",				"",		0.85, 10 },//Sledgehammer
 		{ "itemImages/BarterImages/Tools/Toolset.png",						"Toolset",					"Toolset",							0.85, 4 },//Toolset
-		{ "itemImages/BarterImages/Tools/Wrench.png",						"Wrench",					"Wrench",							0.85, 1 },//Wrench
+		{ "itemImages/BarterImages/Tools/Wrench.png",						"Wrench",					"Wrench",							0.84, 1 },//Wrench
 	};
 
 	const vector<PathNameThresholdItemSize> Valuables{

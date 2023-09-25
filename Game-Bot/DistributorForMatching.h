@@ -3,24 +3,23 @@
 using namespace cv;
 
 struct PathNameThreshold {
-	const char* Path;
-	const char* Name;
-	const char* FleaName;
+	const string Path;
+	const string Name;
 	const double Threshold;
 };
 
 struct PathNameThresholdItemSize{
-	const char* Path;
-	const char* Name;
-	const char* FleaName;
+	const string Path;
+	const string Name;
+	const string FleaName;
 	const double Threshold;
 	const uint8_t ItemSize;
 };
 
 struct PathNameThresholdItemSizeMaxHP {
-	const char* Path;
-	const char* Name;
-	const char*  FleaName;
+	const string Path;
+	const string Name;
+	const string  FleaName;
 	const double Threshold;
 	const uint8_t ItemSize;
 	const uint16_t MaxHp;
@@ -41,7 +40,7 @@ public:
 
 	vector<POINT> removeDuplicates(vector<POINT>& points);
 
-	vector<POINT> removeDuplicates_Medical(vector<POINT>& points);
+	vector<POINT> removeDuplicates_Rec(vector<POINT>& points);
 
 	//vector<PointAmmunition> removeDuplicatesPage(vector<PointAmmunition>& points);
 

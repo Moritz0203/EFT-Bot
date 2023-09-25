@@ -7,8 +7,8 @@
 void BuyItemsFlea::TranslateNameAndPasteIn(const char* nameOfItem) {
 	for (auto& vec : ArrayName) {
 		for (auto& item : vec) {
-			if (strcmp(item.Name, nameOfItem) == 0) {
-				Keyboard::KeyboardTypeString(item.FleaName);
+			if (strcmp(item.Name.c_str(), nameOfItem) == 0) {
+				Keyboard::KeyboardTypeString(item.FleaName.c_str());
 				break;
 			}
 		}
@@ -17,14 +17,14 @@ void BuyItemsFlea::TranslateNameAndPasteIn(const char* nameOfItem) {
 
 void BuyItemsFlea::TranslateNameAndPasteIn_Medical(const char* nameOfItem) {
 	for (auto& item : MedicalVector::Medical) {
-		if (strcmp(item.Name, nameOfItem) == 0) {
-			Keyboard::KeyboardTypeString(item.FleaName);
+		if (strcmp(item.Name.c_str(), nameOfItem) == 0) {
+			Keyboard::KeyboardTypeString(item.FleaName.c_str());
 			break;
 		}
 	}
 }
 
-void BuyItemsFlea::BuyItem() { // make buy quantity work so it buys the right amount
+void BuyItemsFlea::BuyItem() {
 	if(quantity == 0)
 		return;
 
@@ -112,37 +112,51 @@ bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity
 
 
 
-__forceinline string SecurityCheck::ExtraktSpace(string input) {
-	input.erase(remove(input.begin(), input.end(), ' '), input.end());
-	return input;
+__forceinline string SecurityCheck::ExtraktSpaceAndNewlines(string input) {
+	string result;
+	for (char c : input) {
+		if (c != ' ' && c != '\n' && c != '\r') {
+			result += c;
+		}
+	}
+	return result;
 }
 
 
 bool SecurityCheck::MakeSecurityCheck() {
-	//const HWND hWND = GetMat::FindeWindow();
-	//SetForegroundWindow(hWND);
-	//Sleep(5);//Delete later
-	//const Mat MatScreen = GetMat::getMat(hWND);
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(50);//Delete later
+	const Mat MatScreen = GetMat::getMat(hWND);
 	ItemNamePathThreshold pathNameThreshold{};
+	Matching matching(650, 0);
 	bool found = false;
+	POINT point{};
 
 	// GetNameOfItem 
 	
-	Mat MatScreenTest = imread("ObjectImages/Screenshot_4.png");
+	Mat MatScreenTest = imread("ObjectImages/Screenshot_3.png");
 	const Mat templ_SecurityCheckWithName = imread("ObjectImages/SecurityCheckWithName.png");
-	POINT point = TemplateMatching::templateMatchingObjects(MatScreenTest, templ_SecurityCheckWithName, 0.60);
+	point = TemplateMatching::templateMatchingObjects(MatScreen, templ_SecurityCheckWithName, 0.60);
 
 	Rect Rec(point.x + 30, point.y + 42, templ_SecurityCheckWithName.cols - 60, templ_SecurityCheckWithName.rows - 45);
-	string ItemName = TextMatching::textMatching_ItemName(MatScreenTest, Rec);
+	string ItemName = TextMatching::textMatching_ItemName(MatScreen, Rec);
+
+	ItemName = ExtraktSpaceAndNewlines(ItemName);
 
 	cout << ItemName << endl;	
 
 	for (auto& vec : ArrayName) {
+		if(found)
+			break;
+
 		for (auto& item : vec) {
-			if (ItemName == ExtraktSpace(item.FleaName)) {
-				pathNameThreshold.Path = (char*)item.Path;
-				pathNameThreshold.Name = (char*)item.Name;
-				pathNameThreshold.FleaName = (char*)item.FleaName;
+			string FleaName = ExtraktSpaceAndNewlines(item.FleaName);
+
+			if (ItemName == FleaName) {
+				pathNameThreshold.Path = item.Path;
+				pathNameThreshold.Name = item.Name;
+				pathNameThreshold.FleaName = item.FleaName;
 				pathNameThreshold.Threshold = (double)item.Threshold;
 				found = true;
 				break;	
@@ -152,30 +166,94 @@ bool SecurityCheck::MakeSecurityCheck() {
 
 	if (!found) {
 		for (auto& item : MedicalVector::Medical) {
-			if (ItemName == ExtraktSpace(item.FleaName)) {
-				pathNameThreshold.Path = (char*)item.Path;
-				pathNameThreshold.Name = (char*)item.Name;
-				pathNameThreshold.FleaName = (char*)item.FleaName;
-				pathNameThreshold.Threshold = (double)item.Threshold;
+			string FleaName = ExtraktSpaceAndNewlines(item.FleaName);
+
+			if (ItemName == FleaName) {
+				pathNameThreshold.Path = item.Path;
+				pathNameThreshold.Name = item.Name;
+				pathNameThreshold.FleaName = item.FleaName;
+				pathNameThreshold.Threshold = item.Threshold;
 				break;
 			}
 		}
+	}	
+
+
+	if (pathNameThreshold.Path == "") {
+		const Mat templ_SecurityCheckCloseButtom = imread("ObjectImages/CloseButton.png");
+		point = TemplateMatching::templateMatchingObjects(MatScreen, templ_SecurityCheckCloseButtom, 0.90);
+
+		point.y = (templ_SecurityCheckCloseButtom.rows / 2) + point.y;
+		point.x = (templ_SecurityCheckCloseButtom.cols / 2) + point.x;
+
+		Mouse::MoverPOINTandPress(point);
+
+		Sleep(500);
+
+		const Mat templ_FleaMarketButton = imread("ObjectImages/FleaMarketButton.png");
+		point = TemplateMatching::templateMatchingObjects(MatScreen, templ_FleaMarketButton, 0.80);
+
+		point.y = (templ_FleaMarketButton.rows / 2) + point.y;
+		point.x = (templ_FleaMarketButton.cols / 2) + point.x;
+
+		Mouse::MoverPOINTandPress(point);
+
+		Sleep(500);
+
+		MakeSecurityCheck();
 	}
 
-	cout << pathNameThreshold.Name << endl;
-	
-	
+
+	// Find Item in SecurityCheck
+	Rect Rec2(600, 0, MatScreenTest.cols - 1200, MatScreenTest.rows);	
+	Mat TemplateMatching = MatScreen(Rec2);
 
 	/*const char* image_window = "Source Image";
 	namedWindow(image_window, WINDOW_AUTOSIZE);
-	imshow(image_window, MatScreenTest);
+	imshow(image_window, TemplateMatching);
 	waitKey(0);*/
 
-	// Find Item in SecurityCheck
+	Mat templ = imread(pathNameThreshold.Path);
+	vector<POINT> vecItemsToClick = TemplateMatching::templateMatchingItems(pathNameThreshold.Path, pathNameThreshold.Threshold - 0.2, false, false, pathNameThreshold.Name, TemplateMatching);
+	vecItemsToClick = matching.removeDuplicates_Rec(vecItemsToClick);
+	
 	// Click Item
-	// Check if SecurityCheck passed
-	// If not Try again until passed if time out wait never return until passed
-	// return true
 
-	return true;
+	POINT point_ClickItem{};
+	for (POINT point : vecItemsToClick) {
+		point_ClickItem.y = (templ.rows / 2) + point.y;
+		point_ClickItem.x = (templ.cols / 2) + point.x;
+
+		cout << point_ClickItem.x << " " << point_ClickItem.y << endl;	
+
+		Mouse::MoverPOINTandPress(point_ClickItem);
+		Sleep(100);
+	}
+
+	// Check if SecurityCheck passed
+	TemplateMatching = GetMat::getMat(hWND);
+	const Mat templ_SecurityCheckBotton= imread("ObjectImages/ConfirmButton.png");
+	point = TemplateMatching::templateMatchingObjects(TemplateMatching(Rec2), templ_SecurityCheckBotton, 0.80);
+	
+	point.x += 650;
+
+	cout << point.x << " " << point.y << endl;	
+
+	Mouse::MoverPOINTandPress(point);
+
+	// If not Try again until passed if time out wait never return until passed
+	
+	const Mat templ_SecurityCheck = imread("ObjectImages/SecurityCheck.png");
+	if (TemplateMatching::templateMatchingBool(TemplateMatching, templ_SecurityCheck, 0.95)) {
+		OutOfTrys = 5;
+		return true;
+	}else if (OutOfTrys == 0) { 
+		Sleep(300000);// fail save wait for time 5 min
+		OutOfTrys = 5;
+		return true;
+	}
+
+	Sleep(500);
+	OutOfTrys--;
+	MakeSecurityCheck();
 }

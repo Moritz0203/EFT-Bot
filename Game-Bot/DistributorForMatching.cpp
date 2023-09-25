@@ -92,7 +92,7 @@ vector<POINT> Matching::removeDuplicates(vector<POINT>& points) {
 	return result;
 }
 
-vector<POINT> Matching::removeDuplicates_Medical(vector<POINT>& points) {
+vector<POINT> Matching::removeDuplicates_Rec(vector<POINT>& points) {
 	unordered_set<pair<int, int>, pair_hash> unSet;
 	vector<POINT> result;
 	for (POINT& point : points) {
@@ -260,7 +260,7 @@ void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> 
 
 		templ = imread(input[i].Path);
 		if (!ReturnDataMedical.empty()) {
-			ReturnDataMedical_Clean = removeDuplicates_Medical(ReturnDataMedical);
+			ReturnDataMedical_Clean = removeDuplicates_Rec(ReturnDataMedical);
 
 			for (int i3 = 0; i3 < ReturnDataMedical_Clean.size(); i3++) {
 				string Hp = {};

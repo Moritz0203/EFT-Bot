@@ -11,7 +11,7 @@
 using namespace std;
 using namespace cv;
 
-#define DebugImage1 (1)
+#define DebugImage1 (0)
 
 vector<POINT> TemplateMatching::templateMatchingItems(string templatename, double threshold, bool MabyHasInsurance, bool RoiNeed, string NameOfItem, Mat MatScreen) {
 	vector<POINT> ReturnData;
@@ -342,10 +342,10 @@ const string TextMatching::textMatching_ItemName(Mat MatScreen, Rect Rec) {
 
 	cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
 
-	const char* image_window = "Source Image";
-	namedWindow(image_window, WINDOW_AUTOSIZE);
-	imshow(image_window, Roi);
-	waitKey(0);
+	//const char* image_window = "Source Image";
+	//namedWindow(image_window, WINDOW_AUTOSIZE);
+	//imshow(image_window, Roi);
+	//waitKey(0);
 
 	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
 	tess->Init("tessdata/", "eng");

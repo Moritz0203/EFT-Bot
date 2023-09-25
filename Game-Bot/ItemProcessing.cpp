@@ -80,7 +80,7 @@ void ItemProcessing::cleanUpVectorItemsMedical() {
 					uint16_t y_minus_1 = tempPointCase.point.y - 1;
 					uint16_t y_plus_1 = tempPointCase.point.y + 1;
 					uint16_t x_minus_1 = tempPointCase.point.x - 1;
-					uint16_t x_plus_1 = tempPointCase.point.x + 1;
+					uint16_t x_plus_1 = (uint16_t)tempPointCase.point.x + 1;
 
 					//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
 					//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfItem << " " << tempPointCase.nameOfItem << " " << pointCase.page << " " << tempPointCase.page << " " << multiplier << endl;

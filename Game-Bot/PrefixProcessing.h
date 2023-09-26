@@ -1,6 +1,8 @@
 #pragma once
-class PrefixProcessing {
+#include "Includes.h"
 
+class PrefixProcessing {
+	void BuyOperator(AssignPrefix& Prefix, MovPrefix& movPrefix);
 public:
 	void PrefixOperator();
 };

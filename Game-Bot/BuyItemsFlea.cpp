@@ -64,7 +64,7 @@ void BuyItemsFlea::BuyItem(uint8_t quantity) {
 	}
 }
 
-bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity, bool IsMedical) {
+bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity, bool IsMedical) {// Make funktion to open flea market and close it
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later

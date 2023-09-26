@@ -1,6 +1,30 @@
 #include "PrefixProcessing.h"
 #include "MovPrefix.h"
+#include "BuyItemsFlea.h"
 #include "InputMK.h"
+#include "ItemVectors.h"
+#include "DistributorForMatching.h"
+
+void PrefixProcessing::BuyOperator(AssignPrefix& Prefix, MovPrefix& movPrefix) {
+	BuyItemsFlea buyItemsFlea;
+	bool found = false;
+	bool IsMedical = false;
+
+	for (PathNameThresholdItemSizeMaxHP ItemName : MedicalVector::Medical) {
+		if (ItemName.Name == Prefix.NameOfItem) {
+			IsMedical = true;
+			found = true;
+			break;
+		}
+	}
+
+	buyItemsFlea.BuyItemsFleaOperator(Prefix.NameOfItem.c_str(), Prefix.BuyQuantity, IsMedical);
+
+
+}
+
+
+
 
 void PrefixProcessing::PrefixOperator() {
 	AssignPrefix assingPrefix;
@@ -96,9 +120,7 @@ void PrefixProcessing::PrefixOperator() {
 		// TODO: Add other items
 
 		if (!found) {
-			// buy items from flea market
-			
-		
+			BuyOperator(prefix, movPrefix);
 		}
 	}
 }

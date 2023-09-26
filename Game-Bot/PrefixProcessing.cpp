@@ -37,6 +37,7 @@ void PrefixProcessing::PrefixOperator() {
 				if (!found) {
 					movPrefix_temp.NameOfItem = medical.nameOfItem;
 					movPrefix_temp.IdMov = prefix.IdMov;
+					movPrefix_temp.BuyQuantity = prefix.BuyQuantity;
 					movPrefix_temp.pointCase = nullptr;
 					movPrefix_temp.pointItem = std::make_shared<PointMedical>(medical);
 
@@ -80,6 +81,7 @@ void PrefixProcessing::PrefixOperator() {
 					if (!found) {
 						movPrefix_temp.NameOfItem = medical.nameOfItem;
 						movPrefix_temp.IdMov = prefix.IdMov;
+						movPrefix_temp.BuyQuantity = prefix.BuyQuantity;
 						movPrefix_temp.pointCase = std::make_shared<PointCaseInStashMedical>(pointCaseMedical);
 						movPrefix_temp.pointItem = std::make_shared<PointMedical>(medical);
 

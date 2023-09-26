@@ -10,7 +10,7 @@
 #include "c_log.h"
 #include "BuyItemsFlea.h"
 
-// HighCard 
+// HighCard | High T
 // SecurityCheck Items Barter / Medical / Food 
 
 int main() {
@@ -36,10 +36,10 @@ int main() {
 	//pouchProcessing.Pouch_FirstStart();
 
 
-	/*ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
+	//ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
 
-	readPrefixConfigFile.ParseConfig();
-	readPrefixConfigFile.PrintData();*/
+	//readPrefixConfigFile.ParseConfig();
+	//readPrefixConfigFile.PrintData();
 
 	/*BuyItemsFlea buyItemsFlea;
 
@@ -58,6 +58,6 @@ int main() {
 	}*/	
 
 
-	SecurityCheck securityCheck;
-	securityCheck.MakeSecurityCheck();
+	/*SecurityCheck securityCheck;
+	securityCheck.MakeSecurityCheck();*/
 }

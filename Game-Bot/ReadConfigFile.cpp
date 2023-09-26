@@ -31,6 +31,7 @@ void ReadPrefixConfigFile::PrintData() {
         c_log::Info("IDMov: ", c_log::LGreen, entry.IdMov);
         c_log::Info("Item:  ", c_log::LGreen, entry.NameOfItem);
         c_log::Info("MinHP: ", c_log::LGreen, entry.MinHp);
+        c_log::Info("BuyQuantity: ", c_log::LGreen, entry.BuyQuantity);
         std::cout << std::endl;
     }
 }
@@ -93,7 +94,27 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
                         //cout << minHpStr << endl;
                         assingPrefix_temp.MinHp = std::stoi(minHpStr);
 
-                        AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
+
+                        std::getline(file, line); // Die nächste Zeile enthält den Wert in Anführungszeichen
+                        if (!line.empty()) {
+                            size_t startPos = line.find("\"") + 1;
+                            size_t endPos = line.find("\"", startPos);
+
+                            if (startPos != std::string::npos && endPos != std::string::npos) {
+                                std::string buyQuantity = line.substr(startPos, endPos - startPos);
+                                // Entferne führende und abschließende Anführungszeichen, falls vorhanden
+                                if (!buyQuantity.empty() && buyQuantity.front() == '"') {
+                                    buyQuantity.erase(0, 1);
+                                }
+                                if (!buyQuantity.empty() && buyQuantity.back() == '"') {
+                                    buyQuantity.pop_back();
+                                }
+                                //cout << minHpStr << endl;
+                                assingPrefix_temp.BuyQuantity = std::stoi(buyQuantity);
+
+                                AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
+                            }
+                        }
                     }
                 }
             }

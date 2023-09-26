@@ -14,6 +14,7 @@ class SecurityCheck {
 	bool FailSafeWithMatching(ItemNamePathThreshold& pathNameThreshold, vector<POINT>& vecItemsToClick, cv::Mat MatScreen, cv::Rect Rec, HWND hWND);
 	void ExtraktNameFromSecurityCheck(ItemNamePathThreshold& pathNameThreshold, cv::Mat MatScreen);
 	void ClickItemsAndConfirm(vector<POINT> vecItemsToClick, cv::Mat templ, HWND hWND, cv::Rect Rec, int ShiftX);
+
 public:
 	bool MakeSecurityCheck();
 };

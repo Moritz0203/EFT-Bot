@@ -10,9 +10,10 @@ struct ItemNamePathThreshold {
 
 class SecurityCheck {
 	string ExtraktSpaceAndNewlines(string input);
-
-	uint8_t OutOfTrys = 5;
-
+	bool FailSafeDefault(ItemNamePathThreshold& pathNameThreshold, HWND hWND, cv::Mat MatScreen);
+	bool FailSafeWithMatching(ItemNamePathThreshold& pathNameThreshold, vector<POINT>& vecItemsToClick, cv::Mat MatScreen, cv::Rect Rec, HWND hWND);
+	void ExtraktNameFromSecurityCheck(ItemNamePathThreshold& pathNameThreshold, cv::Mat MatScreen);
+	void ClickItemsAndConfirm(vector<POINT> vecItemsToClick, cv::Mat templ, HWND hWND, cv::Rect Rec, int ShiftX);
 public:
 	bool MakeSecurityCheck();
 };
@@ -20,9 +21,8 @@ public:
 class BuyItemsFlea {
 	void TranslateNameAndPasteIn(const char* nameOfItem);
 	void TranslateNameAndPasteIn_Medical(const char* nameOfItem);
-	void BuyItem();
+	void BuyItem(uint8_t quantity);
 
-	uint8_t quantity = 0;
 	SecurityCheck securityCheck;
 
 public:

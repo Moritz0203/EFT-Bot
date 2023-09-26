@@ -15,7 +15,7 @@ namespace MedicalVector {
 		{ "itemImages/MedicalImages/Medical/CAT.png",						"CAT",			"CAT hemostatic tourniquet",					0.85, 1, 1	 },//CAT
 		{ "itemImages/MedicalImages/Medical/CMS.png",						"CMS",			"CMS surgical kit",								0.85, 2, 5	 },//CMS
 		{ "itemImages/MedicalImages/Medical/Esmarch.png",					"Esmarch",		"Esmarch tourniquet",							0.85, 1, 1	 },//Esmarch
-		{ "itemImages/MedicalImages/Medical/GoldenStar.png",				"GoldenStar",	"Golden Star Balsam",							0.85, 1, 10	 },//GoldenStar
+		{ "itemImages/MedicalImages/Medical/GoldenStar.png",				"GoldenStar",	"Golden Star Balsam",							0.84, 1, 10	 },//GoldenStar
 		{ "itemImages/MedicalImages/Medical/Grizzly.png",					"Grizzly",		"Grizzly medical kit",							0.85, 4, 1800},//Grizzly
 		{ "itemImages/MedicalImages/Medical/Hemostatic.png",				"Hemostatic",	"CALOK-B hemostatic applicator",				0.85, 1, 3	 },//Hemostatic
 		{ "itemImages/MedicalImages/Medical/Ibuprofen.png",					"Ibuprofen",	"Ibuprofen painkillers",						0.85, 1, 15	 },//Ibuprofen
@@ -23,7 +23,7 @@ namespace MedicalVector {
 		{ "itemImages/MedicalImages/Medical/Salewa.png",					"Salewa",		"Salewa first aid kit",							0.85, 2, 400 },//Salewa
 		{ "itemImages/MedicalImages/Medical/Splint.png",					"Splint",		"Immobilizing splint",							0.85, 1, 1	 },//Splint
 		{ "itemImages/MedicalImages/Medical/Surv12.png",					"Surv12",		"Surv12 field surgical kit",					0.85, 3, 15	 },//Surv12
-		{ "itemImages/MedicalImages/Medical/Vaseline.png",					"Vaseline",		"Vaseline balm",								0.85, 1, 6	 },//Vaseline
+		{ "itemImages/MedicalImages/Medical/Vaseline.png",					"Vaseline",		"Vaseline balm",								0.83, 1, 6	 },//Vaseline
 	};
 
 	const vector<PathNameThresholdItemSize> Injectors{
@@ -33,7 +33,7 @@ namespace MedicalVector {
 		{ "itemImages/MedicalImages/Injectors/ETG.png",						"ETG",			"eTG-change regenerative",						0.85, 1},//ETG
 		{ "itemImages/MedicalImages/Injectors/L1.png",						"L1",			"L1 (Norepinephrine) injector",					0.85, 1},//L1
 		{ "itemImages/MedicalImages/Injectors/Meldonin.png",				"Meldonin",		"Meldonin injector",							0.85, 1},//Meldonin
-		{ "itemImages/MedicalImages/Injectors/Morphine.png",				"Morphine",		"Morphine injector",							0.85, 1},//Morphine
+		{ "itemImages/MedicalImages/Injectors/Morphine.png",				"Morphine",		"Morphine injector",							0.83, 1},//Morphine
 		{ "itemImages/MedicalImages/Injectors/MULE.png",					"MULE",			"M.U.L.E. stimulant injector",					0.85, 1},//MULE
 		{ "itemImages/MedicalImages/Injectors/Obdolbos.png",				"Obdolbos",		"",												0.85, 1},//Obdolbos
 		{ "itemImages/MedicalImages/Injectors/Obdolbos2.png",				"Obdolbos2",	"",												0.85, 1},//Obdolbos2
@@ -78,7 +78,7 @@ namespace ProvisionsVector {
 		{ "itemImages/Provisions/MaxEnergy.png",							"MaxEnergy",			"Can of Max Energy energy drink",		0.85, 1},//MaxEnergy
 		{ "itemImages/Provisions/Mayo.png",									"Mayo",					"Jar of DevilDog mayo",					0.85, 1},//Mayo
 		{ "itemImages/Provisions/Milk.png",									"Milk",					"Pack of milk",							0.85, 2},//Milk
-		{ "itemImages/Provisions/Moonshine.png",							"Moonshine",			"Bottle of Fierce Hatchling moonshine",	0.85, 2},//Moonshine
+		{ "itemImages/Provisions/Moonshine.png",							"Moonshine",			"Bottle of Fierce Hatchling moonshine",	0.84, 2},//Moonshine
 		{ "itemImages/Provisions/MRE.png",									"MRE",					"MRE ration pack",						0.85, 2},//MRE
 		{ "itemImages/Provisions/Oatflakes.png",							"Oatflakes",			"Pack of oat flakes",					0.85, 2},//Oatflakes
 		{ "itemImages/Provisions/Peas.png",									"Peas",					"Can of green peas",					0.85, 1},//Peas
@@ -298,14 +298,14 @@ namespace BarterVector {
 		{ "itemImages/BarterImages/Tools/MTape.png",						"MTape",					"Construction measuring tape",		0.85, 1 },//MTape
 		{ "itemImages/BarterImages/Tools/Nippers.png",						"Nippers",					"Nippers",							0.85, 1 },//Nippers
 		{ "itemImages/BarterImages/Tools/PGW.png",							"PGW",						"Pipe grip wrench",					0.85, 2 },//PGW
-		{ "itemImages/BarterImages/Tools/Pliers.png",						"Pliers",					"Pliers",							0.85, 1 },//Pliers
+		{ "itemImages/BarterImages/Tools/Pliers.png",						"Pliers",					"Pliers",							0.83, 1 },//Pliers
 		{ "itemImages/BarterImages/Tools/RatchetWrench.png",				"RatchetWrench",			"Ratchet wrench",					0.80, 2 },//RatchetWrench
 		{ "itemImages/BarterImages/Tools/RoundPliers.png",					"RoundPliers",				"Round pliers",						0.83, 1 },//RoundPliers
-		{ "itemImages/BarterImages/Tools/Screwdriver.png",					"Screwdriver",				"Screwdriver",						0.85, 1 },//Screwdriver
+		{ "itemImages/BarterImages/Tools/Screwdriver.png",					"Screwdriver",				"Screwdriver",						0.83, 1 },//Screwdriver
 		{ "itemImages/BarterImages/Tools/SewingKit.png",					"SewingKit",				"Sewing kit",						0.85, 1 },//SewingKit
 		//{ "itemImages/BarterImages/Tools/Sledgehammer.png",				"Sledgehammer",				"",		0.85, 10 },//Sledgehammer
 		{ "itemImages/BarterImages/Tools/Toolset.png",						"Toolset",					"Toolset",							0.85, 4 },//Toolset
-		{ "itemImages/BarterImages/Tools/Wrench.png",						"Wrench",					"Wrench",							0.84, 1 },//Wrench
+		{ "itemImages/BarterImages/Tools/Wrench.png",						"Wrench",					"Wrench",							0.83, 1 },//Wrench
 	};
 
 	const vector<PathNameThresholdItemSize> Valuables{

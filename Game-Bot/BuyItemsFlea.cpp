@@ -58,8 +58,7 @@ void BuyItemsFlea::BuyItem(uint8_t quantity) {
 			quantity--;
 		}
 		else if (TemplateMatching::templateMatchingBool(MatScreen2, templ_SecurityCheck, 0.95)) {
-			bool SecurityCheck = securityCheck.MakeSecurityCheck();
-			if(SecurityCheck)
+			if(securityCheck.MakeSecurityCheck())
 				quantity--;
 		}
 	}

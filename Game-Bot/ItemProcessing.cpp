@@ -39,29 +39,44 @@ void ItemProcessing::MedicalProcess_OneScreen(std::shared_ptr<vector<PointMedica
 
 vector<vector<PointMedical>> ItemProcessing::OneItemMedicalMatching(string nameOfItem) {
 	Matching matching;
-	vector<vector<PointMedical>> vec_vec_PointMedical;
+	vector<vector<PointMedical>> pointMedical_NC;
 
 	for (auto& item : MedicalVector::Medical) {
 		if (item.Name == nameOfItem) {
 			PathNameThresholdItemSizeMaxHP input{ item.Path , item.Name , item.FleaName , item.Threshold , item.ItemSize , item.MaxHp };
-			vec_vec_PointMedical = matching.OneItemMedicalMatching(input);
+			pointMedical_NC = matching.OneItemMedicalMatching(input);
 			break;
 		}
 	}
 
-
-	return vec_vec_PointMedical;
+	return cleanUpVectorItemsMedical_Return(pointMedical_NC);
 }
 
 vector<vector<PointBarter>> ItemProcessing::OneItemBarterMatching(string nameOfItem) {
 	Matching matching;
-	vector<vector<PointBarter>> vec_vec_PointBarter;
+	vector<vector<PointBarter>> pointBarter_NC;
 	PathNameThresholdItemSize input{};
 
+	bool found = false;	
+	for (auto& vec : ArrayName) {
+		if (found)
+			break;
 
+		for (auto& item : vec) {
+			if (item.Name == nameOfItem) {
+				PathNameThresholdItemSize input{ item.Path , item.Name , item.FleaName , item.Threshold , item.ItemSize };
+				pointBarter_NC = matching.OneItemBarterMatching(input);
 
-	return vec_vec_PointBarter;
+				found = true;
+				break;
+			}
+		}
+	}
+
+	return cleanUpVectorItemsBarter_Return(pointBarter_NC);
 }
+
+
 
 
 
@@ -149,7 +164,7 @@ void ItemProcessing::cleanUpVectorItemsMedical() {
 }
 
 
-vector<vector<PointMedical>> ItemProcessing::cleanUpVectorItemsMedical(vector<vector<PointMedical>>& pointMedical_NC) {
+vector<vector<PointMedical>> ItemProcessing::cleanUpVectorItemsMedical_Return(vector<vector<PointMedical>>& pointMedical_NC) {
 	POINT_PAGE point_page{};
 	POINT_PAGE inPoint_page{};
 	std::set<POINT_PAGE> set_POINT_PAGE;
@@ -221,7 +236,74 @@ vector<vector<PointMedical>> ItemProcessing::cleanUpVectorItemsMedical(vector<ve
 	return pointMedical_C;
 }
 
-vector<vector<PointBarter>> ItemProcessing::cleanUpVectorItemsBarter(vector<vector<PointBarter>>& pointBarter_NC)
-{
-	return vector<vector<PointBarter>>();
+vector<vector<PointBarter>> ItemProcessing::cleanUpVectorItemsBarter_Return(vector<vector<PointBarter>>& pointBarter_NC) {
+	POINT_PAGE point_page{};
+	POINT_PAGE inPoint_page{};
+	std::set<POINT_PAGE> set_POINT_PAGE;
+	vector<vector<PointBarter>> pointBarter_C;
+	pointBarter_C.resize(pointBarter_NC.size());
+
+
+	uint8_t iTemp = 0;
+	for (uint8_t i = 0; i < pointBarter_NC.size(); i++) {
+		iTemp++;
+
+		if (iTemp == pointBarter_NC.size())
+			break;
+
+		for (PointBarter pointCase : pointBarter_NC[i]) {
+			point_page.page = pointCase.page;
+			point_page.point = pointCase.point;
+
+			if (set_POINT_PAGE.count(point_page) > 0)
+				continue;
+
+			bool Found = false;
+			int multiplier = 1;
+			for (uint8_t iTempLoop = iTemp; iTempLoop < pointBarter_NC.size() - 1 || iTempLoop < iTemp + 2; iTempLoop++) {
+
+				for (PointBarter inPointCase : pointBarter_NC[iTempLoop]) {
+					PointBarter tempPointCase = inPointCase;
+					tempPointCase.point.y = tempPointCase.point.y + (343 * multiplier);
+					inPoint_page.page = inPointCase.page;
+					inPoint_page.point = inPointCase.point;
+
+					uint16_t y_minus_1 = tempPointCase.point.y - 1;
+					uint16_t y_plus_1 = tempPointCase.point.y + 1;
+					uint16_t x_minus_1 = tempPointCase.point.x - 1;
+					uint16_t x_plus_1 = (uint16_t)tempPointCase.point.x + 1;
+
+					if (set_POINT_PAGE.count(inPoint_page) > 0)
+						continue;
+
+					if (tempPointCase.point.y == pointCase.point.y || y_minus_1 == pointCase.point.y || y_plus_1 == pointCase.point.y) {
+						if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
+							set_POINT_PAGE.insert(inPoint_page);
+							Found = true;
+						}
+					}
+				}
+				multiplier++;
+			}
+			if (Found)
+				pointBarter_C[i].emplace_back(pointCase);
+		}
+		if (i == 0) {
+			for (PointBarter pointBarter : pointBarter_NC[i]) {
+				if (pointBarter.point.y <= 400) {
+					pointBarter_C[i].emplace_back(pointBarter);
+				}
+			}
+		}
+		if (iTemp == 10) {
+			for (PointBarter pointBarter : pointBarter_NC[iTemp]) {
+				if (pointBarter.point.y >= 618) {
+					pointBarter_C[i].emplace_back(pointBarter);
+				}
+			}
+		}
+	}
+
+
+	return pointBarter_C;
 }

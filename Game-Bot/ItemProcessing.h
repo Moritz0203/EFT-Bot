@@ -4,8 +4,8 @@
 class ItemProcessing {
 	void cleanUpVectorItemsMedical();
 
-	vector<vector<PointMedical>> cleanUpVectorItemsMedical(vector<vector<PointMedical>>& pointMedical_NC);
-	vector<vector<PointBarter>> cleanUpVectorItemsBarter(vector<vector<PointBarter>>& pointBarter_NC);
+	vector<vector<PointMedical>> cleanUpVectorItemsMedical_Return(vector<vector<PointMedical>>& pointMedical_NC);
+	vector<vector<PointBarter>> cleanUpVectorItemsBarter_Return(vector<vector<PointBarter>>& pointBarter_NC);
 
 public:
 	void Init_Vectors();

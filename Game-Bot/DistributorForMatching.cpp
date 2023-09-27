@@ -345,6 +345,106 @@ void Matching::MedicalMatching(vector<PathNameThresholdItemSizeMaxHP> input) {
 }
 
 
+
+vector<vector<PointMedical>> Matching::OneItemMedicalMatching(PathNameThresholdItemSizeMaxHP input) {
+	Mat templ;
+	GetMat getMat;
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
+
+	vector<POINT> ReturnDataMedical;
+	vector<POINT> ReturnDataMedical_Clean;
+	vector<PointMedical> pointMedical_temp;
+	vector<vector<PointMedical>> pointMedical;
+
+	int page = 0;
+	for (Mat MatScreen : MatScreenVector) {
+		Rect Rec(1200, 0, MatScreen.cols - 1200, MatScreen.rows);
+		Mat MatScreenTemp = MatScreen(Rec);
+
+		ReturnDataMedical = TemplateMatching::templateMatchingItems(input.Path, input.Threshold, false, true, input.Name, MatScreenTemp);
+
+		templ = imread(input.Path);
+		if (!ReturnDataMedical.empty()) {
+			ReturnDataMedical_Clean = removeDuplicates(ReturnDataMedical);
+
+			for (int i3 = 0; i3 < ReturnDataMedical_Clean.size(); i3++) {
+				string Hp = {};
+				if (input.MaxHp != 1) {
+					if (input.Name == "Grizzly" || input.Name == "Salewa") {
+						Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 112 - Y, templ.cols, templ.rows - 112);
+						Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+					}
+					else {
+						Rect Rec(ReturnDataMedical_Clean[i3].x - X, ReturnDataMedical_Clean[i3].y + 47 - Y, templ.cols, templ.rows - 47);
+						Hp = TextMatching::textMatching_MedicalItems(MatScreen, Rec);
+					}
+
+					int HpInt = extractAndConvertToInt(Hp, input.MaxHp);
+					if (HpInt != 0) {
+						cout << "--- " << HpInt << endl;
+						pointMedical_temp.emplace_back(ReturnDataMedical_Clean[i3], input.Name, templ.rows, templ.cols, page, input.ItemSize, HpInt, input.MaxHp);
+					}
+				}
+				else {
+					pointMedical_temp.emplace_back(ReturnDataMedical_Clean[i3], input.Name, templ.rows, templ.cols, page, input.ItemSize, 0, input.MaxHp);
+				}
+			}
+			ReturnDataMedical.clear();
+			ReturnDataMedical_Clean.clear();
+		}
+		pointMedical.emplace_back(pointMedical_temp);
+		pointMedical_temp.clear();
+		page++;
+	}
+
+	return pointMedical;
+}
+
+
+
+vector<vector<PointBarter>> Matching::OneItemBarterMatching(PathNameThresholdItemSize input) {
+	Mat templ;
+	GetMat getMat;
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
+
+	vector<POINT> ReturnDataBA;
+	vector<POINT> ReturnDataBA_Clean;
+	vector<PointBarter> pointBarter_temp;
+	vector<vector<PointBarter>> pointBarter;
+
+	int page = 0;
+	for (Mat MatScreen : MatScreenVector) {
+		Rect Rec(1200, 0, MatScreen.cols - 1200, MatScreen.rows);
+		Mat MatScreenTemp = MatScreen(Rec);
+
+		ReturnDataBA = TemplateMatching::templateMatchingItems(input.Path, input.Threshold, false, true, input.Name, MatScreenTemp);
+
+		templ = imread(input.Path);
+		if (!ReturnDataBA.empty()) {
+			ReturnDataBA_Clean = removeDuplicates(ReturnDataBA);
+
+			for (int i3 = 0; i3 < ReturnDataBA_Clean.size(); i3++) {
+				pointBarter_temp.emplace_back(ReturnDataBA_Clean[i3], input.Name, templ.rows, templ.cols, page, input.ItemSize, false);
+			}
+			ReturnDataBA.clear();
+			ReturnDataBA_Clean.clear();
+		}
+		pointBarter.emplace_back(pointBarter_temp);
+		pointBarter_temp.clear();
+		page++;
+	}
+
+	return pointBarter;
+}
+
+
+
+
+
+
+
+
+
 //std::array<std::string, 2> FoundInRaid{
 //	"ObjectImages/FoundInRaid/FoundInRaid-Blue.png",
 //	"ObjectImages/FoundInRaid/FoundInRaid-Red.png"
@@ -352,8 +452,8 @@ void Matching::MedicalMatching(vector<PathNameThresholdItemSizeMaxHP> input) {
 
 //void Matching::BarterMatching(vector<PathNameThresholdItemSize> input, vector<vector<PointBarter>> &input_vec) {
 //	const int sizeFoundInRaid = sizeof(FoundInRaid) / sizeof(String);
-//	Mat templ;
 //	Mat MatScreen;
+//	Mat templ;
 //	GetMat getMat;
 //	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 //

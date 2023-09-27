@@ -53,4 +53,7 @@ public:
 	void MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> input, shared_ptr<vector<PointMedical>>& ptr_MedicalVec, Mat MatScreen);
 
 	void MedicalMatching(vector<PathNameThresholdItemSizeMaxHP> input);
+
+	vector<vector<PointMedical>> OneItemMedicalMatching(PathNameThresholdItemSizeMaxHP input);
+	vector<vector<PointBarter>> OneItemBarterMatching(PathNameThresholdItemSize input);
 };

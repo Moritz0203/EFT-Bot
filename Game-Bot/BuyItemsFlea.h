@@ -23,6 +23,8 @@ class BuyItemsFlea {
 	void TranslateNameAndPasteIn(const char* nameOfItem);
 	void TranslateNameAndPasteIn_Medical(const char* nameOfItem);
 	void BuyItem(uint8_t quantity);
+	void OpenFlea(HWND hWND);
+	void CloseFlea(HWND hWND);
 
 	SecurityCheck securityCheck;
 

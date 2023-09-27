@@ -64,21 +64,54 @@ void BuyItemsFlea::BuyItem(uint8_t quantity) {
 	}
 }
 
-bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity, bool IsMedical) {// Make funktion to open flea market and close it
-	const HWND hWND = GetMat::FindeWindow();
+void BuyItemsFlea::OpenFlea(HWND hWND) {
 	SetForegroundWindow(hWND);
 	Sleep(5);//Delete later
 	const Mat MatScreen = GetMat::getMat(hWND);
+	const Mat templ_FleaMarketButton = imread("ObjectImages/FleaMarketButton.png");
 
-	const Mat templ = imread("ObjectImages/FleaSearchBar.png");
-	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ, 0.95);
+
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ_FleaMarketButton, 0.90);
+	point.y = (templ_FleaMarketButton.rows / 2) + point.y;
+	point.x = (templ_FleaMarketButton.cols / 2) + point.x;
+
+	Mouse::MoverPOINTandPress(point);
+
+	Sleep(2500);
+}
+
+void BuyItemsFlea::CloseFlea(HWND hWND) {
+	SetForegroundWindow(hWND);
+	Sleep(5);//Delete later
+	const Mat MatScreen = GetMat::getMat(hWND);
+	const Mat templ_CharacterButton = imread("ObjectImages/CharacterButton.png");
+
+
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ_CharacterButton, 0.90);
+	point.y = (templ_CharacterButton.rows / 2) + point.y;
+	point.x = (templ_CharacterButton.cols / 2) + point.x;
+
+	Mouse::MoverPOINTandPress(point);
+
+	Sleep(2500);
+}
+
+bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity, bool IsMedical) {// Make funktion to open flea market and close it
+	const HWND hWND = GetMat::FindeWindow();
+
+	OpenFlea(hWND);
+
+	const Mat MatScreen = GetMat::getMat(hWND);
+
+	const Mat templ_FleaSearchBar = imread("ObjectImages/FleaSearchBar.png");
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ_FleaSearchBar, 0.95);
 	
 	if (point.x == 0 && point.y == 0) {		
 		return false;
 	}
 
-	point.y = (templ.rows / 2) + point.y;
-	point.x = (templ.cols / 2) + point.x;
+	point.y = (templ_FleaSearchBar.rows / 2) + point.y;
+	point.x = (templ_FleaSearchBar.cols / 2) + point.x;
 	
 	Mouse::MoverPOINTandPress(point);
 	Sleep(20);
@@ -100,6 +133,8 @@ bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity
 	Mouse::MoverPOINTandPress(point);
 	Sleep(200);
 	Keyboard::KeyboardInput(0x2E); //virtual - key code for the "DEL" key
+
+	CloseFlea(hWND);
 
 	return true;
 }

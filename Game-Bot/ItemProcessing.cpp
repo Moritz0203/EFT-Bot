@@ -37,6 +37,32 @@ void ItemProcessing::MedicalProcess_OneScreen(std::shared_ptr<vector<PointMedica
 }
 
 
+vector<vector<PointMedical>> ItemProcessing::OneItemMedicalMatching(string nameOfItem) {
+	Matching matching;
+	vector<vector<PointMedical>> vec_vec_PointMedical;
+
+	for (auto& item : MedicalVector::Medical) {
+		if (item.Name == nameOfItem) {
+			PathNameThresholdItemSizeMaxHP input{ item.Path , item.Name , item.FleaName , item.Threshold , item.ItemSize , item.MaxHp };
+			vec_vec_PointMedical = matching.OneItemMedicalMatching(input);
+			break;
+		}
+	}
+
+
+	return vec_vec_PointMedical;
+}
+
+vector<vector<PointBarter>> ItemProcessing::OneItemBarterMatching(string nameOfItem) {
+	Matching matching;
+	vector<vector<PointBarter>> vec_vec_PointBarter;
+	PathNameThresholdItemSize input{};
+
+
+
+	return vec_vec_PointBarter;
+}
+
 
 
 struct POINT_PAGE {
@@ -120,4 +146,82 @@ void ItemProcessing::cleanUpVectorItemsMedical() {
 			}
 		}
 	}
+}
+
+
+vector<vector<PointMedical>> ItemProcessing::cleanUpVectorItemsMedical(vector<vector<PointMedical>>& pointMedical_NC) {
+	POINT_PAGE point_page{};
+	POINT_PAGE inPoint_page{};
+	std::set<POINT_PAGE> set_POINT_PAGE;
+	vector<vector<PointMedical>> pointMedical_C;
+	pointMedical_C.resize(pointMedical_NC.size());
+
+
+	uint8_t iTemp = 0;
+	for (uint8_t i = 0; i < pointMedical_NC.size(); i++) {
+		iTemp++;
+
+		if (iTemp == pointMedical_NC.size())
+			break;
+
+		for (PointMedical pointCase : pointMedical_NC[i]) {
+			point_page.page = pointCase.page;
+			point_page.point = pointCase.point;
+
+			if (set_POINT_PAGE.count(point_page) > 0)
+				continue;
+
+			bool Found = false;
+			int multiplier = 1;
+			for (uint8_t iTempLoop = iTemp; iTempLoop < pointMedical_NC.size() - 1 || iTempLoop < iTemp + 2; iTempLoop++) {
+
+				for (PointMedical inPointCase : pointMedical_NC[iTempLoop]) {
+					PointMedical tempPointCase = inPointCase;
+					tempPointCase.point.y = tempPointCase.point.y + (343 * multiplier);
+					inPoint_page.page = inPointCase.page;
+					inPoint_page.point = inPointCase.point;
+
+					uint16_t y_minus_1 = tempPointCase.point.y - 1;
+					uint16_t y_plus_1 = tempPointCase.point.y + 1;
+					uint16_t x_minus_1 = tempPointCase.point.x - 1;
+					uint16_t x_plus_1 = (uint16_t)tempPointCase.point.x + 1;
+
+					if (set_POINT_PAGE.count(inPoint_page) > 0)
+						continue;
+
+					if (tempPointCase.point.y == pointCase.point.y || y_minus_1 == pointCase.point.y || y_plus_1 == pointCase.point.y) {
+						if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
+							set_POINT_PAGE.insert(inPoint_page);
+							Found = true;
+						}
+					}
+				}
+				multiplier++;
+			}
+			if (Found)
+				pointMedical_C[i].emplace_back(pointCase);
+		}
+		if (i == 0) {
+			for (PointMedical pointMedical : pointMedical_NC[i]) {
+				if (pointMedical.point.y <= 400) {
+					pointMedical_C[i].emplace_back(pointMedical);
+				}
+			}
+		}
+		if (iTemp == 10) {
+			for (PointMedical pointMedical : pointMedical_NC[iTemp]) {
+				if (pointMedical.point.y >= 618) {
+					pointMedical_C[i].emplace_back(pointMedical);
+				}
+			}
+		}
+	}
+
+
+	return pointMedical_C;
+}
+
+vector<vector<PointBarter>> ItemProcessing::cleanUpVectorItemsBarter(vector<vector<PointBarter>>& pointBarter_NC)
+{
+	return vector<vector<PointBarter>>();
 }

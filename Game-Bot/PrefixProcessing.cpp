@@ -1,12 +1,16 @@
+#pragma once	
 #include "PrefixProcessing.h"
-#include "MovPrefix.h"
 #include "BuyItemsFlea.h"
 #include "InputMK.h"
 #include "ItemVectors.h"
 #include "DistributorForMatching.h"
+#include "Controler.h"
+#include "getMat.h"
 
 void PrefixProcessing::BuyOperator(AssignPrefix& Prefix, MovPrefix& movPrefix) {
 	BuyItemsFlea buyItemsFlea;
+	Controler controler;
+	GetMat getMat;
 	bool found = false;
 	bool IsMedical = false;
 
@@ -18,7 +22,12 @@ void PrefixProcessing::BuyOperator(AssignPrefix& Prefix, MovPrefix& movPrefix) {
 		}
 	}
 
-	buyItemsFlea.BuyItemsFleaOperator(Prefix.NameOfItem.c_str(), Prefix.BuyQuantity, IsMedical);
+	while (buyItemsFlea.BuyItemsFleaOperator(Prefix.NameOfItem.c_str(), Prefix.BuyQuantity, IsMedical) != true);// later with more checks
+
+	controler.TakeScreenShots();	
+	Sleep(10);
+
+	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
 
 }

@@ -3,13 +3,15 @@
 #include "BuyItemsFlea.h"
 #include "InputMK.h"
 #include "ItemVectors.h"
-#include "DistributorForMatching.h"
-#include "Controler.h"
+#include "LobbyControler.h"
 #include "getMat.h"
+#include "ItemProcessing.h"
 
 void PrefixProcessing::BuyOperator(AssignPrefix& Prefix, MovPrefix& movPrefix) {
 	BuyItemsFlea buyItemsFlea;
-	Controler controler;
+	LobbyControler lobbyControler;
+	MovPrefix movPrefix_temp;
+	ItemProcessing itemProcessing;
 	GetMat getMat;
 	bool found = false;
 	bool IsMedical = false;
@@ -24,12 +26,39 @@ void PrefixProcessing::BuyOperator(AssignPrefix& Prefix, MovPrefix& movPrefix) {
 
 	while (buyItemsFlea.BuyItemsFleaOperator(Prefix.NameOfItem.c_str(), Prefix.BuyQuantity, IsMedical) != true);// later with more checks
 
-	controler.TakeScreenShots();	
+	lobbyControler.TakeScreenShots();	
 	Sleep(10);
 
-	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
+	if (IsMedical) {
+		vector<vector<PointMedical>> pointMedicalOneItem_C = itemProcessing.OneItemMedicalMatching(Prefix.NameOfItem);
 
+		for (int i = 0; i < pointMedicalOneItem_C.size(); i++) {
+			for (PointMedical item : pointMedicalOneItem_C[i]) {
+				movPrefix_temp.NameOfItem = item.nameOfItem;
+				movPrefix_temp.IdMov = Prefix.IdMov;
+				movPrefix_temp.BuyQuantity = Prefix.BuyQuantity;
+				movPrefix_temp.pointCase = nullptr;
+				movPrefix_temp.pointItem = std::make_shared<PointMedical>(item);
 
+				movPrefix.movPrefix.push_back(movPrefix_temp); 
+			}
+		}
+	}
+	else {
+		vector<vector<PointBarter>> pointBarterOneItem_C = itemProcessing.OneItemBarterMatching(Prefix.NameOfItem);
+
+		for (int i = 0; i < pointBarterOneItem_C.size(); i++) {
+			for (PointBarter item : pointBarterOneItem_C[i]) {
+				movPrefix_temp.NameOfItem = item.nameOfItem;
+				movPrefix_temp.IdMov = Prefix.IdMov;
+				movPrefix_temp.BuyQuantity = Prefix.BuyQuantity;
+				movPrefix_temp.pointCase = nullptr;
+				movPrefix_temp.pointItem = std::make_shared<PointBarter>(item);
+
+				movPrefix.movPrefix.push_back(movPrefix_temp);
+			}
+		}
+	}
 }
 
 

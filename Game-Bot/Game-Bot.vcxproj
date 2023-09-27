@@ -130,8 +130,8 @@
     <ClCompile Include="BuyItemsFlea.cpp" />
     <ClCompile Include="CaseProcessing.cpp" />
     <ClCompile Include="Checks.cpp" />
-    <ClCompile Include="Controler.cpp" />
-    <ClCompile Include="ControlerInGame.cpp" />
+    <ClCompile Include="LobbyControler.cpp" />
+    <ClCompile Include="GameControler.cpp" />
     <ClCompile Include="DistributorForMatching.cpp" />
     <ClCompile Include="getMat.cpp" />
     <ClCompile Include="Health.cpp" />
@@ -153,8 +153,8 @@
     <ClInclude Include="BuyItemsFlea.h" />
     <ClInclude Include="CaseProcessing.h" />
     <ClInclude Include="Checks.h" />
-    <ClInclude Include="Controler.h" />
-    <ClInclude Include="ControlerInGame.h" />
+    <ClInclude Include="LobbyControler.h" />
+    <ClInclude Include="GameControler.h" />
     <ClInclude Include="c_log.h" />
     <ClInclude Include="DistributorForMatching.h" />
     <ClInclude Include="getMat.h" />

@@ -7,8 +7,11 @@ typedef enum e_stash_version {
 	EdgeOfDarkness = 11,
 }stash_version;
 
-class Controler {
+class LobbyControler {
 	stash_version Stash_Version = EdgeOfDarkness;
+
+	void StashControler();
+	void ServerControler();
 
 public:
 	stash_version GetStashVersion() const {
@@ -20,5 +23,6 @@ public:
 	}
 
 	void TakeScreenShots();
+	void Controler();
 };
 

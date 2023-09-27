@@ -80,7 +80,7 @@
     <ClCompile Include="Health.cpp">
       <Filter>Source Files\GameBot\InGameFunktions</Filter>
     </ClCompile>
-    <ClCompile Include="Controler.cpp">
+    <ClCompile Include="LobbyControler.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall</Filter>
     </ClCompile>
     <ClCompile Include="getMat.cpp">
@@ -92,7 +92,7 @@
     <ClCompile Include="DistributorForMatching.cpp">
       <Filter>Source Files\TemplateMatching</Filter>
     </ClCompile>
-    <ClCompile Include="ControlerInGame.cpp">
+    <ClCompile Include="GameControler.cpp">
       <Filter>Source Files\GameBot\InGameFunktions</Filter>
     </ClCompile>
     <ClCompile Include="Checks.cpp">
@@ -142,7 +142,7 @@
     <ClInclude Include="Walk.h">
       <Filter>Header Files\GameBot\InGameFunktions</Filter>
     </ClInclude>
-    <ClInclude Include="Controler.h">
+    <ClInclude Include="LobbyControler.h">
       <Filter>Header Files\GameBot\Lobby-Overall</Filter>
     </ClInclude>
     <ClInclude Include="DistributorForMatching.h">
@@ -154,7 +154,7 @@
     <ClInclude Include="TemplateMatching.h">
       <Filter>Header Files\TemplateMatching</Filter>
     </ClInclude>
-    <ClInclude Include="ControlerInGame.h">
+    <ClInclude Include="GameControler.h">
       <Filter>Header Files\GameBot\InGameFunktions</Filter>
     </ClInclude>
     <ClInclude Include="Checks.h">

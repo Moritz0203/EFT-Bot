@@ -33,10 +33,10 @@ class PouchProcessing {
 	bool FirstStart = true;
 
 	void ShiftOutItems(uint8_t rows, uint8_t cols);
+	void Pouch_FirstStart();
 
 public:
 	void PouchMatching();
-	void Pouch_FirstStart();
 	void PouchOperator();
 
 	PouchProcessing(pouch_version Pouch){

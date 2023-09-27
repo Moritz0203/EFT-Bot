@@ -86,7 +86,7 @@ void ItemMoving::MovFromCase(MovPrefix& prefix) {
 	Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
 }
 
-void ItemMoving::MovingProcessing() {
+void ItemMoving::MovingProcessing(vector<MovPrefix> input) {
 	
 	for (MovPrefix& prefix : MovPrefix::movPrefix) {
 		if (prefix.pointCase == nullptr && prefix.pointItem != nullptr) {// Item is in Stash
@@ -96,4 +96,12 @@ void ItemMoving::MovingProcessing() {
 			MovFromCase(prefix);
 		}
 	}
+}
+
+
+
+
+
+void ItemMoving::MovingOperator() {
+
 }

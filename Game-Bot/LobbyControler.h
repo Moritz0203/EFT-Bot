@@ -12,6 +12,9 @@ class LobbyControler {
 
 	void StashControler();
 	void ServerControler();
+	void QueueControler();
+
+	void OpenStashView();
 
 public:
 	stash_version GetStashVersion() const {

@@ -25,6 +25,8 @@ void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 
 
 void PouchProcessing::PouchOperator() {
+	
+	
 	if (FirstStart) {
 		Pouch_FirstStart();
 		FirstStart = false;
@@ -32,6 +34,7 @@ void PouchProcessing::PouchOperator() {
 	else {
 		PouchMatching();
 	}
+
 }
 
 

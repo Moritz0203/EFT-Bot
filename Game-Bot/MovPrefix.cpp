@@ -19,12 +19,11 @@ MovPrefix::MovPrefix()
 {
 }
 
-MovPrefix::MovPrefix(string NameOfItem, uint8_t IdMov, std::shared_ptr<PointCase> pointCase, std::shared_ptr<PointItem> pointItem, uint16_t BuyQuantity)
+MovPrefix::MovPrefix(string NameOfItem, uint8_t IdMov, vector<PointerStack> pointerStack, uint16_t BuyQuantity)
 {
 	this->NameOfItem = NameOfItem;
 	this->IdMov = IdMov;
-	this->pointCase = pointCase;
-	this->pointItem = pointItem;
+	this->pointerStack = pointerStack;
 	this->BuyQuantity = BuyQuantity;
 }
 

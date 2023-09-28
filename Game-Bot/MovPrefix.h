@@ -17,15 +17,20 @@ public:
 
 
 class MovPrefix {// INFO: wenn pointCase und pointItem gestetzt sind, dann ist es ein Item, welches in einem Case ist, wenn nur pointItem gesetzt ist, dann ist das Item im Stash
+
+	struct PointerStack {
+		std::shared_ptr<PointCase> pointCase = nullptr;
+		std::shared_ptr<PointItem> pointItem = nullptr;
+	};
+
 public:
 	string NameOfItem = {};
 	uint8_t IdMov = {}; 
 	uint16_t BuyQuantity = {};
-	std::shared_ptr<PointCase> pointCase = nullptr;
-	std::shared_ptr<PointItem> pointItem = nullptr;
+	vector<PointerStack> pointerStack = {};
 
 	MovPrefix();
-	MovPrefix(string NameOfItem, uint8_t IdMov, std::shared_ptr<PointCase> pointCase, std::shared_ptr<PointItem> pointItem, uint16_t BuyQuantity);
+	MovPrefix(string NameOfItem, uint8_t IdMov, vector<PointerStack> pointerStack, uint16_t BuyQuantity);
 
 public:
 	static std::vector<MovPrefix> movPrefix;

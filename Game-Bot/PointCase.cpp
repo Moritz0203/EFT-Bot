@@ -1,17 +1,5 @@
 #include "PointCase.h"
 
-Pouch::Pouch()
-{
-}
-
-Pouch::Pouch(std::string nameOfPouch, const POINT pointPouch, vector<PointMedical> ItemsInPouch)
-{
-	this->nameOfPouch = nameOfPouch;
-	this->ItemsInPouch = ItemsInPouch;
-}
-
-Pouch Pouch::pouch;
-
 PointCase::PointCase()
 {
 }

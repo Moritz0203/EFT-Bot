@@ -131,6 +131,9 @@
     <ClCompile Include="BuyItemsFlea.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall\Matching-Moving</Filter>
     </ClCompile>
+    <ClCompile Include="StashObject.cpp">
+      <Filter>Source Files\GameBot\TypeClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ProgrammScheduler.h">
@@ -201,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="ItemVectors.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StashObject.h">
+      <Filter>Header Files\GameBot\TypeClass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

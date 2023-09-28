@@ -4,6 +4,7 @@
 #include "InputMK.h"
 #include "DistributorForMatching.h"
 #include "ItemProcessing.h"
+#include "StashObject.h"
 
 void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 	const uint16_t width = 64, height = 64;

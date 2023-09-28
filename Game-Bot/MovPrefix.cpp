@@ -15,6 +15,7 @@ AssignPrefix::AssignPrefix(string NameOfItem, uint16_t MinHp, uint16_t IdMov, ui
 std::vector<AssignPrefix> AssignPrefix::assignPrefix;
 
 
+
 MovPrefix::MovPrefix()
 {
 }
@@ -27,4 +28,4 @@ MovPrefix::MovPrefix(string NameOfItem, uint8_t IdMov, vector<PointerStack> poin
 	this->BuyQuantity = BuyQuantity;
 }
 
-std::vector<MovPrefix> MovPrefix::movPrefix;
+//std::vector<MovPrefix> MovPrefix::movPrefix;

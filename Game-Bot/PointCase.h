@@ -6,19 +6,6 @@
 #include "PointItems.h"
 using namespace std;
 
-class Pouch {
-public:
-	std::string nameOfPouch = {};
-	POINT pointPouch = {};
-	vector<PointMedical> ItemsInPouch{};
-
-	Pouch();
-	Pouch(std::string nameOfPouch, const POINT pointPouch, vector<PointMedical> ItemsInPouch);
-
-public:
-	static Pouch pouch;
-};
-
 class PointCase {
 public:
 	std::string tagCase = {}, nameOfCase = {};

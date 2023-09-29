@@ -23,11 +23,19 @@ class BuyItemsFlea {
 	void TranslateNameAndPasteIn(const char* nameOfItem);
 	void TranslateNameAndPasteIn_Medical(const char* nameOfItem);
 	void BuyItem(uint8_t quantity);
+
+	SecurityCheck securityCheck;
+	bool ExplicitlyMoreItems = false;
+
+public:
 	void OpenFlea(HWND hWND);
 	void CloseFlea(HWND hWND);
 
-	SecurityCheck securityCheck;
-
-public:
 	bool BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity, bool IsMedical);
+
+	BuyItemsFlea(bool explicitlyMoreItems) {
+		this->ExplicitlyMoreItems = explicitlyMoreItems;
+	}
+
+	BuyItemsFlea() {};
 };

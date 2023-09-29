@@ -8,27 +8,40 @@
 #include "ItemProcessing.h"
 #include "StashObject.h"
 
-void PrefixProcessing::BuyOperator(AssignPrefix& Prefix, MovPrefix& movPrefix) {
-	BuyItemsFlea buyItemsFlea;
+void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
+	BuyItemsFlea buyItemsFlea(true);
 	LobbyControler lobbyControler;
 	MovPrefix movPrefix_temp;
 	ItemProcessing itemProcessing;
 	GetMat getMat;
-	bool found = false;
-	bool IsMedical = false;
+	const HWND hWND = GetMat::FindeWindow();
 
-	for (PathNameThresholdItemSizeMaxHP ItemName : MedicalVector::Medical) {
-		if (ItemName.Name == Prefix.NameOfItem) {
-			IsMedical = true;
-			found = true;
-			break;
+
+
+	buyItemsFlea.OpenFlea(hWND);
+
+	for (AssignPrefix Prefix : BuyPrefix) {
+		bool IsMedical = false;
+
+		for (PathNameThresholdItemSizeMaxHP ItemName : MedicalVector::Medical) {
+			if (ItemName.Name == Prefix.NameOfItem) {
+				IsMedical = true;
+				break;
+			}
 		}
+
+		while (buyItemsFlea.BuyItemsFleaOperator(Prefix.NameOfItem.c_str(), Prefix.BuyQuantity, IsMedical) != true);// later with more checks
+
+
+
 	}
 
-	while (buyItemsFlea.BuyItemsFleaOperator(Prefix.NameOfItem.c_str(), Prefix.BuyQuantity, IsMedical) != true);// later with more checks
+	buyItemsFlea.CloseFlea(hWND);
+	
 
-	lobbyControler.TakeScreenShots();	
-	Sleep(10);
+
+	//lobbyControler.TakeScreenShots();	
+	//Sleep(10);
 
 	/*if (IsMedical) {
 		vector<vector<PointMedical>> pointMedicalOneItem_C = itemProcessing.OneItemMedicalMatching(Prefix.NameOfItem);
@@ -65,117 +78,55 @@ void PrefixProcessing::BuyOperator(AssignPrefix& Prefix, MovPrefix& movPrefix) {
 
 
 
-void PrefixProcessing::PrefixOperator() {
-	AssignPrefix assingPrefix;
+void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove hp to be ther and if not move it out and new in 
+	MovPrefix movPrefix;
+	vector<AssignPrefix> BuyPrefix{};
+	
+	for (AssignPrefix Prefix : AssignPrefix::assignPrefix_vec) {
 
-	for (AssignPrefix prefix : assingPrefix.assignPrefix) {//build check if item in poch has inove hp to be ther and if not move it out and new in 
-		bool found = false;
-		for (int i = 0; i < PointMedical::pointMedical_C.size(); i++) {
-			
-			
-			for (MovPrefix movPrefix : Pouch::pouch.Prefix) {
-				
+		if (Prefix.IdMov == 01) {
+			movPrefix.NameOfItem = Prefix.NameOfItem;
+			movPrefix.BuyQuantity = Prefix.BuyQuantity;
+
+			for (int i = 0; i < PointMedical::pointMedical_C.size(); i++) {
+
+				for (PointMedical item : PointMedical::pointMedical_C[i]) {
+					if(item.nameOfItem != Prefix.NameOfItem)
+						continue;
+					
+					if(item.hpItem < Prefix.MinHp) 
+						continue;
+
+					
+					movPrefix.pointerStack_vec.push_back({ nullptr, std::make_shared<PointMedical>(item) });
+				}
 			}
+
+			for (int i = 0; i < PointCaseInStashMedical::pointCaseInStashMedical_C.size(); i++) {
+				
+				for (PointCaseInStashMedical Case : PointCaseInStashMedical::pointCaseInStashMedical_C[i]) {
+					
+					for (PointMedical item : Case.ItemsInCase) {
 						
-			
-			
-			
-			//if(found)
-			//	break;
+						if(item.nameOfItem != Prefix.NameOfItem)
+							continue;
 
-			//for (PointMedical medical : PointMedical::pointMedical_C[i]) {
-			//	if (medical.nameOfItem != prefix.NameOfItem) 
-			//		continue;
+						if (item.hpItem < Prefix.MinHp)
+							continue;
 
-			//	if (!medical.hpItem < prefix.MinHp) 
-			//		continue;
+						movPrefix.pointerStack_vec.push_back({ std::make_shared<PointCase>(Case), std::make_shared<PointMedical>(item) });
+					}
+				}	
+			}
 
-			//	for (PointMedical medicalPouch : Pouch::pouch.ItemsInPouch) {
-			//		if (medicalPouch.nameOfItem != medical.nameOfItem)
-			//			continue;
-
-			//		if (!(medicalPouch.hpItem > prefix.MinHp)) {
-			//			MouseAndKeyboard::KeyboardInput_MovAndPress(0x11, medicalPouch.point); //virtual - key code for the "SHIFT" key
-			//			break;
-			//		}
-			//		else if(medicalPouch.hpItem > prefix.MinHp) {
-			//			found = true;
-			//			break;
-			//		}
-			//	}
-
-			//	if (!found) {
-			//		movPrefix_temp.NameOfItem = medical.nameOfItem;
-			//		movPrefix_temp.IdMov = prefix.IdMov;
-			//		movPrefix_temp.BuyQuantity = prefix.BuyQuantity;
-			//		movPrefix_temp.pointCase = nullptr;
-			//		movPrefix_temp.pointItem = std::make_shared<PointMedical>(medical);
-
-			//		movPrefix.movPrefix.push_back(movPrefix_temp);
-
-			//		found = true;
-			//		break;
-			//	}
-			//}
+			Pouch::pouch.Prefix.push_back(movPrefix);
 		}
-		
-		for (int i = 0; i < PointCaseInStashMedical::pointCaseInStashMedical_C.size(); i++) {
 
 
 
-
-
-
-
-
-
-			//if (found)
-			//	break;
-
-			//for (PointCaseInStashMedical pointCaseMedical : PointCaseInStashMedical::pointCaseInStashMedical_C[i]) {
-			//	if (found)
-			//		break;
-
-			//	for (PointMedical medical : pointCaseMedical.ItemsInCase) {
-			//		if (medical.nameOfItem != prefix.NameOfItem)
-			//			continue;
-
-			//		if (!medical.hpItem < prefix.MinHp)
-			//			continue;
-
-			//		for (PointMedical medicalPouch : Pouch::pouch.ItemsInPouch) {
-			//			if (medicalPouch.nameOfItem != medical.nameOfItem)
-			//				continue;
-
-			//			if (!(medicalPouch.hpItem > prefix.MinHp)) {
-			//				MouseAndKeyboard::KeyboardInput_MovAndPress(0x11, medicalPouch.point); //virtual - key code for the "SHIFT" key
-			//				break;
-			//			}
-			//			else if (medicalPouch.hpItem > prefix.MinHp) {
-			//				found = true;
-			//				break;
-			//			}
-			//		}
-
-			//		if (!found) {
-			//			movPrefix_temp.NameOfItem = medical.nameOfItem;
-			//			movPrefix_temp.IdMov = prefix.IdMov;
-			//			movPrefix_temp.BuyQuantity = prefix.BuyQuantity;
-			//			movPrefix_temp.pointCase = std::make_shared<PointCaseInStashMedical>(pointCaseMedical);
-			//			movPrefix_temp.pointItem = std::make_shared<PointMedical>(medical);
-
-			//			movPrefix.movPrefix.push_back(movPrefix_temp);
-
-			//			found = true;
-			//			break;
-			//		}
-			//	}
-			//}
-		}
-		// TODO: Add other items
-
-		if (!found) {
-			//BuyOperator(prefix, movPrefix);
-		}
+		BuyPrefix.push_back(Prefix);
 	}
+		
+
+	BuyOperator(BuyPrefix);
 }

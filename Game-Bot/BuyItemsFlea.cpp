@@ -99,7 +99,8 @@ void BuyItemsFlea::CloseFlea(HWND hWND) {
 bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity, bool IsMedical) {// Make funktion to open flea market and close it
 	const HWND hWND = GetMat::FindeWindow();
 
-	OpenFlea(hWND);
+	if(!ExplicitlyMoreItems)
+		OpenFlea(hWND);
 
 	const Mat MatScreen = GetMat::getMat(hWND);
 
@@ -134,7 +135,8 @@ bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity
 	Sleep(200);
 	Keyboard::KeyboardInput(0x2E); //virtual - key code for the "DEL" key
 
-	CloseFlea(hWND);
+	if(!ExplicitlyMoreItems)
+		CloseFlea(hWND);
 
 	return true;
 }

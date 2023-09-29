@@ -13,7 +13,7 @@ public:
 	AssignPrefix(string NameOfItem, uint16_t MinHp, uint16_t IdMov, uint16_t BuyQuantity);
 
 public:
-	static std::vector<AssignPrefix> assignPrefix;
+	static std::vector<AssignPrefix> assignPrefix_vec;
 };
 
 
@@ -26,12 +26,11 @@ class MovPrefix {// INFO: wenn pointCase und pointItem gestetzt sind, dann ist e
 
 public:
 	string NameOfItem = {};
-	uint8_t IdMov = {}; 
 	uint16_t BuyQuantity = {};
-	vector<PointerStack> pointerStack = {};
+	vector<PointerStack> pointerStack_vec = {};
 
 	MovPrefix();
-	MovPrefix(string NameOfItem, uint8_t IdMov, vector<PointerStack> pointerStack, uint16_t BuyQuantity);
+	MovPrefix(string NameOfItem, vector<PointerStack> pointerStack_vec, uint16_t BuyQuantity);
 
 	//static std::vector<MovPrefix> movPrefix;
 };

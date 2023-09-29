@@ -27,7 +27,7 @@ bool ReadPrefixConfigFile::ParseConfig() {
 }
 
 void ReadPrefixConfigFile::PrintData() {
-    for (AssignPrefix entry : AssignPrefix::assignPrefix) {
+    for (AssignPrefix entry : AssignPrefix::assignPrefix_vec) {
         c_log::Info("IDMov: ", c_log::LGreen, entry.IdMov);
         c_log::Info("Item:  ", c_log::LGreen, entry.NameOfItem);
         c_log::Info("MinHP: ", c_log::LGreen, entry.MinHp);
@@ -112,7 +112,7 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
                                 //cout << minHpStr << endl;
                                 assingPrefix_temp.BuyQuantity = std::stoi(buyQuantity);
 
-                                AssignPrefix::assignPrefix.push_back(assingPrefix_temp);
+                                AssignPrefix::assignPrefix_vec.push_back(assingPrefix_temp);
                             }
                         }
                     }

@@ -3,7 +3,8 @@
 #include "MovPrefix.h"
 
 class PrefixProcessing {
-	void BuyOperator(AssignPrefix& Prefix, MovPrefix& movPrefix);
+	void BuyOperator(vector<AssignPrefix> BuyPrefix);
+
 public:
 	void PrefixOperator();
 };

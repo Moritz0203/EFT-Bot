@@ -5,6 +5,8 @@
 #include "TemplateMatching.h"
 #include "ItemVectors.h"
 #include "Includes.h"
+#include "LobbyControler.h"
+#include "ItemProcessing.h"
 using namespace cv;
 
 void BuyItemsFlea::TranslateNameAndPasteIn(const char* nameOfItem) {
@@ -141,10 +143,44 @@ bool BuyItemsFlea::BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity
 	return true;
 }
 
-bool BuyItemsFlea::EsayBuyItemsAPI(const char* nameOfItem, uint8_t quantity)
-{
+vector<PointItem> BuyItemsFlea::EasyBuyItemsAPI(string nameOfItem, uint8_t quantity) {
+	vector<PointItem> vecPointItem;
+	LobbyControler lobbyControler;
+	ItemProcessing itemProcessing;
+	bool IsMedical = false;
 
-	return false;
+	for (PathNameThresholdItemSizeMaxHP ItemName : MedicalVector::Medical) {
+		if (ItemName.Name == nameOfItem) {
+			IsMedical = true;
+			break;
+		}
+	}
+
+	BuyItemsFleaOperator(nameOfItem.c_str(), quantity, IsMedical);
+
+	lobbyControler.TakeScreenShots();
+	Sleep(10);
+
+	if (IsMedical) {
+		vector<vector<PointMedical>> pointMedicalOneItem_C = itemProcessing.ItemProcessing::OneItemMedicalMatching(nameOfItem);
+
+		for (int i = 0; i < pointMedicalOneItem_C.size(); i++) {
+			for (PointMedical item : pointMedicalOneItem_C[i]) {
+				vecPointItem.push_back({ item.point, item.nameOfItem, item.heightTempl, item.widthTempl, item.page, item.slotsPerItem });
+			}
+		}
+	}
+	else {
+		vector<vector<PointBarter>> pointBarterOneItem_C = itemProcessing.OneItemBarterMatching(nameOfItem);
+
+		for (int i = 0; i < pointBarterOneItem_C.size(); i++) {
+			for (PointBarter item : pointBarterOneItem_C[i]) {
+				vecPointItem.push_back({ item.point, item.nameOfItem, item.heightTempl, item.widthTempl, item.page, item.slotsPerItem });
+			}
+		}
+	}	
+
+	return vecPointItem;
 }
 
 

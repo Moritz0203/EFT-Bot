@@ -108,13 +108,17 @@ void ItemMoving::MovFromCase(PointerStack& prefix) {
 
 
 void ItemMoving::MovingOperator() {
+	BuyItemsFlea buyItemsFlea;
 
 	for (MovPrefix& prefix : Pouch::pouch.Prefix) {
 		uint16_t Mov = prefix.HowMuchToMove;
 
 		if(prefix.pointerStack_vec.size() == 0){
+			vector<PointItem> vec_Items = buyItemsFlea.EasyBuyItemsAPI(prefix.NameOfItem, prefix.BuyQuantity);
 			
-			
+			for (PointItem item : vec_Items) {
+				prefix.pointerStack_vec.push_back({ {}, item });
+			}
 		}
 
 		for (PointerStack pointerStack : prefix.pointerStack_vec) {
@@ -122,12 +126,12 @@ void ItemMoving::MovingOperator() {
 			if(Mov == 0)
 				break;
 
-			if(pointerStack.pointCase.nameOfCase == ""){// Item is in Stash
-				MovFromStash(pointerStack);
+			if(pointerStack.pointCase.nameOfCase == "") {
+				MovFromStash(pointerStack);// Item is in Stash
 				Mov--;
 			}
-			else {// Item is in Case
-				MovFromCase(pointerStack);
+			else {
+				MovFromCase(pointerStack);// Item is in Case
 				Mov--;
 			}
 		

@@ -36,10 +36,10 @@ int main() {
 	//pouchProcessing.Pouch_FirstStart();
 
 
-	//ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
+	/*ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
 
-	//readPrefixConfigFile.ParseConfig();
-	//readPrefixConfigFile.PrintData();
+	readPrefixConfigFile.ParseConfig();
+	readPrefixConfigFile.PrintData();*/
 
 	/*BuyItemsFlea buyItemsFlea;
 

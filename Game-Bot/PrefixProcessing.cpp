@@ -16,8 +16,6 @@ void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 	GetMat getMat;
 	const HWND hWND = GetMat::FindeWindow();
 
-
-
 	buyItemsFlea.OpenFlea(hWND);
 
 	for (AssignPrefix Prefix : BuyPrefix) {
@@ -43,6 +41,7 @@ void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 
 		movPrefix_temp.NameOfItem = Prefix.NameOfItem;
 		movPrefix_temp.BuyQuantity = Prefix.BuyQuantity;
+		movPrefix_temp.HowMuchToMove = Prefix.HowMuchToMove;
 		
 		for (PathNameThresholdItemSizeMaxHP ItemName : MedicalVector::Medical) {
 			if (ItemName.Name == Prefix.NameOfItem) {
@@ -76,8 +75,6 @@ void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 
 		Pouch::pouch.Prefix.push_back(movPrefix_temp);
 	}
-
-	
 }
 
 
@@ -93,6 +90,7 @@ void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove
 		if (Prefix.IdMov == 01) {
 			movPrefix.NameOfItem = Prefix.NameOfItem;
 			movPrefix.BuyQuantity = Prefix.BuyQuantity;
+			movPrefix.HowMuchToMove = Prefix.HowMuchToMove;
 
 			for (int i = 0; i < PointMedical::pointMedical_C.size(); i++) {
 
@@ -132,7 +130,6 @@ void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove
 			if(!found)
 				Pouch::pouch.Prefix.push_back(movPrefix);
 		}
-
 
 
 		BuyPrefix.push_back(Prefix);

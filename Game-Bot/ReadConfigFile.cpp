@@ -32,6 +32,7 @@ void ReadPrefixConfigFile::PrintData() {
         c_log::Info("Item:  ", c_log::LGreen, entry.NameOfItem);
         c_log::Info("MinHP: ", c_log::LGreen, entry.MinHp);
         c_log::Info("BuyQuantity: ", c_log::LGreen, entry.BuyQuantity);
+        c_log::Info("HowMuchToMove: ", c_log::LGreen, entry.HowMuchToMove);
         std::cout << std::endl;
     }
 }
@@ -109,10 +110,29 @@ void ReadPrefixConfigFile::ParseBlock(std::ifstream& file) {
                                 if (!buyQuantity.empty() && buyQuantity.back() == '"') {
                                     buyQuantity.pop_back();
                                 }
-                                //cout << minHpStr << endl;
+                                //cout << buyQuantity << endl;
                                 assingPrefix_temp.BuyQuantity = std::stoi(buyQuantity);
 
-                                AssignPrefix::assignPrefix_vec.push_back(assingPrefix_temp);
+                                std::getline(file, line); // Die nächste Zeile enthält den Wert in Anführungszeichen
+                                if (!line.empty()) {
+                                    size_t startPos = line.find("\"") + 1;
+                                    size_t endPos = line.find("\"", startPos);
+
+                                    if (startPos != std::string::npos && endPos != std::string::npos) {
+                                        std::string howMuchToMove = line.substr(startPos, endPos - startPos);
+                                        // Entferne führende und abschließende Anführungszeichen, falls vorhanden
+                                        if (!howMuchToMove.empty() && howMuchToMove.front() == '"') {
+                                            howMuchToMove.erase(0, 1);
+                                        }
+                                        if (!howMuchToMove.empty() && howMuchToMove.back() == '"') {
+                                            howMuchToMove.pop_back();
+                                        }
+                                        //cout << howMuchToMove << endl;
+                                        assingPrefix_temp.HowMuchToMove = std::stoi(howMuchToMove);
+
+                                        AssignPrefix::assignPrefix_vec.push_back(assingPrefix_temp);
+                                    }
+                                }
                             }
                         }
                     }

@@ -59,7 +59,7 @@ void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 					if (item.hpItem < Prefix.MinHp)
 						continue;
 
-					movPrefix_temp.pointerStack_vec.push_back({ nullptr, std::make_shared<PointMedical>(item) });
+					movPrefix_temp.pointerStack_vec.push_back({ {}, item });
 				}
 			}
 		}
@@ -68,7 +68,7 @@ void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 
 			for (int i = 0; i < pointBarterOneItem_C.size(); i++) {
 				for (PointBarter item : pointBarterOneItem_C[i]) {
-					movPrefix_temp.pointerStack_vec.push_back({ nullptr, std::make_shared<PointBarter>(item) });
+					movPrefix_temp.pointerStack_vec.push_back({ {}, item });
 				}
 			}
 		}
@@ -102,7 +102,7 @@ void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove
 						continue;
 
 					
-					movPrefix.pointerStack_vec.push_back({ nullptr, std::make_shared<PointMedical>(item) });
+					movPrefix.pointerStack_vec.push_back({ {}, item });
 
 					found = true;
 				}
@@ -120,7 +120,7 @@ void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove
 						if (item.hpItem < Prefix.MinHp)
 							continue;
 
-						movPrefix.pointerStack_vec.push_back({ std::make_shared<PointCase>(Case), std::make_shared<PointMedical>(item) });
+						movPrefix.pointerStack_vec.push_back({ Case, item });
 
 						found = true;
 					}

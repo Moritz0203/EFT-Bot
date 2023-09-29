@@ -1,6 +1,10 @@
 #pragma once
 #include "Includes.h"
 
+struct PointerStack {
+	PointCase pointCase = {};
+	PointItem pointItem = {};
+};
 
 class AssignPrefix {
 public:
@@ -19,11 +23,6 @@ public:
 
 
 class MovPrefix {// INFO: wenn pointCase und pointItem gestetzt sind, dann ist es ein Item, welches in einem Case ist, wenn nur pointItem gesetzt ist, dann ist das Item im Stash
-	struct PointerStack {
-		std::shared_ptr<PointCase> pointCase = nullptr;
-		std::shared_ptr<PointItem> pointItem = nullptr;
-	};
-
 
 public:
 	string NameOfItem = {};

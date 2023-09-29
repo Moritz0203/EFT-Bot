@@ -32,6 +32,7 @@ public:
 	void CloseFlea(HWND hWND);
 
 	bool BuyItemsFleaOperator(const char* nameOfItem, uint8_t quantity, bool IsMedical);
+	bool EsayBuyItemsAPI(const char* nameOfItem, uint8_t quantity);
 
 	BuyItemsFlea(bool explicitlyMoreItems) {
 		this->ExplicitlyMoreItems = explicitlyMoreItems;

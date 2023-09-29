@@ -3,10 +3,10 @@
 
 
 class ItemMoving {
-	/*void MovFromStash(MovPrefix& prefix);
-	void MovFromCase(MovPrefix& prefix);
+	void MovFromStash(PointerStack& prefix);
+	void MovFromCase(PointerStack& prefix);
 
-	void MovingProcessing(vector<MovPrefix> input);*/
+	//void MovingProcessing(vector<MovPrefix> input);
 
 	uint8_t lastPage = 0;
 public:

@@ -9,6 +9,8 @@ class CaseProcessing {
 
 	static void cleanUpVectorCase();
 
+	static void cleanUpVectorCase_Medical();
+
 public:
 	void CaseOperator_Medical();
 	void CaseOperator();

@@ -233,11 +233,13 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 					double rows = templ.rows;
 					rows -= rows / 3.0;
 					const Rect Rec(ReturnDataCase_Clean[i3].x + 2, ReturnDataCase_Clean[i3].y, rows, 12);
-					string tagCase = TextMatching::textMatching(MatScreen, Rec);
+					//string tagCase = TextMatching::textMatching(MatScreen, Rec);
 
-					if (checkSecondLastChar(tagCase)) {
-						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], input[i].Name, tagCase, templ.rows, templ.cols, page, PointItem_empty);
-					}
+					cout << "Case: " << input[i].Name << " Page: " << page << endl;
+
+					//if (checkSecondLastChar(tagCase)) {
+						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], input[i].Name, "", templ.rows, templ.cols, page, PointItem_empty);
+					//}
 				}
 				ReturnDataCase.clear();
 				ReturnDataCase_Clean.clear();
@@ -299,6 +301,8 @@ void Matching::MedicalMatching(vector<PathNameThresholdItemSizeMaxHP> input) {
 	vector<vector<POINT>> freeSlots_empty{};
 	int page = 0;
 
+	cout << "Start MedicalMatching" << endl;
+
 	for (Mat MatScreen : MatScreenVector) {
 
 		Rect Rec(1200, 0, MatScreen.cols - 1200, MatScreen.rows);
@@ -326,7 +330,7 @@ void Matching::MedicalMatching(vector<PathNameThresholdItemSizeMaxHP> input) {
 
 						int HpInt = extractAndConvertToInt(Hp, input[i].MaxHp);
 						if (HpInt != 0) {
-							cout << "--- " << HpInt << endl;
+							cout << "--- HpItem: " << HpInt << " Name Of Item: " << input[i].Name << " Page: " << page << endl;
 							pointMedical_temp.emplace_back(ReturnDataMedical_Clean[i3], input[i].Name, templ.rows, templ.cols, page, input[i].ItemSize, HpInt, input[i].MaxHp);
 						}
 					}
@@ -341,7 +345,12 @@ void Matching::MedicalMatching(vector<PathNameThresholdItemSizeMaxHP> input) {
 		PointMedical::pointMedical_NC.emplace_back(pointMedical_temp);
 		pointMedical_temp.clear();
 		page++;
+
+		cout << "Page in Matching Medical: " << page << endl;
 	}
+
+	cout << "End MedicalMatching" << endl;
+
 }
 
 

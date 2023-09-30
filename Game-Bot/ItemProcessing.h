@@ -1,7 +1,10 @@
 #pragma once
 #include "Includes.h"
+#include <mutex>
 
 class ItemProcessing {
+	static std::mutex ItemProcessing_Mutex;
+
 	void cleanUpVectorItemsMedical();
 
 	vector<vector<PointMedical>> cleanUpVectorItemsMedical_Return(vector<vector<PointMedical>>& pointMedical_NC);

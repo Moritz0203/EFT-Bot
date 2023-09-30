@@ -44,7 +44,7 @@ void LobbyControler::TakeScreenShots() {
 
 	ChecksPublic.CheckScrollbarPositions();
 	Sleep(300);
-	getMat.TakeScreenshots(Stash_Version);
+	getMat.TakeScreenshots(7);
 }
 
 void LobbyControler::OpenStashView() {
@@ -129,7 +129,7 @@ void LobbyControler::FirstStartStashMatching() {
 void LobbyControler::StashControler() {
 	PouchProcessing pouchProcessing(Gamma);//later get from config file or form server 
 
-	OpenStashView();
+	//OpenStashView();
 
 	if (FirstStart) {
 		FirstStartStashMatching();
@@ -137,7 +137,7 @@ void LobbyControler::StashControler() {
 	}
 	pouchProcessing.PouchOperator();
 
-	CloseStashView();	
+	//CloseStashView();	
 }
 
 

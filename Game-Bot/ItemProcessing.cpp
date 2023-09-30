@@ -1,12 +1,12 @@
 #pragma once														
 #include "ItemProcessing.h"
-#include "Includes.h"
 #include <set>
 #include "DistributorForMatching.h"
 #include "getMat.h"
 #include "ItemVectors.h"
 #include "c_log.h"
 
+std::mutex ItemProcessing::ItemProcessing_Mutex;
 
 namespace CaseVector {
 	const vector<PathNameThreshold> Case{
@@ -37,16 +37,22 @@ void ItemProcessing::Init_Vectors() {
 	PointCaseInStashMedical::pointCaseInStashMedical_NC.clear();
 	PointCaseInStashMedical::pointCaseInStashMedical_C.clear();
 
-	PointMedical::pointMedical_NC.resize(MatScreenVector.size());
+	//PointMedical::pointMedical_NC.resize(MatScreenVector.size());
 	PointMedical::pointMedical_C.resize(MatScreenVector.size());
-	PointCaseInStashMedical::pointCaseInStashMedical_NC.resize(MatScreenVector.size());
+	//PointCaseInStashMedical::pointCaseInStashMedical_NC.resize(MatScreenVector.size());
 	PointCaseInStashMedical::pointCaseInStashMedical_C.resize(MatScreenVector.size());
+
+	//cout << "PointMedical::pointMedical_NC.size(): " << PointMedical::pointMedical_NC.size() << endl;
+	//cout << "PointMedical::pointMedical_C.size(): " << PointMedical::pointMedical_C.size() << endl;
 }
 
 void ItemProcessing::CaseMatching_Medical() {
 	Matching matching;
 
-	c_log::Start("CaseMatching_Medical");
+	{
+		std::lock_guard<std::mutex> lock(ItemProcessing_Mutex);
+		c_log::Start("CaseMatching_Medical");
+	}
 
 	matching.CaseMatching(CaseVector::CaseMedical);
 
@@ -60,13 +66,27 @@ void ItemProcessing::MedicalProcess() {
 		matching.MedicalMatching(vec);
 	}*/
 
-	c_log::Start("MedicalProcess");
+	{
+		std::lock_guard<std::mutex> lock(ItemProcessing_Mutex);
+		c_log::Start("MedicalProcess");
+	}
 
 	matching.MedicalMatching(MedicalVector::Medical);
 
-	c_log::End("MedicalProcess");
+	for (int i = 0; i < PointMedical::pointMedical_NC.size(); i++) {
+
+		if (PointMedical::pointMedical_NC[i].size() == 0)
+			cout << "empty Page: " << i << endl;
+
+		for (int i2 = 0; i2 < PointMedical::pointMedical_NC[i].size(); i2++) {
+			cout << PointMedical::pointMedical_NC[i][i2].nameOfItem << " " << PointMedical::pointMedical_NC[i][i2].page << endl;
+		}
+	}
+
 
 	cleanUpVectorItemsMedical();
+
+	c_log::End("MedicalProcess");
 }
 
 
@@ -162,8 +182,8 @@ void ItemProcessing::cleanUpVectorItemsMedical() {
 					if (set_POINT_PAGE.count(inPoint_page) > 0)
 						continue;
 
-					/*if (pointCase.nameOfItem != inPointCase.nameOfItem) // NOTE: Später über eingabe regeln wie sicher der user sein munition sortig haben möchte
-						continue;*/
+					if (pointCase.nameOfItem != inPointCase.nameOfItem) // NOTE: Später über eingabe regeln wie sicher der user sein munition sortig haben möchte
+						continue;
 
 					if (tempPointCase.point.y == pointCase.point.y || y_minus_1 == pointCase.point.y || y_plus_1 == pointCase.point.y) {
 						if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {

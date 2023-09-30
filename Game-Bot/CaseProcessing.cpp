@@ -25,7 +25,18 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 	
 	c_log::Start("CaseOperator_Medical");
 
-	cleanUpVectorCase();
+	cleanUpVectorCase_Medical();
+
+	for (int i = 0; i < PointCaseInStashMedical::pointCaseInStashMedical_C.size(); i++) {
+
+		if (PointCaseInStashMedical::pointCaseInStashMedical_C[i].size() == 0)
+			cout << "empty Page: " << i << endl;
+
+		for (int i2 = 0; i2 < PointCaseInStashMedical::pointCaseInStashMedical_C[i].size(); i2++) {
+			cout << PointCaseInStashMedical::pointCaseInStashMedical_C[i][i2].nameOfCase << " " << PointCaseInStashMedical::pointCaseInStashMedical_C[i][i2].page << endl;
+		}
+	}
+
 
 	std::shared_ptr<vector<PointMedical>> ptr_MedicalVec;
 	int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
@@ -270,6 +281,82 @@ void CaseProcessing::cleanUpVectorCase() {
 			}
 		}
 		PointCaseInStash::pointCaseInStash_C.emplace_back(temp);
+		temp.clear();
+	}
+}
+
+void CaseProcessing::cleanUpVectorCase_Medical() {
+	vector<PointCaseInStashMedical> temp;
+	POINT_PAGE point_page{};
+	POINT_PAGE inPoint_page{};
+	std::set<POINT_PAGE> set_POINT_PAGE;
+
+
+	temp = PointCaseInStashMedical::pointCaseInStashMedical_NC[0];
+	PointCaseInStashMedical::pointCaseInStashMedical_C.emplace_back(temp);
+	temp.clear();
+
+	uint8_t iTemp = 1;
+	for (uint8_t i = 1; i < PointCaseInStashMedical::pointCaseInStashMedical_NC.size(); i++) {
+		iTemp++;
+
+		if (iTemp == PointCaseInStashMedical::pointCaseInStashMedical_NC.size())
+			break;
+
+		for (PointCaseInStashMedical pointCase : PointCaseInStashMedical::pointCaseInStashMedical_NC[i]) {
+			point_page.page = pointCase.page;
+			point_page.point = pointCase.point;
+
+			if (set_POINT_PAGE.count(point_page) > 0)
+				continue;
+
+			bool Found = false;
+			uint8_t multiplier = 1;
+			for (uint8_t iTempLoop = iTemp; iTempLoop < PointCaseInStashMedical::pointCaseInStashMedical_NC.size() - 1 || iTempLoop < iTemp + 3; iTempLoop++) {
+
+				for (PointCaseInStashMedical inPointCase : PointCaseInStashMedical::pointCaseInStashMedical_NC[iTempLoop]) {
+					PointCaseInStashMedical tempPointCase = inPointCase;
+					tempPointCase.point.y = tempPointCase.point.y + (343 * multiplier);
+					inPoint_page.page = inPointCase.page;
+					inPoint_page.point = inPointCase.point;
+
+					uint16_t y_minus_1 = tempPointCase.point.y - 1;
+					uint16_t y_plus_1 = tempPointCase.point.y + 1;
+					uint16_t x_minus_1 = tempPointCase.point.x - 1;
+					uint16_t x_plus_1 = tempPointCase.point.x + 1;
+
+
+					//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
+						//cout << pointCase.point.y << " " << pointCase.point.x << " " << tempPointCase.point.y << " " << tempPointCase.point.x << " " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << " " << multiplier << endl;
+
+					if (pointCase.nameOfCase != inPointCase.nameOfCase)
+						continue;
+
+					if (set_POINT_PAGE.count(inPoint_page) > 0)
+						continue;
+
+					if (tempPointCase.point.y == pointCase.point.y || y_minus_1 == pointCase.point.y || y_plus_1 == pointCase.point.y) {
+						if (tempPointCase.point.x == pointCase.point.x || x_minus_1 == pointCase.point.x || x_plus_1 == pointCase.point.x) {
+							set_POINT_PAGE.insert(inPoint_page);
+							Found = true;
+							//if (pointCase.nameOfCase == "AmmoCase" && tempPointCase.nameOfCase == "AmmoCase")
+								//cout << "\n---------- push " << pointCase.point.y << " " << pointCase.point.x << " -- " << tempPointCase.point.y << " " << tempPointCase.point.x << " -- " << inPointCase.point.y << " " << inPointCase.point.x << " -- " << pointCase.nameOfCase << " " << tempPointCase.nameOfCase << " " << pointCase.page << " " << tempPointCase.page << "\n" << endl;
+						}
+					}
+				}
+				multiplier++;
+			}
+			if (Found)
+				temp.emplace_back(pointCase);
+		}
+		if (iTemp == 10) {
+			for (PointCaseInStashMedical pointCase : PointCaseInStashMedical::pointCaseInStashMedical_NC[iTemp]) {
+				if (pointCase.point.y >= 618) {
+					temp.emplace_back(pointCase);
+				}
+			}
+		}
+		PointCaseInStashMedical::pointCaseInStashMedical_C.emplace_back(temp);
 		temp.clear();
 	}
 }

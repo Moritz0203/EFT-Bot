@@ -7,6 +7,7 @@
 #include "getMat.h"
 #include "ItemProcessing.h"
 #include "StashObject.h"
+#include "c_log.h"
 
 void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 	BuyItemsFlea buyItemsFlea(true);
@@ -27,6 +28,8 @@ void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 				break;
 			}
 		}
+
+		c_log::Info("BuyOperator: " + Prefix.NameOfItem);
 
 		while (buyItemsFlea.BuyItemsFleaOperator(Prefix.NameOfItem.c_str(), Prefix.BuyQuantity, IsMedical) != true);// later with more checks
 	}
@@ -74,6 +77,9 @@ void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 			}
 		}
 
+		for(PointerStack& pointerStack : movPrefix_temp.pointerStack_vec)
+			c_log::Info("BuyOperator: " , Prefix.NameOfItem , " " , pointerStack.pointItem.nameOfItem , " " , pointerStack.pointItem.page);
+
 		Pouch::pouch.Prefix.push_back(movPrefix_temp);
 	}
 }
@@ -84,6 +90,8 @@ void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove hp to be ther and if not move it out and new in 
 	MovPrefix movPrefix;
 	vector<AssignPrefix> BuyPrefix{};
+
+	c_log::Start("PrefixOperator");
 	
 	for (AssignPrefix Prefix : AssignPrefix::assignPrefix_vec) {
 		bool found = false;
@@ -139,4 +147,6 @@ void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove
 		
 
 	BuyOperator(BuyPrefix);
+
+	c_log::End("PrefixOperator");
 }

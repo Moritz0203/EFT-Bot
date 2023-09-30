@@ -5,6 +5,7 @@
 #include "DistributorForMatching.h"
 #include "getMat.h"
 #include "ItemVectors.h"
+#include "c_log.h"
 
 
 namespace CaseVector {
@@ -45,7 +46,11 @@ void ItemProcessing::Init_Vectors() {
 void ItemProcessing::CaseMatching_Medical() {
 	Matching matching;
 
+	c_log::Start("CaseMatching_Medical");
+
 	matching.CaseMatching(CaseVector::CaseMedical);
+
+	c_log::End("CaseMatching_Medical");	
 }
 
 void ItemProcessing::MedicalProcess() {
@@ -55,7 +60,11 @@ void ItemProcessing::MedicalProcess() {
 		matching.MedicalMatching(vec);
 	}*/
 
+	c_log::Start("MedicalProcess");
+
 	matching.MedicalMatching(MedicalVector::Medical);
+
+	c_log::End("MedicalProcess");
 
 	cleanUpVectorItemsMedical();
 }

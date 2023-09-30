@@ -9,6 +9,7 @@
 #include "ReadConfigFile.h"
 #include "c_log.h"
 #include "BuyItemsFlea.h"
+#include "LobbyControler.h"
 
 // HighCard | High T
 // SecurityCheck Items Barter / Medical / Food 
@@ -60,4 +61,8 @@ int main() {
 
 	/*SecurityCheck securityCheck;
 	securityCheck.MakeSecurityCheck();*/
+
+
+	LobbyControler lobbyControler;
+	lobbyControler.Controler();
 }

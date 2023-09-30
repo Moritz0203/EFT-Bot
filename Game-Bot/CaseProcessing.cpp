@@ -23,7 +23,7 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 	checksPublic ChecksPublic;
 	Matching matching(730, 300);
 	
-	c_log::Start("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
+	c_log::Start("CaseOperator_Medical");
 
 	cleanUpVectorCase();
 
@@ -63,7 +63,7 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 		Keyboard::KeyboardInput(keyforInput);
 	}
 
-	c_log::End("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
+	c_log::End("CaseOperator_Medical");
 }
 
 

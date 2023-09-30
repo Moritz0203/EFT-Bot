@@ -18,6 +18,7 @@ class LobbyControler {
 	void QueueControler();
 
 	void OpenStashView();
+	void CloseStashView();
 
 	void FirstStartGetData();
 	void FirstStartStashMatching();

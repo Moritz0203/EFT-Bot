@@ -13,6 +13,7 @@
 #include "CaseProcessing.h"
 #include "PouchProcessing.h"
 #include "ItemMoving.h"
+#include "c_log.h"
 
 
 std::queue<std::function<void()>> q;
@@ -62,12 +63,27 @@ void LobbyControler::OpenStashView() {
 	Sleep(2500);
 }
 
+void LobbyControler::CloseStashView() {
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(5);//Delete later
+	const Mat MatScreen = GetMat::getMat(hWND);
+	const Mat templ_MainMenuButton = imread("ObjectImages/MainMenuButton.png");
+
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ_MainMenuButton, 0.90);
+	point.y = (templ_MainMenuButton.rows / 2) + point.y;
+	point.x = (templ_MainMenuButton.cols / 2) + point.x;
+
+	Mouse::MoverPOINTandPress(point);
+
+	Sleep(2500);
+}
+
 void LobbyControler::FirstStartGetData() {
-	ReadPrefixConfigFile readPrefixConfigFile("ConfigFile.txt");
+	ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
 
 	readPrefixConfigFile.ParseConfig();
 	readPrefixConfigFile.PrintData();
-
 }
 
 void LobbyControler::FirstStartStashMatching() {
@@ -92,11 +108,13 @@ void LobbyControler::FirstStartStashMatching() {
 	c_v.notify_all();
 
 	ItemProcessing_Thread1.join();
+	c_log::Thread("ItemProcessing_Thread1 join");
 
 	ItemProcessing_Thread2.join();
+	c_log::Thread("ItemProcessing_Thread2 join");
 
 
-	caseProcessing.CaseOperator();
+	caseProcessing.CaseOperator_Medical();
 
 	pouchProcessing.PouchOperator();
 
@@ -117,10 +135,11 @@ void LobbyControler::StashControler() {
 		FirstStartStashMatching();
 		FirstStart = false;
 	}
-	else {
-		pouchProcessing.PouchOperator();
-	}
+	pouchProcessing.PouchOperator();
+
+	CloseStashView();	
 }
+
 
 void LobbyControler::ServerControler() {// Later 
 
@@ -137,6 +156,6 @@ void LobbyControler::QueueControler() {// next to do
 void LobbyControler::Controler() {
 	FirstStartGetData();
 
-
+	StashControler();
 }
 

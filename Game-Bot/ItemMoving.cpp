@@ -8,6 +8,7 @@
 #include "PointCase.h"
 #include "StashObject.h"
 #include "BuyItemsFlea.h"
+#include "c_log.h"
 
 
 void ItemMoving::MovFromStash(PointerStack& prefix) {
@@ -123,6 +124,8 @@ void ItemMoving::MovOneItem(MovPrefix& movPrefix) {
 void ItemMoving::MovingOperator() {
 	BuyItemsFlea buyItemsFlea;
 
+	c_log::Start("MovingOperator");
+
 	for (MovPrefix& prefix : Pouch::pouch.Prefix) {
 		uint16_t Mov = prefix.HowMuchToMove;
 
@@ -140,13 +143,17 @@ void ItemMoving::MovingOperator() {
 				break;
 
 			if(pointerStack.pointCase.nameOfCase == "") {
+				c_log::Info("MovingOperator: ", pointerStack.pointItem.nameOfItem, " ", pointerStack.pointItem.page);	
 				MovFromStash(pointerStack);// Item is in Stash
 				Mov--;
 			}
 			else {
+				c_log::Info("MovingOperator: ", pointerStack.pointItem.nameOfItem, " ", pointerStack.pointCase.nameOfCase, " ", pointerStack.pointCase.page);
 				MovFromCase(pointerStack);// Item is in Case
 				Mov--;
 			}
 		}
 	}
+
+	c_log::End("MovingOperator");
 }

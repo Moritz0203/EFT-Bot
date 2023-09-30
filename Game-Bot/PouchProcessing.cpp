@@ -6,6 +6,7 @@
 #include "ItemProcessing.h"
 #include "StashObject.h"
 #include "ItemMoving.h"
+#include "ItemVectors.h"
 
 void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 	const uint16_t width = 64, height = 64;
@@ -27,7 +28,6 @@ void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 
 
 void PouchProcessing::PouchOperator() {
-	
 	if (FirstStart) {
 		Pouch_FirstStart();
 		FirstStart = false;
@@ -36,7 +36,6 @@ void PouchProcessing::PouchOperator() {
 		PouchMatching();
 		PouchItemCheck();
 	}
-
 }
 
 
@@ -53,7 +52,7 @@ void PouchProcessing::PouchMatching() {
 	Rect Rec(800, 610, MatScreenVector[0].cols - 1625, MatScreenVector[0].rows - 800);
 	Mat MatScreenTemp = MatScreenVector[0](Rec);
 
-	itemProcessing.MedicalProcess_OneScreen(ptr_MedicalVec, MatScreenVector[0]);
+	matching.MedicalMatching_OneScreen(MedicalVector::Medical, ptr_MedicalVec, MatScreenTemp);
 }
 
 

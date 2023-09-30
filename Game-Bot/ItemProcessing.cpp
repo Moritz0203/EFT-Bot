@@ -7,15 +7,45 @@
 #include "ItemVectors.h"
 
 
+namespace CaseVector {
+	const vector<PathNameThreshold> Case{
+		{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.79 },//AmmoCase
+		{ "CaseImages/GrenadCase.png",										"GrenadCase",				0.909 },//GrenadCase
+		{ "CaseImages/HolodilnickCase.png",									"HolodilnickCase",			0.909 },//HolodilnickCase
+		{ "CaseImages/MagCase.png",											"MagCase",					0.88 },//MagCase
+		{ "CaseImages/MedCase.png",											"MedCase",					0.92 },//MedCase
+		{ "CaseImages/MoneyCase.png",										"MoneyCase",				0.88 },//MoneyCase
+		{ "CaseImages/JunkCase.png",										"JunkCase",					0.80 },//JunkCase
+		{ "CaseImages/WeaponsCase.png",										"WeaponsCase",				0.88 },//WeaponsCase
+		{ "CaseImages/ItemsCase.png",										"ItemsCase",				0.88 },//ItemsCase
+		{ "CaseImages/THICCcase.png",										"THICCcase",				0.88 },//THICCcase
+	};
 
+	const vector<PathNameThreshold> CaseMedical{
+		{ "CaseImages/MedCase.png",											"MedCase",					0.92 },//MedCase
+	};
+}
 
 
 void ItemProcessing::Init_Vectors() {
 	GetMat getMat;
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
+	PointMedical::pointMedical_NC.clear();
+	PointMedical::pointMedical_C.clear();
+	PointCaseInStashMedical::pointCaseInStashMedical_NC.clear();
+	PointCaseInStashMedical::pointCaseInStashMedical_C.clear();
+
 	PointMedical::pointMedical_NC.resize(MatScreenVector.size());
 	PointMedical::pointMedical_C.resize(MatScreenVector.size());
+	PointCaseInStashMedical::pointCaseInStashMedical_NC.resize(MatScreenVector.size());
+	PointCaseInStashMedical::pointCaseInStashMedical_C.resize(MatScreenVector.size());
+}
+
+void ItemProcessing::CaseMatching_Medical() {
+	Matching matching;
+
+	matching.CaseMatching(CaseVector::CaseMedical);
 }
 
 void ItemProcessing::MedicalProcess() {
@@ -28,12 +58,6 @@ void ItemProcessing::MedicalProcess() {
 	matching.MedicalMatching(MedicalVector::Medical);
 
 	cleanUpVectorItemsMedical();
-}
-
-void ItemProcessing::MedicalProcess_OneScreen(std::shared_ptr<vector<PointMedical>>& ptr_MedicalVec, cv::Mat MatScreen) {
-	/*Matching matching;
-
-	matching.MedicalMatching_OneScreen(MedicalVector::Medical, ptr_MedicalVec, MatScreen);*/
 }
 
 

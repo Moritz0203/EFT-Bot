@@ -9,12 +9,18 @@ typedef enum e_stash_version {
 
 class LobbyControler {
 	stash_version Stash_Version = EdgeOfDarkness;
+	bool FirstStart = true;
+
+	void SchedulerWorker();
 
 	void StashControler();
 	void ServerControler();
 	void QueueControler();
 
 	void OpenStashView();
+
+	void FirstStartGetData();
+	void FirstStartStashMatching();
 
 public:
 	stash_version GetStashVersion() const {

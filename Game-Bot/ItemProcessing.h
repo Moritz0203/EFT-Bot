@@ -9,8 +9,9 @@ class ItemProcessing {
 
 public:
 	void Init_Vectors();
+
+	void CaseMatching_Medical();	
 	void MedicalProcess();
-	void MedicalProcess_OneScreen(std::shared_ptr<vector<PointMedical>>& ptr_MedicalVec, cv::Mat MatScreen);
 	vector<vector<PointMedical>> OneItemMedicalMatching(string nameOfItem);
 	vector<vector<PointBarter>> OneItemBarterMatching(string nameOfItem);
 };

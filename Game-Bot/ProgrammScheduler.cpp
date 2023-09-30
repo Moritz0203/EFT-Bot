@@ -3,12 +3,12 @@
 #include "getMat.h"
 #include <queue>
 
-std::queue<std::function<void()>> q;
-std::mutex m;
-std::condition_variable c_v;
+//std::queue<std::function<void()>> q;
+//std::mutex m;
+//std::condition_variable c_v;
 
 void ProgrammScheduler::SchedulerWorker() {
-	while (true) {
+	/*while (true) {
 		std::unique_lock<std::mutex> lock(m);
 		c_v.wait(lock, [] {
 			return !q.empty(); });
@@ -20,7 +20,7 @@ void ProgrammScheduler::SchedulerWorker() {
 
 		if (q.size() == 0)
 			break;
-	}
+	}*/
 }
 
 void ProgrammScheduler::Scheduler() {

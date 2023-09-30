@@ -12,33 +12,9 @@
 #include <set>
 #include "c_log.h"
 #include "ItemProcessing.h"
+#include "ItemVectors.h"
 using namespace std;
 using namespace cv;
-
-//std::mutex ItemsProcessing::mtx;
-//std::condition_variable ItemsProcessing::cv;
-//bool ItemsProcessing::ready = false;
-//std::mutex ItemsProcessing::i_M;
-
-
-namespace CaseVector {
-	const vector<PathNameThreshold> Case{
-		{ "CaseImages/AmmoCase.png",										"AmmoCase",					0.79 },//AmmoCase
-		{ "CaseImages/GrenadCase.png",										"GrenadCase",				0.909 },//GrenadCase
-		{ "CaseImages/HolodilnickCase.png",									"HolodilnickCase",			0.909 },//HolodilnickCase
-		{ "CaseImages/MagCase.png",											"MagCase",					0.88 },//MagCase
-		{ "CaseImages/MedCase.png",											"MedCase",					0.92 },//MedCase
-		{ "CaseImages/MoneyCase.png",										"MoneyCase",				0.88 },//MoneyCase
-		{ "CaseImages/JunkCase.png",										"JunkCase",					0.80 },//JunkCase
-		{ "CaseImages/WeaponsCase.png",										"WeaponsCase",				0.88 },//WeaponsCase
-		{ "CaseImages/ItemsCase.png",										"ItemsCase",				0.88 },//ItemsCase
-		{ "CaseImages/THICCcase.png",										"THICCcase",				0.88 },//THICCcase
-	};
-
-	const vector<PathNameThreshold> CaseMedical{
-		{ "CaseImages/MedCase.png",											"MedCase",					0.92 },//MedCase
-	};
-}
 
 
 void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching constructor definition if only MedCase is needed, Make a new class for PointCaseInStashMedical
@@ -48,8 +24,6 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 	Matching matching(730, 300);
 	
 	c_log::Start("CaseOperator                    ", c_log::LCyan, " | [Thread]", c_log::White, "Parent Thread", c_log::LCyan, "StartUp_Thread");
-	
-	matching.CaseMatching(CaseVector::CaseMedical);
 
 	cleanUpVectorCase();
 
@@ -77,7 +51,7 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 			Rect Rec(730, 300, MatScreen.cols - 1460, MatScreen.rows - 600);
 			Mat MatScreenTemp = MatScreen(Rec);
 
-			itemProcessing.MedicalProcess_OneScreen(ptr_MedicalVec, MatScreen);
+			matching.MedicalMatching_OneScreen(MedicalVector::Medical, ptr_MedicalVec, MatScreenTemp);
 			Keyboard::KeyboardInput(0x1B);// virtual-key code for the "ESC" key
 
 			moved = true;

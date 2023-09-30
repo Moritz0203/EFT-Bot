@@ -28,10 +28,11 @@ public:
 	string NameOfItem = {};
 	uint16_t BuyQuantity = {};
 	uint16_t HowMuchToMove = {};
+	uint16_t MinHp = {};
 	vector<PointerStack> pointerStack_vec = {};
 
 	MovPrefix();
-	MovPrefix(string NameOfItem, vector<PointerStack> pointerStack_vec, uint16_t BuyQuantity, uint16_t HowMuchToMov);
+	MovPrefix(string NameOfItem, vector<PointerStack> pointerStack_vec, uint16_t BuyQuantity, uint16_t HowMuchToMov, uint16_t MinHp);
 
 	//static std::vector<MovPrefix> movPrefix;
 };

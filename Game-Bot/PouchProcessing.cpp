@@ -5,6 +5,7 @@
 #include "DistributorForMatching.h"
 #include "ItemProcessing.h"
 #include "StashObject.h"
+#include "ItemMoving.h"
 
 void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 	const uint16_t width = 64, height = 64;
@@ -33,6 +34,7 @@ void PouchProcessing::PouchOperator() {
 	}
 	else {
 		PouchMatching();
+		PouchItemCheck();
 	}
 
 }
@@ -88,5 +90,22 @@ void PouchProcessing::Pouch_FirstStart() {
 
 	default:
 		break;
+	}
+}
+
+void PouchProcessing::PouchItemCheck() {
+	ItemMoving itemMoving;
+
+	for (MovPrefix Prefix : Pouch::pouch.Prefix) {
+		for (PointMedical item : Pouch::pouch.ItemsInPouch) {
+			if(Prefix.NameOfItem != item.nameOfItem)
+				continue;	
+
+			if (item.hpItem < Prefix.MinHp) {
+				MouseAndKeyboard::KeyboardInput_MovAndPress(0x11, item.point); // virtual - key code for the "CTRL" key
+
+				itemMoving.MovOneItem(Prefix);
+			}
+		}
 	}
 }

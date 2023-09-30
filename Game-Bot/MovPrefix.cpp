@@ -21,11 +21,12 @@ MovPrefix::MovPrefix()
 {
 }
 
-MovPrefix::MovPrefix(string NameOfItem, vector<PointerStack> pointerStack_vec, uint16_t BuyQuantity, uint16_t HowMuchToMov)
+MovPrefix::MovPrefix(string NameOfItem, vector<PointerStack> pointerStack_vec, uint16_t BuyQuantity, uint16_t HowMuchToMov, uint16_t MinHp)
 {
 	this->NameOfItem = NameOfItem;
 	this->pointerStack_vec = pointerStack_vec;
 	this->BuyQuantity = BuyQuantity;
+	this->MinHp = MinHp;
 	this->HowMuchToMove = HowMuchToMov;
 }
 

@@ -42,6 +42,7 @@ void PrefixProcessing::BuyOperator(vector<AssignPrefix> BuyPrefix) {
 		movPrefix_temp.NameOfItem = Prefix.NameOfItem;
 		movPrefix_temp.BuyQuantity = Prefix.BuyQuantity;
 		movPrefix_temp.HowMuchToMove = Prefix.HowMuchToMove;
+		movPrefix_temp.MinHp = Prefix.MinHp;
 		
 		for (PathNameThresholdItemSizeMaxHP ItemName : MedicalVector::Medical) {
 			if (ItemName.Name == Prefix.NameOfItem) {
@@ -91,6 +92,7 @@ void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove
 			movPrefix.NameOfItem = Prefix.NameOfItem;
 			movPrefix.BuyQuantity = Prefix.BuyQuantity;
 			movPrefix.HowMuchToMove = Prefix.HowMuchToMove;
+			movPrefix.MinHp = Prefix.MinHp;
 
 			for (int i = 0; i < PointMedical::pointMedical_C.size(); i++) {
 

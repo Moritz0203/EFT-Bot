@@ -34,6 +34,7 @@ class PouchProcessing {
 
 	void ShiftOutItems(uint8_t rows, uint8_t cols);
 	void Pouch_FirstStart();
+	void PouchItemCheck();
 
 public:
 	void PouchMatching();

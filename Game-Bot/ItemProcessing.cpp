@@ -23,7 +23,7 @@ namespace CaseVector {
 	};
 
 	const vector<PathNameThreshold> CaseMedical{
-		{ "CaseImages/MedCase.png",											"MedCase",					0.92 },//MedCase
+		{ "CaseImages/MedCase.png",											"MedCase",					0.93 },//MedCase
 	};
 }
 

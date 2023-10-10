@@ -25,15 +25,17 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 	
 	c_log::Start("CaseOperator_Medical");
 
+	cout << PointCaseInStashMedical::pointCaseInStashMedical_NC.size() << endl;
+
 	cleanUpVectorCase_Medical();
 
 	for (int i = 0; i < PointCaseInStashMedical::pointCaseInStashMedical_C.size(); i++) {
 
 		if (PointCaseInStashMedical::pointCaseInStashMedical_C[i].size() == 0)
-			cout << "empty Page: " << i << endl;
+			cout << "---- " << "empty Page: " << i << endl;
 
 		for (int i2 = 0; i2 < PointCaseInStashMedical::pointCaseInStashMedical_C[i].size(); i2++) {
-			cout << PointCaseInStashMedical::pointCaseInStashMedical_C[i][i2].nameOfCase << " " << PointCaseInStashMedical::pointCaseInStashMedical_C[i][i2].page << endl;
+			cout << "---- " << PointCaseInStashMedical::pointCaseInStashMedical_C[i][i2].nameOfCase << " " << PointCaseInStashMedical::pointCaseInStashMedical_C[i][i2].page << endl;
 		}
 	}
 

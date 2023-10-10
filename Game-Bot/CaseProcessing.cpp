@@ -209,6 +209,7 @@ struct POINT_PAGE {
 };
 
 
+
 void CaseProcessing::cleanUpVectorCase() {
 	vector<PointCaseInStash> temp;
 	POINT_PAGE point_page{};

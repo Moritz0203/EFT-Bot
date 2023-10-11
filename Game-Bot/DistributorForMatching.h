@@ -46,7 +46,7 @@ public:
 
 	//void AmmunitionMatching(vector<PathNameThreshold> input);
 
-	void CaseMatching(vector<PathNameThreshold> input);
+	void CaseMatching(vector<PathNameThreshold> input, vector<vector<PointCase>>& vec);
 
 	//void BarterMatching(vector<PathNameThresholdItemSize> input, vector<vector<PointBarter>> &input_vec);
 

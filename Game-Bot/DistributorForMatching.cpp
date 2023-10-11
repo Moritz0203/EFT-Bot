@@ -202,7 +202,7 @@ vector<POINT> Matching::removeDuplicates_Rec(vector<POINT>& points) {
 //}
 
 
-void Matching::CaseMatching(vector<PathNameThreshold> input) {
+void Matching::CaseMatching(vector<PathNameThreshold> input, vector<vector<PointCase>>& vec) {
 	Mat templ;
 	GetMat getMat;
 
@@ -212,7 +212,7 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 	vector<POINT> ReturnDataCase;
 	vector<POINT> ReturnDataCase_Clean;
 	vector<vector<POINT>> freeSlots_empty{};
-	vector<PointCaseInStash> pointCasetempStashTemp;
+	vector<PointCase> pointCasetempStashTemp;
 	vector<PointItem> PointItem_empty{};
 	int page = 0;
 
@@ -238,14 +238,14 @@ void Matching::CaseMatching(vector<PathNameThreshold> input) {
 					cout << "Case: " << input[i].Name << " Page: " << page << endl;
 
 					//if (checkSecondLastChar(tagCase)) {
-						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], input[i].Name, "", templ.rows, templ.cols, page, PointItem_empty);
+						pointCasetempStashTemp.emplace_back(ReturnDataCase_Clean[i3], input[i].Name, "", templ.rows, templ.cols, page);
 					//}
 				}
 				ReturnDataCase.clear();
 				ReturnDataCase_Clean.clear();
 			}
 		}
-		PointCaseInStash::pointCaseInStash_NC.emplace_back(pointCasetempStashTemp);
+		vec.emplace_back(pointCasetempStashTemp);
 		pointCasetempStashTemp.clear();
 		page++;
 	}

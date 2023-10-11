@@ -48,13 +48,34 @@ void ItemProcessing::Init_Vectors() {
 
 void ItemProcessing::CaseMatching_Medical() {
 	Matching matching;
+	vector<vector<PointCase>> vec;
 
 	{
 		std::lock_guard<std::mutex> lock(ItemProcessing_Mutex);
 		c_log::Start("CaseMatching_Medical");
 	}
 
-	matching.CaseMatching(CaseVector::CaseMedical);
+	matching.CaseMatching(CaseVector::CaseMedical, vec);
+
+	for (const auto& innerVec : vec) {
+		std::vector<PointCaseInStashMedical> innerMedicalVec; 
+
+		for (const PointCase& pointCase : innerVec) {
+			PointCaseInStashMedical pointCaseMedical;
+
+			pointCaseMedical.point = pointCase.point;
+			pointCaseMedical.nameOfCase = pointCase.nameOfCase;
+			pointCaseMedical.tagCase = pointCase.tagCase;
+			pointCaseMedical.heightTempl = pointCase.heightTempl;
+			pointCaseMedical.widthTempl = pointCase.widthTempl;
+			pointCaseMedical.page = pointCase.page;
+			pointCaseMedical.ItemsInCase = {};
+
+			innerMedicalVec.push_back(pointCaseMedical);
+		}
+
+		PointCaseInStashMedical::pointCaseInStashMedical_NC.push_back(innerMedicalVec);
+	}
 
 	c_log::End("CaseMatching_Medical");	
 }

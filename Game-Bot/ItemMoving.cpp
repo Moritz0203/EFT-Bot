@@ -15,7 +15,7 @@ void ItemMoving::MovFromStash(PointerStack prefix) {
 	checksPublic ChecksPublic;
 	const int keyforInput = 0x28;// virtual-key code for the "DOWN ARROW" key
 
-	if (prefix.pointItem.page == lastPage) {
+	/*if (prefix.pointItem.page == lastPage) {
 		ChecksPublic.ClickScrollbarPositions();
 	}
 	else if (prefix.pointItem.page < lastPage) {
@@ -25,13 +25,13 @@ void ItemMoving::MovFromStash(PointerStack prefix) {
 			Keyboard::KeyboardInput(keyforInput);
 		}
 	}
-	else {
+	else {*/
 		ChecksPublic.CheckScrollbarPositions();
 		for (int i = 0; i < prefix.pointItem.page; i++) {
 			Sleep(400);
 			Keyboard::KeyboardInput(keyforInput);
 		}
-	}
+	//}
 	Sleep(100);
 	
 	POINT point_a {};

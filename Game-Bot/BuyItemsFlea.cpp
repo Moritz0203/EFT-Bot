@@ -29,12 +29,12 @@ void BuyItemsFlea::TranslateNameAndPasteIn_Medical(const char* nameOfItem) {
 	}
 }
 
-void BuyItemsFlea::BuyItem(uint8_t quantity) {
+void BuyItemsFlea::BuyItem(int quantity) {
 	const Mat templ_BuySuccessful = imread("ObjectImages/BuySuccessful.png");
 	const Mat templ_SecurityCheck = imread("ObjectImages/SecurityCheck.png");
 	const HWND hWND = GetMat::FindeWindow();
 
-	while (quantity == 0) {
+	while (quantity != 0) {
 		SetForegroundWindow(hWND);
 		Sleep(5);//Delete later
 		const Mat MatScreen = GetMat::getMat(hWND);

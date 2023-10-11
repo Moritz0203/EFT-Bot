@@ -67,8 +67,8 @@ int main() {
 
 
 
-	LobbyControler lobbyControler;
-	lobbyControler.Controler();
+	/*LobbyControler lobbyControler;
+	lobbyControler.Controler();*/
 
 
 
@@ -92,4 +92,9 @@ int main() {
 	//prefix.pointItem.nameOfItem = "Grizzly";
 
 	//itemMoving.MovFromStash(prefix);
+
+
+	/*BuyItemsFlea buyItemsFlea;
+
+	buyItemsFlea.EasyBuyItemsAPI("Grizzly", 1);*/
 }

@@ -22,7 +22,7 @@ public:
 class BuyItemsFlea {
 	void TranslateNameAndPasteIn(const char* nameOfItem);
 	void TranslateNameAndPasteIn_Medical(const char* nameOfItem);
-	void BuyItem(uint8_t quantity);
+	void BuyItem(int quantity);
 
 	SecurityCheck securityCheck;
 	bool ExplicitlyMoreItems = false;

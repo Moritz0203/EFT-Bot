@@ -16,7 +16,7 @@ namespace MedicalVector {
 		{ "itemImages/MedicalImages/Medical/CMS.png",						"CMS",			"CMS surgical kit",								0.85, 2, 5	 },//CMS
 		{ "itemImages/MedicalImages/Medical/Esmarch.png",					"Esmarch",		"Esmarch tourniquet",							0.85, 1, 1	 },//Esmarch
 		{ "itemImages/MedicalImages/Medical/GoldenStar.png",				"GoldenStar",	"Golden Star Balsam",							0.84, 1, 10	 },//GoldenStar
-		{ "itemImages/MedicalImages/Medical/Grizzly.png",					"Grizzly",		"Grizzly medical kit",							0.85, 4, 1800},//Grizzly
+		{ "itemImages/MedicalImages/Medical/Grizzly.png",					"Grizzly",		"Grizzly medical kit",							0.837, 4, 1800},//Grizzly
 		{ "itemImages/MedicalImages/Medical/Hemostatic.png",				"Hemostatic",	"CALOK-B hemostatic applicator",				0.85, 1, 3	 },//Hemostatic
 		{ "itemImages/MedicalImages/Medical/Ibuprofen.png",					"Ibuprofen",	"Ibuprofen painkillers",						0.85, 1, 15	 },//Ibuprofen
 		{ "itemImages/MedicalImages/Medical/IFAK.png",						"IFAK",			"IFAK individual first aid kit",				0.85, 1, 300 },//IFAK

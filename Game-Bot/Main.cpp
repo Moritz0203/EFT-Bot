@@ -10,6 +10,8 @@
 #include "c_log.h"
 #include "BuyItemsFlea.h"
 #include "LobbyControler.h"
+#include "ItemMoving.h"
+#include "StashObject.h"
 
 // HighCard | High T
 // SecurityCheck Items Barter / Medical / Food 
@@ -65,4 +67,27 @@ int main() {
 
 	LobbyControler lobbyControler;
 	lobbyControler.Controler();
+
+
+
+	//ItemMoving itemMoving;
+	//PointerStack prefix{};
+
+	//const HWND hWND = GetMat::FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(5);//Delete later
+	//const Mat MatScreen = GetMat::getMat(hWND);
+
+	//POINT point = TemplateMatching::templateMatchingObjects(MatScreen, imread("itemImages/MedicalImages/Medical/Grizzly.png"), 0.85);
+
+	//Pouch::pouch.pointPouch = TemplateMatching::templateMatchingObjects(MatScreen, imread("CaseImages/Secure_container_Gamma.png"), 0.90);
+
+	//prefix.pointItem.page = 1;
+	//prefix.pointItem.point.x = point.x;
+	//prefix.pointItem.point.y = point.y;
+	//prefix.pointItem.widthTempl = 127;
+	//prefix.pointItem.heightTempl = 127;	
+	//prefix.pointItem.nameOfItem = "Grizzly";
+
+	//itemMoving.MovFromStash(prefix);
 }

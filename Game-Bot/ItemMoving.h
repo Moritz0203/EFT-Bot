@@ -3,11 +3,11 @@
 
 
 class ItemMoving {
-	void MovFromStash(PointerStack& prefix);
-	void MovFromCase(PointerStack& prefix);
+	void MovFromCase(PointerStack prefix);
 
 	uint8_t lastPage = 0;
 public:
+	void MovFromStash(PointerStack prefix);
 
 	void MovOneItem(MovPrefix& movPrefix);
 

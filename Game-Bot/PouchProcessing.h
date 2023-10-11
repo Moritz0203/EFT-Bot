@@ -30,7 +30,7 @@ class PouchProcessing {
 	};
 
 	pouch_version Pouch_Version = Default;
-	bool FirstStart = true;
+	static bool FirstStart;
 
 	void ShiftOutItems(uint8_t rows, uint8_t cols);
 	void Pouch_FirstStart();

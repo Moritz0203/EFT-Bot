@@ -25,8 +25,6 @@ void CaseProcessing::CaseOperator_Medical() { // TODO: add at matching construct
 	
 	c_log::Start("CaseOperator_Medical");
 
-	cout << PointCaseInStashMedical::pointCaseInStashMedical_NC.size() << endl;
-
 	cleanUpVectorCase_Medical();
 
 	for (int i = 0; i < PointCaseInStashMedical::pointCaseInStashMedical_C.size(); i++) {

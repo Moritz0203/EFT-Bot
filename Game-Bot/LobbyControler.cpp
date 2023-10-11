@@ -97,24 +97,24 @@ void LobbyControler::FirstStartStashMatching() {
 	TakeScreenShots();
 
 	std::thread ItemProcessing_Thread1(&LobbyControler::SchedulerWorker, &lobbyControler);
-	std::thread ItemProcessing_Thread2(&LobbyControler::SchedulerWorker, &lobbyControler);
+	//std::thread ItemProcessing_Thread2(&LobbyControler::SchedulerWorker, &lobbyControler);
 
 	{//new scope to delete the mutex at the end
 		std::lock_guard<std::mutex> lock(m);
 		q.push(std::bind(&ItemProcessing::Init_Vectors, &itemProcessing));
 		q.push(std::bind(&ItemProcessing::MedicalProcess, &itemProcessing));
-		q.push(std::bind(&ItemProcessing::CaseMatching_Medical, &itemProcessing));
+		//q.push(std::bind(&ItemProcessing::CaseMatching_Medical, &itemProcessing));
 	}
 	c_v.notify_all();
 
 	ItemProcessing_Thread1.join();
 	c_log::Thread("ItemProcessing_Thread1 join");
 
-	ItemProcessing_Thread2.join();
-	c_log::Thread("ItemProcessing_Thread2 join");
+	/*ItemProcessing_Thread2.join();
+	c_log::Thread("ItemProcessing_Thread2 join");*/
 
 
-	caseProcessing.CaseOperator_Medical();
+	//caseProcessing.CaseOperator_Medical();
 
 	pouchProcessing.PouchOperator();
 

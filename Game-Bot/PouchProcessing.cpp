@@ -9,6 +9,8 @@
 #include "ItemVectors.h"
 #include "c_log.h"
 
+bool PouchProcessing::FirstStart = true;
+
 void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 	const uint16_t width = 64, height = 64;
 	uint16_t YStart = 620, XStart = 800;
@@ -31,9 +33,9 @@ void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 void PouchProcessing::PouchOperator() {
 	c_log::Start("PouchOperator");
 
-	if (FirstStart) {
+	if (PouchProcessing::FirstStart) {
 		Pouch_FirstStart();
-		FirstStart = false;
+		PouchProcessing::FirstStart = false;
 		c_log::Info("PouchOperator FirstStart");
 	}
 	else {

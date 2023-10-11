@@ -111,7 +111,8 @@ void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove
 					if(item.hpItem < Prefix.MinHp) 
 						continue;
 
-					
+					//cout << item.nameOfItem << endl;
+
 					movPrefix.pointerStack_vec.push_back({ {}, item });
 
 					found = true;
@@ -137,16 +138,18 @@ void PrefixProcessing::PrefixOperator() {//build check if item in poch has inove
 				}	
 			}
 
-			if(!found)
+			if (found) {
 				Pouch::pouch.Prefix.push_back(movPrefix);
+				movPrefix.pointerStack_vec.clear();
+			}
 		}
 
-
-		BuyPrefix.push_back(Prefix);
+		if(!found)
+			BuyPrefix.push_back(Prefix);
 	}
 		
-
-	BuyOperator(BuyPrefix);
+	if(!BuyPrefix.empty())
+		BuyOperator(BuyPrefix);
 
 	c_log::End("PrefixOperator");
 }

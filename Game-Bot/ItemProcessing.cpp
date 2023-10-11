@@ -23,7 +23,7 @@ namespace CaseVector {
 	};
 
 	const vector<PathNameThreshold> CaseMedical{
-		{ "CaseImages/MedCase.png",											"MedCase",					0.93 },//MedCase
+		{ "CaseImages/MedCase.png",											"MedCase",					0.925 },//MedCase
 	};
 }
 
@@ -40,7 +40,7 @@ void ItemProcessing::Init_Vectors() {
 	//PointMedical::pointMedical_NC.resize(MatScreenVector.size());
 	PointMedical::pointMedical_C.resize(MatScreenVector.size());
 	//PointCaseInStashMedical::pointCaseInStashMedical_NC.resize(MatScreenVector.size());
-	PointCaseInStashMedical::pointCaseInStashMedical_C.resize(MatScreenVector.size());
+	//PointCaseInStashMedical::pointCaseInStashMedical_C.resize(MatScreenVector.size());
 
 	//cout << "PointMedical::pointMedical_NC.size(): " << PointMedical::pointMedical_NC.size() << endl;
 	//cout << "PointMedical::pointMedical_C.size(): " << PointMedical::pointMedical_C.size() << endl;

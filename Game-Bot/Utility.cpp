@@ -176,6 +176,8 @@ void findFreeSlots::Print_Out_Case_EmptySlots() {
 }
 
 
+
+
 //bool Check_for_Space::One_Slot(shared_ptr<vector<vector<POINT>>>& ptr_vector) {
 //	for (vector<POINT>& row : *ptr_vector) {
 //		for (auto iterrator = row.begin(); iterrator != row.end(); ++iterrator) {
@@ -393,3 +395,34 @@ void findFreeSlots::Print_Out_Case_EmptySlots() {
 //			return false;
 //	}
 //}
+
+
+
+
+BothTimes TarkovTime::realTimeToTarkovTime() {
+	std::tm realTime = getRealTime();
+	std::time_t unixTime = std::mktime(const_cast<std::tm*>(&realTime));
+	BothTimes bothTimes;
+
+	const long long oneDay = hrs(24);
+	const long long russia = hrs(3);
+	long long offset = russia;
+
+	long long tarkovTime_LL = (offset + (unixTime * tarkovRatio)) % oneDay;
+
+	std::tm tarkovTime = {};
+	if (localtime_s(&tarkovTime, &tarkovTime_LL) == 0) {
+		tarkovTime.tm_hour += 1;
+
+		bothTimes.left = tarkovTime;
+
+		if(tarkovTime.tm_hour > 12)
+			tarkovTime.tm_hour -= 12;
+		else
+			tarkovTime.tm_hour += 12;
+
+		bothTimes.right = tarkovTime;
+
+		return bothTimes;
+	}
+}

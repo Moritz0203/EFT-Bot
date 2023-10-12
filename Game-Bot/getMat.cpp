@@ -65,14 +65,14 @@ cv::Mat GetMat::getMat(HWND hWND) {
 	//Close the handle for the file that was created
 	CloseHandle(bmp_file_handle);
 
-	Mat mat = cv::imread("TempIMG.png");
-	return  mat;
-
 	DeleteDC(hdc);
 	DeleteObject(hbmp);
 	ReleaseDC(HWND_DESKTOP, hdcScreen);
 	ReleaseDC(hWND, hdcScreen);
 	delete[] bmp_pixels;
+	
+	Mat mat = cv::imread("TempIMG.png");
+	return  mat;
 }
 
 std::vector<cv::Mat> GetMat::MatScreenVector;

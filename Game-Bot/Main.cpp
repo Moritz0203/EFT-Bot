@@ -70,11 +70,11 @@ int main() {
 	/*LobbyControler lobbyControler;
 	lobbyControler.Controler();*/
 
-	while (true) {
+	/*while (true) {
 		BothTimes bothTimes = TarkovTime::realTimeToTarkovTime();
 		cout << bothTimes.left.tm_hour << " " << bothTimes.left.tm_min << " " << bothTimes.left.tm_sec << " -- " << bothTimes.right.tm_hour << " " << bothTimes.right.tm_min << " " << bothTimes.right.tm_sec << endl;
 		Sleep(1000);	
-	}
+	}*/
 
 	//ItemMoving itemMoving;
 	//PointerStack prefix{};

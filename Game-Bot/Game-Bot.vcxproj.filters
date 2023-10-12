@@ -66,6 +66,12 @@
     <Filter Include="Source Files\GameBot\Lobby-Overall\Matching-Moving\Processing">
       <UniqueIdentifier>{55f0f60d-fb0a-4f67-a8e8-8d76bb721949}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameBot\Lobby-Overall\Queue-PrepareGame">
+      <UniqueIdentifier>{94b79aee-d16e-41e9-9f8b-d6d950abd363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameBot\Lobby-Overall\Queue-PrepareGame">
+      <UniqueIdentifier>{9a4cb876-89de-460f-af2f-2688874a20fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -133,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="StashObject.cpp">
       <Filter>Source Files\GameBot\TypeClass</Filter>
+    </ClCompile>
+    <ClCompile Include="OueueProcessing.cpp">
+      <Filter>Source Files\GameBot\Lobby-Overall\Queue-PrepareGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +216,9 @@
     </ClInclude>
     <ClInclude Include="StashObject.h">
       <Filter>Header Files\GameBot\TypeClass</Filter>
+    </ClInclude>
+    <ClInclude Include="OueueProcessing.h">
+      <Filter>Header Files\GameBot\Lobby-Overall\Queue-PrepareGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

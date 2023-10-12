@@ -10,6 +10,11 @@ void OueueProcessing::ClickReadyButton() {
 
 }
 
+void OueueProcessing::ClickEscapeFromTarkov() {
+
+
+}
+
 void OueueProcessing::ClickOnMap() {
 
 

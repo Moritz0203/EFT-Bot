@@ -53,5 +53,6 @@ class TarkovTime {
     }
 
 public:
+
     static BothTimes realTimeToTarkovTime();
 };

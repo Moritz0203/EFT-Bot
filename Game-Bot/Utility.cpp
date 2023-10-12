@@ -421,7 +421,6 @@ BothTimes TarkovTime::realTimeToTarkovTime() {
 		else
 			bothTimes.left = tarkovTime;
 
-
 		if(tarkovTime.tm_hour >= 12)
 			tarkovTime.tm_hour -= 12;
 		else

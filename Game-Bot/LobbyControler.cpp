@@ -147,8 +147,21 @@ void LobbyControler::ServerControler() {// Later
 }
 
 void LobbyControler::QueueControler() {// next to do 
+	// click on Escape from Tarkov button
 
+	// click on Next button
 
+	// Select map / Shoreline / Woods / Interchange 
+
+	// Select Time
+
+	// Click to times on Next button | if with insurance 1 time than Insurance button and 1 time Next button
+
+	// Click on Ready button
+
+	// wait for game start
+	
+	// give control to GameControler
 }
 
 

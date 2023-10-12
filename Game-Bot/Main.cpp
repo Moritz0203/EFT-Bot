@@ -67,8 +67,9 @@ int main() {
 
 
 
-	/*LobbyControler lobbyControler;
-	lobbyControler.Controler();*/
+	LobbyControler lobbyControler;
+	lobbyControler.Controler();
+
 
 
 

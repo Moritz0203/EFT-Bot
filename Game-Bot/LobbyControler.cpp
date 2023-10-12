@@ -153,7 +153,7 @@ void LobbyControler::QueueControler() {// next to do
 
 	// Select map / Shoreline / Woods / Interchange 
 
-	// Select Time
+	// Select Time / make a night day check
 
 	// Click to times on Next button | if with insurance 1 time than Insurance button and 1 time Next button
 

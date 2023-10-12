@@ -414,9 +414,15 @@ BothTimes TarkovTime::realTimeToTarkovTime() {
 	if (localtime_s(&tarkovTime, &tarkovTime_LL) == 0) {
 		tarkovTime.tm_hour += 1;
 
-		bothTimes.left = tarkovTime;
+		if (tarkovTime.tm_hour == 24) {
+			tarkovTime.tm_hour -= 24;
+			bothTimes.left = tarkovTime;
+		}
+		else
+			bothTimes.left = tarkovTime;
 
-		if(tarkovTime.tm_hour > 12)
+
+		if(tarkovTime.tm_hour >= 12)
 			tarkovTime.tm_hour -= 12;
 		else
 			tarkovTime.tm_hour += 12;

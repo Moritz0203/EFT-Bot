@@ -3,7 +3,7 @@
 #include "MovPrefix.h"
 #include "TemplateMatching.h"
 #include "InputMK.h"
-#include "Checks.h"
+#include "Utility.h"
 #include "getMat.h"
 #include "PointCase.h"
 #include "StashObject.h"

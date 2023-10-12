@@ -129,7 +129,7 @@
   <ItemGroup>
     <ClCompile Include="BuyItemsFlea.cpp" />
     <ClCompile Include="CaseProcessing.cpp" />
-    <ClCompile Include="Checks.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="LobbyControler.cpp" />
     <ClCompile Include="GameControler.cpp" />
     <ClCompile Include="DistributorForMatching.cpp" />
@@ -153,7 +153,7 @@
   <ItemGroup>
     <ClInclude Include="BuyItemsFlea.h" />
     <ClInclude Include="CaseProcessing.h" />
-    <ClInclude Include="Checks.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="LobbyControler.h" />
     <ClInclude Include="GameControler.h" />
     <ClInclude Include="c_log.h" />

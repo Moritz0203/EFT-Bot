@@ -95,7 +95,7 @@
     <ClCompile Include="GameControler.cpp">
       <Filter>Source Files\GameBot\InGameFunktions</Filter>
     </ClCompile>
-    <ClCompile Include="Checks.cpp">
+    <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PointCase.cpp">
@@ -160,7 +160,7 @@
     <ClInclude Include="GameControler.h">
       <Filter>Header Files\GameBot\InGameFunktions</Filter>
     </ClInclude>
-    <ClInclude Include="Checks.h">
+    <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PointCase.h">

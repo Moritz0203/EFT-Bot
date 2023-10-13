@@ -80,6 +80,18 @@ void LobbyControler::CloseStashView() {
 	Sleep(2500);
 }
 
+void LobbyControler::WaitForGameStart() {
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	std::this_thread::sleep_for(std::chrono::minutes(2));
+
+	while (true) {
+		GetMat::getMatWithRect(hWND , RECT{ 0, 0, 1920, 1080 });
+
+
+	}
+}
+
 void LobbyControler::FirstStartGetData() {
 	ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
 
@@ -127,6 +139,8 @@ void LobbyControler::FirstStartStashMatching() {
 
 
 
+
+
 void LobbyControler::StashControler() {
 	PouchProcessing pouchProcessing(Gamma);//later get from config file or form server 
 
@@ -147,7 +161,7 @@ void LobbyControler::ServerControler() {// Later
 
 }
 
-void LobbyControler::QueueControler() {// next to do 
+void LobbyControler::QueueControler() {
 	OueueProcessing queueProcessing(Shoreline, false);//later get from config file or form server 
 
 	queueProcessing.OueueProcess();

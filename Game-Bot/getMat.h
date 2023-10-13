@@ -4,6 +4,7 @@ using namespace std;
 
 struct GetMat {
 	static cv::Mat getMat(HWND hWND);
+	static cv::Mat getMatWithRect(HWND hWND, RECT rect);
 
 	void TakeScreenshots(int Screens);
 

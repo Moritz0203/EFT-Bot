@@ -19,6 +19,7 @@ class LobbyControler {
 
 	void OpenStashView();
 	void CloseStashView();
+	void WaitForGameStart();
 
 	void FirstStartGetData();
 	void FirstStartStashMatching();

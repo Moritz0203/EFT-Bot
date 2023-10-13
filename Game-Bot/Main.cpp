@@ -103,8 +103,15 @@ int main() {
 	buyItemsFlea.EasyBuyItemsAPI("Grizzly", 1);*/
 
 
-	//const HWND hWND = GetMat::FindeWindow();
-	//SetForegroundWindow(hWND);
-	//Sleep(10);//Delete later
-	//const Mat MatScreen = GetMat::getMat(hWND);
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(10);//Delete later
+
+	const char* image_window = "Source Image";
+	namedWindow(image_window, WINDOW_AUTOSIZE);
+
+	Mat MatScreen = GetMat::getMatWithRect(hWND, RECT{ 0, 0, 1920, 1080 });
+
+	cv::imshow(image_window, MatScreen);
+	waitKey(0);
 }

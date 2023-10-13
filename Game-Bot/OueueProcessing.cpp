@@ -108,7 +108,7 @@ void OueueProcessing::Incurance() {
 	MatScreen = GetMat::getMat(hWND);
 
 	Rect Rec(1650, 850, MatScreen.cols - 1783, MatScreen.rows - 1010);
-	int number = TextMatching::textMatching_OnlyNumbers(MatScreen, Rec);
+	int number = TextMatching::textMatching_OnlyNumbers(MatScreen, Rec);// later push to server 
 
 	const Mat templ_InsureButton = imread("ObjectImages/InsureButton.png");
 
@@ -125,6 +125,28 @@ void OueueProcessing::Incurance() {
 
 
 void OueueProcessing::OueueProcess() {
-	
+	ClickEscapeFromTarkov();
+	ClickNextButton();
+	ClickOnMap();	
 
+	if (MapVector[MapToRun].NoTimeLimit == true) {
+		ClickReadyButton();
+	} 
+	else {
+		SelectTime();
+		
+		if(NeedIncurance != true) {
+			ClickReadyButton();
+		}
+		else {
+			ClickNextButton();
+			ClickNextButton();
+		}
+	}
+
+	if (NeedIncurance == true)
+		Incurance();
+
+	ClickNextButton();	
+	ClickReadyButton();
 }

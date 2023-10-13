@@ -12,6 +12,7 @@
 #include <queue>
 #include "CaseProcessing.h"
 #include "PouchProcessing.h"
+#include "OueueProcessing.h"
 #include "ItemMoving.h"
 #include "c_log.h"
 
@@ -147,17 +148,10 @@ void LobbyControler::ServerControler() {// Later
 }
 
 void LobbyControler::QueueControler() {// next to do 
-	// click on Escape from Tarkov button
+	OueueProcessing queueProcessing(Shoreline, false);//later get from config file or form server 
 
-	// click on Next button
+	queueProcessing.OueueProcess();
 
-	// Select map / Shoreline / Woods / Interchange 
-
-	// Select Time / make a night day check 
-
-	// Click to times on Next button | if with insurance 1 time than Insurance button and 1 time Next button
-
-	// Click on Ready button
 
 	// wait for game start
 	

@@ -105,14 +105,14 @@ void OueueProcessing::Incurance() {
 
 	Sleep(100);
 
-
 	MatScreen = GetMat::getMat(hWND);
 
-	// read in cost of insurance
+	Rect Rec(1650, 850, MatScreen.cols - 1783, MatScreen.rows - 1010);
+	int number = TextMatching::textMatching_OnlyNumbers(MatScreen, Rec);
 
 	const Mat templ_InsureButton = imread("ObjectImages/InsureButton.png");
 
-	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ_InsureButton, 0.90);
+	point = TemplateMatching::templateMatchingObjects(MatScreen, templ_InsureButton, 0.90);
 	point.y = (templ_InsureButton.rows / 2) + point.y;
 	point.x = (templ_InsureButton.cols / 2) + point.x;
 

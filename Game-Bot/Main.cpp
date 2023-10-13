@@ -101,4 +101,10 @@ int main() {
 	/*BuyItemsFlea buyItemsFlea;
 
 	buyItemsFlea.EasyBuyItemsAPI("Grizzly", 1);*/
+
+
+	//const HWND hWND = GetMat::FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(10);//Delete later
+	//const Mat MatScreen = GetMat::getMat(hWND);
 }

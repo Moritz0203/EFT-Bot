@@ -36,7 +36,7 @@ __forceinline bool Matching::checkSecondLastChar(string& tagCase) {
 	return false;
 }
 
-__forceinline int extractAndConvertToInt(std::string input, uint16_t MaxHp) {
+int extractAndConvertToInt(std::string input, uint16_t MaxHp) {
 	size_t slashPos = input.find('/');
 
 	std::string numberPart = input.substr(0, slashPos);

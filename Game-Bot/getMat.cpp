@@ -75,16 +75,13 @@ cv::Mat GetMat::getMat(HWND hWND) {
 	return  mat;
 }
 
-cv::Mat GetMat::getMatWithRect(HWND hWND, RECT rect) {
-	int width = rect.right - rect.left;
-	int height = rect.bottom - rect.top;
-
+cv::Mat GetMat::getMatWithRect(HWND hWND, POINT pointStart, int width, int height) {
 	HDC hdcScreen = GetDC(HWND_DESKTOP);
 	HDC hdc = CreateCompatibleDC(hdcScreen);
 	HBITMAP hbmp = CreateCompatibleBitmap(hdcScreen, width, height);
 	SelectObject(hdc, hbmp);
 
-	BitBlt(hdc, 0, 0, width, height, hdcScreen, rect.left, rect.top, SRCCOPY);
+	BitBlt(hdc, 0, 0, width, height, hdcScreen, pointStart.x, pointStart.y, SRCCOPY);
 
 	BITMAPINFO bmp_info = { 0 };
 	bmp_info.bmiHeader.biSize = sizeof(bmp_info.bmiHeader);

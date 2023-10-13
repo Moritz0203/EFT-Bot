@@ -103,17 +103,23 @@ int main() {
 	buyItemsFlea.EasyBuyItemsAPI("Grizzly", 1);*/
 
 
-	const HWND hWND = GetMat::FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(10);//Delete later
+	//const HWND hWND = GetMat::FindeWindow();
+	////SetForegroundWindow(hWND);
+	//Sleep(10);//Delete later
 
-	const char* image_window = "Source Image";
-	namedWindow(image_window, WINDOW_AUTOSIZE);
+	//const char* image_window = "Source Image";
+	//namedWindow(image_window, WINDOW_AUTOSIZE);
 
-	Mat MatScreen = GetMat::getMatWithRect(hWND, RECT{ 0, 0, 1920, 1080 });
+	//POINT point = { 830, 560 };
 
-	cv::imshow(image_window, MatScreen);
-	waitKey(0);
+	//Mat MatScreen = GetMat::getMatWithRect(hWND, point, 265, 65);
+
+	//cv::imshow(image_window, MatScreen);
+	//waitKey(0);
 
 
+	/*Mat MatTemplate = imread("ObjectImages/GetReadyBanner.png");
+	POINT point = TemplateMatching::templateMatchingObjects(imread("ObjectImages/Screenshot_2.png"), MatTemplate, 0.85);
+
+	cout << point.x + MatTemplate.rows << " " << point.y + MatTemplate.cols << endl;*/	
 }

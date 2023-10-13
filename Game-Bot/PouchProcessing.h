@@ -8,7 +8,7 @@ typedef enum e_pouch_version {
 	Epsilon = 3,
 	Gamma = 4,
 	Kappa = 5,
-	Default = 10,
+	Default_Pouch = 10,
 }pouch_version;
 
 struct PathNameThresholdSlots {
@@ -29,7 +29,7 @@ class PouchProcessing {
 		{"CaseImages/Secure_container_Kappa.png",	"Kappa",	0.90, 12},//Kappa
 	};
 
-	pouch_version Pouch_Version = Default;
+	pouch_version Pouch_Version = Default_Pouch;
 	static bool FirstStart;
 
 	void ShiftOutItems(uint8_t rows, uint8_t cols);

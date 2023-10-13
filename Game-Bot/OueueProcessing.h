@@ -5,7 +5,7 @@ typedef enum e_map {
 	Interchange = 0,
 	Woods = 1,
 	Shoreline = 2,
-	Default = 10,
+	Default_Map = 10,
 }Map;
 
 struct MapDependeces {
@@ -44,7 +44,7 @@ class OueueProcessing {
 		return (time >= startTime && time <= endTime);
 	}
 
-	Map MapToRun = Default;
+	Map MapToRun = Default_Map;
 	bool NeedIncurance = false;
 
 public:

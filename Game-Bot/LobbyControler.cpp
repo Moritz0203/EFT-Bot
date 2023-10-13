@@ -83,12 +83,16 @@ void LobbyControler::CloseStashView() {
 void LobbyControler::WaitForGameStart() {
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
+	POINT point = { 830, 560 };
 	std::this_thread::sleep_for(std::chrono::minutes(2));
 
 	while (true) {
-		GetMat::getMatWithRect(hWND , RECT{ 0, 0, 1920, 1080 });
+		Mat MatScreen = GetMat::getMatWithRect(hWND, point, 265, 65);
 
+		if (TemplateMatching::templateMatchingBool(MatScreen, imread("ObjectImages/GetReadyBanner.png"), 0.95))
+			return;
 
+		std::this_thread::sleep_for(std::chrono::seconds(5));
 	}
 }
 

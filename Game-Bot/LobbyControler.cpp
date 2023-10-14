@@ -148,7 +148,7 @@ void LobbyControler::FirstStartStashMatching() {
 void LobbyControler::StashControler() {
 	PouchProcessing pouchProcessing(Gamma);//later get from config file or form server 
 
-	//OpenStashView();
+	OpenStashView();
 
 	if (FirstStart) {
 		FirstStartStashMatching();
@@ -156,7 +156,7 @@ void LobbyControler::StashControler() {
 	}
 	pouchProcessing.PouchOperator();
 
-	//CloseStashView();	
+	CloseStashView();	
 }
 
 
@@ -170,10 +170,7 @@ void LobbyControler::QueueControler() {
 
 	queueProcessing.OueueProcess();
 
-
-	// wait for game start
-	
-	// give control to GameControler
+	WaitForGameStart();	
 }
 
 
@@ -182,5 +179,6 @@ void LobbyControler::Controler() {
 	FirstStartGetData();
 
 	StashControler();
-}
 
+	QueueControler();	
+}

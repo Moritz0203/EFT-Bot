@@ -110,7 +110,7 @@ int main() {
 	//SetForegroundWindow(hWND);
 	//Sleep(1000);//Delete later
 
-	const int screenWidth = 1920;
+	/*const int screenWidth = 1920;
     const int screenHeight = 1080;
 
     int originalX = screenWidth / 2;
@@ -127,7 +127,7 @@ int main() {
 
 		SetPosition(x++, 540);
 		Sleep(10);
-	}
+	}*/
 
 
 

@@ -82,6 +82,8 @@ void HumanizedMouse::MoveMouse(int x, int y) {
     delete[] output; // Don't forget to free the memory when done
 }
 
+
+
 void HumanizedMouse::MoveMouseInGame(int xOffset, int yOffset, int initialDelay_NS, int Accuracy) {
     //Accuracy to desired pixel
     int Acc = Accuracy; // 8 
@@ -94,6 +96,10 @@ void HumanizedMouse::MoveMouseInGame(int xOffset, int yOffset, int initialDelay_
     int targetX = (originalX + xOffset) + (int)(Acc * targetDistribution.NextGaussian());
     int targetY = (originalY + yOffset) + (int)(Acc * targetDistribution.NextGaussian());
 
+    POINT p;
+    GetCursorPos(&p);
+     originalX = (int)p.x;
+     originalY = (int)p.y;
 
     // Find a mid point between the original and target position
     int midPointX = ((originalX + xOffset) - targetX) / 2;

@@ -21,6 +21,7 @@ private:
     std::thread MainThread;
     bool ShouldExit = false;
     int32_t MouseSpeed = 10;
+    double Gravity = 2.0f;
 
     void MoveSystem(int32_t x, int32_t y)
     {
@@ -44,7 +45,7 @@ private:
         return rand() % maxValue;
     }
 
-    void ThreadEntry()
+    void ThreadEntry_Normal()
     {
         srand(time(nullptr));
 
@@ -72,8 +73,8 @@ private:
             double xe = TargetX;
             double ye = TargetY;
 
-            double gravity = 3.0f;
-            double wind = 1.0f;
+            double gravity = 0.8f;
+            double wind = 0.4f;
 
             double targetArea = 20.f;
 
@@ -152,6 +153,11 @@ private:
             }
         }
     }
+
+
+
+    
+
 public:
     void SetTarget(int32_t x, int32_t y)
     {
@@ -159,10 +165,16 @@ public:
         TargetY = y;
     }
 
-    void Start()
+    void SetGravity(int32_t gravity)
+	{
+        this->Gravity = gravity;
+	}
+
+
+    void Start_Normal()
     {
         ShouldExit = false;
-        MainThread = std::thread([this] { this->ThreadEntry(); });
+        MainThread = std::thread([this] { this->ThreadEntry_Normal(); });
     }
 
     void Stop()

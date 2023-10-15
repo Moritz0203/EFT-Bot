@@ -93,26 +93,38 @@ int main() {
 
     cout << originalPos.x << " " << originalPos.y << endl;*/
 
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
+
+    int originalX = screenWidth / 2;
+    int originalY = screenHeight / 2;
 
     HumanizedMouse mouse;
     while (!GetAsyncKeyState(VK_F4))
     {
         
-        mouse.MoveMouseInGame(300, 0, 990, 8);
+        mouse.MoveMouse(originalX + 600, originalY + 0);
 
         Sleep(1000);
     }
 
 
-    //HumanMouse mouse;
+    /*HumanMouse mouse;
 
-    //mouse.SetTarget(1000, 700);
-    //mouse.Start();
+    mouse.Start_Normal();
+    mouse.SetGravity(2);
 
-    //while (!(GetKeyState(VK_F4) & 0x8000))
-    //{
-    //   
-    //}
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
 
-    //mouse.Stop();
+    int originalX = screenWidth / 2;
+    int originalY = screenHeight / 2;
+
+
+    while (!(GetAsyncKeyState(VK_F4) & 0x8000))
+    {
+        mouse.SetTarget(originalX + 500, originalY + 0);
+    }
+
+    mouse.Stop();*/
 }

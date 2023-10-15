@@ -149,13 +149,7 @@
     <ClCompile Include="OueueProcessing.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall\Queue-PrepareGame</Filter>
     </ClCompile>
-    <ClCompile Include="HumanizedMouse.cpp">
-      <Filter>Source Files\MK\HumanizedMouse</Filter>
-    </ClCompile>
-    <ClCompile Include="BezierCurve.cpp">
-      <Filter>Source Files\MK\HumanizedMouse</Filter>
-    </ClCompile>
-    <ClCompile Include="Normal.cpp">
+    <ClCompile Include="RealisticMouse.cpp">
       <Filter>Source Files\MK\HumanizedMouse</Filter>
     </ClCompile>
   </ItemGroup>
@@ -235,16 +229,10 @@
     <ClInclude Include="OueueProcessing.h">
       <Filter>Header Files\GameBot\Lobby-Overall\Queue-PrepareGame</Filter>
     </ClInclude>
-    <ClInclude Include="HumanizedMouse.h">
-      <Filter>Header Files\MK\HumanizedMouse</Filter>
-    </ClInclude>
-    <ClInclude Include="BezierCurve.h">
-      <Filter>Header Files\MK\HumanizedMouse</Filter>
-    </ClInclude>
-    <ClInclude Include="Normal.h">
-      <Filter>Header Files\MK\HumanizedMouse</Filter>
-    </ClInclude>
     <ClInclude Include="human_mouse.h">
+      <Filter>Header Files\MK\HumanizedMouse</Filter>
+    </ClInclude>
+    <ClInclude Include="RealisticMouse.h">
       <Filter>Header Files\MK\HumanizedMouse</Filter>
     </ClInclude>
   </ItemGroup>

@@ -25,19 +25,19 @@
 // SecurityCheck Items Barter / Medical / Food 
 
 
-void SetPosition(float x, float y) {
-	double fScreenWidth = ::GetSystemMetrics(SM_CXSCREEN);
-	double fScreenHeight = ::GetSystemMetrics(SM_CYSCREEN);
-	double fx = x * (65535.0f / fScreenWidth);
-	double fy = y * (65535.0f / fScreenHeight);
-
-	INPUT  Input = { 0 };
-	Input.type = INPUT_MOUSE;
-	Input.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
-	Input.mi.dx = (long)fx;
-	Input.mi.dy = (long)fy;
-	::SendInput(1, &Input, sizeof(INPUT));
-}
+//void SetPosition(float x, float y) {
+//	double fScreenWidth = ::GetSystemMetrics(SM_CXSCREEN);
+//	double fScreenHeight = ::GetSystemMetrics(SM_CYSCREEN);
+//	double fx = x * (65535.0f / fScreenWidth);
+//	double fy = y * (65535.0f / fScreenHeight);
+//
+//	INPUT  Input = { 0 };
+//	Input.type = INPUT_MOUSE;
+//	Input.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
+//	Input.mi.dx = (long)fx;
+//	Input.mi.dy = (long)fy;
+//	::SendInput(1, &Input, sizeof(INPUT));
+//}
 
 void MouseMoving(int xOffset, int yOffset, int durationMs) {
     const int steps = 20;
@@ -76,17 +76,17 @@ void MouseMoving(int xOffset, int yOffset, int durationMs) {
         double curvedY = yStep * t * curveFactor;
 
         //mouse_event(MOUSEEVENTF_MOVE, (DWORD)curvedX, (DWORD)curvedY, 0, 0);
-		SetPosition(curvedX, curvedY);
+		//SetPosition(curvedX, curvedY);
 
 		Sleep(sleepMs); // Pausiere für eine kurze Zeit zwischen den Schritten
     }
 }
 
 
-//void SetPosition(std::int32_t x, std::int32_t y)
-//{
-//	mouse_event(MOUSEEVENTF_MOVE, (DWORD)x, (DWORD)y, 0, 0);
-//}
+void SetPosition(std::int32_t x, std::int32_t y)
+{
+	mouse_event(MOUSEEVENTF_MOVE, (DWORD)x, (DWORD)y, 0, 0);
+}
 
 //void SetPosition(std::int32_t x, std::int32_t y)
 //{
@@ -106,9 +106,9 @@ int main() {
 
 
 
-	const HWND hWND = GetMat::FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(200);//Delete later
+	//const HWND hWND = GetMat::FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(1000);//Delete later
 
 	const int screenWidth = 1920;
     const int screenHeight = 1080;
@@ -116,11 +116,18 @@ int main() {
     int originalX = screenWidth / 2;
     int originalY = screenHeight / 2;
 
-	/*while (true)
+
+
+	int x = originalX;
+	int stopX = originalX + 10;
+	while (true)
 	{
-		MouseMoving(screenWidth + 200, screenHeight, 100);
-		Sleep(100);
-	}*/
+		if(x > stopX)
+			break;
+
+		SetPosition(x++, 540);
+		Sleep(10);
+	}
 
 
 

@@ -127,9 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BezierCurve.cpp" />
     <ClCompile Include="BuyItemsFlea.cpp" />
     <ClCompile Include="CaseProcessing.cpp" />
+    <ClCompile Include="Normal.cpp" />
     <ClCompile Include="OueueProcessing.cpp" />
+    <ClCompile Include="HumanizedMouse.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="LobbyControler.cpp" />
     <ClCompile Include="GameControler.cpp" />
@@ -152,9 +155,13 @@
     <ClCompile Include="Walk.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BezierCurve.h" />
     <ClInclude Include="BuyItemsFlea.h" />
     <ClInclude Include="CaseProcessing.h" />
+    <ClInclude Include="human_mouse.h" />
+    <ClInclude Include="Normal.h" />
     <ClInclude Include="OueueProcessing.h" />
+    <ClInclude Include="HumanizedMouse.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="LobbyControler.h" />
     <ClInclude Include="GameControler.h" />

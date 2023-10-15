@@ -3,6 +3,8 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+#include <random>
+#include <ctime>
 
 void Mouse::MoverPOINTandPress(POINT Points)
 {
@@ -37,6 +39,9 @@ void Mouse::MouseMoveAtoB(POINT PointA, POINT PointB)
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 	//cout << "MouseMoveAtoB" << endl;
 }
+
+
+
 
 void Keyboard::KeyboardInput(int keyforInput)
 {
@@ -117,6 +122,9 @@ void Keyboard::KeyboardTypeString(const char* string) {
 	KeyboardHoldFirstAndPressSecond(0x11, 0x56);//virtual - key code for the "CTRL" key and "V" key
 }
 
+
+
+
 void MouseAndKeyboard::KeyboardInput_MovAndPress(int keyforInput, POINT Point)
 {
 	INPUT ip{};
@@ -144,4 +152,3 @@ void MouseAndKeyboard::KeyboardInput_MovAndPress(int keyforInput, POINT Point)
     ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
     SendInput(1, &ip, sizeof(INPUT));
 }
-

@@ -12,114 +12,107 @@
 #include "LobbyControler.h"
 #include "ItemMoving.h"
 #include "StashObject.h"
+#include "InputMK.h"
+
+#include "human_mouse.h"
+#include <cmath>
+#include <random>
+#include "HumanizedMouse.h"
+
+#define M_PI 3.14159265358979323846
+
 
 // HighCard | High T
 // SecurityCheck Items Barter / Medical / Food 
 
+
+//void MouseMoving(int xOffset, int yOffset, int durationMs) {
+//    const int steps = 20;
+//    const int sleepMs = durationMs / steps;
+//
+//    // Maximale Abweichung vom Bogen
+//    int maxDeviation = 50;
+//
+//    // Erzeuge einen Zufallszahlengenerator für die Bogenbewegung
+//    std::random_device rd;
+//    std::mt19937 gen(rd());
+//    std::uniform_real_distribution<double> angleDist(-0.2, 0.2); // Kleine Winkelabweichung
+//
+//    // Easing-Funktion: Verwendet eine kubische Interpolation rückwärts (1 - (1-t)^3) für Geschwindigkeitsänderung
+//    auto ease = [](double t) { return 1.0 - pow(1.0 - t, 3); };
+//
+//    // Berechne Schritte in x und y Richtung
+//    double xStep = static_cast<double>(xOffset) / steps;
+//    double yStep = static_cast<double>(yOffset) / steps;
+//
+//    // Mausbewegung mit allmählicher Krümmung und Easing
+//    for (int step = 1; step <= steps; ++step) {
+//        double t = static_cast<double>(step) / steps;
+//
+//        // Anwendung der Easing-Funktion auf t
+//        t = ease(t);
+//
+//        // Allmähliche Krümmung der Bewegung
+//        double curveFactor = sin(t * M_PI / 2);  // Von 0 bis 1 in Form eines Sinus
+//
+//        // Zufälliger Winkel entlang des Bogens
+//        double angle = angleDist(gen);
+//
+//        // Anpasse der x- und y-Koordinaten für die Krümmung
+//        double curvedX = xStep * t;
+//        double curvedY = yStep * t * curveFactor;
+//
+//        mouse_event(MOUSEEVENTF_MOVE, (DWORD)curvedX, (DWORD)curvedY, 0, 0);
+//        Sleep(sleepMs); // Pausiere für eine kurze Zeit zwischen den Schritten
+//    }
+//}
+
+
+
+
+
+
+
 int main() {
 	c_log::add_out(new c_log::c_log_consolestream);
 
-	/*ProgrammScheduler programmScheduler;
-
-	programmScheduler.Scheduler();*/
-
-	//checksPublic ChecksPublic;
-	//CaseProcessing caseProcessing;
-	//PouchProcessing pouchProcessing(Gamma);
-	//GetMat getMat;
-
-	//ChecksPublic.CheckScrollbarPositions();
-	//Sleep(300);
-	//getMat.TakeScreenshots(1);
-
-	////caseProcessing.CaseOperator();
-
-	//pouchProcessing.PouchMatching();
-
-	//pouchProcessing.Pouch_FirstStart();
 
 
-	/*ReadPrefixConfigFile readPrefixConfigFile("ConfigPrefix.txt");
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(100);//Delete later
+    
+    /*POINT originalPos;
+    GetCursorPos(&originalPos);
 
-	readPrefixConfigFile.ParseConfig();
-	readPrefixConfigFile.PrintData();*/
+    cout << originalPos.x << " " << originalPos.y << endl;  
 
-	/*BuyItemsFlea buyItemsFlea;
+    MouseMoving(500, 0, 100);
 
-	buyItemsFlea.BuyItemsFleaOperator("Bandage", 0, true);*/
+    GetCursorPos(&originalPos);
 
-	/*std::vector<POINT> vec{};
-
-	Matching matching;	
-	Mat MatScreen = imread("ObjectImages/SecurityCheck.png");
-	vec = TemplateMatching::templateMatchingItems("itemImages/MedicalImages/Medical/Grizzly.png", 0.85, false, false, "Grizzly", MatScreen);
-
-	vec = matching.removeDuplicates(vec);
-
-	for (auto& item : vec) {
-		cout << item.x << " " << item.y << endl;
-	}*/	
+    cout << originalPos.x << " " << originalPos.y << endl;*/
 
 
-	/*SecurityCheck securityCheck;
-	securityCheck.MakeSecurityCheck();*/
+    HumanizedMouse mouse;
+    while (!GetAsyncKeyState(VK_F4))
+    {
+        
+        mouse.MoveMouseInGame(300, 0, 990, 8);
+
+        Sleep(1000);
+    }
 
 
+    //HumanMouse mouse;
 
+    //mouse.SetTarget(1000, 700);
+    //mouse.Start();
 
-	/*LobbyControler lobbyControler;
-	lobbyControler.Controler();*/
+    //while (!(GetKeyState(VK_F4) & 0x8000))
+    //{
+    //   
+    //}
 
-	/*while (true) {
-		BothTimes bothTimes = TarkovTime::realTimeToTarkovTime();
-		cout << bothTimes.left.tm_hour << " " << bothTimes.left.tm_min << " " << bothTimes.left.tm_sec << " -- " << bothTimes.right.tm_hour << " " << bothTimes.right.tm_min << " " << bothTimes.right.tm_sec << endl;
-		Sleep(1000);	
-	}*/
-
-	//ItemMoving itemMoving;
-	//PointerStack prefix{};
-
-	//const HWND hWND = GetMat::FindeWindow();
-	//SetForegroundWindow(hWND);
-	//Sleep(5);//Delete later
-	//const Mat MatScreen = GetMat::getMat(hWND);
-
-	//POINT point = TemplateMatching::templateMatchingObjects(MatScreen, imread("itemImages/MedicalImages/Medical/Grizzly.png"), 0.85);
-
-	//Pouch::pouch.pointPouch = TemplateMatching::templateMatchingObjects(MatScreen, imread("CaseImages/Secure_container_Gamma.png"), 0.90);
-
-	//prefix.pointItem.page = 1;
-	//prefix.pointItem.point.x = point.x;
-	//prefix.pointItem.point.y = point.y;
-	//prefix.pointItem.widthTempl = 127;
-	//prefix.pointItem.heightTempl = 127;	
-	//prefix.pointItem.nameOfItem = "Grizzly";
-
-	//itemMoving.MovFromStash(prefix);
-
-
-	/*BuyItemsFlea buyItemsFlea;
-
-	buyItemsFlea.EasyBuyItemsAPI("Grizzly", 1);*/
-
-
-	//const HWND hWND = GetMat::FindeWindow();
-	////SetForegroundWindow(hWND);
-	//Sleep(10);//Delete later
-
-	//const char* image_window = "Source Image";
-	//namedWindow(image_window, WINDOW_AUTOSIZE);
-
-	//POINT point = { 830, 560 };
-
-	//Mat MatScreen = GetMat::getMatWithRect(hWND, point, 265, 65);
-
-	//cv::imshow(image_window, MatScreen);
-	//waitKey(0);
-
-
-	/*Mat MatTemplate = imread("ObjectImages/GetReadyBanner.png");
-	POINT point = TemplateMatching::templateMatchingObjects(imread("ObjectImages/Screenshot_2.png"), MatTemplate, 0.85);
-
-	cout << point.x + MatTemplate.rows << " " << point.y + MatTemplate.cols << endl;*/	
+    //mouse.Stop();
 }

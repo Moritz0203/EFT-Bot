@@ -70,6 +70,8 @@ public:
 typedef enum e_direction {
 	Forward = 0,
 	Backwards = 1,
+
+	NoDirection = 10,
 }Direction;
 
 typedef enum e_rotation {
@@ -78,6 +80,8 @@ typedef enum e_rotation {
 	HalfLeft = 2,
 	HalfRight = 3,
 	TurnAround = 4,
+
+	NoRotation = 10,
 }Rotation;
 
 class HumanizedKeyboard
@@ -89,10 +93,17 @@ public:
 
 	}
 
-	void MoveToDirection(Direction direction, Rotation rotation) {
+	void MoveToDirection(Direction direction, Rotation rotation, uint speedIn_NS) {
 
 	}
 };
+
+
+
+
+
+
+
 
 
 int main() {

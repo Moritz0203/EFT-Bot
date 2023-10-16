@@ -93,7 +93,7 @@ public:
 
 	}
 
-	void MoveToDirection(Direction direction, Rotation rotation, uint speedIn_NS) {
+	void MoveToDirection(Direction direction = NoDirection, Rotation rotation = NoRotation, uint speedIn_NS = 900) {
 
 	}
 };

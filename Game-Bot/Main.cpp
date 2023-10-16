@@ -39,6 +39,8 @@
 //	::SendInput(1, &Input, sizeof(INPUT));
 //}
 
+
+
 void MouseMoving(int xOffset, int yOffset, int durationMs) {
     const int steps = 20;
     const int sleepMs = durationMs / steps;

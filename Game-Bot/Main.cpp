@@ -143,14 +143,29 @@ int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
 
-	const HWND hWND = GetMat::FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(1000);//Delete later
+	//const HWND hWND = GetMat::FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(1000);//Delete later
 
+
+	int y = 0;
 	while (true)
 	{
-		moveMouse(1, 0);
-		Sleep(1);
+		while (y > -100)
+		{
+			moveMouse(2, -1);
+			y--;
+			Sleep(1);
+
+		}
+		while (y < 100)
+		{
+			moveMouse(2, 1);
+			y++;
+			Sleep(1);
+
+		}
+
 	}
 
 

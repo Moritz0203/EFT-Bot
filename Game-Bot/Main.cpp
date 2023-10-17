@@ -50,7 +50,25 @@
 //}
 
 
+typedef enum e_rotation_x {
+	Left = 0,
+	Right = 1,
+	HalfLeft = 2,
+	HalfRight = 3,
+	TurnAround = 4,
 
+	NoRotationX = 10,
+}RotationX;
+
+typedef enum e_rotation_y {
+	Up = 0,
+	Down = 1,
+	HalfUp = 2,
+	HalfDown = 3,
+
+	NoRotationY = 10,
+	AutoRotation = 20,
+}RotationY;
 
 class HumanizedMouse
 {
@@ -61,7 +79,11 @@ public:
 
 	}
 
-	void MoveToDirection(float xRotation, float yRotation, uint speedIn_NS) {
+	void MoveViaRotation(float xRotation, float yRotation, uint speedIn_NS) {
+
+	}
+
+	void MoveToDirection(RotationX rotationX = NoRotationX, RotationY rotationY = AutoRotation, uint speedIn_NS = 900) {
 
 	}
 };
@@ -74,16 +96,6 @@ typedef enum e_direction {
 	NoDirection = 10,
 }Direction;
 
-typedef enum e_rotation {
-	Left = 0,
-	Right = 1,
-	HalfLeft = 2,
-	HalfRight = 3,
-	TurnAround = 4,
-
-	NoRotation = 10,
-}Rotation;
-
 class HumanizedKeyboard
 {
 
@@ -93,7 +105,7 @@ public:
 
 	}
 
-	void MoveToDirection(Direction direction = NoDirection, Rotation rotation = NoRotation, uint speedIn_NS = 900) {
+	void MoveToDirection(Direction direction = NoDirection, uint speedIn_NS = 900) {
 
 	}
 };

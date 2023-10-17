@@ -72,6 +72,8 @@ typedef enum e_rotation_y {
 
 class HumanizedMouse
 {
+   
+
 
 public:
 	
@@ -115,16 +117,41 @@ public:
 
 
 
+void moveMouse(int x, int y) {
+    INPUT input;
+    input.type = INPUT_MOUSE;
+    input.mi.dwFlags = MOUSEEVENTF_MOVE;
+    input.mi.dx = x;
+    input.mi.dy = y;
+    input.mi.mouseData = 0;
+    input.mi.time = 0;
+    input.mi.dwExtraInfo = 0;
+
+	cout << "x: " << x << " y: " << y << endl;
+
+    SendInput(1, &input, sizeof(INPUT));
+}
+
+
+
+
+
 
 
 
 int main() {
-	c_log::add_out(new c_log::c_log_consolestream);
+	//c_log::add_out(new c_log::c_log_consolestream);
 
 
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(1000);//Delete later
+
+	while (true)
+	{
+		moveMouse(1, 0);
+		Sleep(1);
+	}
 
 
-	//const HWND hWND = GetMat::FindeWindow();
-	//SetForegroundWindow(hWND);
-	//Sleep(1000);//Delete later
 }

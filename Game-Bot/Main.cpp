@@ -72,7 +72,7 @@ typedef enum e_rotation_y {
 
 class HumanizedMouse
 {
-   
+	
 
 
 public:
@@ -164,9 +164,9 @@ int main() {
 			y++;
 			Sleep(1);
 
+
 		}
 
+
 	}
-
-
 }

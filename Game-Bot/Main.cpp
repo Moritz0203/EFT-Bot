@@ -225,15 +225,12 @@ int main() {
 	//		moveMouse(2, -1);
 	//		y--;
 	//		Sleep(1);
-
 	//	}
 	//	while (y < 100)
 	//	{
 	//		moveMouse(2, 1);
 	//		y++;
 	//		Sleep(1);
-
-
 	//	}*/
 
 	//	/*while (x > -1800)

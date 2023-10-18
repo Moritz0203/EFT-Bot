@@ -100,6 +100,7 @@ class HumanizedMouse
 		return distribution(gen);
 	}
 
+
 public:
 	
 	void MoveToExactPoint(int x, int y, uint speedIn_NS) {
@@ -114,7 +115,7 @@ public:
 		int XRotation = 0;
 		int YRotation = 0;
 		
-		// X
+		/// X
 		if (rotationX == TurnAround) {
 			if (shouldAddPrefix())
 				XRotation = -1800;
@@ -128,7 +129,7 @@ public:
 			XRotation = static_cast<int>(rotationX);
 		}
 		
-		// Y
+		/// Y
 		if (rotationY == AutoRotationY) {
 			YRotation = getRandomValueForAutoRotation(-50, 50);
 		}
@@ -145,6 +146,8 @@ typedef enum e_direction {
 	Forward = 0,
 	Backwards = 1,
 	AutoForward = 2,
+	SprintForward = 3,
+	AutoSprintForward = 4,
 
 	NoDirection = 10,
 }Direction;
@@ -170,7 +173,7 @@ public:
 
 class HumanizedMovement : public HumanizedMouse, public HumanizedKeyboard
 {
-
+	
 };
 
 

@@ -248,7 +248,6 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 		y -= stepY;
 	}
 
-
 	return result;
 }
 

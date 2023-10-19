@@ -230,22 +230,23 @@ void moveMouse_testing(int x, int y) {
 std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 	std::vector<std::pair<int, int>> result;
 
-	//srand(static_cast<unsigned>(time(0))); // Zufallsseed basierend auf der aktuellen Zeit initialisieren
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distX(1, 8);
+	std::uniform_int_distribution<int> distY(1, 8);
 
-	//while (x > 0 || y > 0) {
-	//	int stepX = 1 + (rand() % 8); // Zufällige Schrittgröße für x (zwischen 1 und 8)
-	//	int stepY = 1 + (rand() % 8); // Zufällige Schrittgröße für y (zwischen 1 und 8)
+	while (x > 0 || y > 0) {
+		int stepX = distX(gen);
+		int stepY = distY(gen);
 
-	//	if (stepX > x) stepX = x;
-	//	if (stepY > y) stepY = y;
+		if (stepX > x) stepX = x;
+		if (stepY > y) stepY = y;
 
-	//	result.push_back(std::make_pair(stepX, stepY));
+		result.push_back(std::make_pair(stepX, stepY));
 
-	//	x -= stepX;
-	//	y -= stepY;
-	//}
-
-
+		x -= stepX;
+		y -= stepY;
+	}
 
 
 	return result;
@@ -274,15 +275,16 @@ int main() {
 	int endY = 45;
 
 	std::vector<std::pair<int, int>> steps = splitDistance(endX, endY);
-	int currentX = 0, currentY = 0;
+	int currentX = 0, currentY = 0, count = 0;
 
 	for (const auto& step : steps) {
 		currentX += step.first;
 		currentY += step.second;
+		count++;
 		std::cout << "(" << step.first << ", " << step.second << ") -> Aktuelle Position: (" << currentX << ", " << currentY << ")" << std::endl;
 	}
 
-	std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")" << std::endl;
+	std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")\nPoints to Endpoint: " << count << std::endl;
 
 
 

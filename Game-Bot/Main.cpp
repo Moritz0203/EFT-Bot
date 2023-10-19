@@ -258,8 +258,8 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 /// 90  degree turn = ~900  pixels
 /// 45  degree turn = ~400  pixels
 
-/// 90  degree up   = ~-800  pixels
-/// 45  degree up   = ~-400  pixels
+/// 90  degree up   = ~-800 pixels
+/// 45  degree up   = ~-400 pixels
 
 
 int main() {

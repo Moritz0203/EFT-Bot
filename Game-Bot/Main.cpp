@@ -114,6 +114,7 @@ public:
 	void MoveToDirection(RotationX rotationX = AutoRotationX, RotationY rotationY = AutoRotationY, uint speedIn_NS = 900) {
 		int XRotation = 0;
 		int YRotation = 0;
+		vector<pair<int, int>> mousePositions;
 		
 		/// X
 		if (rotationX == TurnAround) {
@@ -198,6 +199,59 @@ void moveMouse_testing(int x, int y) {
 
 
 
+//std::vector<std::pair<int, int>> splitDistance(int x, int y) {
+//	std::vector<std::pair<int, int>> result;
+//
+//	std::random_device rd;
+//	std::mt19937 gen(rd());
+//	std::uniform_int_distribution<int> distX(2, 8);
+//	std::uniform_int_distribution<int> distY(2, 8);
+//
+//	int initialStepX = distX(gen);
+//	int initialStepY = distY(gen);
+//
+//	while (x > 0 || y > 0) {
+//		int stepX = std::min(initialStepX, x);
+//		int stepY = std::min(initialStepY, y);
+//
+//		result.push_back(std::make_pair(stepX, stepY));
+//
+//		x -= stepX;
+//		y -= stepY;
+//
+//		// Reduziere die Schrittgröße
+//		initialStepX = std::max(1, initialStepX - 1);
+//		initialStepY = std::max(1, initialStepY - 1);
+//	}
+//
+//	return result;
+//}
+
+std::vector<std::pair<int, int>> splitDistance(int x, int y) {
+	std::vector<std::pair<int, int>> result;
+
+	//srand(static_cast<unsigned>(time(0))); // Zufallsseed basierend auf der aktuellen Zeit initialisieren
+
+	//while (x > 0 || y > 0) {
+	//	int stepX = 1 + (rand() % 8); // Zufällige Schrittgröße für x (zwischen 1 und 8)
+	//	int stepY = 1 + (rand() % 8); // Zufällige Schrittgröße für y (zwischen 1 und 8)
+
+	//	if (stepX > x) stepX = x;
+	//	if (stepY > y) stepY = y;
+
+	//	result.push_back(std::make_pair(stepX, stepY));
+
+	//	x -= stepX;
+	//	y -= stepY;
+	//}
+
+
+
+
+	return result;
+}
+
+
 
 /// 180 degree turn = ~1800 pixels
 /// 90  degree turn = ~900  pixels
@@ -211,9 +265,26 @@ int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
 
-	const HWND hWND = GetMat::FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(1000);//Delete later
+	//const HWND hWND = GetMat::FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(1000);//Delete later
+
+
+	int endX = 120; // Endpunkt
+	int endY = 45;
+
+	std::vector<std::pair<int, int>> steps = splitDistance(endX, endY);
+	int currentX = 0, currentY = 0;
+
+	for (const auto& step : steps) {
+		currentX += step.first;
+		currentY += step.second;
+		std::cout << "(" << step.first << ", " << step.second << ") -> Aktuelle Position: (" << currentX << ", " << currentY << ")" << std::endl;
+	}
+
+	std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")" << std::endl;
+
+
 
 
 	//int y = 0;

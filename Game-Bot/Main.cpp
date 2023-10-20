@@ -229,72 +229,57 @@ void moveMouse_testing(int x, int y) {
 
 std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 	std::vector<std::pair<int, int>> result;
-	int progressTracker = std::max(x, y);
-	bool xIsBigger = (progressTracker == x);
+	int progressTrackerX = x;
+	int progressTrackerY = y;
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<int> distX_Default(6, 10);
-	std::uniform_int_distribution<int> distY_Default(6, 10);
+	std::uniform_int_distribution<int> distX_Default(6, 9);
+	std::uniform_int_distribution<int> distY_Default(4, 6);
 
 	std::uniform_int_distribution<int> distX_13(4, 7);
-	std::uniform_int_distribution<int> distY_13(4, 7);
+	std::uniform_int_distribution<int> distY_13(3, 4);
 
 	std::uniform_int_distribution<int> distX_14(2, 5);
-	std::uniform_int_distribution<int> distY_14(2, 5);
+	std::uniform_int_distribution<int> distY_14(1, 2);
 
 	std::uniform_int_distribution<int> distX_15(1, 3);
-	std::uniform_int_distribution<int> distY_15(1, 3);
 
 
-	cout << "x: " << 1.0 / 80 * x << " y: " << 1.0 / 80 * y << endl;
+	//cout << "x: " << 1.0 / 80 * x << " y: " << 1.0 / 80 * y << endl;
 
 	int stepX = 0;
 	int stepY = 0;
 	while (x > 0 || y > 0) {
 		
-		if (xIsBigger) {
 
 			//cout << x << " 1/8 " <<  1.0 / 12 * progressTracker << " 1/6 " <<  1.0 / 5 * progressTracker << " 1/2 " <<  1.0 / 2 * progressTracker << endl;
 
-			if (x <= 1.0 / 12 * progressTracker) {
+			if (x <= 1.0 / 12 * progressTrackerX) {
 				stepX = distX_15(gen);
-				stepY = distY_15(gen);
 			}
-			else if (x <= 1.0 / 5 * progressTracker) {
+			else if (x <= 1.0 / 5 * progressTrackerX) {
 				stepX = distX_14(gen);
-				stepY = distY_14(gen);
 			}
-			else if (x <= 1.0 / 2 * progressTracker) {
+			else if (x <= 1.0 / 2 * progressTrackerX) {
 				stepX = distX_13(gen);
-				stepY = distY_13(gen);
 			}
 			else {
 				stepX = distX_Default(gen);
-				stepY = distY_Default(gen);
 			}
-		}
-		else {
-			if (y <= 1.0 / 5 * progressTracker) {
-				// Führe Aktionen für progressTracker >= 1/5 von y aus
-				stepX = distX_15(gen);
-				stepY = distY_15(gen);
-			}
-			else if (y <= 1.0 / 4 * progressTracker) {
+		
+			if (y <= 1.0 / 4 * progressTrackerY) {
 				// Führe Aktionen für progressTracker >= 1/4 von y aus
-				stepX = distX_14(gen);
 				stepY = distY_14(gen);
 			}
-			else if (y <= 1.0 / 3 * progressTracker) {
+			else if (y <= 1.0 / 2 * progressTrackerY) {
 				// Führe Aktionen für progressTracker >= 1/3 von y aus
-				stepX = distX_13(gen);
 				stepY = distY_13(gen);
 			}
 			else {
-				stepX = distX_Default(gen);
 				stepY = distY_Default(gen);
 			}
-		}
+		
 
 
 		
@@ -332,7 +317,7 @@ int main() {
 
 
 	int endX = 900; // Endpunkt
-	int endY = 80;
+	int endY = 120;
 
 	std::vector<std::pair<int, int>> steps = splitDistance(endX, endY);
 	int currentX = 0, currentY = 0, count = 0;

@@ -87,7 +87,7 @@ class HumanizedMouse
 	}
 
 	bool shouldAddPrefix() {
-		std::srand(static_cast<unsigned>(std::time(0))); 
+		std::srand(static_cast<unsigned>(std::time(0)));
 
 		return (std::rand() % 2 == 0);
 	}
@@ -102,7 +102,7 @@ class HumanizedMouse
 
 
 public:
-	
+
 	void MoveToExactPoint(int x, int y, uint speedIn_NS) {
 
 	}
@@ -115,7 +115,7 @@ public:
 		int XRotation = 0;
 		int YRotation = 0;
 		vector<pair<int, int>> mousePositions;
-		
+
 		/// X
 		if (rotationX == TurnAround) {
 			if (shouldAddPrefix())
@@ -129,7 +129,7 @@ public:
 		else {
 			XRotation = static_cast<int>(rotationX);
 		}
-		
+
 		/// Y
 		if (rotationY == AutoRotationY) {
 			YRotation = getRandomValueForAutoRotation(-50, 50);
@@ -174,7 +174,7 @@ public:
 
 class HumanizedMovement : public HumanizedMouse, public HumanizedKeyboard
 {
-	
+
 };
 
 
@@ -182,18 +182,18 @@ class HumanizedMovement : public HumanizedMouse, public HumanizedKeyboard
 
 
 void moveMouse_testing(int x, int y) {
-    INPUT input;
-    input.type = INPUT_MOUSE;
-    input.mi.dwFlags = MOUSEEVENTF_MOVE;
-    input.mi.dx = x;
-    input.mi.dy = y;
-    input.mi.mouseData = 0;
-    input.mi.time = 0;
-    input.mi.dwExtraInfo = 0;
+	INPUT input;
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_MOVE;
+	input.mi.dx = x;
+	input.mi.dy = y;
+	input.mi.mouseData = 0;
+	input.mi.time = 0;
+	input.mi.dwExtraInfo = 0;
 
 	cout << "x: " << x << " y: " << y << endl;
 
-    SendInput(1, &input, sizeof(INPUT));
+	SendInput(1, &input, sizeof(INPUT));
 }
 
 
@@ -229,6 +229,12 @@ void moveMouse_testing(int x, int y) {
 
 std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 	std::vector<std::pair<int, int>> result;
+	int initialX = x;
+	int initialY = y;
+
+	x = abs(x);
+	y = abs(y);
+
 	int progressTrackerX = x;
 	int progressTrackerY = y;
 
@@ -242,19 +248,16 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 
 	std::uniform_int_distribution<int> distX_14(2, 5);
 	std::uniform_int_distribution<int> distY_14(1, 2);
+	std::uniform_int_distribution<int> distY_14_custom(1, 10); // Erhöhte Wahrscheinlichkeit für 1
+
 
 	std::uniform_int_distribution<int> distX_15(1, 3);
-
-
-	//cout << "x: " << 1.0 / 80 * x << " y: " << 1.0 / 80 * y << endl;
 
 	int stepX = 0;
 	int stepY = 0;
 	while (x > 0 || y > 0) {
 		
-
-			//cout << x << " 1/8 " <<  1.0 / 12 * progressTracker << " 1/6 " <<  1.0 / 5 * progressTracker << " 1/2 " <<  1.0 / 2 * progressTracker << endl;
-
+		if (initialX > 100) {
 			if (x <= 1.0 / 12 * progressTrackerX) {
 				stepX = distX_15(gen);
 			}
@@ -267,22 +270,51 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 			else {
 				stepX = distX_Default(gen);
 			}
-		
+		}
+		else {
+			if (std::uniform_int_distribution<int>(1, 100)(gen) <= 20) {
+				stepX = 0;
+			}
+			else {
+				stepX = distX_15(gen);
+			}
+		}
+
+		if (initialY > 100) {
 			if (y <= 1.0 / 4 * progressTrackerY) {
-				// Führe Aktionen für progressTracker >= 1/4 von y aus
-				stepY = distY_14(gen);
+				if (std::uniform_int_distribution<int>(1, 100)(gen) <= 20) {
+					stepY = 0;
+				}
+				else {
+					stepY = distY_14(gen);
+				}
 			}
 			else if (y <= 1.0 / 2 * progressTrackerY) {
-				// Führe Aktionen für progressTracker >= 1/3 von y aus
 				stepY = distY_13(gen);
 			}
 			else {
 				stepY = distY_Default(gen);
 			}
-		
-
-
-		
+		}
+		else {
+			if (initialX > 350) {
+				if (std::uniform_int_distribution<int>(1, 100)(gen) >= (abs(initialY) - (abs(initialY) / 2))) {
+					stepY = 0;
+				}
+				else {
+					int randomValue = distY_14_custom(gen);
+					stepY = (randomValue <= 8) ? 1 : 2;
+				}
+			}
+			else {
+				if (std::uniform_int_distribution<int>(1, 100)(gen) >= 60) {
+					stepY = 0;
+				}
+				else {
+					stepY = distY_14(gen);
+				}
+			}
+		}
 
 		if (stepX > x) stepX = x;
 		if (stepY > y) stepY = y;
@@ -291,11 +323,23 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 
 		x -= stepX;
 		y -= stepY;
+	}
 
+	if (initialX < 0) {
+		for (auto& step : result) {
+			step.first *= -1;
+		}
+	}
+
+	if (initialY < 0) {
+		for (auto& step : result) {
+			step.second *= -1;
+		}
 	}
 
 	return result;
 }
+
 
 
 
@@ -316,8 +360,8 @@ int main() {
 	//Sleep(1000);//Delete later
 
 
-	int endX = 900; // Endpunkt
-	int endY = 120;
+	int endX = 1800; // Endpunkt
+	int endY = -100;
 
 	std::vector<std::pair<int, int>> steps = splitDistance(endX, endY);
 	int currentX = 0, currentY = 0, count = 0;
@@ -331,7 +375,10 @@ int main() {
 
 	std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")\nPoints to Endpoint: " << count << std::endl;
 
-
+	for (const auto& step : steps) {
+		moveMouse_testing(step.first, step.second);
+		Sleep(1);
+	}
 
 
 	//int y = 0;

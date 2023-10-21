@@ -250,7 +250,6 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 	std::uniform_int_distribution<int> distY_14(1, 2);
 	std::uniform_int_distribution<int> distY_14_custom(1, 10); // Erhöhte Wahrscheinlichkeit für 1
 
-
 	std::uniform_int_distribution<int> distX_15(1, 3);
 
 	int stepX = 0;
@@ -280,9 +279,9 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 			}
 		}
 
-		if (initialY > 100) {
+		if (initialY < 80) {
 			if (y <= 1.0 / 4 * progressTrackerY) {
-				if (std::uniform_int_distribution<int>(1, 100)(gen) <= 20) {
+				if (std::uniform_int_distribution<int>(1, 100)(gen) >= 30) {
 					stepY = 0;
 				}
 				else {
@@ -303,7 +302,7 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 				}
 				else {
 					int randomValue = distY_14_custom(gen);
-					stepY = (randomValue <= 8) ? 1 : 2;
+					stepY = (randomValue <= initialY > 60 ? 8 : 7) ? 1 : 2;
 				}
 			}
 			else {
@@ -360,8 +359,8 @@ int main() {
 	//Sleep(1000);//Delete later
 
 
-	int endX = 1800; // Endpunkt
-	int endY = -100;
+	int endX = 450; // Endpunkt
+	int endY = -400;
 
 	std::vector<std::pair<int, int>> steps = splitDistance(endX, endY);
 	int currentX = 0, currentY = 0, count = 0;

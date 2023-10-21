@@ -227,6 +227,100 @@ void moveMouse_testing(int x, int y) {
 //	return result;
 //}
 
+bool isXGreaterThanY(int x, int y) {
+	return x > y;
+}
+
+std::vector<std::pair<int, int>> makePath(int x, int y) {
+	std::vector<std::pair<int, int>> result;
+	std::vector<int> BiggerNumber;
+	std::vector<int> SmallerNumber;
+
+	int ProcessFirst = 0;
+	int ControlProcessFirst = 0;
+	int ProcessSecond = 0;
+	int ControlProcessSecond = 0;
+
+	bool isXGreater = isXGreaterThanY(x, y);
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	if (isXGreater) {
+		ProcessFirst = abs(x);
+		ControlProcessFirst = abs(x);
+		ProcessSecond = abs(y);
+		ControlProcessSecond = abs(y);
+	}
+	else {
+		ProcessFirst = abs(y);
+		ControlProcessFirst = abs(y);
+		ProcessSecond = abs(x);
+		ControlProcessSecond = abs(x);
+	}
+
+
+	std::uniform_int_distribution<int> distBiggerNumber_Default(6, 9);
+	std::uniform_int_distribution<int> distBiggerNumber_FirstDown(4, 7);
+	std::uniform_int_distribution<int> distBiggerNumber_SecondDown(2, 5);
+	std::uniform_int_distribution<int> distBiggerNumber_ThirdDown(1, 3);
+
+	int step = 0;
+	while (ProcessFirst > 0) {
+
+		if (ProcessFirst <= 1.0 / 12 * ControlProcessFirst) {
+			step = distBiggerNumber_ThirdDown(gen);
+		}
+		else if (ProcessFirst <= 1.0 / 5 * ControlProcessFirst) {
+			step = distBiggerNumber_SecondDown(gen);
+		}
+		else if (ProcessFirst <= 1.0 / 2 * ControlProcessFirst) {
+			step = distBiggerNumber_FirstDown(gen);
+		}
+		else {
+			step = distBiggerNumber_Default(gen);
+		}
+
+		if (step > ProcessFirst) step = ProcessFirst;
+
+		BiggerNumber.push_back(x < 0 ? step *= -1 : step);
+
+		ProcessFirst -= step;
+	}
+
+	std::uniform_int_distribution<int> distSmallerNumber_Default(4, 6);
+	std::uniform_int_distribution<int> distSmallerNumber_FirstDown(3, 4);
+	std::uniform_int_distribution<int> distSmallerNumber_SecondDown(1, 2);
+	std::uniform_int_distribution<int> distSmallerNumber_GenNull(1, 10);
+
+	step = 0;
+	while (ProcessSecond > 0) {
+
+		if (initialX > 350) {
+			if (std::uniform_int_distribution<int>(1, 100)(gen) >= (abs(initialY) - (abs(initialY) / 2))) {
+				step = 0;
+			}
+			else {
+				int randomValue = distY_14_custom(gen);
+				step = (randomValue <= initialY > 60 ? 8 : 7) ? 1 : 2;
+			}
+		}
+		else {
+			if (std::uniform_int_distribution<int>(1, 100)(gen) >= 60) {
+				step = 0;
+			}
+			else {
+				step = distY_14(gen);
+			}
+		}
+
+
+	}
+
+	return result;
+}
+
+
+
 std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 	std::vector<std::pair<int, int>> result;
 	int initialX = x;
@@ -255,7 +349,7 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 	int stepX = 0;
 	int stepY = 0;
 	while (x > 0 || y > 0) {
-		
+
 		if (initialX > 100) {
 			if (x <= 1.0 / 12 * progressTrackerX) {
 				stepX = distX_15(gen);
@@ -362,7 +456,7 @@ int main() {
 	int endX = 450; // Endpunkt
 	int endY = -400;
 
-	std::vector<std::pair<int, int>> steps = splitDistance(endX, endY);
+	std::vector<std::pair<int, int>> steps = makePath(endX, endY);
 	int currentX = 0, currentY = 0, count = 0;
 
 	for (const auto& step : steps) {
@@ -374,10 +468,10 @@ int main() {
 
 	std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")\nPoints to Endpoint: " << count << std::endl;
 
-	for (const auto& step : steps) {
+	/*for (const auto& step : steps) {
 		moveMouse_testing(step.first, step.second);
 		Sleep(1);
-	}
+	}*/
 
 
 	//int y = 0;

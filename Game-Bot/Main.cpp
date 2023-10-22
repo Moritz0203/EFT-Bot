@@ -293,7 +293,7 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 	std::uniform_int_distribution<int> distSmallerNumber_GenNull(1, 10);
 
 	step = 0;
-	while (ProcessSecond > 0) {
+	/*while (ProcessSecond > 0) {
 
 		if (initialX > 350) {
 			if (std::uniform_int_distribution<int>(1, 100)(gen) >= (abs(initialY) - (abs(initialY) / 2))) {
@@ -314,7 +314,7 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 		}
 
 
-	}
+	}*/
 
 	return result;
 }
@@ -453,20 +453,20 @@ int main() {
 	//Sleep(1000);//Delete later
 
 
-	int endX = 450; // Endpunkt
-	int endY = -400;
+	//int endX = 450; // Endpunkt
+	//int endY = -400;
 
-	std::vector<std::pair<int, int>> steps = makePath(endX, endY);
-	int currentX = 0, currentY = 0, count = 0;
+	//std::vector<std::pair<int, int>> steps = makePath(endX, endY);
+	//int currentX = 0, currentY = 0, count = 0;
 
-	for (const auto& step : steps) {
-		currentX += step.first;
-		currentY += step.second;
-		count++;
-		std::cout << "(" << step.first << ", " << step.second << ") -> Aktuelle Position: (" << currentX << ", " << currentY << ")" << std::endl;
-	}
+	//for (const auto& step : steps) {
+	//	currentX += step.first;
+	//	currentY += step.second;
+	//	count++;
+	//	std::cout << "(" << step.first << ", " << step.second << ") -> Aktuelle Position: (" << currentX << ", " << currentY << ")" << std::endl;
+	//}
 
-	std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")\nPoints to Endpoint: " << count << std::endl;
+	//std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")\nPoints to Endpoint: " << count << std::endl;
 
 	/*for (const auto& step : steps) {
 		moveMouse_testing(step.first, step.second);

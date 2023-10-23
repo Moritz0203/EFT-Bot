@@ -313,7 +313,11 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 			}
 		}
 
+		if (step > ProcessSecond) step = ProcessSecond;
 
+		SmallerNumber.push_back(x < 0 ? step *= -1 : step);
+
+		ProcessFirst -= step;
 	}
 
 	return result;

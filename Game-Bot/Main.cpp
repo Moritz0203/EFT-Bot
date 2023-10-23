@@ -293,15 +293,15 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 	std::uniform_int_distribution<int> distSmallerNumber_GenNull(1, 10);
 
 	step = 0;
-	/*while (ProcessSecond > 0) {
+	while (ProcessSecond > 0) {
 
-		if (initialX > 350) {
-			if (std::uniform_int_distribution<int>(1, 100)(gen) >= (abs(initialY) - (abs(initialY) / 2))) {
+		if (ControlProcessSecond > 350) {
+			if (std::uniform_int_distribution<int>(1, 100)(gen) >= (ControlProcessSecond) - (ControlProcessSecond / 2)) {
 				step = 0;
 			}
 			else {
-				int randomValue = distY_14_custom(gen);
-				step = (randomValue <= initialY > 60 ? 8 : 7) ? 1 : 2;
+				int randomValue = distSmallerNumber_GenNull(gen);
+				step = (randomValue <= ControlProcessSecond > 60 ? 8 : 7) ? 1 : 2;
 			}
 		}
 		else {
@@ -309,12 +309,12 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 				step = 0;
 			}
 			else {
-				step = distY_14(gen);
+				step = distSmallerNumber_SecondDown(gen);
 			}
 		}
 
 
-	}*/
+	}
 
 	return result;
 }

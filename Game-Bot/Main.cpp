@@ -238,8 +238,10 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 
 	int ProcessFirst = 0;
 	int ControlProcessFirst = 0;
+	int OriginalProcessFirst = 0;
 	int ProcessSecond = 0;
 	int ControlProcessSecond = 0;
+	int OriginalProcessSecond = 0;
 
 	bool isXGreater = isXGreaterThanY(x, y);
 	std::random_device rd;
@@ -248,14 +250,18 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 	if (isXGreater) {
 		ProcessFirst = abs(x);
 		ControlProcessFirst = abs(x);
+		OriginalProcessFirst = x;
 		ProcessSecond = abs(y);
 		ControlProcessSecond = abs(y);
+		OriginalProcessSecond = y;
 	}
 	else {
 		ProcessFirst = abs(y);
 		ControlProcessFirst = abs(y);
+		OriginalProcessFirst = y;
 		ProcessSecond = abs(x);
 		ControlProcessSecond = abs(x);
+		OriginalProcessSecond = x;
 	}
 
 
@@ -282,7 +288,7 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 
 		if (step > ProcessFirst) step = ProcessFirst;
 
-		BiggerNumber.push_back(x < 0 ? step *= -1 : step);
+		BiggerNumber.push_back(OriginalProcessFirst < 0 ? step *= -1 : step);
 
 		ProcessFirst -= step;
 	}
@@ -315,10 +321,12 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 
 		if (step > ProcessSecond) step = ProcessSecond;
 
-		SmallerNumber.push_back(x < 0 ? step *= -1 : step);
+		SmallerNumber.push_back(OriginalProcessSecond < 0 ? step *= -1 : step);
 
 		ProcessFirst -= step;
 	}
+
+
 
 	return result;
 }

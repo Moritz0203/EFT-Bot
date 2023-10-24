@@ -199,34 +199,6 @@ void moveMouse_testing(int x, int y) {
 
 
 
-//std::vector<std::pair<int, int>> splitDistance(int x, int y) {
-//	std::vector<std::pair<int, int>> result;
-//
-//	std::random_device rd;
-//	std::mt19937 gen(rd());
-//	std::uniform_int_distribution<int> distX(2, 8);
-//	std::uniform_int_distribution<int> distY(2, 8);
-//
-//	int initialStepX = distX(gen);
-//	int initialStepY = distY(gen);
-//
-//	while (x > 0 || y > 0) {
-//		int stepX = std::min(initialStepX, x);
-//		int stepY = std::min(initialStepY, y);
-//
-//		result.push_back(std::make_pair(stepX, stepY));
-//
-//		x -= stepX;
-//		y -= stepY;
-//
-//		// Reduziere die Schrittgröße
-//		initialStepX = std::max(1, initialStepX - 1);
-//		initialStepY = std::max(1, initialStepY - 1);
-//	}
-//
-//	return result;
-//}
-
 bool isXGreaterThanY(int x, int y) {
 	return x > y;
 }
@@ -293,6 +265,8 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 		ProcessFirst -= step;
 		BiggerNumber.push_back(OriginalProcessFirst < 0 ? step *= -1 : step);
 	}
+
+
 
 
 

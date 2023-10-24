@@ -191,7 +191,7 @@ void moveMouse_testing(int x, int y) {
 	input.mi.time = 0;
 	input.mi.dwExtraInfo = 0;
 
-	cout << "x: " << x << " y: " << y << endl;
+	std::cout << "x: " << x << " y: " << y << endl;
 
 	SendInput(1, &input, sizeof(INPUT));
 }
@@ -288,50 +288,92 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 
 		if (step > ProcessFirst) step = ProcessFirst;
 
-		BiggerNumber.push_back(OriginalProcessFirst < 0 ? step *= -1 : step);
+		//cout << "ProcessFirst: " << ProcessFirst << " step: " << step << endl;
 
 		ProcessFirst -= step;
+		BiggerNumber.push_back(OriginalProcessFirst < 0 ? step *= -1 : step);
 	}
+
+
+
+	//int lowerBound = 1;
+	//int upperBound = 60;
+
+	//// Definiere die Skalierungsfaktoren für den Bereich 30-300
+	//double lowerScaleFactor = 30.0;
+	//double upperScaleFactor = 390.0;
+
+	//// Skaliere den Wert von BiggerNumber in den Bereich 1-100
+	//int scaledValue = static_cast<int>((BiggerNumber.size() - lowerScaleFactor) / (upperScaleFactor - lowerScaleFactor) * (upperBound - lowerBound) + lowerBound);
+
+	//// Verwende den ControlProcessSecond-Wert, um den scaledValue weiter zu beeinflussen
+	//scaledValue -= ControlProcessSecond / 10; // Ändere den Skalierungsfaktor nach Bedarf
+
+	//int threshold = 100 - scaledValue;
+
+	//cout << "scaledValue: " << scaledValue << " threshold: " << threshold << endl;
+
+
+
 
 	std::uniform_int_distribution<int> distSmallerNumber_Default(4, 6);
 	std::uniform_int_distribution<int> distSmallerNumber_FirstDown(3, 4);
 	std::uniform_int_distribution<int> distSmallerNumber_SecondDown(1, 2);
 	std::uniform_int_distribution<int> distSmallerNumber_GenNull(1, 10);
 
+	std::cout << (5.0 / 6) * ProcessSecond << " : " << (2.0 / 3) * ProcessSecond << endl;
+
 	step = 0;
 	while (ProcessSecond > 0) {
 
-		if (ControlProcessSecond > 350) {
-			if (std::uniform_int_distribution<int>(1, 100)(gen) >= (ControlProcessSecond) - (ControlProcessSecond / 2)) {
-				step = 0;
-			}
-			else {
-				int randomValue = distSmallerNumber_GenNull(gen);
-				step = (randomValue <= ControlProcessSecond > 60 ? 8 : 7) ? 1 : 2;
-			}
+		if ((ProcessSecond <= (5.0 / 6) * ControlProcessSecond) && (ProcessSecond >= (2.0 / 3) * ControlProcessSecond)) {
+			step = distSmallerNumber_FirstDown(gen);
+		}
+		else if (ProcessSecond <= (2.0 / 3) * ControlProcessSecond) {
+			step = distSmallerNumber_SecondDown(gen);
 		}
 		else {
-			if (std::uniform_int_distribution<int>(1, 100)(gen) >= 60) {
-				step = 0;
-			}
-			else {
-				step = distSmallerNumber_SecondDown(gen);
-			}
+			step = distSmallerNumber_Default(gen);
 		}
 
 		if (step > ProcessSecond) step = ProcessSecond;
 
-		SmallerNumber.push_back(OriginalProcessSecond < 0 ? step *= -1 : step);
+		//cout << "ProcessSecond: " << ProcessSecond << " step: " << step << endl;
+		ProcessSecond -= step;
 
-		ProcessFirst -= step;
+		SmallerNumber.push_back(OriginalProcessSecond < 0 ? step *= -1 : step);
 	}
 
+	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " Differenz: " << BiggerNumber.size() - SmallerNumber.size() << endl;
 
+	while (SmallerNumber.size() < BiggerNumber.size()) {
+		SmallerNumber.push_back(0);
+	}
+
+	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << endl;
+
+	
+	if(isXGreater){
+		if (BiggerNumber.size() == SmallerNumber.size()) {
+			for (size_t i = 0; i < BiggerNumber.size(); ++i) {
+				result.push_back(std::make_pair(BiggerNumber[i], SmallerNumber[i]));
+			}
+		}
+	}
+	else {
+		if (BiggerNumber.size() == SmallerNumber.size()) {
+			for (size_t i = 0; i < BiggerNumber.size(); ++i) {
+				result.push_back(std::make_pair(SmallerNumber[i], BiggerNumber[i]));
+			}
+		}
+	}
+
+	std::cout << result.size() << endl;
 
 	return result;
 }
 
-  
+
 
 std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 	std::vector<std::pair<int, int>> result;
@@ -465,25 +507,25 @@ int main() {
 	//Sleep(1000);//Delete later
 
 
-	//int endX = 450; // Endpunkt
-	//int endY = -400;
+	int endX = 200; // Endpunkt
+	int endY = -50;
 
-	//std::vector<std::pair<int, int>> steps = makePath(endX, endY);
-	//int currentX = 0, currentY = 0, count = 0;
+	std::vector<std::pair<int, int>> steps = makePath(endX, endY);
+	int currentX = 0, currentY = 0, count = 0;
 
-	//for (const auto& step : steps) {
-	//	currentX += step.first;
-	//	currentY += step.second;
-	//	count++;
-	//	std::cout << "(" << step.first << ", " << step.second << ") -> Aktuelle Position: (" << currentX << ", " << currentY << ")" << std::endl;
-	//}
+	for (const auto& step : steps) {
+		currentX += step.first;
+		currentY += step.second;
+		count++;
+		std::cout << "(" << step.first << ", " << step.second << ") -> Aktuelle Position: (" << currentX << ", " << currentY << ")" << std::endl;
+	}
 
-	//std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")\nPoints to Endpoint: " << count << std::endl;
+	std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")\nPoints to Endpoint: " << count << std::endl;
 
-	/*for (const auto& step : steps) {
+	for (const auto& step : steps) {
 		moveMouse_testing(step.first, step.second);
 		Sleep(1);
-	}*/
+	}
 
 
 	//int y = 0;

@@ -78,6 +78,12 @@
     <Filter Include="Source Files\MK\HumanizedMouse">
       <UniqueIdentifier>{0a8a25d4-de37-4a3a-ad45-81a90e97a330}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameBot\Lobby-Overall\Server-RunTimeStorage">
+      <UniqueIdentifier>{a6b1b552-3a5d-48aa-afbc-fca6b67d47f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameBot\Lobby-Overall\Server-RunTimeStorage">
+      <UniqueIdentifier>{78f83e42-d838-47f1-a7a5-5735c082859f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -151,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="RealisticMouse.cpp">
       <Filter>Source Files\MK\HumanizedMouse</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerAPI.cpp">
+      <Filter>Source Files\GameBot\Lobby-Overall\Server-RunTimeStorage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +243,9 @@
     </ClInclude>
     <ClInclude Include="RealisticMouse.h">
       <Filter>Header Files\MK\HumanizedMouse</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerAPI.h">
+      <Filter>Header Files\GameBot\Lobby-Overall\Server-RunTimeStorage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -131,6 +131,7 @@
     <ClCompile Include="CaseProcessing.cpp" />
     <ClCompile Include="OueueProcessing.cpp" />
     <ClCompile Include="RealisticMouse.cpp" />
+    <ClCompile Include="ServerAPI.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="LobbyControler.cpp" />
     <ClCompile Include="GameControler.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="human_mouse.h" />
     <ClInclude Include="OueueProcessing.h" />
     <ClInclude Include="RealisticMouse.h" />
+    <ClInclude Include="ServerAPI.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="LobbyControler.h" />
     <ClInclude Include="GameControler.h" />

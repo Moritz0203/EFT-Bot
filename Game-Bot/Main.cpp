@@ -100,6 +100,9 @@ class HumanizedMouse
 		return distribution(gen);
 	}
 
+	bool isXGreaterThanY(int x, int y) {
+		return x > y;
+	}
 
 public:
 
@@ -320,12 +323,15 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 
 	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " Differenz: " << BiggerNumber.size() - SmallerNumber.size() << endl;
 
+	int div = BiggerNumber.size() - SmallerNumber.size();
+	int Overhead = (div / 2);
+
+
+
+	//delet later
 	while (SmallerNumber.size() < BiggerNumber.size()) {
 		SmallerNumber.push_back(0);
 	}
-
-	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << endl;
-
 	
 	if(isXGreater){
 		if (BiggerNumber.size() == SmallerNumber.size()) {
@@ -341,8 +347,6 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 			}
 		}
 	}
-
-	std::cout << result.size() << endl;
 
 	return result;
 }

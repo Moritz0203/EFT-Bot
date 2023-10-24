@@ -524,36 +524,4 @@ int main() {
 		moveMouse_testing(step.first, step.second);
 		Sleep(1);
 	}
-
-
-	//int y = 0;
-	//int x = 0;
-	//while (true)
-	//{
-	//	/*while (y > -100)
-	//	{
-	//		moveMouse(2, -1);
-	//		y--;
-	//		Sleep(1);
-	//	}
-	//	while (y < 100)
-	//	{
-	//		moveMouse(2, 1);
-	//		y++;
-	//		Sleep(1);
-	//	}*/
-
-	//	/*while (x > -1800)
-	//	{
-	//		moveMouse(-1, 0);
-	//		x--;
-	//		Sleep(1);
-	//	}*/
-
-	//	while (y > -400) {
-	//		moveMouse(0, -1);
-	//		y--;
-	//		Sleep(1);
-	//	}
-	//}
 }

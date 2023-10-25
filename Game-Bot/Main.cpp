@@ -328,6 +328,24 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " Differenz: " << BiggerNumber.size() - SmallerNumber.size() << " Overhead: " << Overhead << endl;
 
 
+	while (Overhead > 0) {
+		step = distSmallerNumber_SecondDown(gen);
+
+		if (step > Overhead) step = Overhead;
+
+		Overhead -= step;
+
+		if(OriginalProcessSecond < 0)
+			step *= -1;
+
+		if (Overhead < OverheadSplited) 
+			step *= -1;
+
+		SmallerNumber.push_back(step);
+	}
+
+
+
 
 
 	//delet later

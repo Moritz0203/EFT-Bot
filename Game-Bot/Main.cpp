@@ -321,10 +321,12 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 		SmallerNumber.push_back(OriginalProcessSecond < 0 ? step *= -1 : step);
 	}
 
-	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " Differenz: " << BiggerNumber.size() - SmallerNumber.size() << endl;
-
 	int div = BiggerNumber.size() - SmallerNumber.size();
 	int Overhead = (div / 2);
+	int OverheadSplited = (Overhead / 2);
+
+	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " Differenz: " << BiggerNumber.size() - SmallerNumber.size() << " Overhead: " << Overhead << endl;
+
 
 
 

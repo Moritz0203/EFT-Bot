@@ -349,7 +349,6 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 
 
 
-
 	//delet later
 	while (SmallerNumber.size() < BiggerNumber.size()) {
 		SmallerNumber.push_back(0);

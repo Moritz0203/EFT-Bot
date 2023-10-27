@@ -345,7 +345,7 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 	}
 
 
-	///Make 0 in to the smaller number vector
+	///insert 0 in to the smaller number vector
 
 
 

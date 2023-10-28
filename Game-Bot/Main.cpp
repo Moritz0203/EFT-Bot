@@ -135,7 +135,7 @@ public:
 
 		/// Y
 		if (rotationY == AutoRotationY) {
-			YRotation = getRandomValueForAutoRotation(-50, 50);
+			YRotation = getRandomValueForAutoRotation(-20, 20);
 		}
 		else {
 			YRotation = static_cast<int>(rotationY);
@@ -272,7 +272,6 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 
 
 
-
 	//int lowerBound = 1;
 	//int upperBound = 60;
 
@@ -322,14 +321,14 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 	}
 
 	int div = BiggerNumber.size() - SmallerNumber.size();
-	int Overhead = div / 2;
+	int Overhead = div / 5;
 	int OverheadSplited = (Overhead / 2);
 
 	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " Differenz: " << BiggerNumber.size() - SmallerNumber.size() << " Overhead: " << Overhead << " OverheadSplited: " << OverheadSplited<< endl;
 
 
 	while (Overhead > 0) {
-		step = distSmallerNumber_SecondDown(gen);
+		step = /*distSmallerNumber_SecondDown(gen)*/1;
 
 		if (step > Overhead) step = Overhead;
 
@@ -352,13 +351,25 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 
 	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " zeroCount: " << zeroCount << endl;
 
+	int currentIndex = SmallerNumber.size() - 1;
+	while (zeroCount > 0) {
+		
+		if (currentIndex < 0) {
+			currentIndex = SmallerNumber.size() - 1;
+			continue;
+		}
 
+		if (SmallerNumber[currentIndex] >= 3 || SmallerNumber[currentIndex] <= -3) {
+			currentIndex = SmallerNumber.size() - 1;
+			continue;
+		}
 
+		if (std::uniform_int_distribution<int>(1, 100)(gen) >= 40) {
+			SmallerNumber.insert(SmallerNumber.begin() + currentIndex, 0);
+			zeroCount--;
+		}
 
-
-	//delet later
-	while (SmallerNumber.size() < BiggerNumber.size()) {
-		SmallerNumber.push_back(0);
+		currentIndex--;
 	}
 	
 	if(isXGreater){
@@ -505,13 +516,13 @@ int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
 
-	//const HWND hWND = GetMat::FindeWindow();
-	//SetForegroundWindow(hWND);
-	//Sleep(1000);//Delete later
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(1000);//Delete later
 
 
 	int endX = 900; // Endpunkt
-	int endY = -100;
+	int endY = -20;
 
 	std::vector<std::pair<int, int>> steps = makePath(endX, endY);
 	int currentX = 0, currentY = 0, count = 0;
@@ -527,6 +538,7 @@ int main() {
 
 	for (const auto& step : steps) {
 		moveMouse_testing(step.first, step.second);
-		Sleep(1);
+		std::this_thread::sleep_for(std::chrono::nanoseconds(3700));
+		//Sleep(0.999);
 	}
 }

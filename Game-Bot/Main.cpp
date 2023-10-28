@@ -322,10 +322,10 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 	}
 
 	int div = BiggerNumber.size() - SmallerNumber.size();
-	int Overhead = (div / 2);
+	int Overhead = div / 2;
 	int OverheadSplited = (Overhead / 2);
 
-	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " Differenz: " << BiggerNumber.size() - SmallerNumber.size() << " Overhead: " << Overhead << endl;
+	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " Differenz: " << BiggerNumber.size() - SmallerNumber.size() << " Overhead: " << Overhead << " OverheadSplited: " << OverheadSplited<< endl;
 
 
 	while (Overhead > 0) {
@@ -346,6 +346,13 @@ std::vector<std::pair<int, int>> makePath(int x, int y) {
 
 
 	///insert 0 in to the smaller number vector
+
+	div = BiggerNumber.size() - SmallerNumber.size();
+	int zeroCount = div;
+
+	std::cout << "BiggerNumber: " << BiggerNumber.size() << " SmallerNumber: " << SmallerNumber.size() << " zeroCount: " << zeroCount << endl;
+
+
 
 
 
@@ -503,8 +510,8 @@ int main() {
 	//Sleep(1000);//Delete later
 
 
-	int endX = 200; // Endpunkt
-	int endY = -50;
+	int endX = 900; // Endpunkt
+	int endY = -100;
 
 	std::vector<std::pair<int, int>> steps = makePath(endX, endY);
 	int currentX = 0, currentY = 0, count = 0;

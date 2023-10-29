@@ -137,7 +137,6 @@ class HumanizedMouse
 			OriginalProcessSecond = x;
 		}
 
-
 		std::uniform_int_distribution<int> distBiggerNumber_Default(6, 9);
 		std::uniform_int_distribution<int> distBiggerNumber_FirstDown(4, 7);
 		std::uniform_int_distribution<int> distBiggerNumber_SecondDown(2, 5);

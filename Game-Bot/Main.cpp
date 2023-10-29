@@ -512,6 +512,7 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 /// 90  degree up   = ~-800 pixels
 /// 45  degree up   = ~-400 pixels
 
+
 int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 

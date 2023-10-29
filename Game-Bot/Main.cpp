@@ -515,11 +515,9 @@ std::vector<std::pair<int, int>> splitDistance(int x, int y) {
 int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
-
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
-
 
 	int endX = 900; // Endpunkt
 	int endY = -20;

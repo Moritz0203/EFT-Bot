@@ -169,8 +169,6 @@ class HumanizedMouse
 		std::uniform_int_distribution<int> distSmallerNumber_SecondDown(1, 2);
 		std::uniform_int_distribution<int> distSmallerNumber_GenNull(1, 10);
 
-		std::cout << (5.0 / 6) * ProcessSecond << " : " << (2.0 / 3) * ProcessSecond << endl;
-
 		step = 0;
 		while (ProcessSecond > 0) {
 
@@ -266,7 +264,7 @@ public:
 	void MoveToDirection(RotationX rotationX = AutoRotationX, RotationY rotationY = AutoRotationY, uint speedIn_NS = 900) {
 		int XRotation = 0;
 		int YRotation = 0;
-		vector<pair<int, int>> mousePositions;
+		vector<pair<int, int>> mousePath;
 
 		/// X
 		if (rotationX == TurnAround) {
@@ -290,8 +288,7 @@ public:
 			YRotation = static_cast<int>(rotationY);
 		}
 
-
-
+		mousePath = makePath(XRotation, YRotation); 
 
 	}
 };
@@ -337,6 +334,7 @@ class HumanizedMovement : public HumanizedMouse, public HumanizedKeyboard
 
 
 namespace Testing {
+	
 	void moveMouse_testing(int x, int y) {
 		INPUT input;
 		input.type = INPUT_MOUSE;
@@ -353,11 +351,26 @@ namespace Testing {
 	}
 
 
+	void KeyBoard_testing() {
+		INPUT input;
+		input.type = INPUT_KEYBOARD;
+		input.ki.wVk = 0x41;
+		input.ki.wScan = 0;
+		input.ki.dwFlags = 0;
+		input.ki.time = 0;
+		input.ki.dwExtraInfo = 0;
+
+		SendInput(1, &input, sizeof(INPUT));
+
+		input.ki.dwFlags = KEYEVENTF_KEYUP;
+		SendInput(1, &input, sizeof(INPUT));
+	}
 
 
 	bool isXGreaterThanY(int x, int y) {
 		return x > y;
 	}
+
 
 	std::vector<std::pair<int, int>> makePath(int x, int y) {
 		std::vector<std::pair<int, int>> result;
@@ -508,7 +521,6 @@ namespace Testing {
 
 		return result;
 	}
-
 
 
 	std::vector<std::pair<int, int>> splitDistance(int x, int y) {

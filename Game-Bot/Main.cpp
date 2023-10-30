@@ -680,7 +680,6 @@ int main() {
 	Sleep(10000); // Zum Beispiel 1 Sekunde
 
 
-
 	// Setze die Flag auf true
 	bool flag = true;
 

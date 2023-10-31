@@ -297,17 +297,58 @@ public:
 typedef enum e_direction {
 	Forward = 0,
 	Backwards = 1,
-	AutoForward = 2,
-	SprintForward = 3,
-	AutoSprintForward = 4,
+	Right = 2,
+	Left = 3,
+	AutoForward = 4,
+	SprintForward = 5,
+	AutoSprintForward = 6,
 
 	NoDirection = 10,
 }Direction;
 
-class HumanizedKeyboard
-{
+enum ErrorCodes {
+	InvalidDirection = 10,
+	DirectionAlreadyExists = 11,
+	DirectionConflict = 12,
+};
+
+class HumanizedKeyboard {
+
+	struct DirectionState {
+		const Direction direction;
+		bool KillProcess; // true = Kill Process, false = Continue Process
+		bool SoftKillProcess; // true = Soft Kill Process, false = Continue Process
+
+		DirectionState(Direction dir, bool killProcess, bool softKillProcess)
+			: direction(dir) {
+
+			if (killProcess && softKillProcess) {
+				KillProcess = true;
+				SoftKillProcess = false;
+			}
+			else {
+				KillProcess = killProcess;
+				SoftKillProcess = softKillProcess;
+			}
+		}
+	};
+
+	int CheckForError(Direction direction, Direction conflictDirection) {
+		for (const DirectionState& dirState : directionStates) {
+			if (dirState.direction == direction) {
+				return DirectionAlreadyExists;
+			}
+
+			if (dirState.direction == conflictDirection) {
+				return DirectionConflict;
+			}
+		}
+
+		return 0;
+	}
 
 
+	vector<DirectionState> directionStates{};
 
 public:
 
@@ -315,7 +356,64 @@ public:
 
 	}
 
-	void MoveToDirection(Direction direction = NoDirection, uint speedIn_NS = 900) {
+	int MoveToDirection(Direction direction = NoDirection) {
+		int errorCode = 0;
+
+		switch (direction) {
+			case NoDirection:
+				return InvalidDirection;
+				break;
+
+			case Forward:
+				errorCode = CheckForError(direction, Backwards);
+				if (errorCode != 0) {
+					return errorCode;
+				}
+				break;
+
+			case Backwards:
+				errorCode = CheckForError(direction, Forward);
+				if (errorCode != 0) {
+					return errorCode;
+				}
+				break;
+
+			case Right:
+				errorCode = CheckForError(direction, Left);
+				if (errorCode != 0) {
+					return errorCode;
+				}
+				break;
+
+			case Left:
+				errorCode = CheckForError(direction, Right);
+				if (errorCode != 0) {
+					return errorCode;
+				}
+				break;
+
+			case AutoForward:
+				errorCode = CheckForError(direction, Backwards);
+				if (errorCode != 0) {
+					return errorCode;
+				}
+				break;
+
+			case SprintForward:
+				errorCode = CheckForError(direction, Backwards);
+				if (errorCode != 0) {
+					return errorCode;
+				}
+				break;
+
+			case AutoSprintForward:
+				errorCode = CheckForError(direction, Backwards);
+				if (errorCode != 0) {
+					return errorCode;
+				}
+				break;
+		}
+
 
 	}
 };
@@ -347,22 +445,6 @@ namespace Testing {
 
 		std::cout << "x: " << x << " y: " << y << endl;
 
-		SendInput(1, &input, sizeof(INPUT));
-	}
-
-
-	void KeyBoard_testing() {
-		INPUT input;
-		input.type = INPUT_KEYBOARD;
-		input.ki.wVk = 0x41;
-		input.ki.wScan = 0;
-		input.ki.dwFlags = 0;
-		input.ki.time = 0;
-		input.ki.dwExtraInfo = 0;
-
-		SendInput(1, &input, sizeof(INPUT));
-
-		input.ki.dwFlags = KEYEVENTF_KEYUP;
 		SendInput(1, &input, sizeof(INPUT));
 	}
 

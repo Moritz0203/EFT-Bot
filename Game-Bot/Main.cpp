@@ -288,7 +288,7 @@ public:
 			YRotation = static_cast<int>(rotationY);
 		}
 
-		mousePath = makePath(XRotation, YRotation); 
+		mousePath = makePath(XRotation, YRotation);
 
 	}
 };
@@ -334,7 +334,7 @@ class HumanizedMovement : public HumanizedMouse, public HumanizedKeyboard
 
 
 namespace Testing {
-	
+
 	void moveMouse_testing(int x, int y) {
 		INPUT input;
 		input.type = INPUT_MOUSE;
@@ -653,51 +653,53 @@ namespace Testing {
 int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
-	const HWND hWND = GetMat::FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(1000);//Delete later
+	//const HWND hWND = GetMat::FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(1000);//Delete later
+
+	//INPUT input[2];
+	//input[0].type = INPUT_KEYBOARD;
+	//input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
+	//input[0].ki.dwFlags = 0;
+
+	//// SendInput für das Drücken von 'W'
+	//SendInput(1, &input[0], sizeof(INPUT));
+
+	//Sleep(1000);
+
+	//// Simuliere das Drücken der Shift-Taste
+	//input[1].type = INPUT_KEYBOARD;
+	//input[1].ki.wVk = VK_SHIFT; // Shift-Taste
+	//input[1].ki.dwFlags = 0;
+
+	//// SendInput für das Drücken der Shift-Taste
+	//SendInput(1, &input[1], sizeof(INPUT));
+	//
+	//// Warte eine Weile
+	//Sleep(10000); // Zum Beispiel 1 Sekunde
 
 
-	INPUT input[2];
-	input[0].type = INPUT_KEYBOARD;
-	input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
-	input[0].ki.dwFlags = 0;
+	//// Setze die Flag auf true
+	//bool flag = true;
 
-	// SendInput für das Drücken von 'W'
-	SendInput(1, &input[0], sizeof(INPUT));
+	//// Simuliere das Loslassen der Shift-Taste
+	//input[1].ki.dwFlags = KEYEVENTF_KEYUP;
 
-	Sleep(1000);
-
-	// Simuliere das Drücken der Shift-Taste
-	input[1].type = INPUT_KEYBOARD;
-	input[1].ki.wVk = VK_SHIFT; // Shift-Taste
-	input[1].ki.dwFlags = 0;
-
-	// SendInput für das Drücken der Shift-Taste
-	SendInput(1, &input[1], sizeof(INPUT));
-	
-	// Warte eine Weile
-	Sleep(10000); // Zum Beispiel 1 Sekunde
+	//// SendInput für das Loslassen der Shift-Taste
+	//SendInput(1, &input[1], sizeof(INPUT));
 
 
-	// Setze die Flag auf true
-	bool flag = true;
+	//// Warte eine Weile
+	//Sleep(500); // Zum Beispiel 1 Sekunde
 
-	// Simuliere das Loslassen der Shift-Taste
-	input[1].ki.dwFlags = KEYEVENTF_KEYUP;
+	//// Simuliere das Loslassen der W-Taste
+	//input[0].ki.dwFlags = KEYEVENTF_KEYUP;
 
-	// SendInput für das Loslassen der Shift-Taste
-	SendInput(1, &input[1], sizeof(INPUT));
+	//// SendInput für das Loslassen von 'W'
+	//SendInput(1, &input[0], sizeof(INPUT));
 
 
-	// Warte eine Weile
-	Sleep(500); // Zum Beispiel 1 Sekunde
 
-	// Simuliere das Loslassen der W-Taste
-	input[0].ki.dwFlags = KEYEVENTF_KEYUP;
-
-	// SendInput für das Loslassen von 'W'
-	SendInput(1, &input[0], sizeof(INPUT));
 
 
 
@@ -721,4 +723,22 @@ int main() {
 	//	std::this_thread::sleep_for(std::chrono::nanoseconds(3700));
 	//	//Sleep(0.999);
 	//}
+
+
+
+
+	std::string text;
+	std::cout << "Enter a message to encrypt: ";
+	std::getline(std::cin, text);
+
+	std::cout << "Encrypted message: ";
+	for (char c : text) {
+		int encryptedChar = static_cast<int>(c);
+		std::cout << encryptedChar << " ";
+	}
+
+	std::cout << std::endl;
+
+
+
 }

@@ -349,6 +349,23 @@ class HumanizedKeyboard {
 		return 0;
 	}
 
+	///x = 50, y = 1035, width = 146, height = 3
+	int CheckStaminaBar() {
+		const HWND hWND = GetMat::FindeWindow();
+		cv::Mat MatScreen = GetMat::getMatWithRect(hWND, { 50, 1035 }, 146, 3);
+
+		/// 142 , 1 
+		/// 4 , 1 
+		
+		cv::Point pointFull(142, 2);
+		cv::Point pointEmpty(4, 2);
+
+		cv::Vec3b colorFull = MatScreen.at<cv::Vec3b>(pointFull);
+		cv::Vec3b colorEmpty = MatScreen.at<cv::Vec3b>(pointEmpty);
+
+		cv::Vec3b targetColorFull(41.6, 50.2, 12.5);
+		cv::Vec3b targetColorEmpty(0, 0, 0);
+	}
 
 	void ForwardMove(shared_ptr<DirectionState> directionState_ptr) {
 		INPUT input[1];
@@ -360,7 +377,7 @@ class HumanizedKeyboard {
 		SendInput(1, &input[0], sizeof(INPUT));
 
 		while (true) {
-			std::unique_lock<std::mutex> lock(mtx);
+			std::unique_lock<std::mutex> lock(mtx_KB);
 			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
 		}
 
@@ -381,7 +398,7 @@ class HumanizedKeyboard {
 		SendInput(1, &input[0], sizeof(INPUT));
 
 		while (true) {
-			std::unique_lock<std::mutex> lock(mtx);
+			std::unique_lock<std::mutex> lock(mtx_KB);
 			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
 		}
 
@@ -402,7 +419,7 @@ class HumanizedKeyboard {
 		SendInput(1, &input[0], sizeof(INPUT));
 
 		while (true) {
-			std::unique_lock<std::mutex> lock(mtx);
+			std::unique_lock<std::mutex> lock(mtx_KB);
 			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
 		}
 
@@ -423,7 +440,7 @@ class HumanizedKeyboard {
 		SendInput(1, &input[0], sizeof(INPUT));
 
 		while (true) {
-			std::unique_lock<std::mutex> lock(mtx);
+			std::unique_lock<std::mutex> lock(mtx_KB);
 			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
 		}
 
@@ -834,29 +851,40 @@ namespace Testing {
 		return result;
 	}
 
+
+
+	///x = 50, y = 1035, width = 146, height = 3
+	int CheckStaminaBar() {
+		const HWND hWND = GetMat::FindeWindow();
+		cv::Mat MatScreen = GetMat::getMatWithRect(hWND, { 50, 1035 }, 146, 3);
+
+		/// 142 , 1 
+		/// 4 , 1 
+
+		cv::Point pointFull(142, 2);
+		cv::Point pointEmpty(4, 2);
+
+		cv::Vec3b colorFull = MatScreen.at<cv::Vec3b>(pointFull);
+		cv::Vec3b colorEmpty = MatScreen.at<cv::Vec3b>(pointEmpty);
+
+		cv::Vec3b targetColorFull(106, 128, 32);
+		cv::Vec3b targetColorEmpty(0, 0, 0);
+
+		if (colorFull == targetColorFull) {
+			return 100;
+		}
+		else if (colorEmpty == targetColorEmpty) {
+			return 0;
+		}
+		else {
+			return 50;
+		}
+	}
+
 }
 
 
-std::mutex mtx;
-std::condition_variable C_V;
 
-
-bool conditionA1 = false;
-bool conditionA2 = false;
-bool conditionB1 = false;
-bool conditionB2 = false;
-
-void waitForConditionsA(const std::string& threadName) {
-	std::unique_lock<std::mutex> lock(mtx);
-	C_V.wait(lock, [] { return conditionA1 || conditionA2; });
-	std::cout << "Thread " << threadName << " wacht auf." << std::endl;
-}
-
-void waitForConditionsB(const std::string& threadName) {
-	std::unique_lock<std::mutex> lock(mtx);
-	C_V.wait(lock, [] { return conditionB1 || conditionB2; });
-	std::cout << "Thread " << threadName << " wacht auf." << std::endl;
-}
 
 
 /// 180 degree turn = ~1800 pixels
@@ -870,9 +898,17 @@ void waitForConditionsB(const std::string& threadName) {
 int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
-	//const HWND hWND = GetMat::FindeWindow();
-	//SetForegroundWindow(hWND);
-	//Sleep(1000);//Delete later
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(1000);//Delete later
+
+	while(GetAsyncKeyState(VK_F4) == 0)	{
+
+		cout << Testing::CheckStaminaBar() << endl;
+
+		Sleep(100);
+	}
+
 
 	//INPUT input[2];
 	//input[0].type = INPUT_KEYBOARD;
@@ -920,26 +956,7 @@ int main() {
 
 
 
-	std::thread threadA(waitForConditionsA, "A");
-	std::thread threadB(waitForConditionsB, "B");
 
-	std::this_thread::sleep_for(std::chrono::seconds(2));
-
-	
-	conditionA1 = true;
-	
-	C_V.notify_all();
-
-	Sleep(1000);
-
-
-	conditionB2 = true;
-	
-	C_V.notify_all();
-
-	threadA.join();
-	threadB.join();
-	return 0;
 
 
 	//int endX = 900; // Endpunkt

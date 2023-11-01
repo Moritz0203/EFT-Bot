@@ -877,7 +877,7 @@ namespace Testing {
 			return 0;
 		}
 		else {
-			return 50;
+			return -1;
 		}
 	}
 

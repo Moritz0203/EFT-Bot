@@ -53,8 +53,8 @@
 
 
 typedef enum e_rotation_x {
-	Left = -900,
-	Right = 900,
+	LeftX = -900,
+	RightX = 900,
 	HalfLeft = -400,
 	HalfRight = 400,
 
@@ -313,6 +313,8 @@ enum ErrorCodes {
 };
 
 class HumanizedKeyboard {
+	std::mutex mtx_KB;
+	std::condition_variable cv_KB;
 
 	struct DirectionState {
 		const Direction direction;
@@ -348,7 +350,109 @@ class HumanizedKeyboard {
 	}
 
 
+	void ForwardMove(shared_ptr<DirectionState> directionState_ptr) {
+		INPUT input[1];
+		input[0].type = INPUT_KEYBOARD;
+		input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
+		input[0].ki.dwFlags = 0;
+
+		// SendInput für das Drücken von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+
+		while (true) {
+			std::unique_lock<std::mutex> lock(mtx);
+			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		}
+
+		// Simuliere das Loslassen der W-Taste
+		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
+
+		// SendInput für das Loslassen von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+	}
+
+	void BackwardsMove(shared_ptr<DirectionState> directionState_ptr) {
+		INPUT input[1];
+		input[0].type = INPUT_KEYBOARD;
+		input[0].ki.wVk = 'S'; // Hier die gewünschte Taste
+		input[0].ki.dwFlags = 0;
+
+		// SendInput für das Drücken von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+
+		while (true) {
+			std::unique_lock<std::mutex> lock(mtx);
+			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		}
+
+		// Simuliere das Loslassen der W-Taste
+		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
+
+		// SendInput für das Loslassen von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+	}
+
+	void RightMove(shared_ptr<DirectionState> directionState_ptr) {
+		INPUT input[1];
+		input[0].type = INPUT_KEYBOARD;
+		input[0].ki.wVk = 'D'; // Hier die gewünschte Taste
+		input[0].ki.dwFlags = 0;
+
+		// SendInput für das Drücken von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+
+		while (true) {
+			std::unique_lock<std::mutex> lock(mtx);
+			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		}
+
+		// Simuliere das Loslassen der W-Taste
+		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
+
+		// SendInput für das Loslassen von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+	}
+
+	void LeftMove(shared_ptr<DirectionState> directionState_ptr) {
+		INPUT input[1];
+		input[0].type = INPUT_KEYBOARD;
+		input[0].ki.wVk = 'A'; // Hier die gewünschte Taste
+		input[0].ki.dwFlags = 0;
+
+		// SendInput für das Drücken von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+
+		while (true) {
+			std::unique_lock<std::mutex> lock(mtx);
+			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		}
+
+		// Simuliere das Loslassen der W-Taste
+		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
+
+		// SendInput für das Loslassen von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+	}
+
+	void SprintForwardMove(shared_ptr<DirectionState> directionState_ptr) {
+
+	}
+
+
+
+	void AutoForwardMove(shared_ptr<DirectionState> directionState_ptr) {
+
+	}
+
+	void AutoSprintForwardMove(shared_ptr<DirectionState> directionState_ptr) {
+
+	}
+
+
 	vector<DirectionState> directionStates{};
+
+	std::thread DirectionThread;
+	std::thread LeftRightThread;
 
 public:
 
@@ -720,8 +824,26 @@ namespace Testing {
 }
 
 
+std::mutex mtx;
+std::condition_variable C_V;
 
 
+bool conditionA1 = false;
+bool conditionA2 = false;
+bool conditionB1 = false;
+bool conditionB2 = false;
+
+void waitForConditionsA(const std::string& threadName) {
+	std::unique_lock<std::mutex> lock(mtx);
+	C_V.wait(lock, [] { return conditionA1 || conditionA2; });
+	std::cout << "Thread " << threadName << " wacht auf." << std::endl;
+}
+
+void waitForConditionsB(const std::string& threadName) {
+	std::unique_lock<std::mutex> lock(mtx);
+	C_V.wait(lock, [] { return conditionB1 || conditionB2; });
+	std::cout << "Thread " << threadName << " wacht auf." << std::endl;
+}
 
 
 /// 180 degree turn = ~1800 pixels
@@ -735,57 +857,76 @@ namespace Testing {
 int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
-	const HWND hWND = GetMat::FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(1000);//Delete later
+	//const HWND hWND = GetMat::FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(1000);//Delete later
 
-	INPUT input[2];
-	input[0].type = INPUT_KEYBOARD;
-	input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
-	input[0].ki.dwFlags = 0;
+	//INPUT input[2];
+	//input[0].type = INPUT_KEYBOARD;
+	//input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
+	//input[0].ki.dwFlags = 0;
 
-	// SendInput für das Drücken von 'W'
-	SendInput(1, &input[0], sizeof(INPUT));
+	//// SendInput für das Drücken von 'W'
+	//SendInput(1, &input[0], sizeof(INPUT));
+
+	//Sleep(1000);
+
+	//// Simuliere das Drücken der Shift-Taste
+	//input[1].type = INPUT_KEYBOARD;
+	//input[1].ki.wVk = VK_SHIFT; // Shift-Taste
+	//input[1].ki.dwFlags = 0;
+
+	//// SendInput für das Drücken der Shift-Taste
+	//SendInput(1, &input[1], sizeof(INPUT));
+
+
+
+	//// Warte eine Weile
+	//Sleep(10000); // Zum Beispiel 1 Sekunde
+
+
+
+	//// Setze die Flag auf true
+	//bool flag = true;
+
+	//// Simuliere das Loslassen der Shift-Taste
+	//input[1].ki.dwFlags = KEYEVENTF_KEYUP;
+
+	//// SendInput für das Loslassen der Shift-Taste
+	//SendInput(1, &input[1], sizeof(INPUT));
+
+
+	//// Warte eine Weile
+	//Sleep(500); // Zum Beispiel 1 Sekunde
+
+	//// Simuliere das Loslassen der W-Taste
+	//input[0].ki.dwFlags = KEYEVENTF_KEYUP;
+
+	//// SendInput für das Loslassen von 'W'
+	//SendInput(1, &input[0], sizeof(INPUT));
+
+
+
+	std::thread threadA(waitForConditionsA, "A");
+	std::thread threadB(waitForConditionsB, "B");
+
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+
+	
+	conditionA1 = true;
+	
+	C_V.notify_all();
 
 	Sleep(1000);
 
-	// Simuliere das Drücken der Shift-Taste
-	input[1].type = INPUT_KEYBOARD;
-	input[1].ki.wVk = VK_SHIFT; // Shift-Taste
-	input[1].ki.dwFlags = 0;
 
-	// SendInput für das Drücken der Shift-Taste
-	SendInput(1, &input[1], sizeof(INPUT));
+	conditionB2 = true;
+	
+	C_V.notify_all();
 
-
-
-	// Warte eine Weile
-	Sleep(10000); // Zum Beispiel 1 Sekunde
-
-
-
-	// Setze die Flag auf true
-	bool flag = true;
-
-	// Simuliere das Loslassen der Shift-Taste
-	input[1].ki.dwFlags = KEYEVENTF_KEYUP;
-
-	// SendInput für das Loslassen der Shift-Taste
-	SendInput(1, &input[1], sizeof(INPUT));
-
-
-	// Warte eine Weile
-	Sleep(500); // Zum Beispiel 1 Sekunde
-
-	// Simuliere das Loslassen der W-Taste
-	input[0].ki.dwFlags = KEYEVENTF_KEYUP;
-
-	// SendInput für das Loslassen von 'W'
-	SendInput(1, &input[0], sizeof(INPUT));
-
-
-
-
+	threadA.join();
+	threadB.join();
+	return 0;
 
 
 	//int endX = 900; // Endpunkt

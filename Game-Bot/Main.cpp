@@ -356,15 +356,25 @@ class HumanizedKeyboard {
 
 		/// 142 , 1 
 		/// 4 , 1 
-		
+
 		cv::Point pointFull(142, 2);
 		cv::Point pointEmpty(4, 2);
 
 		cv::Vec3b colorFull = MatScreen.at<cv::Vec3b>(pointFull);
 		cv::Vec3b colorEmpty = MatScreen.at<cv::Vec3b>(pointEmpty);
 
-		cv::Vec3b targetColorFull(41.6, 50.2, 12.5);
+		cv::Vec3b targetColorFull(106, 128, 32);
 		cv::Vec3b targetColorEmpty(0, 0, 0);
+
+		if (colorFull == targetColorFull) {
+			return 100;
+		}
+		else if (colorEmpty == targetColorEmpty) {
+			return 0;
+		}
+		else {
+			return -1;
+		}
 	}
 
 	void ForwardMove(shared_ptr<DirectionState> directionState_ptr) {
@@ -451,9 +461,77 @@ class HumanizedKeyboard {
 		SendInput(1, &input[0], sizeof(INPUT));
 	}
 
-	void SprintForwardMove(shared_ptr<DirectionState> directionState_ptr) {
+	void SprindForwardMove(shared_ptr<DirectionState> directionState_ptr) {
+
+	}
 
 
+
+	void SprintForwardControler(shared_ptr<DirectionState> directionState_ptr) {
+		std::thread InternalThread;
+		DirectionState ForwardState(Forward, false, false);
+		DirectionState SprintForwardState(SprintForward, false, false);
+		int stamina = CheckStaminaBar();
+
+		if (stamina == -1) {
+			InternalThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(ForwardState));
+
+			while (true)
+			{
+				stamina = CheckStaminaBar();
+
+				if(stamina == 100)
+					break;
+
+				std::this_thread::sleep_for(std::chrono::milliseconds(500));
+			}
+
+			ForwardState.KillProcess = true;
+			cv_KB.notify_one();
+			InternalThread.join();
+		}
+
+		bool isSprintForward = true;
+		while (true) {
+			stamina = CheckStaminaBar();
+
+			if (stamina == 0) {
+
+				if (isSprintForward) {
+					SprintForwardState.KillProcess = true;
+					cv_KB.notify_one();
+					InternalThread.join();
+				}
+
+				InternalThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(ForwardState));
+
+				isSprintForward = false;
+			}
+			else if (stamina == 100) {
+				
+				if (!isSprintForward) {
+					ForwardState.KillProcess = true;
+					cv_KB.notify_one();
+					InternalThread.join();
+				}
+
+				InternalThread = std::thread(&HumanizedKeyboard::SprindForwardMove, this, std::make_shared<DirectionState>(SprintForward));
+
+				isSprintForward = true;
+			}
+
+
+			std::unique_lock<std::mutex> lock(mtx_KB);
+			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		}
+
+		if(isSprintForward)
+			SprintForwardState.KillProcess = true;
+		else
+			ForwardState.KillProcess = true;
+
+		cv_KB.notify_one();
+		InternalThread.join();
 	}
 
 
@@ -467,7 +545,7 @@ class HumanizedKeyboard {
 	}
 
 
-	array<DirectionState, 2> directionStates{  DirectionState(NoDirection, false, false) , DirectionState(NoDirection, false, false)  };
+	array<DirectionState, 2> directionStates{ DirectionState(NoDirection, false, false) , DirectionState(NoDirection, false, false) };
 
 	std::thread DirectionThread;
 	std::thread LeftRightThread;
@@ -482,72 +560,72 @@ public:
 		int errorCode = 0;
 
 		switch (direction) {
-			case NoDirection:
-				return InvalidDirection;
-				break;
+		case NoDirection:
+			return InvalidDirection;
+			break;
 
-			case Forward:
-				errorCode = CheckForError(direction, Backwards);
-				if (errorCode != 0) {
-					return errorCode;
-				}
-				directionStates[0].direction = direction;
-				DirectionThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
-				break;
+		case Forward:
+			errorCode = CheckForError(direction, Backwards);
+			if (errorCode != 0) {
+				return errorCode;
+			}
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
+			break;
 
-			case Backwards:
-				errorCode = CheckForError(direction, Forward);
-				if (errorCode != 0) {
-					return errorCode;
-				}
-				directionStates[0].direction = direction;
-				DirectionThread = std::thread(&HumanizedKeyboard::BackwardsMove, this, std::make_shared<DirectionState>(directionStates[0]));
-				break;
+		case Backwards:
+			errorCode = CheckForError(direction, Forward);
+			if (errorCode != 0) {
+				return errorCode;
+			}
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::BackwardsMove, this, std::make_shared<DirectionState>(directionStates[0]));
+			break;
 
-			case Right:
-				errorCode = CheckForError(direction, Left);
-				if (errorCode != 0) {
-					return errorCode;
-				}
-				directionStates[1].direction = direction;
-				LeftRightThread = std::thread(&HumanizedKeyboard::RightMove, this, std::make_shared<DirectionState>(directionStates[1]));
-				break;
+		case Right:
+			errorCode = CheckForError(direction, Left);
+			if (errorCode != 0) {
+				return errorCode;
+			}
+			directionStates[1].direction = direction;
+			LeftRightThread = std::thread(&HumanizedKeyboard::RightMove, this, std::make_shared<DirectionState>(directionStates[1]));
+			break;
 
-			case Left:
-				errorCode = CheckForError(direction, Right);
-				if (errorCode != 0) {
-					return errorCode;
-				}
-				directionStates[1].direction = direction;
-				LeftRightThread = std::thread(&HumanizedKeyboard::LeftMove, this, std::make_shared<DirectionState>(directionStates[1]));
-				break;
+		case Left:
+			errorCode = CheckForError(direction, Right);
+			if (errorCode != 0) {
+				return errorCode;
+			}
+			directionStates[1].direction = direction;
+			LeftRightThread = std::thread(&HumanizedKeyboard::LeftMove, this, std::make_shared<DirectionState>(directionStates[1]));
+			break;
 
-			case AutoForward:
-				errorCode = CheckForError(direction, Backwards);
-				if (errorCode != 0) {
-					return errorCode;
-				}
-				directionStates[0].direction = direction;
-				DirectionThread = std::thread(&HumanizedKeyboard::AutoForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
-				break;
+		case AutoForward:
+			errorCode = CheckForError(direction, Backwards);
+			if (errorCode != 0) {
+				return errorCode;
+			}
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::AutoForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
+			break;
 
-			case SprintForward:
-				errorCode = CheckForError(direction, Backwards);
-				if (errorCode != 0) {
-					return errorCode;
-				}
-				directionStates[0].direction = direction;
-				DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
-				break;
+		case SprintForward:
+			errorCode = CheckForError(direction, Backwards);
+			if (errorCode != 0) {
+				return errorCode;
+			}
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, std::make_shared<DirectionState>(directionStates[0]));
+			break;
 
-			case AutoSprintForward:
-				errorCode = CheckForError(direction, Backwards);
-				if (errorCode != 0) {
-					return errorCode;
-				}
-				directionStates[0].direction = direction;
-				DirectionThread = std::thread(&HumanizedKeyboard::AutoSprintForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
-				break;
+		case AutoSprintForward:
+			errorCode = CheckForError(direction, Backwards);
+			if (errorCode != 0) {
+				return errorCode;
+			}
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::AutoSprintForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
+			break;
 		}
 	}
 };
@@ -902,7 +980,7 @@ int main() {
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
 
-	while(GetAsyncKeyState(VK_F4) == 0)	{
+	while (GetAsyncKeyState(VK_F4) == 0) {
 
 		cout << Testing::CheckStaminaBar() << endl;
 

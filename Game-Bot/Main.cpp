@@ -377,6 +377,10 @@ class HumanizedKeyboard {
 		}
 	}
 
+	bool KillProcessForwardSprint = false;
+	bool KillProcessForward = false;
+
+
 	void ForwardMove(shared_ptr<DirectionState> directionState_ptr) {
 		INPUT input[1];
 		input[0].type = INPUT_KEYBOARD;
@@ -386,9 +390,8 @@ class HumanizedKeyboard {
 		// SendInput für das Drücken von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (true) {
-			std::unique_lock<std::mutex> lock(mtx_KB);
-			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		while (KillProcessForward != true) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
 		// Simuliere das Loslassen der W-Taste
@@ -461,16 +464,61 @@ class HumanizedKeyboard {
 		SendInput(1, &input[0], sizeof(INPUT));
 	}
 
-	void SprindForwardMove(shared_ptr<DirectionState> directionState_ptr) {
 
+	void SprindForwardMove(shared_ptr<DirectionState> directionState_ptr) {
+		INPUT input[2];
+		input[0].type = INPUT_KEYBOARD;
+		input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
+		input[0].ki.dwFlags = 0;
+
+		// SendInput für das Drücken von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+
+		Sleep(1000);
+
+		// Simuliere das Drücken der Shift-Taste
+		input[1].type = INPUT_KEYBOARD;
+		input[1].ki.wVk = VK_SHIFT; // Shift-Taste
+		input[1].ki.dwFlags = 0;
+
+		// SendInput für das Drücken der Shift-Taste
+		SendInput(1, &input[1], sizeof(INPUT));
+
+
+
+		
+		while (KillProcessForwardSprint != true) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		}
+
+
+		// Simuliere das Loslassen der Shift-Taste
+		input[1].ki.dwFlags = KEYEVENTF_KEYUP;
+
+		// SendInput für das Loslassen der Shift-Taste
+		SendInput(1, &input[1], sizeof(INPUT));
+
+
+		// Warte eine Weile
+		Sleep(500); // Zum Beispiel 1 Sekunde
+
+		// Simuliere das Loslassen der W-Taste
+		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
+
+		// SendInput für das Loslassen von 'W'
+		SendInput(1, &input[0], sizeof(INPUT));
+
+
+		cout << "SprindForwardMove END" << endl;
 	}
 
 
+	DirectionState ForwardState{ Forward, false, false };
+	DirectionState SprintForwardState{ SprintForward, false, false };
 
 	void SprintForwardControler(shared_ptr<DirectionState> directionState_ptr) {
 		std::thread InternalThread;
-		DirectionState ForwardState(Forward, false, false);
-		DirectionState SprintForwardState(SprintForward, false, false);
+
 		int stamina = CheckStaminaBar();
 
 		if (stamina == -1) {
@@ -480,7 +528,7 @@ class HumanizedKeyboard {
 			{
 				stamina = CheckStaminaBar();
 
-				if(stamina == 100)
+				if (stamina == 100)
 					break;
 
 				std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -491,41 +539,61 @@ class HumanizedKeyboard {
 			InternalThread.join();
 		}
 
-		bool isSprintForward = true;
+		bool isSprintForward = false;
+		bool isSprintForwardFirstTime = true;
 		while (true) {
 			stamina = CheckStaminaBar();
+			//cout << "stamina: " << stamina << endl;
 
 			if (stamina == 0) {
 
 				if (isSprintForward) {
-					SprintForwardState.KillProcess = true;
-					cv_KB.notify_one();
+					KillProcessForwardSprint = true;
 					InternalThread.join();
+
+					KillProcessForwardSprint = false;
+
+					InternalThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(ForwardState));
+
+					cout << "Forward" << endl;
+
+					isSprintForward = false;
 				}
-
-				InternalThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(ForwardState));
-
-				isSprintForward = false;
 			}
 			else if (stamina == 100) {
-				
+
 				if (!isSprintForward) {
-					ForwardState.KillProcess = true;
-					cv_KB.notify_one();
-					InternalThread.join();
+					
+					if (!isSprintForwardFirstTime) {
+						KillProcessForward = true;
+						InternalThread.join();
+
+						KillProcessForward = false;
+					}
+					else {
+						isSprintForwardFirstTime = false;
+					}
+					
+
+					InternalThread = std::thread(&HumanizedKeyboard::SprindForwardMove, this, std::make_shared<DirectionState>(SprintForwardState));
+
+					cout << "SprintForward" << endl;
+
+					isSprintForward = true;
 				}
-
-				InternalThread = std::thread(&HumanizedKeyboard::SprindForwardMove, this, std::make_shared<DirectionState>(SprintForward));
-
-				isSprintForward = true;
 			}
 
 
-			std::unique_lock<std::mutex> lock(mtx_KB);
-			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+
+			
+			/*std::unique_lock<std::mutex> lock(mtx_KB);
+			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });*/
+			
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
 		}
 
-		if(isSprintForward)
+		if (isSprintForward)
 			SprintForwardState.KillProcess = true;
 		else
 			ForwardState.KillProcess = true;
@@ -551,6 +619,19 @@ class HumanizedKeyboard {
 	std::thread LeftRightThread;
 
 public:
+
+	void test() {
+		directionStates[0].direction = SprintForward;
+
+		DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, std::make_shared<DirectionState>(directionStates[0]));
+
+
+
+		directionStates[0].KillProcess = true;
+		cv_KB.notify_one();
+		DirectionThread.join();
+	}
+
 
 	void MoveToExactPosition() {
 
@@ -972,7 +1053,6 @@ namespace Testing {
 /// 90  degree up   = ~-800 pixels
 /// 45  degree up   = ~-400 pixels
 
-
 int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
@@ -980,12 +1060,10 @@ int main() {
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
 
-	while (GetAsyncKeyState(VK_F4) == 0) {
+	HumanizedKeyboard humanizedKeyboard;
 
-		cout << Testing::CheckStaminaBar() << endl;
+	humanizedKeyboard.test();
 
-		Sleep(100);
-	}
 
 
 	//INPUT input[2];

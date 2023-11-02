@@ -622,8 +622,6 @@ public:
 
 		DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, std::make_shared<DirectionState>(directionStates[0]));
 
-
-
 		directionStates[0].KillProcess = true;
 		cv_KB.notify_one();
 		DirectionThread.join();

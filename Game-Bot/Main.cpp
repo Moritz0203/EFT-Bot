@@ -459,7 +459,6 @@ class HumanizedKeyboard {
 		SendInput(1, &input[0], sizeof(INPUT));
 	}
 
-
 	void SprindForwardMove(shared_ptr<DirectionState> directionState_ptr) {
 		INPUT input[2];
 		input[0].type = INPUT_KEYBOARD;

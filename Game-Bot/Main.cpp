@@ -390,7 +390,7 @@ class HumanizedKeyboard {
 		// SendInput für das Drücken von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (KillProcessForward != true) {
+		while (directionState_ptr->KillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
@@ -487,7 +487,7 @@ class HumanizedKeyboard {
 
 
 		
-		while (KillProcessForwardSprint != true) {
+		while (directionState_ptr->KillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
@@ -513,16 +513,20 @@ class HumanizedKeyboard {
 	}
 
 
-	DirectionState ForwardState{ Forward, false, false };
-	DirectionState SprintForwardState{ SprintForward, false, false };
 
 	void SprintForwardControler(shared_ptr<DirectionState> directionState_ptr) {
 		std::thread InternalThread;
 
+		DirectionState ForwardState{ Forward, false, false };
+		DirectionState SprintForwardState{ SprintForward, false, false };
+
+		std::shared_ptr<DirectionState> ForwardState_ptr = std::make_shared<DirectionState>(ForwardState);
+		std::shared_ptr<DirectionState> SprintForwardState_ptr = std::make_shared<DirectionState>(SprintForwardState);
+
 		int stamina = CheckStaminaBar();
 
 		if (stamina == -1) {
-			InternalThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(ForwardState));
+			InternalThread = std::thread(&HumanizedKeyboard::ForwardMove, this, ForwardState_ptr);
 
 			while (true)
 			{
@@ -534,9 +538,9 @@ class HumanizedKeyboard {
 				std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			}
 
-			ForwardState.KillProcess = true;
-			cv_KB.notify_one();
+			ForwardState_ptr->KillProcess = true;
 			InternalThread.join();
+			ForwardState_ptr->KillProcess = false;
 		}
 
 		bool isSprintForward = false;
@@ -548,12 +552,12 @@ class HumanizedKeyboard {
 			if (stamina == 0) {
 
 				if (isSprintForward) {
-					KillProcessForwardSprint = true;
+					SprintForwardState_ptr->KillProcess = true;
 					InternalThread.join();
 
-					KillProcessForwardSprint = false;
+					SprintForwardState_ptr->KillProcess = false;
 
-					InternalThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(ForwardState));
+					InternalThread = std::thread(&HumanizedKeyboard::ForwardMove, this, ForwardState_ptr);
 
 					cout << "Forward" << endl;
 
@@ -565,17 +569,17 @@ class HumanizedKeyboard {
 				if (!isSprintForward) {
 					
 					if (!isSprintForwardFirstTime) {
-						KillProcessForward = true;
+						ForwardState_ptr->KillProcess = true;
 						InternalThread.join();
 
-						KillProcessForward = false;
+						ForwardState_ptr->KillProcess = false;
 					}
 					else {
 						isSprintForwardFirstTime = false;
 					}
 					
 
-					InternalThread = std::thread(&HumanizedKeyboard::SprindForwardMove, this, std::make_shared<DirectionState>(SprintForwardState));
+					InternalThread = std::thread(&HumanizedKeyboard::SprindForwardMove, this, SprintForwardState_ptr);
 
 					cout << "SprintForward" << endl;
 
@@ -591,11 +595,10 @@ class HumanizedKeyboard {
 		}
 
 		if (isSprintForward)
-			SprintForwardState.KillProcess = true;
+			SprintForwardState_ptr->KillProcess = true;
 		else
-			ForwardState.KillProcess = true;
+			ForwardState_ptr->KillProcess = true;
 
-		cv_KB.notify_one();
 		InternalThread.join();
 	}
 

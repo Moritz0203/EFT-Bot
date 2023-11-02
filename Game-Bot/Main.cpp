@@ -582,9 +582,6 @@ class HumanizedKeyboard {
 					isSprintForward = true;
 				}
 			}
-
-
-
 			
 			/*std::unique_lock<std::mutex> lock(mtx_KB);
 			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });*/

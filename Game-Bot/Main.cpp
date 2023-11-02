@@ -386,18 +386,13 @@ class HumanizedKeyboard {
 		input[0].type = INPUT_KEYBOARD;
 		input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
 		input[0].ki.dwFlags = 0;
-
-		// SendInput für das Drücken von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 
 		while (directionState_ptr->KillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
-		// Simuliere das Loslassen der W-Taste
 		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
-
-		// SendInput für das Loslassen von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 	}
 
@@ -471,45 +466,23 @@ class HumanizedKeyboard {
 		input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
 		input[0].ki.dwFlags = 0;
 
-		// SendInput für das Drücken von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
-
 		Sleep(1000);
 
-		// Simuliere das Drücken der Shift-Taste
 		input[1].type = INPUT_KEYBOARD;
-		input[1].ki.wVk = VK_SHIFT; // Shift-Taste
+		input[1].ki.wVk = VK_SHIFT; 
 		input[1].ki.dwFlags = 0;
-
-		// SendInput für das Drücken der Shift-Taste
 		SendInput(1, &input[1], sizeof(INPUT));
-
-
-
 		
 		while (directionState_ptr->KillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
-
-		// Simuliere das Loslassen der Shift-Taste
 		input[1].ki.dwFlags = KEYEVENTF_KEYUP;
-
-		// SendInput für das Loslassen der Shift-Taste
 		SendInput(1, &input[1], sizeof(INPUT));
-
-
-		// Warte eine Weile
-		Sleep(500); // Zum Beispiel 1 Sekunde
-
-		// Simuliere das Loslassen der W-Taste
+		Sleep(500);
 		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
-
-		// SendInput für das Loslassen von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
-
-
-		cout << "SprindForwardMove END" << endl;
 	}
 
 

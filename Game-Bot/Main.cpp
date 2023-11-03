@@ -590,7 +590,10 @@ public:
 	}
 
 	
-	int EndMoveToDirection(Direction direction = NoDirection) {
+	int EndMoveToDirection(Direction direction, bool KillProcess, bool SoftKillProcess) {// KillProcess instend kills the process, SoftKillProcess instend stops the process at the next possible point
+		int errorCode = 0;
+
+		
 
 	}
 

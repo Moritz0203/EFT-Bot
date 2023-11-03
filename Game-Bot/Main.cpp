@@ -592,6 +592,10 @@ class HumanizedKeyboard {
 
 public:
 
+	HumanizedKeyboard() {
+
+	}
+
 	void test() {
 		directionStates[0].direction = SprintForward;
 

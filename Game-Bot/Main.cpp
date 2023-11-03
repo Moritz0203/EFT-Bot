@@ -336,12 +336,12 @@ class HumanizedKeyboard {
 	};
 
 	int CheckForError(Direction direction, Direction conflictDirection) {
-		for (const shared_ptr<DirectionState>& dirState : directionStates) {
-			if (dirState->direction == direction) {
+		for (const DirectionState& dirState : directionStates) {
+			if (dirState.direction == direction) {
 				return DirectionAlreadyExists;
 			}
 
-			if (dirState->direction == conflictDirection) {
+			if (dirState.direction == conflictDirection) {
 				return DirectionConflict;
 			}
 		}
@@ -388,9 +388,8 @@ class HumanizedKeyboard {
 		input[0].ki.dwFlags = 0;
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (true) {
-			std::unique_lock<std::mutex> lock(mtx_KB);
-			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		while (directionState_ptr->KillProcess != true) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
 		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
@@ -474,9 +473,8 @@ class HumanizedKeyboard {
 		input[1].ki.dwFlags = 0;
 		SendInput(1, &input[1], sizeof(INPUT));
 		
-		while (true) {
-			std::unique_lock<std::mutex> lock(mtx_KB);
-			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		while (directionState_ptr->KillProcess != true) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
 		input[1].ki.dwFlags = KEYEVENTF_KEYUP;
@@ -491,11 +489,11 @@ class HumanizedKeyboard {
 	void SprintForwardControler(shared_ptr<DirectionState> directionState_ptr) {
 		std::thread InternalThread;
 
-		DirectionState ForwardState{ Forward, false, false };
-		DirectionState SprintForwardState{ SprintForward, false, false };
+		DirectionState ForwardStateInternal{ Forward, false, false };
+		DirectionState SprintForwardStateInternal{ SprintForward, false, false };
 
-		std::shared_ptr<DirectionState> ForwardState_ptr = std::make_shared<DirectionState>(ForwardState);
-		std::shared_ptr<DirectionState> SprintForwardState_ptr = std::make_shared<DirectionState>(SprintForwardState);
+		std::shared_ptr<DirectionState> ForwardState_ptr = std::make_shared<DirectionState>(ForwardStateInternal);
+		std::shared_ptr<DirectionState> SprintForwardState_ptr = std::make_shared<DirectionState>(SprintForwardStateInternal);
 
 		int stamina = CheckStaminaBar();
 
@@ -513,7 +511,6 @@ class HumanizedKeyboard {
 			}
 
 			ForwardState_ptr->KillProcess = true;
-			cv_KB.notify_all();
 			InternalThread.join();
 			ForwardState_ptr->KillProcess = false;
 		}
@@ -523,14 +520,13 @@ class HumanizedKeyboard {
 		while (directionState_ptr->KillProcess != true) {
 			stamina = CheckStaminaBar();
 
-			if (stamina == 0 && directionState_ptr->SoftKillProcess == true) 
+			if (stamina == 0 && directionState_ptr->SoftKillProcess == true)
 				break;
-			
+
 			if (stamina == 0) {
 
 				if (isSprintForward) {
 					SprintForwardState_ptr->KillProcess = true;
-					cv_KB.notify_all();
 					InternalThread.join();
 
 					SprintForwardState_ptr->KillProcess = false;
@@ -548,7 +544,6 @@ class HumanizedKeyboard {
 					
 					if (!isSprintForwardFirstTime) {
 						ForwardState_ptr->KillProcess = true;
-						cv_KB.notify_all();
 						InternalThread.join();
 
 						ForwardState_ptr->KillProcess = false;
@@ -565,16 +560,19 @@ class HumanizedKeyboard {
 					isSprintForward = true;
 				}
 			}
-
+			
+			/*std::unique_lock<std::mutex> lock(mtx_KB);
+			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });*/
+			
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
 		}
 
 		if (isSprintForward)
 			SprintForwardState_ptr->KillProcess = true;
 		else
 			ForwardState_ptr->KillProcess = true;
-		
-		cv_KB.notify_all();
+
 		InternalThread.join();
 	}
 
@@ -589,27 +587,29 @@ class HumanizedKeyboard {
 	}
 
 
-	array<shared_ptr<DirectionState>, 2> directionStates;
+	array<DirectionState, 2> directionStates{ DirectionState(NoDirection, false, false) , DirectionState(NoDirection, false, false) };
 
 	std::thread DirectionThread;
 	std::thread LeftRightThread;
 
-	DirectionState ForwardBackwards{ NoDirection, false, false };
-	DirectionState LeftRight{ NoDirection, false, false };
+	DirectionState DirectionFB{ NoDirection, false, false };// Forward Backwards
+	DirectionState DirectionRL{ NoDirection, false, false };// Right Left
+	
+	shared_ptr<DirectionState> DirectionFB_ptr = std::make_shared<DirectionState>(DirectionFB);// Forward Backwards pointer
+	shared_ptr<DirectionState> DirectionRL_ptr = std::make_shared<DirectionState>(DirectionRL);// Right Left pointer
 
 public:
 
-	HumanizedKeyboard() {
-		directionStates[0] = std::make_shared<DirectionState>(ForwardBackwards);
-		directionStates[1] = std::make_shared<DirectionState>(LeftRight);
-	}
-
 	void test() {
-		directionStates[0]->direction = SprintForward;
+		DirectionFB_ptr->direction = SprintForward;
 
-		DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, directionStates[0]);
+		DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, DirectionFB_ptr);
 
-		directionStates[0]->KillProcess = true;
+		std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+
+		cout << "KillProcess" << endl;
+
+		DirectionFB_ptr->KillProcess = true;
 		DirectionThread.join();
 	}
 
@@ -631,8 +631,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0]->direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::ForwardMove, this, directionStates[0]);
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
 			break;
 
 		case Backwards:
@@ -640,8 +640,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0]->direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::BackwardsMove, this, directionStates[0]);
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::BackwardsMove, this, std::make_shared<DirectionState>(directionStates[0]));
 			break;
 
 		case Right:
@@ -649,8 +649,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[1]->direction = direction;
-			LeftRightThread = std::thread(&HumanizedKeyboard::RightMove, this, directionStates[1]);
+			directionStates[1].direction = direction;
+			LeftRightThread = std::thread(&HumanizedKeyboard::RightMove, this, std::make_shared<DirectionState>(directionStates[1]));
 			break;
 
 		case Left:
@@ -658,8 +658,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[1]->direction = direction;
-			LeftRightThread = std::thread(&HumanizedKeyboard::LeftMove, this, directionStates[1]);
+			directionStates[1].direction = direction;
+			LeftRightThread = std::thread(&HumanizedKeyboard::LeftMove, this, std::make_shared<DirectionState>(directionStates[1]));
 			break;
 
 		case AutoForward:
@@ -667,8 +667,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0]->direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::AutoForwardMove, this, directionStates[0]);
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::AutoForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
 			break;
 
 		case SprintForward:
@@ -676,8 +676,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0]->direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, directionStates[0]);
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, std::make_shared<DirectionState>(directionStates[0]));
 			break;
 
 		case AutoSprintForward:
@@ -685,8 +685,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0]->direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::AutoSprintForwardMove, this, directionStates[0]);
+			directionStates[0].direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::AutoSprintForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
 			break;
 		}
 	}

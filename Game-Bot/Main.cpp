@@ -336,16 +336,13 @@ class HumanizedKeyboard {
 	};
 
 	int CheckForError(Direction direction, Direction conflictDirection) {
-		for (const DirectionState& dirState : directionStates) {
-			if (dirState.direction == direction) {
-				return DirectionAlreadyExists;
-			}
 
-			if (dirState.direction == conflictDirection) {
-				return DirectionConflict;
-			}
-		}
+		if(direction == DirectionFB_ptr->direction || direction == DirectionRL_ptr->direction)
+			return DirectionAlreadyExists;
 
+		if(conflictDirection == DirectionFB_ptr->direction || conflictDirection == DirectionRL_ptr->direction)
+			return DirectionConflict;
+		
 		return 0;
 	}
 
@@ -377,9 +374,6 @@ class HumanizedKeyboard {
 		}
 	}
 
-	bool KillProcessForwardSprint = false;
-	bool KillProcessForward = false;
-
 
 	void ForwardMove(shared_ptr<DirectionState> directionState_ptr) {
 		INPUT input[1];
@@ -388,7 +382,7 @@ class HumanizedKeyboard {
 		input[0].ki.dwFlags = 0;
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (directionState_ptr->KillProcess != true) {
+		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
@@ -399,70 +393,52 @@ class HumanizedKeyboard {
 	void BackwardsMove(shared_ptr<DirectionState> directionState_ptr) {
 		INPUT input[1];
 		input[0].type = INPUT_KEYBOARD;
-		input[0].ki.wVk = 'S'; // Hier die gewünschte Taste
+		input[0].ki.wVk = 'S';
 		input[0].ki.dwFlags = 0;
-
-		// SendInput für das Drücken von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (true) {
-			std::unique_lock<std::mutex> lock(mtx_KB);
-			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
-		// Simuliere das Loslassen der W-Taste
 		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
-
-		// SendInput für das Loslassen von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 	}
 
 	void RightMove(shared_ptr<DirectionState> directionState_ptr) {
 		INPUT input[1];
 		input[0].type = INPUT_KEYBOARD;
-		input[0].ki.wVk = 'D'; // Hier die gewünschte Taste
+		input[0].ki.wVk = 'D'; 
 		input[0].ki.dwFlags = 0;
-
-		// SendInput für das Drücken von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (true) {
-			std::unique_lock<std::mutex> lock(mtx_KB);
-			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
-		// Simuliere das Loslassen der W-Taste
 		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
-
-		// SendInput für das Loslassen von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 	}
 
 	void LeftMove(shared_ptr<DirectionState> directionState_ptr) {
 		INPUT input[1];
 		input[0].type = INPUT_KEYBOARD;
-		input[0].ki.wVk = 'A'; // Hier die gewünschte Taste
+		input[0].ki.wVk = 'A'; 
 		input[0].ki.dwFlags = 0;
-
-		// SendInput für das Drücken von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (true) {
-			std::unique_lock<std::mutex> lock(mtx_KB);
-			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });
+		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
-		// Simuliere das Loslassen der W-Taste
 		input[0].ki.dwFlags = KEYEVENTF_KEYUP;
-
-		// SendInput für das Loslassen von 'W'
 		SendInput(1, &input[0], sizeof(INPUT));
 	}
 
 	void SprindForwardMove(shared_ptr<DirectionState> directionState_ptr) {
 		INPUT input[2];
 		input[0].type = INPUT_KEYBOARD;
-		input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
+		input[0].ki.wVk = 'W'; 
 		input[0].ki.dwFlags = 0;
 
 		SendInput(1, &input[0], sizeof(INPUT));
@@ -473,7 +449,7 @@ class HumanizedKeyboard {
 		input[1].ki.dwFlags = 0;
 		SendInput(1, &input[1], sizeof(INPUT));
 		
-		while (directionState_ptr->KillProcess != true) {
+		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
@@ -561,11 +537,7 @@ class HumanizedKeyboard {
 				}
 			}
 			
-			/*std::unique_lock<std::mutex> lock(mtx_KB);
-			cv_KB.wait(lock, [directionState_ptr] { return directionState_ptr->KillProcess || directionState_ptr->SoftKillProcess; });*/
-			
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
 		}
 
 		if (isSprintForward)
@@ -587,7 +559,6 @@ class HumanizedKeyboard {
 	}
 
 
-	array<DirectionState, 2> directionStates{ DirectionState(NoDirection, false, false) , DirectionState(NoDirection, false, false) };
 
 	std::thread DirectionThread;
 	std::thread LeftRightThread;
@@ -603,7 +574,7 @@ public:
 	void test() {
 		DirectionFB_ptr->direction = SprintForward;
 
-		DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, DirectionFB_ptr);
+		DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, &DirectionFB_ptr);
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(10000));
 
@@ -615,6 +586,11 @@ public:
 
 
 	void MoveToExactPosition() {
+
+	}
+
+	
+	int EndMoveToDirection(Direction direction = NoDirection) {
 
 	}
 
@@ -631,8 +607,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0].direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::ForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
+			DirectionFB_ptr->direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::ForwardMove, this, DirectionFB_ptr);
 			break;
 
 		case Backwards:
@@ -640,8 +616,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0].direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::BackwardsMove, this, std::make_shared<DirectionState>(directionStates[0]));
+			DirectionFB_ptr->direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::BackwardsMove, this, DirectionFB_ptr);
 			break;
 
 		case Right:
@@ -649,8 +625,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[1].direction = direction;
-			LeftRightThread = std::thread(&HumanizedKeyboard::RightMove, this, std::make_shared<DirectionState>(directionStates[1]));
+			DirectionRL_ptr->direction = direction;
+			LeftRightThread = std::thread(&HumanizedKeyboard::RightMove, this, DirectionRL_ptr);
 			break;
 
 		case Left:
@@ -658,8 +634,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[1].direction = direction;
-			LeftRightThread = std::thread(&HumanizedKeyboard::LeftMove, this, std::make_shared<DirectionState>(directionStates[1]));
+			DirectionRL_ptr->direction = direction;
+			LeftRightThread = std::thread(&HumanizedKeyboard::LeftMove, this, DirectionRL_ptr);
 			break;
 
 		case AutoForward:
@@ -667,8 +643,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0].direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::AutoForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
+			DirectionFB_ptr->direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::AutoForwardMove, this, DirectionFB_ptr);
 			break;
 
 		case SprintForward:
@@ -676,8 +652,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0].direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, std::make_shared<DirectionState>(directionStates[0]));
+			DirectionFB_ptr->direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, DirectionFB_ptr);
 			break;
 
 		case AutoSprintForward:
@@ -685,8 +661,8 @@ public:
 			if (errorCode != 0) {
 				return errorCode;
 			}
-			directionStates[0].direction = direction;
-			DirectionThread = std::thread(&HumanizedKeyboard::AutoSprintForwardMove, this, std::make_shared<DirectionState>(directionStates[0]));
+			DirectionFB_ptr->direction = direction;
+			DirectionThread = std::thread(&HumanizedKeyboard::AutoSprintForwardMove, this, DirectionFB_ptr);
 			break;
 		}
 	}

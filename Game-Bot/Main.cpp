@@ -310,6 +310,8 @@ enum ErrorCodes {
 	InvalidDirection = 10,
 	DirectionAlreadyExists = 11,
 	DirectionConflict = 12,
+	DirectionDoesNotExist = 13,
+	NoKillProcess = 14,
 };
 
 class HumanizedKeyboard {
@@ -592,9 +594,38 @@ public:
 	
 	int EndMoveToDirection(Direction direction, bool KillProcess, bool SoftKillProcess) {// KillProcess instend kills the process, SoftKillProcess instend stops the process at the next possible point
 		int errorCode = 0;
+		std::shared_ptr<DirectionState> directionState_ptr;
+		bool isDirectionFB = false;
 
+		if (direction == DirectionFB_ptr->direction) {
+			directionState_ptr = DirectionFB_ptr;
+			isDirectionFB = true;
+		}
+		else if (direction == DirectionRL_ptr->direction) {
+			directionState_ptr = DirectionRL_ptr;
+		}
+		else
+			return DirectionDoesNotExist;
 		
+		if(KillProcess == false && SoftKillProcess == false)
+			return NoKillProcess;
 
+		if (KillProcess == true && SoftKillProcess == true) {
+			directionState_ptr->KillProcess = true;
+			directionState_ptr->SoftKillProcess = false;
+		}
+		else {
+			directionState_ptr->KillProcess = KillProcess;
+			directionState_ptr->SoftKillProcess = SoftKillProcess;
+		}
+
+		if(isDirectionFB)
+			DirectionThread.join();
+		else
+			LeftRightThread.join();
+
+		directionState_ptr->KillProcess = false;
+		directionState_ptr->SoftKillProcess = false;
 	}
 
 	int MoveToDirection(Direction direction = NoDirection) {

@@ -511,9 +511,7 @@ class HumanizedKeyboard {
 					SprintForwardState_ptr->KillProcess = false;
 
 					InternalThread = std::thread(&HumanizedKeyboard::ForwardMove, this, ForwardState_ptr);
-
 					cout << "Forward" << endl;
-
 					isSprintForward = false;
 				}
 			}
@@ -530,13 +528,22 @@ class HumanizedKeyboard {
 					else {
 						isSprintForwardFirstTime = false;
 					}
-					
 
 					InternalThread = std::thread(&HumanizedKeyboard::SprindForwardMove, this, SprintForwardState_ptr);
-
 					cout << "SprintForward" << endl;
-
 					isSprintForward = true;
+				}
+				else if (count == 0 && stamina == 100) {
+					INPUT input[1];
+					input[0].type = INPUT_KEYBOARD;
+					input[0].ki.wVk = VK_SHIFT;
+					input[0].ki.dwFlags = 0;
+					SendInput(1, &input[0], sizeof(INPUT));
+
+					count = 3;
+				}
+				else {
+					count--;
 				}
 			}
 			

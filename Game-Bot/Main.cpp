@@ -321,7 +321,7 @@ class HumanizedKeyboard {
 	struct DirectionState {
 		Direction direction;
 		bool KillProcess; // true = Kill Process, false = Continue Process
-		bool SoftKillProcess; // true = Soft Kill Process, false = Continue Process
+		bool SoftKillProcess; // true = Soft Kill Process, false = Continue Process | Only works for SprintForward and AutoSprintForward
 
 		DirectionState(Direction dir, bool killProcess, bool softKillProcess)
 			: direction(dir) {
@@ -384,7 +384,7 @@ class HumanizedKeyboard {
 		input[0].ki.dwFlags = 0;
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
+		while (directionState_ptr->KillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
@@ -399,7 +399,7 @@ class HumanizedKeyboard {
 		input[0].ki.dwFlags = 0;
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
+		while (directionState_ptr->KillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
@@ -414,7 +414,7 @@ class HumanizedKeyboard {
 		input[0].ki.dwFlags = 0;
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
+		while (directionState_ptr->KillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
@@ -429,7 +429,7 @@ class HumanizedKeyboard {
 		input[0].ki.dwFlags = 0;
 		SendInput(1, &input[0], sizeof(INPUT));
 
-		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
+		while (directionState_ptr->KillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
@@ -451,7 +451,7 @@ class HumanizedKeyboard {
 		input[1].ki.dwFlags = 0;
 		SendInput(1, &input[1], sizeof(INPUT));
 		
-		while (directionState_ptr->KillProcess != true || directionState_ptr->SoftKillProcess != true) {
+		while (directionState_ptr->KillProcess != true) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
@@ -495,9 +495,10 @@ class HumanizedKeyboard {
 
 		bool isSprintForward = false;
 		bool isSprintForwardFirstTime = true;
-		int count = 3;
+		int count = 4;
 		while (directionState_ptr->KillProcess != true) {
 			stamina = CheckStaminaBar();
+			cout << "Stamina: " << stamina << endl;
 
 			if (stamina == 0 && directionState_ptr->SoftKillProcess == true)
 				break;
@@ -506,7 +507,9 @@ class HumanizedKeyboard {
 
 				if (isSprintForward) {
 					SprintForwardState_ptr->KillProcess = true;
+					cout << "SprintForward KillProcess" << endl;
 					InternalThread.join();
+					cout << "SprintForward KillProcess End" << endl;
 
 					SprintForwardState_ptr->KillProcess = false;
 
@@ -532,18 +535,31 @@ class HumanizedKeyboard {
 					InternalThread = std::thread(&HumanizedKeyboard::SprindForwardMove, this, SprintForwardState_ptr);
 					cout << "SprintForward" << endl;
 					isSprintForward = true;
+					count = 4;
 				}
-				else if (count == 0 && stamina == 100) {
-					INPUT input[1];
-					input[0].type = INPUT_KEYBOARD;
-					input[0].ki.wVk = VK_SHIFT;
-					input[0].ki.dwFlags = 0;
-					SendInput(1, &input[0], sizeof(INPUT));
+				else if (stamina == 100 && isSprintForward == true) {
+					
+					if (count == 0) {
+						cout << "Reset Shift" << endl;
 
-					count = 3;
-				}
-				else {
-					count--;
+						INPUT input[2];
+						input[0].type = INPUT_KEYBOARD;
+						input[0].ki.wVk = VK_SHIFT;
+						input[0].ki.dwFlags = KEYEVENTF_KEYUP;
+						SendInput(1, &input[0], sizeof(INPUT));
+
+						Sleep(500);
+
+						input[1].type = INPUT_KEYBOARD;
+						input[1].ki.wVk = VK_SHIFT;
+						input[1].ki.dwFlags = 0;
+						SendInput(1, &input[1], sizeof(INPUT));
+
+						count = 4;
+					}
+					else {
+						count--;
+					}
 				}
 			}
 			
@@ -583,14 +599,16 @@ public:
 
 	void test() {
 		DirectionFB_ptr->direction = SprintForward;
+		DirectionFB_ptr->KillProcess = false;
+		DirectionFB_ptr->SoftKillProcess = false;
 
-		DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, &DirectionFB_ptr);
+		DirectionThread = std::thread(&HumanizedKeyboard::SprintForwardControler, this, DirectionFB_ptr);
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(10000));
 
-		cout << "KillProcess" << endl;
+		//cout << "KillProcess" << endl;
 
-		DirectionFB_ptr->KillProcess = true;
+		//DirectionFB_ptr->KillProcess = true;
 		DirectionThread.join();
 	}
 

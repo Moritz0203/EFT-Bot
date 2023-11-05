@@ -495,6 +495,7 @@ class HumanizedKeyboard {
 
 		bool isSprintForward = false;
 		bool isSprintForwardFirstTime = true;
+		int count = 3;
 		while (directionState_ptr->KillProcess != true) {
 			stamina = CheckStaminaBar();
 

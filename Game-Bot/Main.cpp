@@ -581,7 +581,7 @@ class HumanizedKeyboard {
 	}
 
 	void AutoSprintForwardMove(shared_ptr<DirectionState> directionState_ptr) {
-
+		
 	}
 
 
@@ -608,7 +608,7 @@ public:
 
 		//cout << "KillProcess" << endl;
 
-		//DirectionFB_ptr->KillProcess = true;
+		//DirectionFB_ptr->SoftKillProcess = true;
 		DirectionThread.join();
 	}
 
@@ -619,7 +619,6 @@ public:
 
 	
 	int EndMoveToDirection(Direction direction, bool KillProcess, bool SoftKillProcess) {// KillProcess instend kills the process, SoftKillProcess instend stops the process at the next possible point
-		int errorCode = 0;
 		std::shared_ptr<DirectionState> directionState_ptr;
 		bool isDirectionFB = false;
 
@@ -652,6 +651,8 @@ public:
 
 		directionState_ptr->KillProcess = false;
 		directionState_ptr->SoftKillProcess = false;
+
+		return 0;
 	}
 
 	int MoveToDirection(Direction direction = NoDirection) {

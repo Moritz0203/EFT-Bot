@@ -288,7 +288,14 @@ public:
 			YRotation = static_cast<int>(rotationY) - getRandomValueForAutoRotation(-10, 10);
 		}
 
+		cout << XRotation << "  :  " << YRotation << endl;	
+		cout << endl;
+
 		mousePath = makePath(XRotation, YRotation);
+
+		for (const auto& step : mousePath) {
+			cout << step.first << " : " << step.second << endl;	
+		}
 
 		uint minSleep = 3400;
 		uint maxSleep = 4100;
@@ -296,8 +303,6 @@ public:
 		uint stepDuration = (maxSleep - minSleep) / mousePath.size();
 
 		uint CurrentSleep = minSleep;
-
-		cout << XRotation << " : " << YRotation << endl;	
 
 		for (const auto& step : mousePath) {
 			moveMouse(step.first, step.second);
@@ -1098,7 +1103,7 @@ int main() {
 
 	HumanizedMouse humanizedMouse;
 
-	humanizedMouse.MoveToDirection(RightX);
+	humanizedMouse.MoveToDirection();
 
 	//INPUT input[2];
 	//input[0].type = INPUT_KEYBOARD;

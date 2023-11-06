@@ -233,8 +233,19 @@ class HumanizedMouse
 			currentIndex--;
 		}
 
+		cout << "BiggerNumber : SmallerNumber" << endl;
+		for (size_t i = 0; i < BiggerNumber.size(); i++)
+		{
+			cout << BiggerNumber[i] << " : " << SmallerNumber[i] << endl;
+		}
+		cout << endl;
+
 		if (isXGreater) {
+
+			cout << BiggerNumber.size() << " : " << SmallerNumber.size() << endl;
 			if (BiggerNumber.size() == SmallerNumber.size()) {
+				cout << "X is Bigger" << endl;
+
 				for (size_t i = 0; i < BiggerNumber.size(); ++i) {
 					result.push_back(std::make_pair(BiggerNumber[i], SmallerNumber[i]));
 				}
@@ -242,10 +253,18 @@ class HumanizedMouse
 		}
 		else {
 			if (BiggerNumber.size() == SmallerNumber.size()) {
+				cout << "Y is Bigger" << endl;
+
 				for (size_t i = 0; i < BiggerNumber.size(); ++i) {
 					result.push_back(std::make_pair(SmallerNumber[i], BiggerNumber[i]));
 				}
 			}
+		}
+
+		cout << "X : Y - In Make Path" << endl;
+
+		for (const auto& step : result) {
+			cout << step.first << " : " << step.second << endl;
 		}
 
 		return result;
@@ -293,9 +312,12 @@ public:
 
 		mousePath = makePath(XRotation, YRotation);
 
+		cout << "X : Y" << endl;
 		for (const auto& step : mousePath) {
 			cout << step.first << " : " << step.second << endl;	
 		}
+
+		cout << mousePath.size() << endl;	
 
 		uint minSleep = 3400;
 		uint maxSleep = 4100;

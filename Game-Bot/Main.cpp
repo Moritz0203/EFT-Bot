@@ -315,8 +315,6 @@ enum ErrorCodes {
 };
 
 class HumanizedKeyboard {
-	std::mutex mtx_KB;
-	std::condition_variable cv_KB;
 
 	struct DirectionState {
 		Direction direction;

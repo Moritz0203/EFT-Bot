@@ -95,7 +95,7 @@ class HumanizedMouse
 	int getRandomValueForAutoRotation(int lower, int uper) {
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		std::uniform_int_distribution<int> distribution(-lower, uper);
+		std::uniform_int_distribution<int> distribution(lower, uper);
 
 		return distribution(gen);
 	}
@@ -269,31 +269,47 @@ public:
 		/// X
 		if (rotationX == TurnAround) {
 			if (shouldAddPrefix())
-				XRotation = -1800;
+				XRotation = -1800 - getRandomValueForAutoRotation(-20, 20);
 			else
-				XRotation = 1800;
+				XRotation = 1800 - getRandomValueForAutoRotation(-20, 20);
 		}
 		else if (rotationX == AutoRotationX) {
 			XRotation = getRandomValueForAutoRotation(-100, 100);
 		}
 		else {
-			XRotation = static_cast<int>(rotationX);
+			XRotation = static_cast<int>(rotationX) - getRandomValueForAutoRotation(-10, 10);
 		}
 
 		/// Y
 		if (rotationY == AutoRotationY) {
-			YRotation = getRandomValueForAutoRotation(-20, 20);
+			YRotation = getRandomValueForAutoRotation(-40, 40);
 		}
 		else {
-			YRotation = static_cast<int>(rotationY);
+			YRotation = static_cast<int>(rotationY) - getRandomValueForAutoRotation(-10, 10);
 		}
 
 		mousePath = makePath(XRotation, YRotation);
 
+		uint minSleep = 3400;
+		uint maxSleep = 4100;
+
+		uint stepDuration = (maxSleep - minSleep) / mousePath.size();
+
+		uint CurrentSleep = minSleep;
+
+		cout << XRotation << " : " << YRotation << endl;	
+
+		for (const auto& step : mousePath) {
+			moveMouse(step.first, step.second);
+
+			std::this_thread::sleep_for(std::chrono::nanoseconds(CurrentSleep));
+
+			CurrentSleep += stepDuration;
+		}
 	}
 };
 
-
+	
 typedef enum e_direction {
 	Forward = 0,
 	Backwards = 1,
@@ -1076,11 +1092,13 @@ int main() {
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
 
-	HumanizedKeyboard humanizedKeyboard;
+	//HumanizedKeyboard humanizedKeyboard;
 
-	humanizedKeyboard.test();
+	//humanizedKeyboard.test();
 
+	HumanizedMouse humanizedMouse;
 
+	humanizedMouse.MoveToDirection(RightX);
 
 	//INPUT input[2];
 	//input[0].type = INPUT_KEYBOARD;

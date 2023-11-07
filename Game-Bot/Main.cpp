@@ -307,7 +307,6 @@ public:
 			YRotation = static_cast<int>(rotationY) - getRandomValueForAutoRotation(-10, 10);
 		}
 
-
 		cout << XRotation << "  :  " << YRotation << endl;	
 		cout << endl;
 

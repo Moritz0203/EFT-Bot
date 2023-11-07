@@ -261,6 +261,7 @@ class HumanizedMouse
 			}
 		}
 
+
 		cout << "X : Y - In Make Path" << endl;
 
 		for (const auto& step : result) {

@@ -323,7 +323,6 @@ public:
 		uint maxSleep = 4100;
 
 		uint stepDuration = (maxSleep - minSleep) / mousePath.size();
-
 		uint CurrentSleep = minSleep;
 
 		for (const auto& step : mousePath) {

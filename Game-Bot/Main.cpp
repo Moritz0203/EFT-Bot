@@ -116,7 +116,7 @@ class HumanizedMouse
 		int ControlProcessSecond = 0;
 		int OriginalProcessSecond = 0;
 
-		bool isXGreater = isXGreaterThanY(x, y);
+		bool isXGreater = isXGreaterThanY(abs(x), abs(y));
 		std::random_device rd;
 		std::mt19937 gen(rd());
 
@@ -148,7 +148,7 @@ class HumanizedMouse
 			if (ProcessFirst <= 1.0 / 12 * ControlProcessFirst) {
 				step = distBiggerNumber_ThirdDown(gen);
 			}
-			else if (ProcessFirst <= 1.0 / 5 * ControlProcessFirst) {
+			else if (ProcessFirst <= 1.0 / 4 * ControlProcessFirst) {
 				step = distBiggerNumber_SecondDown(gen);
 			}
 			else if (ProcessFirst <= 1.0 / 2 * ControlProcessFirst) {
@@ -232,19 +232,36 @@ class HumanizedMouse
 
 			currentIndex--;
 		}
+		
+		
+		div = BiggerNumber.size() - SmallerNumber.size();
+		cout << "--- " << div << endl;
 
-		cout << "BiggerNumber : SmallerNumber" << endl;
+
+
+
+
+
+		cout << "BiggerNumber" << endl;
 		for (size_t i = 0; i < BiggerNumber.size(); i++)
 		{
-			cout << BiggerNumber[i] << " : " << SmallerNumber[i] << endl;
+			cout << BiggerNumber[i] << endl;
+		}
+		cout << endl;
+		
+		cout << "SmallerNumber" << endl;
+		for (size_t i = 0; i < SmallerNumber.size(); i++)
+		{
+			cout << SmallerNumber[i] << endl;
 		}
 		cout << endl;
 
+		cout << BiggerNumber.size() << " : " << SmallerNumber.size() << endl;
+
 		if (isXGreater) {
 
-			cout << BiggerNumber.size() << " : " << SmallerNumber.size() << endl;
+			cout << "X is Bigger" << endl;
 			if (BiggerNumber.size() == SmallerNumber.size()) {
-				cout << "X is Bigger" << endl;
 
 				for (size_t i = 0; i < BiggerNumber.size(); ++i) {
 					result.push_back(std::make_pair(BiggerNumber[i], SmallerNumber[i]));
@@ -252,8 +269,8 @@ class HumanizedMouse
 			}
 		}
 		else {
+			cout << "Y is Bigger" << endl;
 			if (BiggerNumber.size() == SmallerNumber.size()) {
-				cout << "Y is Bigger" << endl;
 
 				for (size_t i = 0; i < BiggerNumber.size(); ++i) {
 					result.push_back(std::make_pair(SmallerNumber[i], BiggerNumber[i]));
@@ -1115,9 +1132,9 @@ namespace Testing {
 int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
-	const HWND hWND = GetMat::FindeWindow();
-	SetForegroundWindow(hWND);
-	Sleep(1000);//Delete later
+	//const HWND hWND = GetMat::FindeWindow();
+	//SetForegroundWindow(hWND);
+	//Sleep(1000);//Delete later
 
 	//HumanizedKeyboard humanizedKeyboard;
 

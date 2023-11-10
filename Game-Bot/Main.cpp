@@ -189,78 +189,175 @@ class HumanizedMouse
 			SmallerNumber.push_back(OriginalProcessSecond < 0 ? step *= -1 : step);
 		}
 
-		int div = BiggerNumber.size() - SmallerNumber.size();
-		int Overhead = div / 5;
-		int OverheadSplited = (Overhead / 2);
 
-		while (Overhead > 0) {
-			step = 1;
+		/// Block if BiggerNumber.size() < SmallerNumber.size()
+		if (BiggerNumber.size() < SmallerNumber.size()) {
+			SmallerNumber.clear();
+			ProcessSecond = ControlProcessSecond;
 
-			if (step > Overhead) step = Overhead;
+			while (ProcessSecond > 0) {
 
-			Overhead -= step;
+				if (ProcessSecond <= 1.0 / 8 * ControlProcessSecond) {
+					step = distBiggerNumber_ThirdDown(gen);
+				}
+				else if (ProcessSecond <= 1.0 / 4 * ControlProcessSecond) {
+					step = distBiggerNumber_SecondDown(gen);
+				}
+				else if (ProcessSecond <= 1.0 / 2 * ControlProcessSecond) {
+					step = distBiggerNumber_FirstDown(gen);
+				}
+				else {
+					step = distBiggerNumber_Default(gen);
+				}
 
-			if (OriginalProcessSecond < 0)
-				step *= -1;
+				if (step > ProcessSecond) step = ProcessSecond;
 
-			if (Overhead < OverheadSplited)
-				step *= -1;
-
-			SmallerNumber.push_back(step);
-		}
-
-		div = BiggerNumber.size() - SmallerNumber.size();
-		int zeroCount = div;
-
-		int currentIndex = SmallerNumber.size() - 1;
-		while (zeroCount > 0) {
-
-			if (currentIndex < 0) {
-				currentIndex = SmallerNumber.size() - 1;
-				continue;
+				ProcessSecond -= step;
+				SmallerNumber.push_back(ControlProcessSecond < 0 ? step *= -1 : step);
 			}
 
-			if (SmallerNumber[currentIndex] >= 3 || SmallerNumber[currentIndex] <= -3) {
-				currentIndex = SmallerNumber.size() - 1;
-				continue;
+			int div = BiggerNumber.size() - SmallerNumber.size();
+			int Overhead = div / 5;
+			int OverheadSplited = (Overhead / 2);
+
+			//cout << "Overhead: " << Overhead << endl;
+
+			while (Overhead > 0) {
+				step = 1;
+
+				if (step > Overhead) step = Overhead;
+
+				Overhead -= step;
+
+				if (OriginalProcessSecond < 0)
+					step *= -1;
+
+				if (Overhead < OverheadSplited)
+					step *= -1;
+
+				SmallerNumber.push_back(step);
 			}
 
-			if (std::uniform_int_distribution<int>(1, 100)(gen) >= 40) {
-				SmallerNumber.insert(SmallerNumber.begin() + currentIndex, 0);
-				zeroCount--;
+			div = BiggerNumber.size() - SmallerNumber.size();
+			int zeroCount = div;
+
+			//cout << "div: " << div << endl;
+			//cout << "zeroCount: " << zeroCount << endl;
+
+			//for (int i : SmallerNumber)
+			//	cout << i << endl;
+
+			int currentIndex = SmallerNumber.size() - 1;
+			if (currentIndex == 0) {
+				for (int i = 0; i < zeroCount; i++) {
+					SmallerNumber.push_back(0);
+				}
+			}
+			else {
+				int failSave = 400;
+				while (zeroCount > 0) {
+					//cout << "currentIndex: " << currentIndex << endl;
+
+					if(failSave == 0)
+						break;
+
+					if (currentIndex < 0) {
+						failSave--;
+						currentIndex = SmallerNumber.size() - 1;
+						continue;
+					}
+
+					if (SmallerNumber[currentIndex] > 6 || SmallerNumber[currentIndex] < -6) {
+						failSave--;
+						currentIndex = SmallerNumber.size() - 1;
+						continue;
+					}
+
+					if (std::uniform_int_distribution<int>(1, 100)(gen) >= 40) {
+						failSave = 400;
+						SmallerNumber.insert(SmallerNumber.begin() + currentIndex, 0);
+						zeroCount--;
+					}
+
+					currentIndex--;
+				}
 			}
 
-			currentIndex--;
+		}
+		else {
+			int div = BiggerNumber.size() - SmallerNumber.size();
+			int Overhead = div / 5;
+			int OverheadSplited = (Overhead / 2);
+
+			//cout << "Overhead: " << Overhead << endl;
+
+			while (Overhead > 0) {
+				step = 1;
+
+				if (step > Overhead) step = Overhead;
+
+				Overhead -= step;
+
+				if (OriginalProcessSecond < 0)
+					step *= -1;
+
+				if (Overhead < OverheadSplited)
+					step *= -1;
+
+				SmallerNumber.push_back(step);
+			}
+
+			div = BiggerNumber.size() - SmallerNumber.size();
+			int zeroCount = div;
+
+			int currentIndex = SmallerNumber.size() - 1;
+			if (currentIndex == 0) {
+				for (int i = 0; i < zeroCount; i++) {
+					SmallerNumber.push_back(0);
+				}
+			}
+			else {
+				while (zeroCount > 0) {
+					//cout << "currentIndex: " << currentIndex << endl;
+
+					if (currentIndex < 0) {
+						currentIndex = SmallerNumber.size() - 1;
+						continue;
+					}
+
+					if (SmallerNumber[currentIndex] >= 3 || SmallerNumber[currentIndex] <= -3) {
+						currentIndex = SmallerNumber.size() - 1;
+						continue;
+					}
+
+					if (std::uniform_int_distribution<int>(1, 100)(gen) >= 40) {
+						SmallerNumber.insert(SmallerNumber.begin() + currentIndex, 0);
+						zeroCount--;
+					}
+
+					currentIndex--;
+				}
+			}
+		}
+
+		//cout << BiggerNumber.size() << " : " << SmallerNumber.size() << endl;
+
+		if (BiggerNumber.size() < SmallerNumber.size()) {
+			int div = SmallerNumber.size() - BiggerNumber.size();
+
+			for (int i = 0; i < div; i++) {
+				BiggerNumber.push_back(0);
+			}
+		}
+		else if (BiggerNumber.size() > SmallerNumber.size()) {
+			int div = BiggerNumber.size() - SmallerNumber.size();
+
+			for (int i = 0; i < div; i++) {
+				SmallerNumber.push_back(0);
+			}
 		}
 		
-		
-		div = BiggerNumber.size() - SmallerNumber.size();
-		cout << "--- " << div << endl;
-
-
-
-
-
-
-		cout << "BiggerNumber" << endl;
-		for (size_t i = 0; i < BiggerNumber.size(); i++)
-		{
-			cout << BiggerNumber[i] << endl;
-		}
-		cout << endl;
-		
-		cout << "SmallerNumber" << endl;
-		for (size_t i = 0; i < SmallerNumber.size(); i++)
-		{
-			cout << SmallerNumber[i] << endl;
-		}
-		cout << endl;
-
-		cout << BiggerNumber.size() << " : " << SmallerNumber.size() << endl;
-
 		if (isXGreater) {
-
-			cout << "X is Bigger" << endl;
 			if (BiggerNumber.size() == SmallerNumber.size()) {
 
 				for (size_t i = 0; i < BiggerNumber.size(); ++i) {
@@ -269,20 +366,12 @@ class HumanizedMouse
 			}
 		}
 		else {
-			cout << "Y is Bigger" << endl;
 			if (BiggerNumber.size() == SmallerNumber.size()) {
 
 				for (size_t i = 0; i < BiggerNumber.size(); ++i) {
 					result.push_back(std::make_pair(SmallerNumber[i], BiggerNumber[i]));
 				}
 			}
-		}
-
-
-		cout << "X : Y - In Make Path" << endl;
-
-		for (const auto& step : result) {
-			cout << step.first << " : " << step.second << endl;
 		}
 
 		return result;
@@ -303,30 +392,37 @@ public:
 		int YRotation = 0;
 		vector<pair<int, int>> mousePath;
 
-		/// X
-		if (rotationX == TurnAround) {
-			if (shouldAddPrefix())
-				XRotation = -1800 - getRandomValueForAutoRotation(-20, 20);
-			else
-				XRotation = 1800 - getRandomValueForAutoRotation(-20, 20);
-		}
-		else if (rotationX == AutoRotationX) {
-			XRotation = getRandomValueForAutoRotation(-100, 100);
-		}
-		else {
-			XRotation = static_cast<int>(rotationX) - getRandomValueForAutoRotation(-10, 10);
-		}
+		while (true) {
+			/// X
+			if (rotationX == TurnAround) {
+				if (shouldAddPrefix())
+					XRotation = -1800 - getRandomValueForAutoRotation(-20, 20);
+				else
+					XRotation = 1800 - getRandomValueForAutoRotation(-20, 20);
+			}
+			else if (rotationX == AutoRotationX) {
+				XRotation = getRandomValueForAutoRotation(-100, 100);
+			}
+			else {
+				XRotation = static_cast<int>(rotationX) - getRandomValueForAutoRotation(-10, 10);
+			}
 
-		/// Y
-		if (rotationY == AutoRotationY) {
-			YRotation = getRandomValueForAutoRotation(-40, 40);
-		}
-		else {
-			YRotation = static_cast<int>(rotationY) - getRandomValueForAutoRotation(-10, 10);
-		}
+			/// Y
+			if (rotationY == AutoRotationY) {
+				YRotation = getRandomValueForAutoRotation(-40, 40);
+			}
+			else {
+				YRotation = static_cast<int>(rotationY) - getRandomValueForAutoRotation(-10, 10);
+			}
 
-		cout << XRotation << "  :  " << YRotation << endl;	
-		cout << endl;
+			cout << XRotation << "  :  " << YRotation << endl;
+			cout << endl;
+
+			if (XRotation != 0 && YRotation != 0) {
+				break;
+			}
+		}
+		
 
 		mousePath = makePath(XRotation, YRotation);
 
@@ -335,7 +431,7 @@ public:
 			cout << step.first << " : " << step.second << endl;	
 		}
 
-		cout << mousePath.size() << endl;	
+		//cout << mousePath.size() << endl;	
 
 		uint minSleep = 3400;
 		uint maxSleep = 4100;

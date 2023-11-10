@@ -415,14 +415,13 @@ public:
 				YRotation = static_cast<int>(rotationY) - getRandomValueForAutoRotation(-10, 10);
 			}
 
-			cout << XRotation << "  :  " << YRotation << endl;
-			cout << endl;
+			//cout << XRotation << "  :  " << YRotation << endl;
+			//cout << endl;
 
 			if (XRotation != 0 && YRotation != 0) {
 				break;
 			}
 		}
-		
 
 		mousePath = makePath(XRotation, YRotation);
 
@@ -430,8 +429,6 @@ public:
 		for (const auto& step : mousePath) {
 			cout << step.first << " : " << step.second << endl;	
 		}
-
-		//cout << mousePath.size() << endl;	
 
 		uint minSleep = 3400;
 		uint maxSleep = 4100;
@@ -448,6 +445,7 @@ public:
 		}
 	}
 };
+
 
 	
 typedef enum e_direction {

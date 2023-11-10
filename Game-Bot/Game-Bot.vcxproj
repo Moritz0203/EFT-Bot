@@ -129,8 +129,10 @@
   <ItemGroup>
     <ClCompile Include="BuyItemsFlea.cpp" />
     <ClCompile Include="CaseProcessing.cpp" />
+    <ClCompile Include="HumanizedKeyboard.cpp" />
+    <ClCompile Include="HumanizedMouse.cpp" />
+    <ClCompile Include="HumanizedMovement.cpp" />
     <ClCompile Include="OueueProcessing.cpp" />
-    <ClCompile Include="RealisticMouse.cpp" />
     <ClCompile Include="ServerAPI.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="LobbyControler.cpp" />
@@ -156,9 +158,10 @@
   <ItemGroup>
     <ClInclude Include="BuyItemsFlea.h" />
     <ClInclude Include="CaseProcessing.h" />
-    <ClInclude Include="human_mouse.h" />
+    <ClInclude Include="HumanizedKeyboard.h" />
+    <ClInclude Include="HumanizedMouse.h" />
+    <ClInclude Include="HumanizedMovement.h" />
     <ClInclude Include="OueueProcessing.h" />
-    <ClInclude Include="RealisticMouse.h" />
     <ClInclude Include="ServerAPI.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="LobbyControler.h" />

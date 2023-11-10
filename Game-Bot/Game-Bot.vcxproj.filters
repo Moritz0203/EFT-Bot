@@ -72,17 +72,17 @@
     <Filter Include="Source Files\GameBot\Lobby-Overall\Queue-PrepareGame">
       <UniqueIdentifier>{9a4cb876-89de-460f-af2f-2688874a20fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\MK\HumanizedMouse">
-      <UniqueIdentifier>{fc765d1e-57d3-4ba1-b073-3cb7b436a7e8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\MK\HumanizedMouse">
-      <UniqueIdentifier>{0a8a25d4-de37-4a3a-ad45-81a90e97a330}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\GameBot\Lobby-Overall\Server-RunTimeStorage">
       <UniqueIdentifier>{a6b1b552-3a5d-48aa-afbc-fca6b67d47f0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\GameBot\Lobby-Overall\Server-RunTimeStorage">
       <UniqueIdentifier>{78f83e42-d838-47f1-a7a5-5735c082859f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MK\Humanized">
+      <UniqueIdentifier>{fc765d1e-57d3-4ba1-b073-3cb7b436a7e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MK\Humanized">
+      <UniqueIdentifier>{0a8a25d4-de37-4a3a-ad45-81a90e97a330}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -155,11 +155,17 @@
     <ClCompile Include="OueueProcessing.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall\Queue-PrepareGame</Filter>
     </ClCompile>
-    <ClCompile Include="RealisticMouse.cpp">
-      <Filter>Source Files\MK\HumanizedMouse</Filter>
-    </ClCompile>
     <ClCompile Include="ServerAPI.cpp">
       <Filter>Source Files\GameBot\Lobby-Overall\Server-RunTimeStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="HumanizedKeyboard.cpp">
+      <Filter>Source Files\MK\Humanized</Filter>
+    </ClCompile>
+    <ClCompile Include="HumanizedMouse.cpp">
+      <Filter>Source Files\MK\Humanized</Filter>
+    </ClCompile>
+    <ClCompile Include="HumanizedMovement.cpp">
+      <Filter>Source Files\MK\Humanized</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,14 +244,17 @@
     <ClInclude Include="OueueProcessing.h">
       <Filter>Header Files\GameBot\Lobby-Overall\Queue-PrepareGame</Filter>
     </ClInclude>
-    <ClInclude Include="human_mouse.h">
-      <Filter>Header Files\MK\HumanizedMouse</Filter>
-    </ClInclude>
-    <ClInclude Include="RealisticMouse.h">
-      <Filter>Header Files\MK\HumanizedMouse</Filter>
-    </ClInclude>
     <ClInclude Include="ServerAPI.h">
       <Filter>Header Files\GameBot\Lobby-Overall\Server-RunTimeStorage</Filter>
+    </ClInclude>
+    <ClInclude Include="HumanizedKeyboard.h">
+      <Filter>Header Files\MK\Humanized</Filter>
+    </ClInclude>
+    <ClInclude Include="HumanizedMouse.h">
+      <Filter>Header Files\MK\Humanized</Filter>
+    </ClInclude>
+    <ClInclude Include="HumanizedMovement.h">
+      <Filter>Header Files\MK\Humanized</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

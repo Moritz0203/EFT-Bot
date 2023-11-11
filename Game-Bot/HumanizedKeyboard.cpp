@@ -151,6 +151,7 @@ void HumanizedKeyboard::SprindForwardMove(std::shared_ptr<DirectionState> direct
 
 void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> directionState_ptr) {
 	thread InternalThread;
+	HumanizedKeyboard humanizedKeyboard;
 
 	DirectionState ForwardStateInternal{ Forward, false, false };
 	DirectionState SprintForwardStateInternal{ SprintForward, false, false };
@@ -161,7 +162,7 @@ void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> d
 	int stamina = CheckStaminaBar();
 
 	if (stamina == -1) {
-		InternalThread = thread(&HumanizedKeyboard::ForwardMove, this, ForwardState_ptr);
+		InternalThread = thread(&HumanizedKeyboard::ForwardMove, &humanizedKeyboard, ForwardState_ptr);
 
 		while (true)
 		{
@@ -169,7 +170,7 @@ void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> d
 
 			if (stamina == 100)
 				break;
-
+			 
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		}
 
@@ -195,7 +196,7 @@ void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> d
 
 				SprintForwardState_ptr->KillProcess = false;
 
-				InternalThread = thread(&HumanizedKeyboard::ForwardMove, ForwardState_ptr);
+				InternalThread = thread(&HumanizedKeyboard::ForwardMove, &humanizedKeyboard, ForwardState_ptr);
 				isSprintForward = false;
 			}
 		}
@@ -213,7 +214,7 @@ void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> d
 					isSprintForwardFirstTime = false;
 				}
 
-				InternalThread = thread(&HumanizedKeyboard::SprindForwardMove, SprintForwardState_ptr);
+				InternalThread = thread(&HumanizedKeyboard::SprindForwardMove, &humanizedKeyboard, SprintForwardState_ptr);
 				isSprintForward = true;
 				count = 4;
 			}
@@ -294,6 +295,7 @@ int HumanizedKeyboard::EndMoveToDirection(Direction direction, bool KillProcess,
 
 int HumanizedKeyboard::MoveToDirection(Direction direction) {
 	int errorCode = 0;
+	HumanizedKeyboard humanizedKeyboard;
 
 	switch (direction) {
 	case NoDirection:
@@ -306,7 +308,7 @@ int HumanizedKeyboard::MoveToDirection(Direction direction) {
 			return errorCode;
 		}
 		DirectionFB_ptr->direction = direction;
-		DirectionThread = thread(&HumanizedKeyboard::ForwardMove, DirectionFB_ptr);
+		DirectionThread = thread(&HumanizedKeyboard::ForwardMove, &humanizedKeyboard, DirectionFB_ptr);
 		break;
 
 	case Backwards:
@@ -315,7 +317,7 @@ int HumanizedKeyboard::MoveToDirection(Direction direction) {
 			return errorCode;
 		}
 		DirectionFB_ptr->direction = direction;
-		DirectionThread = thread(&HumanizedKeyboard::BackwardsMove, DirectionFB_ptr);
+		DirectionThread = thread(&HumanizedKeyboard::BackwardsMove, &humanizedKeyboard, DirectionFB_ptr);
 		break;
 
 	case Right:
@@ -324,7 +326,7 @@ int HumanizedKeyboard::MoveToDirection(Direction direction) {
 			return errorCode;
 		}
 		DirectionRL_ptr->direction = direction;
-		LeftRightThread = thread(&HumanizedKeyboard::RightMove, DirectionRL_ptr);
+		LeftRightThread = thread(&HumanizedKeyboard::RightMove, &humanizedKeyboard, DirectionRL_ptr);
 		break;
 
 	case Left:
@@ -333,7 +335,7 @@ int HumanizedKeyboard::MoveToDirection(Direction direction) {
 			return errorCode;
 		}
 		DirectionRL_ptr->direction = direction;
-		LeftRightThread = thread(&HumanizedKeyboard::LeftMove, DirectionRL_ptr);
+		LeftRightThread = thread(&HumanizedKeyboard::LeftMove, &humanizedKeyboard, DirectionRL_ptr);
 		break;
 
 	case AutoForward:
@@ -342,7 +344,7 @@ int HumanizedKeyboard::MoveToDirection(Direction direction) {
 			return errorCode;
 		}
 		DirectionFB_ptr->direction = direction;
-		DirectionThread = thread(&HumanizedKeyboard::AutoForwardMove, DirectionFB_ptr);
+		DirectionThread = thread(&HumanizedKeyboard::AutoForwardMove, &humanizedKeyboard, DirectionFB_ptr);
 		break;
 
 	case SprintForward:
@@ -351,7 +353,7 @@ int HumanizedKeyboard::MoveToDirection(Direction direction) {
 			return errorCode;
 		}
 		DirectionFB_ptr->direction = direction;
-		DirectionThread = thread(&HumanizedKeyboard::SprintForwardControler, DirectionFB_ptr);
+		DirectionThread = thread(&HumanizedKeyboard::SprintForwardControler, &humanizedKeyboard, DirectionFB_ptr);
 		break;
 
 	case AutoSprintForward:
@@ -360,7 +362,7 @@ int HumanizedKeyboard::MoveToDirection(Direction direction) {
 			return errorCode;
 		}
 		DirectionFB_ptr->direction = direction;
-		DirectionThread = thread(&HumanizedKeyboard::AutoSprintForwardMove, DirectionFB_ptr);
+		DirectionThread = thread(&HumanizedKeyboard::AutoSprintForwardMove, &humanizedKeyboard, DirectionFB_ptr);
 		break;
 	}
 }

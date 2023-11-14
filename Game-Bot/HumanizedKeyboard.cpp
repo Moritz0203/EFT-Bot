@@ -287,6 +287,7 @@ int HumanizedKeyboard::EndMoveToDirection(Direction direction, bool KillProcess,
 	else
 		LeftRightThread.join();
 
+	directionState_ptr->direction = NoDirection;
 	directionState_ptr->KillProcess = false;
 	directionState_ptr->SoftKillProcess = false;
 
@@ -365,4 +366,6 @@ int HumanizedKeyboard::MoveToDirection(Direction direction) {
 		DirectionThread = thread(&HumanizedKeyboard::AutoSprintForwardMove, &humanizedKeyboard, DirectionFB_ptr);
 		break;
 	}
+
+	return errorCode;
 }

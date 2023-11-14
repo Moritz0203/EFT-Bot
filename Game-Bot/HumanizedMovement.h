@@ -14,7 +14,10 @@ typedef enum e_movetype {
 
 enum ErrorCodes_HumanizedMovement {
 	ThreadAlreadyRunning = 1,
-
+	InvalidMoveType = 2,
+	MoveAlreadyRunning = 3,
+	MoveNotRunning = 4,
+	ThreadNotRunning = 5,
 } ErrorCodes_HM;
 
 struct MoveState {
@@ -27,7 +30,12 @@ struct MoveState {
 
 class HumanizedMovement : public HumanizedKeyboard, public HumanizedMouse {
 	
-
+	void MoveBigCircle(std::shared_ptr<MoveState> move_ptr);
+	void MoveSmallCircle(std::shared_ptr<MoveState> move_ptr);
+	void MoveBigSquare(std::shared_ptr<MoveState> move_ptr);
+	void MoveSmallSquare(std::shared_ptr<MoveState> move_ptr);
+	void MoveRandom(std::shared_ptr<MoveState> move_ptr);
+	void MoveAuto(std::shared_ptr<MoveState> move_ptr);
 	
 public:
 

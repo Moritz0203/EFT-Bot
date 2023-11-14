@@ -3,12 +3,19 @@
 #include "HumanizedMouse.h"
 
 typedef enum e_movetype {
-	MOVE_TYPE_STOP = 1,
-	MOVE_TYPE_BIG_CIRCLE = 2,
-	MOVE_TYPE_SMALL_CIRCLE = 3,
-	MOVE_TYPE_AUTO = 4,
-	MOVE_TYPE_RANDOM = 5,
+	MOVE_TYPE_BIG_CIRCLE = 1,
+	MOVE_TYPE_SMALL_CIRCLE = 2,
+	MOVE_TYPE_BIG_SQUARE = 3,
+	MOVE_TYPE_SMALL_SQUARE = 4,
+	MOVE_TYPE_AUTO = 5,
+	MOVE_TYPE_RANDOM = 6,
+	MOVE_TYPE_NONE = 7
 } MoveType;
+
+enum ErrorCodes_HumanizedMovement {
+	ThreadAlreadyRunning = 1,
+
+} ErrorCodes_HM;
 
 struct MoveState {
 	MoveType moveType;
@@ -24,6 +31,6 @@ class HumanizedMovement : public HumanizedKeyboard, public HumanizedMouse {
 	
 public:
 
-	void StartMove(MoveType moveType = MOVE_TYPE_AUTO);
-	void StopMove(MoveType moveType, bool KillProcess, bool SoftKillProcess);
+	int StartMove(MoveType moveType = MOVE_TYPE_AUTO);
+	int StopMove(bool KillProcess, bool SoftKillProcess);
 };

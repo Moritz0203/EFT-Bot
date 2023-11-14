@@ -14,8 +14,8 @@ DirectionState::DirectionState(Direction dir, bool killProcess, bool softKillPro
 }
 
 
-thread DirectionThread;
-thread LeftRightThread;
+std::thread DirectionThread;
+std::thread LeftRightThread;
 
 DirectionState DirectionFB{ NoDirection, false, false };// Forward Backwards
 DirectionState DirectionRL{ NoDirection, false, false };// Right Left

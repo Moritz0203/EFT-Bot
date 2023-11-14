@@ -14,13 +14,13 @@ typedef enum e_direction {
 	NoDirection = 10,
 }Direction;
 
-enum ErrorCodes {
+enum ErrorCodes_HumanizedKeyboard {
 	InvalidDirection = 10,
 	DirectionAlreadyExists = 11,
 	DirectionConflict = 12,
 	DirectionDoesNotExist = 13,
 	NoKillProcess = 14,
-};
+} ErrorCodes_HK;
 
 struct DirectionState {
 	Direction direction;

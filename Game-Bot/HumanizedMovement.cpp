@@ -96,6 +96,8 @@ int HumanizedMovement::StartMove(MoveType moveType) {
 	return errorCode;
 }
 
+
+
 int HumanizedMovement::StopMove(bool KillProcess, bool SoftKillProcess) {
 	int errorCode = 0;
 

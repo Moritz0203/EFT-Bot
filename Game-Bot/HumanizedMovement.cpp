@@ -13,26 +13,13 @@ MoveState::MoveState(MoveType dir, bool killProcess, bool softKillProcess)
 	}
 }
 
-ConditionState::ConditionState(MovingCondition con, bool killProcess, bool softKillProcess)
-	: movingCondition(con) {
-	if (killProcess && softKillProcess) {
-		KillProcess = true;
-		SoftKillProcess = false;
-	}
-	else {
-		KillProcess = killProcess;
-		SoftKillProcess = softKillProcess;
-	}
-}
-
-
 std::thread MoveThread;
 
 MoveState moveState(MOVE_TYPE_NONE, false, false);
-ConditionState conditionState(MOVING_CONDITION_WALK, false, false);
+MovingCondition movingCondition = MOVING_CONDITION_WALK;
 
 std::shared_ptr<MoveState> MoveState_ptr = std::make_shared<MoveState>(moveState);
-std::shared_ptr<ConditionState> ConditionState_ptr = std::make_shared<ConditionState>(conditionState);
+std::shared_ptr<MovingCondition> ConditionState_ptr = std::make_shared<MovingCondition>(movingCondition);
 
 
 void HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
@@ -112,11 +99,6 @@ int HumanizedMovement::StartMove(MoveType moveType) {
 }
 
 int HumanizedMovement::StartMovingCondition(MovingCondition movingCondition) {
-
-	return 0;
-}
-
-int HumanizedMovement::EndMovingCondition(bool KillProcess, bool SoftKillProcess) {
 
 	return 0;
 }

@@ -35,14 +35,6 @@ struct MoveState {
 	MoveState(MoveType dir, bool killProcess, bool softKillProcess);
 };
 
-struct ConditionState {
-	MovingCondition movingCondition;
-	bool KillProcess; // true = Kill Process, false = Continue Process
-	bool SoftKillProcess; // true = Soft Kill Process, false = Continue Process
-
-	ConditionState(MovingCondition con, bool killProcess, bool softKillProcess);
-};
-
 
 class HumanizedMovement : public HumanizedKeyboard, public HumanizedMouse {
 	
@@ -57,6 +49,5 @@ public:
 
 	int StartMove(MoveType moveType = MOVE_TYPE_AUTO);
 	int StartMovingCondition(MovingCondition movingCondition = MOVING_CONDITION_WALK);
-	int EndMovingCondition(bool KillProcess, bool SoftKillProcess);
 	int StopMove(bool KillProcess, bool SoftKillProcess);
 };

@@ -20,7 +20,8 @@ enum ErrorCodes_HumanizedKeyboard {
 	DirectionConflict = 12,
 	DirectionDoesNotExist = 13,
 	NoKillProcess = 14,
-} ErrorCodes_HK;
+};
+extern ErrorCodes_HumanizedKeyboard ErrorCodes_HK;
 
 struct DirectionState {
 	Direction direction;

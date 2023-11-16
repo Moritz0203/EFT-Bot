@@ -25,14 +25,14 @@ ConditionState::ConditionState(MovingCondition con, bool killProcess, bool softK
 	}
 }
 
+
 std::thread MoveThread;
 
 MoveState moveState(MOVE_TYPE_NONE, false, false);
-MovingCondition movingCondition(MOVING_CONDITION_WALK, false, false);
-
+ConditionState conditionState(MOVING_CONDITION_WALK, false, false);
 
 std::shared_ptr<MoveState> MoveState_ptr = std::make_shared<MoveState>(moveState);
-std::shared_ptr<ConditionState> ConditionState_ptr = std::make_shared<ConditionState>(movingCondition);
+std::shared_ptr<ConditionState> ConditionState_ptr = std::make_shared<ConditionState>(conditionState);
 
 
 void HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {

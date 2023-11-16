@@ -24,7 +24,8 @@ enum ErrorCodes_HumanizedMovement {
 	MoveAlreadyRunning = 3,
 	MoveNotRunning = 4,
 	ThreadNotRunning = 5,
-} ErrorCodes_HM;
+};
+extern ErrorCodes_HumanizedMovement ErrorCodes_HM;
 
 struct MoveState {
 	MoveType moveType;

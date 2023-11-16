@@ -13,10 +13,9 @@ typedef enum e_movetype {
 } MoveType;
 
 typedef enum e_movingcondition {
-	MOVING_CONDITION_NONE = 1,
-	MOVING_CONDITION_SPRINT = 2,
-	MOVING_CONDITION_WALK = 3,
-	MOVING_CONDITION_CRIP = 4,
+	MOVING_CONDITION_SPRINT = 1,
+	MOVING_CONDITION_WALK = 2,
+	MOVING_CONDITION_CRIP = 3,
 } MovingCondition;
 
 enum ErrorCodes_HumanizedMovement {
@@ -40,7 +39,7 @@ struct ConditionState {
 	bool KillProcess; // true = Kill Process, false = Continue Process
 	bool SoftKillProcess; // true = Soft Kill Process, false = Continue Process
 
-	ConditionState(MovingCondition dir, bool killProcess, bool softKillProcess);
+	ConditionState(MovingCondition con, bool killProcess, bool softKillProcess);
 };
 
 
@@ -56,7 +55,7 @@ class HumanizedMovement : public HumanizedKeyboard, public HumanizedMouse {
 public:
 
 	int StartMove(MoveType moveType = MOVE_TYPE_AUTO);
-	int StartMovingCondition(MovingCondition movingCondition = MOVING_CONDITION_NONE);
+	int StartMovingCondition(MovingCondition movingCondition = MOVING_CONDITION_WALK);
 	int EndMovingCondition(bool KillProcess, bool SoftKillProcess);
 	int StopMove(bool KillProcess, bool SoftKillProcess);
 };

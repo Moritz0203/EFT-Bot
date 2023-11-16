@@ -13,6 +13,17 @@ MoveState::MoveState(MoveType dir, bool killProcess, bool softKillProcess)
 	}
 }
 
+ConditionState::ConditionState(MovingCondition con, bool killProcess, bool softKillProcess)
+	: movingCondition(con) {
+	if (killProcess && softKillProcess) {
+		KillProcess = true;
+		SoftKillProcess = false;
+	}
+	else {
+		KillProcess = killProcess;
+		SoftKillProcess = softKillProcess;
+	}
+}
 
 std::thread MoveThread;
 
@@ -95,6 +106,16 @@ int HumanizedMovement::StartMove(MoveType moveType) {
 	}
 
 	return errorCode;
+}
+
+int HumanizedMovement::StartMovingCondition(MovingCondition movingCondition) {
+
+	return 0;
+}
+
+int HumanizedMovement::EndMovingCondition(bool KillProcess, bool SoftKillProcess) {
+
+	return 0;
 }
 
 int HumanizedMovement::StopMove(bool KillProcess, bool SoftKillProcess) {

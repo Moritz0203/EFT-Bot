@@ -12,6 +12,13 @@ typedef enum e_movetype {
 	MOVE_TYPE_NONE = 7
 } MoveType;
 
+typedef enum e_movingcondition {
+	MOVING_CONDITION_NONE = 1,
+	MOVING_CONDITION_SPRINT = 2,
+	MOVING_CONDITION_WALK = 3,
+	MOVING_CONDITION_CRIP = 4,
+} MovingCondition;
+
 enum ErrorCodes_HumanizedMovement {
 	ThreadAlreadyRunning = 1,
 	InvalidMoveType = 2,
@@ -28,6 +35,15 @@ struct MoveState {
 	MoveState(MoveType dir, bool killProcess, bool softKillProcess);
 };
 
+struct ConditionState {
+	MovingCondition movingCondition;
+	bool KillProcess; // true = Kill Process, false = Continue Process
+	bool SoftKillProcess; // true = Soft Kill Process, false = Continue Process
+
+	ConditionState(MovingCondition dir, bool killProcess, bool softKillProcess);
+};
+
+
 class HumanizedMovement : public HumanizedKeyboard, public HumanizedMouse {
 	
 	void MoveBigCircle(std::shared_ptr<MoveState> move_ptr);
@@ -40,5 +56,7 @@ class HumanizedMovement : public HumanizedKeyboard, public HumanizedMouse {
 public:
 
 	int StartMove(MoveType moveType = MOVE_TYPE_AUTO);
+	int StartMovingCondition(MovingCondition movingCondition = MOVING_CONDITION_NONE);
+	int EndMovingCondition(bool KillProcess, bool SoftKillProcess);
 	int StopMove(bool KillProcess, bool SoftKillProcess);
 };

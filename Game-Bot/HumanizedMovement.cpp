@@ -54,10 +54,10 @@ int HumanizedMovement::StartMove(MoveType moveType) {
 	int errorCode = 0;
 	HumanizedMovement humanizedMovement;
 
-	if(MoveThread.joinable())
+	if (MoveThread.joinable())
 		return ThreadAlreadyRunning;
 
-	if(moveType == MOVE_TYPE_NONE)
+	if (moveType == MOVE_TYPE_NONE)
 		return InvalidMoveType;
 
 	if (MoveState_ptr->moveType != MOVE_TYPE_NONE) 
@@ -115,10 +115,10 @@ int HumanizedMovement::StartMovingCondition(MovingCondition movingCondition) {
 int HumanizedMovement::StopMove(bool KillProcess, bool SoftKillProcess) {
 	int errorCode = 0;
 
-	if(MoveState_ptr->moveType == MOVE_TYPE_NONE)
+	if (MoveState_ptr->moveType == MOVE_TYPE_NONE)
 		return MoveNotRunning;
 
-	if(!MoveThread.joinable())
+	if (!MoveThread.joinable())
 		return ThreadNotRunning;
 
 	if (KillProcess && SoftKillProcess) {

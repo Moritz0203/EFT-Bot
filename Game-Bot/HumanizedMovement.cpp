@@ -49,6 +49,7 @@ void HumanizedMovement::MoveAuto(std::shared_ptr<MoveState> move_ptr) {
 
 
 
+
 /// Public
 int HumanizedMovement::StartMove(MoveType moveType) {
 	int errorCode = 0;

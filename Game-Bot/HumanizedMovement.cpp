@@ -13,6 +13,7 @@ MoveState::MoveState(MoveType dir, bool killProcess, bool softKillProcess)
 	}
 }
 
+/// Private
 std::thread MoveThread;
 
 MoveState moveState(MOVE_TYPE_NONE, false, false);

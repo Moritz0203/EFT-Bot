@@ -13,6 +13,8 @@ MoveState::MoveState(MoveType dir, bool killProcess, bool softKillProcess)
 	}
 }
 
+
+
 /// Private
 std::thread MoveThread;
 
@@ -47,7 +49,6 @@ void HumanizedMovement::MoveRandom(std::shared_ptr<MoveState> move_ptr) {
 void HumanizedMovement::MoveAuto(std::shared_ptr<MoveState> move_ptr) {
 
 }
-
 
 
 

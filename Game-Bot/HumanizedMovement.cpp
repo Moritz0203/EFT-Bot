@@ -61,17 +61,14 @@ int HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 	while (true) {
 
 		if (move_ptr->KillProcess) {
-			// Kill Process
 			HumanizedKeyboard::EndMoveToDirection(InternalDirection, true, false);
 			break;
 		}
 		else if (move_ptr->SoftKillProcess) {
-			// Soft Kill Process
 			HumanizedKeyboard::EndMoveToDirection(InternalDirection, false, true);
 			break;
 		}
 		else if (InternalMovingCondition != *ConditionState_ptr) { // NOTE: Finde a good way to descide if SoftKillProcess or KillProcess
-			// Change Moving Condition
 			HumanizedKeyboard::EndMoveToDirection(InternalDirection, false, true);
 			InternalMovingCondition = *ConditionState_ptr;
 

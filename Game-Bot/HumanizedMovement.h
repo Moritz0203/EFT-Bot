@@ -25,6 +25,7 @@ enum ErrorCodes_HumanizedMovement {
 	MoveAlreadyRunning = 3,
 	MoveNotRunning = 4,
 	ThreadNotRunning = 5,
+	InvalideMovingCondition = 6,
 };
 extern ErrorCodes_HumanizedMovement ErrorCodes_HM;
 
@@ -39,7 +40,7 @@ struct MoveState {
 
 class HumanizedMovement : public HumanizedKeyboard, public HumanizedMouse {
 	
-	void MoveBigCircle(std::shared_ptr<MoveState> move_ptr);
+	int MoveBigCircle(std::shared_ptr<MoveState> move_ptr);
 	void MoveSmallCircle(std::shared_ptr<MoveState> move_ptr);
 	void MoveBigSquare(std::shared_ptr<MoveState> move_ptr);
 	void MoveSmallSquare(std::shared_ptr<MoveState> move_ptr);

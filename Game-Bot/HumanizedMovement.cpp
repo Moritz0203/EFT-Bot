@@ -25,25 +25,59 @@ MovingCondition movingCondition = MOVING_CONDITION_WALK;
 std::shared_ptr<MoveState> MoveState_ptr = std::make_shared<MoveState>(moveState);
 std::shared_ptr<MovingCondition> ConditionState_ptr = std::make_shared<MovingCondition>(movingCondition);
 
+Direction CheckDirection(MovingCondition movingCondition) {
+	Direction InternalDirection = NoDirection;
 
-void HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
+	switch (movingCondition)
+	{
+	case MOVING_CONDITION_NONE:
+		return NoDirection;
+		break;
+
+	case MOVING_CONDITION_SPRINT:
+		InternalDirection = SprintForward;
+		break;
+
+	case MOVING_CONDITION_WALK:
+		InternalDirection = Forward;
+		break;
+
+	case MOVING_CONDITION_CRIP:
+		//InternalDirection = Crip; // TODO: Add Crip
+		break;
+	}
+
+	return InternalDirection;
+}
+
+int HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 	MovingCondition InternalMovingCondition = MOVING_CONDITION_NONE;
+	Direction InternalDirection = NoDirection;
+	InternalMovingCondition = *ConditionState_ptr;
+	InternalDirection = CheckDirection(InternalMovingCondition);
 
-	while (move_ptr->moveType == MOVE_TYPE_BIG_CIRCLE) {
-		
+	HumanizedKeyboard::MoveToDirection(InternalDirection);
+
+	while (true) {
+
 		if (move_ptr->KillProcess) {
 			// Kill Process
+			HumanizedKeyboard::EndMoveToDirection(InternalDirection, true, false);
 			break;
 		}
 		else if (move_ptr->SoftKillProcess) {
 			// Soft Kill Process
+			HumanizedKeyboard::EndMoveToDirection(InternalDirection, false, true);
 			break;
 		}
-		else {
-			// Continue Process
-			if (InternalMovingCondition != *ConditionState_ptr) {
-				// Change Moving Condition
-			}
+		else if (InternalMovingCondition != *ConditionState_ptr) { // NOTE: Finde a good way to descide if SoftKillProcess or KillProcess
+			// Change Moving Condition
+			HumanizedKeyboard::EndMoveToDirection(InternalDirection, false, true);
+			InternalMovingCondition = *ConditionState_ptr;
+
+			InternalDirection = CheckDirection(InternalMovingCondition);
+
+			HumanizedKeyboard::MoveToDirection(InternalDirection);
 		}
 
 	}
@@ -83,9 +117,9 @@ int HumanizedMovement::StartMove(MoveType moveType) {
 	if (moveType == MOVE_TYPE_NONE)
 		return InvalidMoveType;
 
-	if (MoveState_ptr->moveType != MOVE_TYPE_NONE) 
+	if (MoveState_ptr->moveType != MOVE_TYPE_NONE)
 		return MoveAlreadyRunning;
-	
+
 	switch (moveType) {
 	case MOVE_TYPE_BIG_CIRCLE:
 		MoveState_ptr->moveType = moveType;

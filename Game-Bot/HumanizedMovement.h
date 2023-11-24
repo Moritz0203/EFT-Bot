@@ -16,6 +16,7 @@ typedef enum e_movingcondition {
 	MOVING_CONDITION_SPRINT = 1,
 	MOVING_CONDITION_WALK = 2,
 	MOVING_CONDITION_CRIP = 3,
+	MOVING_CONDITION_NONE = 4
 } MovingCondition;
 
 enum ErrorCodes_HumanizedMovement {

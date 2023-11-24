@@ -17,6 +17,7 @@ MoveState::MoveState(MoveType dir, bool killProcess, bool softKillProcess)
 
 /// Private
 std::thread MoveThread;
+std::thread MouseThread;
 
 MoveState moveState(MOVE_TYPE_NONE, false, false);
 MovingCondition movingCondition = MOVING_CONDITION_WALK;
@@ -26,7 +27,26 @@ std::shared_ptr<MovingCondition> ConditionState_ptr = std::make_shared<MovingCon
 
 
 void HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
+	MovingCondition InternalMovingCondition = MOVING_CONDITION_NONE;
 
+	while (move_ptr->moveType == MOVE_TYPE_BIG_CIRCLE) {
+		
+		if (move_ptr->KillProcess) {
+			// Kill Process
+			break;
+		}
+		else if (move_ptr->SoftKillProcess) {
+			// Soft Kill Process
+			break;
+		}
+		else {
+			// Continue Process
+			if (InternalMovingCondition != *ConditionState_ptr) {
+				// Change Moving Condition
+			}
+		}
+
+	}
 }
 
 void HumanizedMovement::MoveSmallCircle(std::shared_ptr<MoveState> move_ptr) {

@@ -58,8 +58,8 @@ class HumanizedMouse
 
 public:
 
-	void MoveToExactPoint(int x, int y, UINT speedIn_NS) { }
 	void MoveViaRotation(float xRotation, float yRotation, UINT speedIn_NS) { }
 
+	void MoveToExactPoint(int x, int y, UINT speedIn_NS);
 	void MoveToDirection(RotationX rotationX = AutoRotationX, RotationY rotationY = AutoRotationY, UINT speedIn_NS = 900);
 };

@@ -274,6 +274,10 @@ std::vector<std::pair<int, int>> HumanizedMouse::makePath(int x, int y) {
 	return result;
 }
 
+void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
+
+}
+
 void HumanizedMouse::MoveToDirection(RotationX rotationX, RotationY rotationY, UINT speedIn_NS) {
 	int XRotation = 0;
 	int YRotation = 0;

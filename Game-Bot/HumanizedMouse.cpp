@@ -274,7 +274,40 @@ std::vector<std::pair<int, int>> HumanizedMouse::makePath(int x, int y) {
 	return result;
 }
 
+
 void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
+	std::vector<std::pair<int, int>> result;
+	std::vector<int> BiggerNumber;
+	std::vector<int> SmallerNumber;
+	
+	int ProcessFirst = 0;
+	int ControlProcessFirst = 0;
+	int OriginalProcessFirst = 0;
+	int ProcessSecond = 0;
+	int ControlProcessSecond = 0;
+	int OriginalProcessSecond = 0;
+
+	bool isXGreater = isXGreaterThanY(abs(x), abs(y));
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	if (isXGreater) {
+		ProcessFirst = abs(x);
+		ControlProcessFirst = abs(x);
+		OriginalProcessFirst = x;
+		ProcessSecond = abs(y);
+		ControlProcessSecond = abs(y);
+		OriginalProcessSecond = y;
+	}
+	else {
+		ProcessFirst = abs(y);
+		ControlProcessFirst = abs(y);
+		OriginalProcessFirst = y;
+		ProcessSecond = abs(x);
+		ControlProcessSecond = abs(x);
+		OriginalProcessSecond = x;
+	}
+
 
 }
 

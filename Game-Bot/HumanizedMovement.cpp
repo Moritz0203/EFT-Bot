@@ -171,9 +171,11 @@ int HumanizedMovement::SetMovingCondition(MovingCondition movingCondition) {
 	if (MoveState_ptr->moveType == MOVE_TYPE_NONE)
 		return MoveNotRunning;
 
-	std::cout << movingCondition << std::endl;
+	std::cout << "SetMovingCondition: " << movingCondition << std::endl;
 
 	*ConditionState_ptr = movingCondition;
+
+	std::cout << "SetMovingCondition_ptr: " << *ConditionState_ptr << std::endl;
 
 	return errorCode;
 }

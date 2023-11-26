@@ -86,7 +86,7 @@ int HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 			HumanizedKeyboard.MoveToDirection(InternalDirection);
 		}
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		HumanizedMouse.MoveToExactPoint(5, 0, 2000);
 	}
 

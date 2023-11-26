@@ -52,6 +52,6 @@ class HumanizedMovement {
 public:
 
 	int StartMove(MoveType moveType = MOVE_TYPE_AUTO);
-	int MovingCondition(MovingCondition movingCondition = MOVING_CONDITION_WALK);
+	int SetMovingCondition(MovingCondition movingCondition = MOVING_CONDITION_WALK);
 	int StopMove(bool KillProcess, bool SoftKillProcess);
 };

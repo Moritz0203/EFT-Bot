@@ -28,7 +28,7 @@ std::shared_ptr<MovingCondition> ConditionState_ptr = std::make_shared<MovingCon
 Direction CheckDirection(MovingCondition movingCondition) {
 	Direction InternalDirection = NoDirection;
 
-	std::cout << movingCondition << std::endl;
+	std::cout << "CheckDirection: " << movingCondition << std::endl;
 
 	switch (movingCondition)
 	{
@@ -162,7 +162,7 @@ int HumanizedMovement::StartMove(MoveType moveType) {
 	return errorCode;
 }
 
-int HumanizedMovement::MovingCondition(MovingCondition movingCondition) {
+int HumanizedMovement::SetMovingCondition(MovingCondition movingCondition) {
 	int errorCode = 0;
 
 	if (!MoveThread.joinable())

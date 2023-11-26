@@ -329,7 +329,77 @@ void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
 		SmallerNumber.push_back(OriginalProcessSecond < 0 ? step *= -1 : step);
 	}
 
+	int div = BiggerNumber.size() - SmallerNumber.size();
+	int zeroCount = div;
 
+	int currentIndex = SmallerNumber.size() - 1;
+	if (currentIndex == 0) {
+		for (int i = 0; i < zeroCount; i++) {
+			SmallerNumber.push_back(0);
+		}
+	}
+	else {
+		while (zeroCount > 0) {
+			//cout << "currentIndex: " << currentIndex << endl;
+
+			if (currentIndex < 0) {
+				currentIndex = SmallerNumber.size() - 1;
+				continue;
+			}
+
+			if (SmallerNumber[currentIndex] >= 3 || SmallerNumber[currentIndex] <= -3) {
+				currentIndex = SmallerNumber.size() - 1;
+				continue;
+			}
+
+			if (std::uniform_int_distribution<int>(1, 100)(gen) >= 40) {
+				SmallerNumber.insert(SmallerNumber.begin() + currentIndex, 0);
+				zeroCount--;
+			}
+
+			currentIndex--;
+		}
+	}
+
+	if (BiggerNumber.size() < SmallerNumber.size()) {
+		int div = SmallerNumber.size() - BiggerNumber.size();
+
+		for (int i = 0; i < div; i++) {
+			BiggerNumber.push_back(0);
+		}
+	}
+	else if (BiggerNumber.size() > SmallerNumber.size()) {
+		int div = BiggerNumber.size() - SmallerNumber.size();
+
+		for (int i = 0; i < div; i++) {
+			SmallerNumber.push_back(0);
+		}
+	}
+
+	if (isXGreater) {
+		if (BiggerNumber.size() == SmallerNumber.size()) {
+
+			for (size_t i = 0; i < BiggerNumber.size(); ++i) {
+				result.push_back(std::make_pair(BiggerNumber[i], SmallerNumber[i]));
+			}
+		}
+	}
+	else {
+		if (BiggerNumber.size() == SmallerNumber.size()) {
+
+			for (size_t i = 0; i < BiggerNumber.size(); ++i) {
+				result.push_back(std::make_pair(SmallerNumber[i], BiggerNumber[i]));
+			}
+		}
+	}
+
+	UINT SleepDuration = speedIn_NS / result.size();
+
+	for (const auto& step : result) {
+		moveMouse(step.first, step.second);
+
+		std::this_thread::sleep_for(std::chrono::nanoseconds(SleepDuration));
+	}
 }
 
 void HumanizedMouse::MoveToDirection(RotationX rotationX, RotationY rotationY, UINT speedIn_NS) {

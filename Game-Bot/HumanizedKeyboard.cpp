@@ -71,6 +71,8 @@ void HumanizedKeyboard::ForwardMove(std::shared_ptr<DirectionState> directionSta
 	input[0].ki.dwFlags = 0;
 	SendInput(1, &input[0], sizeof(INPUT));
 
+	cout << "test" << endl;
+
 	while (directionState_ptr->KillProcess != true) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
@@ -160,6 +162,8 @@ void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> d
 	shared_ptr<DirectionState> SprintForwardState_ptr = std::make_shared<DirectionState>(SprintForwardStateInternal);
 
 	int stamina = CheckStaminaBar();
+
+	cout << "stamina: " << stamina << endl;	
 
 	if (stamina == -1) {
 		InternalThread = thread(&HumanizedKeyboard::ForwardMove, &humanizedKeyboard, ForwardState_ptr);

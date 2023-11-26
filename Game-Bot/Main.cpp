@@ -13,8 +13,8 @@
 #include "ItemMoving.h"
 #include "StashObject.h"
 #include "InputMK.h"
+#include "HumanizedMovement.h"
 
-#include "human_mouse.h"
 #include <cmath>
 #include <random>
 
@@ -354,85 +354,16 @@ namespace Testing {
 int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
-	//const HWND hWND = GetMat::FindeWindow();
-	//SetForegroundWindow(hWND);
-	//Sleep(1000);//Delete later
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(1000);//Delete later
 
-	//HumanizedKeyboard humanizedKeyboard;
+	HumanizedMovement humanizedMovement;
 
-	//humanizedKeyboard.test();
+	humanizedMovement.StartMove(MoveType::MOVE_TYPE_BIG_CIRCLE);
+	cout << "Error Code :" << humanizedMovement.MovingCondition(MovingCondition::MOVING_CONDITION_SPRINT) << endl;
 
-	//HumanizedMouse humanizedMouse;
+	std::this_thread::sleep_for(std::chrono::seconds(50));
 
-	//humanizedMouse.MoveToDirection();
-
-	//INPUT input[2];
-	//input[0].type = INPUT_KEYBOARD;
-	//input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
-	//input[0].ki.dwFlags = 0;
-
-	//// SendInput für das Drücken von 'W'
-	//SendInput(1, &input[0], sizeof(INPUT));
-
-	//Sleep(1000);
-
-	//// Simuliere das Drücken der Shift-Taste
-	//input[1].type = INPUT_KEYBOARD;
-	//input[1].ki.wVk = VK_SHIFT; // Shift-Taste
-	//input[1].ki.dwFlags = 0;
-
-	//// SendInput für das Drücken der Shift-Taste
-	//SendInput(1, &input[1], sizeof(INPUT));
-
-
-
-	//// Warte eine Weile
-	//Sleep(10000); // Zum Beispiel 1 Sekunde
-
-
-
-	//// Setze die Flag auf true
-	//bool flag = true;
-
-	//// Simuliere das Loslassen der Shift-Taste
-	//input[1].ki.dwFlags = KEYEVENTF_KEYUP;
-
-	//// SendInput für das Loslassen der Shift-Taste
-	//SendInput(1, &input[1], sizeof(INPUT));
-
-
-	//// Warte eine Weile
-	//Sleep(500); // Zum Beispiel 1 Sekunde
-
-	//// Simuliere das Loslassen der W-Taste
-	//input[0].ki.dwFlags = KEYEVENTF_KEYUP;
-
-	//// SendInput für das Loslassen von 'W'
-	//SendInput(1, &input[0], sizeof(INPUT));
-
-
-
-
-
-
-	//int endX = 900; // Endpunkt
-	//int endY = -20;
-
-	//std::vector<std::pair<int, int>> steps = Testing::makePath(endX, endY);
-	//int currentX = 0, currentY = 0, count = 0;
-
-	//for (const auto& step : steps) {
-	//	currentX += step.first;
-	//	currentY += step.second;
-	//	count++;
-	//	std::cout << "(" << step.first << ", " << step.second << ") -> Aktuelle Position: (" << currentX << ", " << currentY << ")" << std::endl;
-	//}
-
-	//std::cout << "Endpunkt erreicht: (" << currentX << ", " << currentY << ")\nPoints to Endpoint: " << count << std::endl;
-
-	//for (const auto& step : steps) {
-	//	Testing::moveMouse_testing(step.first, step.second);
-	//	std::this_thread::sleep_for(std::chrono::nanoseconds(3700));
-	//	//Sleep(0.999);
-	//}
+	humanizedMovement.StopMove(true, false);
 }

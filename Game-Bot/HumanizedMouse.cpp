@@ -1,5 +1,6 @@
 #include "HumanizedMouse.h"
 #include <thread>
+#include <iostream>
 
 std::vector<std::pair<int, int>> HumanizedMouse::makePath(int x, int y) {
 	std::vector<std::pair<int, int>> result;
@@ -394,6 +395,9 @@ void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
 	}
 
 	UINT SleepDuration = speedIn_NS / result.size();
+
+	std::cout << result.size() << std::endl;	
+	std::cout << "Path Finished" << std::endl;
 
 	for (const auto& step : result) {
 		moveMouse(step.first, step.second);

@@ -1,5 +1,6 @@
 #include "HumanizedMovement.h"
 #include <thread>
+#include <iostream>
 
 MoveState::MoveState(MoveType dir, bool killProcess, bool softKillProcess)
 	: moveType(dir) {
@@ -17,7 +18,6 @@ MoveState::MoveState(MoveType dir, bool killProcess, bool softKillProcess)
 
 /// Private
 std::thread MoveThread;
-std::thread MouseThread;
 
 MoveState moveState(MOVE_TYPE_NONE, false, false);
 MovingCondition movingCondition = MOVING_CONDITION_WALK;
@@ -28,6 +28,8 @@ std::shared_ptr<MovingCondition> ConditionState_ptr = std::make_shared<MovingCon
 Direction CheckDirection(MovingCondition movingCondition) {
 	Direction InternalDirection = NoDirection;
 
+	std::cout << movingCondition << std::endl;
+
 	switch (movingCondition)
 	{
 	case MOVING_CONDITION_NONE:
@@ -35,10 +37,12 @@ Direction CheckDirection(MovingCondition movingCondition) {
 		break;
 
 	case MOVING_CONDITION_SPRINT:
+		std::cout << "Sprint" << std::endl;
 		InternalDirection = SprintForward;
 		break;
 
 	case MOVING_CONDITION_WALK:
+		std::cout << "Walk" << std::endl;
 		InternalDirection = Forward;
 		break;
 
@@ -53,33 +57,37 @@ Direction CheckDirection(MovingCondition movingCondition) {
 int HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 	MovingCondition InternalMovingCondition = MOVING_CONDITION_NONE;
 	Direction InternalDirection = NoDirection;
+
 	InternalMovingCondition = *ConditionState_ptr;
 	InternalDirection = CheckDirection(InternalMovingCondition);
 
-	HumanizedKeyboard::MoveToDirection(InternalDirection);
+	HumanizedKeyboard.MoveToDirection(InternalDirection);
 
 	while (true) {
 
 		if (move_ptr->KillProcess) {
-			HumanizedKeyboard::EndMoveToDirection(InternalDirection, true, false);
+			HumanizedKeyboard.EndMoveToDirection(InternalDirection, true, false);
 			break;
 		}
 		else if (move_ptr->SoftKillProcess) {
-			HumanizedKeyboard::EndMoveToDirection(InternalDirection, false, true);
+			HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
 			break;
 		}
 		else if (InternalMovingCondition != *ConditionState_ptr) { // NOTE: Finde a good way to descide if SoftKillProcess or KillProcess
-			HumanizedKeyboard::EndMoveToDirection(InternalDirection, false, true);
+			HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
 			InternalMovingCondition = *ConditionState_ptr;
 
 			InternalDirection = CheckDirection(InternalMovingCondition);
 
-			HumanizedKeyboard::MoveToDirection(InternalDirection);
+			HumanizedKeyboard.MoveToDirection(InternalDirection);
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
-		HumanizedMouse::MoveToExactPoint(5, 0, 2000);
+		std::cout << "Mouse" << std::endl;
+		HumanizedMouse.MoveToExactPoint(5, 0, 2000);
 	}
+
+	return 0;
 }
 
 void HumanizedMovement::MoveSmallCircle(std::shared_ptr<MoveState> move_ptr) {
@@ -154,7 +162,7 @@ int HumanizedMovement::StartMove(MoveType moveType) {
 	return errorCode;
 }
 
-int HumanizedMovement::StartMovingCondition(MovingCondition movingCondition) {
+int HumanizedMovement::MovingCondition(MovingCondition movingCondition) {
 	int errorCode = 0;
 
 	if (!MoveThread.joinable())
@@ -162,6 +170,8 @@ int HumanizedMovement::StartMovingCondition(MovingCondition movingCondition) {
 
 	if (MoveState_ptr->moveType == MOVE_TYPE_NONE)
 		return MoveNotRunning;
+
+	std::cout << movingCondition << std::endl;
 
 	*ConditionState_ptr = movingCondition;
 

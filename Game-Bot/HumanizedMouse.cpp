@@ -308,6 +308,27 @@ void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
 		OriginalProcessSecond = x;
 	}
 
+	int step = 0;
+	while (ProcessFirst > 0) {
+		step = 1;
+
+		if (step > ProcessFirst) step = ProcessFirst;
+
+		ProcessFirst -= step;
+		BiggerNumber.push_back(OriginalProcessFirst < 0 ? step *= -1 : step);
+	}
+
+	step = 0;
+	while (ProcessSecond > 0) {
+		step = 1;
+
+		if (step > ProcessSecond) step = ProcessSecond;
+
+		ProcessSecond -= step;
+
+		SmallerNumber.push_back(OriginalProcessSecond < 0 ? step *= -1 : step);
+	}
+
 
 }
 

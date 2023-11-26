@@ -80,7 +80,6 @@ int HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 				HumanizedKeyboard.EndMoveToDirection(InternalDirection, true, false);
 
 			InternalMovingCondition = *ConditionState_ptr;
-
 			InternalDirection = CheckDirection(InternalMovingCondition);
 
 			HumanizedKeyboard.MoveToDirection(InternalDirection);

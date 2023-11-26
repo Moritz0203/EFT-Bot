@@ -73,8 +73,12 @@ int HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 			HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
 			break;
 		}
-		else if (InternalMovingCondition != *ConditionState_ptr) { // NOTE: Finde a good way to descide if SoftKillProcess or KillProcess
-			HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
+		else if (InternalMovingCondition != *ConditionState_ptr) { 
+			if(InternalDirection == SprintForward)
+				HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
+			else 
+				HumanizedKeyboard.EndMoveToDirection(InternalDirection, true, false);
+
 			InternalMovingCondition = *ConditionState_ptr;
 
 			InternalDirection = CheckDirection(InternalMovingCondition);
@@ -175,7 +179,7 @@ int HumanizedMovement::SetMovingCondition(MovingCondition movingCondition) {
 
 	*ConditionState_ptr = movingCondition;
 
-	std::cout << "SetMovingCondition_ptr: " << *ConditionState_ptr << std::endl;
+	//std::cout << "SetMovingCondition_ptr: " << *ConditionState_ptr << std::endl;
 
 	return errorCode;
 }

@@ -262,6 +262,7 @@ void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> d
 /// Public functions
 int HumanizedKeyboard::EndMoveToDirection(Direction direction, bool KillProcess, bool SoftKillProcess) {
 	std::shared_ptr<DirectionState> directionState_ptr;
+	int errorCode = 0;
 	bool isDirectionFB = false;
 
 	if (direction == DirectionFB_ptr->direction) {
@@ -281,6 +282,10 @@ int HumanizedKeyboard::EndMoveToDirection(Direction direction, bool KillProcess,
 		directionState_ptr->KillProcess = true;
 		directionState_ptr->SoftKillProcess = false;
 	}
+	else if ((directionState_ptr->direction != SprintForward || directionState_ptr->direction != AutoSprintForward) && (SoftKillProcess == true)) {
+		errorCode = NoSoftKillProcessPossible;
+		directionState_ptr->KillProcess = true;
+	}
 	else {
 		directionState_ptr->KillProcess = KillProcess;
 		directionState_ptr->SoftKillProcess = SoftKillProcess;
@@ -295,7 +300,7 @@ int HumanizedKeyboard::EndMoveToDirection(Direction direction, bool KillProcess,
 	directionState_ptr->KillProcess = false;
 	directionState_ptr->SoftKillProcess = false;
 
-	return 0;
+	return errorCode;
 }
 
 int HumanizedKeyboard::MoveToDirection(Direction direction) {

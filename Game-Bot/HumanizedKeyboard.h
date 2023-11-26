@@ -20,6 +20,7 @@ enum ErrorCodes_HumanizedKeyboard {
 	DirectionConflict = 12,
 	DirectionDoesNotExist = 13,
 	NoKillProcess = 14,
+	NoSoftKillProcessPossible = 15,
 };
 extern ErrorCodes_HumanizedKeyboard ErrorCodes_HK;
 

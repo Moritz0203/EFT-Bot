@@ -361,9 +361,9 @@ int main() {
 	HumanizedMovement humanizedMovement;
 
 	humanizedMovement.StartMove(MoveType::MOVE_TYPE_BIG_CIRCLE);
-	cout << "Error Code MovingCondition: " << humanizedMovement.SetMovingCondition(MovingCondition::MOVING_CONDITION_SPRINT) << endl;
+	humanizedMovement.SetMovingCondition(MovingCondition::MOVING_CONDITION_SPRINT);
 
-	std::this_thread::sleep_for(std::chrono::seconds(50));
+	std::this_thread::sleep_for(std::chrono::seconds(30));
 
 	humanizedMovement.StopMove(true, false);
 }

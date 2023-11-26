@@ -28,7 +28,7 @@ std::shared_ptr<MovingCondition> ConditionState_ptr = std::make_shared<MovingCon
 Direction CheckDirection(MovingCondition movingCondition) {
 	Direction InternalDirection = NoDirection;
 
-	std::cout << "CheckDirection: " << movingCondition << std::endl;
+	//std::cout << "CheckDirection: " << movingCondition << std::endl;
 
 	switch (movingCondition)
 	{
@@ -74,7 +74,7 @@ int HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 			break;
 		}
 		else if (InternalMovingCondition != *ConditionState_ptr) { 
-			if(InternalDirection == SprintForward)
+			if(InternalDirection == SprintForward || InternalDirection == AutoSprintForward)
 				HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
 			else 
 				HumanizedKeyboard.EndMoveToDirection(InternalDirection, true, false);
@@ -87,7 +87,6 @@ int HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
-		std::cout << "Mouse" << std::endl;
 		HumanizedMouse.MoveToExactPoint(5, 0, 2000);
 	}
 
@@ -175,7 +174,7 @@ int HumanizedMovement::SetMovingCondition(MovingCondition movingCondition) {
 	if (MoveState_ptr->moveType == MOVE_TYPE_NONE)
 		return MoveNotRunning;
 
-	std::cout << "SetMovingCondition: " << movingCondition << std::endl;
+	//std::cout << "SetMovingCondition: " << movingCondition << std::endl;
 
 	*ConditionState_ptr = movingCondition;
 

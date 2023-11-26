@@ -280,7 +280,11 @@ void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
 	std::vector<std::pair<int, int>> result;
 	std::vector<int> BiggerNumber;
 	std::vector<int> SmallerNumber;
+	std::random_device rd;
+	std::mt19937 gen(rd());
 	
+	//std::cout << "Path Started" << std::endl;
+
 	int ProcessFirst = 0;
 	int ControlProcessFirst = 0;
 	int OriginalProcessFirst = 0;
@@ -289,12 +293,10 @@ void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
 	int OriginalProcessSecond = 0;
 
 	bool isXGreater = isXGreaterThanY(abs(x), abs(y));
-	std::random_device rd;
-	std::mt19937 gen(rd());
 
 	if (isXGreater) {
 		ProcessFirst = abs(x);
-		ControlProcessFirst = abs(x);
+		ControlProcessFirst = abs(x);	
 		OriginalProcessFirst = x;
 		ProcessSecond = abs(y);
 		ControlProcessSecond = abs(y);
@@ -330,11 +332,14 @@ void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
 		SmallerNumber.push_back(OriginalProcessSecond < 0 ? step *= -1 : step);
 	}
 
+	//std::cout << "BiggerNumber.size(): " << BiggerNumber.size() << std::endl;
+	//std::cout << "SmallerNumber.size(): " << SmallerNumber.size() << std::endl;
+
 	int div = BiggerNumber.size() - SmallerNumber.size();
 	int zeroCount = div;
 
 	int currentIndex = SmallerNumber.size() - 1;
-	if (currentIndex == 0) {
+	if (currentIndex <= 0) {
 		for (int i = 0; i < zeroCount; i++) {
 			SmallerNumber.push_back(0);
 		}
@@ -361,6 +366,8 @@ void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
 			currentIndex--;
 		}
 	}
+
+
 
 	if (BiggerNumber.size() < SmallerNumber.size()) {
 		int div = SmallerNumber.size() - BiggerNumber.size();
@@ -396,8 +403,8 @@ void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
 
 	UINT SleepDuration = speedIn_NS / result.size();
 
-	std::cout << result.size() << std::endl;	
-	std::cout << "Path Finished" << std::endl;
+	//std::cout << result.size() << std::endl;	
+	//std::cout << "Path Finished" << std::endl;
 
 	for (const auto& step : result) {
 		moveMouse(step.first, step.second);

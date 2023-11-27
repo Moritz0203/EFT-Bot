@@ -159,16 +159,20 @@ void HumanizedMovement::MoveBigSquare(std::shared_ptr<MoveState> move_ptr) {
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		tick++;
-
-		if (tick >= 1000) {
-
-			if(HumanizedKeyboard.IsSprinting())
+		
+		if (HumanizedKeyboard.IsSprinting()) {
+			if (tick >= 1000) {
 				HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
-			else
-				HumanizedMouse.MoveToDirection(RotationX::RightX);
-
-			tick = 0;
+				tick = 0;
+			}
 		}
+		else {
+			if (tick >= 2500) {
+				HumanizedMouse.MoveToDirection(RotationX::RightX); 
+				tick = 0;
+			}
+		}
+		
 	}
 }
 
@@ -176,8 +180,50 @@ void HumanizedMovement::MoveSmallSquare(std::shared_ptr<MoveState> move_ptr) {
 
 }
 
-void HumanizedMovement::MoveRandom(std::shared_ptr<MoveState> move_ptr) {
+void HumanizedMovement::MoveRandom(std::shared_ptr<MoveState> move_ptr) { // TODO: Make it more random
+	MovingCondition InternalMovingCondition = MOVING_CONDITION_NONE;
+	Direction InternalDirection = NoDirection;
 
+	InternalMovingCondition = *ConditionState_ptr;
+	InternalDirection = CheckDirection(InternalMovingCondition);
+
+	HumanizedKeyboard.MoveToDirection(InternalDirection);
+	int tick = 0;
+	while (true) {
+
+		if (move_ptr->KillProcess) {
+			HumanizedKeyboard.EndMoveToDirection(InternalDirection, true, false);
+			break;
+		}
+		else if (move_ptr->SoftKillProcess) {
+			HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
+			break;
+		}
+		else if (InternalMovingCondition != *ConditionState_ptr) {
+			if (InternalDirection == SprintForward || InternalDirection == AutoSprintForward)
+				HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
+			else
+				HumanizedKeyboard.EndMoveToDirection(InternalDirection, true, false);
+
+			InternalMovingCondition = *ConditionState_ptr;
+			InternalDirection = CheckDirection(InternalMovingCondition);
+
+			HumanizedKeyboard.MoveToDirection(InternalDirection);
+		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		tick++;
+
+		if (tick >= 1000) {
+
+			if (HumanizedKeyboard.IsSprinting())
+				HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
+			else
+				HumanizedMouse.MoveToDirection(RotationX::RightX);
+
+			tick = 0;
+		}
+	}
 }
 
 

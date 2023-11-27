@@ -42,7 +42,7 @@ class HumanizedMovement {
 	HumanizedKeyboard HumanizedKeyboard;
 	HumanizedMouse HumanizedMouse;
 
-	int MoveBigCircle(std::shared_ptr<MoveState> move_ptr);
+	void MoveBigCircle(std::shared_ptr<MoveState> move_ptr);
 	void MoveSmallCircle(std::shared_ptr<MoveState> move_ptr);
 	void MoveBigSquare(std::shared_ptr<MoveState> move_ptr);
 	void MoveSmallSquare(std::shared_ptr<MoveState> move_ptr);

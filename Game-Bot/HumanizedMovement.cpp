@@ -160,8 +160,8 @@ void HumanizedMovement::MoveBigSquare(std::shared_ptr<MoveState> move_ptr) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		tick++;
 
-		if (tick <= 500) {
-			HumanizedMouse.MoveToDirection(RotationX::RightX);
+		if (tick >= 1000) {
+			HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
 			tick = 0;
 		}
 	}

@@ -7,6 +7,9 @@ typedef enum e_rotation_x {
 	RightX = 900,
 	HalfLeft = -400,
 	HalfRight = 400,
+	LeftSprintX = -1800,
+	RightSprintX = 1800,
+
 
 	TurnAround = 1,
 	AutoRotationX = 2,
@@ -61,5 +64,5 @@ public:
 	void MoveViaRotation(float xRotation, float yRotation, UINT speedIn_NS) { }
 
 	void MoveToExactPoint(int x, int y, UINT speedIn_NS); // Only for Small Movements
-	void MoveToDirection(RotationX rotationX = AutoRotationX, RotationY rotationY = AutoRotationY, UINT speedIn_NS = 900);
+	void MoveToDirection(RotationX rotationX = AutoRotationX, RotationY rotationY = AutoRotationY);
 };

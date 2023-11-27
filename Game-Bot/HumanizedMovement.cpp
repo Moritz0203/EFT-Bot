@@ -86,7 +86,7 @@ int HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
-		HumanizedMouse.MoveToExactPoint(5, 0, 2000);
+		HumanizedMouse.MoveToExactPoint(8, 0, 2000);
 	}
 
 	return 0;

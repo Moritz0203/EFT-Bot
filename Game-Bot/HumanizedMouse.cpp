@@ -413,7 +413,7 @@ void HumanizedMouse::MoveToExactPoint(int x, int y, UINT speedIn_NS) {
 	}
 }
 
-void HumanizedMouse::MoveToDirection(RotationX rotationX, RotationY rotationY, UINT speedIn_NS) {
+void HumanizedMouse::MoveToDirection(RotationX rotationX = AutoRotationX, RotationY rotationY = AutoRotationY, UINT speedIn_NS = 900) {
 	int XRotation = 0;
 	int YRotation = 0;
 	std::vector<std::pair<int, int>> mousePath;

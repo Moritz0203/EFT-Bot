@@ -73,10 +73,10 @@ void HumanizedMovement::MoveBigCircle(std::shared_ptr<MoveState> move_ptr) {
 			HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
 			break;
 		}
-		else if (InternalMovingCondition != *ConditionState_ptr) { 
-			if(InternalDirection == SprintForward || InternalDirection == AutoSprintForward)
+		else if (InternalMovingCondition != *ConditionState_ptr) {
+			if (InternalDirection == SprintForward || InternalDirection == AutoSprintForward)
 				HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
-			else 
+			else
 				HumanizedKeyboard.EndMoveToDirection(InternalDirection, true, false);
 
 			InternalMovingCondition = *ConditionState_ptr;
@@ -127,7 +127,44 @@ void HumanizedMovement::MoveSmallCircle(std::shared_ptr<MoveState> move_ptr) {
 }
 
 void HumanizedMovement::MoveBigSquare(std::shared_ptr<MoveState> move_ptr) {
+	MovingCondition InternalMovingCondition = MOVING_CONDITION_NONE;
+	Direction InternalDirection = NoDirection;
 
+	InternalMovingCondition = *ConditionState_ptr;
+	InternalDirection = CheckDirection(InternalMovingCondition);
+
+	HumanizedKeyboard.MoveToDirection(InternalDirection);
+	int tick = 0;	
+	while (true) {
+
+		if (move_ptr->KillProcess) {
+			HumanizedKeyboard.EndMoveToDirection(InternalDirection, true, false);
+			break;
+		}
+		else if (move_ptr->SoftKillProcess) {
+			HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
+			break;
+		}
+		else if (InternalMovingCondition != *ConditionState_ptr) {
+			if (InternalDirection == SprintForward || InternalDirection == AutoSprintForward)
+				HumanizedKeyboard.EndMoveToDirection(InternalDirection, false, true);
+			else
+				HumanizedKeyboard.EndMoveToDirection(InternalDirection, true, false);
+
+			InternalMovingCondition = *ConditionState_ptr;
+			InternalDirection = CheckDirection(InternalMovingCondition);
+
+			HumanizedKeyboard.MoveToDirection(InternalDirection);
+		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		tick++;
+
+		if (tick <= 500) {
+			HumanizedMouse.MoveToDirection(RotationX::RightX);
+			tick = 0;
+		}
+	}
 }
 
 void HumanizedMovement::MoveSmallSquare(std::shared_ptr<MoveState> move_ptr) {

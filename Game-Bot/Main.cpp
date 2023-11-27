@@ -363,7 +363,7 @@ int main() {
 	humanizedMovement.StartMove(MoveType::MOVE_TYPE_BIG_CIRCLE);
 	humanizedMovement.SetMovingCondition(MovingCondition::MOVING_CONDITION_SPRINT);
 
-	std::this_thread::sleep_for(std::chrono::seconds(30));
+	std::this_thread::sleep_for(std::chrono::seconds(120));
 
 	humanizedMovement.StopMove(true, false);
 }

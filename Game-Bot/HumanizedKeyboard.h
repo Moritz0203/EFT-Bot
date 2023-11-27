@@ -51,6 +51,7 @@ public:
 
 	void MoveToExactPosition() { }
 
+	bool IsSprinting();
 	int EndMoveToDirection(Direction direction, bool KillProcess, bool SoftKillProcess); // KillProcess instend kills the process, SoftKillProcess instend stops the process at the next possible point
 	int MoveToDirection(Direction direction = NoDirection);
 };

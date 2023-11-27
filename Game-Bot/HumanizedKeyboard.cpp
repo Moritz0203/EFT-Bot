@@ -151,6 +151,8 @@ void HumanizedKeyboard::SprindForwardMove(std::shared_ptr<DirectionState> direct
 	SendInput(1, &input[0], sizeof(INPUT));
 }
 
+bool isSprintForward = false;
+
 void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> directionState_ptr) {
 	thread InternalThread;
 	HumanizedKeyboard humanizedKeyboard;
@@ -183,7 +185,6 @@ void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> d
 		ForwardState_ptr->KillProcess = false;
 	}
 
-	bool isSprintForward = false;
 	bool isSprintForwardFirstTime = true;
 	int count = 4;
 	while (directionState_ptr->KillProcess != true) {
@@ -259,6 +260,13 @@ void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> d
 }
 
 
+bool HumanizedKeyboard::IsSprinting() {
+	if (DirectionFB_ptr->direction != SprintForward)
+		return false;
+	else
+		return isSprintForward;
+}
+
 /// Public functions
 int HumanizedKeyboard::EndMoveToDirection(Direction direction, bool KillProcess, bool SoftKillProcess) {
 	std::shared_ptr<DirectionState> directionState_ptr;
@@ -282,7 +290,7 @@ int HumanizedKeyboard::EndMoveToDirection(Direction direction, bool KillProcess,
 		directionState_ptr->KillProcess = true;
 		directionState_ptr->SoftKillProcess = false;
 	}
-	else if ((directionState_ptr->direction != SprintForward || directionState_ptr->direction != AutoSprintForward) && (SoftKillProcess == true)) {
+	else if (((directionState_ptr->direction != SprintForward) || (directionState_ptr->direction != AutoSprintForward)) && (SoftKillProcess == true)) {
 		errorCode = NoSoftKillProcessPossible;
 		directionState_ptr->KillProcess = true;
 	}

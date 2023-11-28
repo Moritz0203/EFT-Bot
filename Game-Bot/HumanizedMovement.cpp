@@ -161,13 +161,13 @@ void HumanizedMovement::MoveBigSquare(std::shared_ptr<MoveState> move_ptr) {
 		tick++;
 		
 		if (HumanizedKeyboard.IsSprinting()) {
-			if (tick >= 1000) {
+			if (tick >= 250) {
 				HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
 				tick = 0;
 			}
 		}
 		else {
-			if (tick >= 2500) {
+			if (tick >= 600) {
 				HumanizedMouse.MoveToDirection(RotationX::RightX); 
 				tick = 0;
 			}

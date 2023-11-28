@@ -222,7 +222,7 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> rand(1, 2);
 	std::uniform_int_distribution<int> rand2(250, 1500);
-	std::uniform_int_distribution<int> rand3(4, 10);
+	std::uniform_int_distribution<int> rand3(4, 12);
 
 	int ChouseTypeTick = 0;
 	int Tick = 0;

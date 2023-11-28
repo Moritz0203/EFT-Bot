@@ -180,7 +180,8 @@ void HumanizedMovement::MoveSmallSquare(std::shared_ptr<MoveState> move_ptr) {
 
 }
 
-void HumanizedMovement::MoveRandom(std::shared_ptr<MoveState> move_ptr) { // TODO: Make it more random
+
+void HumanizedMovement::MoveThreadForRandom(std::shared_ptr<MoveState> move_ptr) {
 	MovingCondition InternalMovingCondition = MOVING_CONDITION_NONE;
 	Direction InternalDirection = NoDirection;
 
@@ -188,7 +189,7 @@ void HumanizedMovement::MoveRandom(std::shared_ptr<MoveState> move_ptr) { // TOD
 	InternalDirection = CheckDirection(InternalMovingCondition);
 
 	HumanizedKeyboard.MoveToDirection(InternalDirection);
-	int tick = 0;
+
 	while (true) {
 
 		if (move_ptr->KillProcess) {
@@ -211,18 +212,30 @@ void HumanizedMovement::MoveRandom(std::shared_ptr<MoveState> move_ptr) { // TOD
 			HumanizedKeyboard.MoveToDirection(InternalDirection);
 		}
 
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+}
+
+void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr) { // TODO: Make it more random
+	std::thread MoveThreadForRandomThread(&HumanizedMovement::MoveThreadForRandom, this, move_ptr);
+
+	while (true) {
+
+		if(!MoveThreadForRandomThread.joinable())
+			break;
+
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
-		tick++;
+		
+		/*if (HumanizedKeyboard.IsSprinting())
+			HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
+		else
+			HumanizedMouse.MoveToDirection(RotationX::RightX);*/
 
-		if (tick >= 1000) {
-
-			if (HumanizedKeyboard.IsSprinting())
-				HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
+		/*if (HumanizedKeyboard.IsSprinting())
+				HumanizedMouse.MoveToDirection(RotationX::LeftSprintX);
 			else
-				HumanizedMouse.MoveToDirection(RotationX::RightX);
+				HumanizedMouse.MoveToDirection(RotationX::LeftX);*/
 
-			tick = 0;
-		}
 	}
 }
 
@@ -275,7 +288,7 @@ int HumanizedMovement::StartMove(MoveType moveType) {
 
 	case MOVE_TYPE_RANDOM:
 		MoveState_ptr->moveType = moveType;
-		MoveThread = std::thread(&HumanizedMovement::MoveRandom, humanizedMovement, MoveState_ptr);
+		MoveThread = std::thread(&HumanizedMovement::MoveRandomControler, humanizedMovement, MoveState_ptr);
 		break;
 	}
 

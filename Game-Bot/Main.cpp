@@ -360,7 +360,7 @@ int main() {
 
 	HumanizedMovement humanizedMovement;
 
-	humanizedMovement.StartMove(MoveType::MOVE_TYPE_BIG_SQUARE);
+	humanizedMovement.StartMove(MoveType::MOVE_TYPE_RANDOM);
 	humanizedMovement.SetMovingCondition(MovingCondition::MOVING_CONDITION_SPRINT);
 
 	std::this_thread::sleep_for(std::chrono::seconds(100));

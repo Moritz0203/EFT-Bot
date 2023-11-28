@@ -42,11 +42,13 @@ class HumanizedMovement {
 	HumanizedKeyboard HumanizedKeyboard;
 	HumanizedMouse HumanizedMouse;
 
+	void MoveThreadForRandom(std::shared_ptr<MoveState> move_ptr);
+
 	void MoveBigCircle(std::shared_ptr<MoveState> move_ptr);
 	void MoveSmallCircle(std::shared_ptr<MoveState> move_ptr);
 	void MoveBigSquare(std::shared_ptr<MoveState> move_ptr);
 	void MoveSmallSquare(std::shared_ptr<MoveState> move_ptr);
-	void MoveRandom(std::shared_ptr<MoveState> move_ptr);
+	void MoveRandomControler(std::shared_ptr<MoveState> move_ptr);
 	void MoveAuto(std::shared_ptr<MoveState> move_ptr);
 	
 public:

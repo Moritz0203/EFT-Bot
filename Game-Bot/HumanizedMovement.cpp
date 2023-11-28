@@ -134,7 +134,7 @@ void HumanizedMovement::MoveBigSquare(std::shared_ptr<MoveState> move_ptr) {
 	InternalDirection = CheckDirection(InternalMovingCondition);
 
 	HumanizedKeyboard.MoveToDirection(InternalDirection);
-	int tick = 0;	
+	int tick = 0;
 	while (true) {
 
 		if (move_ptr->KillProcess) {
@@ -159,7 +159,7 @@ void HumanizedMovement::MoveBigSquare(std::shared_ptr<MoveState> move_ptr) {
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		tick++;
-		
+
 		if (HumanizedKeyboard.IsSprinting()) {
 			if (tick >= 250) {
 				HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
@@ -168,11 +168,11 @@ void HumanizedMovement::MoveBigSquare(std::shared_ptr<MoveState> move_ptr) {
 		}
 		else {
 			if (tick >= 600) {
-				HumanizedMouse.MoveToDirection(RotationX::RightX); 
+				HumanizedMouse.MoveToDirection(RotationX::RightX);
 				tick = 0;
 			}
 		}
-		
+
 	}
 }
 
@@ -218,24 +218,63 @@ void HumanizedMovement::MoveThreadForRandom(std::shared_ptr<MoveState> move_ptr)
 
 void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr) { // TODO: Make it more random
 	std::thread MoveThreadForRandomThread(&HumanizedMovement::MoveThreadForRandom, this, move_ptr);
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> rand(1, 2);
+	std::uniform_int_distribution<int> rand2(250, 1500);
+	std::uniform_int_distribution<int> rand3(4, 10);
 
+	int ChouseTypeTick = 0;
+	int Tick = 0;
+	int Type = 0;
+	int LeftRight = 0;
+	int SquareSize = 0;	
+	int CircleSize = 0;
 	while (true) {
 
-		if(!MoveThreadForRandomThread.joinable())
+		if (!MoveThreadForRandomThread.joinable())
 			break;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
-		
-		/*if (HumanizedKeyboard.IsSprinting())
-			HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
-		else
-			HumanizedMouse.MoveToDirection(RotationX::RightX);*/
+		ChouseTypeTick++;
+		Tick++;
 
-		/*if (HumanizedKeyboard.IsSprinting())
-				HumanizedMouse.MoveToDirection(RotationX::LeftSprintX);
-			else
-				HumanizedMouse.MoveToDirection(RotationX::LeftX);*/
+		if (ChouseTypeTick >= 6000) {
+			Type = rand(gen);
+			LeftRight = rand(gen);
+			SquareSize = rand2(gen);
+			CircleSize = rand3(gen);
+			ChouseTypeTick = 0;
+		}
 
+		if (Type == 1) {// Square
+			if (Tick >= SquareSize) {
+				if (LeftRight == 1) {// Right
+					if (HumanizedKeyboard.IsSprinting())
+						HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
+					else
+						HumanizedMouse.MoveToDirection(RotationX::RightX);
+
+					Tick = 0;
+				}
+				else {// Left
+					if (HumanizedKeyboard.IsSprinting())
+						HumanizedMouse.MoveToDirection(RotationX::LeftSprintX);
+					else
+						HumanizedMouse.MoveToDirection(RotationX::LeftX);
+
+					Tick = 0;
+				}
+			}
+		}
+		else {// Circle
+			if (LeftRight == 1) {// Right
+				HumanizedMouse.MoveToExactPoint(CircleSize, 0, 1700);
+			}
+			else {// Left
+				HumanizedMouse.MoveToExactPoint(CircleSize *= -1, 0, 1700);
+			}
+		}
 	}
 }
 

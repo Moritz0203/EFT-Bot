@@ -248,7 +248,9 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 		}
 
 		if (Type == 1) {// Square
+
 			if (Tick >= SquareSize) {
+
 				if (LeftRight == 1) {// Right
 					if (HumanizedKeyboard.IsSprinting())
 						HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
@@ -258,6 +260,7 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 					Tick = 0;
 				}
 				else {// Left
+
 					if (HumanizedKeyboard.IsSprinting())
 						HumanizedMouse.MoveToDirection(RotationX::LeftSprintX);
 					else

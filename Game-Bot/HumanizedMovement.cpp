@@ -260,7 +260,6 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 					Tick = 0;
 				}
 				else {// Left
-
 					if (HumanizedKeyboard.IsSprinting())
 						HumanizedMouse.MoveToDirection(RotationX::LeftSprintX);
 					else

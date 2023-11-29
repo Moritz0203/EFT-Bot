@@ -281,7 +281,6 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 }
 
 
-
 void HumanizedMovement::MoveAuto(std::shared_ptr<MoveState> move_ptr) {
 
 }

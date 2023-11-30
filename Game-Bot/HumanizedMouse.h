@@ -2,6 +2,14 @@
 #include <random>
 #include "Windows.h"
 
+/// 180 degree turn = ~1800 pixels
+/// 90  degree turn = ~900  pixels
+/// 45  degree turn = ~400  pixels
+
+/// 90  degree up   = ~-800 pixels
+/// 45  degree up   = ~-400 pixels
+/// while Sprinting double the values
+
 typedef enum e_rotation_x {
 	LeftX = -900,
 	RightX = 900,

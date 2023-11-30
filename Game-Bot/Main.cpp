@@ -354,6 +354,7 @@ namespace Testing {
 int main() {
 	//c_log::add_out(new c_log::c_log_consolestream);
 
+
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later

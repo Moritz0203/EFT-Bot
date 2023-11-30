@@ -19,7 +19,6 @@ typedef enum e_rotation_x {
 	LeftSprintX = -1800,
 	RightSprintX = 1800,
 
-
 	TurnAround = 1,
 	AutoRotationX = 2,
 }RotationX;

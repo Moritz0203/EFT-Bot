@@ -5,7 +5,7 @@
 /// 180 degree turn = ~1800 pixels
 /// 90  degree turn = ~900  pixels
 /// 45  degree turn = ~400  pixels
-
+/// while Sprinting double the values
 /// 90  degree up   = ~-800 pixels
 /// 45  degree up   = ~-400 pixels
 /// while Sprinting double the values

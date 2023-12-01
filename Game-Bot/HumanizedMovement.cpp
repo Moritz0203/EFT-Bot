@@ -28,8 +28,6 @@ std::shared_ptr<MovingCondition> ConditionState_ptr = std::make_shared<MovingCon
 Direction CheckDirection(MovingCondition movingCondition) {
 	Direction InternalDirection = NoDirection;
 
-	//std::cout << "CheckDirection: " << movingCondition << std::endl;
-
 	switch (movingCondition)
 	{
 	case MOVING_CONDITION_NONE:
@@ -346,11 +344,7 @@ int HumanizedMovement::SetMovingCondition(MovingCondition movingCondition) {
 	if (MoveState_ptr->moveType == MOVE_TYPE_NONE)
 		return MoveNotRunning;
 
-	//std::cout << "SetMovingCondition: " << movingCondition << std::endl;
-
 	*ConditionState_ptr = movingCondition;
-
-	//std::cout << "SetMovingCondition_ptr: " << *ConditionState_ptr << std::endl;
 
 	return errorCode;
 }

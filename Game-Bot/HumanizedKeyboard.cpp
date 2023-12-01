@@ -267,6 +267,8 @@ bool HumanizedKeyboard::IsSprinting() {
 		return isSprintForward;
 }
 
+
+
 /// Public functions
 int HumanizedKeyboard::EndMoveToDirection(Direction direction, bool KillProcess, bool SoftKillProcess) {
 	std::shared_ptr<DirectionState> directionState_ptr;

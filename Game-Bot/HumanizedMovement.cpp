@@ -230,6 +230,7 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 	int LeftRight = 0;
 	int SquareSize = 0;	
 	int CircleSize = 0;
+
 	while (true) {
 
 		if (!MoveThreadForRandomThread.joinable())

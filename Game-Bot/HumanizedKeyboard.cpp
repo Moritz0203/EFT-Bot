@@ -67,7 +67,7 @@ int HumanizedKeyboard::CheckStaminaBar() {
 void HumanizedKeyboard::ForwardMove(std::shared_ptr<DirectionState> directionState_ptr) {
 	INPUT input[1];
 	input[0].type = INPUT_KEYBOARD;
-	input[0].ki.wVk = 'W'; // Hier die gewünschte Taste
+	input[0].ki.wVk = 'W';
 	input[0].ki.dwFlags = 0;
 	SendInput(1, &input[0], sizeof(INPUT));
 

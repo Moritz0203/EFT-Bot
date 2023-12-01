@@ -165,7 +165,7 @@ void HumanizedKeyboard::SprintForwardControler(std::shared_ptr<DirectionState> d
 
 	int stamina = CheckStaminaBar();
 
-	cout << "stamina: " << stamina << endl;	
+	//cout << "stamina: " << stamina << endl;	
 
 	if (stamina == -1) {
 		InternalThread = thread(&HumanizedKeyboard::ForwardMove, &humanizedKeyboard, ForwardState_ptr);

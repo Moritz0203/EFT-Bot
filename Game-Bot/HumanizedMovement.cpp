@@ -238,7 +238,7 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 		ChouseTypeTick++;
 		Tick++;
 
-		if (ChouseTypeTick >= 6000) {
+		if (ChouseTypeTick >= 6000) {// NOTE: Later with user input
 			Type = rand(gen);
 			LeftRight = rand(gen);
 			SquareSize = rand2(gen);

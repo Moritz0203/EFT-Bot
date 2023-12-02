@@ -41,4 +41,5 @@ int main() {
 	std::this_thread::sleep_for(std::chrono::seconds(100));
 
 	humanizedMovement.StopMove(true, false);
+
 }

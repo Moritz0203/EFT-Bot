@@ -248,6 +248,7 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 			SquareSize = rand2(gen);
 			CircleSize = rand3(gen);
 			ChouseTypeTick = 0;
+			Tick = 0;
 		}
 		std::cout << ChouseTypeTick << std::endl;
 

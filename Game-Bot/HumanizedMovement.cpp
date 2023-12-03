@@ -178,7 +178,7 @@ void HumanizedMovement::MoveSmallSquare(std::shared_ptr<MoveState> move_ptr) {
 
 }
 
-
+bool FinishMove = false;	
 void HumanizedMovement::MoveThreadForRandom(std::shared_ptr<MoveState> move_ptr) {
 	MovingCondition InternalMovingCondition = MOVING_CONDITION_NONE;
 	Direction InternalDirection = NoDirection;
@@ -212,6 +212,8 @@ void HumanizedMovement::MoveThreadForRandom(std::shared_ptr<MoveState> move_ptr)
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
+
+	FinishMove = true;
 }
 
 void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr) { // TODO: Make it more random
@@ -220,37 +222,41 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> rand(1, 2);
 	std::uniform_int_distribution<int> rand2(250, 1500);
-	std::uniform_int_distribution<int> rand3(4, 12);
+	std::uniform_int_distribution<int> rand3(4, 10);
 
 	int ChouseTypeTick = 0;
 	int Tick = 0;
-	int Type = 0;
-	int LeftRight = 0;
-	int SquareSize = 0;	
-	int CircleSize = 0;
+	int Type = rand(gen);
+	int LeftRight = rand(gen);
+	int SquareSize = rand2(gen);
+	int CircleSize = rand3(gen);
 
 	while (true) {
 
-		if (!MoveThreadForRandomThread.joinable())
+		if (FinishMove == true) {
+			MoveThreadForRandomThread.join();
 			break;
+		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		ChouseTypeTick++;
 		Tick++;
 
-		if (ChouseTypeTick >= 6000) {// NOTE: Later with user input
+		if (ChouseTypeTick >= 3000) {// NOTE: Later with user input
 			Type = rand(gen);
 			LeftRight = rand(gen);
 			SquareSize = rand2(gen);
 			CircleSize = rand3(gen);
 			ChouseTypeTick = 0;
 		}
+		std::cout << ChouseTypeTick << std::endl;
 
 		if (Type == 1) {// Square
 
 			if (Tick >= SquareSize) {
 
 				if (LeftRight == 1) {// Right
+					std::cout << "Right Square" << std::endl;
 					if (HumanizedKeyboard.IsSprinting())
 						HumanizedMouse.MoveToDirection(RotationX::RightSprintX);
 					else
@@ -259,6 +265,7 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 					Tick = 0;
 				}
 				else {// Left
+					std::cout << "Left Square" << std::endl;
 					if (HumanizedKeyboard.IsSprinting())
 						HumanizedMouse.MoveToDirection(RotationX::LeftSprintX);
 					else
@@ -270,10 +277,18 @@ void HumanizedMovement::MoveRandomControler(std::shared_ptr<MoveState> move_ptr)
 		}
 		else {// Circle
 			if (LeftRight == 1) {// Right
-				HumanizedMouse.MoveToExactPoint(CircleSize, 0, 1700);
+				std::cout << "Right Circle" << std::endl;
+				if(HumanizedKeyboard.IsSprinting())
+					HumanizedMouse.MoveToExactPoint(CircleSize, 0, 1700);
+				else
+					HumanizedMouse.MoveToExactPoint((CircleSize + 5), 0, 1700);
 			}
 			else {// Left
-				HumanizedMouse.MoveToExactPoint(CircleSize *= -1, 0, 1700);
+				std::cout << "Left Circle" << std::endl;
+				if (HumanizedKeyboard.IsSprinting())
+					HumanizedMouse.MoveToExactPoint((CircleSize *= -1), 0, 1700);
+				else
+					HumanizedMouse.MoveToExactPoint(( - 1 * (CircleSize + 5)), 0, 1700);
 			}
 		}
 	}

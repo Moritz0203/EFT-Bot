@@ -25,12 +25,12 @@ struct HealthDependences {
 class Health {
 	
 	std::vector<HealthDependences> HealthDependencesList{
-		{ Light_Bleeding, "Health/Light_Bleeding.png", "Light_Bleeding", 0.9, {}, false },
-		{ Heavy_Bleeding, "Health/Heavy_Bleeding.png", "Heavy_Bleeding", 0.9, {}, false },
-		{ Fracture,		  "Health/Fracture.png",	   "Fracture",       0.9, {}, false },
-		{ Pain,			  "Health/Pain.png",		   "Pain",		     0.9, {}, false },
-		{ Dehydration,	  "Health/Dehydration.png",    "Dehydration",    0.9, {}, false },
-		{ Starvation,	  "Health/Starvation.png",	   "Starvation",     0.9, {}, false },
+		{ Light_Bleeding, "Health/Light_Bleeding.png", "Light_Bleeding", 0.90, {}, false },
+		{ Heavy_Bleeding, "Health/Heavy_Bleeding.png", "Heavy_Bleeding", 0.90, {}, false },
+		{ Fracture,		  "Health/Fracture.png",	   "Fracture",       0.90, {}, false },
+		{ Pain,			  "Health/Pain.png",		   "Pain",		     0.90, {}, false },
+		{ Dehydration,	  "Health/Dehydration.png",    "Dehydration",    0.90, {}, false },
+		{ Starvation,	  "Health/Starvation.png",	   "Starvation",     0.90, {}, false },
 	};
 
 

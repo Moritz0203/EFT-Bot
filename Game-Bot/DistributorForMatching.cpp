@@ -251,6 +251,26 @@ void Matching::CaseMatching(vector<PathNameThreshold> input, vector<vector<Point
 	}
 }
 
+void Matching::BarterMatching_OneScreen(vector<PathNameThresholdItemSize> input, shared_ptr<vector<PointBarter>>& ptr_BarterVec, Mat MatScreen) {
+	Mat templ;
+	vector<POINT> ReturnDataBarter;
+	vector<POINT> ReturnDataBarter_Clean;
+
+	for (int i = 0; i < input.size(); i++) {
+
+		ReturnDataBarter = TemplateMatching::templateMatchingItems(input[i].Path, input[i].Threshold, false, true, input[i].Name, MatScreen);
+
+		templ = imread(input[i].Path);
+		if (!ReturnDataBarter.empty()) {
+			ReturnDataBarter_Clean = removeDuplicates_Rec(ReturnDataBarter);
+
+			for (int i3 = 0; i3 < ReturnDataBarter_Clean.size(); i3++) {
+				ptr_BarterVec->emplace_back(ReturnDataBarter_Clean[i3], input[i].Name, templ.rows, templ.cols, NULL, input[i].ItemSize, false);
+			}
+		}
+	}
+}
+
 void Matching::MedicalMatching_OneScreen(vector<PathNameThresholdItemSizeMaxHP> input, shared_ptr<vector<PointMedical>>& ptr_MedicalVec, Mat MatScreen) {
 	Mat templ;
 	vector<POINT> ReturnDataMedical;

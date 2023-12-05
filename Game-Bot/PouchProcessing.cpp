@@ -55,6 +55,7 @@ void PouchProcessing::PouchMatching() {
 	vector<PointMedical> MedicalVec{};
 	Pouch::pouch.nameOfPouch = PouchVector[Pouch_Version].Name;
 	shared_ptr<vector<PointMedical>> ptr_MedicalVec = make_shared<vector<PointMedical>>(Pouch::pouch.ItemsInPouch_Medical);
+	shared_ptr<vector<PointBarter>> ptr_BarterVec = make_shared<vector<PointBarter>>(Pouch::pouch.ItemsInPouch_Barter);
 
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
@@ -62,6 +63,9 @@ void PouchProcessing::PouchMatching() {
 	Mat MatScreenTemp = MatScreenVector[0](Rec);
 
 	matching.MedicalMatching_OneScreen(MedicalVector::Medical, ptr_MedicalVec, MatScreenTemp);
+	
+	for(vector<PathNameThresholdItemSize> vec : ArrayForBarterCheck)
+		matching.BarterMatching_OneScreen(vec, ptr_BarterVec, MatScreenTemp);
 }
 
 

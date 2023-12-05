@@ -362,3 +362,8 @@ const array<vector<PathNameThresholdItemSize>, 12> ArrayName{
 	BarterVector::Tools,
 	BarterVector::Valuables,
 };
+
+const array<vector< PathNameThresholdItemSize>, 2> ArrayForBarterCheck{
+	MedicalVector::Injectors,
+	ProvisionsVector::Provisions,
+};

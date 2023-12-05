@@ -54,7 +54,7 @@ void PouchProcessing::PouchMatching() {
 	ItemProcessing itemProcessing;
 	vector<PointMedical> MedicalVec{};
 	Pouch::pouch.nameOfPouch = PouchVector[Pouch_Version].Name;
-	shared_ptr<vector<PointMedical>> ptr_MedicalVec = make_shared<vector<PointMedical>>(Pouch::pouch.ItemsInPouch);
+	shared_ptr<vector<PointMedical>> ptr_MedicalVec = make_shared<vector<PointMedical>>(Pouch::pouch.ItemsInPouch_Medical);
 
 	const std::vector<cv::Mat> MatScreenVector = getMat.GetMatVector();
 
@@ -106,7 +106,7 @@ void PouchProcessing::PouchItemCheck() {
 	bool moved = false;	
 
 	for (MovPrefix Prefix : Pouch::pouch.Prefix) {
-		for (PointMedical item : Pouch::pouch.ItemsInPouch) {
+		for (PointMedical item : Pouch::pouch.ItemsInPouch_Medical) {
 			if(Prefix.NameOfItem != item.nameOfItem)
 				continue;	
 

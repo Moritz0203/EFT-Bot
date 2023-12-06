@@ -33,5 +33,9 @@ class Health {
 		{ Starvation,	  "Health/Starvation.png",	   "Starvation",     0.90, {}, false },
 	};
 
+public:
 
+	Health(std::shared_ptr<) {
+		
+	}
 };

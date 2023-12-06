@@ -22,6 +22,25 @@ struct HealthDependences {
 	bool HaveItem;
 };
 
+struct ItemDependence {
+	const HealthSystem_InGame Health;
+	std::vector<string> Items;
+};
+
+
+namespace ItemDependences_Vec {
+	
+	std::vector<ItemDependence> ItemDependencesList{
+		{ Light_Bleeding, {} },
+		{ Heavy_Bleeding, {} },
+		{ Fracture,		  {} },
+		{ Pain,			  {} },
+		{ Dehydration,	  {} },
+		{ Starvation,	  {} },
+	};
+
+}
+
 
 class Health {
 	
@@ -38,5 +57,6 @@ public:
 
 	Health(std::shared_ptr<vector<PointMedical>> medicalItemVec_ptr, std::shared_ptr<vector<PointBarter>> barterItemVec_ptr) {
 		
+	
 	}
 };

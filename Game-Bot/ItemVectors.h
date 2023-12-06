@@ -4,50 +4,50 @@
 
 namespace MedicalVector {
 	const vector<PathNameThresholdItemSizeMaxHP> Medical{
-		{ "itemImages/MedicalImages/Medical/AFAK.png",						"AFAK",			"AFAK tactical individual first aid kit",		0.85, 1, 400 },//AFAK
-		{ "itemImages/MedicalImages/Medical/AI2.png",						"AI2",			"AI-2 medkit",									0.85, 1, 100 },//AI2
-		{ "itemImages/MedicalImages/Medical/AluSplint.png",					"AluSplint",	"Aluminum splint",								0.85, 1, 5   },//AluSplint
-		{ "itemImages/MedicalImages/Medical/Analgin.png",					"Analgin",		"Analgin painkillers",							0.85, 1, 4	 },//Analgin
-		{ "itemImages/MedicalImages/Medical/ArmyBandage.png",				"ArmyBandage",	"Army bandage",									0.85, 1, 2	 },//ArmyBandage
-		{ "itemImages/MedicalImages/Medical/Augmentin.png",					"Augmentin",	"Augmentin antibiotic pills",					0.85, 1, 1	 },//Augmentin
-		{ "itemImages/MedicalImages/Medical/Bandage.png",					"Bandage",		"Aseptic bandage",								0.85, 1, 1	 },//Bandage
-		{ "itemImages/MedicalImages/Medical/CarKit.png",					"CarKit",		"Car first aid kit",							0.85, 2, 220 },//CarKit
-		{ "itemImages/MedicalImages/Medical/CAT.png",						"CAT",			"CAT hemostatic tourniquet",					0.85, 1, 1	 },//CAT
-		{ "itemImages/MedicalImages/Medical/CMS.png",						"CMS",			"CMS surgical kit",								0.85, 2, 5	 },//CMS
-		{ "itemImages/MedicalImages/Medical/Esmarch.png",					"Esmarch",		"Esmarch tourniquet",							0.85, 1, 1	 },//Esmarch
-		{ "itemImages/MedicalImages/Medical/GoldenStar.png",				"GoldenStar",	"Golden Star Balsam",							0.84, 1, 10	 },//GoldenStar
-		{ "itemImages/MedicalImages/Medical/Grizzly.png",					"Grizzly",		"Grizzly medical kit",							0.837, 4, 1800},//Grizzly
-		{ "itemImages/MedicalImages/Medical/Hemostatic.png",				"Hemostatic",	"CALOK-B hemostatic applicator",				0.85, 1, 3	 },//Hemostatic
-		{ "itemImages/MedicalImages/Medical/Ibuprofen.png",					"Ibuprofen",	"Ibuprofen painkillers",						0.85, 1, 15	 },//Ibuprofen
-		{ "itemImages/MedicalImages/Medical/IFAK.png",						"IFAK",			"IFAK individual first aid kit",				0.85, 1, 300 },//IFAK
-		{ "itemImages/MedicalImages/Medical/Salewa.png",					"Salewa",		"Salewa first aid kit",							0.85, 2, 400 },//Salewa
-		{ "itemImages/MedicalImages/Medical/Splint.png",					"Splint",		"Immobilizing splint",							0.85, 1, 1	 },//Splint
-		{ "itemImages/MedicalImages/Medical/Surv12.png",					"Surv12",		"Surv12 field surgical kit",					0.85, 3, 15	 },//Surv12
-		{ "itemImages/MedicalImages/Medical/Vaseline.png",					"Vaseline",		"Vaseline balm",								0.83, 1, 6	 },//Vaseline
+		{ "itemImages/MedicalImages/Medical/AFAK.png",						"AFAK",			"AFAK tactical individual first aid kit",		0.85,  1, 400  },//AFAK
+		{ "itemImages/MedicalImages/Medical/AI2.png",						"AI2",			"AI-2 medkit",									0.85,  1, 100  },//AI2
+		{ "itemImages/MedicalImages/Medical/AluSplint.png",					"AluSplint",	"Aluminum splint",								0.85,  1, 5    },//AluSplint
+		{ "itemImages/MedicalImages/Medical/Analgin.png",					"Analgin",		"Analgin painkillers",							0.85,  1, 4	   },//Analgin
+		{ "itemImages/MedicalImages/Medical/ArmyBandage.png",				"ArmyBandage",	"Army bandage",									0.85,  1, 2	   },//ArmyBandage
+		{ "itemImages/MedicalImages/Medical/Augmentin.png",					"Augmentin",	"Augmentin antibiotic pills",					0.85,  1, 1	   },//Augmentin
+		{ "itemImages/MedicalImages/Medical/Bandage.png",					"Bandage",		"Aseptic bandage",								0.85,  1, 1	   },//Bandage
+		{ "itemImages/MedicalImages/Medical/CarKit.png",					"CarKit",		"Car first aid kit",							0.85,  2, 220  },//CarKit
+		{ "itemImages/MedicalImages/Medical/CAT.png",						"CAT",			"CAT hemostatic tourniquet",					0.85,  1, 1	   },//CAT
+		{ "itemImages/MedicalImages/Medical/CMS.png",						"CMS",			"CMS surgical kit",								0.85,  2, 5	   },//CMS
+		{ "itemImages/MedicalImages/Medical/Esmarch.png",					"Esmarch",		"Esmarch tourniquet",							0.85,  1, 1	   },//Esmarch
+		{ "itemImages/MedicalImages/Medical/GoldenStar.png",				"GoldenStar",	"Golden Star Balsam",							0.84,  1, 10   },//GoldenStar
+		{ "itemImages/MedicalImages/Medical/Grizzly.png",					"Grizzly",		"Grizzly medical kit",							0.837, 4, 1800 },//Grizzly
+		{ "itemImages/MedicalImages/Medical/Hemostatic.png",				"Hemostatic",	"CALOK-B hemostatic applicator",				0.85,  1, 3	   },//Hemostatic
+		{ "itemImages/MedicalImages/Medical/Ibuprofen.png",					"Ibuprofen",	"Ibuprofen painkillers",						0.85,  1, 15   },//Ibuprofen
+		{ "itemImages/MedicalImages/Medical/IFAK.png",						"IFAK",			"IFAK individual first aid kit",				0.85,  1, 300  },//IFAK
+		{ "itemImages/MedicalImages/Medical/Salewa.png",					"Salewa",		"Salewa first aid kit",							0.85,  2, 400  },//Salewa
+		{ "itemImages/MedicalImages/Medical/Splint.png",					"Splint",		"Immobilizing splint",							0.85,  1, 1	   },//Splint
+		{ "itemImages/MedicalImages/Medical/Surv12.png",					"Surv12",		"Surv12 field surgical kit",					0.85,  3, 15   },//Surv12
+		{ "itemImages/MedicalImages/Medical/Vaseline.png",					"Vaseline",		"Vaseline balm",								0.83,  1, 6	   },//Vaseline
 	};
 
 	const vector<PathNameThresholdItemSize> Injectors{
-		{ "itemImages/MedicalImages/Injectors/3bTG.png",					"3bTG",			"3-(b-TG) stimulant injector",					0.85, 1},//3bTG
-		{ "itemImages/MedicalImages/Injectors/Adrenaline.png",				"Adrenaline",	"Adrenaline injector",							0.85, 1},//Adrenaline
-		{ "itemImages/MedicalImages/Injectors/AHF1M.png",					"AHF1M",		"AHF1-M stimulant injector",					0.85, 1},//AHF1M
-		{ "itemImages/MedicalImages/Injectors/ETG.png",						"ETG",			"eTG-change regenerative",						0.85, 1},//ETG
-		{ "itemImages/MedicalImages/Injectors/L1.png",						"L1",			"L1 (Norepinephrine) injector",					0.85, 1},//L1
-		{ "itemImages/MedicalImages/Injectors/Meldonin.png",				"Meldonin",		"Meldonin injector",							0.85, 1},//Meldonin
-		{ "itemImages/MedicalImages/Injectors/Morphine.png",				"Morphine",		"Morphine injector",							0.83, 1},//Morphine
-		{ "itemImages/MedicalImages/Injectors/MULE.png",					"MULE",			"M.U.L.E. stimulant injector",					0.85, 1},//MULE
-		{ "itemImages/MedicalImages/Injectors/Obdolbos.png",				"Obdolbos",		"",												0.85, 1},//Obdolbos
-		{ "itemImages/MedicalImages/Injectors/Obdolbos2.png",				"Obdolbos2",	"",												0.85, 1},//Obdolbos2
-		{ "itemImages/MedicalImages/Injectors/P22.png",						"P22",			"P22 (Product 22) stimulant injector",			0.85, 1},//P22
-		{ "itemImages/MedicalImages/Injectors/Perfotoran.png",				"Perfotoran",	"Perfotoran (Blue Blood)",						0.85, 1},//Perfotoran
-		{ "itemImages/MedicalImages/Injectors/PNB.png",						"PNB",			"PNB (Product 16)",								0.85, 1},//PNB
-		{ "itemImages/MedicalImages/Injectors/Propital.png",				"Propital",		"Propital regenerative",						0.85, 1},//Propital
-		{ "itemImages/MedicalImages/Injectors/SJ1.png",						"SJ1",			"SJ1 TGLabs combat",							0.85, 1},//SJ1
-		{ "itemImages/MedicalImages/Injectors/SJ6.png",						"SJ6",			"SJ6 TGLabs combat",							0.85, 1},//SJ6
-		{ "itemImages/MedicalImages/Injectors/SJ9.png",						"SJ9",			"SJ9 TGLabs combat",							0.85, 1},//SJ9
-		{ "itemImages/MedicalImages/Injectors/SJ12.png",					"SJ12",			"SJ12 TGLabs combat",							0.85, 1},//SJ12
-		{ "itemImages/MedicalImages/Injectors/Trimadol.png",				"Trimadol",		"Trimadol stimulant injector",					0.85, 1},//Trimadol
-		{ "itemImages/MedicalImages/Injectors/XTG12.png",					"XTG12",		"xTG-12 antidote injector",						0.85, 1},//XTG12
-		{ "itemImages/MedicalImages/Injectors/Zagustin.png",				"Zagustin",		"Zagustin hemostatic",							0.85, 1},//Zagustin
+		{ "itemImages/MedicalImages/Injectors/3bTG.png",					"3bTG",			"3-(b-TG) stimulant injector",					0.85, 1 },//3bTG
+		{ "itemImages/MedicalImages/Injectors/Adrenaline.png",				"Adrenaline",	"Adrenaline injector",							0.85, 1 },//Adrenaline
+		{ "itemImages/MedicalImages/Injectors/AHF1M.png",					"AHF1M",		"AHF1-M stimulant injector",					0.85, 1 },//AHF1M
+		{ "itemImages/MedicalImages/Injectors/ETG.png",						"ETG",			"eTG-change regenerative",						0.85, 1 },//ETG
+		{ "itemImages/MedicalImages/Injectors/L1.png",						"L1",			"L1 (Norepinephrine) injector",					0.85, 1 },//L1
+		{ "itemImages/MedicalImages/Injectors/Meldonin.png",				"Meldonin",		"Meldonin injector",							0.85, 1 },//Meldonin
+		{ "itemImages/MedicalImages/Injectors/Morphine.png",				"Morphine",		"Morphine injector",							0.83, 1 },//Morphine
+		{ "itemImages/MedicalImages/Injectors/MULE.png",					"MULE",			"M.U.L.E. stimulant injector",					0.85, 1 },//MULE
+		{ "itemImages/MedicalImages/Injectors/Obdolbos.png",				"Obdolbos",		"",												0.85, 1 },//Obdolbos
+		{ "itemImages/MedicalImages/Injectors/Obdolbos2.png",				"Obdolbos2",	"",												0.85, 1 },//Obdolbos2
+		{ "itemImages/MedicalImages/Injectors/P22.png",						"P22",			"P22 (Product 22) stimulant injector",			0.85, 1 },//P22
+		{ "itemImages/MedicalImages/Injectors/Perfotoran.png",				"Perfotoran",	"Perfotoran (Blue Blood)",						0.85, 1 },//Perfotoran
+		{ "itemImages/MedicalImages/Injectors/PNB.png",						"PNB",			"PNB (Product 16)",								0.85, 1 },//PNB
+		{ "itemImages/MedicalImages/Injectors/Propital.png",				"Propital",		"Propital regenerative",						0.85, 1 },//Propital
+		{ "itemImages/MedicalImages/Injectors/SJ1.png",						"SJ1",			"SJ1 TGLabs combat",							0.85, 1 },//SJ1
+		{ "itemImages/MedicalImages/Injectors/SJ6.png",						"SJ6",			"SJ6 TGLabs combat",							0.85, 1 },//SJ6
+		{ "itemImages/MedicalImages/Injectors/SJ9.png",						"SJ9",			"SJ9 TGLabs combat",							0.85, 1 },//SJ9
+		{ "itemImages/MedicalImages/Injectors/SJ12.png",					"SJ12",			"SJ12 TGLabs combat",							0.85, 1 },//SJ12
+		{ "itemImages/MedicalImages/Injectors/Trimadol.png",				"Trimadol",		"Trimadol stimulant injector",					0.85, 1 },//Trimadol
+		{ "itemImages/MedicalImages/Injectors/XTG12.png",					"XTG12",		"xTG-12 antidote injector",						0.85, 1 },//XTG12
+		{ "itemImages/MedicalImages/Injectors/Zagustin.png",				"Zagustin",		"Zagustin hemostatic",							0.85, 1 },//Zagustin
 	};
 
 	/*const array<vector<PathNameThresholdItemSize>, 2> ArrayMedical{
@@ -59,52 +59,52 @@ namespace MedicalVector {
 
 namespace ProvisionsVector {
 	const vector<PathNameThresholdItemSize> Provisions{
-		{ "itemImages/Provisions/Alyonka.png",								"Alyonka",				"Alyonka chocolate bar",				0.85, 1},//Alyonka
-		{ "itemImages/Provisions/AppleJuice.png",							"AppleJuice",			"Pack of apple juice",					0.85, 2},//AppleJuice
-		{ "itemImages/Provisions/Aquamari.png",								"Aquamari",				"Aquamari water bottle with filter",	0.85, 2},//Aquamari
-		{ "itemImages/Provisions/BigTushonka.png",							"BigTushonka",			"Can of beef stew (Large)",				0.85, 1},//BigTushonka
-		{ "itemImages/Provisions/Condmilk.png",								"Condmilk",				"Can of condensed milk",				0.85, 1},//Condmilk
-		{ "itemImages/Provisions/Crackers.png",								"Crackers",				"Army crackers",						0.85, 1},//Crackers
-		{ "itemImages/Provisions/Croutons.png",								"Croutons",				"Rye croutons",							0.85, 1},//Croutons
-		{ "itemImages/Provisions/EmergencyWaterRation.png",					"EmergencyWaterRation",	"Emergency Water Ration",				0.85, 1},//EmergencyWaterRation
-		{ "itemImages/Provisions/Emeyla.png",								"Emeyla",				"Emelya rye croutons",					0.85, 1},//Emeyla
-		{ "itemImages/Provisions/GrandJuice.png",							"GrandJuice",			"Pack of Grand juice",					0.85, 2},//GrandJuice
-		{ "itemImages/Provisions/GreenTea.png",								"GreenTea",				"Can of Ice Green tea",					0.85, 1},//GreenTea
-		{ "itemImages/Provisions/Herring.png",								"Herring",				"Can of herring",						0.85, 1},//Herring
-		{ "itemImages/Provisions/HorRod.png",								"HotRod",				"Can of Hot Rod energy drink",			0.85, 1},//HorRod
-		{ "itemImages/Provisions/Humpback.png",								"Humpback",				"Can of humpback salmon",				0.85, 1},//Humpback
-		{ "itemImages/Provisions/Iskra.png",								"Iskra",				"Iskra ration pack",					0.85, 2},//Iskra
-		{ "itemImages/Provisions/Kvass.png",								"Kvass",				"Bottle of \"Norvinskiy Yadreniy\"",	0.85, 2},//Kvass
-		{ "itemImages/Provisions/MaxEnergy.png",							"MaxEnergy",			"Can of Max Energy energy drink",		0.85, 1},//MaxEnergy
-		{ "itemImages/Provisions/Mayo.png",									"Mayo",					"Jar of DevilDog mayo",					0.85, 1},//Mayo
-		{ "itemImages/Provisions/Milk.png",									"Milk",					"Pack of milk",							0.85, 2},//Milk
-		{ "itemImages/Provisions/Moonshine.png",							"Moonshine",			"Bottle of Fierce Hatchling moonshine",	0.84, 2},//Moonshine
-		{ "itemImages/Provisions/MRE.png",									"MRE",					"MRE ration pack",						0.85, 2},//MRE
-		{ "itemImages/Provisions/Oatflakes.png",							"Oatflakes",			"Pack of oat flakes",					0.85, 2},//Oatflakes
-		{ "itemImages/Provisions/Peas.png",									"Peas",					"Can of green peas",					0.85, 1},//Peas
-		{ "itemImages/Provisions/Pevko.png",								"Pevko",				"Bottle of Pevko Light beer",			0.85, 2},//Pevko
-		{ "itemImages/Provisions/Pineapple.png",							"Pineapple",			"Pack of Russian Army pineapple juice",	0.85, 2},//Pineapple
-		{ "itemImages/Provisions/RatCola.png",								"RatCola",				"Can of RatCola soda",					0.85, 1},//RatCola
-		{ "itemImages/Provisions/Saury.png",								"Saury",				"Can of pacific saury",					0.85, 1},//Saury
-		{ "itemImages/Provisions/Sausage.png",								"Sausage",				"Salty Dog beef sausage",				0.85, 2},//Sausage
-		{ "itemImages/Provisions/Slickers.png",								"Slickers",				"Slickers chocolate bar",				0.85, 1},//Slickers
-		{ "itemImages/Provisions/Sprats.png",								"Sprats",				"Can of sprats",						0.85, 1},//Sprats
-		{ "itemImages/Provisions/Squash.png",								"Squash",				"Can of squash spread",					0.85, 1},//Squash
-		{ "itemImages/Provisions/Sugar.png",								"Sugar",				"Pack of sugar",						0.85, 1},//Sugar
-		{ "itemImages/Provisions/Superwater.png",							"Superwater",			"Canister with purified water",			0.85, 4},//Superwater
-		{ "itemImages/Provisions/TarCola.png",								"TarCola",				"Can of TarCola soda",					0.85, 1},//TarCola
-		{ "itemImages/Provisions/Tushonka.png",								"Tushonka",				"Can of beef stew (Small)",				0.85, 1},//Tushonka
-		{ "itemImages/Provisions/VitaJuice.png",							"VitaJuice",			"Pack of Vita juice",					0.85, 2},//VitaJuice
-		{ "itemImages/Provisions/Vodka.png",								"Vodka",				"Bottle of Tarkovskaya vodka",			0.85, 2},//Vodka
-		{ "itemImages/Provisions/Water.png",								"Water",				"Bottle of water (0.6L)",				0.85, 2},//Water
-		{ "itemImages/Provisions/Whiskey.png",								"Whiskey",				"Bottle of Dan Jackiel whiskey",		0.85, 2},//Whiskey
+		{ "itemImages/Provisions/Alyonka.png",								"Alyonka",				"Alyonka chocolate bar",				0.85, 1 },//Alyonka
+		{ "itemImages/Provisions/AppleJuice.png",							"AppleJuice",			"Pack of apple juice",					0.85, 2 },//AppleJuice
+		{ "itemImages/Provisions/Aquamari.png",								"Aquamari",				"Aquamari water bottle with filter",	0.85, 2 },//Aquamari
+		{ "itemImages/Provisions/BigTushonka.png",							"BigTushonka",			"Can of beef stew (Large)",				0.85, 1 },//BigTushonka
+		{ "itemImages/Provisions/Condmilk.png",								"Condmilk",				"Can of condensed milk",				0.85, 1 },//Condmilk
+		{ "itemImages/Provisions/Crackers.png",								"Crackers",				"Army crackers",						0.85, 1 },//Crackers
+		{ "itemImages/Provisions/Croutons.png",								"Croutons",				"Rye croutons",							0.85, 1 },//Croutons
+		{ "itemImages/Provisions/EmergencyWaterRation.png",					"EmergencyWaterRation",	"Emergency Water Ration",				0.85, 1 },//EmergencyWaterRation
+		{ "itemImages/Provisions/Emeyla.png",								"Emeyla",				"Emelya rye croutons",					0.85, 1 },//Emeyla
+		{ "itemImages/Provisions/GrandJuice.png",							"GrandJuice",			"Pack of Grand juice",					0.85, 2 },//GrandJuice
+		{ "itemImages/Provisions/GreenTea.png",								"GreenTea",				"Can of Ice Green tea",					0.85, 1 },//GreenTea
+		{ "itemImages/Provisions/Herring.png",								"Herring",				"Can of herring",						0.85, 1 },//Herring
+		{ "itemImages/Provisions/HorRod.png",								"HotRod",				"Can of Hot Rod energy drink",			0.85, 1 },//HorRod
+		{ "itemImages/Provisions/Humpback.png",								"Humpback",				"Can of humpback salmon",				0.85, 1 },//Humpback
+		{ "itemImages/Provisions/Iskra.png",								"Iskra",				"Iskra ration pack",					0.85, 2 },//Iskra
+		{ "itemImages/Provisions/Kvass.png",								"Kvass",				"Bottle of \"Norvinskiy Yadreniy\"",	0.85, 2 },//Kvass
+		{ "itemImages/Provisions/MaxEnergy.png",							"MaxEnergy",			"Can of Max Energy energy drink",		0.85, 1 },//MaxEnergy
+		{ "itemImages/Provisions/Mayo.png",									"Mayo",					"Jar of DevilDog mayo",					0.85, 1 },//Mayo
+		{ "itemImages/Provisions/Milk.png",									"Milk",					"Pack of milk",							0.85, 2 },//Milk
+		{ "itemImages/Provisions/Moonshine.png",							"Moonshine",			"Bottle of Fierce Hatchling moonshine",	0.84, 2 },//Moonshine
+		{ "itemImages/Provisions/MRE.png",									"MRE",					"MRE ration pack",						0.85, 2 },//MRE
+		{ "itemImages/Provisions/Oatflakes.png",							"Oatflakes",			"Pack of oat flakes",					0.85, 2 },//Oatflakes
+		{ "itemImages/Provisions/Peas.png",									"Peas",					"Can of green peas",					0.85, 1 },//Peas
+		{ "itemImages/Provisions/Pevko.png",								"Pevko",				"Bottle of Pevko Light beer",			0.85, 2 },//Pevko
+		{ "itemImages/Provisions/Pineapple.png",							"Pineapple",			"Pack of Russian Army pineapple juice",	0.85, 2 },//Pineapple
+		{ "itemImages/Provisions/RatCola.png",								"RatCola",				"Can of RatCola soda",					0.85, 1 },//RatCola
+		{ "itemImages/Provisions/Saury.png",								"Saury",				"Can of pacific saury",					0.85, 1 },//Saury
+		{ "itemImages/Provisions/Sausage.png",								"Sausage",				"Salty Dog beef sausage",				0.85, 2 },//Sausage
+		{ "itemImages/Provisions/Slickers.png",								"Slickers",				"Slickers chocolate bar",				0.85, 1 },//Slickers
+		{ "itemImages/Provisions/Sprats.png",								"Sprats",				"Can of sprats",						0.85, 1 },//Sprats
+		{ "itemImages/Provisions/Squash.png",								"Squash",				"Can of squash spread",					0.85, 1 },//Squash
+		{ "itemImages/Provisions/Sugar.png",								"Sugar",				"Pack of sugar",						0.85, 1 },//Sugar
+		{ "itemImages/Provisions/Superwater.png",							"Superwater",			"Canister with purified water",			0.85, 4 },//Superwater
+		{ "itemImages/Provisions/TarCola.png",								"TarCola",				"Can of TarCola soda",					0.85, 1 },//TarCola
+		{ "itemImages/Provisions/Tushonka.png",								"Tushonka",				"Can of beef stew (Small)",				0.85, 1 },//Tushonka
+		{ "itemImages/Provisions/VitaJuice.png",							"VitaJuice",			"Pack of Vita juice",					0.85, 2 },//VitaJuice
+		{ "itemImages/Provisions/Vodka.png",								"Vodka",				"Bottle of Tarkovskaya vodka",			0.85, 2 },//Vodka
+		{ "itemImages/Provisions/Water.png",								"Water",				"Bottle of water (0.6L)",				0.85, 2 },//Water
+		{ "itemImages/Provisions/Whiskey.png",								"Whiskey",				"Bottle of Dan Jackiel whiskey",		0.85, 2 },//Whiskey
 	};
 }
 
 
 namespace BarterVector {
 	const vector<PathNameThresholdItemSize> Building{
-		{ "itemImages/BarterImages/Building/AnalogThermometer.png",			"AnalogThermometer",		"Analog thermometer",				0.82, 2},//AnalogThermometer
+		{ "itemImages/BarterImages/Building/AnalogThermometer.png",			"AnalogThermometer",		"Analog thermometer",				0.82, 2 },//AnalogThermometer
 		{ "itemImages/BarterImages/Building/Bolts.png",						"Bolts",					"Bolts",							0.84, 1 },//Bolts
 		{ "itemImages/BarterImages/Building/DuctTape.png",					"DuctTape",					"Duct tape",						0.85, 1 },//DuctTape
 		{ "itemImages/BarterImages/Building/Hose.png",						"Hose",						"Corrugated hose",					0.83, 2 },//Hose

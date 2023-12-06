@@ -51,9 +51,12 @@ void PouchProcessing::PouchOperator() {
 void PouchProcessing::PouchMatching() {
 	GetMat getMat;
 	Matching matching(800, 610);
-	ItemProcessing itemProcessing;
-	vector<PointMedical> MedicalVec{};
+	
 	Pouch::pouch.nameOfPouch = PouchVector[Pouch_Version].Name;
+	
+	Pouch::pouch.ItemsInPouch_Medical.clear();
+	Pouch::pouch.ItemsInPouch_Barter.clear();
+
 	shared_ptr<vector<PointMedical>> ptr_MedicalVec = make_shared<vector<PointMedical>>(Pouch::pouch.ItemsInPouch_Medical);
 	shared_ptr<vector<PointBarter>> ptr_BarterVec = make_shared<vector<PointBarter>>(Pouch::pouch.ItemsInPouch_Barter);
 

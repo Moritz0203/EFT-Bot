@@ -34,7 +34,7 @@ namespace ItemDependences_Vec {
 		{ Light_Bleeding, { "AFAK", "AI2", "ArmyBandage", "Bandage", "CarKit", "Grizzly", "IFAK", "Salewa" } },
 		{ Heavy_Bleeding, { "AFAK", "CarKit", "CAT", "Esmarch", "Grizzly", "Hemostatic", "IFAK", "Salewa" } },
 		{ Fracture,		  { "AluSplint", "Grizzly", "Splint", "Surv12" } },
-		{ Pain,			  {} },
+		{ Pain,			  { } },
 		{ Dehydration,	  { "AppleJuice", "Aquamari", "EmergencyWaterRation", "GrandJuice", "GreenTea", "HotRod", "Kvass", "MaxEnergy", "Milk",	"Pineapple", "RatCola", "TarCola", "VitaJuice", "Water" } },
 		{ Starvation,	  { "Alyonka", "BigTushonka", "Condmilk", "Crackers", "Croutons", "Emeyla", "Herring", "Humpback", "Iskra", "Mayo", "MRE", "Oatflakes", "Peas", "Saury", "Slickers", "Sprats", "Squash", "Tushonka" } },
 	};

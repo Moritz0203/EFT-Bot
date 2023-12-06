@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include "Includes.h"
 
 typedef enum e_HealthSystem_InGame {
 	Light_Bleeding = 0,
@@ -35,7 +36,7 @@ class Health {
 
 public:
 
-	Health(std::shared_ptr<) {
+	Health(std::shared_ptr<vector<PointMedical>> medicalItemVec_ptr, std::shared_ptr<vector<PointBarter>> barterItemVec_ptr) {
 		
 	}
 };

@@ -22,7 +22,7 @@ struct HealthDependences {
 	bool HaveItem;
 };
 
-struct ItemDependence {
+struct ItemDependence { // implement a second vector for all items and the first is only for beste items for use case 
 	const HealthSystem_InGame Health;
 	std::vector<string> Items;
 };
@@ -31,12 +31,12 @@ struct ItemDependence {
 namespace ItemDependences_Vec {
 	
 	std::vector<ItemDependence> ItemDependencesList{
-		{ Light_Bleeding, {} },
-		{ Heavy_Bleeding, {} },
-		{ Fracture,		  {} },
+		{ Light_Bleeding, { "AFAK", "AI2", "ArmyBandage", "Bandage", "CarKit", "Grizzly", "IFAK", "Salewa" } },
+		{ Heavy_Bleeding, { "AFAK", "CarKit", "CAT", "Esmarch", "Grizzly", "Hemostatic", "IFAK", "Salewa" } },
+		{ Fracture,		  { "AluSplint", "Grizzly", "Splint", "Surv12" } },
 		{ Pain,			  {} },
-		{ Dehydration,	  {} },
-		{ Starvation,	  {} },
+		{ Dehydration,	  { "AppleJuice", "Aquamari", "EmergencyWaterRation", "GrandJuice", "GreenTea", "HotRod", "Kvass", "MaxEnergy", "Milk",	"Pineapple", "RatCola", "TarCola", "VitaJuice", "Water" } },
+		{ Starvation,	  { "Alyonka", "BigTushonka", "Condmilk", "Crackers", "Croutons", "Emeyla", "Herring", "Humpback", "Iskra", "Mayo", "MRE", "Oatflakes", "Peas", "Saury", "Slickers", "Sprats", "Squash", "Tushonka" } },
 	};
 
 }

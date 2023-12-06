@@ -42,6 +42,7 @@ namespace ItemDependences_Vec {
 }
 
 
+
 class Health {
 	
 	std::vector<HealthDependences> HealthDependencesList{

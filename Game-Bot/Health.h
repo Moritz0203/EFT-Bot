@@ -61,6 +61,48 @@ public:
 
 	Health(std::shared_ptr<vector<PointMedical>> medicalItemVec_ptr, std::shared_ptr<vector<PointBarter>> barterItemVec_ptr) {
 		
+		for (auto& healthDependence : HealthDependencesList) {
+			
+			for (auto& itemDependence : ItemDependences_Vec::ItemDependencesList) {
+				
+				if (healthDependence.Health == itemDependence.Health) {
+					
+					for (auto& item : itemDependence.ItemsBest) {
+						
+						for (auto& medicalItem : *medicalItemVec_ptr) {
+							if (item == medicalItem.nameOfItem) {
+								healthDependence.ItemsBest.push_back(std::make_shared<PointMedical>(medicalItem));
+								healthDependence.HaveItem = true;
+							}
+						}
+						
+						for (auto& barterItem : *barterItemVec_ptr) {
+							if (item == barterItem.nameOfItem) {
+								healthDependence.ItemsBest.push_back(std::make_shared<PointBarter>(barterItem));
+								healthDependence.HaveItem = true;
+							}
+						}
+					}
+
+					for (auto& item : itemDependence.ItemsAll) {
+						
+						for (auto& medicalItem : *medicalItemVec_ptr) {
+							if (item == medicalItem.nameOfItem) {
+								healthDependence.ItemsAll.push_back(std::make_shared<PointMedical>(medicalItem));
+								healthDependence.HaveItem = true;
+							}
+						}
+						
+						for (auto& barterItem : *barterItemVec_ptr) {
+							if (item == barterItem.nameOfItem) {
+								healthDependence.ItemsAll.push_back(std::make_shared<PointBarter>(barterItem));
+								healthDependence.HaveItem = true;
+							}
+						}
+					}
+				}
+			}
+		}
 	
 	}
 };

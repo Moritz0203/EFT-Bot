@@ -15,7 +15,7 @@ typedef enum e_HealthSystem_InGame {
 }HealthSystem_InGame;
 
 struct HealthDependences {
-	const HealthSystem_InGame Health;
+	const HealthSystem_InGame HealthType;
 	const char* Path;
 	const char* Name;
 	const double Threshold;
@@ -25,7 +25,7 @@ struct HealthDependences {
 };
 
 struct ItemDependence {
-	const HealthSystem_InGame Health;
+	const HealthSystem_InGame HealthType;
 	std::vector<string> ItemsBest; // If empty use ItemsALl
 	std::vector<string> ItemsAll;
 };
@@ -61,13 +61,12 @@ public:
 
 	Health(std::shared_ptr<vector<PointMedical>> medicalItemVec_ptr, std::shared_ptr<vector<PointBarter>> barterItemVec_ptr) {
 		
-		for (auto& healthDependence : HealthDependencesList) {
+		for (HealthDependences& healthDependence : HealthDependencesList) {
 			
-			for (auto& itemDependence : ItemDependences_Vec::ItemDependencesList) {
-				
-				if (healthDependence.Health == itemDependence.Health) {
+			for (ItemDependence& itemDependence : ItemDependences_Vec::ItemDependencesList) {
+				if (healthDependence.HealthType == itemDependence.HealthType) {
 					
-					for (auto& item : itemDependence.ItemsBest) {
+					for (string& item : itemDependence.ItemsBest) {
 						
 						for (auto& medicalItem : *medicalItemVec_ptr) {
 							if (item == medicalItem.nameOfItem) {
@@ -104,5 +103,7 @@ public:
 			}
 		}
 	
+
+
 	}
 };

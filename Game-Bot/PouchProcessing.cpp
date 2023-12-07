@@ -15,6 +15,7 @@ void PouchProcessing::ShiftOutItems(uint8_t rows, uint8_t cols) {
 	const uint16_t width = 64, height = 64;
 	uint16_t YStart = 620, XStart = 800;
 	uint16_t Y = YStart;
+	
 	for (uint8_t row = 0; row < rows; row++) {
 		uint16_t X = XStart;
 		for (uint8_t col = 0; col < cols; col++) {

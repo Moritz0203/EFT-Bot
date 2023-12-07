@@ -24,6 +24,12 @@ struct HealthDependences {
 	bool HaveItem;
 };
 
+enum ErrorCodes_Health {
+	ThreadAlreadyRunning = 1,
+	ThreadNotRunning = 5,
+};
+extern ErrorCodes_Health ErrorCodes_H;
+
 struct ItemDependence {
 	const HealthSystem_InGame HealthType;
 	std::vector<string> ItemsBest; // If empty use ItemsALl
@@ -56,6 +62,11 @@ class Health {
 		{ Dehydration,	  "Health/Dehydration.png",    "Dehydration",    0.90, {}, {}, false },
 		{ Starvation,	  "Health/Starvation.png",	   "Starvation",     0.90, {}, {}, false },
 	};
+
+	void DistributorHealth();
+	void HealthWorker();
+
+	void AddToQueue(std::function<void()> func);
 
 public:
 
@@ -102,8 +113,9 @@ public:
 				}
 			}
 		}
-	
-
-
 	}
+
+	int StartHealthSystem();
+	int StopHealthSystem();
+
 };

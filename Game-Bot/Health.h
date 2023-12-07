@@ -68,14 +68,14 @@ public:
 					
 					for (string& item : itemDependence.ItemsBest) {
 						
-						for (auto& medicalItem : *medicalItemVec_ptr) {
+						for (PointMedical& medicalItem : *medicalItemVec_ptr) {
 							if (item == medicalItem.nameOfItem) {
 								healthDependence.ItemsBest.push_back(std::make_shared<PointMedical>(medicalItem));
 								healthDependence.HaveItem = true;
 							}
 						}
 						
-						for (auto& barterItem : *barterItemVec_ptr) {
+						for (PointBarter& barterItem : *barterItemVec_ptr) {
 							if (item == barterItem.nameOfItem) {
 								healthDependence.ItemsBest.push_back(std::make_shared<PointBarter>(barterItem));
 								healthDependence.HaveItem = true;
@@ -83,16 +83,16 @@ public:
 						}
 					}
 
-					for (auto& item : itemDependence.ItemsAll) {
+					for (string& item : itemDependence.ItemsAll) {
 						
-						for (auto& medicalItem : *medicalItemVec_ptr) {
+						for (PointMedical& medicalItem : *medicalItemVec_ptr) {
 							if (item == medicalItem.nameOfItem) {
 								healthDependence.ItemsAll.push_back(std::make_shared<PointMedical>(medicalItem));
 								healthDependence.HaveItem = true;
 							}
 						}
 						
-						for (auto& barterItem : *barterItemVec_ptr) {
+						for (PointBarter& barterItem : *barterItemVec_ptr) {
 							if (item == barterItem.nameOfItem) {
 								healthDependence.ItemsAll.push_back(std::make_shared<PointBarter>(barterItem));
 								healthDependence.HaveItem = true;

@@ -20,14 +20,14 @@ struct HealthDependences {
 	const char* Name;
 	const double Threshold;
 	std::vector<std::shared_ptr<void>> ItemsBest;
-	std::vector<std::shared_ptr<void>> Items;
+	std::vector<std::shared_ptr<void>> ItemsAll;
 	bool HaveItem;
 };
 
 struct ItemDependence {
 	const HealthSystem_InGame Health;
-	std::vector<string> ItemsBest; // If empty use Items
-	std::vector<string> Items;
+	std::vector<string> ItemsBest; // If empty use ItemsALl
+	std::vector<string> ItemsAll;
 };
 
 

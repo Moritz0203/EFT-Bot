@@ -39,10 +39,11 @@ void Health::HealthWorker() {
 
 
 void Health::DistributorHealth() {
+	std::unique_lock<std::mutex> lock(m_Health);
 	
 	while (DistributorHealthThreadRunning) {
 		
-
+		
 		
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 

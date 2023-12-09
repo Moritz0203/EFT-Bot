@@ -71,7 +71,6 @@ class Health {
 	void CheckHealth();
 	void DoProcess(HealthSystem_InGame thingToDo);
 
-	void AddToQueue(std::function<void()> func);
 
 public:
 

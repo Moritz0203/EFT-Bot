@@ -13,12 +13,6 @@ std::mutex m_Health;
 std::condition_variable c_v_Health;
 
 
-void Health::AddToQueue(std::function<void()> func) {
-	std::unique_lock<std::mutex> lock(m_Health);
-	q_Health.push(func);
-	c_v_Health.notify_one();
-}
-
 void Health::HealthWorker() {
 	while (true) {
 		std::unique_lock<std::mutex> lock(m_Health);
@@ -63,13 +57,26 @@ void Health::DistributorHealth() {
 
 		if (cyclesAfterDetection > 4) {
 			cyclesAfterDetection = 0;
-
+			
 			walkObject_ptr->InstendStopMoving();
 
+			// open Inventory
+
+			WorkerThread = std::thread(HealthWorker, this);
+
 			for (HealthSystem_InGame& healthSystem_InGame : InGameHealth_vec) {
-				AddToQueue(std::bind(&Health::DoProcess, this, healthSystem_InGame));
+				if(HealthDependencesList[healthSystem_InGame].HaveItem)
+					q_Health.push(std::bind(&Health::DoProcess, this, healthSystem_InGame));
 			}
 			InGameHealth_vec.clear();
+
+			lock.unlock();
+			c_v_Health.notify_all();
+
+			WorkerThread.join();
+			lock.lock();
+
+			// close Inventory
 
 			walkObject_ptr->StartMoving();
 		}
@@ -94,7 +101,6 @@ int Health::StartHealthSystem() {
 	DistributorHealthThreadRunning = true;
 
 	DistributorHealthThread = std::thread(DistributorHealth, this);
-	WorkerThread = std::thread(HealthWorker, this);
 
 	return 0;
 }

@@ -33,12 +33,9 @@ int main() {
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
 
-	HumanizedMovement humanizedMovement;
 
-	humanizedMovement.StartMove(MoveType::MOVE_TYPE_RANDOM);
-	humanizedMovement.SetMovingCondition(MovingCondition::MOVING_CONDITION_SPRINT);
+	Mat MatScreen = GetMat::getMatWithRect(hWND, POINT{ 0,0 }, 150, 150);
 
-	std::this_thread::sleep_for(std::chrono::seconds(120));
-
-	humanizedMovement.StopMove(true, false);
+	imshow("test", MatScreen);	
+	waitKey(0);
 }

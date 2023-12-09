@@ -1,4 +1,6 @@
 #include "Health.h"
+#include"TemplateMatching.h"
+#include "getMat.h"
 #include <queue>
 
 /// private functions
@@ -43,17 +45,24 @@ void Health::DistributorHealth() {
 	std::vector<HealthSystem_InGame> InGameHealth_vec{};
 	std::unique_lock<std::mutex> lock(m_Health);
 
+	Mat MatScreen;
+
 
 	int cyclesAfterDetection = 0;
 	while (DistributorHealthThreadRunning) {
-
-
+		bool found = false;
+		
+		for (HealthDependences& healthDependence : HealthDependencesList) {
+			if (TemplateMatching::templateMatchingBool(MatScreen, imread(healthDependence.Path), healthDependence.Threshold)) {
+				InGameHealth_vec.push_back(healthDependence.HealthType);
+				found = true;
+			}
+		}
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 
-
-		// write detection for health here
-
+		if(!found)
+			continue;
 
 		if (cyclesAfterDetection > 4) {
 			cyclesAfterDetection = 0;
@@ -62,7 +71,7 @@ void Health::DistributorHealth() {
 
 			// open Inventory
 
-			WorkerThread = std::thread(HealthWorker, this);
+			WorkerThread = std::thread(std::bind(&Health::HealthWorker, this));
 
 			for (HealthSystem_InGame& healthSystem_InGame : InGameHealth_vec) {
 				if(HealthDependencesList[healthSystem_InGame].HaveItem)
@@ -93,11 +102,11 @@ void Health::DistributorHealth() {
 
 int Health::StartHealthSystem() {
 	if (DistributorHealthThreadRunning)
-		return ThreadAlreadyRunning;
+		return ThreadAlreadyRunning_H;
 
 	DistributorHealthThreadRunning = true;
 
-	DistributorHealthThread = std::thread(DistributorHealth, this);
+	DistributorHealthThread = std::thread(std::bind(&Health::DistributorHealth, this));
 
 	return 0;
 }
@@ -105,7 +114,7 @@ int Health::StartHealthSystem() {
 int Health::StopHealthSystem() {
 
 	if (!DistributorHealthThreadRunning)
-		return ThreadNotRunning;
+		return ThreadNotRunning_H;
 
 	DistributorHealthThreadRunning = false;
 

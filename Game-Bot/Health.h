@@ -25,8 +25,8 @@ struct HealthDependences {
 };
 
 enum ErrorCodes_Health {
-	ThreadAlreadyRunning = 1,
-	ThreadNotRunning = 5,
+	ThreadAlreadyRunning_H = 1,
+	ThreadNotRunning_H = 2,
 };
 extern ErrorCodes_Health ErrorCodes_H;
 

@@ -84,9 +84,6 @@ void Health::DistributorHealth() {
 			cyclesAfterDetection++;
 		}
 
-
-
-		// wait for worker thread to finish
 	}
 }
 

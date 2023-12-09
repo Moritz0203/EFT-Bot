@@ -71,7 +71,6 @@ class Health {
 	void CheckHealth();
 	void DoProcess(HealthSystem_InGame thingToDo);
 
-
 public:
 
 	Health(std::shared_ptr<vector<PointMedical>> medicalItemVec_ptr, std::shared_ptr<vector<PointBarter>> barterItemVec_ptr, shared_ptr<Walk> walkObject_ptr) {

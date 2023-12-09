@@ -48,7 +48,6 @@ void Health::DistributorHealth() {
 	Mat MatScreen;
 	HWND hWND = GetMat::FindeWindow();
 
-
 	int cyclesAfterDetection = 0;
 	while (DistributorHealthThreadRunning) {
 		bool found = false;

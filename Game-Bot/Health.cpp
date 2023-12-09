@@ -36,25 +36,47 @@ void Health::HealthWorker() {
 }
 
 
+void Health::CheckHealth() {
+
+}
+
+void Health::DoProcess(HealthSystem_InGame thingToDo) {
+
+}
 
 
 void Health::DistributorHealth() {
+	std::vector<HealthSystem_InGame> InGameHealth_vec{};
 	std::unique_lock<std::mutex> lock(m_Health);
-	
+
+
+	int cyclesAfterDetection = 0;
 	while (DistributorHealthThreadRunning) {
-		
-		
-		
+
+
+
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 
 
 		// write detection for health here
 
-		// if a health is detectid, add to queue
 
+		if (cyclesAfterDetection > 4) {
+			cyclesAfterDetection = 0;
 
-		// break the walk thread 
-		// wait 4 cycles and then start worker thread
+			walkObject_ptr->InstendStopMoving();
+
+			for (HealthSystem_InGame& healthSystem_InGame : InGameHealth_vec) {
+				AddToQueue(std::bind(&Health::DoProcess, this, healthSystem_InGame));
+			}
+			InGameHealth_vec.clear();
+
+			walkObject_ptr->StartMoving();
+		}
+		else {
+			cyclesAfterDetection++;
+		}
+
 
 
 		// wait for worker thread to finish
@@ -66,9 +88,9 @@ void Health::DistributorHealth() {
 /// public functions
 
 int Health::StartHealthSystem() {
-	if(DistributorHealthThreadRunning)
+	if (DistributorHealthThreadRunning)
 		return ThreadAlreadyRunning;
-	
+
 	DistributorHealthThreadRunning = true;
 
 	DistributorHealthThread = std::thread(DistributorHealth, this);
@@ -79,7 +101,7 @@ int Health::StartHealthSystem() {
 
 int Health::StopHealthSystem() {
 
-	if(!DistributorHealthThreadRunning)
+	if (!DistributorHealthThreadRunning)
 		return ThreadNotRunning;
 
 	DistributorHealthThreadRunning = false;

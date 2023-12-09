@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 #include "Includes.h"
-
+#include "Walk.h"
 
 typedef enum e_HealthSystem_InGame {
 	Light_Bleeding = 0,
@@ -63,15 +63,22 @@ class Health {
 		{ Starvation,	  "Health/Starvation.png",	   "Starvation",     0.90, {}, {}, false },
 	};
 
+	shared_ptr<Walk> walkObject_ptr;
+
 	void DistributorHealth();
 	void HealthWorker();
+
+	void CheckHealth();
+	void DoProcess(HealthSystem_InGame thingToDo);
 
 	void AddToQueue(std::function<void()> func);
 
 public:
 
-	Health(std::shared_ptr<vector<PointMedical>> medicalItemVec_ptr, std::shared_ptr<vector<PointBarter>> barterItemVec_ptr) {
+	Health(std::shared_ptr<vector<PointMedical>> medicalItemVec_ptr, std::shared_ptr<vector<PointBarter>> barterItemVec_ptr, shared_ptr<Walk> walkObject_ptr) {
 		
+		this->walkObject_ptr = walkObject_ptr;
+
 		for (HealthDependences& healthDependence : HealthDependencesList) {
 			
 			for (ItemDependence& itemDependence : ItemDependences_Vec::ItemDependencesList) {

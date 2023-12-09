@@ -33,7 +33,7 @@ extern ErrorCodes_Health ErrorCodes_H;
 struct ItemDependence {
 	const HealthSystem_InGame HealthType;
 	std::vector<string> ItemsBest; // If empty use ItemsALl
-	std::vector<string> ItemsAll;
+	std::vector<string> ItemsSecond;
 };
 
 

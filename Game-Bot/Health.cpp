@@ -36,6 +36,11 @@ void Health::HealthWorker() {
 void Health::CheckHealth() {
 
 }
+ 
+
+// Food wait time 6 sec after use
+// Water wait time 5 sec after use
+// Health wait time 8 sec after use
 
 void Health::DoProcess(HealthSystem_InGame thingToDo) {
 
@@ -95,7 +100,6 @@ void Health::DistributorHealth() {
 		else {
 			cyclesAfterDetection++;
 		}
-
 	}
 }
 

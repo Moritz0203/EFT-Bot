@@ -47,6 +47,17 @@ void Health::DistributorHealth() {
 		
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 
+
+		// write detection for health here
+
+		// if a health is detectid, add to queue
+
+
+		// break the walk thread 
+		// wait 4 cycles and then start worker thread
+
+
+		// wait for worker thread to finish
 	}
 }
 

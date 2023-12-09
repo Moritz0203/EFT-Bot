@@ -43,7 +43,64 @@ void Health::CheckHealth() {
 // Health wait time 8 sec after use
 
 void Health::DoProcess(HealthSystem_InGame thingToDo) {
+	std::unique_ptr<HealthDependences> HealthDependence_ptr = std::make_unique<HealthDependences>(HealthDependencesList[thingToDo]);
+	PointBarter* Barter;
+	PointMedical* Medical;
+	POINT point;
+	POINT finalPoint;
+	int Wight = 0;
+	int Hight = 0;
 
+	if(HealthDependence_ptr->ItemsBest.size() > 0) {
+
+		if (thingToDo == Dehydration || thingToDo == Starvation) {
+			Barter = static_cast<PointBarter*>(HealthDependence_ptr->ItemsBest[0].get());
+			point = Barter->point;
+			Wight = Barter->widthTempl;
+			Hight = Barter->heightTempl;
+
+			HealthDependence_ptr->ItemsBest.erase(HealthDependence_ptr->ItemsBest.begin());
+		}
+		else {
+			Medical = static_cast<PointMedical*>(HealthDependence_ptr->ItemsBest[0].get());
+			point = Medical->point;
+			Wight = Medical->widthTempl;
+			Hight = Medical->heightTempl;
+
+			// build a check for item erasing if low on health 
+		}
+
+		finalPoint.x = point.x + (Wight / 2);	
+		finalPoint.y = point.y + (Hight / 2);
+
+		Mouse::MoverPOINTandPressTwoTimes(finalPoint);
+	}
+	else {
+		
+		if (thingToDo == Dehydration || thingToDo == Starvation) {
+			Barter = static_cast<PointBarter*>(HealthDependence_ptr->ItemsSecond[0].get());
+			point = Barter->point;
+			Wight = Barter->widthTempl;
+			Hight = Barter->heightTempl;
+
+			HealthDependence_ptr->ItemsSecond.erase(HealthDependence_ptr->ItemsSecond.begin());
+		}
+		else {
+			Medical = static_cast<PointMedical*>(HealthDependence_ptr->ItemsSecond[0].get());
+			point = Medical->point;
+			Wight = Medical->widthTempl;
+			Hight = Medical->heightTempl;
+
+			// build a check for item erasing if low on health 
+		}
+
+		finalPoint.x = point.x + (Wight / 2);
+		finalPoint.y = point.y + (Hight / 2);
+
+		Mouse::MoverPOINTandPressTwoTimes(finalPoint);
+	}
+
+	std::this_thread::sleep_for(std::chrono::seconds(HealthDependence_ptr->waitTime));
 }
 
 

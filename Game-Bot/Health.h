@@ -20,8 +20,9 @@ struct HealthDependences {
 	const char* Name;
 	const double Threshold;
 	std::vector<std::shared_ptr<void>> ItemsBest;
-	std::vector<std::shared_ptr<void>> ItemsAll;
+	std::vector<std::shared_ptr<void>> ItemsSecond;
 	bool HaveItem;
+	int waitTime = 0; // In seconds
 };
 
 enum ErrorCodes_Health {
@@ -55,12 +56,12 @@ namespace ItemDependences_Vec {
 class Health {
 	
 	std::vector<HealthDependences> HealthDependencesList{
-		{ Light_Bleeding, "Health/Light_Bleeding.png", "Light_Bleeding", 0.90, {}, {}, false },
-		{ Heavy_Bleeding, "Health/Heavy_Bleeding.png", "Heavy_Bleeding", 0.90, {}, {}, false },
-		{ Fracture,		  "Health/Fracture.png",	   "Fracture",       0.90, {}, {}, false },
-		{ Pain,			  "Health/Pain.png",		   "Pain",		     0.90, {}, {}, false },
-		{ Dehydration,	  "Health/Dehydration.png",    "Dehydration",    0.90, {}, {}, false },
-		{ Starvation,	  "Health/Starvation.png",	   "Starvation",     0.90, {}, {}, false },
+		{ Light_Bleeding, "Health/Light_Bleeding.png", "Light_Bleeding", 0.90, {}, {}, false, 8 },
+		{ Heavy_Bleeding, "Health/Heavy_Bleeding.png", "Heavy_Bleeding", 0.90, {}, {}, false, 8 },
+		{ Fracture,		  "Health/Fracture.png",	   "Fracture",       0.90, {}, {}, false, 8 },
+		{ Pain,			  "Health/Pain.png",		   "Pain",		     0.90, {}, {}, false, 0 },
+		{ Dehydration,	  "Health/Dehydration.png",    "Dehydration",    0.90, {}, {}, false, 5 },
+		{ Starvation,	  "Health/Starvation.png",	   "Starvation",     0.90, {}, {}, false, 6 },
 	};
 
 	shared_ptr<Walk> walkObject_ptr;
@@ -99,7 +100,7 @@ public:
 						}
 					}
 
-					for (string& item : itemDependence.ItemsAll) {
+					for (string& item : itemDependence.ItemsSecond) {
 						
 						for (PointMedical& medicalItem : *medicalItemVec_ptr) {
 							if (item == medicalItem.nameOfItem) {

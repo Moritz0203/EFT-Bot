@@ -2,6 +2,7 @@
 #include"TemplateMatching.h"
 #include "getMat.h"
 #include <queue>
+#include "InputMK.h"
 
 /// private functions
 
@@ -71,7 +72,7 @@ void Health::DistributorHealth() {
 			
 			walkObject_ptr->InstendStopMoving();
 
-			// open Inventory
+			Keyboard::KeyboardInput(0x09);
 
 			WorkerThread = std::thread(std::bind(&Health::HealthWorker, this));
 
@@ -87,7 +88,7 @@ void Health::DistributorHealth() {
 			WorkerThread.join();
 			lock.lock();
 
-			// close Inventory
+			Keyboard::KeyboardInput(0x09);
 
 			walkObject_ptr->StartMoving();
 		}

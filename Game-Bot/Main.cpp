@@ -33,4 +33,5 @@ int main() {
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
 
+
 }

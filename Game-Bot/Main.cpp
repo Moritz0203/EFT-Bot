@@ -33,9 +33,4 @@ int main() {
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
 
-
-	Mat MatScreen = GetMat::getMatWithRect(hWND, POINT{ 0,0 }, 150, 150);
-
-	imshow("test", MatScreen);	
-	waitKey(0);
 }

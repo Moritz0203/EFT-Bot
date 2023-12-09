@@ -46,12 +46,15 @@ void Health::DistributorHealth() {
 	std::unique_lock<std::mutex> lock(m_Health);
 
 	Mat MatScreen;
+	HWND hWND = GetMat::FindeWindow();
 
 
 	int cyclesAfterDetection = 0;
 	while (DistributorHealthThreadRunning) {
 		bool found = false;
-		
+		 
+		MatScreen = GetMat::getMatWithRect(hWND, POINT{ 140, 0 }, 100, 150);
+
 		for (HealthDependences& healthDependence : HealthDependencesList) {
 			if (TemplateMatching::templateMatchingBool(MatScreen, imread(healthDependence.Path), healthDependence.Threshold)) {
 				InGameHealth_vec.push_back(healthDependence.HealthType);

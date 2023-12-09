@@ -22,7 +22,13 @@ struct HealthDependences {
 	std::vector<std::shared_ptr<void>> ItemsBest;
 	std::vector<std::shared_ptr<void>> ItemsSecond;
 	bool HaveItem;
-	int waitTime = 0; // In seconds
+	int waitTime; // In seconds
+};
+
+struct ItemDependence {
+	const HealthSystem_InGame HealthType;
+	std::vector<string> ItemsBest; // If empty use ItemsALl
+	std::vector<string> ItemsSecond;
 };
 
 enum ErrorCodes_Health {
@@ -31,11 +37,6 @@ enum ErrorCodes_Health {
 };
 extern ErrorCodes_Health ErrorCodes_H;
 
-struct ItemDependence {
-	const HealthSystem_InGame HealthType;
-	std::vector<string> ItemsBest; // If empty use ItemsALl
-	std::vector<string> ItemsSecond;
-};
 
 
 namespace ItemDependences_Vec {
@@ -104,14 +105,14 @@ public:
 						
 						for (PointMedical& medicalItem : *medicalItemVec_ptr) {
 							if (item == medicalItem.nameOfItem) {
-								healthDependence.ItemsAll.push_back(std::make_shared<PointMedical>(medicalItem));
+								healthDependence.ItemsSecond.push_back(std::make_shared<PointMedical>(medicalItem));
 								healthDependence.HaveItem = true;
 							}
 						}
 						
 						for (PointBarter& barterItem : *barterItemVec_ptr) {
 							if (item == barterItem.nameOfItem) {
-								healthDependence.ItemsAll.push_back(std::make_shared<PointBarter>(barterItem));
+								healthDependence.ItemsSecond.push_back(std::make_shared<PointBarter>(barterItem));
 								healthDependence.HaveItem = true;
 							}
 						}

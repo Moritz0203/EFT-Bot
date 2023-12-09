@@ -46,8 +46,8 @@ void Health::DoProcess(HealthSystem_InGame thingToDo) {
 	std::unique_ptr<HealthDependences> HealthDependence_ptr = std::make_unique<HealthDependences>(HealthDependencesList[thingToDo]);
 	PointBarter* Barter;
 	PointMedical* Medical;
-	POINT point;
-	POINT finalPoint;
+	POINT point{};
+	POINT finalPoint{};
 	int Wight = 0;
 	int Hight = 0;
 
@@ -91,7 +91,7 @@ void Health::DoProcess(HealthSystem_InGame thingToDo) {
 			Wight = Medical->widthTempl;
 			Hight = Medical->heightTempl;
 
-			// build a check for item erasing if low on health 
+			// build a check for item erasing if low on health
 		}
 
 		finalPoint.x = point.x + (Wight / 2);

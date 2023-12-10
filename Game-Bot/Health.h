@@ -56,12 +56,12 @@ namespace ItemDependences_Vec {
 class Health {
 	
 	std::vector<HealthDependences> HealthDependencesList{
-		{ Light_Bleeding, "Health/Light_Bleeding.png", "Light_Bleeding", 0.90, {}, {}, false, 8 },
-		{ Heavy_Bleeding, "Health/Heavy_Bleeding.png", "Heavy_Bleeding", 0.90, {}, {}, false, 8 },
-		{ Fracture,		  "Health/Fracture.png",	   "Fracture",       0.90, {}, {}, false, 8 },
-		{ Pain,			  "Health/Pain.png",		   "Pain",		     0.90, {}, {}, false, 0 },
-		{ Dehydration,	  "Health/Dehydration.png",    "Dehydration",    0.90, {}, {}, false, 5 },
-		{ Starvation,	  "Health/Starvation.png",	   "Starvation",     0.90, {}, {}, false, 6 },
+		{ Light_Bleeding, "ObjectImages/Health/Light_Bleeding.png", "Light_Bleeding", 0.97, {}, {}, false, 8 },
+		{ Heavy_Bleeding, "ObjectImages/Health/Heavy_Bleeding.png", "Heavy_Bleeding", 0.97, {}, {}, false, 8 },
+		{ Fracture,		  "ObjectImages/Health/Fracture.png",		"Fracture",       0.97, {}, {}, false, 8 },
+		{ Pain,			  "ObjectImages/Health/Pain.png",			"Pain",			  0.97, {}, {}, false, 0 },
+		{ Dehydration,	  "ObjectImages/Health/Dehydration.png",    "Dehydration",    0.97, {}, {}, false, 5 },
+		{ Starvation,	  "ObjectImages/Health/Starvation.png",		"Starvation",     0.97, {}, {}, false, 6 },
 	};
 
 	shared_ptr<Walk> walkObject_ptr;

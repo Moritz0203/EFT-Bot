@@ -27,7 +27,7 @@ struct HealthDependences {
 
 struct ItemDependence {
 	const HealthSystem_InGame HealthType;
-	std::vector<string> ItemsBest; // If empty use ItemsALl
+	std::vector<string> ItemsBest; // If empty use ItemsSecond
 	std::vector<string> ItemsSecond;
 };
 
@@ -36,7 +36,6 @@ enum ErrorCodes_Health {
 	ThreadNotRunning_H = 2,
 };
 extern ErrorCodes_Health ErrorCodes_H;
-
 
 
 namespace ItemDependences_Vec {
@@ -49,7 +48,7 @@ namespace ItemDependences_Vec {
 		{ Dehydration,	  { "AppleJuice", "Aquamari", "EmergencyWaterRation", "GrandJuice", "GreenTea", "HotRod", "Kvass", "MaxEnergy", "Milk",	"Pineapple", "RatCola", "TarCola", "VitaJuice", "Water" }, { "Peas" } },
 		{ Starvation,	  { "Alyonka", "BigTushonka", "Condmilk", "Crackers", "Croutons", "Emeyla", "Herring", "Humpback", "Iskra", "Mayo", "MRE", "Oatflakes", "Peas", "Saury", "Slickers", "Sprats", "Squash", "Tushonka" }, { "AppleJuice", "Aquamari", "GrandJuice", "Kvass", "MaxEnergy", "Milk", "Pineapple", "VitaJuice" } },
 	};
-
+	
 }
 
 

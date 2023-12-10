@@ -26,11 +26,14 @@ class OueueProcessing {
 	};
 
 	void ClickNextButton();	
+	void ClickApplyButton();
 	void ClickReadyButton();
 	void ClickEscapeFromTarkov();
 	void ClickOnMap();
 	void SelectTime();
 	void Incurance();
+
+	void ExtractRaidInformation();
 	
 	bool IsTimeInRange(const std::tm& timeToCheck, const std::tm& start, const std::tm& end) {
 		std::tm tempTimeToCheck = timeToCheck;
@@ -46,14 +49,20 @@ class OueueProcessing {
 
 	Map MapToRun = Default_Map;
 	bool NeedIncurance = false;
+	bool NeedAutoHeal = false;
 
 public:
 
 	OueueProcessing(Map map, bool insure) {
 		this->MapToRun = map;
 		this->NeedIncurance = insure;
-	}	
+	}
 
-	void OueueProcess();
+	OueueProcessing(bool needAutoHeal){
+		this->NeedAutoHeal = needAutoHeal;
+	}
+
+	void OueueProcess_InGame();
+	void OueueProcess_OutOfGame();
 };
 

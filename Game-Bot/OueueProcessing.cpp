@@ -20,6 +20,22 @@ void OueueProcessing::ClickNextButton() {
 	Sleep(500);
 }
 
+void OueueProcessing::ClickApplyButton() {
+	const HWND hWND = GetMat::FindeWindow();
+	SetForegroundWindow(hWND);
+	Sleep(5);//Delete later
+	const Mat MatScreen = GetMat::getMat(hWND);
+	const Mat templ_ApplyButton = imread("ObjectImages/ApplyButton.png");
+
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ_ApplyButton, 0.90);
+	point.y = (templ_ApplyButton.rows / 2) + point.y;
+	point.x = (templ_ApplyButton.cols / 2) + point.x;
+
+	Mouse::MoverPOINTandPress(point);
+
+	Sleep(500);
+}
+
 void OueueProcessing::ClickReadyButton() {
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
@@ -121,10 +137,15 @@ void OueueProcessing::Incurance() {
 	Sleep(500);
 }
 
+void OueueProcessing::ExtractRaidInformation() {
+
+}
 
 
 
-void OueueProcessing::OueueProcess() {
+
+
+void OueueProcessing::OueueProcess_InGame() {
 	ClickEscapeFromTarkov();
 	ClickNextButton();
 	ClickOnMap();	
@@ -149,4 +170,23 @@ void OueueProcessing::OueueProcess() {
 
 	ClickNextButton();	
 	ClickReadyButton();
+}
+
+void OueueProcessing::OueueProcess_OutOfGame() {
+	ClickNextButton();
+	// Click Next but extract EXP and Raid Time
+
+	ClickNextButton();
+	ClickNextButton();
+	ClickNextButton();
+
+	if (NeedAutoHeal) {
+		ClickApplyButton();
+		ClickNextButton(); 
+	}
+	else {
+		ClickNextButton();
+	}
+
+	Sleep(2000);
 }

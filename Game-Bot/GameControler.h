@@ -1,6 +1,9 @@
 #pragma once
-class GameControler {
 
+
+
+class GameControler {
+	
 
 };
 

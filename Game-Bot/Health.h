@@ -40,7 +40,7 @@ extern ErrorCodes_Health ErrorCodes_H;
 
 namespace ItemDependences_Vec {
 	
-	std::vector<ItemDependence> ItemDependencesList{
+	std::vector<ItemDependence> ItemDependencesList {
 		{ Light_Bleeding, { "ArmyBandage", "Bandage" }, { "AFAK", "AI2", "CarKit", "Grizzly", "IFAK", "Salewa" } },
 		{ Heavy_Bleeding, { "CAT", "Esmarch", "Hemostatic" }, { "AFAK", "CarKit", "Grizzly", "IFAK", "Salewa" } },
 		{ Fracture,		  { "AluSplint", "Splint" }, { "Grizzly", "Surv12" } },
@@ -55,7 +55,7 @@ namespace ItemDependences_Vec {
 
 class Health {
 	
-	std::vector<HealthDependences> HealthDependencesList{
+	std::vector<HealthDependences> HealthDependencesList {
 		{ Light_Bleeding, "ObjectImages/Health/Light_Bleeding.png", "Light_Bleeding", 0.97, {}, {}, false, 8 },
 		{ Heavy_Bleeding, "ObjectImages/Health/Heavy_Bleeding.png", "Heavy_Bleeding", 0.97, {}, {}, false, 8 },
 		{ Fracture,		  "ObjectImages/Health/Fracture.png",		"Fracture",       0.97, {}, {}, false, 8 },

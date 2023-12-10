@@ -3,6 +3,7 @@
 #include "getMat.h"
 #include <queue>
 #include "InputMK.h"
+#include "ItemVectors.h"
 
 /// private functions
 
@@ -36,7 +37,19 @@ void Health::HealthWorker() {
 void Health::CheckHealth() {
 
 }
- 
+
+bool Health::MedicalItemCheck(PointMedical pointMedical) {
+
+	for (PathNameThresholdItemSizeMaxHP PathName : MedicalVector::Medical) {
+		
+		if (PathName.Name == pointMedical.nameOfItem) {
+			
+			Mat MatScreen = GetMat::getMatWithRect(GetMat::FindeWindow(), pointMedical.point, pointMedical.widthTempl, pointMedical.heightTempl);
+
+			return TemplateMatching::templateMatchingBool(MatScreen, imread(PathName.Path), PathName.Threshold);
+		}
+	}
+}
 
 // Food wait time 6 sec after use
 // Water wait time 5 sec after use
@@ -67,7 +80,9 @@ void Health::DoProcess(HealthSystem_InGame thingToDo) {
 			Wight = Medical->widthTempl;
 			Hight = Medical->heightTempl;
 
-			// build a check for item erasing if low on health 
+			if (!MedicalItemCheck(*Medical)) {
+				HealthDependence_ptr->ItemsBest.erase(HealthDependence_ptr->ItemsBest.begin());
+			}
 		}
 
 		finalPoint.x = point.x + (Wight / 2);	
@@ -91,7 +106,9 @@ void Health::DoProcess(HealthSystem_InGame thingToDo) {
 			Wight = Medical->widthTempl;
 			Hight = Medical->heightTempl;
 
-			// build a check for item erasing if low on health
+			if (!MedicalItemCheck(*Medical)) {
+				HealthDependence_ptr->ItemsBest.erase(HealthDependence_ptr->ItemsBest.begin());
+			}
 		}
 
 		finalPoint.x = point.x + (Wight / 2);
@@ -181,6 +198,8 @@ int Health::StopHealthSystem() {
 		return ThreadNotRunning_H;
 
 	DistributorHealthThreadRunning = false;
+
+	DistributorHealthThread.join();
 
 	return 0;
 }

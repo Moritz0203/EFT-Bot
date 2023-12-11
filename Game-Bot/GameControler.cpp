@@ -19,7 +19,6 @@ void GameControler::Controler() {
 	walk.StartMoving();
 	health.StartHealthSystem();
 
-	//Game Loop
 	// NOTE: Later it needs to check server for any updates on MoveType and MovingCondition
 	HWND hWND = GetMat::FindeWindow();
 	while (true) {

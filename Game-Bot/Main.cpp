@@ -14,6 +14,7 @@
 #include "StashObject.h"
 #include "InputMK.h"
 #include "HumanizedMovement.h"
+#include "OueueProcessing.h"
 
 #include <cmath>
 #include <random>
@@ -33,5 +34,9 @@ int main() {
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
 
+
+	OueueProcessing queueProcessing(true);
+
+	queueProcessing.OueueProcess_OutOfGame();
 
 }

@@ -8,6 +8,10 @@ struct Mouse {
 	static void MoverPOINTandPressTwoTimes(POINT Points); 
 
 	static void MouseMoveAtoB(POINT PointA, POINT PointB); 
+
+	static void MouseMove(POINT Point);
+
+	static void ClickLeftButton();
 };
 
 struct Keyboard {

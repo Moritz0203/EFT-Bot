@@ -25,6 +25,7 @@ class OueueProcessing {
 		{"ObjectImages/Shoreline.png",		"Shoreline",	0.90, { 0, 0, 21 }, { 0, 0, 5 },  false},//Shoreline
 	};
 
+	void ResetMousePosition();
 	void ClickNextButton();	
 	void ClickApplyButton();
 	void ClickReadyButton();
@@ -33,7 +34,6 @@ class OueueProcessing {
 	void SelectTime();
 	void Incurance();
 
-	void ExtractRaidInformation();
 	
 	bool IsTimeInRange(const std::tm& timeToCheck, const std::tm& start, const std::tm& end) {
 		std::tm tempTimeToCheck = timeToCheck;
@@ -52,6 +52,7 @@ class OueueProcessing {
 	bool NeedAutoHeal = false;
 
 public:
+	void ExtractRaidInformation();
 
 	OueueProcessing(Map map, bool insure) {
 		this->MapToRun = map;

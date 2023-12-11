@@ -41,6 +41,16 @@ void Mouse::MouseMoveAtoB(POINT PointA, POINT PointB)
 }
 
 
+void Mouse::MouseMove(POINT Point) {
+	SetCursorPos(Point.x, Point.y);
+}
+
+void Mouse::ClickLeftButton() {
+	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+}
+
+
 
 
 void Keyboard::KeyboardInput(int keyforInput)

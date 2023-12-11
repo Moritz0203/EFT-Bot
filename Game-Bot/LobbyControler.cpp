@@ -168,7 +168,7 @@ void LobbyControler::ServerControler() {// Later
 void LobbyControler::QueueControler() {
 	OueueProcessing queueProcessing(Shoreline, false);//later get from config file or form server 
 
-	queueProcessing.OueueProcess();
+	queueProcessing.OueueProcess_InGame();
 
 	WaitForGameStart();	
 }

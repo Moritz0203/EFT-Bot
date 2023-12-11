@@ -8,6 +8,10 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+
+#include <iomanip>
+#include <ctime>
+
 using namespace std;
 using namespace cv;
 
@@ -370,6 +374,69 @@ const int TextMatching::textMatching_OnlyNumbers(Mat MatScreen, Rect Rec) {
 
 	return 0;
 }
+
+
+
+
+
+std::tm convertTimeStringToTm(const std::string& timeString) {
+	std::tm timeStruct = {};
+
+	// Extrahiere Stunden, Minuten und Sekunden aus dem String
+	int hours = 0, minutes = 0, seconds = 0;
+
+	hours = std::stoi(timeString.substr(0, 2));
+	minutes = std::stoi(timeString.substr(2, 2));
+	seconds = std::stoi(timeString.substr(4, 2));
+
+
+	// Setze die entsprechenden Werte im std::tm-Objekt
+	timeStruct.tm_hour = hours;
+	timeStruct.tm_min = minutes;
+	timeStruct.tm_sec = seconds;
+
+	return timeStruct;
+}
+
+
+const std::tm TextMatching::textMatching_OnlyNumbers_Time(Mat MatScreen, Rect Rec)
+{
+	Mat Roi = MatScreen(Rec);
+
+	convertScaleAbs(Roi, Roi, 1.1, 0);// 1 | 0
+
+	cvtColor(Roi, Roi, cv::COLOR_BGR2GRAY);
+
+	/*const char* image_window = "Source Image";
+	namedWindow(image_window, WINDOW_AUTOSIZE);
+	imshow(image_window, Roi);
+	waitKey(0);*/
+
+	std::unique_ptr<tesseract::TessBaseAPI> tess(new tesseract::TessBaseAPI());
+	tess->Init("tessdata/", "eng");
+
+	tess->SetVariable("fontconfig_use", "tessdata/font.oft");
+	tess->SetPageSegMode(tesseract::PSM_SINGLE_LINE);
+	tess->SetVariable("tessedit_char_whitelist", "1234567890");
+	tess->SetVariable("textord_confidence_threshold", "91");
+
+	tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
+	tess->SetSourceResolution(100);
+
+	std::unique_ptr<char[]> txt(tess->GetUTF8Text());
+
+	if (txt) {
+		string str = txt.get();
+		
+		str.erase(std::remove_if(str.begin(), str.end(), std::isspace), str.end());
+
+		cout << str << endl;
+		cout << str.size() << endl;	
+		return convertTimeStringToTm(str);
+	}
+
+}
+
 
 
 

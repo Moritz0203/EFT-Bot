@@ -20,6 +20,7 @@ struct TextMatching {
 	static const string textMatching_MedicalItems(Mat MatScreen, Rect Rec);
 	static const string textMatching_ItemName(Mat MatScreen, Rect Rec);
 	static const int textMatching_OnlyNumbers(Mat MatScreen, Rect Rec);
+	static const std::tm textMatching_OnlyNumbers_Time(Mat MatScreen, Rect Rec);
 };
 
 

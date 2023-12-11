@@ -11,13 +11,18 @@ void OueueProcessing::ClickNextButton() {
 	const Mat MatScreen = GetMat::getMat(hWND);
 	const Mat templ_NextButton = imread("ObjectImages/NextButton.png");
 
-	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ_NextButton, 0.90);
+	POINT point = TemplateMatching::templateMatchingObjects(MatScreen, templ_NextButton, 0.85);
 	point.y = (templ_NextButton.rows / 2) + point.y;
 	point.x = (templ_NextButton.cols / 2) + point.x;
 
 	Mouse::MoverPOINTandPress(point);
 
-	Sleep(500);
+	Sleep(1000);
+}
+
+void OueueProcessing::ResetMousePosition() {
+	POINT point = { 960, 540 };
+	Mouse::MouseMove(point);
 }
 
 void OueueProcessing::ClickApplyButton() {
@@ -33,7 +38,7 @@ void OueueProcessing::ClickApplyButton() {
 
 	Mouse::MoverPOINTandPress(point);
 
-	Sleep(500);
+	Sleep(1000);
 }
 
 void OueueProcessing::ClickReadyButton() {
@@ -49,7 +54,8 @@ void OueueProcessing::ClickReadyButton() {
 
 	Mouse::MoverPOINTandPress(point);
 
-	Sleep(500);
+	Sleep(1000);
+
 }
 
 void OueueProcessing::ClickEscapeFromTarkov() {
@@ -65,7 +71,7 @@ void OueueProcessing::ClickEscapeFromTarkov() {
 
 	Mouse::MoverPOINTandPress(point);
 
-	Sleep(500);
+	Sleep(1000);
 }
 
 void OueueProcessing::ClickOnMap() {
@@ -81,7 +87,7 @@ void OueueProcessing::ClickOnMap() {
 
 	Mouse::MoverPOINTandPress(point);
 
-	Sleep(500);
+	Sleep(1000);
 }
 
 void OueueProcessing::SelectTime() {
@@ -134,11 +140,21 @@ void OueueProcessing::Incurance() {
 
 	Mouse::MoverPOINTandPress(point);
 
-	Sleep(500);
+	Sleep(1000);
 }
 
 void OueueProcessing::ExtractRaidInformation() {
+	Mat MatScreen = GetMat::getMat(GetMat::FindeWindow());
 
+	Rect Rec(1050, 655, MatScreen.cols - 1825, MatScreen.rows - 1050);
+
+	std::tm timeStruct = TextMatching::textMatching_OnlyNumbers_Time(MatScreen, Rec);// later push to server 
+
+	// Add ECP extraction 
+
+	//Mat RecMat = MatScreen(Rec);
+	//imshow("MatScreen", RecMat);
+	//waitKey(0);
 }
 
 
@@ -173,12 +189,20 @@ void OueueProcessing::OueueProcess_InGame() {
 }
 
 void OueueProcessing::OueueProcess_OutOfGame() {
+	ExtractRaidInformation();
 	ClickNextButton();
-	// Click Next but extract EXP and Raid Time
 
-	ClickNextButton();
-	ClickNextButton();
-	ClickNextButton();
+	Mouse::ClickLeftButton();
+
+	Sleep(1000);
+
+	Mouse::ClickLeftButton();
+
+	Sleep(1000);
+
+	Mouse::ClickLeftButton();
+	
+	Sleep(1000);
 
 	if (NeedAutoHeal) {
 		ClickApplyButton();
@@ -188,5 +212,12 @@ void OueueProcessing::OueueProcess_OutOfGame() {
 		ClickNextButton();
 	}
 
-	Sleep(2000);
+	Mat MatScreen;
+	while (true) {
+		Sleep(1000);
+		MatScreen = GetMat::getMat(GetMat::FindeWindow());
+
+		if(TemplateMatching::templateMatchingBool(MatScreen, imread("ObjectImages/EscapeFromTarkovButton.png"), 0.90) == true)
+			break;
+	}
 }

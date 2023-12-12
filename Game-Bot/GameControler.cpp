@@ -34,6 +34,3 @@ void GameControler::Controler() {
 		}
 	}
 }
-
-
-

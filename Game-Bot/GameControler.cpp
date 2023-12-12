@@ -7,6 +7,7 @@
 
 
 
+
 void GameControler::Controler() {
 	Walk walk(false, MoveType::MOVE_TYPE_RANDOM, MovingCondition::MOVING_CONDITION_SPRINT);
 

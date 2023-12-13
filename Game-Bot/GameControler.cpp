@@ -7,8 +7,14 @@
 
 
 
+void GameControler::getDataFromServer() {
+	// NOTE: Later it needs to check server for any updates on MoveType and MovingCondition
+	this->moveType = MoveType::MOVE_TYPE_RANDOM;
+	this->movingCondition = MovingCondition::MOVING_CONDITION_SPRINT;
+}
+
 void GameControler::Controler() {
-	Walk walk(false, MoveType::MOVE_TYPE_RANDOM, MovingCondition::MOVING_CONDITION_SPRINT);
+	Walk walk(false, moveType, movingCondition);
 
 	std::shared_ptr<Walk> walkPtr = std::make_shared<Walk>(walk);
 	std::shared_ptr<vector<PointMedical>> medicalPtr = std::make_shared<vector<PointMedical>>(Pouch::pouch.ItemsInPouch_Medical);

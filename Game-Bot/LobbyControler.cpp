@@ -159,7 +159,6 @@ void LobbyControler::StashControler() {
 	CloseStashView();	
 }
 
-
 void LobbyControler::ServerControler() {// Later 
 
 

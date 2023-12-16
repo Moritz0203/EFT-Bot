@@ -20,6 +20,7 @@ public:
 	void CheckForFails();
 };
 
+
 class findFreeSlots {
 	vector<vector<POINT>> FinalResults;
 	vector<POINT> Clean_ReturnPoints;

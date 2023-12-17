@@ -33,5 +33,4 @@ int main() {
 	const HWND hWND = GetMat::FindeWindow();
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
-
 }

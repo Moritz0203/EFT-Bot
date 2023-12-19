@@ -13,6 +13,7 @@ void GameControler::getDataFromServer() {
 	this->movingCondition = MovingCondition::MOVING_CONDITION_SPRINT;
 }
 
+
 void GameControler::Controler() {
 	Walk walk(false, moveType, movingCondition);
 

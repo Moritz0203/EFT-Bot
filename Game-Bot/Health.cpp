@@ -36,6 +36,8 @@ void Health::HealthWorker() {
 
 void Health::CheckHealth() {
 	// Implement function to check health via checking the health caracter in the top left corner
+
+	// check for red on the Health caracter the more red the more health is missing
 }
 
 bool Health::MedicalItemCheck(PointMedical pointMedical) {

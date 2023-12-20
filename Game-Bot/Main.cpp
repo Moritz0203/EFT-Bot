@@ -35,8 +35,4 @@ int main() {
 	Sleep(1000);//Delete later
 
 
-
-
-
-
 }

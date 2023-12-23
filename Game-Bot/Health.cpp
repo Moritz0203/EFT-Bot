@@ -40,6 +40,7 @@ void Health::CheckHealth() {
 	// check for red on the Health caracter the more red the more health is missing
 }
 
+
 bool Health::MedicalItemCheck(PointMedical pointMedical) {
 
 	for (PathNameThresholdItemSizeMaxHP PathName : MedicalVector::Medical) {

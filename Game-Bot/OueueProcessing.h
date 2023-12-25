@@ -20,9 +20,9 @@ struct MapDependences {
 class OueueProcessing {
 
 	const vector<MapDependences> MapVector{
-		{"ObjectImages/Interchange.png",	"Interchange",	0.90, { 0, 30, 6 }, { 0, 0, 19 }, false },//Interchange
-		{"ObjectImages/Woods.png",			"Woods",		0.90, { 0, 0, 0 },	{ 0, 0, 0 },  true  },//Woods
-		{"ObjectImages/Shoreline.png",		"Shoreline",	0.90, { 0, 0, 21 }, { 0, 0, 5 },  false},//Shoreline
+		{ "ObjectImages/Interchange.png",	"Interchange",	0.90, { 0, 30, 6 }, { 0, 0, 19 }, false },//Interchange
+		{ "ObjectImages/Woods.png",			"Woods",		0.90, { 0, 0, 0  },	{ 0, 0, 0  }, true  },//Woods
+		{ "ObjectImages/Shoreline.png",		"Shoreline",	0.90, { 0, 0, 21 }, { 0, 0, 5  }, false },//Shoreline
 	};
 
 	void ResetMousePosition();

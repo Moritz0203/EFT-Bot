@@ -17,6 +17,8 @@ struct MapDependences {
 	const bool NoTimeLimit;
 };
 
+
+
 class OueueProcessing {
 
 	const vector<MapDependences> MapVector{

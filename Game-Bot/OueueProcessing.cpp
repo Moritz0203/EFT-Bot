@@ -144,17 +144,24 @@ void OueueProcessing::Incurance() {
 }
 
 void OueueProcessing::ExtractRaidInformation() {
-	Mat MatScreen = GetMat::getMat(GetMat::FindeWindow());
+	Mat MatScreen1 = GetMat::getMat(GetMat::FindeWindow());
 
-	Rect Rec(1050, 655, MatScreen.cols - 1825, MatScreen.rows - 1050);
+	Rect Rec(1050, 655, MatScreen1.cols - 1825, MatScreen1.rows - 1050);
 
-	std::tm timeStruct = TextMatching::textMatching_OnlyNumbers_Time(MatScreen, Rec);// later push to server 
+	std::tm timeStruct = TextMatching::textMatching_OnlyNumbers_Time(MatScreen1, Rec);// later push to server 
 
 	// Add ECP extraction 
+	Mat MatScreen2 = GetMat::getMat(GetMat::FindeWindow());
 
-	//Mat RecMat = MatScreen(Rec);
-	//imshow("MatScreen", RecMat);
-	//waitKey(0);
+	Rect RecEXP(930, 710, MatScreen2.cols - 1660, MatScreen2.rows - 1010);
+
+	int EXP = TextMatching::textMatching_OnlyNumbers(MatScreen2, RecEXP);// later push to server
+
+	cout << "EXP: " << EXP << endl;
+
+	Mat RecMat = MatScreen2(RecEXP);
+	imshow("MatScreen2", RecMat);
+	waitKey(0);
 }
 
 

@@ -359,7 +359,7 @@ const int TextMatching::textMatching_OnlyNumbers(Mat MatScreen, Rect Rec) {
 	tess->SetVariable("fontconfig_use", "tessdata/font.oft");
 	tess->SetPageSegMode(tesseract::PSM_SINGLE_LINE);
 	tess->SetVariable("tessedit_char_whitelist", "1234567890");
-	tess->SetVariable("textord_confidence_threshold", "99");
+	tess->SetVariable("textord_confidence_threshold", "999");
 
 	tess->SetImage(Roi.data, Roi.cols, Roi.rows, Roi.channels(), Roi.step1());
 	tess->SetSourceResolution(100);
@@ -430,8 +430,8 @@ const std::tm TextMatching::textMatching_OnlyNumbers_Time(Mat MatScreen, Rect Re
 		
 		str.erase(std::remove_if(str.begin(), str.end(), std::isspace), str.end());
 
-		cout << str << endl;
-		cout << str.size() << endl;	
+		//cout << str << endl;
+		//cout << str.size() << endl;	
 		return convertTimeStringToTm(str);
 	}
 

@@ -34,5 +34,8 @@ int main() {
 	SetForegroundWindow(hWND);
 	Sleep(1000);//Delete later
 
+	OueueProcessing oP(Interchange, true);
+
+	oP.ExtractRaidInformation();
 
 }

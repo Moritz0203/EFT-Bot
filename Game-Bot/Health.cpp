@@ -35,6 +35,7 @@ void Health::HealthWorker() {
 
 
 
+
 void Health::CheckHealth() {
 	// Implement function to check health via checking the health caracter in the top left corner
 

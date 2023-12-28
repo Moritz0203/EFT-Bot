@@ -37,5 +37,4 @@ int main() {
 	OueueProcessing oP(Interchange, true);
 
 	oP.ExtractRaidInformation();
-
 }

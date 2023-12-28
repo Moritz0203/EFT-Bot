@@ -36,7 +36,6 @@ class OueueProcessing {
 	void SelectTime();
 	void Incurance();
 
-	
 	bool IsTimeInRange(const std::tm& timeToCheck, const std::tm& start, const std::tm& end) {
 		std::tm tempTimeToCheck = timeToCheck;
 		std::tm tempStartTime = start;

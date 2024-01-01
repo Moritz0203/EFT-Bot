@@ -26,8 +26,8 @@ class OueueProcessing {
 		{ "ObjectImages/Shoreline.png",		"Shoreline",	0.90, { 0, 0, 21 }, { 0, 0, 5  }, false },//Shoreline
 	};
 
-	void ResetMousePosition();
 	void ClickNextButton();	
+	void ResetMousePosition();
 	void ClickApplyButton();
 	void ClickReadyButton();
 	void ClickEscapeFromTarkov();

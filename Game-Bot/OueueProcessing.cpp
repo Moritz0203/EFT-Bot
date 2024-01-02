@@ -168,6 +168,7 @@ void OueueProcessing::ExtractRaidInformation() {
 
 
 
+
 void OueueProcessing::OueueProcess_InGame() {
 	ClickEscapeFromTarkov();
 	ClickNextButton();

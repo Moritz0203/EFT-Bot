@@ -18,6 +18,7 @@ struct MapDependences {
 };
 
 
+
 class OueueProcessing {
 
 	const vector<MapDependences> MapVector{

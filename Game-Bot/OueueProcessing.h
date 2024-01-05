@@ -53,6 +53,7 @@ class OueueProcessing {
 	bool NeedAutoHeal = false;
 
 public:
+
 	void ExtractRaidInformation();
 
 	OueueProcessing(Map map, bool insure) {

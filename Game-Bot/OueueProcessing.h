@@ -35,6 +35,7 @@ class OueueProcessing {
 	void ClickOnMap();
 	void SelectTime();
 	void Incurance();
+	void ExtractRaidInformation();
 
 	bool IsTimeInRange(const std::tm& timeToCheck, const std::tm& start, const std::tm& end) {
 		std::tm tempTimeToCheck = timeToCheck;
@@ -53,8 +54,6 @@ class OueueProcessing {
 	bool NeedAutoHeal = false;
 
 public:
-
-	void ExtractRaidInformation();
 
 	OueueProcessing(Map map, bool insure) {
 		this->MapToRun = map;

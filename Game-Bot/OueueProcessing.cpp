@@ -55,7 +55,6 @@ void OueueProcessing::ClickReadyButton() {
 	Mouse::MoverPOINTandPress(point);
 
 	Sleep(1000);
-
 }
 
 void OueueProcessing::ClickEscapeFromTarkov() {
@@ -163,6 +162,8 @@ void OueueProcessing::ExtractRaidInformation() {
 	//Mat RecMat = MatScreen2(RecEXP);
 	//imshow("MatScreen2", RecMat);
 	//waitKey(0);
+
+	Sleep(1000);
 }
 
 

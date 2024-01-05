@@ -67,4 +67,3 @@ public:
 	void OueueProcess_InGame();
 	void OueueProcess_OutOfGame();
 };
-

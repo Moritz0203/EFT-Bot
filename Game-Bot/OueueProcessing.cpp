@@ -197,6 +197,7 @@ void OueueProcessing::OueueProcess_InGame() {
 	ClickReadyButton();
 }
 
+
 void OueueProcessing::OueueProcess_OutOfGame() {
 	ExtractRaidInformation();
 	ClickNextButton();

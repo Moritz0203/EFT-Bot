@@ -39,6 +39,7 @@ struct MoveState {
 
 
 
+
 class HumanizedMovement {
 	HumanizedKeyboard HumanizedKeyboard;
 	HumanizedMouse HumanizedMouse;

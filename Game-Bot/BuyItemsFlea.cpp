@@ -190,6 +190,7 @@ vector<PointItem> BuyItemsFlea::EasyBuyItemsAPI(string nameOfItem, uint8_t quant
 
 
 
+
 string SecurityCheck::ExtraktSpaceAndNewlines(string input) {
 	string result;
 	for (char c : input) {
